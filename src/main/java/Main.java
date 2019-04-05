@@ -24,5 +24,7 @@ public class Main {
             lotto = new Lotto(Lotto.generateLottoNumber());
             lottos.add(lotto);
         }
+
+        ui.printBuyLotto(lottos);
     }
 }

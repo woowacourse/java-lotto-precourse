@@ -32,4 +32,8 @@ public class Lotto {
     private static int generateRandomNumber() {
         return new Random().nextInt(RANDOM_NUMBER_RANGE) + 1;
     }
+
+    String getLotto() {
+        return numbers.toString();
+    }
 }

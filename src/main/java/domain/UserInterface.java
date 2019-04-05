@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -11,7 +12,7 @@ public class UserInterface {
         return sc.next();
     }
 
-    public boolean validatePurchaseAmount(String purchaseAmountStr){
+    public boolean validatePurchaseAmount(String purchaseAmountStr) {
         int purchaseAmount;
 
         try {
@@ -21,7 +22,7 @@ public class UserInterface {
             return false;
         }
 
-        if(purchaseAmount < MIN_PURCHASE_AMOUNT){
+        if (purchaseAmount < MIN_PURCHASE_AMOUNT) {
             System.out.println("유효하지 않은 금액입니다.");
             return false;
         }
@@ -29,4 +30,9 @@ public class UserInterface {
         return true;
     }
 
+    public void printBuyLotto(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.getLotto());
+        }
+    }
 }
