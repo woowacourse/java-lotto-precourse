@@ -1,0 +1,32 @@
+package domain;
+
+import java.util.Scanner;
+
+public class UserInterface {
+    private Scanner sc = new Scanner(System.in);
+    private static final int MIN_PURCHASE_AMOUNT = 1000;
+
+    public String inputPurchaseAmount() {
+        System.out.println("구입금액을 입력하세요.");
+        return sc.next();
+    }
+
+    public boolean validatePurchaseAmount(String purchaseAmountStr){
+        int purchaseAmount;
+
+        try {
+            purchaseAmount = Integer.parseInt(purchaseAmountStr);
+        } catch (NumberFormatException e) {
+            System.out.println("숫자를 입력해 주세요.");
+            return false;
+        }
+
+        if(purchaseAmount < MIN_PURCHASE_AMOUNT){
+            System.out.println("유효하지 않은 금액입니다.");
+            return false;
+        }
+
+        return true;
+    }
+
+}
