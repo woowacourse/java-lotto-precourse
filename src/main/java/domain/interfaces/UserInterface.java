@@ -3,13 +3,14 @@ package domain.interfaces;
 import domain.Lotto;
 import domain.Rank;
 
+import java.util.InputMismatchException;
 import java.util.List;
 
 public interface UserInterface {
 
-    int promptTotalPrice();
-    List<Integer> promptWinningNumbers();
-    int promptBonusNumber();
+    int promptTotalPrice() throws InputMismatchException;
+    List<Integer> promptWinningNumbers() throws NumberFormatException;
+    int promptBonusNumber() throws InputMismatchException;
 
     void printBoughtLottos(List<Lotto> lottos);
     /**

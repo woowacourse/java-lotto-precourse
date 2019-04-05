@@ -3,7 +3,6 @@ package domain;
 import domain.interfaces.UserInterface;
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -13,20 +12,20 @@ public class ConsoleUserInterface implements UserInterface {
     private Scanner sc = new Scanner(System.in);
 
     @Override
-    public int promptTotalPrice() throws InputMismatchException {
+    public int promptTotalPrice() {
         System.out.println("구입금액을 입력해 주세요.");
         return sc.nextInt();
     }
 
     @Override
-    public List<Integer> promptWinningNumbers() throws NumberFormatException {
+    public List<Integer> promptWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        String[] segments = sc.nextLine().split(",");
+        String[] segments = sc.next().split(",");
         return Arrays.stream(segments).map(Integer::valueOf).collect(Collectors.toList());
     }
 
     @Override
-    public int promptBonusNumber() throws InputMismatchException {
+    public int promptBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return sc.nextInt();
     }
@@ -51,7 +50,7 @@ public class ConsoleUserInterface implements UserInterface {
 
     @Override
     public void printEarningRate(double earningRate) {
-        System.out.println("총 수익률은 " + (Math.round(earningRate * 1000) / 1000) + "입니다.");
+        System.out.println(String.format("총 수익률은 %.1f입니다.", Math.round(earningRate * 1000) / 1000f));
     }
 
     @Override
