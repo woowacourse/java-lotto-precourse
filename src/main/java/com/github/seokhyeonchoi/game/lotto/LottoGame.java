@@ -3,10 +3,9 @@ package com.github.seokhyeonchoi.game.lotto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import com.github.seokhyeonchoi.game.Game;
+import com.github.seokhyeonchoi.util.conversion.StringToIntegerConverter;
 import com.github.seokhyeonchoi.util.validation.DuplicationValidator;
 import com.github.seokhyeonchoi.util.validation.LeastValueValidator;
 import com.github.seokhyeonchoi.util.validation.ValueRangeValidator;
@@ -23,7 +22,7 @@ public class LottoGame implements Game {
 	private final String WINNING_BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호를 입력해주세요.";
 
 	private final Scanner SCANNER = new Scanner(System.in);
-	private final DuplicationValidator<Integer> DUPLICATION_VALIDATOR = new DuplicationValidator();
+	private final DuplicationValidator<Integer> DUPLICATION_VALIDATOR = new DuplicationValidator<Integer>();
 	private final ValueRangeValidator VALUE_RANGE_VALIDATOR = new ValueRangeValidator(MIN_LOTTO_NUM, MAX_LOTTO_NUM);
 	private final LeastValueValidator LEAST_VALUE_VALIDATOR = new LeastValueValidator(LEAST_PURCHASE_AMOUNT);
 
@@ -69,21 +68,19 @@ public class LottoGame implements Game {
 		while (winningLottoNums.size() != LOTTO_NUM_SIZE 
 				&& !DUPLICATION_VALIDATOR.valid(winningLottoNums)
 				&& !VALUE_RANGE_VALIDATOR.valid(winningLottoNums)) {
-			winningLottoNums = stringToList(inputWinningLottoString(), SPLIT_REGEX, REMOVE_REGEX);
+			winningLottoNums = StringToIntegerConverter.toList(inputWinningLottoString(), SPLIT_REGEX, REMOVE_REGEX);
 		}
-		
 		return new Lotto(winningLottoNums);
 	}
 	
-	private int getWinningBonusNum(Lotto lotto) {
+	private int getWinningBonusNum(Lotto winningLotto) {
 		int winningBonusNum = 0;
-		List<Integer> lottoNums = lotto.getNumbers();
+		List<Integer> winningLottoNums = winningLotto.getNumbers();
 		
-		while(!DUPLICATION_VALIDATOR.valid(lottoNums, winningBonusNum)
+		while(!DUPLICATION_VALIDATOR.valid(winningLottoNums, winningBonusNum)
 				&& !VALUE_RANGE_VALIDATOR.valid(winningBonusNum)) {
 			winningBonusNum = inputWinningBonusNum();
 		}
-		
 		return winningBonusNum;
 	}
 	
@@ -103,11 +100,5 @@ public class LottoGame implements Game {
 		System.out.println(WINNING_BONUS_NUMBER_INPUT_MESSAGE);
 		
 		return SCANNER.nextInt();
-	}
-
-	private List<Integer> stringToList(String inputString, String splitRegex, String removeRegex) {
-		Pattern pattern = Pattern.compile(splitRegex);
-
-		return pattern.splitAsStream(inputString.replaceAll(removeRegex, "")).map(Integer::parseInt).collect(Collectors.toList());
 	}
 }
