@@ -38,8 +38,10 @@ public enum Rank {
             return SECOND;
         }
 
+        // FIXED: values()가 FIRST, SECOND, ... 순서로 순회하면서
+        // countOfMatch 값이 5인 경우에 먼저 등장하는 SECOND가 반환되는 현상
         for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
+            if (rank.matchCount(countOfMatch) && !rank.equals(SECOND)) {
                 return rank;
             }
         }

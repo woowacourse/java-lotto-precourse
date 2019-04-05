@@ -13,7 +13,14 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        boolean bonusMatch = userLotto.contains(bonusNo);
+        int matchCount = userLotto.countMatch(lotto);
+
+        return Rank.valueOf(matchCount, bonusMatch);
+    }
+
+    @Override
+    public java.lang.String toString() {
+        return lotto.toString() + " | " + bonusNo;
     }
 }
