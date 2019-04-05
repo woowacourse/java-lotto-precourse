@@ -1,10 +1,10 @@
 package com.github.seokhyeonchoi.game.lotto;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.github.seokhyeonchoi.game.Game;
 import com.github.seokhyeonchoi.util.validation.DuplicationValidator;
@@ -17,6 +17,10 @@ public class LottoGame implements Game {
 	private final int MAX_LOTTO_NUM = 45;
 	private final int LOTTO_NUM_SIZE = 6;
 	private final String SPLIT_REGEX = ",";
+	private final String REMOVE_REGEX = "((\\.\\d+)|[^0-9,])";
+	private final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입 금액을 입력해주세요.";
+	private final String WINNING_LOTTO_NUMBERS_INPUT_MESSAGE = "지난 주 당첨번호를 입력해주세요.";
+	private final String WINNING_BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호를 입력해주세요.";
 
 	private final Scanner SCANNER = new Scanner(System.in);
 	private final DuplicationValidator<Integer> DUPLICATION_VALIDATOR = new DuplicationValidator();
@@ -38,38 +42,72 @@ public class LottoGame implements Game {
 	}
 
 	private void init() {
-
+		purchaseAmount = getPurchaseAmount();
+		winningLotto = getWinningLotto();
 	}
 
-	private int inputPurchaseAmount() {
+	private int getPurchaseAmount() {
 		int amount = 0;
 
 		while (!LEAST_VALUE_VALIDATOR.valid(amount)) {
-			amount = SCANNER.nextInt();
+			amount = inputPurchaseAmount();
 		}
 
 		return amount;
 	}
 
-	private Lotto inputWinningLottoNums() {
-		String nums = "";
-		List<Integer> winningLottoNums = new ArrayList<>();
-
-		while (winningLottoNums.size() != LOTTO_NUM_SIZE && !VALUE_RANGE_VALIDATOR.valid(winningLottoNums)) {
-			nums = SCANNER.nextLine();
-			winningLottoNums = toList(nums, SPLIT_REGEX);
-		}
-		return new Lotto(winningLottoNums);
+	private WinningLotto getWinningLotto() {
+		Lotto lottoNums = getWinningLottoNums();
+		int bonusNum = getWinningBonusNum(lottoNums);
+		
+		return new WinningLotto(lottoNums, bonusNum);
 	}
 
-	private List<Integer> toList(String inputString, String regex) {
-		List<Integer> list = new ArrayList<Integer>();
-		String[] strArray = inputString.split(regex);
-
-		for (String str : strArray) {
-			list.add(Integer.parseInt(str));
+	private Lotto getWinningLottoNums() {
+		List<Integer> winningLottoNums = new ArrayList<>();
+		
+		while (winningLottoNums.size() != LOTTO_NUM_SIZE 
+				&& !DUPLICATION_VALIDATOR.valid(winningLottoNums)
+				&& !VALUE_RANGE_VALIDATOR.valid(winningLottoNums)) {
+			winningLottoNums = stringToList(inputWinningLottoString(), SPLIT_REGEX, REMOVE_REGEX);
 		}
+		
+		return new Lotto(winningLottoNums);
+	}
+	
+	private int getWinningBonusNum(Lotto lotto) {
+		int winningBonusNum = 0;
+		List<Integer> lottoNums = lotto.getNumbers();
+		
+		while(!DUPLICATION_VALIDATOR.valid(lottoNums, winningBonusNum)
+				&& !VALUE_RANGE_VALIDATOR.valid(winningBonusNum)) {
+			winningBonusNum = inputWinningBonusNum();
+		}
+		
+		return winningBonusNum;
+	}
+	
+	private int inputPurchaseAmount() {
+		System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
+		
+		return SCANNER.nextInt();
+	}
+	
+	private String inputWinningLottoString() {
+		System.out.println(WINNING_LOTTO_NUMBERS_INPUT_MESSAGE);
+		
+		return SCANNER.nextLine();
+	}
+	
+	private int inputWinningBonusNum() {
+		System.out.println(WINNING_BONUS_NUMBER_INPUT_MESSAGE);
+		
+		return SCANNER.nextInt();
+	}
 
-		return list;
+	private List<Integer> stringToList(String inputString, String splitRegex, String removeRegex) {
+		Pattern pattern = Pattern.compile(splitRegex);
+
+		return pattern.splitAsStream(inputString.replaceAll(removeRegex, "")).map(Integer::parseInt).collect(Collectors.toList());
 	}
 }
