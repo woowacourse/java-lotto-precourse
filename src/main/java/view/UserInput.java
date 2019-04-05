@@ -1,9 +1,11 @@
 package view;
 
 import controller.LottoController;
+import domain.Lotto;
 
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInput {
@@ -33,5 +35,13 @@ public class UserInput {
         }
     }
 
+    public void displayLotto() {
+        List<Lotto> lottoList = lottoController.getLottoList();
+
+        System.out.println(lottoList.size() + "개를 구매했습니다.");
+        for (Lotto lotto : lottoList) {
+            System.out.println(lotto);
+        }
+    }
 
 }

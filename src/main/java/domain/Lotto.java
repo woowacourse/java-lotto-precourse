@@ -13,4 +13,7 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    public String toString() {
+        return String.join(",", String.valueOf(numbers));
+    }
 }
