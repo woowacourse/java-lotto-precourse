@@ -16,4 +16,7 @@ public class WinningLotto {
         // TODO 로직 구현
         return null;
     }
+
+
+
 }
