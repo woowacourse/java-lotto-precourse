@@ -1,4 +1,4 @@
-package domain;
+package com.kwonmc.lotto;
 
 /**
  * 로또 등수를 의미하는 enum
