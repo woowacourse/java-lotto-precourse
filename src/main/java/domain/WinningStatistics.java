@@ -17,7 +17,6 @@ public class WinningStatistics {
     }
 
     /**
-     *
      * @param unitPrice 복권의 장당 단가
      * @return 수익률, 0 이상 미만 1 사이의 부동소수점수
      */
@@ -29,7 +28,7 @@ public class WinningStatistics {
             return 0;
         }
 
-        return totalEarned / (double)(countOfLotto * unitPrice);
+        return totalEarned / (double) (countOfLotto * unitPrice);
     }
 
     private int calculateCountOfLotto() {
@@ -43,7 +42,7 @@ public class WinningStatistics {
     private long calculateTotalEarned() {
         long sum = 0;
         for (Rank r : stats.keySet()) {
-            sum += (long)r.getWinningMoney() * stats.get(r);
+            sum += (long) r.getWinningMoney() * stats.get(r);
         }
         return sum;
     }
