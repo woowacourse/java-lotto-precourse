@@ -64,10 +64,16 @@
 
 * Shop - 로또를 판매
     * Variable
-        * private final int lottoPrice - 로또 하나의 가격
+        * private final int INITIAL_VALUE - 데이터 체크를 위한 초기 값
+        * private final int LOTTO_PRICE - 로또 한장의 가격
+        * private final int LOTTO_NUMBER_SIZE - 체크할 로또번호의 개수
+        * private final int LOTTO_MAX_VALUE - 로또에서 선택할 수 있는 최고 번호
+        * private final int LOTTO_MIN_VALUE - 로또에서 선택할 수 있는 최저 번호
      * Method
         * public Lotto sellLotto(int cash) - 지불한 금액에 따른 로또 판매
-        * private void checkCash(int cash) - 지불한 금액이 1000원 단위가 아니거나 음수인 경우를 대처
+        * public int inputPrice() - 금액을 입력 받음
+        * private int checkInputData(int price) - 데이터를 체크함
+        * private int checkPrice(int price) - 금액이 1000원 단위이며, 0이상인지 체크함
         
 * Bank - 로또 결과에 대한 처리
     * Variable
@@ -85,9 +91,9 @@
 - [x] 마크다운 작성
 - [x] 각각의 클래스 파일 생성
 - [x] 구입 금액 입력 받기
-- [ ] 구입 금액에 따른 로또 발권하기
-- [ ] 로또 번호 입력 받기
-- [ ] 로또 생성하기
+- [x] 구입 금액에 따른 로또 발권하기
+- [x] 로또 번호 입력 받기
+- [x] 로또 생성하기
 - [ ] 생성된 로또 출력하기
 - [ ] 지난 주 당첨 번호 입력 받기
 - [ ] 보너스 볼 입력 받기
