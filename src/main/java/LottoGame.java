@@ -1,10 +1,27 @@
 import domain.*;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * 로또 게임 진행을 담당하는 객체
  */
 public class LottoGame {
-    public static void main(String args[]) {
+    public HashMap<Lotto, Rank> startLottery(List<Lotto> issuedLottos, WinningLotto winningLotto) {
+        HashMap<Lotto, Rank> lotteryResults = new HashMap<Lotto, Rank>();
 
+        return lotteryResults;
+    }
+
+    public static void main(String args[]) {
+        LottoGame lottoGame = new LottoGame();
+        LottoManager lottoManager = new LottoManager();
+
+        int purchaseAmount = lottoManager.inputPurchaseAmount();
+        List<Lotto> issuedLottos = lottoManager.issueLottoOf(purchaseAmount);
+        WinningLotto winningLotto = new WinningLotto(lottoManager.inputWinningNumber(), lottoManager.inputBonus());
+
+        HashMap<Lotto, Rank> lotteryResults = lottoGame.startLottery(issuedLottos, winningLotto);
+        lottoManager.showEarningRate(lotteryResults);
     }
 }
