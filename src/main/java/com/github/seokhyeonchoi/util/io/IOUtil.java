@@ -23,6 +23,10 @@ public class IOUtil {
 	public static void write() {
 	}
 
+	public static void writef(String format, Object... args) {
+		System.out.printf(format, args);
+	}
+	
 	public static int readInt() {
 		
 		return StringToIntegerConverter.toInt(readLine(), REGEX);
