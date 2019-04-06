@@ -1,4 +1,4 @@
-package domain;
+package edu.yk1028;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package domain;
+package edu.yk1028;
 
 /**
  * 당첨 번호를 담당하는 객체

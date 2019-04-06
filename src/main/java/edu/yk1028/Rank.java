@@ -1,4 +1,4 @@
-package domain;
+package edu.yk1028;
 
 /**
  * 로또 등수를 의미하는 enum
