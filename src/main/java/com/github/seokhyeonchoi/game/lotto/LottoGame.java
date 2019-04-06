@@ -2,12 +2,11 @@ package com.github.seokhyeonchoi.game.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
 
 import com.github.seokhyeonchoi.game.Game;
 import com.github.seokhyeonchoi.util.conversion.StringToIntegerConverter;
 import com.github.seokhyeonchoi.util.generation.RandomNumberGenerator;
+import com.github.seokhyeonchoi.util.io.IOUtil;
 import com.github.seokhyeonchoi.util.validation.DuplicationValidator;
 import com.github.seokhyeonchoi.util.validation.LeastValueValidator;
 import com.github.seokhyeonchoi.util.validation.ValueRangeValidator;
@@ -23,12 +22,10 @@ public class LottoGame implements Game {
 	private final String WINNING_LOTTO_NUMBERS_INPUT_MESSAGE = "지난 주 당첨번호를 입력해주세요.";
 	private final String WINNING_BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호를 입력해주세요.";
 
-	private final Scanner SCANNER = new Scanner(System.in);
 	private final DuplicationValidator<Integer> DUPLICATION_VALIDATOR = new DuplicationValidator<Integer>();
 	private final ValueRangeValidator VALUE_RANGE_VALIDATOR = new ValueRangeValidator(MIN_LOTTO_NUM, MAX_LOTTO_NUM);
 	private final LeastValueValidator LEAST_VALUE_VALIDATOR = new LeastValueValidator(ONE_TICKET_AMOUNT);
-	private final Random RANDOM_GENERATOR = new Random();
-
+	
 	private List<Lotto> lottoTickets;
 	private int purchaseAmount;
 	private WinningLotto winningLotto;
@@ -99,20 +96,20 @@ public class LottoGame implements Game {
 	}
 
 	private int inputPurchaseAmount() {
-		System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
+		IOUtil.writeln(PURCHASE_AMOUNT_INPUT_MESSAGE);
 
-		return SCANNER.nextInt();
+		return IOUtil.readInt();
 	}
 
 	private String inputWinningLottoString() {
-		System.out.println(WINNING_LOTTO_NUMBERS_INPUT_MESSAGE);
+		IOUtil.writeln(WINNING_LOTTO_NUMBERS_INPUT_MESSAGE);
 
-		return SCANNER.nextLine();
+		return IOUtil.readLine();
 	}
 
 	private int inputWinningBonusNum() {
-		System.out.println(WINNING_BONUS_NUMBER_INPUT_MESSAGE);
+		IOUtil.writeln(WINNING_BONUS_NUMBER_INPUT_MESSAGE);
 
-		return SCANNER.nextInt();
+		return IOUtil.readInt();
 	}
 }

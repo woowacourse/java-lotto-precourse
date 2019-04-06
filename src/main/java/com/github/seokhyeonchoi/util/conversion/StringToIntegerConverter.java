@@ -10,4 +10,13 @@ public class StringToIntegerConverter {
 
 		return pattern.splitAsStream(inputString.replaceAll(removeRegex, "")).map(Integer::parseInt).collect(Collectors.toList());
 	}
+	
+	public static Integer toInt(String inputString, String removeRegex) {
+		String replacedString = inputString.replaceAll(removeRegex, "");
+		if(replacedString.equals("")) {
+			return 0;
+		}
+		
+		return Integer.parseInt(replacedString);
+	}
 }
