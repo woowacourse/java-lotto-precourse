@@ -47,8 +47,7 @@ public class LottoGame {
         return list;
     }
 
-    public void matchNumbers(){
-        WinningMoney wm = new WinningMoney();
+    public void matchNumbers(WinningMoney wm){
         for(int i=0; i<userLotto.length; i++){
             Rank rank = winningLotto.match(userLotto[i]);
             int winningMoney = rank.getWinningMoney();

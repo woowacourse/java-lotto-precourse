@@ -10,11 +10,14 @@ public class StartLottoGame {
 
     public void gameStart() {
         LottoGame lg = new LottoGame();
+        WinningMoney wm = new WinningMoney();
         Scanner sc = new Scanner(System.in);
-        int possibleBuyCnt = (lg.inputCost(sc) / ONE_LOTTO_PRICE);
+        int resultCost = lg.inputCost(sc);
+        int possibleBuyCnt = (resultCost / ONE_LOTTO_PRICE);
         lg.buyLotto(possibleBuyCnt);
         lg.lastWeekNumber(sc);
-        lg.matchNumbers();
+        lg.matchNumbers(wm);
+        wm.printMoneyRate(resultCost);
     }
 
     public static void main(String[] args) {
