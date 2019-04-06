@@ -38,13 +38,8 @@ public class LottoGame {
     }
 
     private int userInputStringToInt() {
-        try {
-            String userInput = scanner.nextLine();
-            int result = Integer.parseInt(userInput);
-            return result;
-        } catch (NumberFormatException ex) {
-            return -1;
-        }
+        String userInput = scanner.nextLine();
+        return stringToInt(userInput);
     }
 
     private int stringToInt(String string) {
@@ -91,17 +86,6 @@ public class LottoGame {
         winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBallNumber);
     }
 
-    private int userInputBonusBall(ArrayList<Integer> winningNumbers) {
-        System.out.println("보너스 볼을 입력해주세요");
-        int bonusBallNumber = userInputStringToInt();
-        while (!lottoNumberVerify(bonusBallNumber, winningNumbers) || !bonusNumberVerify(bonusBallNumber, winningNumbers)) {
-            System.out.println("잘못된 번호를 입력했습니다.");
-            System.out.println("보너스 볼을 입력해주세요");
-            bonusBallNumber = userInputStringToInt();
-        }
-        return bonusBallNumber;
-    }
-
     public ArrayList<Integer> userInputSplit() {
         String userInput = scanner.nextLine();
         if (userInput == null || userInput.equals(""))
@@ -111,6 +95,14 @@ public class LottoGame {
         ArrayList<Integer> resultList = stringListToIntegerList(splitList);
         Collections.sort(resultList);
         return resultList;
+    }
+
+    private ArrayList<Integer> stringListToIntegerList(ArrayList<String> splitList) {
+        ArrayList<Integer> result = new ArrayList<>();
+        for (String number : splitList) {
+            result.add(stringToInt(number));
+        }
+        return result;
     }
 
     private boolean winningLottoNumbersVerify(ArrayList<Integer> winningNumbers) {
@@ -123,6 +115,17 @@ public class LottoGame {
         return result;
     }
 
+    private int userInputBonusBall(ArrayList<Integer> winningNumbers) {
+        System.out.println("보너스 볼을 입력해주세요");
+        int bonusBallNumber = userInputStringToInt();
+        while (!lottoNumberVerify(bonusBallNumber, winningNumbers) || !bonusNumberVerify(bonusBallNumber, winningNumbers)) {
+            System.out.println("잘못된 번호를 입력했습니다.");
+            System.out.println("보너스 볼을 입력해주세요");
+            bonusBallNumber = userInputStringToInt();
+        }
+        return bonusBallNumber;
+    }
+
     private boolean lottoNumberVerify(int number, ArrayList<Integer> winningNumbers) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)
             return false;
@@ -133,14 +136,6 @@ public class LottoGame {
 
     private boolean bonusNumberVerify(int number, ArrayList<Integer> winningNumbers) {
         return !winningNumbers.contains(number);
-    }
-
-    private ArrayList<Integer> stringListToIntegerList(ArrayList<String> splitList) {
-        ArrayList<Integer> result = new ArrayList<>();
-        for (String number : splitList) {
-            result.add(stringToInt(number));
-        }
-        return result;
     }
 
     private void printResult() {
@@ -159,7 +154,6 @@ public class LottoGame {
     private double matchRankMap(Map<Rank, Integer> resultMap, Rank rank, Double proceeds) {
         int countOfMatch = rank.getCountOfMatch();
         int getWinningMoney = rank.getWinningMoney();
-        // rank.getWinningMoney() * resultMap.get(rank);
         if (getWinningMoney == 30000000) {
             System.out.println(countOfMatch + "개 일치, 보너스볼 일치 (" + getWinningMoney + "원) - " + resultMap.get(rank) + "개");
             return getWinningMoney * resultMap.get(rank);
