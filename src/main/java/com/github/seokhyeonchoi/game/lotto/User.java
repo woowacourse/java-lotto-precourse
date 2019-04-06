@@ -13,7 +13,7 @@ import static com.github.seokhyeonchoi.game.lotto.Constant.*;
 public class User {
 	
 	private EnumMap<Rank, Integer> rankMap;
-	private int revenue;
+	private long revenue;
 	private double roi;
 	
 	public User(List<Lotto> lottoTickets, WinningLotto winningLotto) {
@@ -39,7 +39,7 @@ public class User {
 	}
 	
 	private void calculateRevenue() {
-		int revenue = 0;
+		long revenue = 0;
 		
 		for(Rank rank : Rank.values()) {
 			revenue += rankMap.get(rank) * rank.getWinningMoney();
@@ -49,7 +49,7 @@ public class User {
 	}
 	
 	private void calculateROI(int ticketSize) {
-		this.roi = this.revenue / (ticketSize * ONE_TICKET_AMOUNT);
+		this.roi = (double)this.revenue / (ticketSize * ONE_TICKET_AMOUNT);
 	}
 	
 	public void printResult() {
@@ -81,7 +81,7 @@ public class User {
 	
 	private void printROI() {
 		IOUtil.write(ROI_MESSAGE_PREFIX);
-		IOUtil.write(roi);
+		IOUtil.writef("%.3f", roi);
 		IOUtil.writeln(ROI_MESSAGE_SUFFIX);
 	}
 }
