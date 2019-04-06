@@ -51,6 +51,7 @@ public class LottoGame {
         for(int i=0; i<userLotto.length; i++){
             Rank rank = winningLotto.match(userLotto[i]);
             int winningMoney = rank.getWinningMoney();
+            // TODO 금액별로 카운트
         }
     }
 }
