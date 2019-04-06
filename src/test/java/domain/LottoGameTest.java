@@ -13,28 +13,42 @@ public class LottoGameTest {
     public void setUp() throws Exception {
         lottoGame = new LottoGame();
     }
-
     @Test
     public void userInputVerify() {
-        boolean result = lottoGame.userInputVerify(2000);
+        boolean result = lottoGame.inputPriceVerify(2000);
         Assert.assertEquals(true, result);
     }
-
     @Test
     public void userInputVerifyZero() {
-        boolean result = lottoGame.userInputVerify(0);
+        boolean result = lottoGame.inputPriceVerify(0);
         Assert.assertEquals(false, result);
     }
-
     @Test
     public void userInputVerifyNegative() {
-        boolean result = lottoGame.userInputVerify(-1000);
+        boolean result = lottoGame.inputPriceVerify(-1000);
+        Assert.assertEquals(false, result);
+    }
+    @Test
+    public void userInputVerifyNotThousandNumber() {
+        boolean result = lottoGame.inputPriceVerify(1234);
         Assert.assertEquals(false, result);
     }
 
     @Test
-    public void userInputVerifyNotThousandNumber() {
-        boolean result = lottoGame.userInputVerify(1234);
-        Assert.assertEquals(false, result);
+    public void userInputSplit() {
+        String[] result = lottoGame.userInputSplit("1,2,3");
+        Assert.assertArrayEquals(new String[]{"1", "2", "3"}, result);
+    }
+
+    @Test
+    public void userInputSplitBlank() {
+        String[] result = lottoGame.userInputSplit("");
+        Assert.assertArrayEquals(new String[]{}, result);
+    }
+
+    @Test
+    public void userInputSplitNull() {
+        String[] result = lottoGame.userInputSplit(null);
+        Assert.assertArrayEquals(new String[]{}, result);
     }
 }
