@@ -76,7 +76,12 @@
         * public Lotto sellLotto(int cash) - 지불한 금액에 따른 로또 판매
         * public int inputPrice() - 금액을 입력 받음
         * public void printLotto(Lotto[] lottobundle) - 구매한 모든 로또를 형식에 맞춰 출력
-        * createWinningLotto() - 당첨 번호 생성
+        * public WinningLotto createWinningLotto() - 당첨 번호 생성
+        * public Rank[] createRankBundle(Lotto[] lottobundle,WinningLotto winningLotto) - 랭킹을 담을 배열 생성
+        * public float calculateEarningrate(float amount, Rank[] rank) - 수익률을 계산
+        * public void printLottoResult(Rank[] rankbundle,float Earningrate) - 로또 결과 출력
+        * private int createCountOfMatchAmount(Rank[] rank, int winningMoney) - 로또 당첨 갯수 생성
+        * private int pulsCountOfMatchAmount(int userWinningMoney,int winningMoney) - 로또 당첨 갯수 증가
         * private int createBonusNumber(List<Integer> winningNumber) - 보너스 번호를 생성
         * private int checkBonusNumberValidation(int bonusNumber, List<Integer> winningNumber) - 보너스 번호 유효성 검사
         * private int checkBonusNumberRange(int bonusNumber, List<Integer> winningNumber) - 보너스 번호 범위 검사
@@ -115,5 +120,5 @@
 - [x] 지난 주 당첨 번호 입력 받기
 - [x] 보너스 볼 입력 받기
 - [x] 당첨 비교 하기
-- [ ] 수익률 계산 하기
-- [ ] 당첨 통계 출력 하기 
+- [x] 수익률 계산 하기
+- [x] 당첨 통계 출력 하기 

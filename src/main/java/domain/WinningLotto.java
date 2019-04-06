@@ -28,9 +28,6 @@ public class WinningLotto {
             countOfMatch = (userLotto.getLottoNumber().contains(this.lotto.getLottoNumber().get(i))) ? countOfMatch + 1 : countOfMatch;
         }
         Boolean matchBonus = userLotto.getLottoNumber().contains(this.bonusNo);
-        System.out.println(userLotto.getLottoNumber().toString());
-        System.out.println(this.bonusNo);
-        System.out.println(matchBonus);
         Rank rank = Rank.valueOf(countOfMatch,matchBonus);
         return rank;
     }

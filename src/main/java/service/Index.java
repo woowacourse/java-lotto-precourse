@@ -12,5 +12,7 @@ public class Index {
         shop.printLotto(lottobundle);
         WinningLotto winningLotto = shop.createWinningLotto();
         Rank[] rankBundle = shop.createRankBundle(lottobundle,winningLotto);
+        float Earningrate = shop.calculateEarningrate(user.buyingCash,rankBundle);
+        shop.printLottoResult(rankBundle,Earningrate);
     }
 }

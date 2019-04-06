@@ -52,6 +52,40 @@ public class Shop {
         return rankBundle;
     }
 
+    public float calculateEarningrate(float amount, Rank[] rank){
+        float winningMoney = 0;
+        for(int i=0; i<rank.length;i++){
+            winningMoney = winningMoney + rank[i].getWinningMoney();
+        }
+        return (winningMoney/amount);
+    }
+
+    public void printLottoResult(Rank[] rankbundle,float Earningrate){
+        System.out.println("당첨 통계\n----------");
+        System.out.println(Rank.FIFTH.getCountOfMatch()+"개 일치 ("+Rank.FIFTH.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.FIFTH.getWinningMoney())+"개");
+        System.out.println(Rank.FOURTH.getCountOfMatch()+"개 일치 ("+Rank.FOURTH.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.FOURTH.getWinningMoney())+"개");
+        System.out.println(Rank.THIRD.getCountOfMatch()+"개 일치 ("+Rank.THIRD.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.THIRD.getWinningMoney())+"개");
+        System.out.println(Rank.SECOND.getCountOfMatch()+"개 일치, 보너스 볼 일치 ("+Rank.SECOND.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.SECOND.getWinningMoney())+"개");
+        System.out.println(Rank.FIRST.getCountOfMatch()+"개 일치 ("+Rank.FIRST.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.FIRST.getWinningMoney())+"개");
+        System.out.println("총 수익률은 "+Earningrate+"입니다.");
+    }
+
+    private int createCountOfMatchAmount(Rank[] rank, int winningMoney){
+        int countOfMatchAmount = 0;
+        for(int i=0; i<rank.length;i++){
+            countOfMatchAmount = countOfMatchAmount + pulsCountOfMatchAmount(rank[i].getWinningMoney(),winningMoney);
+        }
+        return countOfMatchAmount;
+    }
+
+    private int pulsCountOfMatchAmount(int userWinningMoney,int winningMoney){
+        if(userWinningMoney == winningMoney){
+            return 1;
+        }
+        return 0;
+    }
+
+
     private int createBonusNumber(List<Integer> winningNumber) {
         int bonusNumber = checkBonusNumberValidation(INITIAL_VALUE, winningNumber);
         return bonusNumber;
@@ -63,7 +97,6 @@ public class Shop {
             int signedBonusNumber = scan.nextInt();
             bonusNumber = checkBonusNumberRange(signedBonusNumber, winningNumber);
             bonusNumber = checkDuplicateBonusNumber(bonusNumber, winningNumber);
-            return bonusNumber;
         } catch (InputMismatchException e) {
             resetScanner();
             bonusNumber = checkBonusNumberValidation(INITIAL_VALUE, winningNumber);
@@ -155,7 +188,6 @@ public class Shop {
         try {
             int signedprice = scan.nextInt();
             price = checkPrice(signedprice);
-            return price;
         } catch (InputMismatchException e) {
             resetScanner();
             price = checkPriceValidation(INITIAL_VALUE);
