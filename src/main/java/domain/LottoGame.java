@@ -52,9 +52,9 @@ public class LottoGame {
         for(int i=0; i<userLotto.length; i++){
             Rank rank = winningLotto.match(userLotto[i]);
             int winningMoney = rank.getWinningMoney();
-            //setCountMoney(winningMoney, wm);
-            // TODO 금액별로 카운트
+            setCountMoney(winningMoney, wm);
         }
+        wm.printCountMoney();
     }
 
     private void setCountMoney(int money, WinningMoney wm){
