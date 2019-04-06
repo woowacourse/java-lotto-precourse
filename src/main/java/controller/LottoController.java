@@ -1,21 +1,28 @@
 package controller;
 
 import domain.Lotto;
+import domain.WinningLotto;
 
 import java.util.*;
 
 public class LottoController {
 
-    private List<Lotto> lottoList = new ArrayList<>();
     private static final int LOTTO_BOUND = 45;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_PRICE = 1000;
+
     private Random random = new Random();
+    private List<Lotto> lottoList = new ArrayList<>();
+    private WinningLotto winningLotto;
 
     public LottoController(int money) {
         for (int i = 0; i < money / LOTTO_PRICE; i++) {
             lottoList.add(createLotto());
         }
+    }
+
+    public void setWinningLotto(Lotto lotto, int bonusNo) {
+        this.winningLotto = new WinningLotto(lotto, bonusNo);
     }
 
     private Lotto createLotto() {

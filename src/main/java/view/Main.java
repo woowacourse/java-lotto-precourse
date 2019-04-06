@@ -8,6 +8,7 @@ public class Main {
         try {
             userView.inputMoney();
             userView.displayLotto();
+            userView.inputWinningLotto();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
