@@ -10,6 +10,7 @@
 
 package edu.yk1028;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -19,6 +20,8 @@ import java.util.Scanner;
  *
  */
 public class User {
+	List<Lotto> lottos;
+	
 	public int insertMoney() {
 		Scanner scanner = new Scanner(System.in);
 
@@ -27,5 +30,9 @@ public class User {
 			System.out.println("정수가 아닙니다.");
 		}
 		return scanner.nextInt();
+	}
+	
+	public void receiveLottos(List<Lotto> lottos) {
+		this.lottos = lottos;
 	}
 }
