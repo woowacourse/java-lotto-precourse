@@ -53,35 +53,47 @@ public class User {
 	}
 	
 	public void printResult() {
-		IOUtil.writeln();
-		IOUtil.writeln(WINNING_STATISTICS_MESSAGE);
-		IOUtil.writeln(LINE_DIVIDE_MESSAGE);
+		printResultPreMessage();
 		for(Rank rank: Rank.values()) {
 			printRank(rank);
 		}
 		printROI();
 	}
 	
+	private void printResultPreMessage() {
+		IOUtil.writeln();
+		IOUtil.writeln(WINNING_STATISTICS_MESSAGE);
+		IOUtil.writeln(LINE_DIVIDE_MESSAGE);
+	}
+	
 	private void printRank(Rank rank) {
 		if(rank == Rank.MISS) {
 			return;
 		}
-		IOUtil.write(rank.getCountOfMatch());
-		IOUtil.write(NUMBEROF_MESSAGE);
-		IOUtil.write(MATCH_NUMS_MESSAGE);
+		printRankHeader(rank.getCountOfMatch());
 		if(rank == Rank.SECOND) {
 			IOUtil.write(MATCH_BONUS_MESSAGE);
 		}
+		printRankFooter(rank.getWinningMoney(), rankMap.get(rank));
+	}
+	
+	private void printRankHeader(int countOfMatch) {
+		IOUtil.write(countOfMatch);
+		IOUtil.write(NUMBEROF_MESSAGE);
+		IOUtil.write(MATCH_NUMS_MESSAGE);
+	}
+
+	private void printRankFooter(int winningMoney, int numOfWin) {
 		IOUtil.write(OPEN_BRACKET_MESSAGE);
-		IOUtil.write(rank.getWinningMoney());
+		IOUtil.write(winningMoney);
 		IOUtil.write(CLOSE_BRACKET_MESSAGE);
-		IOUtil.write(rankMap.get(rank));
+		IOUtil.write(numOfWin);
 		IOUtil.writeln(NUMBEROF_MESSAGE);
 	}
 	
 	private void printROI() {
 		IOUtil.write(ROI_MESSAGE_PREFIX);
-		IOUtil.writef("%.3f", roi);
+		IOUtil.writef(ROI_PRINT_FORMAT, roi);
 		IOUtil.writeln(ROI_MESSAGE_SUFFIX);
 	}
 }
