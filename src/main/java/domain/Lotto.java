@@ -12,10 +12,16 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
+	public List<Integer> getNumbers() {
+		return numbers;
+	}
+	
+	public boolean contains(int number) {
+		return numbers.contains(number);
+	}
+
 	@Override
 	public String toString() {
 		return numbers.toString();
 	}
-	// 추가 기능 구현
-	
 }
