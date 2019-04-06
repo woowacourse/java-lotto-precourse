@@ -10,26 +10,24 @@ public class LottoGame {
     private int userInputPrice;
     private List<Lotto> LottoList = new ArrayList<>();
     private RandomLottoNumber randomLottoNumber = new RandomLottoNumber();
-    private ArrayList<String> winningNumbers;
-    private String bonusBall;
+    private WinningLotto winningLotto;
     public LottoGame() {
         userInputPrice = userInputPurchase();
         issueLotto();
         userInputWinningLotto();
-        userInputBonusBall();
+        System.out.println("당첨 통계 \n---------");
+        printResult();
     }
 
     private int userInputPurchase() {
         System.out.println("구입 금액을 입력해주세요");
-        String userInput = scanner.nextLine();
-        int purchase = userInputStringToInt(userInput);
-        while (!inputPriceVerify(purchase)) {
+        int purchasePrice = userInputStringToInt();
+        while (!inputPriceVerify(purchasePrice)) {
             System.out.println("잘못된 금액을 입력하셧습니다.");
             System.out.println("구입 금액을 입력해주세요");
-            userInput = scanner.nextLine();
-            purchase = userInputStringToInt(userInput);
+            purchasePrice = userInputStringToInt();
         }
-        return purchase;
+        return purchasePrice;
     }
 
     public boolean inputPriceVerify(int userInput) {
@@ -39,9 +37,19 @@ public class LottoGame {
         return true;
     }
 
-    private int userInputStringToInt(String userInput) {
+    private int userInputStringToInt() {
         try {
+            String userInput = scanner.nextLine();
             int result = Integer.parseInt(userInput);
+            return result;
+        } catch (NumberFormatException ex) {
+            return -1;
+        }
+    }
+
+    private int stringToInt(String string) {
+        try {
+            int result = Integer.parseInt(string);
             return result;
         } catch (NumberFormatException ex) {
             return -1;
@@ -71,60 +79,93 @@ public class LottoGame {
     }
 
     private void userInputWinningLotto() {
+        ArrayList<Integer> winningNumbers;
         System.out.println("지난 주 당첨 번호를 쉼표로 구분하여 입력해 주세요.");
         winningNumbers = userInputSplit();
-        while (!winningLottoNumbersVerify()) {
+        while (!winningLottoNumbersVerify(winningNumbers)) {
             System.out.println("잘못된 번호를 입력했습니다.");
             System.out.println("지난 주 당첨 번호를 쉼표로 구분하여 입력해 주세요.");
             winningNumbers = userInputSplit();
         }
+        int bonusBallNumber = userInputBonusBall(winningNumbers);
+        winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBallNumber);
     }
 
-    private void userInputBonusBall() {
+    private int userInputBonusBall(ArrayList<Integer> winningNumbers) {
         System.out.println("보너스 볼을 입력해주세요");
-        bonusBall = scanner.nextLine();
-        while (!lottoNumberVerify(bonusBall) || !bonusNumberVerify(bonusBall)) {
+        int bonusBallNumber = userInputStringToInt();
+        while (!lottoNumberVerify(bonusBallNumber, winningNumbers) || !bonusNumberVerify(bonusBallNumber, winningNumbers)) {
             System.out.println("잘못된 번호를 입력했습니다.");
             System.out.println("보너스 볼을 입력해주세요");
-            bonusBall = scanner.nextLine();
+            bonusBallNumber = userInputStringToInt();
         }
+        return bonusBallNumber;
     }
 
-    public ArrayList<String> userInputSplit() {
+    public ArrayList<Integer> userInputSplit() {
         String userInput = scanner.nextLine();
-        if (userInput == null || userInput.equals("")) {
+        if (userInput == null || userInput.equals(""))
             return new ArrayList<>();
-        }
         String[] result = userInput.split(",");
-        ArrayList<String> resultList = new ArrayList<>(Arrays.asList(result));
+        ArrayList<String> splitList = new ArrayList<>(Arrays.asList(result));
+        ArrayList<Integer> resultList = stringListToIntegerList(splitList);
         Collections.sort(resultList);
         return resultList;
     }
 
-    private boolean winningLottoNumbersVerify() {
+    private boolean winningLottoNumbersVerify(ArrayList<Integer> winningNumbers) {
         boolean result = true;
-        for (String number : winningNumbers) {
-            result = lottoNumberVerify(number) & result;
+        if (winningNumbers.size() != 6)
+            return false;
+        for (int number : winningNumbers) {
+            result = lottoNumberVerify(number, winningNumbers) & result;
         }
         return result;
     }
 
-    private boolean lottoNumberVerify(String number) {
-        if (winningNumbers.size() < 6)
+    private boolean lottoNumberVerify(int number, ArrayList<Integer> winningNumbers) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)
             return false;
-        int lottoNumber = userInputStringToInt(number);
-        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
-            return false;
-        }
         int first = winningNumbers.indexOf(number);
         int second = winningNumbers.lastIndexOf(number);
         return first == second;
     }
 
-    private boolean bonusNumberVerify(String number) {
-        if (winningNumbers.contains(number)) {
-            return false;
-        }
-        return true;
+    private boolean bonusNumberVerify(int number, ArrayList<Integer> winningNumbers) {
+        return !winningNumbers.contains(number);
     }
+
+    private ArrayList<Integer> stringListToIntegerList(ArrayList<String> splitList) {
+        ArrayList<Integer> result = new ArrayList<>();
+        for (String number : splitList) {
+            result.add(stringToInt(number));
+        }
+        return result;
+    }
+
+    private void printResult() {
+        double proceeds = 0.0;
+        Map<Rank, Integer> resultMap = new LinkedHashMap<>();
+        for (Rank rank : Rank.values())
+            resultMap.put(rank, 0);
+        for (Lotto lotto : LottoList)
+            resultMap.put(winningLotto.match(lotto), resultMap.get(winningLotto.match(lotto)) + 1);
+        for (int i = 4; i >= 0; i--) {
+            proceeds = proceeds + matchRankMap(resultMap, Rank.values()[i], proceeds);
+        }
+        System.out.println("총 수익률은 " + proceeds / userInputPrice + "입니다.");
+    }
+
+    private double matchRankMap(Map<Rank, Integer> resultMap, Rank rank, Double proceeds) {
+        int countOfMatch = rank.getCountOfMatch();
+        int getWinningMoney = rank.getWinningMoney();
+        // rank.getWinningMoney() * resultMap.get(rank);
+        if (getWinningMoney == 30000000) {
+            System.out.println(countOfMatch + "개 일치, 보너스볼 일치 (" + getWinningMoney + "원) - " + resultMap.get(rank) + "개");
+            return getWinningMoney * resultMap.get(rank);
+        }
+        System.out.println(countOfMatch + "개 일치 (" + getWinningMoney + "원) - " + resultMap.get(rank) + "개");
+        return getWinningMoney * resultMap.get(rank);
+    }
+
 }
