@@ -19,9 +19,13 @@ import java.util.Scanner;
  *
  */
 public class User {
-	public int inputMoney() {
+	public int insertMoney() {
 		Scanner scanner = new Scanner(System.in);
 
+		while (!scanner.hasNextInt()) {
+			scanner.next();
+			System.out.println("정수가 아닙니다.");
+		}
 		return scanner.nextInt();
 	}
 }
