@@ -44,6 +44,14 @@ public class Shop {
         }
     }
 
+    public Rank[] createRankBundle(Lotto[] lottobundle,WinningLotto winningLotto){
+        Rank[] rankBundle = new Rank[lottobundle.length];
+        for(int i=0; i<lottobundle.length;i++){
+            rankBundle[i] = winningLotto.match(lottobundle[i]);
+        }
+        return rankBundle;
+    }
+
     private int createBonusNumber(List<Integer> winningNumber) {
         int bonusNumber = checkBonusNumberValidation(INITIAL_VALUE, winningNumber);
         return bonusNumber;

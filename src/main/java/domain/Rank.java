@@ -12,7 +12,6 @@ public enum Rank {
     MISS(0, 0);
 
     private static final int WINNING_MIN_COUNT = 3;
-
     private int countOfMatch;
     private int winningMoney;
 
@@ -34,8 +33,8 @@ public enum Rank {
             return MISS;
         }
 
-        if (SECOND.matchCount(countOfMatch) && matchBonus) {
-            return SECOND;
+        if (SECOND.matchCount(countOfMatch) && !matchBonus) {
+            return THIRD;
         }
 
         for (Rank rank : values()) {

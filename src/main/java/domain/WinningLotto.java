@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -21,7 +23,15 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countOfMatch = 0;
+        for(int i =0; i<userLotto.getLottoNumber().size();i++){
+            countOfMatch = (userLotto.getLottoNumber().contains(this.lotto.getLottoNumber().get(i))) ? countOfMatch + 1 : countOfMatch;
+        }
+        Boolean matchBonus = userLotto.getLottoNumber().contains(this.bonusNo);
+        System.out.println(userLotto.getLottoNumber().toString());
+        System.out.println(this.bonusNo);
+        System.out.println(matchBonus);
+        Rank rank = Rank.valueOf(countOfMatch,matchBonus);
+        return rank;
     }
 }
