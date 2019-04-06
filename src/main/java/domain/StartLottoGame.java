@@ -14,6 +14,7 @@ public class StartLottoGame {
         int possibleBuyCnt = (lg.inputCost(sc) / ONE_LOTTO_PRICE);
         lg.buyLotto(possibleBuyCnt);
         lg.lastWeekNumber(sc);
+        lg.matchNumbers();
     }
 
     public static void main(String[] args) {

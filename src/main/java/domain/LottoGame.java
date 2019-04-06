@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class LottoGame {
     private static final int MAX_LOTTO_SIZE = 6;
@@ -17,10 +14,10 @@ public class LottoGame {
     }
 
     public void buyLotto(int cnt) {
-        this.userLotto = new Lotto[cnt];
-        AutoLotto al = new AutoLotto();
+        userLotto = new Lotto[cnt];
         for (int i = 0; i < cnt; i++) {
-            this.userLotto[i] = new Lotto(al.makeAutoNumber());
+            AutoLotto al = new AutoLotto();
+            userLotto[i] = new Lotto(al.makeAutoNumber());
         }
     }
 
@@ -35,6 +32,7 @@ public class LottoGame {
 
     private void registerLotto(String strNum, int bonus){
         List<Integer> list = eraseComma(strNum);
+        Collections.sort(list);
         Lotto winLotto = new Lotto(list);
         winningLotto = new WinningLotto(winLotto, bonus);
     }
@@ -47,5 +45,11 @@ public class LottoGame {
             list.add(num);
         }
         return list;
+    }
+
+    public void matchNumbers(){
+        for(int i=0; i<userLotto.length; i++){
+            winningLotto.match(userLotto[i]);
+        }
     }
 }

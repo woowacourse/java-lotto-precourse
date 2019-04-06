@@ -59,12 +59,12 @@ public class AutoLotto {
     private void printNumbers() {
         System.out.print("[");
         for (int i = 0; i < this.numbers.size(); i++) {
-            System.out.print(this.numbers.get(i) + printComma(i));
+            System.out.print(this.numbers.get(i) + getComma(i));
         }
         System.out.println("]");
     }
 
-    private String printComma(int i) {
+    private String getComma(int i) {
         if (i != 5) {
             return ", ";
         }
