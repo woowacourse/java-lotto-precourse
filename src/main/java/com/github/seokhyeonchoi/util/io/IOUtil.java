@@ -6,7 +6,7 @@ import com.github.seokhyeonchoi.util.conversion.StringToIntegerConverter;
 
 public class IOUtil {
 	private static final Scanner SCANNER = new Scanner(System.in);
-	private static final String REGEX = "([^0-9].+)";
+	private static final String REGEX = "([^0-9]\\d+)|([^0-9])";
 
 	public static void writeln(Object obj) {
 		System.out.println(obj);
