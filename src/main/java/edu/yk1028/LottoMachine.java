@@ -1,5 +1,5 @@
 /*
- * LottoGame
+ * LottoMachine
  * 
  * version 1.0
  * 
@@ -17,7 +17,7 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * 로또 게임을 진행하는 객체
+ * 사용자에게 로또를 발급하는 객체
  * 
  * @author wongeunsong
  *

@@ -16,5 +16,6 @@ public class Main {
 		LottoMachine lottoMachine = new LottoMachine();
 
 		user.buyLottos(lottoMachine);
+		user.printLottos();
 	}
 }
