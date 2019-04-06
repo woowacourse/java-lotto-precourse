@@ -13,8 +13,8 @@ package edu.yk1028;
 public class Main {
 	public static void main(String[] args) {
 		User user = new User();
-		LottoGame lottoGame = new LottoGame(user);
+		LottoMachine lottoMachine = new LottoMachine();
 
-		lottoGame.play();
+		user.buyLottos(lottoMachine);
 	}
 }

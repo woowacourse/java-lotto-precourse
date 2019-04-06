@@ -20,19 +20,29 @@ import java.util.Scanner;
  *
  */
 public class User {
-	List<Lotto> lottos;
-	
-	public int insertMoney() {
+	private final String REQUEST_MONEY = "구입 금액을 입력해 주세요.";
+	private final String WRONG_INPUT = "잘못된 입력입니다.";
+	private final String PURCHASE_FAILED = "로또 구매에 실패했습니다.";
+
+	private List<Lotto> lottos;
+
+	public void buyLottos(LottoMachine lottoMachine) {
+		try {
+			int money = insertMoney();
+			this.lottos = lottoMachine.cellLottos(money);
+		} catch (Exception e) {
+			System.out.println(PURCHASE_FAILED);
+		}
+	}
+
+	private int insertMoney() {
 		Scanner scanner = new Scanner(System.in);
 
+		System.out.println(REQUEST_MONEY);
 		while (!scanner.hasNextInt()) {
 			scanner.next();
-			System.out.println("정수가 아닙니다.");
+			System.out.println(WRONG_INPUT);
 		}
 		return scanner.nextInt();
-	}
-	
-	public void receiveLottos(List<Lotto> lottos) {
-		this.lottos = lottos;
 	}
 }

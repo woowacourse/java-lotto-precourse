@@ -22,28 +22,19 @@ import java.util.Set;
  * @author wongeunsong
  *
  */
-public class LottoGame {
+public class LottoMachine {
 	private final int MIN_MONEY = 1000;
 	private final int LOTTO_PRICE = 1000;
 	private final int NUMBER_OF_LOTTO_NUMBERS = 6;
 	private final int BOUND_OF_LOTTO_NUMBER = 45;
-	private final String REQUEST_MONEY = "구입 금액을 입력해 주세요.";
-	private final String REQUEST_MONEY_OVER_MINIMUM = String.format("%d원 이상 입력해 주세요.", MIN_MONEY);
-
-	private User user;
-
-	public LottoGame(User user) {
-		this.user = user;
-	}
-
-	public void play() {
-		int receivedMoney;
-
-		System.out.println(REQUEST_MONEY);
-		while ((receivedMoney = user.insertMoney()) < MIN_MONEY) {
+	private final String REQUEST_MONEY_OVER_MINIMUM = String.format("최소 구입 금액은 %d원입니다.", MIN_MONEY);
+	
+	public List<Lotto> cellLottos(int money) throws Exception {
+		if (money < MIN_MONEY) {
 			System.out.println(REQUEST_MONEY_OVER_MINIMUM);
+			throw new Exception();
 		}
-		user.receiveLottos(generateLotto(maximumNumberOfLotto(receivedMoney)));
+		return generateLotto(maximumNumberOfLotto(money));
 	}
 
 	private int maximumNumberOfLotto(int money) {
