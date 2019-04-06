@@ -1,3 +1,13 @@
+/*
+ * Rank
+ * 
+ * version 1.0
+ * 
+ * 2019. 4. 6
+ * 
+ * Created by Wongeun Song
+ */
+
 package edu.yk1028;
 
 /**
