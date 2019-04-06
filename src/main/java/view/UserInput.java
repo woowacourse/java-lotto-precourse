@@ -4,20 +4,24 @@ import controller.LottoController;
 import domain.Lotto;
 
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class UserInput {
+
+    private static final int LOTTO_BOUND = 45;
+    private static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_PRICE = 1000;
 
     private Scanner sc = new Scanner(System.in);
     private LottoController lottoController;
 
-    public void inputMoney() throws Exception {
+    private Set<Integer> inputLottoNumber = new TreeSet<>();
+
+    public void inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             int money = sc.nextInt();
-            testValidArgument(money);
+            testValidMoney(money);
 
             this.lottoController = new LottoController(money);
 
@@ -26,12 +30,12 @@ public class UserInput {
         }
     }
 
-    private void testValidArgument(int money) {
-        if (money < 1000) {
-            throw new IllegalArgumentException("1000보다 큰 금액을 입력해주세요.");
+    private void testValidMoney(int money) {
+        if (money < LOTTO_PRICE) {
+            throw new IllegalArgumentException(LOTTO_PRICE + "보다 큰 금액을 입력해주세요.");
         }
-        if (money % 1000 != 0) {
-            throw new IllegalArgumentException("1000의 배수 금액을 입력해주세요.");
+        if (money % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException(LOTTO_PRICE + "의 배수 금액을 입력해주세요.");
         }
     }
 
@@ -44,4 +48,39 @@ public class UserInput {
         }
     }
 
+    public void inputWinningLotto() {
+        System.out.println("지난 주 당첨 번호을 입력해 주세요.");
+        String userInput = sc.nextLine();
+        String[] inputStr = userInput.split(",");
+
+        for (int i = 0; i < inputStr.length; i++) {
+            inputLottoNumber.add(testValidLottoNumber(inputStr[i]));
+        }
+
+        testValidLotto(inputLottoNumber);
+    }
+
+    private void testValidLotto(Set<Integer> numberSet) {
+        if (numberSet.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또번호는" + LOTTO_SIZE + "자리입니다.");
+        }
+    }
+
+    private int testValidLottoNumber(String str) {
+        int num;
+
+        try {
+           num = Integer.parseInt(str);
+           testValidLottoBounds(num);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자가 아닙니다.");
+        }
+        return num;
+    }
+
+    private void testValidLottoBounds(int num) {
+        if ( 0 > num || num > LOTTO_BOUND ) {
+            throw new IllegalArgumentException("로또 번호는" + LOTTO_BOUND + "이하 양수입니다.");
+        }
+    }
 }
