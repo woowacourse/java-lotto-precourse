@@ -6,9 +6,13 @@ public class Lottery {
 
 	// XXX Only 3 field in method!!
 	private static final Scanner SCANNER = new Scanner(System.in);
+	private static final int LOTTO_PRICE = 1_000;
+	
+	private int numberOfPurchases = 0;
 	
 	public void runProgram() {
-		int price = inputPrice();
+		int inputtedPrice = inputPrice();
+		setLottoCount(inputtedPrice);
 	}
 	
 	public int inputPrice() {
@@ -27,5 +31,9 @@ public class Lottery {
 			return false;
 		}
 		return true;
+	}
+	
+	public void setLottoCount(int inputtedPrice) {
+		numberOfPurchases = inputtedPrice / LOTTO_PRICE;
 	}
 }
