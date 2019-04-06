@@ -15,7 +15,7 @@ public class Lottery {
 		setLottoCount(inputtedPrice);
 	}
 	
-	public int inputPrice() {
+	private int inputPrice() {
 		String price = "";
 		do {
 			System.out.println("구입 금액을 입력해 주세요.");
@@ -25,7 +25,7 @@ public class Lottery {
 		return Integer.parseInt(price);
 	}
 	
-	public boolean isNaturalNumber(String value) {
+	private boolean isNaturalNumber(String value) {
 		// TODO ADD more exception!
 		if(value == null || value.length() == 0) {
 			return false;
@@ -33,7 +33,12 @@ public class Lottery {
 		return true;
 	}
 	
-	public void setLottoCount(int inputtedPrice) {
+	private void setLottoCount(int inputtedPrice) {
 		numberOfPurchases = inputtedPrice / LOTTO_PRICE;
+		
+		// TODO 위치 변경
+		System.out.println(numberOfPurchases + "개를 구매했습니다.");
 	}
+	
+	
 }
