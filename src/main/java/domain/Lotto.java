@@ -10,17 +10,5 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
-        System.out.print("[");
-        for (int i = 0; i < this.numbers.size(); i++) {
-            System.out.print(this.numbers.get(i) + printComma(i));
-        }
-        System.out.println("]");
-    }
-
-    private String printComma(int i) {
-        if (i != 5) {
-            return ", ";
-        }
-        return "";
     }
 }

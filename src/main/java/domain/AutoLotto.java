@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 자동 로또를 생성하는 객체
+ */
 public class AutoLotto {
-    private List<Integer> numbers = new ArrayList<Integer>();
+    private static final int MAX_LOTTO_SIZE = 6;
+    private List<Integer> numbers = new ArrayList<>();
 
     public List<Integer> makeAutoNumber() {
         numbers.clear();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < MAX_LOTTO_SIZE; i++) {
             numbers.add(makeRandomNum());
         }
         changeOverlapNum();
         Collections.sort(numbers);
+        printNumbers();
         return numbers;
     }
 
@@ -23,7 +28,7 @@ public class AutoLotto {
     }
 
     private void changeOverlapNum() {
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < MAX_LOTTO_SIZE; i++) {
             i = (isResetNum(isFindOverlapNum(i), i)) ? i - 1 : i;
         }
     }
@@ -49,5 +54,20 @@ public class AutoLotto {
             numbers.set(i, makeRandomNum());
         }
         return b;
+    }
+
+    private void printNumbers() {
+        System.out.print("[");
+        for (int i = 0; i < this.numbers.size(); i++) {
+            System.out.print(this.numbers.get(i) + printComma(i));
+        }
+        System.out.println("]");
+    }
+
+    private String printComma(int i) {
+        if (i != 5) {
+            return ", ";
+        }
+        return "";
     }
 }

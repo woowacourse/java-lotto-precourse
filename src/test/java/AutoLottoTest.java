@@ -7,7 +7,6 @@ public class AutoLottoTest {
 
     @Test
     public void makeAutoNumber() {
-        AutoLotto al = new AutoLotto();
-        assertEquals(52, al.makeAutoNumber());
+
     }
 }
