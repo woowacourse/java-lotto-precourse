@@ -16,7 +16,11 @@ public class WinningMoney {
         }
     };
 
-    public int getWinningMoney(int n){
-        return WINNING_MONEY.get(n);
+    private List<Integer> counterMoney = Arrays.asList(0, 0, 0, 0, 0);
+
+    public int setCountMoney(int money){
+        int index = WINNING_MONEY.indexOf(money);
+        counterMoney.set(index, counterMoney.get(index)+1);
+        return counterMoney.get(index);
     }
 }

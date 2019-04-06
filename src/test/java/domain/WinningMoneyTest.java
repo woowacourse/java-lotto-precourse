@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 public class WinningMoneyTest {
 
     @Test
-    public void getWinningMoney() {
+    public void setCountMoney() {
         WinningMoney wm = new WinningMoney();
-        assertEquals(5000, wm.getWinningMoney(0));
+        assertEquals(2, wm.setCountMoney(5000));
     }
 }

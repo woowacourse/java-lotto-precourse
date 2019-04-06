@@ -48,10 +48,18 @@ public class LottoGame {
     }
 
     public void matchNumbers(){
+        WinningMoney wm = new WinningMoney();
         for(int i=0; i<userLotto.length; i++){
             Rank rank = winningLotto.match(userLotto[i]);
             int winningMoney = rank.getWinningMoney();
+            //setCountMoney(winningMoney, wm);
             // TODO 금액별로 카운트
+        }
+    }
+
+    private void setCountMoney(int money, WinningMoney wm){
+        if(money != 0){
+            wm.setCountMoney(money);
         }
     }
 }
