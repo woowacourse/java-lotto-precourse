@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import domain.util.Validator;
+
 public class Lottery {
 
 	// XXX Only 3 field in method!!
@@ -37,21 +39,13 @@ public class Lottery {
 			System.out.println("구입 금액을 입력해 주세요.");
 			price = SCANNER.nextLine();
 
-		} while (!isNaturalNumber(price));
+		} while (!Validator.isNaturalNumber(price));
 		// TODO int? long?
 		return Integer.parseInt(price);
 	}
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	private boolean isNaturalNumber(String value) {
-		// TODO ADD more exception!
-		if (value == null || value.length() == 0) {
-			return false;
-		}
-		return true;
 	}
 
 	private void setLottoCount() {
