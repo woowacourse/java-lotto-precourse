@@ -19,12 +19,14 @@ public class Lottery {
 		41, 42, 43, 44, 45};
 	private static final int DRAWS_COUNT = 6;
 
+	private int price;
 	private int lottoCount = 0;
 	private List<Lotto> lottoes;
 
 	public void runProgram() {
 		int inputtedPrice = inputPrice();
-		setLottoCount(inputtedPrice);
+		setPrice(inputtedPrice);
+		setLottoCount();
 		setLottoes(lottoCount);
 		printLottoes();
 	}
@@ -40,6 +42,10 @@ public class Lottery {
 		return Integer.parseInt(price);
 	}
 
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	private boolean isNaturalNumber(String value) {
 		// TODO ADD more exception!
 		if (value == null || value.length() == 0) {
@@ -48,8 +54,8 @@ public class Lottery {
 		return true;
 	}
 
-	private void setLottoCount(int inputtedPrice) {
-		lottoCount = inputtedPrice / LOTTO_PRICE;
+	private void setLottoCount() {
+		lottoCount = price / LOTTO_PRICE;
 	}
 
 	private void setLottoes(int lottoCount) {
@@ -61,27 +67,30 @@ public class Lottery {
 	}
 
 	private void printLottoes() {
+		if (lottoes != null || lottoes.size() == 0) {
+			System.out.println("구매한 로또가 없습니다.");
+		}
 		System.out.println(lottoCount + "개를 구매했습니다.");
-		for(Lotto lotto : lottoes) {
+		for (Lotto lotto : lottoes) {
 			System.out.println(lotto);
 		}
 	}
 
 	private Lotto createLotto() {
 		List<Integer> lottoNumbersToExtract = new ArrayList<>(Arrays.asList(ALL_LOTTO_NUMBER));
-		
+
 		List<Integer> lottoNumber = new ArrayList<>();
 		for (int i = 0; i < DRAWS_COUNT; ++i) {
 			int randomNumber = selectRandomLottoNumber(lottoNumbersToExtract);
 			lottoNumber.add(randomNumber);
 		}
 		Collections.sort(lottoNumber);
-		Lotto lotto = new Lotto(lottoNumber);
-		return lotto;
+		return new Lotto(lottoNumber);
 	}
 
 	private int selectRandomLottoNumber(List<Integer> lottoNumbersToExtract) {
 		return lottoNumbersToExtract
 			.remove((int)(Math.random() * lottoNumbersToExtract.size()));
 	}
+
 }
