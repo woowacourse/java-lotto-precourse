@@ -10,6 +10,7 @@ public class Constant {
 	public static final int LOTTO_NUM_SIZE = 6;
 	public static final String SPLIT_REGEX = ",";
 	public static final String REMOVE_REGEX = "((\\.\\d+)|[^0-9,])";
+	public static final String ROI_PRINT_FORMAT = "%.3f";
 	
 	public static final String PURCHASE_AMOUNT_INPUT_MESSAGE = "구입 금액을 입력해주세요.";
 	public static final String PURCHASE_ANNOUNCE_MESSAGE = "개를 구매했습니다.";
