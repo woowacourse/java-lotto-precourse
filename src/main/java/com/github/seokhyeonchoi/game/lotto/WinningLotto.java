@@ -1,5 +1,7 @@
 package com.github.seokhyeonchoi.game.lotto;
 
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -13,7 +15,13 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+    	int matchCount = 0;
+    	List<Integer> userLottoNum = userLotto.getNumbers();
+    	
+    	for(Integer num : lotto.getNumbers()) {
+    		matchCount += userLottoNum.contains(num) ? 1 : 0;
+    	}
+    	
+        return Rank.valueOf(matchCount, userLottoNum.contains(bonusNo));
     }
 }

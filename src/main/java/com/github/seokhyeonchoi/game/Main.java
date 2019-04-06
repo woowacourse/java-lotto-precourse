@@ -1,5 +1,14 @@
 package com.github.seokhyeonchoi.game;
 
-public class Main {
+import com.github.seokhyeonchoi.game.lotto.LottoGame;
 
+/**
+ * main method
+ */
+public class Main {
+	public static void main(String[] args) {
+		Game lottoGame = new LottoGame();
+		
+		lottoGame.start();
+	}
 }
