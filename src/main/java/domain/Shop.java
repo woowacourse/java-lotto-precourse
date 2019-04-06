@@ -16,12 +16,22 @@ public class Shop {
     }
 
     public Lotto[] sellLotto(int price){
+        System.out.println("로또 번호를 입력하세요. 번호는 , 로 구분됩니다.");
         int count = price/1000;
         Lotto[] lottoBundle = new Lotto[count];
         for(int i =0; i<count; i++){
             lottoBundle[i] = new Lotto(getLottoNumber());
+            System.out.println("입력되었습니다.");
         }
         return lottoBundle;
+    }
+
+    public void printLotto(Lotto[] lottobundle){
+        int amount = lottobundle.length;
+        System.out.println(amount+"개를 구매했습니다.");
+        for(int i=0; i<amount; i++){
+            System.out.println(lottobundle[i].printLottoNumber());
+        }
     }
 
     private ArrayList<Integer> getLottoNumber(){

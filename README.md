@@ -28,7 +28,8 @@
         * public Lotto(List<Integer> number) - 번호를 담은 리스트를 받아 변수에 할당한다.
     * Variable
         * private final List<Integer> number - 로또 번호를 담을 리스트
-        * public void printLotto - 로또 출력하기
+        * public List<Integer> getLottoNumber() - 로또 리스트 얻기
+        * public String printLottoNumber() - 로또 출력하기
         
 * Rank - 당첨된 수와, 당첨금액을 통해 생성되는 결과
     * Constructor        
@@ -72,8 +73,16 @@
      * Method
         * public Lotto sellLotto(int cash) - 지불한 금액에 따른 로또 판매
         * public int inputPrice() - 금액을 입력 받음
+        * public void printLotto(Lotto[] lottobundle) - 구매한 모든 로또를 형식에 맞춰 출력
+        * private ArrayList<Integer> getLottoNumber() - 로또 하나의 번호들을 얻음
+        * private String[] getStringLottoNumber() - 로또 번호를 문자열로 받음
+        * private int[] changeIntegerArrayfromStringArray(String[] numberStringArray) - 문자열로 받은 배열을 int형 배열로 변환
+        * private int[] checkDuplicate(int[] numberArray) - 로또의 중복값 제거
+        * private int[] checkMaxMinLottoNumber(int[] numberArray) - 로또번호가 1이상 45이하인지 체크
+        * private int[] checkLottoSize(int[] numberArray) - 로또번호가 6개인지 체크
         * private int checkInputData(int price) - 데이터를 체크함
         * private int checkPrice(int price) - 금액이 1000원 단위이며, 0이상인지 체크함
+        * private Scanner resetScanner() - 값이 유효하지 않을 경우 Scanner객체 초기화
         
 * Bank - 로또 결과에 대한 처리
     * Variable
@@ -94,7 +103,7 @@
 - [x] 구입 금액에 따른 로또 발권하기
 - [x] 로또 번호 입력 받기
 - [x] 로또 생성하기
-- [ ] 생성된 로또 출력하기
+- [x] 생성된 로또 출력하기
 - [ ] 지난 주 당첨 번호 입력 받기
 - [ ] 보너스 볼 입력 받기
 - [ ] 당첨 비교 하기

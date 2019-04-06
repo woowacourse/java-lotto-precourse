@@ -12,6 +12,6 @@ public class Index {
         User user = new User(shop.inputPrice());
         System.out.println(user.buyingCash);
         Lotto[] lottobundle = shop.sellLotto(user.buyingCash);
-
+        shop.printLotto(lottobundle);
     }
 }

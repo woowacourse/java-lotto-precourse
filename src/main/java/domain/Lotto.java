@@ -15,4 +15,8 @@ public class Lotto {
     public List<Integer> getLottoNumber() {
         return this.numbers;
     }
+
+    public String printLottoNumber(){
+        return this.numbers.toString();
+    }
 }
