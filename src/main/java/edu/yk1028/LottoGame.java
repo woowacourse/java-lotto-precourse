@@ -17,7 +17,9 @@ package edu.yk1028;
  *
  */
 public class LottoGame {
-	private final String REQUEST_INPUT_MONEY = "구입 금액을 입력해 주세요.";
+	private final int MIN_MONEY = 1000;
+	private final String REQUEST_MONEY = "구입 금액을 입력해 주세요.";
+	private final String REQUEST_MONEY_OVER_MINIMUM = String.format("1000원 이상 입력해 주세요.", MIN_MONEY);
 
 	private User user;
 
@@ -26,9 +28,9 @@ public class LottoGame {
 	}
 
 	public void play() {
-		int receivedMoney;
-
-		System.out.println(REQUEST_INPUT_MONEY);
-		receivedMoney = user.inputMoney();
+		System.out.println(REQUEST_MONEY);
+		while (user.insertMoney() < MIN_MONEY) {
+			System.out.println(REQUEST_MONEY_OVER_MINIMUM);
+		}
 	}
 }
