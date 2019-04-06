@@ -51,6 +51,8 @@
         * private final int bonusNo - 보너스 번호를 가지고 있는 정수형 변수            
     * Method
         * public Rank match(Lotto userLotto) - 유저의 로또를 받아 당첨번호와 맞춰보고 그 결과를 통해 Rank객체를 생성하는 함수
+        * public Lotto getWinningLotto() - 당첨 번호 리턴
+        * public int getBonusNumber() - 보너스 번호 리턴
         
         
 * User - 로또를 구매하는 자
@@ -74,8 +76,14 @@
         * public Lotto sellLotto(int cash) - 지불한 금액에 따른 로또 판매
         * public int inputPrice() - 금액을 입력 받음
         * public void printLotto(Lotto[] lottobundle) - 구매한 모든 로또를 형식에 맞춰 출력
+        * createWinningLotto() - 당첨 번호 생성
+        * private int createBonusNumber(List<Integer> winningNumber) - 보너스 번호를 생성
+        * private int checkBonusNumberValidation(int bonusNumber, List<Integer> winningNumber) - 보너스 번호 유효성 검사
+        * private int checkBonusNumberRange(int bonusNumber, List<Integer> winningNumber) - 보너스 번호 범위 검사
+        * private int checkDuplicateBonusNumber(int bonusNumber, List<Integer> winningNumber) - 보너스 번호 중복 검사
         * private ArrayList<Integer> getLottoNumber() - 로또 하나의 번호들을 얻음
         * private String[] getStringLottoNumber() - 로또 번호를 문자열로 받음
+        * private Lotto createLotto(ArrayList<Integer> lottoNumber) - 로또 객체 하나를 생성
         * private int[] changeIntegerArrayfromStringArray(String[] numberStringArray) - 문자열로 받은 배열을 int형 배열로 변환
         * private int[] checkDuplicate(int[] numberArray) - 로또의 중복값 제거
         * private int[] checkMaxMinLottoNumber(int[] numberArray) - 로또번호가 1이상 45이하인지 체크
@@ -104,8 +112,8 @@
 - [x] 로또 번호 입력 받기
 - [x] 로또 생성하기
 - [x] 생성된 로또 출력하기
-- [ ] 지난 주 당첨 번호 입력 받기
-- [ ] 보너스 볼 입력 받기
+- [x] 지난 주 당첨 번호 입력 받기
+- [x] 보너스 볼 입력 받기
 - [ ] 당첨 비교 하기
 - [ ] 수익률 계산 하기
 - [ ] 당첨 통계 출력 하기 

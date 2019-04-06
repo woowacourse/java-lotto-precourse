@@ -12,6 +12,14 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    public Lotto getWinningLotto(){
+        return this.lotto;
+    }
+
+    public int getBonusNumber(){
+        return this.bonusNo;
+    }
+
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
         return null;

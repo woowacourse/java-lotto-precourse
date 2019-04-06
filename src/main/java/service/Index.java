@@ -3,6 +3,7 @@ package service;
 import domain.Lotto;
 import domain.Shop;
 import domain.User;
+import domain.WinningLotto;
 
 import java.util.Arrays;
 
@@ -13,5 +14,6 @@ public class Index {
         System.out.println(user.buyingCash);
         Lotto[] lottobundle = shop.sellLotto(user.buyingCash);
         shop.printLotto(lottobundle);
+        WinningLotto winningLotto = shop.createWinningLotto();
     }
 }
