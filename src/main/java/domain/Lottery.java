@@ -35,6 +35,8 @@ public class Lottery {
 		setLottoes(lottoCount);
 		printLottoes();
 		WinningLotto winningLotto = setWinnigLotto();
+		Map<Rank, Integer> result = calculateResult(winningLotto);
+		printResult(result);
 	}
 
 	private int inputPrice() {
@@ -118,5 +120,29 @@ public class Lottery {
 		} while (!Validator.isIncludeLottoNumber(previousBonusNumber)
 			&& !lotto.getNumbers().contains(Integer.parseInt(previousBonusNumber)));
 		return Integer.parseInt(previousBonusNumber.trim());
+	}
+
+	private Map<Rank, Integer> calculateResult(WinningLotto winningLotto) {
+		Map<Rank, Integer> result = new HashMap<>();
+		Arrays.stream(Rank.values()).forEach(rank -> result.put(rank, 0));
+
+		for (Lotto lotto : lottoes) {
+			Rank rank = winningLotto.match(lotto);
+			result.put(rank, result.get(rank) + 1);
+		}
+		return result;
+	}
+
+	private void printResult(Map<Rank, Integer> result) {
+		long sum = 0;
+		for (Rank rank : Rank.values()) {
+			rank.printMatchResult(result.get(rank));
+			sum += rank.getWinningMoney() * result.get(rank);
+		}
+		System.out.printf("총 수익률은 %.2f%% 입니다.\n", calculateEarningRate(sum));
+	}
+
+	private double calculateEarningRate(long sum) {
+		return sum / (double)price * 100;
 	}
 }
