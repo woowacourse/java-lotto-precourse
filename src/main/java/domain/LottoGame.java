@@ -26,7 +26,8 @@ public class LottoGame {
 
     public void lastWeekNumber(Scanner sc) {
         Lotto winLotto = inputNumbers(sc);
-        int bounusNumber = NOE.inputBonusNOE(sc);
+        NOE.checkOverlap(winLotto.getNumbers());
+        int bounusNumber = NOE.inputBonusNOE(sc, winLotto.getNumbers());
         winningLotto = new WinningLotto(winLotto, bounusNumber);
     }
 

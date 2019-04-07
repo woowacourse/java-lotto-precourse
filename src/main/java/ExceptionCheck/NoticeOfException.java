@@ -1,5 +1,7 @@
 package ExceptionCheck;
 
+import domain.AutoLotto;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -31,23 +33,24 @@ public class NoticeOfException {
         System.exit(0);
     }
 
-    public int inputBonusNOE(Scanner sc) {
+    public int inputBonusNOE(Scanner sc, List<Integer> list) {
         System.out.println("보너스 볼을 입력해 주세요.");
         int num = -1;
         try {
             num = sc.nextInt();
-            checkScopeNum(num);
+            checkBonusNOE(num, list);
         } catch (InputMismatchException e) {
             printNotNumber();
         }
         return num;
     }
 
-    private void checkScopeNum(int num) {
+    private void checkBonusNOE(int num, List<Integer> list) {
         if (num < 1 || num > 45) {
             System.out.println("잘못된 입력 값입니다.\n1~45까지의 범위를 벗어났습니다.");
             System.exit(0);
         }
+        checkOverlap(list, num);
     }
 
     public List<Integer> checkListNOE(List<String> stringList) {
@@ -57,6 +60,7 @@ public class NoticeOfException {
             list.add(num);
         }
         checkListSize(list.size());
+
         return list;
     }
 
@@ -75,5 +79,29 @@ public class NoticeOfException {
             System.out.println("잘못된 입력 값입니다.\n당첨 번호의 개수가 6개가 아닙니다.");
             System.exit(0);
         }
+    }
+
+    private void checkOverlap(List<Integer> list, int num) {
+        if (list.contains(num)) {
+            printOverlapNum();
+        }
+    }
+
+    public void checkOverlap(List<Integer> list) {
+        AutoLotto autoLotto = new AutoLotto(list);
+        for (int i = 0; i < MAX_LOTTO_SIZE; i++) {
+            findOverlap(autoLotto, i);
+        }
+    }
+
+    private void findOverlap(AutoLotto at, int i) {
+        if (at.isFindOverlapNum(i)) {
+            printOverlapNum();
+        }
+    }
+
+    private void printOverlapNum() {
+        System.out.println("잘못된 입력 값입니다.\n중복된 값이 포함되어 있습니다.");
+        System.exit(0);
     }
 }

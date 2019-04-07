@@ -11,6 +11,13 @@ public class AutoLotto {
     private static final int MAX_LOTTO_SIZE = 6;
     private List<Integer> numbers = new ArrayList<>();
 
+    public AutoLotto() {
+    }
+
+    public AutoLotto(List<Integer> list) {
+        this.numbers = list;
+    }
+
     public List<Integer> makeAutoNumber() {
         numbers.clear();
         for (int i = 0; i < MAX_LOTTO_SIZE; i++) {
@@ -33,7 +40,7 @@ public class AutoLotto {
         }
     }
 
-    private boolean isFindOverlapNum(int i) {
+    public boolean isFindOverlapNum(int i) {
         boolean same = false;
         for (int j = 0; j < i; j++) {
             same = isSameNum(i, j);
