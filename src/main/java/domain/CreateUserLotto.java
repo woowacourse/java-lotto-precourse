@@ -7,9 +7,10 @@ import java.util.Random;
 import static domain.InfoString.*;
 
 public class CreateUserLotto {
+    static Lotto[] lottos = null;
 
     static void  createLotto(int count) {
-        Lotto[] lottos = new Lotto[count];
+        lottos = new Lotto[count];
 
         for(int i = 0; i < count; i++) {
             lottos[i] = new Lotto(createRandom());

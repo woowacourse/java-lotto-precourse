@@ -38,10 +38,6 @@ public enum Rank {
             return SECOND;
         }
 
-        if (THIRD.matchCount(countOfMatch)) {
-            return THIRD;
-        }
-
         for (Rank rank : values()) {
             if (rank.matchCount(countOfMatch)) {
                 return rank;

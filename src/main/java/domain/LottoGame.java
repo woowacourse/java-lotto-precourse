@@ -10,23 +10,31 @@ public class LottoGame {
 
     private static int INPUT_MONEY;
 
-    static List<Integer> win_lotto = new ArrayList<>();
+    static List<Integer> lottoList = new ArrayList<>();
     static Lotto winLotto;
     static int bonus;
 
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
+
         System.out.println(INFO_BUY_MONEY);
         INPUT_MONEY = scan.nextInt();
         System.out.println(checkMoney() + INFO_BUY_COUNT);
         CreateUserLotto.createLotto(checkMoney());
         System.out.println(INFO_WIN_NUM);
-        setWinNumber();
+        winLotto = setWinNumber();
         System.out.println(INFO_BONUS_NUM);
         setBonusNum();
+        WinningLotto CreateLottoObject = new WinningLotto(winLotto, bonus);
+
+        for(int i = 0; i < checkMoney(); i++) {
+            CreateLottoObject.match(CreateUserLotto.lottos[i]);
+//            CreateUserLotto.lottos[i].getLotto();
+        }
+
     }
 
-    private static int checkMoney() {
+    public static int checkMoney() {
         int count = INPUT_MONEY / 1000;
 
         if(count < MIN_COUNT) {
@@ -36,16 +44,17 @@ public class LottoGame {
         return count;
     }
 
-    private static void setWinNumber() {
+    private static Lotto setWinNumber() {
         Scanner scan = new Scanner(System.in);
         String line = scan.nextLine();
         String[] str = line.split(",");
 
         for(int i=0; i< str.length;i++) {
-            win_lotto.add(Integer.parseInt(str[i]));
+            lottoList.add(Integer.parseInt(str[i]));
         }
 
-        winLotto = new Lotto(win_lotto);
+        winLotto = new Lotto(lottoList);
+        return winLotto;
     }
 
     private static void setBonusNum() {
