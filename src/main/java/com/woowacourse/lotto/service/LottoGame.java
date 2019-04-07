@@ -10,10 +10,8 @@
 package com.woowacourse.lotto.service;
 
 public class LottoGame {
-
-	public void start(){
+	public void start() {
 		UserInput userInput = new UserInput();
 		System.out.println(userInput.getPurchasingAmount());
 	}
-
 }
