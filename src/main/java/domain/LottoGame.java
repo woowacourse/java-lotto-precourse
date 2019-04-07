@@ -170,4 +170,10 @@ public class LottoGame {
 
         return set.size() != THE_NUMBER_OF_LOTTO_NUMBERS;
     }
+
+    private String inputBonusNumber() {
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextLine();
+    }
 }
