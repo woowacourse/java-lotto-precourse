@@ -17,9 +17,17 @@ public class Main {
     private final static String INPUT_BONUS_BALL
             = "보너스 볼을 입력해 주세요.";
     
-    /** 1에서 45 사이의 임의의 정수 하나를 생성하여 반환 */
-    private static int getLottoNum() {
-        return random.nextInt(LOTTO_NUM_END) + LOTTO_NUM_START;
+    /** 로또 하나를 뽑아서 Lotto 객체로 반환 */
+    private static Lotto getLotto() {
+        IntStream stream = random.ints(LOTTO_NUM_START, LOTTO_NUM_END + 1);
+        List<Integer> temp = stream
+                .limit(LOTTO_NUM_LENGTH * 2) // 중복 때문에 2배수로 뽑음
+                .sorted()
+                .distinct()
+                .limit(LOTTO_NUM_LENGTH)
+                .boxed() // IntStream to Integer
+                .collect(Collectors.toList());
+        return new Lotto(temp);
     }
     
     /** 문자열을 입력받아, 쉼표를 기준으로 나누어 문자열 배열로 반환 */
