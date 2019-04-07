@@ -9,6 +9,7 @@ public class Main {
         UserInterface ui = new UserInterface();
         List<Lotto> lottos = new ArrayList<>();
         Lotto lotto;
+        String[] winnerNumbers;
         String purchaseAmountStr = "";
 
         int lottoCnt = 0;
@@ -26,5 +27,11 @@ public class Main {
         }
 
         ui.printBuyLotto(lottos);
+
+        flag = false;
+        while (!flag) {
+            winnerNumbers = ui.inputWinnerNumbers();
+            flag = ui.validateWinnerNumbers(winnerNumbers);
+        }
     }
 }
