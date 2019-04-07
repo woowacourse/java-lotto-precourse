@@ -22,7 +22,9 @@ public class Lotto {
 
     private List<String> convertIntListToStringList(){
         List<String> numberStr = new ArrayList(numbers.size());
-        for(int num : numbers){
+        List<Integer> tempNum = numbers;                        // 오름차순으로 출력하기 위해 츄가
+        Collections.sort(tempNum);
+        for(int num : tempNum){
             numberStr.add(Integer.toString(num));
         }
         return numberStr;
