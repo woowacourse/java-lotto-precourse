@@ -7,6 +7,8 @@ import domain.Lotto;
 public class PlayLotto {
     public static int purchase_amount;
     public static List<Lotto> lottos;
+    public static List<Integer> last_week_num;
+    public static Integer bonus_num;
     public static Scanner sc;
 
     private static final int LOTTO_PRICE = 1000;
@@ -16,6 +18,7 @@ public class PlayLotto {
         getPurchaseAmount();
         makeLottoObject();
         printLottos();
+        getLastWeekNumber();
     }
 
     public static void getPurchaseAmount() {
@@ -79,5 +82,15 @@ public class PlayLotto {
             sb.append(", " + numbers.get(i));
         }
         System.out.println("[" + sb.toString() + "]");
+    }
+
+    public static void getLastWeekNumber(){
+        last_week_num = new ArrayList<>();
+        sc = new Scanner(System.in);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String[] tmp_numbers = sc.nextLine().split(",");
+        for(int i=0 ;i<LOTTO_COUNT;i++){
+            last_week_num.add(Integer.parseInt(tmp_numbers[i]));
+        }
     }
 }
