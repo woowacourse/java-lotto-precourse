@@ -59,7 +59,6 @@ public class Game {
             ranks.add(rank);
         }
     }
-
     public void initGame(){
         inputUserLotto();;
         inputWinningLotto();
