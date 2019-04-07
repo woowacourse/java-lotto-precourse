@@ -13,6 +13,7 @@ public class GameRunner {
         inputLastWeekNumbers();
         inputBonusNo();
         printLottoMatchResult();
+        printLottoMoneyResult();
     }
 
     private void inputUserPurchaseAmount() {
@@ -23,7 +24,11 @@ public class GameRunner {
 
     private void printLottoList() {
         System.out.println();
-        System.out.println(game.getPurchaseAmount() / 1000 + "개를 구매했습니다.");
+        System.out.println(countLotto() + "개를 구매했습니다.");
+    }
+
+    private int countLotto() {
+        return game.getPurchaseAmount() / 1000;
     }
 
     private void inputLastWeekNumbers() {
@@ -43,11 +48,11 @@ public class GameRunner {
     private void printLottoMatchResult() {
         System.out.println("당첨통계");
         System.out.println("---------");
-        System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() +") - 0개");
-        System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치 (" + Rank.FOURTH.getWinningMoney() +") - 0개");
-        System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치 (" + Rank.THIRD.getWinningMoney() +") - 0개");
-        System.out.println(Rank.SECOND.getCountOfMatch() + "개 일치 (" + Rank.SECOND.getWinningMoney() +") - 0개");
-        System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치 (" + Rank.FIRST.getWinningMoney() +") - 0개");
+        System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() +"원) - 0개");
+        System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치 (" + Rank.FOURTH.getWinningMoney() +"원) - 0개");
+        System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치 (" + Rank.THIRD.getWinningMoney() +"원) - 0개");
+        System.out.println(Rank.SECOND.getCountOfMatch() + "개 일치 (" + Rank.SECOND.getWinningMoney() +"원) - 0개");
+        System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치 (" + Rank.FIRST.getWinningMoney() +"원) - 0개");
     }
 
     private void printLottoMoneyResult() {
