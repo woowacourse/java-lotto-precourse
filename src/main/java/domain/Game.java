@@ -49,4 +49,24 @@ public class Game {
     public void makeWinningLotto(List<Integer> lastWeekWinningNumbers, int bonusNo){
         winningLotto = new WinningLotto( new Lotto(lastWeekWinningNumbers), bonusNo);
     }
+
+    public void calculateRank(){
+        for(int i = 0; i < userLottoTickets.size(); i++){
+            Rank rank = winningLotto.match(userLottoTickets.get(i));
+            int index = rank.ordinal();
+            System.out.println("index: " + index);
+            countRanks[index]++;
+            ranks.add(rank);
+        }
+    }
+
+    public void initGame(){
+        inputUserLotto();;
+        inputWinningLotto();
+        calculateRank();
+        for(int i : countRanks)
+            System.out.println(i);
+        Display.showStatistics(countRanks, Rank.values());
+        Display.showProfitRate(countRanks, money);
+    }
 }

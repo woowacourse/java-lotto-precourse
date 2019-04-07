@@ -41,4 +41,17 @@ public class Display {
         int bonusNo = sc.nextInt();
         return bonusNo;
     }
+
+    public static void showStatistics(int[] countRank, Rank[] ranks) {
+        System.out.println("당첨통계");
+        System.out.println("-------");
+        for (int i = ranks.length - 2; i >= 0; i--) {
+            System.out.println(ranks[i].getCountOfMatch() + "개 일치 (" + ranks[i].getWinningMoney() + "원)- " + countRank[i] + "개");
+        }
+    }
+
+    public static void showProfitRate(int[] countRank, int money) {
+        double profitRate = Profit.calculateProfitRate(countRank, money);
+        System.out.println("총 수익륭은 " + profitRate + "입니다.");
+    }
 }
