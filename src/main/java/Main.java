@@ -17,6 +17,9 @@ public class Main {
     
     /** main 진입점 */
     public static void main(String[] args) {
-        // TODO
+        // Test code - 추후 삭제 예정
+        List<Integer> lottoNums = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(lottoNums);
+        System.out.println(lotto);
     }
 }

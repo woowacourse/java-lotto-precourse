@@ -24,4 +24,10 @@ public class Lotto {
     public boolean hasNumber(int number) {
         return numbers.contains(number);
     }
+    
+    /** toString() 재정의. 로또 번호를 그대로 출력한다. */
+    @Override
+    public String toString() {
+        return this.numbers.toString();
+    }
 }
