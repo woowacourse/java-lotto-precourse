@@ -4,10 +4,10 @@ import domain.*;
 
 public class Index {
     public static void main(String[] args){
-        Shop shop = new Shop();
-        User user = new User(shop.inputPrice());
-        Machine machine = new Machine(user.buyingCash);
         Config config = new Config();
+        User user = new User(config.inputPrice());
+        Machine machine = new Machine(user.buyingCash);
+        Shop shop = new Shop(user.buyingCash);
 
         Lotto[] lottobundle = config.typeSelect(machine,shop,user.buyingCash);
         shop.printLotto(lottobundle);
