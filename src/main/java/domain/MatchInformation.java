@@ -1,22 +1,22 @@
 package domain;
 
-public class MatchInformation {
+class MatchInformation {
     private int countOfMatch;
     private boolean matchBonus = false;
 
-    public int getCountOfMatch() {
+    int getCountOfMatch() {
         return countOfMatch;
     }
 
-    public boolean getMatchBonus() {
+    boolean getMatchBonus() {
         return matchBonus;
     }
 
-    public void matchNumber() {
+    void matchNumber() {
         countOfMatch++;
     }
 
-    public void matchBonusNumber() {
+    void matchBonusNumber() {
         matchBonus = true;
     }
 }

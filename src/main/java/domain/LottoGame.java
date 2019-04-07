@@ -2,16 +2,16 @@ package domain;
 
 import java.util.*;
 
-public class LottoGame {
+class LottoGame {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    public static final int MAX_LOTTO_NUMBER = 45;
-    public static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
+    static final int MIN_LOTTO_NUMBER = 1;
     private Scanner scanner = new Scanner(System.in);
     private int userInputPrice;
     private List<Lotto> LottoList = new ArrayList<>();
     private RandomLottoNumber randomLottoNumber = new RandomLottoNumber();
     private WinningLotto winningLotto;
-    public LottoGame() {
+    LottoGame() {
         userInputPrice = userInputPurchase();
         issueLotto();
         userInputWinningLotto();
@@ -30,11 +30,8 @@ public class LottoGame {
         return purchasePrice;
     }
 
-    public boolean inputPriceVerify(int userInput) {
-        if (userInput <= 0 || userInput % 1000 != 0) {
-            return false;
-        }
-        return true;
+    private boolean inputPriceVerify(int userInput) {
+        return (userInput > 0 && userInput % 1000 == 0);
     }
 
     private int userInputStringToInt() {
@@ -44,8 +41,7 @@ public class LottoGame {
 
     private int stringToInt(String string) {
         try {
-            int result = Integer.parseInt(string);
-            return result;
+            return  Integer.parseInt(string);
         } catch (NumberFormatException ex) {
             return -1;
         }
@@ -57,13 +53,11 @@ public class LottoGame {
         for (int i = 0; i < NUMBER_LOTTO; i++) {
             LottoList.add(new Lotto(makeRandomNumbers()));
         }
-        for (int i = 0; i < LottoList.size(); i++) {
-            System.out.println(LottoList.get(i).toString());
-        }
+        for(Lotto lotto : LottoList)
+            System.out.println(lotto.toString());
     }
 
     private List<Integer> makeRandomNumbers() {
-        Random random = new Random();
         List<Integer> numbers = new ArrayList<>();
         randomLottoNumber.shuffle();
         for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
@@ -86,7 +80,7 @@ public class LottoGame {
         winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusBallNumber);
     }
 
-    public ArrayList<Integer> userInputSplit() {
+    private ArrayList<Integer> userInputSplit() {
         String userInput = scanner.nextLine();
         if (userInput == null || userInput.equals(""))
             return new ArrayList<>();
@@ -146,12 +140,12 @@ public class LottoGame {
         for (Lotto lotto : LottoList)
             resultMap.put(winningLotto.match(lotto), resultMap.get(winningLotto.match(lotto)) + 1);
         for (int i = 4; i >= 0; i--) {
-            proceeds = proceeds + matchRankMap(resultMap, Rank.values()[i], proceeds);
+            proceeds = proceeds + matchRankMap(resultMap, Rank.values()[i]);
         }
         System.out.println("총 수익률은 " + proceeds / userInputPrice + "입니다.");
     }
 
-    private double matchRankMap(Map<Rank, Integer> resultMap, Rank rank, Double proceeds) {
+    private double matchRankMap(Map<Rank, Integer> resultMap, Rank rank) {
         int countOfMatch = rank.getCountOfMatch();
         int getWinningMoney = rank.getWinningMoney();
         if (getWinningMoney == 30000000) {

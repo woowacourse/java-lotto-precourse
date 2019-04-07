@@ -1,6 +1,4 @@
 package domain;
-
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -8,7 +6,7 @@ import java.util.List;
  */
 public class Lotto {
     private final List<Integer> numbers;
-    public Lotto(List<Integer> numbers) {
+    Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
     // 추가 기능 구현
@@ -16,8 +14,7 @@ public class Lotto {
     public String toString() {
         return numbers.toString();
     }
-
-    public List<Integer> getNumbers() {
+    List<Integer> getNumbers() {
         return numbers;
     }
 }
