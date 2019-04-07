@@ -50,15 +50,13 @@ public class UserInterface extends CheckValidity {
         }
 
         List<Integer> winnerNumberList = new ArrayList<>();
+        int number;
         for (String winnerNumber : winnerNumbers) {
             if (!checkIntegerFormat(winnerNumber)) {
                 return false;
             }
 
-            winnerNumberList.add(Integer.parseInt(winnerNumber));
-        }
-
-        for (Integer number : winnerNumberList) {
+            number = Integer.parseInt(winnerNumber);
             if (!checkLottoNumberScope(number)) {
                 return false;
             }
@@ -66,6 +64,8 @@ public class UserInterface extends CheckValidity {
             if (checkDouble(winnerNumberList, number)) {
                 return false;
             }
+
+            winnerNumberList.add(number);
         }
 
         return true;

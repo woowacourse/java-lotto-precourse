@@ -12,7 +12,7 @@ public class Main {
         List<Integer> lottoNumbers = new ArrayList<>();
         Lotto lotto;
         WinningLotto winnerLotto;
-        String[] winnerNumbers;
+        String[] winnerNumbers = new String[6];
         String purchaseAmountStr = "";
         String bonusBallStr = "";
 
@@ -39,7 +39,6 @@ public class Main {
             flag = ui.validateWinnerNumbers(winnerNumbers);
         }
 
-        winnerNumbers = new String[6];
         for(String winnerNumber : winnerNumbers){
             lottoNumbers.add(Integer.parseInt(winnerNumber));
         }
@@ -53,5 +52,9 @@ public class Main {
         bonusBall = Integer.parseInt(bonusBallStr);
 
         winnerLotto = new WinningLotto(lotto, bonusBall);
+
+        ui.printWinStats();
+
+
     }
 }
