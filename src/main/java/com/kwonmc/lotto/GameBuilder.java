@@ -19,5 +19,8 @@ public class GameBuilder {
         return this;
     }
 
-
+    public GameBuilder setLastWeekNumbers(Lotto lastWeekNumbers) {
+        this.lastWeekNumbers = lastWeekNumbers;
+        return this;
+    }
 }

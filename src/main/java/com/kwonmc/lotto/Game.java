@@ -8,6 +8,10 @@ public class Game {
     private Lotto lastWeekNumbers; // 지난 주 당첨 번호
     private int bonusNo; // 보너스 볼 번호
 
-
-
+    public Game(int purchaseAmount, ArrayList<Lotto> myLottoList, Lotto lastWeekNumbers, int bonusNo) {
+        this.purchaseAmount = purchaseAmount;
+        this.myLottoList = myLottoList;
+        this.lastWeekNumbers = lastWeekNumbers;
+        this.bonusNo = bonusNo;
+    }
 }
