@@ -4,6 +4,8 @@
 !gradle/wrapper/gradle-wrapper.jar
 /out/
 /target/
+/.vscode/
+*.class
 
 ### STS ###
 .apt_generated
