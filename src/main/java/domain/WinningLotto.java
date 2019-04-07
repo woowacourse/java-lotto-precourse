@@ -28,11 +28,7 @@ public class WinningLotto {
             countOfMatch++;
         }
 
-        Rank rank = Rank.valueOf(countOfMatch,matchBonus);
-        System.out.println("상금 : " + rank.getWinningMoney());
-        System.out.println("매치횟수 : " + rank.getCountOfMatch());
-
-        return null;
+        return Rank.valueOf(countOfMatch,matchBonus);
     }
 
     public void checkBonus(Lotto userLotto) {

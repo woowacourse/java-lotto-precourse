@@ -16,7 +16,6 @@ public class LottoGame {
 
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-
         System.out.println(INFO_BUY_MONEY);
         INPUT_MONEY = scan.nextInt();
         System.out.println(checkMoney() + INFO_BUY_COUNT);
@@ -25,13 +24,8 @@ public class LottoGame {
         winLotto = setWinNumber();
         System.out.println(INFO_BONUS_NUM);
         setBonusNum();
-        WinningLotto CreateLottoObject = new WinningLotto(winLotto, bonus);
-
-        for(int i = 0; i < checkMoney(); i++) {
-            CreateLottoObject.match(CreateUserLotto.lottos[i]);
-//            CreateUserLotto.lottos[i].getLotto();
-        }
-
+        matchRank();
+        printOutPut();
     }
 
     public static int checkMoney() {
@@ -61,5 +55,25 @@ public class LottoGame {
         Scanner scan = new Scanner(System.in);
 
         bonus = scan.nextInt();
+    }
+
+    public static void matchRank() {
+        WinningLotto CreateLottoObject = new WinningLotto(winLotto, bonus);
+        Rank rank = null;
+
+        for(int i = 0; i < checkMoney(); i++) {
+            rank = CreateLottoObject.match(CreateUserLotto.lottos[i]);
+            System.out.println(rank);
+        }
+    }
+
+    public static void printOutPut() {
+        System.out.println(INFO_RESULT_LOTTO);
+        System.out.println(INFO_FIVE_RANK);
+        System.out.println(INFO_FOUR_RANK);
+        System.out.println(INFO_THREE_RANK);
+        System.out.println(INFO_TWO_RANK);
+        System.out.println(INFO_ONE_RANK);
+        System.out.println(INFO_LOSS_RATE);
     }
 }
