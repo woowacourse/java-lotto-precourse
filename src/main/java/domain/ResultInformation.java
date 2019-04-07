@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
-public class ResultInfomation {
+public class ResultInformation {
     private List<Rank> ranks = new ArrayList<>();
     private EnumMap<Rank, Integer> enumMap;
 
+    private static final int MIN_MONEY = 1000;
 
-    public ResultInfomation(List<Rank> ranks) {
+    public ResultInformation(List<Rank> ranks) {
         this.ranks = ranks;
         this.enumMap = createEnumMap();
     }
@@ -28,5 +29,19 @@ public class ResultInfomation {
         }
 
         return map;
+    }
+
+    int getRankCount(Rank type){
+        return enumMap.get(type);
+    }
+
+    float getProfitRate(){
+        int reward = 0;
+
+        for(Rank rank : Rank.values()){
+            reward += rank.getWinningMoney() * enumMap.get(rank);
+        }
+
+        return ((float) reward / (ranks.size() * MIN_MONEY));
     }
 }
