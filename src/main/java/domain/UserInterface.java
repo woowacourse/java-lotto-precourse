@@ -8,8 +8,6 @@ public class UserInterface extends CheckValidity {
     private Scanner sc = new Scanner(System.in);
 
     private static final int MIN_PURCHASE_AMOUNT = 1000;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private static final int LENGTH_LOTTO = 6;
 
     public String inputPurchaseAmount() {
@@ -37,7 +35,7 @@ public class UserInterface extends CheckValidity {
 
     public void printBuyLotto(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getLotto());
+            System.out.println(lotto.toString());
         }
     }
 
@@ -89,5 +87,9 @@ public class UserInterface extends CheckValidity {
         }
 
         return checkLottoNumberScope(bonusBall);
+    }
+
+    public void printWinStats() {
+        System.out.println("당첨통계\n-------------");
     }
 }
