@@ -47,9 +47,8 @@ public class Validator {
 
 	public static boolean isIncludeLottoNumber(String value) {
 		value = value.trim();
-		int number = Integer.parseInt(value);
 		if (!isNaturalNumber(value) ||
-			number < MIN_NUMBER || number > MAX_NUMBER) {
+			Integer.parseInt(value) < MIN_NUMBER || Integer.parseInt(value) > MAX_NUMBER) {
 			printWrongInput();
 			return false;
 		}
