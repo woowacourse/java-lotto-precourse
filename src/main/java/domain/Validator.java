@@ -9,7 +9,12 @@ public class Validator {
     public boolean isValidPurchase(String purchaseAmount) {
         return true;
     }
+
     public boolean isValidWinningNumbers(List<Integer> winningNumbers) {
+        return true;
+    }
+
+    public boolean isValidBonus(String Bonus) {
         return true;
     }
 }

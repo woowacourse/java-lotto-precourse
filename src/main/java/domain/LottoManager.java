@@ -63,7 +63,14 @@ public class LottoManager {
     }
 
     public int inputBonus() {
-        return 0;
+        String bonus;
+
+        do {
+            System.out.println("보너스 볼을 읿력해주세요");
+            bonus = sc.nextLine();
+        } while(!validator.isValidBonus(bonus));
+
+        return Integer.parseInt(bonus);
     }
 
     public void showEarningRate(HashMap<Lotto, Rank> matchResult) {
