@@ -1,5 +1,6 @@
 package com.kwonmc.lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,4 +14,16 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    public static ArrayList<Integer> lottoMaker() {
+        ArrayList<Integer> aLotto = new ArrayList<>();
+
+        while (aLotto.size() < 6) {
+            int random = (int) (Math.random() * 45) + 1;
+            if (!aLotto.contains(random)) {
+                aLotto.add(random);
+            }
+        }
+
+        return aLotto;
+    }
 }
