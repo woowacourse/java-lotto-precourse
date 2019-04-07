@@ -15,7 +15,6 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // index 0 : countOfMatch , index 1 : matchBonus
         MatchInformation matchInformation = new MatchInformation();
         for (int number : userLotto.getNumbers()) {
             matchNumber(number, matchInformation);

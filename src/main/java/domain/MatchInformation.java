@@ -2,7 +2,7 @@ package domain;
 
 public class MatchInformation {
     private int countOfMatch;
-    private boolean matchBonus;
+    private boolean matchBonus = false;
 
     public int getCountOfMatch() {
         return countOfMatch;
