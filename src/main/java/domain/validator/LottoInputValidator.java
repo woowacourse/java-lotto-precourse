@@ -10,10 +10,14 @@ public class LottoInputValidator implements Validator {
 
     @Override
     public boolean doesValid() {
-        return doesInputIsNumeric();
+        return doesInputIsNumeric() && doesInputIsNotNull();
     }
 
     boolean doesInputIsNumeric() {
         return input.matches("[0-9]+");
+    }
+
+    boolean doesInputIsNotNull() {
+        return input != null;
     }
 }

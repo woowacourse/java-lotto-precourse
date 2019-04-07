@@ -13,4 +13,13 @@ public class LottoInputValidatorTest {
 
         assertFalse(doesInputValid);
     }
+
+    @Test
+    public void testInputIsNotValidIfInputIsNull() throws AssertionError {
+        LottoInputValidator inputValidator = new LottoInputValidator(null);
+
+        boolean doesInputValid = inputValidator.doesInputIsNotNull();
+
+        assertFalse(doesInputValid);
+    }
 }
