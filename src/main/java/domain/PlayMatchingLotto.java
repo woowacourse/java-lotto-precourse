@@ -3,14 +3,17 @@ package domain;
 import constnum.Const;
 import exception.LottoException;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class PlayMatchingLotto {
     private static int USER_PAYMENT;
 
     public void play() {
         USER_PAYMENT = receivePaymentFromUser();
+        int amountLotto = USER_PAYMENT/Const.PRIECE_OF_SINGLE_LOTTO;
+        printLottoPaymentAmt(amountLotto);
+        Lotto[] lottos = makeLottoObj(amountLotto);
+
     }
 
     /**
@@ -48,5 +51,47 @@ public class PlayMatchingLotto {
 
         return userPayment;
     }
+
+    private void printLottoPaymentAmt(int amountLotto){
+        System.out.println();
+        System.out.println(amountLotto + Const.STR_NOTI_PAYMENTLOTTO_AMT);
+    }
+
+    private Lotto[] makeLottoObj(int amountLotto){
+        Lotto[] lottos = new Lotto[amountLotto];
+        for(int i = 0 ; i < amountLotto ; i++){
+            lottos[i] = new Lotto(makeLottoNumList());
+            lottos[i].printLottoNums();
+        }
+        return lottos;
+    }
+
+    private List<Integer> makeLottoNumList(){
+        List<Integer> lottoNum =  new ArrayList<>();
+        while (lottoNum.size() != Const.LOTTO_NUM_CNT){
+            lottoNum = addLottoNumList(lottoNum);
+        }
+        return lottoNum;
+    }
+
+    private List<Integer> addLottoNumList(List<Integer> lottoNum){
+        int num = makeRandNumber();
+        if(!lottoNum.contains(num)){
+            lottoNum.add(num);
+        }
+        return lottoNum;
+    }
+
+    /**
+     * 1~45 사이의 난수 생성.
+     * 로또번호 List 객체에 숫자가 있으면 다시 생성
+     * */
+    private int makeRandNumber(){
+        Random random = new Random();
+        int randNum = random.nextInt(Const.MAX_NUM_OF_LOTTO_SELECT) + 1;
+        return randNum;
+    }
+
+
 
 }
