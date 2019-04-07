@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class GameRunner {
     private Scanner sc = new Scanner(System.in);
+    private Game game = new Game();
 
     public void run() {
-        System.out.println("구입금액을 입력해 주세요.");
-        int purchaseAmount = sc.nextInt();
+        getPurchaseAmount();
 
         System.out.println(purchaseAmount / 1000 + "개를 구매했습니다.");
         System.out.println();
@@ -27,5 +27,11 @@ public class GameRunner {
         System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치 (" + Rank.FIRST.getWinningMoney() +") - 0개");
 
         System.out.println("총 수익률은 0.000 입니다.");
+    }
+
+    private void getPurchaseAmount() {
+        System.out.println("구입금액을 입력해 주세요.");
+        int purchaseAmount = sc.nextInt();
+        game.setPurchaseAmount(purchaseAmount);
     }
 }
