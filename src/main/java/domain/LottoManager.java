@@ -45,8 +45,17 @@ public class LottoManager {
         for (int i = 1; i <= numberOfLotto; i++) {
             lottos.add(autoIssue());
         }
+        System.out.println("\n" + numberOfLotto + " 개를 구매하셨습니다.");
+        showLottos(lottos);
 
         return lottos;
+    }
+
+    public void showLottos(List<Lotto> lottos) {
+        for (Lotto lotto: lottos) {
+            System.out.println(lotto.getNumbers());
+        }
+        System.out.println("\n");
     }
 
     public Lotto inputWinningNumbers() {
