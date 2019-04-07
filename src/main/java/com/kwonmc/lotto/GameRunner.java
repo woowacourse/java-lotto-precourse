@@ -6,7 +6,7 @@ public class GameRunner {
     private Scanner sc = new Scanner(System.in);
 
     public void run() {
-        System.out.println("구입금액을 입력해 주세요");
+        System.out.println("구입금액을 입력해 주세요.");
         int purchaseAmount = sc.nextInt();
 
         System.out.println(purchaseAmount / 1000 + "개를 구매했습니다.");
