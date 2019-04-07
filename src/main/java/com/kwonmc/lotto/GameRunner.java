@@ -1,5 +1,6 @@
 package com.kwonmc.lotto;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameRunner {
@@ -10,8 +11,6 @@ public class GameRunner {
         inputUserPurchaseAmount();
         printLottoList();
 
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String lastWeek = sc.next();
 
         System.out.println("보너스 볼을 입력해주세요");
         int bonusNo = sc.nextInt();
@@ -36,5 +35,13 @@ public class GameRunner {
     private void printLottoList() {
         System.out.println();
         System.out.println(game.getPurchaseAmount() / 1000 + "개를 구매했습니다.");
+    }
+
+    private void inputLastWeekNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        // TODO 구현
+        String lastWeek = sc.next();
+        Lotto lotto = new Lotto(new ArrayList<>());
+        game.setLastWeekNumbers(lotto);
     }
 }
