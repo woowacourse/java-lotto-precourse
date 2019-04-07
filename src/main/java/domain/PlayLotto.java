@@ -68,7 +68,7 @@ public class PlayLotto {
     }
 
     public static void printLottos() {
-        System.out.println("\n"+purchase_amount + "개를 구매했습니다.");
+        System.out.println("\n" + purchase_amount + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             printLottoNum(lotto);
         }
@@ -84,13 +84,12 @@ public class PlayLotto {
         System.out.println("[" + sb.toString() + "]");
     }
 
-    public static void getLastWeekNumber(){
+    public static void getLastWeekNumber() {
         last_week_num = new ArrayList<>();
         sc = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] tmp_numbers = sc.nextLine().split(",");
-        for(int i=0 ;i<LOTTO_COUNT;i++){
-            last_week_num.add(Integer.parseInt(tmp_numbers[i]));
-        }
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int tmp_bonus = sc.nextInt();
     }
 }
