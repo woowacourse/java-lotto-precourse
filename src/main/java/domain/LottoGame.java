@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -86,4 +87,8 @@ public class LottoGame {
         }
     }
 
+    private Lotto createLotto(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+        return new Lotto(lottoNumbers);
+    }
 }
