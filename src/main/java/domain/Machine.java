@@ -3,24 +3,29 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Machine {
+public class Machine extends Config {
     private List<Integer> lottoMachineNumber = new ArrayList<>();
+    private int count;
+    private Lotto[] lottoBundle;
+
+    public Machine(int price){
+        this.count = (price/LOTTO_PRICE);
+        this.lottoBundle = new Lotto[count];
+    }
 
     public Lotto[] sellLotto(int price) {
         System.out.println("랜덤으로 로또가 생성됩니다.");
-        int count = (price/1000);
-        Lotto[] lottoBundle = new Lotto[count];
         for(int i=0; i< count; i++) {
             fillLottoNumber();
             lottoBundle[i] = createLotto(getRandomLottoNumber());
         }
-        return lottoBundle;
+        return this.lottoBundle;
     }
 
     private List<Integer> getRandomLottoNumber(){
         List<Integer> lottoUserNumber = new ArrayList<>();
-        for(int i=0; i<6; i++) {
-            lottoUserNumber.add(lottoMachineNumber.remove(createRandomNumber(44-i)));
+        for(int i=0; i<LOTTO_NUMBER_SIZE; i++) {
+            lottoUserNumber.add(lottoMachineNumber.remove(createRandomNumber((LOTTO_MAX_VALUE-1)-i)));
         }
         return lottoUserNumber;
     }
@@ -33,9 +38,9 @@ public class Machine {
         return new Lotto(lottoNumber);
     }
 
-    public void fillLottoNumber() {
+    private void fillLottoNumber() {
         lottoMachineNumber.clear();
-        for(int i=1; i<=45; i++) {
+        for(int i=(LOTTO_MIN_VALUE+1); i<=LOTTO_MAX_VALUE; i++) {
             lottoMachineNumber.add(i);
         }
     }

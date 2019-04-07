@@ -3,22 +3,18 @@ package domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Shop {
-    private final int INITIAL_VALUE = 0;
-    private final int LOTTO_PRICE = 1000;
-    private final int LOTTO_NUMBER_SIZE = 6;
-    private final int LOTTO_MAX_VALUE = 45;
-    private final int LOTTO_MIN_VALUE = 0;
+public class Shop extends Config {
 
-    public int inputPrice() {
-        int price = checkPriceValidation(INITIAL_VALUE);
-        return price;
+    private Lotto[] lottoBundle;
+    private int count;
+
+    public Shop(int price){
+        this.count = price / 1000;
+        this.lottoBundle = new Lotto[count];
     }
 
     public Lotto[] sellLotto(int price) {
         System.out.println("로또 번호를 입력하세요. 번호는 , 로 구분됩니다.");
-        int count = price / 1000;
-        Lotto[] lottoBundle = new Lotto[count];
         for (int i = 0; i < count; i++) {
             lottoBundle[i] = createLotto(getLottoNumber());
             System.out.println("입력되었습니다.");
@@ -36,6 +32,20 @@ public class Shop {
         return winningLotto;
     }
 
+    private Lotto createLotto(ArrayList<Integer> lottoNumber) {
+        return new Lotto(lottoNumber);
+    }
+
+    private ArrayList<Integer> getLottoNumber() {
+        String[] numberStringArray = getStringLottoNumber();
+        int[] numberArray = changeIntegerArrayfromStringArray(numberStringArray);
+        numberArray = checkDuplicate(numberArray);
+        numberArray = checkMaxMinLottoNumber(numberArray);
+        numberArray = checkLottoSize(numberArray);
+        ArrayList<Integer> lottoNumber = (ArrayList<Integer>) Arrays.stream(numberArray).boxed().collect(Collectors.toList());
+        return lottoNumber;
+    }
+
     public void printLotto(Lotto[] lottobundle) {
         int amount = lottobundle.length;
         System.out.println(amount + "개를 구매했습니다.");
@@ -43,48 +53,6 @@ public class Shop {
             System.out.println(lottobundle[i].printLottoNumber());
         }
     }
-
-    public Rank[] createRankBundle(Lotto[] lottobundle,WinningLotto winningLotto){
-        Rank[] rankBundle = new Rank[lottobundle.length];
-        for(int i=0; i<lottobundle.length;i++){
-            rankBundle[i] = winningLotto.match(lottobundle[i]);
-        }
-        return rankBundle;
-    }
-
-    public float calculateEarningrate(float amount, Rank[] rank){
-        float winningMoney = 0;
-        for(int i=0; i<rank.length;i++){
-            winningMoney = winningMoney + rank[i].getWinningMoney();
-        }
-        return (winningMoney/amount);
-    }
-
-    public void printLottoResult(Rank[] rankbundle,float Earningrate){
-        System.out.println("당첨 통계\n----------");
-        System.out.println(Rank.FIFTH.getCountOfMatch()+"개 일치 ("+Rank.FIFTH.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.FIFTH.getWinningMoney())+"개");
-        System.out.println(Rank.FOURTH.getCountOfMatch()+"개 일치 ("+Rank.FOURTH.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.FOURTH.getWinningMoney())+"개");
-        System.out.println(Rank.THIRD.getCountOfMatch()+"개 일치 ("+Rank.THIRD.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.THIRD.getWinningMoney())+"개");
-        System.out.println(Rank.SECOND.getCountOfMatch()+"개 일치, 보너스 볼 일치 ("+Rank.SECOND.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.SECOND.getWinningMoney())+"개");
-        System.out.println(Rank.FIRST.getCountOfMatch()+"개 일치 ("+Rank.FIRST.getWinningMoney()+")-"+createCountOfMatchAmount(rankbundle,Rank.FIRST.getWinningMoney())+"개");
-        System.out.println("총 수익률은 "+Earningrate+"입니다.");
-    }
-
-    private int createCountOfMatchAmount(Rank[] rank, int winningMoney){
-        int countOfMatchAmount = 0;
-        for(int i=0; i<rank.length;i++){
-            countOfMatchAmount = countOfMatchAmount + pulsCountOfMatchAmount(rank[i].getWinningMoney(),winningMoney);
-        }
-        return countOfMatchAmount;
-    }
-
-    private int pulsCountOfMatchAmount(int userWinningMoney,int winningMoney){
-        if(userWinningMoney == winningMoney){
-            return 1;
-        }
-        return 0;
-    }
-
 
     private int createBonusNumber(List<Integer> winningNumber) {
         int bonusNumber = checkBonusNumberValidation(INITIAL_VALUE, winningNumber);
@@ -105,33 +73,19 @@ public class Shop {
     }
 
     private int checkBonusNumberRange(int bonusNumber, List<Integer> winningNumber) {
-        if (bonusNumber > LOTTO_MAX_VALUE || bonusNumber<= LOTTO_MIN_VALUE) {
+        if (bonusNumber > LOTTO_MAX_VALUE || bonusNumber <= LOTTO_MIN_VALUE) {
             System.out.println("번호는 1이상 45이하의 수만 입력이 가능합니다.");
-            bonusNumber = checkBonusNumberValidation(INITIAL_VALUE,winningNumber);
-        }
-        return bonusNumber;
-    }
-
-    private int checkDuplicateBonusNumber(int bonusNumber, List<Integer> winningNumber){
-        if(winningNumber.contains(bonusNumber)){
-            System.out.println("보너스 번호는 당첨 번호와 중복 될 수 없습니다.");
             bonusNumber = checkBonusNumberValidation(INITIAL_VALUE, winningNumber);
         }
         return bonusNumber;
     }
 
-    private Lotto createLotto(ArrayList<Integer> lottoNumber) {
-        return new Lotto(lottoNumber);
-    }
-
-    private ArrayList<Integer> getLottoNumber() {
-        String[] numberStringArray = getStringLottoNumber();
-        int[] numberArray = changeIntegerArrayfromStringArray(numberStringArray);
-        numberArray = checkDuplicate(numberArray);
-        numberArray = checkMaxMinLottoNumber(numberArray);
-        numberArray = checkLottoSize(numberArray);
-        ArrayList<Integer> lottoNumber = (ArrayList<Integer>) Arrays.stream(numberArray).boxed().collect(Collectors.toList());
-        return lottoNumber;
+    private int checkDuplicateBonusNumber(int bonusNumber, List<Integer> winningNumber) {
+        if (winningNumber.contains(bonusNumber)) {
+            System.out.println("보너스 번호는 당첨 번호와 중복 될 수 없습니다.");
+            bonusNumber = checkBonusNumberValidation(INITIAL_VALUE, winningNumber);
+        }
+        return bonusNumber;
     }
 
     private String[] getStringLottoNumber() {
@@ -183,35 +137,5 @@ public class Shop {
         return numberArray;
     }
 
-    private int checkPriceValidation(int price) {
-        Scanner scan = new Scanner(System.in);
-        try {
-            int signedprice = scan.nextInt();
-            price = checkPrice(signedprice);
-        } catch (InputMismatchException e) {
-            resetScanner();
-            price = checkPriceValidation(INITIAL_VALUE);
-        }
-        return price;
-    }
-
-    private Scanner resetScanner() {
-        System.out.println("유효하지 않는 값입니다.");
-        Scanner scan = new Scanner(System.in);
-        return scan;
-    }
-
-
-    private int checkPrice(int price) {
-        if (price < 0) {
-            System.out.println("0원보다 큰 금액을 입력해 주세요.");
-            price = checkPriceValidation(INITIAL_VALUE);
-        }
-        if (price % LOTTO_PRICE != 0) {
-            System.out.println("1000원 단위로 입력 해주세요.");
-            price = checkPriceValidation(INITIAL_VALUE);
-        }
-        return price;
-    }
 
 }
