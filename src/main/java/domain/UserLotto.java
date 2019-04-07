@@ -17,13 +17,13 @@ public class UserLotto {
 	private List<Lotto> lottoes;
 	private int lottoCount = 0;
 
-	public UserLotto(int price) {
+	public UserLotto(long price) {
 		setLottoCount(price);
 		setLottoes(lottoCount);
 	}
 
-	private void setLottoCount(int price) {
-		lottoCount = price / LOTTO_PRICE;
+	private void setLottoCount(long price) {
+		lottoCount = (int)(price / LOTTO_PRICE);
 	}
 
 	public List<Lotto> getLottoes() {

@@ -13,10 +13,10 @@ public class Lottery {
 
 	private static final Scanner SCANNER = new Scanner(System.in);
 
-	private int price;
+	private long price;
 
 	public void runProgram() {
-		int inputtedPrice = inputPrice();
+		long inputtedPrice = inputPrice();
 		setPrice(inputtedPrice);
 		UserLotto userLotto = new UserLotto(price);
 		userLotto.printLottoes();
@@ -25,18 +25,16 @@ public class Lottery {
 		printResult(result);
 	}
 
-	private int inputPrice() {
+	private long inputPrice() {
 		String price = "";
 		do {
 			System.out.println("구입 금액을 입력해 주세요.");
 			price = SCANNER.nextLine();
-
 		} while (!Validator.isNaturalNumber(price));
-		// TODO int? long?
-		return Integer.parseInt(price.trim());
+		return Long.parseLong(price.trim());
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
 
