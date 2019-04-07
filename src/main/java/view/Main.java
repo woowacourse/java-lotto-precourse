@@ -9,7 +9,7 @@ public class Main {
             userView.inputMoney();
             userView.displayLotto();
             userView.inputWinningLotto();
-            userView.displayRank();
+            userView.displayStats();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

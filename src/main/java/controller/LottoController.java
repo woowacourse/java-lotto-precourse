@@ -14,7 +14,7 @@ public class LottoController {
 
     private List<Lotto> lottoList = new ArrayList<>();
     private WinningLotto winningLotto;
-    private List<Rank> rankList = new ArrayList<>();
+    private Map<Rank, Integer> rankMap = new HashMap<>();
 
     public LottoController(int money) {
         for (int i = 0; i < money / LOTTO_PRICE; i++) {
@@ -30,7 +30,7 @@ public class LottoController {
     private void matchLottoList() {
         for (Lotto lotto : lottoList) {
             Rank rank = winningLotto.match(lotto);
-            rankList.add(rank);
+            rankMap.put(rank, rankMap.getOrDefault(rank, 0) + 1);
         }
     }
 
@@ -50,8 +50,18 @@ public class LottoController {
         return lottoList;
     }
 
-    public List<Rank> getRankList() {
-        return rankList;
+    public Map<Rank, Integer> getRankMap() {
+        return rankMap;
+    }
+
+    public double getLottoYield() {
+        int totalPrizes = 0;
+
+        for (Rank rank : rankMap.keySet()) {
+            totalPrizes += rank.getWinningMoney() * rankMap.get(rank);
+        }
+
+        return (double) totalPrizes / (lottoList.size() * LOTTO_PRICE);
     }
 
 }

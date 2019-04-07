@@ -50,10 +50,28 @@ public class UserInput {
         lottoController.setWinningLotto(winningLotto, bonusNo);
     }
 
-    public void displayRank() {
-        for (Rank rank : lottoController.getRankList()) {
-            System.out.println(rank);
+    public void displayStats() {
+        Rank[] displayOrder = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
+
+        System.out.println("당첨 통계\n" + "---------");
+
+        for (Rank rank : displayOrder) {
+            System.out.println(makeRankString(rank));
         }
+
+        System.out.println("총 수익률은 " + lottoController.getLottoYield() + "입니다.");
+    }
+
+    private String makeRankString(Rank rank) {
+        Map<Rank, Integer> rankResult = lottoController.getRankMap();
+
+        if (rank == Rank.SECOND) {
+            return rank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney()
+                    + "원)- " + rankResult.getOrDefault(rank, 0) + "개";
+        }
+
+        return rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney()
+                + "원)- " + rankResult.getOrDefault(rank, 0) + "개";
     }
 
     private List<Integer> makeWinningNumbers(String[] inputStr) {
