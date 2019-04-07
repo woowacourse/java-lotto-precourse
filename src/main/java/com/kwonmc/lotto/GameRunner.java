@@ -13,8 +13,6 @@ public class GameRunner {
         inputLastWeekNumbers();
         inputBonusNo();
         printLottoMatchResult();
-
-        System.out.println("총 수익률은 0.000 입니다.");
     }
 
     private void inputUserPurchaseAmount() {
@@ -50,5 +48,9 @@ public class GameRunner {
         System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치 (" + Rank.THIRD.getWinningMoney() +") - 0개");
         System.out.println(Rank.SECOND.getCountOfMatch() + "개 일치 (" + Rank.SECOND.getWinningMoney() +") - 0개");
         System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치 (" + Rank.FIRST.getWinningMoney() +") - 0개");
+    }
+
+    private void printLottoMoneyResult() {
+        System.out.println("총 수익률은 0.000 입니다.");
     }
 }
