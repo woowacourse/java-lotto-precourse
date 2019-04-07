@@ -24,17 +24,20 @@ public class GameRunner {
 
     private void printLottoInfo() {
         System.out.println();
-        System.out.println(countLotto() + "개를 구매했습니다.");
+        int lottoCount = countLotto();
+        System.out.println(lottoCount + "개를 구매했습니다.");
 
-        createLottoList();
+        createLottoList(lottoCount);
         printLottoList();
     }
 
-    private void createLottoList() {
-        for (int i = 0; i < countLotto(); i++) {
+    private void createLottoList(int lottoCount) {
+        ArrayList<Lotto> tmpLottoList = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
             Lotto tmp = new Lotto(Lotto.lottoMaker());
-            game.addMyLottoList(tmp);
+            tmpLottoList.add(tmp);
         }
+        game.setMyLottoList(tmpLottoList);
     }
 
     private void printLottoList() {

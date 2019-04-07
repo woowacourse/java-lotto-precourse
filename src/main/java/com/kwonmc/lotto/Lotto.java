@@ -2,9 +2,9 @@ package com.kwonmc.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.StringJoiner;
 
 /**
  * 로또 한장을 의미하는 객체
