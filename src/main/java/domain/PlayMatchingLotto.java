@@ -13,7 +13,7 @@ public class PlayMatchingLotto {
         int amountLotto = USER_PAYMENT/Const.PRIECE_OF_SINGLE_LOTTO;
         printLottoPaymentAmt(amountLotto);
         Lotto[] lottos = makeLottoObj(amountLotto);
-
+        WinningLotto winningLotto = new WinningLotto(new Lotto(receiveLastWinLottoFromUser()),0);
     }
 
     /**
@@ -27,10 +27,10 @@ public class PlayMatchingLotto {
         try{
             userPayment = receivePaymentFromUserException();
         } catch(InputMismatchException e){
-            System.out.println(Const.STR_ENTER_PAYMENT_ONLY_NUM_TO_USER);
+            System.out.println(Const.EX_PAYMENT_ONLY_NUM_TO_USER);
             userPayment = receivePaymentFromUser();
         } catch (LottoException e){
-            System.out.println(Const.STR_ENTER_PAYMENT_CONDITION_TO_USER);
+            System.out.println(e.EXCEPTION_STR);
             userPayment = receivePaymentFromUser();
         }
         return userPayment;
@@ -46,7 +46,7 @@ public class PlayMatchingLotto {
         userPayment = sc.nextInt();
 
         if(userPayment < Const.MIN_PRICE_OF_LOTTO_BUY || userPayment > Const.MAX_PRICE_OF_LOTTO_BUY){
-            throw new LottoException();
+            throw new LottoException(Const.EX_PAYMENT_CONDITION_TO_USER);
         }
 
         return userPayment;
@@ -88,10 +88,48 @@ public class PlayMatchingLotto {
      * */
     private int makeRandNumber(){
         Random random = new Random();
-        int randNum = random.nextInt(Const.MAX_NUM_OF_LOTTO_SELECT) + 1;
+        int randNum = random.nextInt(Const.MAX_NUM_OF_LOTTO_TO_SELECT) + 1;
         return randNum;
     }
 
+    private List<Integer> receiveLastWinLottoFromUser(){
+        List<Integer> winnerList;
+        System.out.println("\n"+Const.STR_ENTER_LAST_WIN_NUMBRES);
+        try{
+            winnerList = receiveLastWinLottoFromUserException();
+        }catch (NumberFormatException e){
+            System.out.print(Const.EX_WIN_ONLY_NUM_TO_USER);
+            winnerList = receiveLastWinLottoFromUser();
+        }catch (LottoException e){
+            System.out.print(e.EXCEPTION_STR);
+            winnerList = receiveLastWinLottoFromUser();
+        }
+        return winnerList;
+    }
 
+    private List<Integer> receiveLastWinLottoFromUserException() throws NumberFormatException, LottoException {
+        List<Integer> winnerList = new ArrayList<>(Const.LOTTO_NUM_CNT);
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String[] strArr = str.split(",");
+        for(String s : strArr){
+            winnerList = addWinLottoList(winnerList,Integer.parseInt(s));
+        }
+        if(strArr.length != Const.LOTTO_NUM_CNT){
+            throw new LottoException(Const.EX_WIN_CNT_CONDITION_TO_USER);
+        }
+        return winnerList;
+    }
+
+    private List<Integer> addWinLottoList(List<Integer> winnerList, int num) throws LottoException{
+        if(num < Const.MIN_NUM_OF_LOTTO_TO_SELECT || num > Const.MAX_NUM_OF_LOTTO_TO_SELECT) {
+            throw new LottoException(Const.EX_WIN_CONDITION_TO_USER);
+        }
+        if(winnerList.contains(num)){
+            throw new LottoException(Const.EX_WIN_NOT_OVERLAP_TO_USER);
+        }
+        winnerList.add(num);
+        return winnerList;
+    }
 
 }
