@@ -8,12 +8,19 @@ public class Game {
     private Lotto lastWeekNumbers; // 지난 주 당첨 번호
     private int bonusNo; // 보너스 볼 번호
 
-    public Game(int purchaseAmount, ArrayList<Lotto> myLottoList, Lotto lastWeekNumbers, int bonusNo) {
+    public void setPurchaseAmount(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
-        this.myLottoList = myLottoList;
-        this.lastWeekNumbers = lastWeekNumbers;
-        this.bonusNo = bonusNo;
     }
 
-    
+    public void setMyLottoList(ArrayList<Lotto> myLottoList) {
+        this.myLottoList = myLottoList;
+    }
+
+    public void setLastWeekNumbers(Lotto lastWeekNumbers) {
+        this.lastWeekNumbers = lastWeekNumbers;
+    }
+
+    public void setBonusNo(int bonusNo) {
+        this.bonusNo = bonusNo;
+    }
 }
