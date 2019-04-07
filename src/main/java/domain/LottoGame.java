@@ -10,6 +10,7 @@ public class LottoGame {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int LOTTO_PRICE = 1000;
+    private static final String PRINT_LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
 
     private List<Lotto> lottoes;
 
@@ -107,5 +108,12 @@ public class LottoGame {
         int lottoPurchaseMoney = getLottoPurchaseMoney();
 
         return lottoPurchaseMoney / LOTTO_PRICE;
+    }
+
+    private void printLottoes() {
+        System.out.println(lottoes.size() + PRINT_LOTTO_COUNT_MESSAGE);
+        for (Lotto lotto : lottoes) {
+            lotto.printLottoNumbers();
+        }
     }
 }
