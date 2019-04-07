@@ -1,4 +1,4 @@
-package domain;
+package domain.game;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import domain.lotto.Lotto;
+import domain.lotto.UserLotto;
+import domain.lotto.WinningLotto;
+import domain.util.Rank;
 import domain.util.Validator;
 
 public class Lottery {

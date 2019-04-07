@@ -1,4 +1,4 @@
-package domain;
+package domain.util;
 
 import java.text.DecimalFormat;
 
