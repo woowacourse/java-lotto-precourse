@@ -47,7 +47,7 @@ public class Main {
         flag = false;
         while (!flag) {
             bonusBallStr = ui.inputBonusBall();
-            flag = ui.valiateBonusBall(bonusBallStr);
+            flag = ui.validateBonusBall(lottoNumbers, bonusBallStr);
         }
         bonusBall = Integer.parseInt(bonusBallStr);
     }
