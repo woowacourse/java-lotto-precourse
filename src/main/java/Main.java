@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.*;
 import java.io.Console;
 import domain.*;
 
@@ -11,6 +12,8 @@ public class Main {
     private final static Random random = new Random();
     private final static String INPUT_INT_ERROR
             = "올바른 숫자가 입력되지 않았습니다. 다시 입력해 주세요.";
+    private final static String INPUT_WIN_NUMBERS
+            = "지난 주 당첨 번호를 입력해 주세요.";
     
     /** 1에서 45 사이의 임의의 정수 하나를 생성하여 반환 */
     private static int getLottoNum() {
@@ -48,6 +51,16 @@ public class Main {
             check = isOnlyNumber(temp);
         }
         return Integer.parseInt(temp);
+    }
+    
+    /** 로또 번호 6개를 입력받으려고 1번 시도한다. */
+    private static List<Integer> tryInputLottoNums(String message) {
+        Stream<String> temp = Arrays.stream(getInput(message));
+        return temp
+                .filter(Main::isOnlyNumber)
+                .map(Integer::parseInt)
+                .filter(Main::isLottoRange)
+                .collect(Collectors.toList()); // stream을 List로 변환
     }
     
     /** main 진입점 */
