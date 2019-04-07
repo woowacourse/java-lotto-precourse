@@ -87,9 +87,31 @@ public class PlayLotto {
     public static void getLastWeekNumber() {
         last_week_num = new ArrayList<>();
         sc = new Scanner(System.in);
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] tmp_numbers = sc.nextLine().split(",");
-        System.out.println("보너스 볼을 입력해 주세요.");
-        int tmp_bonus = sc.nextInt();
+        boolean flag = false;
+        while (!flag) {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            String[] tmp_numbers = sc.nextLine().split(",");
+            System.out.println("보너스 볼을 입력해 주세요.");
+            bonus_num = sc.nextInt();
+            sc.nextLine();
+            flag = saveLastWeekNumbers(tmp_numbers);
+        }
+    }
+
+    public static boolean saveLastWeekNumbers(String[] tmp_numbers) {
+        last_week_num.clear();
+        for (int i = 0; i < LOTTO_COUNT; i++) {
+            addOrPassLastWeekNumbers(Integer.parseInt(tmp_numbers[i]));
+        }
+        if (last_week_num.size() < 6) {
+            System.out.println("다시 입력해주세요");
+            return false;
+        }
+        return true;
+    }
+
+    public static void addOrPassLastWeekNumbers(int num) {
+        if (!last_week_num.contains(num) && num >= 1 && num <= 45 && num != bonus_num)
+            last_week_num.add(num);
     }
 }
