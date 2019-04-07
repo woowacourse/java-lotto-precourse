@@ -7,10 +7,8 @@ public class GameRunner {
     private Game game = new Game();
 
     public void run() {
-        getPurchaseAmount();
-
-        System.out.println(purchaseAmount / 1000 + "개를 구매했습니다.");
-        System.out.println();
+        inputUserPurchaseAmount();
+        printLottoList();
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String lastWeek = sc.next();
@@ -29,9 +27,14 @@ public class GameRunner {
         System.out.println("총 수익률은 0.000 입니다.");
     }
 
-    private void getPurchaseAmount() {
+    private void inputUserPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         int purchaseAmount = sc.nextInt();
         game.setPurchaseAmount(purchaseAmount);
+    }
+
+    private void printLottoList() {
+        System.out.println();
+        System.out.println(game.getPurchaseAmount() / 1000 + "개를 구매했습니다.");
     }
 }

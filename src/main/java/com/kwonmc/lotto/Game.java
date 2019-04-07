@@ -12,6 +12,10 @@ public class Game {
         this.purchaseAmount = purchaseAmount;
     }
 
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
+
     public void setMyLottoList(ArrayList<Lotto> myLottoList) {
         this.myLottoList = myLottoList;
     }
