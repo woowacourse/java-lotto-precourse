@@ -20,6 +20,10 @@ public class Game {
         this.myLottoList = myLottoList;
     }
 
+    public void addMyLottoList(Lotto lotto) {
+        this.myLottoList.add(lotto);
+    }
+
     public void setLastWeekNumbers(Lotto lastWeekNumbers) {
         this.lastWeekNumbers = lastWeekNumbers;
     }

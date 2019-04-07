@@ -25,6 +25,11 @@ public class GameRunner {
     private void printLottoList() {
         System.out.println();
         System.out.println(countLotto() + "개를 구매했습니다.");
+
+        for (int i = 0; i < countLotto(); i++) {
+            Lotto tmp = new Lotto(Lotto.lottoMaker());
+            game.addMyLottoList(tmp);
+        }
     }
 
     private int countLotto() {
