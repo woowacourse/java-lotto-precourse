@@ -1,5 +1,6 @@
 import domain.Lotto;
 import domain.UserInterface;
+import domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ public class Main {
         List<Lotto> lottos = new ArrayList<>();
         List<Integer> lottoNumbers = new ArrayList<>();
         Lotto lotto;
-        Lotto winnerLotto;
+        WinningLotto winnerLotto;
         String[] winnerNumbers;
         String purchaseAmountStr = "";
         String bonusBallStr = "";
@@ -42,7 +43,7 @@ public class Main {
         for(String winnerNumber : winnerNumbers){
             lottoNumbers.add(Integer.parseInt(winnerNumber));
         }
-        winnerLotto = new Lotto(lottoNumbers);
+        lotto = new Lotto(lottoNumbers);
 
         flag = false;
         while (!flag) {
@@ -50,5 +51,7 @@ public class Main {
             flag = ui.validateBonusBall(lottoNumbers, bonusBallStr);
         }
         bonusBall = Integer.parseInt(bonusBallStr);
+
+        winnerLotto = new WinningLotto(lotto, bonusBall);
     }
 }
