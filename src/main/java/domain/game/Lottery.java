@@ -16,6 +16,7 @@ import domain.util.Validator;
 public class Lottery {
 
 	private static final Scanner SCANNER = new Scanner(System.in);
+	private static final int PERCENTAGE_CORRECTION = 100;
 
 	private long price;
 
@@ -94,6 +95,6 @@ public class Lottery {
 	}
 
 	private double calculateEarningRate(long sum) {
-		return sum / (double)price * 100;
+		return sum / (double)price * PERCENTAGE_CORRECTION;
 	}
 }
