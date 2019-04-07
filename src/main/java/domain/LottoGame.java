@@ -20,9 +20,43 @@ public class LottoGame {
     }
 
     private int getLottoPurchaseMoney() {
-        Scanner scanner = new Scanner(System.in);
-        int lottoPurchaseMoney = scanner.nextInt();
+        String lottoPurchaseMoney;
 
-        return lottoPurchaseMoney;
+        do {
+            lottoPurchaseMoney = inputLottoPurchaseMoney();
+        } while (!isValidLottoPurchaseMoney(lottoPurchaseMoney));
+
+        return Integer.parseInt(lottoPurchaseMoney);
+    }
+
+    private String inputLottoPurchaseMoney() {
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextLine();
+    }
+
+    private boolean isValidLottoPurchaseMoney(String lottoPurchaseMoney) {
+        if (!isInteger(lottoPurchaseMoney)) {
+            return false;
+        }
+        if (isNegativeNumber(Integer.parseInt(lottoPurchaseMoney))){
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isInteger(String string) {
+        try {
+            Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isNegativeNumber(int number) {
+        return number < 0;
     }
 }
