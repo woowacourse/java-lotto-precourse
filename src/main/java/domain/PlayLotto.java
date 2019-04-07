@@ -50,8 +50,17 @@ public class PlayLotto {
     }
 
     public static void makeNumbers(List<Integer> numbers) {
-        for (int i = 0; i < LOTTO_COUNT; i++) {
-            numbers.add((int) (Math.random() * 45) + 1);
+        while (numbers.size()<6) {
+            int tmp_num = (int) (Math.random() * 45) + 1;
+            addOrPassNumbers(tmp_num,numbers);
         }
+    }
+
+    /**
+    * 중복된 로또 번호가 있으면 패스하고, 중복되지 않은 경우에 로또 번호를 추가한다.
+    */
+    public static void addOrPassNumbers(int tmp_num, List<Integer> numbers){
+        if(!numbers.contains(tmp_num))
+            numbers.add(tmp_num);
     }
 }
