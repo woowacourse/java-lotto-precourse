@@ -23,7 +23,7 @@ public class LottoGame {
 
         int purchaseAmount = lottoManager.inputPurchaseAmount();
         List<Lotto> issuedLottos = lottoManager.issueLottoOf(purchaseAmount);
-        WinningLotto winningLotto = new WinningLotto(lottoManager.inputWinningNumber(), lottoManager.inputBonus());
+        WinningLotto winningLotto = new WinningLotto(lottoManager.inputWinningNumbers(), lottoManager.inputBonus());
 
         HashMap<Lotto, Rank> lotteryResults = lottoGame.startLottery(issuedLottos, winningLotto);
         lottoManager.showEarningRate(lotteryResults);

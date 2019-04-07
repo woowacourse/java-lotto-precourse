@@ -49,8 +49,17 @@ public class LottoManager {
         return lottos;
     }
 
-    public Lotto inputWinningNumber() {
-        return new Lotto(new ArrayList<Integer>());
+    public Lotto inputWinningNumbers() {
+        List<Integer> winningNumbers;
+
+        do {
+            System.out.println("지난 주 당첨 번호를 입력해주세요.");
+            winningNumbers = Arrays.stream(sc.nextLine().split(","))
+                    .map(s -> Integer.valueOf(s))
+                    .collect(Collectors.toList());
+        } while(!validator.isValidWinningNumbers(winningNumbers));
+
+        return new Lotto(winningNumbers);
     }
 
     public int inputBonus() {
