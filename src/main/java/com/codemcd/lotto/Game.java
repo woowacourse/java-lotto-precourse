@@ -1,13 +1,16 @@
 package com.codemcd.lotto;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
 
     private int moneyForLotto;
+    private ArrayList<Integer> lottoNumber = new ArrayList<>();
 
     public void start() {
         inputMoney();
+        lottoNumber = RandomNumber.makeLottoNumber();
     }
 
     private void inputMoney() {
