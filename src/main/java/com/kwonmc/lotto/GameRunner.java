@@ -10,11 +10,9 @@ public class GameRunner {
     public void run() {
         inputUserPurchaseAmount();
         printLottoList();
-
-
-        System.out.println("보너스 볼을 입력해주세요");
-        int bonusNo = sc.nextInt();
-
+        inputLastWeekNumbers();
+        inputBonusNo();
+        
         System.out.println("당첨통계");
         System.out.println("---------");
         System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() +") - 0개");
@@ -43,5 +41,11 @@ public class GameRunner {
         String lastWeek = sc.next();
         Lotto lotto = new Lotto(new ArrayList<>());
         game.setLastWeekNumbers(lotto);
+    }
+
+    private void inputBonusNo() {
+        System.out.println("보너스 볼을 입력해주세요");
+        int bonusNo = sc.nextInt();
+        game.setBonusNo(bonusNo);
     }
 }
