@@ -23,4 +23,9 @@ public class GameBuilder {
         this.lastWeekNumbers = lastWeekNumbers;
         return this;
     }
+
+    public GameBuilder setBonusNo(int bonusNo) {
+        this.bonusNo = bonusNo;
+        return this;
+    }
 }
