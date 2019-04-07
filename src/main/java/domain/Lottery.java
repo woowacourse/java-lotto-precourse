@@ -11,7 +11,6 @@ import domain.util.Validator;
 
 public class Lottery {
 
-	// XXX Only 3 field in method!!
 	private static final Scanner SCANNER = new Scanner(System.in);
 
 	private int price;
