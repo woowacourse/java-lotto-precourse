@@ -18,7 +18,8 @@
 * Lotto - 로또 (로또 한장을 의미하는 객체)
 * Rank - 등수 (로또 등수를 나타내는 객체) 
 * WinningLotto - 당첨 번호 (당첨 번호를 의미하는 객체) 
-* Shop - 상점 (로또를 판매하는 곳)
+* Shop - 상점 (수동 로또를 생성하고 로또를 판매하는 곳)
+* Machine - 기계 (자동 로또를 생성하는 곳)
 * User - 고객 (로또를 구매하는 자)
 
 기능 프리뷰
@@ -65,7 +66,7 @@
         public List<Integer> selectLottoNumber() - 수동으로 로또 값을 선택한다.
         private void checkLottoNumber() - 로또 값이 45를 초과하거나 1미만일 경우를 대처한다.
 
-* Shop - 로또를 판매
+* Shop - 수동 로또를 판매
     * Variable
         * private final int INITIAL_VALUE - 데이터 체크를 위한 초기 값
         * private final int LOTTO_PRICE - 로또 한장의 가격
@@ -97,6 +98,15 @@
         * private int checkPrice(int price) - 금액이 1000원 단위이며, 0이상인지 체크함
         * private Scanner resetScanner() - 값이 유효하지 않을 경우 Scanner객체 초기화
         
+* Machine - 자동 로또를 판매
+    * Variable
+        * private List<Integer> lottoMachineNumber - 로또 번호를 담은 리스트
+    * Method
+        * public Lotto[] sellLotto(int price) - 랜덤으로 로또 번들 생성
+        * private List<Integer> getRandomLottoNumber() - 랜덤한 로또 번호 6개 생성
+        * private int createRandomNumber(int size) - lottoMachineNumber에서 랜덤하게 뽑을 인덱스 생성
+        * private Lotto createLotto(List<Integer> lottoNumber) - 로또 객체 생성
+        * public void fillLottoNumber() - lottoMachineNumber의 로또 번호 초기화하기
 * Bank - 로또 결과에 대한 처리
     * Variable
         * private int earningRate - 수익률
@@ -122,3 +132,4 @@
 - [x] 당첨 비교 하기
 - [x] 수익률 계산 하기
 - [x] 당첨 통계 출력 하기 
+- [x] 자동 로또 생성하기
