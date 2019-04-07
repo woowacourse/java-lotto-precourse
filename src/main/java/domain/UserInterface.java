@@ -68,4 +68,24 @@ public class UserInterface {
 
         return true;
     }
+
+    public String inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return sc.next();
+    }
+
+    public boolean valiateBonusBall(String bonusBallStr) {
+        int bonusBall;
+        try {
+            bonusBall = Integer.parseInt(bonusBallStr);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        if ((MIN_NUMBER > bonusBall) || (bonusBall > MAX_NUMBER)) {
+            return false;
+        }
+
+        return true;
+    }
 }

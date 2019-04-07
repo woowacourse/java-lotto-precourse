@@ -8,11 +8,15 @@ public class Main {
     public static void main(String[] args) {
         UserInterface ui = new UserInterface();
         List<Lotto> lottos = new ArrayList<>();
+        List<Integer> lottoNumbers = new ArrayList<>();
         Lotto lotto;
+        Lotto winnerLotto;
         String[] winnerNumbers;
         String purchaseAmountStr = "";
+        String bonusBallStr = "";
 
         int lottoCnt = 0;
+        int bonusBall;
         boolean flag = false;
 
         while (!flag) {
@@ -33,5 +37,18 @@ public class Main {
             winnerNumbers = ui.inputWinnerNumbers();
             flag = ui.validateWinnerNumbers(winnerNumbers);
         }
+
+        winnerNumbers = new String[6];
+        for(String winnerNumber : winnerNumbers){
+            lottoNumbers.add(Integer.parseInt(winnerNumber));
+        }
+        winnerLotto = new Lotto(lottoNumbers);
+
+        flag = false;
+        while (!flag) {
+            bonusBallStr = ui.inputBonusBall();
+            flag = ui.valiateBonusBall(bonusBallStr);
+        }
+        bonusBall = Integer.parseInt(bonusBallStr);
     }
 }
