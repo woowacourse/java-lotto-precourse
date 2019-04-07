@@ -15,7 +15,7 @@ public class PlayLotto {
     public static void main(String[] args) {
         getPurchaseAmount();
         makeLottoObject();
-        System.out.println("dd");
+        printLottos();
     }
 
     public static void getPurchaseAmount() {
@@ -50,17 +50,34 @@ public class PlayLotto {
     }
 
     public static void makeNumbers(List<Integer> numbers) {
-        while (numbers.size()<6) {
+        while (numbers.size() < 6) {
             int tmp_num = (int) (Math.random() * 45) + 1;
-            addOrPassNumbers(tmp_num,numbers);
+            addOrPassNumbers(tmp_num, numbers);
         }
     }
 
     /**
-    * 중복된 로또 번호가 있으면 패스하고, 중복되지 않은 경우에 로또 번호를 추가한다.
-    */
-    public static void addOrPassNumbers(int tmp_num, List<Integer> numbers){
-        if(!numbers.contains(tmp_num))
+     * 중복된 로또 번호가 있으면 패스하고, 중복되지 않은 경우에 로또 번호를 추가한다.
+     */
+    public static void addOrPassNumbers(int tmp_num, List<Integer> numbers) {
+        if (!numbers.contains(tmp_num))
             numbers.add(tmp_num);
+    }
+
+    public static void printLottos() {
+        System.out.println("\n"+purchase_amount + "개를 구매했습니다.");
+        for (Lotto lotto : lottos) {
+            printLottoNum(lotto);
+        }
+    }
+
+    public static void printLottoNum(Lotto lotto) {
+        List<Integer> numbers = lotto.getNumbers();
+        StringBuilder sb = new StringBuilder();
+        sb.append(numbers.get(0));
+        for (int i = 1; i < numbers.size(); i++) {
+            sb.append(", " + numbers.get(i));
+        }
+        System.out.println("[" + sb.toString() + "]");
     }
 }
