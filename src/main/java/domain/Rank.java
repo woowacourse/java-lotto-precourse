@@ -61,7 +61,6 @@ public enum Rank {
         if (MISS.equals(this)) {
             return "낙첨";
         }
-        
         return this.countOfMatch + "개 일치" + this.additionalMessage
                 + " (" + this.winningMoney + "원)";
     }

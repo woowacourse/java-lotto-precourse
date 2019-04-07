@@ -21,6 +21,16 @@ public class Main {
         return inputData.split(",\\s*"); // 정규 표현식 적용 - 띄어쓰기 때문
     }
     
+    /** 입력된 문자열을 정수로 형변환할 수 있는지 테스트 */
+    private static boolean isOnlyNumber(String string) {
+        if (string.length() == 0) {
+            return false; // 빈 문자열은 취급하지 않는다.
+        }
+        return string.chars() // String -> IntStream
+                .map(i -> (i - '0')) // 형변환 발생
+                .noneMatch(i -> (i < 0 || i > 9)); // 0부터 9 사이의 숫자인가
+    }
+    
     /** main 진입점 */
     public static void main(String[] args) {
         // Test code - 추후 삭제 예정
