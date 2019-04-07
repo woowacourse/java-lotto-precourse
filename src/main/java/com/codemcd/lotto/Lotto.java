@@ -1,4 +1,4 @@
-package domain;
+package com.codemcd.lotto;
 
 import java.util.List;
 
