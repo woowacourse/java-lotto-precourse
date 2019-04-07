@@ -50,4 +50,8 @@ public enum Rank {
 	private boolean matchCount(int countOfMatch) {
 		return this.countOfMatch == countOfMatch;
 	}
+	
+	public void printMatchResult(int count) {
+		System.out.println(countOfMatch + "개 일치 (" + winningMoney + "원) - " + count + "개");
+	}
 }
