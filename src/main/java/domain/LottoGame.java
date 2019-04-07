@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * 로또게임을 진행하는 객체
@@ -12,6 +9,9 @@ public class LottoGame {
     private static final int THE_NUMBER_OF_LOTTO_NUMBERS = 6;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int LOTTO_PRICE = 1000;
+
+    private List<Lotto> lottoes;
 
     public LottoGame() {
 
@@ -92,5 +92,20 @@ public class LottoGame {
         Collections.sort(lottoNumbers);
 
         return new Lotto(lottoNumbers);
+    }
+
+    private void registerLottoes() {
+        lottoes = new ArrayList<>();
+        int lottoCount = getLottoCount();
+
+        for (int i = 0; i < lottoCount; i++) {
+            lottoes.add(createLotto());
+        }
+    }
+
+    private int getLottoCount() {
+        int lottoPurchaseMoney = getLottoPurchaseMoney();
+
+        return lottoPurchaseMoney / LOTTO_PRICE;
     }
 }
