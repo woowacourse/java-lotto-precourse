@@ -116,4 +116,10 @@ public class LottoGame {
             lotto.printLottoNumbers();
         }
     }
+
+    private String inputWinningLottoNumbers() {
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextLine();
+    }
 }
