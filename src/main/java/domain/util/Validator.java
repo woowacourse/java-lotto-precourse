@@ -11,20 +11,19 @@ public class Validator {
 	private static final String NUMBER_PATTERN = "^[0-9]*$";
 
 	public static boolean isNaturalNumber(String value) {
-		if (value == null || value.length() == 0) {
-			return false;
-		}
-		if (!Pattern.matches(NUMBER_PATTERN, value)) {
-			return false;
-		}
-		if (Integer.parseInt(value.trim()) < 0) {
+		if (value == null || value.length() == 0 ||
+			!Pattern.matches(NUMBER_PATTERN, value) ||
+			Integer.parseInt(value.trim()) < 0) {
+			printWrongInput();
 			return false;
 		}
 		return true;
 	}
 
 	public static boolean isValidInputtedNumbers(String input, int drawCount) {
-		if (input == null || input.length() == 0) {
+		if (input == null || input.length() == 0 ||
+			!isSameCount(input, drawCount)) {
+			printWrongInput();
 			return false;
 		}
 		if (!isSameCount(input, drawCount)) {
@@ -40,6 +39,7 @@ public class Validator {
 			.collect(Collectors.toSet());
 
 		if (refinedNumber.size() != drawCount) {
+			printWrongInput();
 			return false;
 		}
 		return true;
@@ -47,13 +47,16 @@ public class Validator {
 
 	public static boolean isIncludeLottoNumber(String value) {
 		value = value.trim();
-		if (!isNaturalNumber(value)) {
-			return false;
-		}
 		int number = Integer.parseInt(value);
-		if (number < MIN_NUMBER || number > MAX_NUMBER) {
+		if (!isNaturalNumber(value) ||
+			number < MIN_NUMBER || number > MAX_NUMBER) {
+			printWrongInput();
 			return false;
 		}
 		return true;
+	}
+
+	public static void printWrongInput() {
+		System.out.println("잘 못 입력했습니다.");
 	}
 }
