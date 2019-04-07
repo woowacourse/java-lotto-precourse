@@ -1,5 +1,7 @@
 package domain;
 
+import java.text.DecimalFormat;
+
 /**
  * 로또 등수를 의미하는 enum
  */
@@ -12,6 +14,7 @@ public enum Rank {
 	MISS(0, 0);
 
 	private static final int WINNING_MIN_COUNT = 3;
+	private static final DecimalFormat MONEY_FORMATTER = new DecimalFormat("###,###");
 
 	private int countOfMatch;
 	private int winningMoney;
@@ -52,6 +55,6 @@ public enum Rank {
 	}
 	
 	public void printMatchResult(int count) {
-		System.out.println(countOfMatch + "개 일치 (" + winningMoney + "원) - " + count + "개");
+		System.out.println(countOfMatch + "개 일치 (" + MONEY_FORMATTER.format(winningMoney) + "원) - " + count + "개");
 	}
 }
