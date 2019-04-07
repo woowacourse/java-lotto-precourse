@@ -8,12 +8,10 @@ public class GameBuilder {
     private Lotto lastWeekNumbers; // 지난 주 당첨 번호
     private int bonusNo; // 보너스 볼 번호
 
-    public GameBuilder(int purchaseAmount) {
+    public GameBuilder setPurchaseAmount(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
+        return this;
     }
 
-    public GameBuilder getPurchaseAmount(int purchaseAmount) {
-        System.out.println(Constant.MESSAGE_GET_PURCHASE_AMOUNT);
-        return new GameBuilder(purchaseAmount);
-    }
+    
 }
