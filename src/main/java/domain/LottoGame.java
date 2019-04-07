@@ -176,4 +176,12 @@ public class LottoGame {
 
         return scanner.nextLine();
     }
+
+    private boolean isValidBounsNumber(String BonusNumber) {
+        if (!isInteger(BonusNumber)) {
+            return false;
+        }
+
+        return Integer.parseInt(BonusNumber) >= MIN_LOTTO_NUMBER && Integer.parseInt(BonusNumber) <= MAX_LOTTO_NUMBER;
+    }
 }
