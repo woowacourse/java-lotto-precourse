@@ -10,16 +10,21 @@ public class LottoMain {
 	static final int LOTTO_PRICE = 1000;
 	static final int ZERO_WON = 0;
 
-	static int buyLotto() {
-		while (true) {
-			System.out.println("구입금액을 입력해 주세요.");
-			int money = in.nextInt();
-			if (money < ZERO_WON || money % LOTTO_PRICE != ZERO_WON) {
-				System.out.println("1000원 단위로 다시 입력해 주세요.");
-				continue;
-			}
-			return money / LOTTO_PRICE;
+	static boolean isInputRight(int money) {
+		if (money < ZERO_WON || money % LOTTO_PRICE != ZERO_WON) {
+			System.out.println("1000원 단위로 다시 입력해 주세요.");
+			return false;
 		}
+		return true;
+	}
+
+	static int buyLotto() {
+		int money;
+		do {
+			System.out.println("구입금액을 입력해 주세요.");
+			money = in.nextInt();
+		} while (!isInputRight(money));
+		return money / LOTTO_PRICE;
 	}
 	
 	public static void main(String[] args) {
