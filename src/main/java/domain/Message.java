@@ -18,4 +18,11 @@ public class Message {
             put("OUTPUT_STATISTICSLINE","=======");
         }
     };
+
+    public static HashMap<String, String> errorMessage = new HashMap<String, String>() {
+        {
+            put("ERROR_ONLYNUMBER", "숫자로 입력하세요.");
+            put("ERROR_MONEYSHORT", "금액이 부족하여 구매할 수 없습니다.");
+        }
+    };
 }
