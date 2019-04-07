@@ -77,6 +77,9 @@
   - showStatistics() // 당첨 통계를 보여주는 기능
   - showProfitRate() // 수익률을 보여주는 기능
 
+ - Profit
+  - calculateProfitRate() // 수익률을 계산하는 기능
+
 - Game
   - Lotto makeLotto() // 로또는 만드는 기능
   - WinningLotto makeWinningLotto() // 당첨 번호를 만드는 기능
