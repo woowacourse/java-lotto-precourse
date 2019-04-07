@@ -10,30 +10,18 @@ import java.util.Scanner;
 public class NoticeOfException {
     private static final int MAX_LOTTO_SIZE = 6;
 
-    public int inputCostNOE(Scanner sc) {
+    public int inputCostNOE(Scanner sc) {           // 구매 비용에 대한 예외처리
         int cost = 0;
         try {
             cost = sc.nextInt();
-            inputCostNOE(cost);
+            printCostNOE(cost);
         } catch (InputMismatchException e) {
             printNotNumber();
         }
         return cost;
     }
 
-    private void inputCostNOE(int cost) {
-        if (cost < 1000) {
-            System.out.println("금액이 부족합니다.");
-            System.exit(0);
-        }
-    }
-
-    private void printNotNumber() {
-        System.out.println("잘못된 입력 값입니다.\n숫자가 아닌 값을 입력하셨습니다.");
-        System.exit(0);
-    }
-
-    public int inputBonusNOE(Scanner sc, List<Integer> list) {
+    public int inputBonusNOE(Scanner sc, List<Integer> list) {      //보너스 볼에 대한 예외처리
         System.out.println("보너스 볼을 입력해 주세요.");
         int num = -1;
         try {
@@ -50,21 +38,26 @@ public class NoticeOfException {
             System.out.println("잘못된 입력 값입니다.\n1~45까지의 범위를 벗어났습니다.");
             System.exit(0);
         }
-        checkOverlap(list, num);
+        checkSameNum(list, num);
     }
 
-    public List<Integer> checkListNOE(List<String> stringList) {
+    private void checkSameNum(List<Integer> list, int num) {
+        if (list.contains(num)) {
+            printOverlapNum();
+        }
+    }
+
+    public List<Integer> checkListNOE(List<String> stringList) {    //당첨 번호에 대한 예외처리
         List<Integer> list = new ArrayList<>();
         for (String str : stringList) {
-            int num = getStringNumber(str);
+            int num = changeStringNum(str);
             list.add(num);
         }
-        checkListSize(list.size());
-
+        printNotListSize(list.size());
         return list;
     }
 
-    private int getStringNumber(String str) {
+    private int changeStringNum(String str) {
         int num = 0;
         try {
             num = Integer.parseInt(str);
@@ -74,20 +67,7 @@ public class NoticeOfException {
         return num;
     }
 
-    private void checkListSize(int size) {
-        if (size < MAX_LOTTO_SIZE || size > MAX_LOTTO_SIZE) {
-            System.out.println("잘못된 입력 값입니다.\n당첨 번호의 개수가 6개가 아닙니다.");
-            System.exit(0);
-        }
-    }
-
-    private void checkOverlap(List<Integer> list, int num) {
-        if (list.contains(num)) {
-            printOverlapNum();
-        }
-    }
-
-    public void checkOverlap(List<Integer> list) {
+    public void checkOverlapNOE(List<Integer> list) {
         AutoLotto autoLotto = new AutoLotto(list);
         for (int i = 0; i < MAX_LOTTO_SIZE; i++) {
             findOverlap(autoLotto, i);
@@ -97,6 +77,25 @@ public class NoticeOfException {
     private void findOverlap(AutoLotto at, int i) {
         if (at.isFindOverlapNum(i)) {
             printOverlapNum();
+        }
+    }
+
+    private void printCostNOE(int cost) {
+        if (cost < 1000) {
+            System.out.println("금액이 부족합니다.");
+            System.exit(0);
+        }
+    }
+
+    private void printNotNumber() {
+        System.out.println("잘못된 입력 값입니다.\n숫자가 아닌 값을 입력하셨습니다.");
+        System.exit(0);
+    }
+
+    private void printNotListSize(int size) {
+        if (size < MAX_LOTTO_SIZE || size > MAX_LOTTO_SIZE) {
+            System.out.println("잘못된 입력 값입니다.\n당첨 번호의 개수가 6개가 아닙니다.");
+            System.exit(0);
         }
     }
 
