@@ -4,18 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static domain.CreateUserLotto.NUM_OF_LOTTO;
+import static domain.InfoString.*;
 
 public class LottoGame {
-    private static final String INFO_BUY_MONEY = "구입금액을 입력해 주세요.";
-    private static final String INFO_BUY_COUNT = "개를 구입했습니다.";
-    private static final String INFO_WIN_NUM = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String INFO_BONUS_NUM = "보너스 볼을 입력해 주세요.";
-    private static final String INFO_RESULT_LOTTO = "당첨 통계";
-    private static final int MIN_COUNT = 1;
+
     private static int INPUT_MONEY;
 
     static List<Integer> win_lotto = new ArrayList<>();
+    static Lotto winLotto;
     static int bonus;
 
     public static void main(String[] args){
@@ -48,6 +44,8 @@ public class LottoGame {
         for(int i=0; i< str.length;i++) {
             win_lotto.add(Integer.parseInt(str[i]));
         }
+
+        winLotto = new Lotto(win_lotto);
     }
 
     private static void setBonusNum() {

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import static domain.InfoString.*;
 
 public class CreateUserLotto {
-    public static final int NUM_OF_LOTTO = 6;
 
     static void  createLotto(int count) {
         Lotto[] lottos = new Lotto[count];
@@ -23,7 +23,7 @@ public class CreateUserLotto {
 
         while(numbers.size() != NUM_OF_LOTTO) {
             numbers = checkNumber(numbers);
-            numbers.add(random.nextInt(44) + 1);
+            numbers.add(random.nextInt(MAX_OF_NUM) + 1);
         }
 
         return numbers;
