@@ -1,4 +1,4 @@
-package domain;
+package com.woowacourse.lotto.domain;
 
 import java.util.List;
 
