@@ -7,4 +7,8 @@ package domain;
  */
 public class LottoGame {
     //TODO: StartLottoGame, EndLottoGame
+    public void startLottoGame() {
+        Lotto testLotto = new Lotto(Lotto.generateRandomNumber());
+        System.out.println(testLotto.getLotto());
+    }
 }
