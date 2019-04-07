@@ -89,7 +89,19 @@ public class UserInterface extends CheckValidity {
         return checkLottoNumberScope(bonusBall);
     }
 
-    public void printWinStats() {
+    public void printWinStats(ResultInformation resultInformation) {
         System.out.println("당첨통계\n-------------");
+
+        System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치 ("
+                + Rank.FIFTH.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.FIFTH) + "개");
+        System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치 ("
+                + Rank.FOURTH.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.FOURTH) + "개");
+        System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치 ("
+                + Rank.THIRD.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.THIRD) + "개");
+        System.out.println(Rank.SECOND.getCountOfMatch() + "개 일치, 보너스 볼 일치 ("
+                + Rank.SECOND.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.SECOND) + "개");
+        System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치 ("
+                + Rank.FIRST.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.FIRST) + "개");
+        System.out.println("총 수익률은 " + resultInformation.getProfitRate() + "입니다.");
     }
 }

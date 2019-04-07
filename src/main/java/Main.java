@@ -1,6 +1,4 @@
-import domain.Lotto;
-import domain.UserInterface;
-import domain.WinningLotto;
+import domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +8,7 @@ public class Main {
         UserInterface ui = new UserInterface();
         List<Lotto> lottos = new ArrayList<>();
         List<Integer> lottoNumbers = new ArrayList<>();
+        List<Rank> ranks = new ArrayList<>();
         Lotto lotto;
         WinningLotto winnerLotto;
         String[] winnerNumbers = new String[6];
@@ -17,7 +16,6 @@ public class Main {
         String bonusBallStr = "";
 
         int lottoCnt = 0;
-        int bonusBall;
         boolean flag = false;
 
         while (!flag) {
@@ -39,22 +37,23 @@ public class Main {
             flag = ui.validateWinnerNumbers(winnerNumbers);
         }
 
-        for(String winnerNumber : winnerNumbers){
+        for (String winnerNumber : winnerNumbers) {
             lottoNumbers.add(Integer.parseInt(winnerNumber));
         }
-        lotto = new Lotto(lottoNumbers);
 
         flag = false;
         while (!flag) {
             bonusBallStr = ui.inputBonusBall();
             flag = ui.validateBonusBall(lottoNumbers, bonusBallStr);
         }
-        bonusBall = Integer.parseInt(bonusBallStr);
 
-        winnerLotto = new WinningLotto(lotto, bonusBall);
+        winnerLotto = new WinningLotto(new Lotto(lottoNumbers), Integer.parseInt(bonusBallStr));
 
-        ui.printWinStats();
+        for (Lotto l : lottos) {
+            ranks.add(winnerLotto.match(l));
+        }
 
-
+        ResultInformation resultInformation = new ResultInformation(ranks);
+        ui.printWinStats(resultInformation);
     }
 }
