@@ -18,4 +18,11 @@ public class WinningLotto {
         boolean matchBonus = userLotto.hasNumber(this.bonusNo);
         return Rank.valueOf(countOfMatch, matchBonus);
     }
+    
+    /** toString() 재정의. 로또 번호를 그대로 출력한다. */
+    @Override
+    public String toString() {
+        return "당첨 번호 : " + this.lotto.toString()
+                + "\n보너스 볼 : " + this.bonusNo;
+    }
 }

@@ -68,12 +68,22 @@ public class Main {
     }
     
     /** 로또 번호를 입력받아 Lotto 객체를 반환한다. */
-    private final static Lotto inputLottoNums() {
-        List<Integer> temp = tryInputLottoNums(INPUT_WIN_NUMBERS);
+    private final static Lotto inputLottoNums(String message) {
+        List<Integer> temp = tryInputLottoNums(message);
         while (temp.size() != LOTTO_NUM_LENGTH) { // 문제가 없을 때까지 반복
             temp = tryInputLottoNums(INPUT_INT_ERROR);
         }
         return new Lotto(temp);
+    }
+    
+    /** 지난 주 당첨 번호를 입력받아 WinningLotto 객체를 반환한다. */
+    private final static WinningLotto lastWeekWinningLotto() {
+        Lotto winning = inputLottoNums(INPUT_WIN_NUMBERS);
+        int bonusNo = inputSingleInt(INPUT_BONUS_BALL);
+        while (!isLottoRange(bonusNo) || winning.hasNumber(bonusNo)) {
+            bonusNo = inputSingleInt(INPUT_INT_ERROR);
+        }
+        return new WinningLotto(winning, bonusNo);
     }
     
     /** main 진입점 */
@@ -84,5 +94,7 @@ public class Main {
         // System.out.println(lotto);
         // Lotto lotto = inputLottoNums();
         // System.out.println(lotto);
+        // WinningLotto winner = lastWeekWinningLotto();
+        // System.out.println(winner);
     }
 }
