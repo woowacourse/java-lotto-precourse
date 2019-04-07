@@ -17,6 +17,10 @@ public class WinningLotto {
 								.stream()
 								.filter(number -> lotto.contains(number))
 								.count();
-		return Rank.valueOf(matchCount, userLotto.contains(bonusNo));
+		return Rank.valueOf(matchCount, containsBonusNo(userLotto));
+	}
+	
+	public boolean containsBonusNo(Lotto userLotto) {
+		return userLotto.contains(bonusNo);
 	}
 }
