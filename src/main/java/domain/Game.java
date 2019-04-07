@@ -39,4 +39,14 @@ public class Game {
             userLottoTickets.add(lotto);
         }
     }
+
+    public void inputWinningLotto(){
+        List<Integer> lastWeekWinningNumbers = Display.inputLastWeekWinningNumbers();
+        int bonusNo = Display.inputBonusNumber();
+        makeWinningLotto(lastWeekWinningNumbers, bonusNo);
+    }
+
+    public void makeWinningLotto(List<Integer> lastWeekWinningNumbers, int bonusNo){
+        winningLotto = new WinningLotto( new Lotto(lastWeekWinningNumbers), bonusNo);
+    }
 }
