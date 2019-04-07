@@ -7,8 +7,7 @@ import domain.Lotto;
 public class PlayLotto {
     public static int purchase_amount;
     public static List<Lotto> lottos;
-    public static List<Integer> last_week_num;
-    public static Integer bonus_num;
+    public static WinningLotto winninglotto;
     public static Scanner sc;
 
     private static final int LOTTO_PRICE = 1000;
@@ -19,6 +18,7 @@ public class PlayLotto {
         makeLottoObject();
         printLottos();
         getLastWeekNumber();
+
     }
 
     public static void getPurchaseAmount() {
@@ -85,33 +85,37 @@ public class PlayLotto {
     }
 
     public static void getLastWeekNumber() {
-        last_week_num = new ArrayList<>();
+        List<Integer> tmp_nums = new ArrayList<>();
         sc = new Scanner(System.in);
         boolean flag = false;
+        int tmp_bonus_num=0;
         while (!flag) {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             String[] tmp_numbers = sc.nextLine().split(",");
             System.out.println("보너스 볼을 입력해 주세요.");
-            bonus_num = sc.nextInt();
-            sc.nextLine();
-            flag = saveLastWeekNumbers(tmp_numbers);
-        }
+            tmp_bonus_num = Integer.parseInt(sc.nextLine());
+            flag = saveLastWeekNumbers(tmp_numbers, tmp_bonus_num, tmp_nums);}
+        makeWinningLotto(tmp_bonus_num, tmp_nums);
     }
 
-    public static boolean saveLastWeekNumbers(String[] tmp_numbers) {
-        last_week_num.clear();
+    public static boolean saveLastWeekNumbers(String[] tmp_numbers, int tmp_bonus_num, List<Integer> tmp_nums) {
         for (int i = 0; i < LOTTO_COUNT; i++) {
-            addOrPassLastWeekNumbers(Integer.parseInt(tmp_numbers[i]));
+            addOrPassLastWeekNumbers(Integer.parseInt(tmp_numbers[i]), tmp_bonus_num, tmp_nums);
         }
-        if (last_week_num.size() < 6) {
+        if (tmp_nums.size() < 6) {
             System.out.println("다시 입력해주세요");
             return false;
         }
         return true;
     }
 
-    public static void addOrPassLastWeekNumbers(int num) {
-        if (!last_week_num.contains(num) && num >= 1 && num <= 45 && num != bonus_num)
-            last_week_num.add(num);
+    public static void addOrPassLastWeekNumbers(int num, int bonus_num, List<Integer> nums) {
+        if (!nums.contains(num) && num >= 1 && num <= 45 && num != bonus_num)
+            nums.add(num);
+    }
+
+    public static void makeWinningLotto(int bonus_num, List<Integer> nums) {
+        Lotto win_nums = new Lotto(nums);
+        winninglotto = new WinningLotto(win_nums,bonus_num);
     }
 }
