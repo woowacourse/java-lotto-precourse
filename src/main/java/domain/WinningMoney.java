@@ -39,13 +39,13 @@ public class WinningMoney {
     }
 
     private float getMoneyRate(int cost) {
-        int resultMoney = getResultMoney();
+        long resultMoney = getResultMoney();
         float result = (float) resultMoney / (float) cost;
         return result;
     }
 
-    private int getResultMoney() {
-        int money = 0;
+    private long getResultMoney() {
+        long money = 0;
         for (int i = 0; i < MAX_WINNING_NUMBER; i++) {
             money += (WINNING_MONEY.get(i) * counterMoney.get(i));
         }
