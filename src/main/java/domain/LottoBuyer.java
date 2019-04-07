@@ -47,7 +47,7 @@ public class LottoBuyer implements Constants {
         int countOfLottos = enterPrice() / 1000;
         purchasedLottos = new Lotto[countOfLottos];
         for (int i = 0; i < countOfLottos; i++) {
-            purchasedLottos[i] = new Lotto(LottoManager.MakeRandomNumber());
+            purchasedLottos[i] = new Lotto(LottoManager.makeRandomNumber());
         }
     }
 }

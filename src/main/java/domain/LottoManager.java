@@ -10,16 +10,18 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 클래스 설명
+ * 로또 번호를 생성하고 관리하는 클래스
  *
  * @version 1.00
  * @author 이남준
  */
 public class LottoManager implements Constants {
     LottoBuyer buyer = new LottoBuyer();
+    WinningLotto winningLotto;
+    private static Random random = new Random();
 
-    public static List<Integer> MakeRandomNumber() {
-        Random random = new Random();
+    public static List<Integer> makeRandomNumber() {
+
         ArrayList<Integer> randomNumbers = new ArrayList<>();
         int randomNumber = random.nextInt(SIZE_OF_NUMBERS + 1) + 1;
 
@@ -30,5 +32,21 @@ public class LottoManager implements Constants {
             randomNumber = random.nextInt(SIZE_OF_NUMBERS + 1) + 1;
         }
         return randomNumbers;
+    }
+
+    public void makeWinningLotto() {
+        List<Integer> lottoNumbers = makeRandomNumber();
+        Lotto lotto = new Lotto(lottoNumbers);
+        int bonusNumber = makeBonusNumber(lottoNumbers);
+
+        winningLotto = new WinningLotto(lotto, bonusNumber);
+    }
+
+    private int makeBonusNumber(List<Integer> lotto) {
+        int randomNumber = random.nextInt(SIZE_OF_NUMBERS + 1);
+        while(lotto.contains(randomNumber)) {
+            randomNumber = random.nextInt(SIZE_OF_NUMBERS + 1);
+        }
+        return randomNumber;
     }
 }
