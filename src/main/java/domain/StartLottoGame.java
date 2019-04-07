@@ -1,5 +1,7 @@
 package domain;
 
+import ExceptionCheck.NoticeOfException;
+
 import java.util.Scanner;
 
 /**
@@ -8,11 +10,11 @@ import java.util.Scanner;
 public class StartLottoGame {
     private static final int ONE_LOTTO_PRICE = 1000;
 
-    public void gameStart() {
+    public void gameStart(NoticeOfException noe) {
         LottoGame lg = new LottoGame();
         WinningMoney wm = new WinningMoney();
         Scanner sc = new Scanner(System.in);
-        int resultCost = lg.inputCost(sc);
+        int resultCost = lg.inputCost(sc, noe);
         int possibleBuyCnt = (resultCost / ONE_LOTTO_PRICE);
         lg.buyLotto(possibleBuyCnt);
         lg.lastWeekNumber(sc);
@@ -22,6 +24,7 @@ public class StartLottoGame {
 
     public static void main(String[] args) {
         StartLottoGame lotto = new StartLottoGame();
-        lotto.gameStart();
+        NoticeOfException noe = new NoticeOfException();
+        lotto.gameStart(noe);
     }
 }

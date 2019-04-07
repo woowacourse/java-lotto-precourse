@@ -1,5 +1,7 @@
 package domain;
 
+import ExceptionCheck.NoticeOfException;
+
 import java.util.*;
 
 public class LottoGame {
@@ -8,9 +10,10 @@ public class LottoGame {
     private Lotto[] userLotto;
     private WinningLotto winningLotto;
 
-    public int inputCost(Scanner sc) {
+    public int inputCost(Scanner sc, NoticeOfException noe) {
         System.out.println("구입금액을 입력해 주세요.");
-        return sc.nextInt();
+        int cost = noe.inputCostNOE(sc);
+        return cost;
     }
 
     public void buyLotto(int cnt) {
@@ -30,25 +33,25 @@ public class LottoGame {
         registerLotto(strNumber, bounusNumber);
     }
 
-    private void registerLotto(String strNum, int bonus){
+    private void registerLotto(String strNum, int bonus) {
         List<Integer> list = eraseComma(strNum);
         Collections.sort(list);
         Lotto winLotto = new Lotto(list);
         winningLotto = new WinningLotto(winLotto, bonus);
     }
 
-    private List<Integer> eraseComma(String str){
+    private List<Integer> eraseComma(String str) {
         List<String> strList = Arrays.asList(str.split(","));
         List<Integer> list = new ArrayList<>();
-        for(int i=0; i<MAX_LOTTO_SIZE; i++){
+        for (int i = 0; i < MAX_LOTTO_SIZE; i++) {
             int num = Integer.parseInt(strList.get(i));
             list.add(num);
         }
         return list;
     }
 
-    public void matchNumbers(WinningMoney wm){
-        for(int i=0; i<userLotto.length; i++){
+    public void matchNumbers(WinningMoney wm) {
+        for (int i = 0; i < userLotto.length; i++) {
             Rank rank = winningLotto.match(userLotto[i]);
             int winningMoney = rank.getWinningMoney();
             setCountMoney(winningMoney, wm);
@@ -56,8 +59,8 @@ public class LottoGame {
         wm.printCountMoney();
     }
 
-    private void setCountMoney(int money, WinningMoney wm){
-        if(money != 0){
+    private void setCountMoney(int money, WinningMoney wm) {
+        if (money != 0) {
             wm.setCountMoney(money);
         }
     }
