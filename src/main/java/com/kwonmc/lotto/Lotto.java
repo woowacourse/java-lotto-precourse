@@ -1,7 +1,10 @@
 package com.kwonmc.lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -25,5 +28,20 @@ public class Lotto {
         }
 
         return aLotto;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Iterator<Integer> iter = numbers.iterator();
+        stringBuilder.append("[");
+        while(iter.hasNext()) {
+            stringBuilder.append(iter.next());
+            if (iter.hasNext()) {
+                stringBuilder.append(", ");
+            }
+        }
+
+        return stringBuilder.toString();
     }
 }
