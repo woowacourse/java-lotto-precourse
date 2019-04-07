@@ -9,12 +9,12 @@
 
 ## 프로그래밍 요구사항 - 객체 1
 
-> public class Lotto {
-&nbsp;private final List<Integer> numbers;
-&nbsp;
-&nbsp;public Lotto(List<Integer> numbers){
-&nbsp;&nbsp;this.numbers = numbers;
-&nbsp;}
+> public class Lotto {  
+&nbsp;private final List<Integer> numbers;  
+&nbsp;  
+&nbsp;public Lotto(List<Integer> numbers){  
+&nbsp;&nbsp;this.numbers = numbers;  
+&nbsp;}  
 }
 - Lotto에 기본 생성자를 추가할 수 없다.
 - numbers 변수의 접근 제어자인 private을 바꿀 수 없다.
@@ -22,17 +22,17 @@
 
 ## 프로그래밍 요구사항 - 객체 2
 
-> public class Lotto {
-&nbsp;private final Lotto lotto;
-&nbsp;private final int bonusNo;
-&nbsp;
-&nbsp;public WinningLotto(Lotto lotto, int bonusNo){
-&nbsp;&nbsp;this.lotto = lotto;
-&nbsp;&nbsp;this.bonusNo = bonusNo;
-&nbsp;}
-&nbsp;public Rank match(Lotto userLotto){
-&nbsp;&nbsp;return null;
-&nbsp;}
+> public class WinningLotto {  
+&nbsp;private final Lotto lotto;  
+&nbsp;private final int bonusNo;  
+&nbsp;  
+&nbsp;public WinningLotto(Lotto lotto, int bonusNo){  
+&nbsp;&nbsp;this.lotto = lotto;  
+&nbsp;&nbsp;this.bonusNo = bonusNo;  
+&nbsp;}  
+&nbsp;public Rank match(Lotto userLotto){  
+&nbsp;&nbsp;return null;  
+&nbsp;}  
 }
 
 - match() 메소드의 반환 값인 Rank는 저장소에서 제공한다.
@@ -56,23 +56,25 @@
 뽑는다.
 
 - Lotto
-  - makeGuessNumbers // 로또의 6개의 숫자를 뽑는 기능
-  - shuffle // 랜덤으로 숫자 배열을 섞는다.
-  - fillNumbers // 숫자를 채운다.
-
+  - getNumbers() // Lotto의 numbers을 반환하는 기능
+  - toString() // Lotto 인스턴스를 String으로 변환하는 기능
+  
 - WinningLotto
+  - match() // retainAll()을 활용하여 
 
 - Rank
+  
+- PickingNumbers
+  - makeNumbers() // 로또의 6개의 숫자를 뽑는 기능
+  - shuffle() // 랜덤으로 숫자 배열을 섞는 기능
+  - fillNumbers() // 숫자(1~45)를 채우는 기능
 
 - Display
-  - inputMoney // 구입 금액을 입력하는 기능
-  - showBoughtLotto// 구입한 로또를 보여주는 기능 
-  - inputLastWeekWinningNumbers // 지난주 당첨 숫자를 입력하는 기능
-  - inputBonusNumber // 보너스 번호를 입력하는 기능
-  - showProfitRate // 수익률을 보여주는 기능
-
-- Show
-  - ArrayList<Lotto>
+  - showBoughtLotto() // 구입한 로또를 보여주는 기능 
+  - inputMoney() // 구입 금액을 입력하는 기능
+  - inputLastWeekWinningNumbers() // 지난주 당첨 숫자를 입력하는 기능
+  - inputBonusNumber() // 보너스 번호를 입력하는 기능
+  - showProfitRate() // 수익률을 보여주는 기능
   - changeMoneyIntoLottos() // 구입 금액으로 몇 개를 살 수 있는 지 보여주는 기능
 
 - Game
