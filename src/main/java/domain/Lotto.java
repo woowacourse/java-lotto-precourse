@@ -33,7 +33,12 @@ public class Lotto {
         return new Random().nextInt(RANDOM_NUMBER_RANGE) + 1;
     }
 
-    String getLotto() {
+    List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    @Override
+    public String toString() {
         return numbers.toString();
     }
 }
