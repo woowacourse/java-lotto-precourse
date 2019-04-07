@@ -17,14 +17,13 @@ public class Validator {
 		if (!Pattern.matches(NUMBER_PATTERN, value)) {
 			return false;
 		}
-		if (Integer.parseInt(value) < 0) {
+		if (Integer.parseInt(value.trim()) < 0) {
 			return false;
 		}
 		return true;
 	}
 
 	public static boolean isValidInputtedNumbers(String input, int drawCount) {
-		System.out.println("잘 못 입력하였습니다.");
 		if (input == null || input.length() == 0) {
 			return false;
 		}
@@ -37,7 +36,7 @@ public class Validator {
 	public static boolean isSameCount(String input, int drawCount) {
 		Set<Integer> refinedNumber = Arrays.stream(input.split(","))
 			.filter(stringNumber -> isIncludeLottoNumber(stringNumber))
-			.map(stringNumber -> Integer.parseInt(stringNumber))
+			.map(stringNumber -> Integer.parseInt(stringNumber.trim()))
 			.collect(Collectors.toSet());
 
 		if (refinedNumber.size() != drawCount) {
@@ -47,6 +46,7 @@ public class Validator {
 	}
 
 	public static boolean isIncludeLottoNumber(String value) {
+		value = value.trim();
 		if (!isNaturalNumber(value)) {
 			return false;
 		}
