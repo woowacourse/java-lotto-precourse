@@ -14,7 +14,7 @@ public class BonusNumber extends Config {
                 || !checkDuplicateBonusNumber(winningNumber));
     }
 
-    public int getBonusNumber(){
+    public int getBonusNumber() {
         return bonusNumber;
     }
 

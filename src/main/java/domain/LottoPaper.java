@@ -16,7 +16,7 @@ public class LottoPaper extends Config {
                 || !checkMaxMinLottoNumber(this.lottoNumber));
     }
 
-    public int[] getLottoNumber(){
+    public int[] getLottoNumber() {
         return lottoNumber;
     }
 
@@ -36,7 +36,7 @@ public class LottoPaper extends Config {
         try {
             return Arrays.stream(lottoString).mapToInt(Integer::parseInt).toArray();
         } catch (Exception e) {
-            System.out.println(e);
+            resetScanner();
             return changeIntegerArrayfromStringArray(createStringArray());
         }
     }

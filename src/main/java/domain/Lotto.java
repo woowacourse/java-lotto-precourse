@@ -16,7 +16,7 @@ public class Lotto {
         return this.numbers;
     }
 
-    public String printLottoNumber(){
+    public String printLottoNumber() {
         return this.numbers.toString();
     }
 }

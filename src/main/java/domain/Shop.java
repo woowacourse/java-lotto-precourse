@@ -1,6 +1,8 @@
 package domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Shop extends Config {
@@ -8,7 +10,7 @@ public class Shop extends Config {
     private Lotto[] lottoBundle;
     private int count;
 
-    public Shop(int price){
+    public Shop(int price) {
         this.count = price / 1000;
         this.lottoBundle = new Lotto[count];
     }
