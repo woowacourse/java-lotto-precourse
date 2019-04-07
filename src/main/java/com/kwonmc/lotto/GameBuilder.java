@@ -28,4 +28,9 @@ public class GameBuilder {
         this.bonusNo = bonusNo;
         return this;
     }
+
+    public Game build() {
+        Game game = new Game(purchaseAmount, myLottoList, lastWeekNumbers, bonusNo);
+        return game;
+    }
 }
