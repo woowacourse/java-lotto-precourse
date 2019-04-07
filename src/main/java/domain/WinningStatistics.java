@@ -21,14 +21,14 @@ public class WinningStatistics {
      * @return 수익률, 0 이상 미만 1 사이의 부동소수점수
      */
     public double calculateEarningRate(int unitPrice) {
-        long totalEarned = calculateTotalEarned();
+        long moneyTotalEarned = calculateTotalEarned();
         int countOfLotto = calculateCountOfLotto();
 
         if (countOfLotto == 0) {
             return 0;
         }
 
-        return totalEarned / (double) (countOfLotto * unitPrice);
+        return  moneyTotalEarned / (double) (countOfLotto * unitPrice);
     }
 
     private int calculateCountOfLotto() {
@@ -39,6 +39,10 @@ public class WinningStatistics {
         return count;
     }
 
+    /**
+     *
+     * @return 당첨금 총액을 반환, 1등이 여러 번 되는 경우를 고려하여 long 타입 사용.
+     */
     private long calculateTotalEarned() {
         long sum = 0;
         for (Rank r : stats.keySet()) {

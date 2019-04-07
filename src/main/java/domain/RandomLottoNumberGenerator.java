@@ -8,13 +8,13 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     @Override
     public Set<Integer> generateLottoNumberSet() {
-        SortedSet<Integer> nums = new TreeSet<>();
+        SortedSet<Integer> generatedNumSet = new TreeSet<>();
 
-        while (!isNumberSetFull(nums)) {
-            nums.add(generateLottoNumber());
+        while (!isNumberSetFull(generatedNumSet)) {
+            generatedNumSet.add(generateLottoNumber());
         }
 
-        return nums;
+        return generatedNumSet;
     }
 
     private boolean isNumberSetFull(Set<Integer> numbers) {

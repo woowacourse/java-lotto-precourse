@@ -75,10 +75,10 @@ class Player {
 
     private List<Integer> promptWinningNumbersInput() {
         try {
-            List<Integer> nums = ui.promptWinningNumbers();
-            checkIfNumbersInLottoNumberRange(nums);
-            checkWinningNumbersLength(nums);
-            return nums;
+            List<Integer> winningNumsInput = ui.promptWinningNumbers();
+            checkIfNumbersInLottoNumberRange(winningNumsInput);
+            checkWinningNumbersLength(winningNumsInput);
+            return winningNumsInput;
         } catch (IllegalArgumentException e) {
             ui.notifyInvalidInput();
             return promptWinningNumbersInput();
@@ -87,10 +87,10 @@ class Player {
 
     private int promptBonusNumberInput(Lotto winningLotto) {
         try {
-            int n = ui.promptBonusNumber();
-            checkIfNumberInRange(n, LottoNumberGenerator.LOTTO_NUM_MIN, LottoNumberGenerator.LOTTO_NUM_MAX);
-            checkIfBonusNumberInLotto(winningLotto, n);
-            return n;
+            int bonusNumInput = ui.promptBonusNumber();
+            checkIfNumberInRange(bonusNumInput, LottoNumberGenerator.LOTTO_NUM_MIN, LottoNumberGenerator.LOTTO_NUM_MAX);
+            checkIfBonusNumberInLotto(winningLotto, bonusNumInput);
+            return bonusNumInput;
         } catch (IllegalArgumentException e) {
             ui.notifyInvalidInput();
             return promptBonusNumberInput(winningLotto);
@@ -133,9 +133,9 @@ class Player {
             totalPrice, UNIT_PRICE_OF_LOTTO));
     }
 
-    private void checkIfBonusNumberInLotto(Lotto l, int n) {
-        if (l.contains(n)) {
-            throw new IllegalArgumentException(String.format("Bonus number %d is in %s", n, l));
+    private void checkIfBonusNumberInLotto(Lotto lottoToCheck, int bonusNumber) {
+        if (lottoToCheck.contains(bonusNumber)) {
+            throw new IllegalArgumentException(String.format("Bonus number %d is in %s", bonusNumber, lottoToCheck));
         }
     }
 }
