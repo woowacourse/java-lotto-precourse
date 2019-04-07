@@ -1,0 +1,28 @@
+package domain;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class LottoFactory {
+
+    private static final int LOTTO_NUM_LENGTH = 6;
+    private final LottoNumGenerator lottoNumGenerator;
+
+    public LottoFactory() {
+        lottoNumGenerator = new LottoNumGenerator();
+    }
+
+    public Lotto getInstance() {
+        List<Integer> lottoNums = getLottoNums();
+        return new Lotto(lottoNums);
+    }
+
+    private List<Integer> getLottoNums() {
+        List<Integer> lottoNums = new ArrayList<>();
+        for (int i = 0; i < LOTTO_NUM_LENGTH; i++) {
+            int lottoNum = lottoNumGenerator.generate();
+            lottoNums.add(new Integer(lottoNum));
+        }
+        return lottoNums;
+    }
+}
