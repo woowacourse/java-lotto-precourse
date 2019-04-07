@@ -41,6 +41,7 @@ public class Lotto {
                 stringBuilder.append(", ");
             }
         }
+        stringBuilder.append("]");
 
         return stringBuilder.toString();
     }

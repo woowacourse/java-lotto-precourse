@@ -9,7 +9,7 @@ public class GameRunner {
 
     public void run() {
         inputUserPurchaseAmount();
-        printLottoList();
+        printLottoInfo();
         inputLastWeekNumbers();
         inputBonusNo();
         printLottoMatchResult();
@@ -22,7 +22,7 @@ public class GameRunner {
         game.setPurchaseAmount(purchaseAmount);
     }
 
-    private void printLottoList() {
+    private void printLottoInfo() {
         System.out.println();
         System.out.println(countLotto() + "개를 구매했습니다.");
 
