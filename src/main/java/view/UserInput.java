@@ -2,6 +2,7 @@ package view;
 
 import controller.LottoController;
 import domain.Lotto;
+import domain.Rank;
 
 
 import java.util.*;
@@ -42,10 +43,17 @@ public class UserInput {
         String[] inputStr = userInput.split(",");
 
         List<Integer> numberList = makeWinningNumbers(inputStr);
+        int bonusNo = inputBonusLottoNo(numberList);
+
         Lotto winningLotto = new Lotto(numberList);
-        int bonusNo = inputBonusLottoNo();
 
         lottoController.setWinningLotto(winningLotto, bonusNo);
+    }
+
+    public void displayRank() {
+        for (Rank rank : lottoController.getRankList()) {
+            System.out.println(rank);
+        }
     }
 
     private List<Integer> makeWinningNumbers(String[] inputStr) {
@@ -60,12 +68,13 @@ public class UserInput {
         return new ArrayList<>(inputNoSet);
     }
 
-    private int inputBonusLottoNo() {
+    private int inputBonusLottoNo(List<Integer> lottoNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         String userInput = sc.nextLine();
         System.out.println();
 
         int bonusNo = makeLottoNo(userInput);
+        testValidBonusLottoNo(bonusNo, lottoNumbers);
 
         return bonusNo;
     }
@@ -108,6 +117,12 @@ public class UserInput {
     private void testValidLottoBounds(int num) {
         if (  num < 0 || num > LOTTO_BOUND ) {
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_BOUND + "이하 양수입니다.");
+        }
+    }
+
+    private void testValidBonusLottoNo(int bonusNo, List<Integer> lottoNumbers) {
+        if (lottoNumbers.contains(bonusNo)) {
+            throw new IllegalArgumentException(bonusNo + "는 유효하지 않은 값입니다.");
         }
     }
 }

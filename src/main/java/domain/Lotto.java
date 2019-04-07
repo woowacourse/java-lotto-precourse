@@ -16,4 +16,8 @@ public class Lotto {
     public String toString() {
         return String.join(",", String.valueOf(numbers));
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
