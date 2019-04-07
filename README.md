@@ -65,17 +65,17 @@
 - Rank
   
 - PickingNumbers
-  - makeNumbers() // 로또의 6개의 숫자를 뽑는 기능
+  - getSix() // 로또 6개 숫자를 뽑는 기능
   - shuffle() // 랜덤으로 숫자 배열을 섞는 기능
   - fillNumbers() // 숫자(1~45)를 채우는 기능
 
 - Display
-  - showBoughtLotto() // 구입한 로또를 보여주는 기능 
   - inputMoney() // 구입 금액을 입력하는 기능
+  - showBoughtLotto() // 구입한 로또의 숫자를 보여주는 기능 
   - inputLastWeekWinningNumbers() // 지난주 당첨 숫자를 입력하는 기능
   - inputBonusNumber() // 보너스 번호를 입력하는 기능
+  - showStatistics() // 당첨 통계를 보여주는 기능
   - showProfitRate() // 수익률을 보여주는 기능
-  - changeMoneyIntoLottos() // 구입 금액으로 몇 개를 살 수 있는 지 보여주는 기능
 
 - Game
   - Lotto makeLotto() // 로또는 만드는 기능
