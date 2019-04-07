@@ -9,6 +9,22 @@
  */
 package com.woowacourse.lotto.service;
 
+import java.util.Scanner;
+
 public class UserInput {
+	static final String DEMAND_PURCHASING_AMOUNT = "구입금액을 입력해주세요.";
+
+	private String inputValue() {
+		Scanner sc = new Scanner(System.in);
+		return sc.nextLine();
+	}
+
+	public int getPurchasingAmount() {
+
+		System.out.println(DEMAND_PURCHASING_AMOUNT);
+		String amount = inputValue();
+
+		return Integer.parseInt(amount);
+	}
 
 }

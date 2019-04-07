@@ -9,6 +9,12 @@
  */
 package com.woowacourse.lotto;
 
+import com.woowacourse.lotto.service.LottoGame;
+
 public class Application {
 
+	public static void main(String[] args) {
+		LottoGame lottoGame = new LottoGame();
+		lottoGame.start();
+	}
 }
