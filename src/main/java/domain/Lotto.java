@@ -17,7 +17,7 @@ public class Lotto {
 
     public static List<Integer> generateRandomNumber() {
         List<Integer> numList = new ArrayList<>();
-        for (int i = 0; i < LottoConstant.RANDOM_NUMBER_LIMIT; i++) {
+        for (int i = 1; i <= LottoConstant.RANDOM_NUMBER_LIMIT; i++) {
             numList.add(i);
         }
         Collections.shuffle(numList);
