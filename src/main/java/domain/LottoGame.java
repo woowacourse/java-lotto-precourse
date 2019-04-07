@@ -87,8 +87,10 @@ public class LottoGame {
         }
     }
 
-    private Lotto createLotto(List<Integer> lottoNumbers) {
+    private Lotto createLotto() {
+        List<Integer> lottoNumbers = createLottoNumbers();
         Collections.sort(lottoNumbers);
+
         return new Lotto(lottoNumbers);
     }
 }
