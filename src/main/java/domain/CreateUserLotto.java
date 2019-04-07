@@ -9,6 +9,7 @@ public class CreateUserLotto {
     private static final int NUM_OF_LOTTO = 6;
 
     static void  createLotto(int count) {
+        createRandom();
         Lotto[] lottos = new Lotto[count];
 
         for(int i = 0; i < count; i++) {
