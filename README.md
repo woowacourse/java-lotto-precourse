@@ -81,9 +81,10 @@
   - calculateProfitRate() // 수익률을 계산하는 기능
 
 - Game
-  - Lotto makeLotto() // 로또는 만드는 기능
-  - WinningLotto makeWinningLotto() // 당첨 번호를 만드는 기능
-  - void initShow() // 로또 당첨 쇼를 시작하는 기능
-  - convertIntoNum(Rank) // Rank의 당첨금액을 숫자로 바꿔주는 기능
-  - long long calculateWinningMoney() // 당첨금 계산하는 기능
-  - double calculateProfitRate // 수익률 계산하는 기능
+  - inputUserLotto() // 사용자로부터 로또 게임에 필요한 데이터를 입력받고, 게임을 준비하는 기능
+  - makeUserLotto() // 사용자 로또를 만드는 기능
+  - inputWinningLotto() // 사용자로부터 당첨 로또에 필요한 데이터를 입력받고, 준비하는 기능
+  - makeWinningLotto() // 당첨 번호를 만드는 기능
+  - calculateRank() // 사용자가 가지고 있는 로또의 당첨 정도를 확인하는 기능
+  - initGame() // 로또 게임을 시작하는 기능
+ 
