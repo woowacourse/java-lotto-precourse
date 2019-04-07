@@ -14,4 +14,6 @@ public class Game {
         this.lastWeekNumbers = lastWeekNumbers;
         this.bonusNo = bonusNo;
     }
+
+    
 }
