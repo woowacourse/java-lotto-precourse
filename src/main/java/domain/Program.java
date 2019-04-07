@@ -50,6 +50,14 @@ public class Program extends Config {
         System.out.println("총 수익률은 " + Earningrate + "입니다.");
     }
 
+    public void printLotto(Lotto[] lottobundle) {
+        int amount = lottobundle.length;
+        System.out.println(amount + "개를 구매했습니다.");
+        for (int i = 0; i < amount; i++) {
+            System.out.println(lottobundle[i].printLottoNumber());
+        }
+    }
+
     private int checkPriceValidation(int price) {
         Scanner scan = new Scanner(System.in);
         try {

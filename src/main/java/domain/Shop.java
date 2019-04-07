@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class Shop extends Config {
         return winningLotto;
     }
 
-    private Lotto createLotto(ArrayList<Integer> lottoNumber) {
+    private Lotto createLotto(List<Integer> lottoNumber) {
         return new Lotto(lottoNumber);
     }
 
@@ -42,13 +43,5 @@ public class Shop extends Config {
         int[] numberArray = new LottoPaper().getLottoNumber();
         ArrayList<Integer> lottoNumber = (ArrayList<Integer>) Arrays.stream(numberArray).boxed().collect(Collectors.toList());
         return lottoNumber;
-    }
-
-    public void printLotto(Lotto[] lottobundle) {
-        int amount = lottobundle.length;
-        System.out.println(amount + "개를 구매했습니다.");
-        for (int i = 0; i < amount; i++) {
-            System.out.println(lottobundle[i].printLottoNumber());
-        }
     }
 }

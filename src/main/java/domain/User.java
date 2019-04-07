@@ -1,9 +1,13 @@
 package domain;
 
 public class User {
-    public int buyingCash;
+    private int buyingCash;
 
     public User(int price) {
         this.buyingCash = price;
+    }
+
+    public int getBuyingCash(){
+        return buyingCash;
     }
 }
