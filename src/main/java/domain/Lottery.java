@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,27 +13,16 @@ public class Lottery {
 
 	// XXX Only 3 field in method!!
 	private static final Scanner SCANNER = new Scanner(System.in);
-	private static final int LOTTO_PRICE = 1_000;
-
-	private Integer[] ALL_LOTTO_NUMBER = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-		11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-		21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-		31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-		41, 42, 43, 44, 45};
-	private static final int DRAWS_COUNT = 6;
 
 	private int price;
-	private int lottoCount = 0;
-	private List<Lotto> lottoes;
 
 	public void runProgram() {
 		int inputtedPrice = inputPrice();
 		setPrice(inputtedPrice);
-		setLottoCount();
-		setLottoes(lottoCount);
-		printLottoes();
+		UserLotto userLotto = new UserLotto(price);
+		userLotto.printLottoes();
 		WinningLotto winningLotto = setWinnigLotto();
-		Map<Rank, Integer> result = calculateResult(winningLotto);
+		Map<Rank, Integer> result = calculateResult(userLotto, winningLotto);
 		printResult(result);
 	}
 
@@ -54,45 +41,6 @@ public class Lottery {
 		this.price = price;
 	}
 
-	private void setLottoCount() {
-		lottoCount = price / LOTTO_PRICE;
-	}
-
-	private void setLottoes(int lottoCount) {
-		List<Lotto> purchasedLotto = new ArrayList<>();
-		for (int i = 0; i < lottoCount; ++i) {
-			purchasedLotto.add(createLotto());
-		}
-		this.lottoes = purchasedLotto;
-	}
-
-	private void printLottoes() {
-		if (lottoes != null || lottoes.size() == 0) {
-			System.out.println("구매한 로또가 없습니다.");
-		}
-		System.out.println(lottoCount + "개를 구매했습니다.");
-		for (Lotto lotto : lottoes) {
-			System.out.println(lotto);
-		}
-	}
-
-	private Lotto createLotto() {
-		List<Integer> lottoNumbersToExtract = new ArrayList<>(Arrays.asList(ALL_LOTTO_NUMBER));
-
-		List<Integer> lottoNumber = new ArrayList<>();
-		for (int i = 0; i < DRAWS_COUNT; ++i) {
-			int randomNumber = selectRandomLottoNumber(lottoNumbersToExtract);
-			lottoNumber.add(randomNumber);
-		}
-		Collections.sort(lottoNumber);
-		return new Lotto(lottoNumber);
-	}
-
-	private int selectRandomLottoNumber(List<Integer> lottoNumbersToExtract) {
-		return lottoNumbersToExtract
-			.remove((int)(Math.random() * lottoNumbersToExtract.size()));
-	}
-
 	private WinningLotto setWinnigLotto() {
 		Lotto lotto = new Lotto(inputPreviousLotto());
 		int bonusNumber = inputPreviousBonusNumber(lotto);
@@ -104,7 +52,7 @@ public class Lottery {
 		do {
 			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 			previousLotto = SCANNER.nextLine();
-		} while (!Validator.isValidInputtedNumbers(previousLotto, DRAWS_COUNT));
+		} while (!Validator.isValidInputtedNumbers(previousLotto, Lotto.DRAWS_COUNT));
 
 		return Arrays.stream(previousLotto.split(","))
 			.sorted()
@@ -122,11 +70,11 @@ public class Lottery {
 		return Integer.parseInt(previousBonusNumber.trim());
 	}
 
-	private Map<Rank, Integer> calculateResult(WinningLotto winningLotto) {
+	private Map<Rank, Integer> calculateResult(UserLotto userLotto, WinningLotto winningLotto) {
 		Map<Rank, Integer> result = new HashMap<>();
 		Arrays.stream(Rank.values()).forEach(rank -> result.put(rank, 0));
 
-		for (Lotto lotto : lottoes) {
+		for (Lotto lotto : userLotto.getLottoes()) {
 			Rank rank = winningLotto.match(lotto);
 			result.put(rank, result.get(rank) + 1);
 		}
