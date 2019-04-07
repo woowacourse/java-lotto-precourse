@@ -3,8 +3,11 @@ package domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import domain.util.Validator;
 
@@ -31,6 +34,7 @@ public class Lottery {
 		setLottoCount();
 		setLottoes(lottoCount);
 		printLottoes();
+		WinningLotto winningLotto = setWinnigLotto();
 	}
 
 	private int inputPrice() {
@@ -41,7 +45,7 @@ public class Lottery {
 
 		} while (!Validator.isNaturalNumber(price));
 		// TODO int? long?
-		return Integer.parseInt(price);
+		return Integer.parseInt(price.trim());
 	}
 
 	public void setPrice(int price) {
@@ -87,4 +91,32 @@ public class Lottery {
 			.remove((int)(Math.random() * lottoNumbersToExtract.size()));
 	}
 
+	private WinningLotto setWinnigLotto() {
+		Lotto lotto = new Lotto(inputPreviousLotto());
+		int bonusNumber = inputPreviousBonusNumber(lotto);
+		return new WinningLotto(lotto, bonusNumber);
+	}
+
+	private List<Integer> inputPreviousLotto() {
+		String previousLotto = "";
+		do {
+			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+			previousLotto = SCANNER.nextLine();
+		} while (!Validator.isValidInputtedNumbers(previousLotto, DRAWS_COUNT));
+
+		return Arrays.stream(previousLotto.split(","))
+			.sorted()
+			.map(number -> Integer.parseInt(number.trim()))
+			.collect(Collectors.toList());
+	}
+
+	private int inputPreviousBonusNumber(Lotto lotto) {
+		String previousBonusNumber = "";
+		do {
+			System.out.println("지난 주 보너스 번호를 입력해 주세요.");
+			previousBonusNumber = SCANNER.nextLine();
+		} while (!Validator.isIncludeLottoNumber(previousBonusNumber)
+			&& !lotto.getNumbers().contains(Integer.parseInt(previousBonusNumber)));
+		return Integer.parseInt(previousBonusNumber.trim());
+	}
 }
