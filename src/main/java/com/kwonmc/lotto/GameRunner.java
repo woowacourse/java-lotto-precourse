@@ -27,12 +27,19 @@ public class GameRunner {
         System.out.println(countLotto() + "개를 구매했습니다.");
 
         createLottoList();
+        printLottoList();
     }
 
     private void createLottoList() {
         for (int i = 0; i < countLotto(); i++) {
             Lotto tmp = new Lotto(Lotto.lottoMaker());
             game.addMyLottoList(tmp);
+        }
+    }
+
+    private void printLottoList() {
+        for (Lotto lotto : game.getMyLottoList()) {
+            System.out.println(lotto.toString());
         }
     }
 

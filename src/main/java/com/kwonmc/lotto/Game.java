@@ -20,6 +20,10 @@ public class Game {
         this.myLottoList = myLottoList;
     }
 
+    public ArrayList<Lotto> getMyLottoList() {
+        return myLottoList;
+    }
+
     public void addMyLottoList(Lotto lotto) {
         this.myLottoList.add(lotto);
     }
