@@ -34,6 +34,11 @@ public class Main {
                 .noneMatch(i -> (i < 0 || i > 9)); // 0부터 9 사이의 숫자인가
     }
     
+    /** 임의의 정수가 로또 번호 범위 안에 있는지를 확인 */
+    private static boolean isLottoRange(int number) {
+        return (number >= LOTTO_NUM_START) && (number <= LOTTO_NUM_END);
+    }
+    
     /** 임의의 정수 하나를 입력받아 반환한다. */
     private static int inputSingleInt(String message) {
         String temp = getInput(message)[0];
