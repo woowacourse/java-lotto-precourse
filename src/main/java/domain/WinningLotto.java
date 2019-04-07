@@ -17,13 +17,13 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         int counter = 0;
         List<Integer> userNumbers = userLotto.getNumbers();
-        for(int num : lotto.getNumbers()) {
-            counter = (userNumbers.contains(num)) ? counter+1 : counter;
+        for (int num : lotto.getNumbers()) {
+            counter = (userNumbers.contains(num)) ? counter + 1 : counter;
         }
         return Rank.valueOf(counter, isMatchBonus(userNumbers));
     }
 
-    private boolean isMatchBonus(List<Integer> list){
+    private boolean isMatchBonus(List<Integer> list) {
         return list.contains(bonusNo);
     }
 }

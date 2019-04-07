@@ -5,14 +5,14 @@ import ExceptionCheck.NoticeOfException;
 import java.util.*;
 
 public class LottoGame {
-    private static final int MAX_LOTTO_SIZE = 6;
+    private static final NoticeOfException NOE = new NoticeOfException();
 
     private Lotto[] userLotto;
     private WinningLotto winningLotto;
 
-    public int inputCost(Scanner sc, NoticeOfException noe) {
+    public int inputCost(Scanner sc) {
         System.out.println("구입금액을 입력해 주세요.");
-        int cost = noe.inputCostNOE(sc);
+        int cost = NOE.inputCostNOE(sc);                    //예외 처리
         return cost;
     }
 
@@ -25,29 +25,28 @@ public class LottoGame {
     }
 
     public void lastWeekNumber(Scanner sc) {
+        Lotto winLotto = inputNumbers(sc);
+        int bounusNumber = NOE.inputBonusNOE(sc);
+        winningLotto = new WinningLotto(winLotto, bounusNumber);
+    }
+
+    private Lotto inputNumbers(Scanner sc) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         sc.nextLine();
         String strNumber = sc.nextLine();
-        System.out.println("보너스 볼을 입력해 주세요.");
-        int bounusNumber = sc.nextInt();
-        registerLotto(strNumber, bounusNumber);
+        return changeTypeNumbers(strNumber);
     }
 
-    private void registerLotto(String strNum, int bonus) {
+    private Lotto changeTypeNumbers(String strNum) {
         List<Integer> list = eraseComma(strNum);
         Collections.sort(list);
         Lotto winLotto = new Lotto(list);
-        winningLotto = new WinningLotto(winLotto, bonus);
+        return winLotto;
     }
 
     private List<Integer> eraseComma(String str) {
         List<String> strList = Arrays.asList(str.split(","));
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < MAX_LOTTO_SIZE; i++) {
-            int num = Integer.parseInt(strList.get(i));
-            list.add(num);
-        }
-        return list;
+        return NOE.checkListNOE(strList);
     }
 
     public void matchNumbers(WinningMoney wm) {

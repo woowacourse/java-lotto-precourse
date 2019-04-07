@@ -13,13 +13,13 @@ public enum Rank {
 
     private static final int WINNING_MIN_COUNT = 3;
 
-    private int countOfMatch;   //몇개 맞았는지?
-    private int winningMoney;   //상금이 얼마인지?
+    private int countOfMatch;
+    private int winningMoney;
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
-    } //몇개 맞았고 상금이 얼마인지 저장하는 생성자
+    }
 
     public int getCountOfMatch() {
         return countOfMatch;
@@ -30,15 +30,15 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (countOfMatch < WINNING_MIN_COUNT) { //3개보다 덜 맞추면 MISS!
+        if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;
         }
 
-        if (SECOND.matchCount(countOfMatch) && matchBonus) { //5개를 맞추고 보너스 번호까지 맞추면
+        if (SECOND.matchCount(countOfMatch) && matchBonus) {
             return SECOND;
         }
 
-        if (THIRD.matchCount(countOfMatch) && !matchBonus) {
+        if (THIRD.matchCount(countOfMatch) && !matchBonus) { // 예외 처리
             return THIRD;
         }
 
