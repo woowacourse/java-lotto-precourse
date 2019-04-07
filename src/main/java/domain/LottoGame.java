@@ -11,6 +11,7 @@ public class LottoGame {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int LOTTO_PRICE = 1000;
     private static final String PRINT_LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String WINNING_LOTTO_NUMBERS_DELIMITER = ",";
 
     private List<Lotto> lottoes;
 
@@ -121,5 +122,9 @@ public class LottoGame {
         Scanner scanner = new Scanner(System.in);
 
         return scanner.nextLine();
+    }
+
+    private String[] separateWinningLottoNumbers(String winningLottoNumbers) {
+        return winningLottoNumbers.split(WINNING_LOTTO_NUMBERS_DELIMITER);
     }
 }
