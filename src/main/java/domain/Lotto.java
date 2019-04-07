@@ -13,4 +13,8 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    /** 특정 숫자가 로또 안에 있는지 질의하는 메소드 */
+    public boolean hasNumber(int number) {
+        return numbers.contains(number);
+    }
 }
