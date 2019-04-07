@@ -124,7 +124,50 @@ public class LottoGame {
         return scanner.nextLine();
     }
 
+    private boolean isValidWinningLottoNumbers(String winningLottoNumbers) {
+        String[] segregatedWinningLottoNumbers = separateWinningLottoNumbers(winningLottoNumbers);
+
+        return isExactLength(segregatedWinningLottoNumbers) && isInteger(segregatedWinningLottoNumbers)
+                && isProperRange(segregatedWinningLottoNumbers) && !hasDuplicateNumber(segregatedWinningLottoNumbers);
+    }
+
     private String[] separateWinningLottoNumbers(String winningLottoNumbers) {
         return winningLottoNumbers.split(WINNING_LOTTO_NUMBERS_DELIMITER);
+    }
+
+    /* 쉼표로 구분한 당첨번호의 길이가 6인지 판단하는 메소드 */
+    private boolean isExactLength(String[] segregatedWinningLottoNumbers) {
+        return segregatedWinningLottoNumbers.length == THE_NUMBER_OF_LOTTO_NUMBERS;
+    }
+
+    private boolean isInteger(String[] segregatedWinningLottoNumbers) {
+        boolean result = true;
+
+        for (String winningLottoNumber : segregatedWinningLottoNumbers) {
+            result = result && isInteger(winningLottoNumber);
+        }
+
+        return result;
+    }
+
+    private boolean isProperRange(String[] segregatedWinningLottoNumbers) {
+        boolean result = true;
+
+        for (String winningLottoNumber : segregatedWinningLottoNumbers) {
+            result = result && (Integer.parseInt(winningLottoNumber) >= MIN_LOTTO_NUMBER
+                    && Integer.parseInt(winningLottoNumber) <= MAX_LOTTO_NUMBER);
+        }
+
+        return result;
+    }
+
+    private boolean hasDuplicateNumber(String[] segregatedWinningLottoNumbers) {
+        Set<Integer> set = new HashSet<>();
+
+        for (String winningLottoNumber : segregatedWinningLottoNumbers) {
+            set.add(Integer.parseInt(winningLottoNumber));
+        }
+
+        return set.size() != THE_NUMBER_OF_LOTTO_NUMBERS;
     }
 }
