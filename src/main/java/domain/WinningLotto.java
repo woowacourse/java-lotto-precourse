@@ -16,7 +16,8 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        List<Integer> userNumbers = userLotto.getNumbers();
+        List<Integer> userNumbers = new ArrayList<>();
+        userNumbers.addAll(userLotto.getNumbers());
 
         userNumbers.retainAll(lotto.getNumbers());
         int matchCount = userNumbers.size();
@@ -27,11 +28,7 @@ public class WinningLotto {
     }
 
     private boolean isMatchBonus(List<Integer> numbers) {
-        List<Integer> bonusNum = new ArrayList<>();
-        bonusNum.add(bonusNo);
-
-        bonusNum.retainAll(lotto.getNumbers());
-        if (bonusNum.size() != 0) {
+        if (numbers.contains(bonusNo)) {
             return true;
         }
 
