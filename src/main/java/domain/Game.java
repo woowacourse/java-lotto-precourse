@@ -1,0 +1,42 @@
+package domain;
+
+import javax.sound.midi.SysexMessage;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Game {
+    List<Lotto> userLottoTickets;
+    PickingNumbers pickingNumbers;
+    WinningLotto winningLotto;
+    List<Rank> ranks;
+    Profit profit;
+    int[] countRanks;
+    private int money;
+
+    private static final int lottoPrice = 1000;
+    private static final int numberOfRanks = 6;
+
+
+    public Game(){
+        userLottoTickets = new ArrayList<Lotto>();
+        pickingNumbers = new PickingNumbers();
+        ranks= new ArrayList<Rank>();
+        countRanks = new int[numberOfRanks];
+    }
+
+    public void inputUserLotto(){
+        this.money = Display.inputMoney();
+        int sizeOfLottoTickets = money / lottoPrice;
+        makeUserLotto(sizeOfLottoTickets);
+        Display.showBoughtLotto(userLottoTickets);
+    }
+
+    public void makeUserLotto(int sizeOfLottoTickets){
+        for(int i = 0; i < sizeOfLottoTickets; i++){
+            pickingNumbers.shuffle();
+            ArrayList<Integer> tmp =  new ArrayList<Integer>(pickingNumbers.get());
+            Lotto lotto = new Lotto(tmp);
+            userLottoTickets.add(lotto);
+        }
+    }
+}
