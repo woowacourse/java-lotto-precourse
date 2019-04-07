@@ -60,7 +60,7 @@
   - toString() // Lotto 인스턴스를 String으로 변환하는 기능
   
 - WinningLotto
-  - match() // retainAll()을 활용하여 
+  - match() // 지난주 당첨번호와 얼마나 일치하는지 확인하는 기능 
 
 - Rank
   
