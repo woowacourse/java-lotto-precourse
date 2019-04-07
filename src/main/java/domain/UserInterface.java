@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserInterface {
+public class UserInterface extends CheckValidity {
     private Scanner sc = new Scanner(System.in);
 
     private static final int MIN_PURCHASE_AMOUNT = 1000;
@@ -53,15 +53,19 @@ public class UserInterface {
 
         List<Integer> winnerNumberList = new ArrayList<>();
         for (String winnerNumber : winnerNumbers) {
-            try {
-                winnerNumberList.add(Integer.parseInt(winnerNumber));
-            } catch (NumberFormatException e) {
+            if (!checkIntegerFormat(winnerNumber)) {
                 return false;
             }
+
+            winnerNumberList.add(Integer.parseInt(winnerNumber));
         }
 
         for (Integer number : winnerNumberList) {
-            if ((MIN_NUMBER > number) || (number > MAX_NUMBER)) {
+            if (!checkLottoNumberScope(number)) {
+                return false;
+            }
+
+            if (checkDouble(winnerNumberList, number)) {
                 return false;
             }
         }
@@ -74,18 +78,16 @@ public class UserInterface {
         return sc.next();
     }
 
-    public boolean valiateBonusBall(String bonusBallStr) {
-        int bonusBall;
-        try {
-            bonusBall = Integer.parseInt(bonusBallStr);
-        } catch (NumberFormatException e) {
+    public boolean validateBonusBall(List<Integer> winnerNumbers, String bonusBallStr) {
+        if (!(checkIntegerFormat(bonusBallStr))) {
             return false;
         }
 
-        if ((MIN_NUMBER > bonusBall) || (bonusBall > MAX_NUMBER)) {
+        int bonusBall = Integer.parseInt(bonusBallStr);
+        if (checkDouble(winnerNumbers, bonusBall)) {
             return false;
         }
 
-        return true;
+        return checkLottoNumberScope(bonusBall);
     }
 }
