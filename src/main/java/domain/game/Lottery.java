@@ -24,9 +24,11 @@ public class Lottery {
 		setPrice(inputtedPrice);
 		UserLotto userLotto = new UserLotto(price);
 		userLotto.printLottoes();
-		WinningLotto winningLotto = setWinnigLotto();
-		Map<Rank, Integer> result = calculateResult(userLotto, winningLotto);
-		printResult(result);
+		if(userLotto.getLottoCount() > 0) {
+			WinningLotto winningLotto = setWinnigLotto();
+			Map<Rank, Integer> result = calculateResult(userLotto, winningLotto);
+			printResult(result);
+		}
 	}
 
 	private long inputPrice() {

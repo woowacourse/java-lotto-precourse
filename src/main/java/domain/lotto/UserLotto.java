@@ -22,6 +22,10 @@ public class UserLotto {
 		setLottoes(lottoCount);
 	}
 
+	public int getLottoCount() {
+		return lottoCount;
+	}
+
 	private void setLottoCount(long price) {
 		lottoCount = (int)(price / LOTTO_PRICE);
 	}
@@ -41,6 +45,7 @@ public class UserLotto {
 	public void printLottoes() {
 		if (lottoes == null || lottoes.size() == 0) {
 			System.out.println("구매한 로또가 없습니다.");
+			return;
 		}
 		System.out.println(lottoCount + "개를 구매했습니다.");
 		for (Lotto lotto : lottoes) {
