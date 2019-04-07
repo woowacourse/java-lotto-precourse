@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Random;
 
 public class CreateUserLotto {
-    private static final int NUM_OF_LOTTO = 6;
+    public static final int NUM_OF_LOTTO = 6;
 
     static void  createLotto(int count) {
-        createRandom();
         Lotto[] lottos = new Lotto[count];
 
         for(int i = 0; i < count; i++) {
@@ -22,7 +21,7 @@ public class CreateUserLotto {
         List<Integer> numbers = new ArrayList<Integer>();
         Random random = new Random();
 
-        while (numbers.size() < NUM_OF_LOTTO) {
+        while(numbers.size() != NUM_OF_LOTTO) {
             numbers = checkNumber(numbers);
             numbers.add(random.nextInt(44) + 1);
         }
@@ -35,7 +34,6 @@ public class CreateUserLotto {
         hs.addAll(numbers);
         numbers.clear();
         numbers.addAll(hs);
-
 
         return numbers;
     }
