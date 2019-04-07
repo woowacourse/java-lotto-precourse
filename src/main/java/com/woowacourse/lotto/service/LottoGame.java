@@ -9,9 +9,27 @@
  */
 package com.woowacourse.lotto.service;
 
+import java.util.List;
+
+import com.woowacourse.lotto.domain.Lotto;
+import com.woowacourse.lotto.domain.LottoFactory;
+
 public class LottoGame {
-	public void start() {
+	private List<Lotto> lottoList;
+
+	private void getLottoList() {
 		UserInput userInput = new UserInput();
-		System.out.println(userInput.getPurchasingAmount());
+		LottoFactory lottoFactory = new LottoFactory();
+		int lottoAmount = userInput.getPurchasingAmount();
+		this.lottoList = lottoFactory.createLottoList(lottoAmount);
+	}
+
+	public void start() {
+		getLottoList();
+
+		/* 테스트를 위한 출력 */
+		for (Lotto lotto : lottoList) {
+			System.out.println(lotto);
+		}
 	}
 }
