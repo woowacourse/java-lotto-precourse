@@ -15,6 +15,7 @@ public class PlayLotto {
     private static final int MAX_LOTTO_NUM = 45;
 
     public static void main(String[] args) {
+        sc = new Scanner(System.in);
         getPurchaseAmount();
         printLottos();
         getLastWeekNumber();
@@ -22,7 +23,6 @@ public class PlayLotto {
     }
 
     public static void getPurchaseAmount() {
-        sc = new Scanner(System.in);
         purchase_money = 0;
         boolean flag = false;
         while (!flag) {
@@ -70,6 +70,7 @@ public class PlayLotto {
 
     public static void printLottos() {
         System.out.println("\n" + purchase_amount + "개를 구매했습니다.");
+        sc.nextLine();
         for (Lotto lotto : lottos) {
             printLottoNum(lotto);
         }
@@ -87,16 +88,14 @@ public class PlayLotto {
 
     public static void getLastWeekNumber() {
         List<Integer> tmp_nums = new ArrayList<>();
-        sc = new Scanner(System.in);
-        boolean flag = false;
         int tmp_bonus_num = 0;
+        boolean flag = false;
         while (!flag) {
             System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
             String[] tmp_numbers = sc.nextLine().split(",");
             System.out.println("보너스 볼을 입력해 주세요.");
             tmp_bonus_num = Integer.parseInt(sc.nextLine());
-            flag = saveLastWeekNumbers(tmp_numbers, tmp_bonus_num, tmp_nums);
-        }
+            flag = saveLastWeekNumbers(tmp_numbers, tmp_bonus_num, tmp_nums); }
         makeWinningLotto(tmp_bonus_num, tmp_nums);
     }
 
