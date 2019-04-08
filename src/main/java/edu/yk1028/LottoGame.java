@@ -31,7 +31,7 @@ public class LottoGame {
 			Lotto lotto = new Lotto(makeList(inputWinningNumbers()));
 			int bonusNumber = inputBonusNumber();
 
-			winningLotto = new WinningLotto(lotto, bonusNumber);
+			winningLotto = makeWinningLotto(lotto, bonusNumber);
 		} catch (Exception e) {
 			System.out.println(FAIL_GENERATEING_WINNING_LOTTO);
 			return false;
@@ -67,5 +67,12 @@ public class LottoGame {
 			throw new Exception();
 		}
 		return bonus;
+	}
+	
+	private WinningLotto makeWinningLotto(Lotto lotto,int bonus) throws Exception {
+		if (lotto.hasNumber(bonus)) {
+			throw new Exception();
+		}
+		return new WinningLotto(lotto, bonus);
 	}
 }

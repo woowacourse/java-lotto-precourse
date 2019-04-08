@@ -22,6 +22,10 @@ public class Lotto {
 	public Lotto(List<Integer> numbers) {
 		this.numbers = numbers;
 	}
+	
+	public boolean hasNumber(int number) {
+		return numbers.contains(number);
+	}
 
 	public void printNumbers() {
 		String message = numbers.stream().map(n -> n.toString()).collect(Collectors.joining(", "));
