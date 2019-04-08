@@ -18,7 +18,7 @@ public class LottoGame {
       lottoArrayList.add(initLotto());
       showLottoNum(lottoArrayList.get(i));
     }
-    showCorrectNum(getCorrectNum());
+    getWinLotto();
   }
 
   public int getThePriceOfLotto() {
@@ -37,20 +37,16 @@ public class LottoGame {
     System.out.println(oneLotto.showNumbers());
   }
 
-  public ArrayList<Integer> getCorrectNum() {
+  public WinningLotto getWinLotto(){
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     Scanner scan = new Scanner(System.in);
-    ArrayList<Integer> correctNum = new ArrayList<Integer>();
-    for (String stringVal : scan.next().split(",")) {
-      correctNum.add(Integer.parseInt(stringVal));
-    }
+    int [] intNum = Arrays.asList(scan.next().split(",")).stream().mapToInt(Integer::parseInt).toArray();
+    List<Integer> win = Arrays.stream(intNum).boxed().collect(Collectors.toList());
+    Lotto winner = new Lotto(win);
     System.out.println("보너스 볼을 입력해 주세요.");
     Scanner scan2 = new Scanner(System.in);
-    correctNum.add(Integer.parseInt(scan2.next()));
-    return correctNum;
+    WinningLotto winLotto = new WinningLotto(winner, scan2.nextInt());
+    return winLotto;
   }
 
-  public void showCorrectNum(ArrayList<Integer> correctNum) {
-
-  }
 }
