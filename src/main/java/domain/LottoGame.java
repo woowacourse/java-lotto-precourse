@@ -1,6 +1,10 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class LottoGame {
@@ -10,6 +14,7 @@ public class LottoGame {
 	static private final int LOTTO_BUY_LIMIT = 100000;
     static private final double LOTTO_TOTAL_NUMBER = 45;
 	static private String money = "0";
+	static private final int LOTTO_MAXIMUM_COUNT = 6;
 	
 	private int inputMoney() {
 		do {
@@ -43,5 +48,18 @@ public class LottoGame {
     	randomNumber = (int) (Math.random() * LOTTO_TOTAL_NUMBER) + 1;
     	return randomNumber;
     }
+	
+    private List<Integer> makeLottoNumberList() {
+    	Set<Integer> lottoNumberList = new HashSet<Integer>();
+    	
+    	while (lottoNumberList.size() < LOTTO_MAXIMUM_COUNT) {
+    		lottoNumberList.add(makeRandomNumber());
+    	}
+    	
+    	List<Integer> numbers = new ArrayList<Integer>(lottoNumberList);
+    	
+    	return numbers;
+    }
+    
 	
 }
