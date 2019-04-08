@@ -21,11 +21,21 @@ public class InputMaker {
 	}
 
 	private static boolean isNumber(String input) {
-		if (input.matches(NUMBER_REGEX)) {
+		if (input.trim().matches(NUMBER_REGEX)) {
 			return true;
 		}
 		System.out.println("숫자를 입력하세요");
 		return false;
+	}
+
+	public static List<Integer> getIntegerList() {
+		List<String> strList = null;
+		do {
+			strList = Arrays.asList(getString().split(","));
+		} while (!strList.stream().allMatch(InputMaker::isNumber));
+		return strList.stream().map(String::trim)
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
 	}
 
 	public static String getString() {
@@ -38,7 +48,7 @@ public class InputMaker {
 
 	private static boolean isBlank(String input) {
 		if (input.matches(BLANK_REGEX)) {
-			System.out.println("빈칸 입력하지 마세요.");
+			System.out.println("빈칸을 입력하셨습니다.");
 			return true;
 		}
 		return false;

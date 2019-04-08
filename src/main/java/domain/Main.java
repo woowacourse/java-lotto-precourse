@@ -9,6 +9,5 @@ public class Main {
 		InputView input = new InputView();
 		System.out.println(input.getLottoCount());
 		System.out.println(input.getWinningLotto());
-		System.out.println(input.getBonusNumber());
 	}
 }
