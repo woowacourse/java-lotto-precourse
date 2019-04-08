@@ -18,7 +18,7 @@ public enum Rank {
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
-        this.winningMoney = winningMoney;;
+        this.winningMoney = winningMoney;
     }
 
     public int getCountOfMatch() {
@@ -39,7 +39,7 @@ public enum Rank {
         }
 
         for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
+            if (rank.matchCount(countOfMatch) && rank != SECOND) {
                 return rank;
             }
         }

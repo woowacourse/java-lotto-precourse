@@ -11,14 +11,8 @@ public class MakeRandom {
         Set<Integer> set=new TreeSet<>();
         while (set.size() != 6) {
             int madeRandomNumber = (int) ((Math.random() * MAX_LOTTO_VALUE) + MIN_LOTTO_VALUE);
-            addRandomNumber(set, madeRandomNumber);
+            set.add(madeRandomNumber);
         }
-        return new LinkedList<>(set);
-    }
-
-    private static void addRandomNumber( Set<Integer> set, int randomNumber) {
-        if (!set.contains(randomNumber)) {
-            set.add(randomNumber);
-        }
+        return new ArrayList<>(set);
     }
 }

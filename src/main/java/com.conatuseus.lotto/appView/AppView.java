@@ -5,11 +5,14 @@ import com.conatuseus.lotto.model.Lotto;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.util.*;
 
 public class AppView {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static final String MONEY_REGEX = "[0-9]+";
+    private static final String NUMBER_REGEX = "[0-9]+";
+    private static final int LOTTO_LENGTH = 6;
+    private static final int MAX_LOTTO_VALUE = 45;
+    private static final int MIN_LOTTO_VALUE = 1;
 
     /* AppView 클래스 기본생성자*/
     public AppView() {
@@ -27,6 +30,7 @@ public class AppView {
 
     public static int inputMoney() throws IOException {
         String scannedMoney;
+
         do {
             outputLine("구입금액을 입력해 주세요.(0이상 1000원 단위)");
             scannedMoney = br.readLine();
@@ -36,7 +40,7 @@ public class AppView {
     }
 
     private static boolean isMoneyValid(String scannedMoney) {
-        if (!scannedMoney.matches(MONEY_REGEX)) {
+        if (!scannedMoney.matches(NUMBER_REGEX)) {
             return false;
         }
         int tInputMoney = Integer.parseInt(scannedMoney);
@@ -49,4 +53,46 @@ public class AppView {
         }
     }
 
+    public static List<Integer> inputWinningLotto() throws IOException {
+        String[] scannedNumbers;
+
+        do {
+            outputLine("지난 주 당첨 번호를 입력해 주세요.");
+            scannedNumbers = br.readLine().split(",");
+        } while (!isWinningLottoValid(scannedNumbers));
+
+        return StringArrayToIntList(scannedNumbers);
+    }
+
+    public static boolean isWinningLottoValid(String[] scannedNumbers) {
+        if (scannedNumbers.length != LOTTO_LENGTH) {
+            return false;
+        }
+
+        int i = 0;
+        Set<Integer> set = new HashSet<>();
+        while (i < LOTTO_LENGTH && scannedNumbers[i].length() >= 1
+                && scannedNumbers[i].matches(NUMBER_REGEX) && isWinningNumberValid(Integer.parseInt(scannedNumbers[i]))) {
+            set.add(Integer.parseInt(scannedNumbers[i]));
+            i++;
+        }
+
+        return set.size() == LOTTO_LENGTH;
+    }
+
+    public static boolean isWinningNumberValid(int scannedNumber) {
+        return scannedNumber >= MIN_LOTTO_VALUE && scannedNumber <= MAX_LOTTO_VALUE;
+    }
+
+    public static List<Integer> StringArrayToIntList(String[] scannedNumbers) {
+        Set<Integer> set = new TreeSet<>();
+        for (String number : scannedNumbers) {
+            set.add(Integer.parseInt(number));
+        }
+        return new ArrayList<>(set);
+    }
+
+    public static int inputWinningBonus() {
+        return 0;
+    }
 }
