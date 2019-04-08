@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class Lotto {
     private final List<Integer> numbers;
+    public static final int UNIT_PRICE = 1000;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
