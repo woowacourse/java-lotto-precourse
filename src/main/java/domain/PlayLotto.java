@@ -105,7 +105,7 @@ public class PlayLotto {
         for (int i = 0; i < LOTTO_COUNT; i++) {
             addOrPassLastWeekNumbers(Integer.parseInt(tmp_numbers[i]), tmp_bonus_num, tmp_nums);
         }
-        if (tmp_nums.size() < 6) {
+        if (tmp_nums.size() != 6) {
             System.out.println("다시 입력해주세요");
             return false;
         }
