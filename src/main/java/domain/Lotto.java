@@ -1,6 +1,8 @@
 package domain;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -18,5 +20,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public List<Integer> generateLottoNumbers() {
+        List<Integer> range = IntStream.rangeClosed(1, 45)
+                .boxed().collect(Collectors.toList());
+        Collections.shuffle(range);
+        return range.subList(0, 6);
+    }
+
+
 }
