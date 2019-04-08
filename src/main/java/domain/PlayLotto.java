@@ -6,9 +6,11 @@ import domain.Lotto;
 
 public class PlayLotto {
     public static int purchase_amount;
+    public static int purchase_money;
     public static List<Lotto> lottos;
     public static WinningLotto winninglotto;
     public static Scanner sc;
+    public static Map<Rank, Integer> result;
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_COUNT = 6;
@@ -18,12 +20,12 @@ public class PlayLotto {
         makeLottoObject();
         printLottos();
         getLastWeekNumber();
-        getLottoRanks();
+        makeResult();
     }
 
     public static void getPurchaseAmount() {
         sc = new Scanner(System.in);
-        int purchase_money = 0;
+        purchase_money = 0;
         boolean flag = false;
         while (!flag) {
             System.out.println("구입금액을 입력해주세요");
@@ -88,13 +90,14 @@ public class PlayLotto {
         List<Integer> tmp_nums = new ArrayList<>();
         sc = new Scanner(System.in);
         boolean flag = false;
-        int tmp_bonus_num=0;
+        int tmp_bonus_num = 0;
         while (!flag) {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             String[] tmp_numbers = sc.nextLine().split(",");
             System.out.println("보너스 볼을 입력해 주세요.");
             tmp_bonus_num = Integer.parseInt(sc.nextLine());
-            flag = saveLastWeekNumbers(tmp_numbers, tmp_bonus_num, tmp_nums);}
+            flag = saveLastWeekNumbers(tmp_numbers, tmp_bonus_num, tmp_nums);
+        }
         makeWinningLotto(tmp_bonus_num, tmp_nums);
     }
 
@@ -116,16 +119,32 @@ public class PlayLotto {
 
     public static void makeWinningLotto(int bonus_num, List<Integer> nums) {
         Lotto win_nums = new Lotto(nums);
-        winninglotto = new WinningLotto(win_nums,bonus_num);
+        winninglotto = new WinningLotto(win_nums, bonus_num);
     }
 
-    public static void getLottoRanks(){
-        Map<Rank, Integer> result = new LinkedHashMap<>();
+    public static void makeResult() {
+        double profit;
+        getLottoRanks();
+        profit = countProfit();
+    }
+
+    public static void getLottoRanks() {
+        result = new LinkedHashMap<>();
         for (Rank rank : Rank.values())
             result.put(rank, 0);
         for (Lotto lotto : lottos) {
             Rank tmp_rank = winninglotto.match(lotto);
             result.put(tmp_rank, result.get(tmp_rank) + 1);
         }
+    }
+
+    public static double countProfit() {
+        double profit = 0.0;
+        for (int i = 0; i < 5; i++){
+            System.out.println(Rank.values()[i]);
+            profit += Rank.values()[i].getWinningMoney() * result.get(Rank.values()[i]);
+        }
+        profit = profit /purchase_money;
+        return profit;
     }
 }
