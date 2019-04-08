@@ -22,6 +22,9 @@ public class Validator {
         if (hasUndefined(inputs)) {
             throw new UndefinedException();
         }
+        if (!isInteger(inputs)) {
+            throw new NotIntegerException();
+        }
     }
 
     private boolean isInteger(String input) {
@@ -31,6 +34,14 @@ public class Validator {
             return false;
         }
         return true;
+    }
+
+    private boolean isInteger(String[] inputs) {
+        boolean check = true;
+        for (String input : inputs) {
+            check = check && isInteger(input);
+        }
+        return check;
     }
 
     private boolean hasUndefined(String[] inputs) {
