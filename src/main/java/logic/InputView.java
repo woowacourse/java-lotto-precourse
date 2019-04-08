@@ -42,7 +42,7 @@ class InputView {
 		int bonusNum;
 		do {
 			bonusNum = getBonusNumber();
-		} while (DUPLICATE_VALIDATOR.isDuplicate(numbers, bonusNum));
+		} while (DUPLICATE_VALIDATOR.isDuplicate(numbers, bonusNum) || !NUMBER_VALIDATOR.isValidNumber(bonusNum));
 		return new WinningLotto(new Lotto(numbers), bonusNum);
 	}
 
