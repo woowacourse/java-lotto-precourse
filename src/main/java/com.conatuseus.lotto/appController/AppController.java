@@ -15,14 +15,28 @@ public class AppController {
         this.user = new User();
     }
 
+    public void setWinningLotto(WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
+    }
+
     public void run() throws IOException {
         AppView.outputLine(">> Lotto 게임을 시작합니다.");
         user.setMoney(AppView.inputMoney());
         user.makeLottoList();
         AppView.printLottoList(user.getLottoList());
-        winningLotto=new WinningLotto(new Lotto(AppView.inputWinningLotto()),0);
+        this.makeWinningLotto();
 
         AppView.outputLine("<< Lotto 게임을 종료합니다.");
+    }
+
+    public void makeWinningLotto() throws IOException {
+        Lotto lotto = new Lotto(AppView.inputWinningLotto());
+        int bonusNumber;
+        do {
+            bonusNumber = AppView.inputWinningBonusNumber();
+        }
+        while (bonusNumber==-1 || lotto.isContain(bonusNumber));
+        this.setWinningLotto(new WinningLotto(lotto, bonusNumber));
     }
 
 

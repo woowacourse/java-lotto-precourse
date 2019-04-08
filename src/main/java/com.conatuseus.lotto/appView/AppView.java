@@ -92,7 +92,17 @@ public class AppView {
         return new ArrayList<>(set);
     }
 
-    public static int inputWinningBonus() {
-        return 0;
+    public static int inputWinningBonusNumber() throws IOException {
+        outputLine("보너스 볼을 입력해 주세요.");
+        String scannedNumber = br.readLine();
+        return isWinningBonusValid(scannedNumber) ? Integer.parseInt(scannedNumber) : -1;
+    }
+
+    public static boolean isWinningBonusValid(String scannedNumber) {
+        if (scannedNumber.length() == 0 || !scannedNumber.matches(NUMBER_REGEX)) {
+            return false;
+        }
+        int number = Integer.parseInt(scannedNumber);
+        return (number >= MIN_LOTTO_VALUE) && (number <= MAX_LOTTO_VALUE);
     }
 }
