@@ -44,6 +44,15 @@ public class PlayLotto {
         return true;
     }
 
+    public boolean isValidSizeOfWinningNumber(String[] rawWinningNumber) {
+        int sizeOfWinningNumber = 6; // 당첨번호의 갯수
+        if (rawWinningNumber.length != sizeOfWinningNumber) {
+            System.out.println("당첨번호는 콤마(,)로 구분하며 6자리입니다.");
+            return false;
+        }
+        return true;
+    }
+
     public List<Integer> convertString2Int(String[] strings) {
         List<Integer> intList = new ArrayList<>();
         for (String str: strings) {
