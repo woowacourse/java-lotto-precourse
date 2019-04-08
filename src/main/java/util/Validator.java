@@ -2,7 +2,7 @@
  * Validator.java
  */
 
-package domain;
+package util;
 
 import java.util.HashSet;
 import java.util.List;
