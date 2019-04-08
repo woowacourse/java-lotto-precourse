@@ -266,4 +266,18 @@ public class LottoGame {
 
         return lottoCount;
     }
+
+    private int getWinningMoneyTotal(WinningLotto winningLotto) {
+        int winningMoneyTotal = 0;
+
+        for (Rank rank : Rank.values()) {
+            winningMoneyTotal += getWinningMoneyTotalByRank(rank, winningLotto);
+        }
+
+        return winningMoneyTotal;
+    }
+
+    private int getWinningMoneyTotalByRank(Rank rank, WinningLotto winningLotto) {
+        return getLottoCountByRank(rank, winningLotto) * rank.getWinningMoney();
+    }
 }
