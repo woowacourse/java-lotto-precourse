@@ -7,15 +7,15 @@ import java.util.Scanner;
  */
 public class LottoMoney {
 
-    private static final int GET_LOTTO_MONEY = 1000;
+    public static final int GET_LOTTO_MONEY = 1000;
 
     /* 로또 구입 금액을 입력 받는 메소드 */
     public static int getLottoMoney(){
 
+        System.out.println("구입 금액을 입력해 주세요");
+
         Scanner getMoney = new Scanner(System.in);
         int lottoMoney = getMoney.nextInt();
-
-        System.out.println("구입 금액을 입력해 주세요");
 
         return lottoMoney / GET_LOTTO_MONEY;
     }
