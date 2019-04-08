@@ -7,13 +7,20 @@ import java.util.Scanner;
 public class UserInterface extends CheckValidity {
     private Scanner sc = new Scanner(System.in);
 
+    private static String STR1 = "개 일치";
+    private static String STR2 = " (";
+    private static String STR3 = ")- ";
+    private static String STR4 = "개";
+    private static String STR5 = ", 보너스 볼 일치";
+
+
     public String inputPurchaseAmount() {
         System.out.println("구입금액을 입력하세요.");
         return sc.nextLine();
     }
 
     public boolean validatePurchaseAmount(String purchaseAmountStr) {
-        if(!checkIntegerFormat(purchaseAmountStr)){
+        if (!checkIntegerFormat(purchaseAmountStr)) {
             return false;
         }
 
@@ -79,16 +86,23 @@ public class UserInterface extends CheckValidity {
     public void printWinStats(ResultInformation resultInformation) {
         System.out.println("당첨통계\n-------------");
 
-        System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치 ("
-                + Rank.FIFTH.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.FIFTH) + "개");
-        System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치 ("
-                + Rank.FOURTH.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.FOURTH) + "개");
-        System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치 ("
-                + Rank.THIRD.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.THIRD) + "개");
-        System.out.println(Rank.SECOND.getCountOfMatch() + "개 일치, 보너스 볼 일치 ("
-                + Rank.SECOND.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.SECOND) + "개");
-        System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치 ("
-                + Rank.FIRST.getWinningMoney() + "원)- " + resultInformation.getRankCount(Rank.FIRST) + "개");
+        System.out.println(printRankState(Rank.FIFTH, resultInformation));
+        System.out.println(printRankState(Rank.FOURTH, resultInformation));
+        System.out.println(printRankState(Rank.THIRD, resultInformation));
+        System.out.println(printRankState(Rank.SECOND, resultInformation));
+        System.out.println(printRankState(Rank.FIRST, resultInformation));
         System.out.println("총 수익률은 " + resultInformation.getProfitRate() + "입니다.");
+    }
+
+    private String printRankState(Rank type, ResultInformation resultInformation) {
+        String str;
+
+        str = type.getCountOfMatch() + STR1;
+        if (type.equals(Rank.SECOND)) {
+            str += STR5;
+        }
+        str += STR2 + type.getWinningMoney() + STR3 + resultInformation.getRankCount(type) + STR4;
+
+        return str;
     }
 }
