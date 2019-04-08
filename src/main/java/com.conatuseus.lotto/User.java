@@ -11,9 +11,13 @@ import java.util.List;
 public class User {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static final String MONEY_REGEX = "[0-9]+";
-    private List<Lotto> lottoList = new LinkedList<>();
+    private List<Lotto> lottoList;
     private int money;
     private int numberOfLotto;
+
+    public User(){
+        this.lottoList=new LinkedList<>();
+    }
 
     public int getMoney() {
         return money;
