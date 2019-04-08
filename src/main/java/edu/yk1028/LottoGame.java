@@ -28,7 +28,7 @@ public class LottoGame {
 	
 	public boolean generateWinningLotto() {
 		try {
-			inputWinningNumbers();
+			Lotto lotto = new Lotto(makeList(inputWinningNumbers()));
 		} catch (Exception e) {
 			System.out.println(FAIL_GENERATEING_WINNING_LOTTO);
 			return false;
@@ -41,5 +41,17 @@ public class LottoGame {
 		
 		System.out.println(REQUEST_WINNING_NUMBERS);
 		return scanner.nextLine().split(NUMBER_SEPARATOR);
+	}
+	
+	private List<Integer> makeList(String[] numbers) throws Exception {
+		NumberList numberList = new NumberList();
+		
+		if (numbers.length != NUMBER_OF_LOTTO_NUMBERS) {
+			throw new Exception();
+		}
+		for	(String number : numbers) {
+			numberList.add(Integer.parseInt(number));
+		}
+		return numberList.getList();
 	}
 }
