@@ -23,35 +23,50 @@ public class LottoGame {
 	private final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 	private final String WRONG_INPUT = "1~45사이의 중복되지 않은 6개의 수를 입력해 주세요. 콤마(,)로 구분";
 	private final String FAIL_GENERATEING_WINNING_LOTTO = "잘못된 당첨 번호입니다.";
-	
+
 	private WinningLotto winningLotto;
-	
+
 	public boolean generateWinningLotto() {
 		try {
+			
 			Lotto lotto = new Lotto(makeList(inputWinningNumbers()));
+			int bonusNumber = inputBonusNumber();
+
+			winningLotto = new WinningLotto(lotto, bonusNumber);
 		} catch (Exception e) {
 			System.out.println(FAIL_GENERATEING_WINNING_LOTTO);
 			return false;
 		}
 		return true;
 	}
-	
+
 	private String[] inputWinningNumbers() {
 		Scanner scanner = new Scanner(System.in);
-		
+
 		System.out.println(REQUEST_WINNING_NUMBERS);
 		return scanner.nextLine().split(NUMBER_SEPARATOR);
 	}
-	
+
 	private List<Integer> makeList(String[] numbers) throws Exception {
 		NumberList numberList = new NumberList();
-		
+
 		if (numbers.length != NUMBER_OF_LOTTO_NUMBERS) {
 			throw new Exception();
 		}
-		for	(String number : numbers) {
+		for (String number : numbers) {
 			numberList.add(Integer.parseInt(number));
 		}
 		return numberList.getList();
+	}
+
+	private int inputBonusNumber() {
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println(REQUEST_BONUS_NUMBER);
+		while (!scanner.hasNextInt()) {
+			scanner.next();
+			System.out.println(WRONG_INPUT);
+		}
+		return scanner.nextInt();
 	}
 }
