@@ -1,12 +1,10 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class LottoTickets {
-    public static final int PRICE_OF_LOTTO = 1000;
-    public static final int LOWER_BOUND_OF_CHANGE = 0;
+    private static final int PRICE_OF_LOTTO = 1000;
+    private static final int LOWER_BOUND_OF_CHANGE = 0;
     private List<Lotto> tickets = new ArrayList<>();
     private int purchasePrice;
 
@@ -30,9 +28,18 @@ public class LottoTickets {
     }
 
     private void generateTickets(int numberOfTickets) {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         for (int i = 0; i < numberOfTickets; i++) {
+            List<Integer> numbers = generateLottoNumbers();
             tickets.add(new Lotto(numbers));
         }
+    }
+
+    private List<Integer> generateLottoNumbers() {
+        Set<Integer> numbers = new TreeSet<>();
+        while (numbers.size() != Lotto.SIZE_OF_LOTTO) {
+            numbers.add((int) (Math.random() * Lotto.LAST_NUMBER) + Lotto.FIRST_NUMBER);
+        }
+
+        return new ArrayList<>(numbers);
     }
 }
