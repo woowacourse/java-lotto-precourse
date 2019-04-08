@@ -17,7 +17,7 @@ public class Const {
     public static final String STR_ENTER_LAST_WIN_NUMBRES = "지난 주 당첨 번호를 입력해 주세요.\n(예: 1,2,3,4,5,6)";
     public static final String STR_ENTER_LAST_WIN_BONUS = "보너스 볼을 입력해 주세요.";
 
-    public static final String EX_PAYMENT_ONLY_NUM_TO_USER = "숫자만 입력할 수 있습니다..";
+    public static final String EX_PAYMENT_ONLY_NUM_TO_USER = "띄어쓰기 없이 숫자만 입력해주세요.";
     public static final String EX_PAYMENT_CONDITION_TO_USER = "최소 구매 금액은 1000원, 최대 구매 금액은 10만원 입니다.";
     public static final String EX_WIN_ONLY_NUM_TO_USER = "띄어쓰기 없이 숫자만 입력해주세요.";
     public static final String EX_LOTTO_CONDITION_TO_USER = "1 ~ 45 사이의 숫자만 입력해주세요.";
