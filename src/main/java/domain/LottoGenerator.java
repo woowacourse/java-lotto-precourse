@@ -9,7 +9,7 @@ public class LottoGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private List<Lotto> lottoList;
+    private static List<Lotto> lottoList;
     private List<Integer> lottoNumbers;
 
     LottoGenerator() {
@@ -50,7 +50,9 @@ public class LottoGenerator {
         return lottoNumbers.contains(candidateLottoNumber) ? false : true;
     }
 
-    public int getLottoListSize() {
-        return this.lottoList.size();
+    public static List<Lotto> getLottoList() {
+        return lottoList;
     }
+
+
 }
