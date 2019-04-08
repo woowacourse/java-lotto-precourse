@@ -42,7 +42,7 @@ public enum Rank {
 		}
 
 		for (Rank rank : values()) {
-			if (rank.matchCount(countOfMatch)) {
+			if (rank.matchCount(countOfMatch) && rank != SECOND) {
 				return rank;
 			}
 		}
@@ -55,6 +55,8 @@ public enum Rank {
 	}
 	
 	public void printMatchResult(int count) {
-		System.out.println(countOfMatch + "개 일치 (" + MONEY_FORMATTER.format(winningMoney) + "원) - " + count + "개");
+		if(countOfMatch != 0) {
+			System.out.println(countOfMatch + "개 일치 (" + MONEY_FORMATTER.format(winningMoney) + "원) - " + count + "개");
+		}
 	}
 }
