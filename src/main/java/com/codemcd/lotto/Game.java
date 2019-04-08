@@ -8,11 +8,14 @@ import java.util.Scanner;
 public class Game {
 
     private static final int MIN_LOTTO_PRICE = 1000;
+    private static final int MAX_RANK_NUMBER = 5;
 
     private int moneyForLotto;
     private int numberOfLotto;
     private List<Lotto> lottos;
     private WinningLotto winningLotto;
+    private int totalPrizeMoney = 0;
+    private List<Integer> countOfRank = new ArrayList<>(MAX_RANK_NUMBER + 1);
 
     public void start() {
         inputMoney();
@@ -20,6 +23,7 @@ public class Game {
         buyLotto();
         printLottoNumbers();
         inputWinningAndBonusNumber();
+        matchingLotto();
     }
 
     private void inputMoney() {
@@ -78,5 +82,24 @@ public class Game {
     private void inputWinningAndBonusNumber() {
         winningLotto = new WinningLotto(new Lotto(inputWinningNumber()), inputBonusNumber());
         winningLotto.printLotto();
+    }
+
+    private void matchingLotto() {
+        initializeCountOfRankList();
+        for(int i=0; i<numberOfLotto; ++i) {
+            Rank currentRank = winningLotto.match(lottos.get(i));
+            countOfRank.set(currentRank.getNumberOfRank(),
+                    countOfRank.get(currentRank.getNumberOfRank()) + 1);
+            totalPrizeMoney += currentRank.getWinningMoney();
+        }
+
+        for(int i=0;i<countOfRank.size(); ++i)
+            System.out.println(countOfRank.get(i));
+        System.out.println(totalPrizeMoney);
+    }
+
+    private void initializeCountOfRankList() {
+        for(int i=0; i<MAX_RANK_NUMBER+1; ++i)
+            countOfRank.add(0);
     }
 }
