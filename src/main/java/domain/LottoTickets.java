@@ -1,10 +1,12 @@
 package domain;
 
+import java.io.IOException;
 import java.util.*;
 
 public class LottoTickets {
     private static final int PRICE_OF_LOTTO = 1000;
     private static final int LOWER_BOUND_OF_CHANGE = 0;
+    private static final int TIME_TO_BREAK = 300;
     private List<Lotto> tickets = new ArrayList<>();
     private int purchasePrice;
 
@@ -24,6 +26,7 @@ public class LottoTickets {
         if (change > LOWER_BOUND_OF_CHANGE) {
             System.out.print("잔돈은 " + change + "원입니다.");
         }
+        pause();
         System.out.println();
     }
 
@@ -41,5 +44,28 @@ public class LottoTickets {
         }
 
         return new ArrayList<>(numbers);
+    }
+
+    public void showAll() {
+        for (int i = 0; i < tickets.size(); i++) {
+            System.out.println(tickets.get(i).toString());
+            sleep();
+        }
+    }
+
+    private void pause() {
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(TIME_TO_BREAK);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
