@@ -1,8 +1,9 @@
 /*
  * LottoMaker.java
  */
-package domain;
+package logic;
 
+import domain.Lotto;
 import util.RandomNumberMaker;
 
 import java.util.ArrayList;

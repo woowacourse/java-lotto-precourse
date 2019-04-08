@@ -1,13 +1,13 @@
 /*
- * InputMaker.java
+ * InputUtil.java
  */
 
-package domain;
+package util;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class InputMaker {
+public class InputUtil {
 	private static final String BLANK_REGEX = "(^\\s*$)";
 	private static final String NUMBER_REGEX = "(^[0-9]+$)";
 	private static final Scanner SCANNER = new Scanner(System.in);
@@ -32,7 +32,7 @@ public class InputMaker {
 		List<String> strList = null;
 		do {
 			strList = Arrays.asList(getString().split(","));
-		} while (!strList.stream().allMatch(InputMaker::isNumber));
+		} while (!strList.stream().allMatch(InputUtil::isNumber));
 		return strList.stream().map(String::trim)
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
