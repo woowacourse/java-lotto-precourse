@@ -10,8 +10,7 @@ public class GameRunner {
     public void run() {
         inputUserPurchaseAmount();
         printLottoInfo();
-        inputLastWeekNumbers();
-        inputBonusNo();
+        inputLastWeekNumberAndBonusNo();
         printLottoMatchResult();
         printLottoMoneyResult();
     }
@@ -51,14 +50,12 @@ public class GameRunner {
         return game.getPurchaseAmount() / 1000;
     }
 
-    private void inputLastWeekNumbers() {
+    private void inputLastWeekNumberAndBonusNo() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         // TODO 구현
         String[] lastWeek = sc.next().split(",");
         Lotto lotto = new Lotto(new ArrayList<>());
-    }
 
-    private void inputBonusNo() {
         System.out.println("보너스 볼을 입력해주세요");
         int bonusNo = sc.nextInt();
     }
