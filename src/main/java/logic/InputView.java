@@ -15,7 +15,7 @@ import java.util.List;
 
 import static domain.LottoConstant.*;
 
-public class InputView {
+class InputView {
 	private static final NumberValidator NUMBER_VALIDATOR = new NumberValidator(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER);
 	private static final DuplicateValidator DUPLICATE_VALIDATOR = new DuplicateValidator();
 	private static final SizeValidator SIZE_VALIDATOR = new SizeValidator(LOTTO_SIZE);
@@ -26,11 +26,11 @@ public class InputView {
 		do {
 			money = InputUtil.getInt();
 		} while (!isValidMoney(money));
-		return (money / 1000);
+		return (money / LOTTO_MIN_MONEY);
 	}
 
 	private boolean isValidMoney(int money) {
-		if (money >= MIN_MONEY) {
+		if (money >= LOTTO_MIN_MONEY) {
 			return true;
 		}
 		System.out.println("1000원 이상의 금액을 입력해주세요.");
