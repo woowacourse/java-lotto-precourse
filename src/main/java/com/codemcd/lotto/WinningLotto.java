@@ -16,4 +16,9 @@ public class WinningLotto {
         // TODO 로직 구현
         return null;
     }
+
+    public void printLotto() {
+        lotto.printLotto();
+        System.out.println(bonusNo);
+    }
 }
