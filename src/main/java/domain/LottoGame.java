@@ -8,15 +8,25 @@ public class LottoGame {
 	static private final String NUMBER_CHECK_REGEX = "^[0-9]*$";
 	static private final int LOTTO_PRICE = 1000;
 	static private final int LOTTO_BUY_LIMIT = 100000;
+	static private String money = "0";
 	
-	private String inputMoney() {
-		System.out.println("구매금액을 입력해 주세요.");
-		String money = sc.nextLine();
-		return money;
+	private int inputMoney() {
+		do {
+			System.out.println("구매금액을 입력해 주세요.");
+			money = sc.nextLine();
+		} while(!checkNumberOrNot(money) || !devideByThousand(money));
+
+		return Integer.parseInt(money);
 	}
 	
 	private boolean checkNumberOrNot(String money) {
-		return (Pattern.matches(NUMBER_CHECK_REGEX, money)) ? true : false;
+		if (Pattern.matches(NUMBER_CHECK_REGEX, money) && !money.equals("0")) {
+			return true;
+		}
+		
+		System.out.println("0 이상의 숫자를 입력해주세요.");
+		return false;
+		
 	}
 	
 	private boolean devideByThousand(String money) {
@@ -27,5 +37,4 @@ public class LottoGame {
 		return true; 
 	}
 	
-
 }
