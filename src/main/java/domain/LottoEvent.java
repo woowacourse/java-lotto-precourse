@@ -13,40 +13,42 @@ public class LottoEvent {
 
     private final LottoInputHandler lottoInputHandler;
     private final LottoFactory lottoFactory;
-    private final List<Lotto> lottoList;
-    private WinningLotto winningLotto;
+    private final List<Lotto> purchasedLotto;
 
     public LottoEvent() {
         lottoInputHandler = new LottoInputHandler();
         lottoFactory = new LottoFactory();
-        lottoList = new ArrayList<>();
-        winningLotto = null;
+        purchasedLotto = new ArrayList<>();
     }
 
-    private void buyLotto() {
+    private void purchaseLotto() {
         int purchaseAmount = lottoInputHandler.getPurchaseAmount();
-        buyLottoWithPurchaseAmount(purchaseAmount);
+        purchaseLottoWithPurchaseAmount(purchaseAmount);
     }
 
-    private void buyLottoWithPurchaseAmount(int purchaseAmount) {
+    private void purchaseLottoWithPurchaseAmount(int purchaseAmount) {
         int numOfLottoToCreate = purchaseAmount / LOTTO_PRICE;
         while (numOfLottoToCreate > 0) {
             Lotto lotto = lottoFactory.getInstance();
-            lottoList.add(lotto);
+            purchasedLotto.add(lotto);
             numOfLottoToCreate--;
         }
     }
 
-    private void createWinningLotto() {
+    private WinningLotto createWinningLotto() {
         List<Integer> winningNumList = convertIntArrayToList(lottoInputHandler.getWinningNums());
         int bonusNum = lottoInputHandler.getBonusNum();
 
-        createWinningLottoWithParams(winningNumList, bonusNum);
+        return createWinningLottoWithParams(winningNumList, bonusNum);
     }
 
-    private void createWinningLottoWithParams(List<Integer> winningNumList, int bonusNum) {
+    private WinningLotto createWinningLottoWithParams(List<Integer> winningNumList, int bonusNum) {
         Lotto winner = lottoFactory.getInstance(winningNumList);
-        winningLotto = new WinningLotto(winner, bonusNum);
+        return new WinningLotto(winner, bonusNum);
+    }
+
+    private List<Rank> getLottoEventResult(WinningLotto winningLotto) {
+        return new LottoEventJudge(winningLotto).judgeLottoEvent(purchasedLotto);
     }
 
     private List<Integer> convertIntArrayToList(int[] winningNums) {
