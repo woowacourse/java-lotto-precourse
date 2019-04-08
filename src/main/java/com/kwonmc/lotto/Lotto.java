@@ -1,8 +1,6 @@
 package com.kwonmc.lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,17 +25,19 @@ public class Lotto {
             }
         }
 
+        aLotto.sort(null);
+
         return aLotto;
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        Iterator<Integer> iter = numbers.iterator();
+        Iterator<Integer> iterator = numbers.iterator();
         stringBuilder.append("[");
-        while(iter.hasNext()) {
-            stringBuilder.append(iter.next());
-            if (iter.hasNext()) {
+        while(iterator.hasNext()) {
+            stringBuilder.append(iterator.next());
+            if (iterator.hasNext()) {
                 stringBuilder.append(", ");
             }
         }

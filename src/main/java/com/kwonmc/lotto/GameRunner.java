@@ -42,8 +42,9 @@ public class GameRunner {
 
     private void printLottoList() {
         for (Lotto lotto : game.getMyLottoList()) {
-            System.out.println(lotto.toString());
+            System.out.println(lotto);
         }
+        System.out.println();
     }
 
     private int countLotto() {
@@ -53,15 +54,13 @@ public class GameRunner {
     private void inputLastWeekNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         // TODO 구현
-        String lastWeek = sc.next();
+        String[] lastWeek = sc.next().split(",");
         Lotto lotto = new Lotto(new ArrayList<>());
-        game.setLastWeekNumbers(lotto);
     }
 
     private void inputBonusNo() {
         System.out.println("보너스 볼을 입력해주세요");
         int bonusNo = sc.nextInt();
-        game.setBonusNo(bonusNo);
     }
 
     private void printLottoMatchResult() {
