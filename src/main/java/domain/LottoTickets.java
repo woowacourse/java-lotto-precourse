@@ -22,7 +22,7 @@ public class LottoTickets {
 
     public void showNumberOfTicketsAndChanges() {
         System.out.print(tickets.size() + "개를 구매했습니다. ");
-        int change = purchasePrice - (tickets.size() * PRICE_OF_LOTTO);
+        int change = purchasePrice % PRICE_OF_LOTTO;
         if (change > LOWER_BOUND_OF_CHANGE) {
             System.out.print("잔돈은 " + change + "원입니다.");
         }
