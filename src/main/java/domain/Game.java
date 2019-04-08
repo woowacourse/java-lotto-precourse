@@ -6,11 +6,12 @@ import java.util.Scanner;
 public class Game {
 
     private int inputPrice;
+    private int purchaseCount;
 
     public void run() {
         do {
             buyLotto();
-        } while (print());
+        } while (printPurchaseCount());
     }
 
     private void buyLotto() {
@@ -24,15 +25,15 @@ public class Game {
         }
     }
 
-    private boolean print() {
-        int num = inputPrice / 1000;
+    private boolean printPurchaseCount() {
+        purchaseCount = inputPrice / 1000;
 
-        if (num <= 0) {
+        if (purchaseCount <= 0) {
             System.out.println("로또를 살 수 없습니다.");
             return true;
         }
 
-        System.out.println(num + "개를 구매했습니다.");
+        System.out.println(purchaseCount + "개를 구매했습니다.");
         return false;
     }
 }
