@@ -1,4 +1,4 @@
-package domain;
+package com.conatuseus.lotto;
 
 /**
  * 로또 등수를 의미하는 enum
@@ -18,7 +18,7 @@ public enum Rank {
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
-        this.winningMoney = winningMoney;
+        this.winningMoney = winningMoney;;
     }
 
     public int getCountOfMatch() {

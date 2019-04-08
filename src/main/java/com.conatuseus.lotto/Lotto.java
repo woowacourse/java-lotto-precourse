@@ -1,4 +1,4 @@
-package domain;
+package com.conatuseus.lotto;
 
 import java.util.List;
 
