@@ -33,6 +33,14 @@ public class PlayLotto {
         }
     }
 
+    public List<Integer> convertString2Int(String[] strings) {
+        List<Integer> intList = new ArrayList<>();
+        for (String str: strings) {
+            intList.add(Integer.parseInt(str));
+        }
+        return intList;
+    }
+
 }
 
 class GeneratingLottoNumber {
