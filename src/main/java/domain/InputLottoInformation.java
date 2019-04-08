@@ -120,7 +120,7 @@ public class InputLottoInformation {
     }
 
     private boolean checkLottoNumber(String no) {
-        if (checkOnlyNumber(no)) {
+        if (checkIsEmpty(no) || checkOnlyNumber(no)) {
             return true;
         }
         int number = Integer.parseInt(no);
@@ -133,6 +133,13 @@ public class InputLottoInformation {
     private boolean checkLottoLength() {
         if (lastweeklotto.size() != LottoBallCount) {
             System.out.println(Message.errorMessage.get("ERROR_SIXNUMBER"));
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkIsEmpty(String no) {
+        if (no.isEmpty()) {
             return true;
         }
         return false;
