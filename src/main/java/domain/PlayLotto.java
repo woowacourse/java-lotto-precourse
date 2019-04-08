@@ -43,7 +43,6 @@ public class PlayLotto {
                     isValidSizeOfWinningNumber(rawWinningNumber)) { break; }
         }
         return convertString2Int(rawWinningNumber);
-
     }
 
     public boolean isValidNumberOfRange(String[] rawWinningNumber) {
@@ -72,6 +71,14 @@ public class PlayLotto {
             intList.add(Integer.parseInt(str));
         }
         return intList;
+    }
+
+    public boolean isValidBonusNumber(int bonusNumber) {
+        if (bonusNumber < 0) {
+            System.out.println("보너스 볼의 범위는 1 ~ 45 사이의 자연수입니다.");
+            return false;
+        }
+        return true;
     }
 
 }
