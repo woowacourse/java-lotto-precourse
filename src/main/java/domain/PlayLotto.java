@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class PlayLotto {
     private final int LOTTO_PRICE = 1000;
     private List<Lotto> myLotto = new ArrayList<>(); // 구입한 내 Lotto List
+    private WinningLotto winningLotto;
 
     public int insertMoney() {
         int money;
@@ -31,6 +32,15 @@ public class PlayLotto {
             System.out.println(lottoNumber);
             myLotto.add(new Lotto(lottoNumber));
         }
+    }
+
+    public void setWinningLotto() {
+        List<Integer> winningLottoNumber = insertWinningLottoNumber();
+        int bonusNumber = insertBonusNumber();
+        while (hasBonusNumber(winningLottoNumber, bonusNumber)) {
+            bonusNumber = insertBonusNumber();
+        }
+        winningLotto = new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);
     }
 
     public List<Integer> insertWinningLottoNumber() {
@@ -84,21 +94,19 @@ public class PlayLotto {
     }
 
     public boolean isValidBonusNumber(int bonusNumber) {
-        if (bonusNumber < 0) {
-            System.out.println("보너스 볼의 범위는 1 ~ 45 사이의 자연수입니다.");
-            System.out.println("보너스 볼을 입력해주세요.");
-            return false;
-        }
-        return true;
+        if (0 < bonusNumber && bonusNumber <= 45) { return true; }
+        System.out.println("보너스 볼의 범위는 1 ~ 45 사이의 자연수입니다.");
+        System.out.println("보너스 볼을 입력해주세요.");
+        return false;
     }
 
     public boolean hasBonusNumber(List<Integer> winningLottoNumber,
                                   int bonusNumber) {
         if (winningLottoNumber.contains(bonusNumber)) {
             System.out.println("당첨번호와 보너스 볼이 중복됬습니다.");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 }
