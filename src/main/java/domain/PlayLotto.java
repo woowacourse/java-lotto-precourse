@@ -33,6 +33,17 @@ public class PlayLotto {
         }
     }
 
+    public boolean isValidNumberOfRange(String[] rawWinningNumber) {
+        List<Integer> intNumber = convertString2Int(rawWinningNumber);
+        for (int number: intNumber) {
+            if (number < 0 || number > 45) {
+                System.out.println("당첨번호는 1 ~ 45 사이의 자연수입니다.");
+                return false;
+            }
+        }
+        return true;
+    }
+
     public List<Integer> convertString2Int(String[] strings) {
         List<Integer> intList = new ArrayList<>();
         for (String str: strings) {
