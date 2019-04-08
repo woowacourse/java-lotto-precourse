@@ -92,7 +92,7 @@ public class PlayLotto {
         boolean flag = false;
         int tmp_bonus_num = 0;
         while (!flag) {
-            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
             String[] tmp_numbers = sc.nextLine().split(",");
             System.out.println("보너스 볼을 입력해 주세요.");
             tmp_bonus_num = Integer.parseInt(sc.nextLine());
@@ -126,6 +126,7 @@ public class PlayLotto {
         double profit;
         getLottoRanks();
         profit = countProfit();
+        printresult(profit);
     }
 
     public static void getLottoRanks() {
@@ -141,10 +142,30 @@ public class PlayLotto {
     public static double countProfit() {
         double profit = 0.0;
         for (int i = 0; i < 5; i++){
-            System.out.println(Rank.values()[i]);
             profit += Rank.values()[i].getWinningMoney() * result.get(Rank.values()[i]);
         }
         profit = profit /purchase_money;
         return profit;
+    }
+
+    public static void printresult(double profit){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n당첨 통계\n-----------\n");
+        for (int i = 4; i>=0; i--){
+            Rank rank = Rank.values()[i];
+            sb.append(makePrintString(rank));
+        }
+        sb.append("총 수익률은 "+profit+"입니다.");
+        System.out.println(sb.toString());
+    }
+
+    public static String makePrintString(Rank rank){
+        String str;
+        if(rank == Rank.SECOND){
+            str = rank.getCountOfMatch()+"개 일치, 보너스 볼 일치 (" +rank.getWinningMoney() +"원) -"+result.get(rank) +"개\n";
+            return str;
+        }
+        str = rank.getCountOfMatch()+"개 일치 (" +rank.getWinningMoney() +"원) -"+result.get(rank) +"개\n";
+        return str;
     }
 }
