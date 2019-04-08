@@ -65,5 +65,14 @@ public class LottoGame {
     	return numbers;
     }
     
-	
+    private ArrayList<Lotto> makeLotto() {
+    	ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
+    	
+    	for (int i = 0; i < purchaseLottoAmount(inputMoney()); i++) {
+    		lottoList.add(new Lotto(makeLottoNumberList()));
+    	}
+    	
+    	return lottoList;
+    }
+    
 }
