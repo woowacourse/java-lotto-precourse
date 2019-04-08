@@ -1,8 +1,6 @@
-package com.conatuseus.lotto;
+package com.conatuseus.lotto.model;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -14,5 +12,9 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    @Override
+    public String toString(){
+        return this.numbers.toString();
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.conatuseus.lotto;
+package com.conatuseus.lotto.model;
 
 /**
  * 당첨 번호를 담당하는 객체
@@ -16,4 +16,6 @@ public class WinningLotto {
         // TODO 로직 구현
         return null;
     }
+
+
 }
