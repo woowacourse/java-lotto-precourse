@@ -13,12 +13,15 @@ public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private static final int ONE = 1;
     private static final int ZERO = 0;
+    private static final int EARNINGS_RATE_DECIMAL_POINT = 2;
+    private static final int PERCENT = 100;
     private static final String INPUT_LOTTO_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String INPUT_WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String WINNING_LOTTO_NUMBERS_DELIMITER = ",";
     private static final String INPUT_LOTTO_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String RESULT_MESSAGE = "당첨 통계\n-------------------------------------------";
+    private static final String EARNINGS_RATE_MESSAGE = "총 수익률은 %." + EARNINGS_RATE_DECIMAL_POINT + "f%%입니다.";
 
     private List<Lotto> lottoes;
 
@@ -35,6 +38,7 @@ public class LottoGame {
         printLottoes();
         WinningLotto winningLotto = createWinningLotto();
         printResult(winningLotto);
+        printEarningsRate(winningLotto);
     }
 
     private String input() {
@@ -279,5 +283,13 @@ public class LottoGame {
 
     private int getWinningMoneyTotalByRank(Rank rank, WinningLotto winningLotto) {
         return getLottoCountByRank(rank, winningLotto) * rank.getWinningMoney();
+    }
+
+    private double getEarningsRate(WinningLotto winningLotto) {
+        return (double) getWinningMoneyTotal(winningLotto) / (lottoes.size() * LOTTO_PRICE) * PERCENT;
+    }
+
+    private void printEarningsRate(WinningLotto winningLotto) {
+        System.out.printf(EARNINGS_RATE_MESSAGE, getEarningsRate(winningLotto));
     }
 }
