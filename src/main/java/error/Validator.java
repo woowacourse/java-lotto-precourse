@@ -4,14 +4,14 @@ import error.customExceptions.MinPurchasePriceException;
 import error.customExceptions.NotIntegerException;
 
 public class Validator {
-    private static final int minPurchasePrice = 1000;
+    private static final int MIN_PURCHASE_PRICE = 1000;
 
     public void checkAccuracyOfPurchasePrice(String input) {
         if (!isInteger(input)) {
             throw new NotIntegerException();
         }
-        if (Integer.parseInt(input) < minPurchasePrice) {
-            throw new MinPurchasePriceException(minPurchasePrice);
+        if (Integer.parseInt(input) < MIN_PURCHASE_PRICE) {
+            throw new MinPurchasePriceException(MIN_PURCHASE_PRICE);
         }
     }
 
