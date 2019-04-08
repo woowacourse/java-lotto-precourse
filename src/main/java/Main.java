@@ -12,6 +12,8 @@ public class Main {
     private final static Random random = new Random();
     private final static String INPUT_INT_ERROR
             = "올바른 숫자가 입력되지 않았습니다. 다시 입력해 주세요.";
+    private final static String INPUT_PURCHASE_AMOUNT
+            = "구입금액을 입력해 주세요.";
     private final static String INPUT_WIN_NUMBERS
             = "지난 주 당첨 번호를 입력해 주세요.";
     private final static String INPUT_BONUS_BALL
@@ -53,7 +55,7 @@ public class Main {
     }
     
     /** 임의의 자연수 하나를 입력받아 반환한다. */
-    private final static int inputSingleInt(String message) {
+    private final static int getSingleInt(String message) {
         String temp = getInput(message)[0];
         boolean check = isOnlyNumber(temp);
         while (!check) { // 입력에 문제가 있으면 계속 재입력 요구
@@ -64,7 +66,7 @@ public class Main {
     }
     
     /** 로또 번호를 입력받으려고 1번 시도한다. */
-    private final static List<Integer> tryInputLottoNums(String message) {
+    private final static List<Integer> tryGetLottoNums(String message) {
         Stream<String> temp = Arrays.stream(getInput(message));
         return temp
                 .filter(Main::isOnlyNumber) // 숫자만 거름
@@ -76,33 +78,32 @@ public class Main {
     }
     
     /** 로또 번호를 입력받아 Lotto 객체를 반환한다. */
-    private final static Lotto inputLottoNums(String message) {
-        List<Integer> temp = tryInputLottoNums(message);
+    private final static Lotto getLottoNums(String message) {
+        List<Integer> temp = tryGetLottoNums(message);
         while (temp.size() != LOTTO_NUM_LENGTH) { // 문제가 없을 때까지 반복
-            temp = tryInputLottoNums(INPUT_INT_ERROR);
+            temp = tryGetLottoNums(INPUT_INT_ERROR);
         }
         return new Lotto(temp);
     }
     
     /** 지난 주 당첨 번호를 입력받아 WinningLotto 객체를 반환한다. */
     private final static WinningLotto lastWeekWinningLotto() {
-        Lotto winning = inputLottoNums(INPUT_WIN_NUMBERS);
-        int bonusNo = inputSingleInt(INPUT_BONUS_BALL);
+        Lotto winning = getLottoNums(INPUT_WIN_NUMBERS);
+        int bonusNo = getSingleInt(INPUT_BONUS_BALL);
         while (!isLottoRange(bonusNo) || winning.hasNumber(bonusNo)) {
-            bonusNo = inputSingleInt(INPUT_INT_ERROR);
+            bonusNo = getSingleInt(INPUT_INT_ERROR);
         }
         return new WinningLotto(winning, bonusNo);
+    }
+    
+    /** 로또 구입금액을 입력받아, 몇 개를 구입하는지 개수를 반환한다. */
+    private static int getPurchaseAmount() {
+        int temp = getSingleInt(INPUT_PURCHASE_AMOUNT);
+        return temp / LOTTO_PRICE;
     }
     
     /** main 진입점 */
     public final static void main(String[] args) {
         // Test code - 추후 삭제 예정
-        // List<Integer> lottoNums = Arrays.asList(1, 2, 3, 4, 5, 6);
-        // Lotto lotto = new Lotto(lottoNums);
-        // System.out.println(lotto);
-        // Lotto lotto = inputLottoNums();
-        // System.out.println(lotto);
-        // WinningLotto winner = lastWeekWinningLotto();
-        // System.out.println(winner);
     }
 }
