@@ -21,6 +21,7 @@ public class Game {
             inputPrice = sc.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("올바른 숫자가 아닙니다.");
+            buyLotto();
         } finally {
             sc.close();
         }
