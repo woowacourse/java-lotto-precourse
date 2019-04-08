@@ -16,6 +16,7 @@ public class Game {
     private WinningLotto winningLotto;
     private int totalPrizeMoney = 0;
     private List<Integer> countOfRank = new ArrayList<>(MAX_RANK_NUMBER + 1);
+    private double earningsRate;
 
     public void start() {
         inputMoney();
@@ -24,6 +25,7 @@ public class Game {
         printLottoNumbers();
         inputWinningAndBonusNumber();
         matchingLotto();
+        printLottoResult();
     }
 
     private void inputMoney() {
@@ -92,14 +94,26 @@ public class Game {
                     countOfRank.get(currentRank.getNumberOfRank()) + 1);
             totalPrizeMoney += currentRank.getWinningMoney();
         }
-
-        for(int i=0;i<countOfRank.size(); ++i)
-            System.out.println(countOfRank.get(i));
-        System.out.println(totalPrizeMoney);
+        calculateEarningsRate();
     }
 
     private void initializeCountOfRankList() {
         for(int i=0; i<MAX_RANK_NUMBER+1; ++i)
             countOfRank.add(0);
+    }
+
+    private void calculateEarningsRate() {
+        earningsRate = totalPrizeMoney / moneyForLotto;
+    }
+
+    private void printLottoResult() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        System.out.println(String.format("%-35s", "3개 일치 (5,000원)") + "- " + countOfRank.get(5) + "개");
+        System.out.println(String.format("%-35s", "4개 일치 (50,000원)") + "- " + countOfRank.get(4) + "개");
+        System.out.println(String.format("%-35s", "5개 일치 (1,500,000원)") + "- " + countOfRank.get(3) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치 (3,000,000원) - " + countOfRank.get(2) + "개");
+        System.out.println(String.format("%-35s", "6개 일치 (2,000,000,000원)") + "- " + countOfRank.get(1) + "개");
+        System.out.println("총 수익률은 " + String.format("%.3f", earningsRate) + "입니다.");
     }
 }
