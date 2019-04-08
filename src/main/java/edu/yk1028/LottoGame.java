@@ -53,7 +53,7 @@ public class LottoGame {
 			throw new Exception();
 		}
 		for (String number : numbers) {
-			numberList.add(Integer.parseInt(number));
+			numberList.add(Integer.parseInt(number.trim()));
 		}
 		return numberList.getList();
 	}
