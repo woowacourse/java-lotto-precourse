@@ -13,11 +13,7 @@ public class LottoGame {
   public void run() {
     int num = getThePriceOfLotto() / 1000;
     System.out.println(num + "개를 구매했습니다.");
-    ArrayList<Lotto> lottoArrayList = new ArrayList<Lotto>();
-    for (int i = 0; i < num; i++) {
-      lottoArrayList.add(initLotto());
-      showLottoNum(lottoArrayList.get(i));
-    }
+    ArrayList<Lotto> lottoArrayList = initLottoArrayList(num);
     getWinLotto();
   }
 
@@ -25,6 +21,15 @@ public class LottoGame {
     System.out.println("구입금액을 입력해 주세요.");
     Scanner scan = new Scanner(System.in);
     return scan.nextInt();
+  }
+
+  public ArrayList<Lotto> initLottoArrayList(int num) {
+    ArrayList<Lotto> lottoArrayList = new ArrayList<Lotto>();
+    for (int i = 0; i < num; i++) {
+      lottoArrayList.add(initLotto());
+      showLottoNum(lottoArrayList.get(i));
+    }
+    return lottoArrayList;
   }
 
   public Lotto initLotto() {
@@ -37,16 +42,21 @@ public class LottoGame {
     System.out.println(oneLotto.showNumbers());
   }
 
-  public WinningLotto getWinLotto(){
-    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    Scanner scan = new Scanner(System.in);
-    int [] intNum = Arrays.asList(scan.next().split(",")).stream().mapToInt(Integer::parseInt).toArray();
-    List<Integer> win = Arrays.stream(intNum).boxed().collect(Collectors.toList());
-    Lotto winner = new Lotto(win);
+  public WinningLotto getWinLotto() {
+    Lotto winner = setWinLotto();
     System.out.println("보너스 볼을 입력해 주세요.");
     Scanner scan2 = new Scanner(System.in);
     WinningLotto winLotto = new WinningLotto(winner, scan2.nextInt());
     return winLotto;
   }
 
+  public Lotto setWinLotto() {
+    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    Scanner scan = new Scanner(System.in);
+    int[] intNum = Arrays.asList(scan.next().split(",")).stream().mapToInt(Integer::parseInt)
+        .toArray();
+    List<Integer> win = Arrays.stream(intNum).boxed().collect(Collectors.toList());
+    Lotto winner = new Lotto(win);
+    return winner;
+  }
 }
