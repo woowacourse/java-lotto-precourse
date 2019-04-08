@@ -9,6 +9,7 @@ import static domain.LottoMoney.getLottoMoney;
 
 public class LottoGame {
 
+    private static List<Integer> lastWinNumber = new ArrayList<Integer>();
     private static final int LOTTO_LENGTH = 6;
     private static final int END_LOTTO_NUMBER = 45;
     private static final int START_LOTTO_NUMBER = 1;
@@ -30,7 +31,7 @@ public class LottoGame {
         for(int i=0;i<getMoney;i++){
 
             Lotto lottoNumber = lottoNumberList.get(i);
-            lottoNumber.print(lottoNumberList.get(i));
+            lottoNumber.showBuyLotto(lottoNumberList.get(i));
         }
     }
 
@@ -44,5 +45,16 @@ public class LottoGame {
             totalLotto.add(lottoNumber);
         }
         takeLottoNumber(totalLotto, lottoMoney);
+    }
+
+    public static void getLastWinNumber(){
+
+        Scanner lastNumber = new Scanner(System.in);
+        String lastWinString = lastNumber.nextLine();
+        String[] lastWinStringArray = lastWinString.split(",");
+
+        for(int i=0; i< lastWinStringArray.length; i++){
+            lastWinNumber.add(Integer.parseInt(lastWinStringArray[i]));
+        }
     }
 }
