@@ -61,17 +61,20 @@ public class GameRunner {
     private void inputLastWeekNumberAndBonusNo() {
         lastWeekNumberMessagePrinter();
         String[] lastWeekStr = sc.next().split(",");
-        int[] lastWeekInt = Arrays.stream(lastWeekStr)
-                .mapToInt(Integer::valueOf)
-                .toArray();
-        ArrayList<Integer> lottoList = arrayToList(lastWeekInt);
-
-        Lotto lotto = new Lotto(lottoList);
+        Lotto lotto = stringArrayToLotto(lastWeekStr);
 
         bonusNoMessagePrinter();
         int bonusNo = sc.nextInt();
 
         game.setWinningLotto(new WinningLotto(lotto, bonusNo));
+    }
+
+    private Lotto stringArrayToLotto(String[] strArray) {
+        int[] intArray = Arrays.stream(strArray)
+                .mapToInt(Integer::valueOf)
+                .toArray();
+        ArrayList<Integer> lottoList = arrayToList(intArray);
+        return new Lotto(lottoList);
     }
 
     private void lastWeekNumberMessagePrinter() {
