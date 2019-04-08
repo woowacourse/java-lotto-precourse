@@ -1,5 +1,6 @@
 package com.codemcd.lotto;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -12,7 +13,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
     public int getCountOfMatch(Lotto winningLotto) {
         int countOfMatch = 0;
         for(int i = 0; i < numbers.size(); ++i) {
@@ -25,11 +25,14 @@ public class Lotto {
         return numbers.contains(currentLottoNumber);
     }
 
-    public void printLotto() {
-        System.out.print("[");
-        for (int i = 0; i < numbers.size() - 1; ++i)
-            System.out.print(numbers.get(i) + ", ");
-        System.out.print(numbers.get(numbers.size() - 1) + "]");
-        System.out.println();
+    public StringBuilder getLottoNumberWithComma() {
+        StringBuilder numberWithComma = new StringBuilder();
+        String delim = "";
+        Iterator<Integer> it = numbers.iterator();
+        while(it.hasNext()) {
+            numberWithComma.append(delim).append(it.next());
+            delim = ", ";
+        }
+        return numberWithComma;
     }
 }

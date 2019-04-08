@@ -53,7 +53,7 @@ public class Game {
         System.out.println();
         System.out.println(numberOfLotto + "개를 구매했습니다.");
         for (int i = 0; i < numberOfLotto; ++i) {
-            lottos.get(i).printLotto();
+            System.out.println("[" + lottos.get(i).getLottoNumberWithComma() + "]");
         }
     }
 
@@ -83,7 +83,6 @@ public class Game {
 
     private void inputWinningAndBonusNumber() {
         winningLotto = new WinningLotto(new Lotto(inputWinningNumber()), inputBonusNumber());
-        winningLotto.printLotto();
     }
 
     private void matchingLotto() {
