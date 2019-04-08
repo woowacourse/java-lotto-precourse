@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Stack;
 
 public class LottoGameManager {
-    private InputLottoInformation inputlottoinformation ;
-    private List<Lotto> lotto ;
-    private WinningLotto winninglotto ;
+    private InputLottoInformation inputlottoinformation;
+    private List<Lotto> lotto;
+    private WinningLotto winninglotto;
     private HashMap<Rank, Integer> lottoStatisticsMap;
-    private double totalEarningRate ;
+    private double totalEarningRate;
 
     private void init() {
         inputlottoinformation = new InputLottoInformation();
@@ -26,14 +26,14 @@ public class LottoGameManager {
         init();
         int money = inputlottoinformation.getLottoPurchasePrice();
         lotto = inputlottoinformation.getGeneratedLottoNumber(money);
-        System.out.println(lotto.size()+Message.lottoOutputMessage.get("OUTPUT_BUYLOTTO"));
+        System.out.println(lotto.size() + Message.lottoOutputMessage.get("OUTPUT_BUYLOTTO"));
         outputLottoNumber();
         confirmWinOfLotto();
         earningRate(money);
     }
 
     private void outputLottoNumber() {
-        for (Lotto li : lotto ) {
+        for (Lotto li : lotto) {
             System.out.println(li.getNumbers());
         }
     }
@@ -53,8 +53,8 @@ public class LottoGameManager {
     private void setWinStatisticsOfLotto() {
         for (Lotto lot : lotto) {
             Rank rank = winninglotto.match(lot);
-            lottoStatisticsMap.put(rank,lottoStatisticsMap.get(rank)+1);
-            totalEarningRate += (int)winninglotto.match(lot).getWinningMoney();
+            lottoStatisticsMap.put(rank, lottoStatisticsMap.get(rank) + 1);
+            totalEarningRate += (int) winninglotto.match(lot).getWinningMoney();
         }
     }
 
@@ -66,7 +66,7 @@ public class LottoGameManager {
             reverse.push(rank);
         }
         int size = reverse.size();
-        for (int i =0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             outputWinStatistics(reverse.pop());
         }
     }
@@ -75,15 +75,15 @@ public class LottoGameManager {
         if (rank == Rank.MISS) {
             return;
         }
-        System.out.print(rank.getCountOfMatch()+"개 일치");
+        System.out.print(rank.getCountOfMatch() + "개 일치");
         if (rank == Rank.SECOND) {
             System.out.print(" 보너스 볼 일치");
         }
         System.out.print("(");
-        System.out.println(rank.getWinningMoney() +"원)- " + lottoStatisticsMap.get(rank)+"개");
+        System.out.println(rank.getWinningMoney() + "원)- " + lottoStatisticsMap.get(rank) + "개");
     }
 
     private void earningRate(int money) {
-        System.out.println("총 수익률은 " + (float)totalEarningRate / (float)money + "입니다.");
+        System.out.println("총 수익률은 " + (float) totalEarningRate / (float) money + "입니다.");
     }
 }
