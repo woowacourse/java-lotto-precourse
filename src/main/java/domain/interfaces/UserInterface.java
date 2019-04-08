@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface UserInterface {
 
-    int promptLottoPurchaseAmount();
+    int promptPurchaseAmount();
     String promptWinningLottoNumber();
     int promptBonusNumber();
-    void notifyInvalidLottoPurchaseAmount();
+    void notifyInvalidPurchaseAmount();
     void printStatistics(List<Integer> lottos);
 
 }
