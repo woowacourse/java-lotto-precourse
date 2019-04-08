@@ -17,18 +17,25 @@ public class GameRunner {
     }
 
     private void inputUserPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
+        purchaseAmountMessagePrinter();
         int purchaseAmount = sc.nextInt();
         game.setPurchaseAmount(purchaseAmount);
+    }
+
+    private void purchaseAmountMessagePrinter() {
+        System.out.println("구입금액을 입력해 주세요.");
     }
 
     private void printLottoInfo() {
         System.out.println();
         int lottoCount = countLotto();
-        System.out.println(lottoCount + "개를 구매했습니다.");
-
+        lottoInfoMessagePrinter(lottoCount);
         createLottoList(lottoCount);
         printLottoList();
+    }
+
+    private void lottoInfoMessagePrinter(int lottoCount) {
+        System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
     private void createLottoList(int lottoCount) {
@@ -52,17 +59,27 @@ public class GameRunner {
     }
 
     private void inputLastWeekNumberAndBonusNo() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        lastWeekNumberMessagePrinter();
         String[] lastWeekStr = sc.next().split(",");
-        int[] lastWeekInt = Arrays.stream(lastWeekStr).mapToInt(Integer::valueOf).toArray();
+        int[] lastWeekInt = Arrays.stream(lastWeekStr)
+                .mapToInt(Integer::valueOf)
+                .toArray();
         ArrayList<Integer> lottoList = arrayToList(lastWeekInt);
 
         Lotto lotto = new Lotto(lottoList);
 
-        System.out.println("보너스 볼을 입력해주세요");
+        bonusNoMessagePrinter();
         int bonusNo = sc.nextInt();
 
         game.setWinningLotto(new WinningLotto(lotto, bonusNo));
+    }
+
+    private void lastWeekNumberMessagePrinter() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    private void bonusNoMessagePrinter() {
+        System.out.println("보너스 볼을 입력해주세요");
     }
 
     private ArrayList<Integer> arrayToList(int[] array) {
