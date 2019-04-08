@@ -16,7 +16,6 @@ import domain.util.Validator;
 public class Lottery {
 
 	private static final Scanner SCANNER = new Scanner(System.in);
-	private static final int PERCENTAGE_CORRECTION = 100;
 
 	private long price;
 
@@ -25,7 +24,7 @@ public class Lottery {
 		setPrice(inputtedPrice);
 		UserLotto userLotto = new UserLotto(price);
 		userLotto.printLottoes();
-		if(userLotto.getLottoCount() > 0) {
+		if (userLotto.getLottoCount() > 0) {
 			WinningLotto winningLotto = setWinnigLotto();
 			Map<Rank, Integer> result = calculateResult(userLotto, winningLotto);
 			printResult(result);
@@ -91,10 +90,10 @@ public class Lottery {
 			rank.printMatchResult(result.get(rank));
 			sum += rank.getWinningMoney() * result.get(rank);
 		}
-		System.out.printf("총 수익률은 %.2f%% 입니다.\n", calculateEarningRate(sum));
+		System.out.printf("총 수익률은 %.3f 입니다.\n", calculateEarningRate(sum));
 	}
 
 	private double calculateEarningRate(long sum) {
-		return sum / (double)price * PERCENTAGE_CORRECTION;
+		return sum / (double)price;
 	}
 }
