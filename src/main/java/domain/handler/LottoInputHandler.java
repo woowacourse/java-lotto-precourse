@@ -2,6 +2,7 @@ package domain.handler;
 
 import java.util.Scanner;
 
+import domain.validator.BonusNumValidator;
 import domain.validator.PurchaseAmountValidator;
 import domain.validator.Validator;
 import domain.validator.WinningNumValidator;
@@ -20,7 +21,26 @@ public class LottoInputHandler {
         return getValidPurchaseAmount();
     }
 
-    public int[] getWinningNums() {
+    public int[] geWinningNums() {
+        return getValidWinningNums();
+    }
+
+    public int getBonusNum() {
+        return getValidBonusNum();
+    }
+
+    private int getValidBonusNum() {
+        String bonusNum = null;
+        do {
+            System.out.println("보너스 볼을 입력해 주세요.");   // TODO 출력을 담당하는 클래스에게 위임
+            bonusNum = getUserInputString();
+            validator = new BonusNumValidator(bonusNum);
+        } while (!validator.doesValid());
+
+        return convertStringToInt(bonusNum);
+    }
+
+    private int[] getValidWinningNums() {
         String[] winningNums = null;
         do {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");     // TODO 출력을 담당하는 클래스에게 위임

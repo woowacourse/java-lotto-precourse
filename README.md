@@ -58,7 +58,6 @@ public class WinningLotto {
 * 수익률을 계산해 출력해야 한다.
 
 ## 구현할 기능 목록
-* 유효한 보너스 번호를 입력받는다
 * 입력받은 당첨 번호, 보너스 번호를 사용해 당첨 로또를 생성한다
 * 구입한 로또와 당첨 로또를 비교하여 당첨 여부를 판별한다
 * 당첨 통계와 수익률을 출력한다
@@ -90,3 +89,6 @@ public class WinningLotto {
             * input 검증: 입력은 숫자여야 한다, 입력은 양수여야 한다, 입력은 null이 아니여야 한다.
         * **이제 LottInputHandler는 input 검증을 신경쓰지 않는다. 단지 유효한 구입 금액, 당첨 번호를 가져오기만 한다.**
             * PurchaseAmountValidator/WinningNumValidator가 LottoInputValidator를 사용해 입력값을 검증한다.
+11. 유효한 보너스 번호를 입력받는다
+    * 이제 WinningNumValidator는 BonusNumValidator를 사용해 각 로또 번호가 1~45 범위의 숫자인지 검증한다
+

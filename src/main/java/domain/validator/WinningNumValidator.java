@@ -1,7 +1,6 @@
 package domain.validator;
 
 import domain.LottoFactory;
-import domain.LottoNumGenerator;
 
 import java.util.List;
 import java.util.Arrays;
@@ -17,29 +16,27 @@ public class WinningNumValidator implements Validator {
     @Override
     public boolean doesValid() {
         return doesLottoNumLengthIsValid()
-                && doesLottoNumInputIsValid()
-                && doesLottoNumNotExceedBound();
+                && doesEachLottoNumInputIsValid()
+                && doesEachLottoNumIsValid();
     }
 
     boolean doesLottoNumLengthIsValid() {
         return lottoNumList.size() == LottoFactory.LOTTO_NUM_LENGTH;
     }
 
-    boolean doesLottoNumInputIsValid() {
-        long numOfInvalidLottoNum = lottoNumList.stream()
+    boolean doesEachLottoNumInputIsValid() {
+        long numOfInvalidLottoNumInput = lottoNumList.stream()
                 .map(LottoInputValidator::new)
                 .filter((inputValidator) -> !inputValidator.doesValid())
                 .count();
-        return numOfInvalidLottoNum == 0;
+        return numOfInvalidLottoNumInput == 0;
     }
 
-    boolean doesLottoNumNotExceedBound() {
-        int lowerBound = LottoNumGenerator.LOTTO_NUM_LOWER_BOUND;
-        int upperBound = LottoNumGenerator.LOTTO_NUM_UPPER_BOUND;
-        long exceedNum = lottoNumList.stream()
-                .map(Integer::parseInt)
-                .filter((lottoNum) -> (lottoNum > upperBound) || (lottoNum < lowerBound))
+    boolean doesEachLottoNumIsValid() {
+        long numOfInvalidLottoNum = lottoNumList.stream()
+                .map(BonusNumValidator::new)
+                .filter((bonusNumValidator) -> !bonusNumValidator.doesValid())
                 .count();
-        return exceedNum == 0;
+        return numOfInvalidLottoNum == 0;
     }
 }

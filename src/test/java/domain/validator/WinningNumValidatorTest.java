@@ -25,7 +25,7 @@ public class WinningNumValidatorTest {
         String[] winningNum = {String.valueOf(lowerBound - 1), String.valueOf(upperBound + 1)};
         WinningNumValidator winningNumValidator = new WinningNumValidator(winningNum);
 
-        boolean doesLottoNumValid = winningNumValidator.doesLottoNumNotExceedBound();
+        boolean doesLottoNumValid = winningNumValidator.doesEachLottoNumIsValid();
 
         assertFalse(doesLottoNumValid);
     }
