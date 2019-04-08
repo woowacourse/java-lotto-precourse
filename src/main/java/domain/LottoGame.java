@@ -11,11 +11,14 @@ public class LottoGame {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int LOTTO_PRICE = 1000;
+    private static final int ONE = 1;
+    private static final int ZERO = 0;
     private static final String INPUT_LOTTO_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String INPUT_WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String WINNING_LOTTO_NUMBERS_DELIMITER = ",";
     private static final String INPUT_LOTTO_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String RESULT_MESSAGE = "당첨 통계\n-------------------------------------------";
 
     private List<Lotto> lottoes;
 
@@ -28,7 +31,10 @@ public class LottoGame {
     }
 
     private void start() {
-
+        registerLottoes();
+        printLottoes();
+        WinningLotto winningLotto = createWinningLotto();
+        printResult(winningLotto);
     }
 
     private String input() {
@@ -103,6 +109,12 @@ public class LottoGame {
         return new Lotto(lottoNumbers);
     }
 
+    private Lotto createLotto(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+
+        return new Lotto(lottoNumbers);
+    }
+
     private void registerLottoes() {
         lottoes = new ArrayList<>();
         int lottoCount = getLottoCount();
@@ -123,6 +135,13 @@ public class LottoGame {
         for (Lotto lotto : lottoes) {
             lotto.printLottoNumbers();
         }
+    }
+
+    private WinningLotto createWinningLotto() {
+        List<Integer> winningLottoNumbers = getWinningLottoNumbers();
+        int bonusNumber = getBonusNumber(winningLottoNumbers);
+
+        return new WinningLotto(createLotto(winningLottoNumbers), bonusNumber);
     }
 
     private List<Integer> getWinningLottoNumbers() {
@@ -211,5 +230,40 @@ public class LottoGame {
         }
 
         return Integer.parseInt(bonusNumber) >= MIN_LOTTO_NUMBER && Integer.parseInt(bonusNumber) <= MAX_LOTTO_NUMBER;
+    }
+
+    private void printResult(WinningLotto winningLotto) {
+        System.out.println(RESULT_MESSAGE);
+        printResultByRank(Rank.FIFTH, winningLotto);
+        printResultByRank(Rank.FOURTH, winningLotto);
+        printResultByRank(Rank.THIRD, winningLotto);
+        printResultByRank(Rank.SECOND, winningLotto);
+        printResultByRank(Rank.FIRST, winningLotto);
+    }
+
+    private void printResultByRank(Rank rank, WinningLotto winningLotto) {
+        if (rank == Rank.SECOND) {
+            printResultSecondRank(rank, winningLotto);
+
+            return;
+        }
+
+        System.out.println(String.valueOf(rank.getCountOfMatch()) + "개 일치 ("
+                + rank.getWinningMoney() + "원)- " + getLottoCountByRank(rank, winningLotto) + "개");
+    }
+
+    private void printResultSecondRank(Rank rank, WinningLotto winningLotto) {
+        System.out.println(String.valueOf(rank.getCountOfMatch()) + "개 일치, 보너스 볼 일치("
+                + rank.getWinningMoney() + "원)- " + getLottoCountByRank(rank, winningLotto) + "개");
+    }
+
+    private int getLottoCountByRank(Rank rank, WinningLotto winningLotto) {
+        int lottoCount = 0;
+
+        for (Lotto lotto : lottoes) {
+            lottoCount += winningLotto.match(lotto) == rank ? ONE : ZERO;
+        }
+
+        return lottoCount;
     }
 }
