@@ -13,13 +13,11 @@ public class LottoMaker {
 	private int lottoMinNumber;
 	private int lottoMaxNumber;
 	private int lottoSize;
-	private RandomNumberMaker randomNumberMaker;
 
 	public LottoMaker(int lottoMinNumber, int lottoMaxNumber, int lottoSize) {
 		this.lottoMinNumber = lottoMinNumber;
 		this.lottoMaxNumber = lottoMaxNumber;
 		this.lottoSize = lottoSize;
-		randomNumberMaker = new RandomNumberMaker(lottoMinNumber, lottoMaxNumber);
 	}
 
 	public List<Lotto> getRandomLottoList(int gameCount) {
@@ -37,7 +35,7 @@ public class LottoMaker {
 	private List<Integer> makeRandomIntList() {
 		List<Integer> intList = new ArrayList<>();
 		for (int i = 0; i < lottoSize; i++) {
-			intList.add(randomNumberMaker.getRandomNumber());
+			intList.add(RandomNumberMaker.getRandomNumber(lottoMaxNumber, lottoMinNumber));
 		}
 		return intList;
 	}
