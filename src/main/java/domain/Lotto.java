@@ -29,6 +29,10 @@ public class Lotto {
         return countOfMatch;
     }
 
+    protected boolean hasBonusNumber(int bonusNumber) {
+        return hasNumber(bonusNumber);
+    }
+
     private boolean hasNumber(int numberToCompare) {
         return numbers.contains(numberToCompare);
     }
