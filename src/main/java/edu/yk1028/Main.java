@@ -14,8 +14,10 @@ public class Main {
 	public static void main(String[] args) {
 		User user = new User();
 		LottoMachine lottoMachine = new LottoMachine();
+		LottoGame lottoGame = new LottoGame();
 
 		user.buyLottos(lottoMachine);
 		user.printLottos();
+		while(!lottoGame.generateWinningLotto());
 	}
 }
