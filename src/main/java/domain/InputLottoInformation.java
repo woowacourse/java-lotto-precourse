@@ -3,15 +3,16 @@ package domain;
 import java.util.*;
 
 public class InputLottoInformation {
-    private Scanner sc ;
-    private List<Lotto> lotto ;
-    private List<Integer> lastweeklotto ;
+    private Scanner sc;
+    private List<Lotto> lotto;
+    private List<Integer> lastweeklotto;
     private final int lottoPrice = 1000;
     private final int maxLottoNo = 45;
     private final int minLottoNo = 1;
     private final int LottoBallCount = 6;
     private HashSet<Integer> overlapNo;
     private HashSet<Integer> overlapBonusNo;
+    private boolean checkstate;
 
     private void init() {
         sc = new Scanner(System.in);
@@ -35,7 +36,7 @@ public class InputLottoInformation {
             System.out.println(Message.lottoInputMessage.get("INPUT_PURCHASEMONEY"));
             purchasePrice = sc.nextInt();
         } catch (InputMismatchException ime) {
-            sc= new Scanner(System.in);
+            sc = new Scanner(System.in);
             System.out.println(Message.errorMessage.get("ERROR_ONLYNUMBER"));
             return getLottoPurchasePrice();
         }
@@ -43,7 +44,7 @@ public class InputLottoInformation {
     }
 
     private boolean checkPrice(int pirce) {
-        if (pirce <lottoPrice) { // 1000보다 적음 못삼
+        if (pirce < lottoPrice) {
             System.out.println(Message.errorMessage.get("ERROR_MONEYSHORT"));
             return true;
         }
@@ -56,7 +57,7 @@ public class InputLottoInformation {
     }
 
     private void setLottoNumber(int money) {
-        for (int i = money; i >=lottoPrice; i -= lottoPrice) {
+        for (int i = money; i >= lottoPrice; i -= lottoPrice) {
             overlapNo = new HashSet<>();
             lotto.add(new Lotto(setSixNumber()));
         }
@@ -81,16 +82,17 @@ public class InputLottoInformation {
             overlapBonusNo = new HashSet<>();
             System.out.println(Message.lottoInputMessage.get("INPUT_LASTWEEK_LOTTONUMBER"));
             number = sc.next();
-            number = number.replaceAll("\\p{Z}","");
+            number = number.replaceAll("\\p{Z}", "");
         } while (checkLastWeekLottoNumber(number));
+
         return lastweeklotto;
     }
 
-    private boolean checkLastWeekLottoNumber(String number) { //,로구분
-        boolean checkstate = false;
+    private boolean checkLastWeekLottoNumber(String number) {
+        checkstate = false;
         String num[] = number.split(",");
         for (String no : num) {
-            checkLottoBallNumber(no,checkstate); // 6개 번호 하나하나 보면서
+            checkLottoBall(no);
         }
         if (!checkstate) {
             checkstate = checkLottoLength();
@@ -98,16 +100,23 @@ public class InputLottoInformation {
         return checkstate;
     }
 
-    private void checkLottoBallNumber(String no,boolean checkstate) {
+    private void checkLottoBall(String no) {
         if (!checkstate) {
-            if (checkLottoNumber(no)) {
-                checkstate = true;
-            }
-            else {
-                overlapBonusNo.add(Integer.parseInt(no));
-                lastweeklotto.add(Integer.parseInt(no)); // 넘길 지난주 로또 번호 리스트에  저장
-            }
+            checkLottoBallState(no);
         }
+    }
+
+    private void checkLottoBallState(String no) {
+        if (checkLottoNumber(no)) {
+            checkstate = true;
+            return;
+        }
+        setLottoBallOverlap(no);
+    }
+
+    private void setLottoBallOverlap(String no) {
+        overlapBonusNo.add(Integer.parseInt(no));
+        lastweeklotto.add(Integer.parseInt(no));
     }
 
     private boolean checkLottoNumber(String no) {
@@ -122,7 +131,7 @@ public class InputLottoInformation {
     }
 
     private boolean checkLottoLength() {
-        if (lastweeklotto.size() != LottoBallCount ) {
+        if (lastweeklotto.size() != LottoBallCount) {
             System.out.println(Message.errorMessage.get("ERROR_SIXNUMBER"));
             return true;
         }
@@ -130,7 +139,7 @@ public class InputLottoInformation {
     }
 
     private boolean checkOnlyNumber(String no) {
-        int number = (no.charAt(0)-48);
+        int number = (no.charAt(0) - 48);
         if (number < minLottoNo || number > maxLottoNo) {
             System.out.println(Message.errorMessage.get("ERROR_ONLYNUMBER"));
             return true;
@@ -147,7 +156,7 @@ public class InputLottoInformation {
     }
 
     private boolean checkOverlapNumber(int number) {
-        if (overlapBonusNo.contains(number) ) {
+        if (overlapBonusNo.contains(number)) {
             System.out.println(Message.errorMessage.get("ERROR_OVERLAP"));
             return true;
         }
@@ -159,7 +168,7 @@ public class InputLottoInformation {
         int number = 0;
         do {
             number = setBonusBallOfLastWeek(number);
-        } while (checkBonusBall(number)); // 보너스볼 체크
+        } while (checkBonusBall(number));
         return number;
     }
 
