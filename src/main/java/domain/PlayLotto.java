@@ -73,9 +73,20 @@ public class PlayLotto {
         return intList;
     }
 
+    public int insertBonusNumber() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해주세요.");
+        int bonusNumber = sc.nextInt();
+        while (!isValidBonusNumber(bonusNumber)) {
+            bonusNumber = sc.nextInt();
+        }
+        return bonusNumber;
+    }
+
     public boolean isValidBonusNumber(int bonusNumber) {
         if (bonusNumber < 0) {
             System.out.println("보너스 볼의 범위는 1 ~ 45 사이의 자연수입니다.");
+            System.out.println("보너스 볼을 입력해주세요.");
             return false;
         }
         return true;
