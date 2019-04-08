@@ -7,10 +7,10 @@ import java.util.List;
  * 로또 게임 진행을 담당하는 객체
  */
 public class LottoGame {
-    public HashMap<Lotto, Rank> startLottery(List<Lotto> issuedLottos, WinningLotto winningLotto) {
+    public HashMap<Lotto, Rank> startLottery(List<Lotto> userLottos, WinningLotto winningLotto) {
         HashMap<Lotto, Rank> lotteryResults = new HashMap<Lotto, Rank>();
 
-        for (Lotto lotto: issuedLottos) {
+        for (Lotto lotto: userLottos) {
             lotteryResults.put(lotto, winningLotto.match(lotto));
         }
 
@@ -23,10 +23,10 @@ public class LottoGame {
         LotteryStaticalAnalyzer staticalAnalyzer = new LotteryStaticalAnalyzer();
 
         int purchaseAmount = lottoManager.inputPurchaseAmount();
-        List<Lotto> issuedLottos = lottoManager.issueLottoOf(purchaseAmount);
+        List<Lotto> userLottos = lottoManager.issueLottoOf(purchaseAmount);
         WinningLotto winningLotto = new WinningLotto(lottoManager.inputWinningNumbers(), lottoManager.inputBonus());
 
-        HashMap<Lotto, Rank> lotteryResults = lottoGame.startLottery(issuedLottos, winningLotto);
+        HashMap<Lotto, Rank> lotteryResults = lottoGame.startLottery(userLottos, winningLotto);
         staticalAnalyzer.analyzeEarningsOf(lotteryResults);
     }
 }
