@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 로또게임을 진행하는 객체
@@ -10,8 +11,11 @@ public class LottoGame {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int LOTTO_PRICE = 1000;
-    private static final String PRINT_LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String INPUT_LOTTO_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String INPUT_WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String WINNING_LOTTO_NUMBERS_DELIMITER = ",";
+    private static final String INPUT_LOTTO_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private List<Lotto> lottoes;
 
@@ -27,6 +31,12 @@ public class LottoGame {
 
     }
 
+    private String input() {
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextLine();
+    }
+
     private int getLottoPurchaseMoney() {
         String lottoPurchaseMoney;
 
@@ -38,20 +48,17 @@ public class LottoGame {
     }
 
     private String inputLottoPurchaseMoney() {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println(INPUT_LOTTO_PURCHASE_MONEY_MESSAGE);
 
-        return scanner.nextLine();
+        return input();
     }
 
     private boolean isValidLottoPurchaseMoney(String lottoPurchaseMoney) {
         if (!isInteger(lottoPurchaseMoney)) {
             return false;
         }
-        if (isNegativeNumber(Integer.parseInt(lottoPurchaseMoney))) {
-            return false;
-        }
 
-        return true;
+        return !isNegativeNumber(Integer.parseInt(lottoPurchaseMoney));
     }
 
     private boolean isInteger(String string) {
@@ -112,35 +119,46 @@ public class LottoGame {
     }
 
     private void printLottoes() {
-        System.out.println(lottoes.size() + PRINT_LOTTO_COUNT_MESSAGE);
+        System.out.println(lottoes.size() + LOTTO_COUNT_MESSAGE);
         for (Lotto lotto : lottoes) {
             lotto.printLottoNumbers();
         }
     }
 
-    private String inputWinningLottoNumbers() {
-        Scanner scanner = new Scanner(System.in);
+    private List<Integer> getWinningLottoNumbers() {
+        String winningLottoNumbers;
 
-        return scanner.nextLine();
+        do {
+            winningLottoNumbers = inputWinningLottoNumbers();
+        } while (!isValidWinningLottoNumbers(winningLottoNumbers));
+
+        return separateWinningLottoNumbers(winningLottoNumbers)
+                .stream().map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    private String inputWinningLottoNumbers() {
+        System.out.println(INPUT_WINNING_LOTTO_NUMBER_MESSAGE);
+
+        return input();
     }
 
     private boolean isValidWinningLottoNumbers(String winningLottoNumbers) {
-        String[] segregatedWinningLottoNumbers = separateWinningLottoNumbers(winningLottoNumbers);
+        List<String> segregatedWinningLottoNumbers = separateWinningLottoNumbers(winningLottoNumbers);
 
         return isExactLength(segregatedWinningLottoNumbers) && isInteger(segregatedWinningLottoNumbers)
                 && isProperRange(segregatedWinningLottoNumbers) && !hasDuplicateNumber(segregatedWinningLottoNumbers);
     }
 
-    private String[] separateWinningLottoNumbers(String winningLottoNumbers) {
-        return winningLottoNumbers.split(WINNING_LOTTO_NUMBERS_DELIMITER);
+    private List<String> separateWinningLottoNumbers(String winningLottoNumbers) {
+        return Arrays.asList(winningLottoNumbers.split(WINNING_LOTTO_NUMBERS_DELIMITER));
     }
 
     /* 쉼표로 구분한 당첨번호의 길이가 6인지 판단하는 메소드 */
-    private boolean isExactLength(String[] segregatedWinningLottoNumbers) {
-        return segregatedWinningLottoNumbers.length == THE_NUMBER_OF_LOTTO_NUMBERS;
+    private boolean isExactLength(List<String> segregatedWinningLottoNumbers) {
+        return segregatedWinningLottoNumbers.size() == THE_NUMBER_OF_LOTTO_NUMBERS;
     }
 
-    private boolean isInteger(String[] segregatedWinningLottoNumbers) {
+    private boolean isInteger(List<String> segregatedWinningLottoNumbers) {
         boolean result = true;
 
         for (String winningLottoNumber : segregatedWinningLottoNumbers) {
@@ -150,7 +168,7 @@ public class LottoGame {
         return result;
     }
 
-    private boolean isProperRange(String[] segregatedWinningLottoNumbers) {
+    private boolean isProperRange(List<String> segregatedWinningLottoNumbers) {
         boolean result = true;
 
         for (String winningLottoNumber : segregatedWinningLottoNumbers) {
@@ -161,7 +179,7 @@ public class LottoGame {
         return result;
     }
 
-    private boolean hasDuplicateNumber(String[] segregatedWinningLottoNumbers) {
+    private boolean hasDuplicateNumber(List<String> segregatedWinningLottoNumbers) {
         Set<Integer> set = new HashSet<>();
 
         for (String winningLottoNumber : segregatedWinningLottoNumbers) {
@@ -171,17 +189,27 @@ public class LottoGame {
         return set.size() != THE_NUMBER_OF_LOTTO_NUMBERS;
     }
 
-    private String inputBonusNumber() {
-        Scanner scanner = new Scanner(System.in);
+    private int getBonusNumber(List<Integer> winningLottoNumbers) {
+        String bonusNumber;
 
-        return scanner.nextLine();
+        do {
+            bonusNumber = inputBonusNumber();
+        } while (!isValidBonusNumber(bonusNumber, winningLottoNumbers));
+
+        return Integer.parseInt(bonusNumber);
     }
 
-    private boolean isValidBounsNumber(String BonusNumber) {
-        if (!isInteger(BonusNumber)) {
+    private String inputBonusNumber() {
+        System.out.println(INPUT_LOTTO_BONUS_NUMBER_MESSAGE);
+
+        return input();
+    }
+
+    private boolean isValidBonusNumber(String bonusNumber, List<Integer> winningLottoNumbers) {
+        if (!isInteger(bonusNumber) || winningLottoNumbers.contains(Integer.parseInt(bonusNumber))) {
             return false;
         }
 
-        return Integer.parseInt(BonusNumber) >= MIN_LOTTO_NUMBER && Integer.parseInt(BonusNumber) <= MAX_LOTTO_NUMBER;
+        return Integer.parseInt(bonusNumber) >= MIN_LOTTO_NUMBER && Integer.parseInt(bonusNumber) <= MAX_LOTTO_NUMBER;
     }
 }
