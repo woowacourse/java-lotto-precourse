@@ -23,6 +23,9 @@ public class Message {
         {
             put("ERROR_ONLYNUMBER", "숫자로 입력하세요.");
             put("ERROR_MONEYSHORT", "금액이 부족하여 구매할 수 없습니다.");
+            put("ERROR_SIXNUMBER","숫자 여섯개를 정확히 입력하세요.");
+            put("ERROR_OVERLAP", "중복된 숫자가 있습니다.");
+            put("ERROR_NUMBERLIMIT","숫자의 범위는 0~45입니다.");
         }
     };
 }
