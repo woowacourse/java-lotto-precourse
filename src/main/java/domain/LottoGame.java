@@ -11,9 +11,11 @@ import java.util.stream.IntStream;
 public class LottoGame {
     public void run(){
       int num = getThePriceOfLotto()/1000;
+      System.out.println(num + "개를 구매했습니다.");
       ArrayList<Lotto> lottoArrayList = new ArrayList<Lotto>();
       for(int i = 0 ; i < num ; i++){
         lottoArrayList.add(initLotto());
+        showLottoNum(lottoArrayList.get(i));
       }
     }
     public int getThePriceOfLotto(){
@@ -25,5 +27,8 @@ public class LottoGame {
       List<Integer> lottoNumbers = IntStream.range(1,46).boxed().collect(Collectors.toList());
       Collections.shuffle(lottoNumbers);
       return new Lotto(lottoNumbers.subList(0,6));
+    }
+    public void showLottoNum(Lotto oneLotto){
+      System.out.println(oneLotto.showNumbers());
     }
 }
