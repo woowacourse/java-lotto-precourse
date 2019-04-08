@@ -18,7 +18,7 @@ public class PlayLotto {
         makeLottoObject();
         printLottos();
         getLastWeekNumber();
-
+        getLottoRanks();
     }
 
     public static void getPurchaseAmount() {
@@ -117,5 +117,15 @@ public class PlayLotto {
     public static void makeWinningLotto(int bonus_num, List<Integer> nums) {
         Lotto win_nums = new Lotto(nums);
         winninglotto = new WinningLotto(win_nums,bonus_num);
+    }
+
+    public static void getLottoRanks(){
+        Map<Rank, Integer> result = new LinkedHashMap<>();
+        for (Rank rank : Rank.values())
+            result.put(rank, 0);
+        for (Lotto lotto : lottos) {
+            Rank tmp_rank = winninglotto.match(lotto);
+            result.put(tmp_rank, result.get(tmp_rank) + 1);
+        }
     }
 }
