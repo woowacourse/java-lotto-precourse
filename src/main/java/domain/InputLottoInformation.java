@@ -140,6 +140,7 @@ public class InputLottoInformation {
 
     private boolean checkIsEmpty(String no) {
         if (no.isEmpty()) {
+            System.out.println(Message.errorMessage.get("ERROR_EMPTY"));
             return true;
         }
         return false;
