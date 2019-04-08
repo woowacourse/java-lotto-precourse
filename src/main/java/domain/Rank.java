@@ -35,11 +35,12 @@ public enum Rank {
         }
 
         if (SECOND.matchCount(countOfMatch) && matchBonus) {
+            System.out.println("return second!");
             return SECOND;
         }
 
         for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
+            if (rank.matchCount(countOfMatch) && (rank != SECOND)) {
                 return rank;
             }
         }
