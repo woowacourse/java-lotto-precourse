@@ -99,12 +99,6 @@ public class Main {
         return new WinningLotto(winning, bonusNo);
     }
     
-    /** 로또 구입금액을 입력받아, 몇 개를 구입하는지 개수를 반환한다. */
-    private static int getPurchaseAmount() {
-        int temp = getSingleInt(INPUT_PURCHASE_AMOUNT);
-        return temp / LOTTO_PRICE;
-    }
-    
     /** 로또를 여러 개 구입하여 리스트로 반환한다. */
     private static List<Lotto> buySomeLotto(int purchaseAmount) {
         List<Lotto> lottoList = new ArrayList<Lotto>();
@@ -116,7 +110,7 @@ public class Main {
     
     /** 돈을 내고 로또를 구입하여 출력한다. */
     private static List<Lotto> lottoGame() {
-        int purchaseAmount = getPurchaseAmount();
+        int purchaseAmount = getSingleInt(INPUT_PURCHASE_AMOUNT) / LOTTO_PRICE;
         System.out.println(purchaseAmount + BUY_COUNT);
         List<Lotto> lottoList = buySomeLotto(purchaseAmount);
         for (Lotto i: lottoList) {
