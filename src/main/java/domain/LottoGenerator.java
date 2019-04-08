@@ -17,7 +17,7 @@ public class LottoGenerator {
         lottoNumbers = new ArrayList<>();
     }
 
-    private void GenerateLottos(int purchaseAmount) {
+    public void GenerateLottos(int purchaseAmount) {
         int lottoCount = purchaseAmount / PRIZE_OF_LOTTO;
         for (int i = 0; i < lottoCount; i++) {
             GenerateLotto();
@@ -25,13 +25,13 @@ public class LottoGenerator {
     }
 
     private void GenerateLotto() {
-        for (int lottoNumberCount = 1; lottoNumberCount <= LOTTO_NUMBER_COUNT; lottoNumberCount++){
+        for (int lottoNumberCount = 1; lottoNumberCount <= LOTTO_NUMBER_COUNT; lottoNumberCount++) {
             lottoNumbers.add(GenerateRandomNumber());
         }
 
         lottoList.add(new Lotto(lottoNumbers));
         lottoNumbers.clear();
-        
+
     }
 
     private int GenerateRandomNumber() {
@@ -50,5 +50,7 @@ public class LottoGenerator {
         return lottoNumbers.contains(candidateLottoNumber) ? false : true;
     }
 
-
+    public int getLottoListSize() {
+        return this.lottoList.size();
+    }
 }

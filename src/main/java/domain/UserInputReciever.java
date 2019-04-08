@@ -12,8 +12,7 @@ public class UserInputReciever {
         try {
             TryToRecievePurchaseAmount();
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            RecievePurchaseAmount();
+           e.printStackTrace();
         }
 
         return purchaseAmount;
