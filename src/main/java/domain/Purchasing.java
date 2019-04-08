@@ -1,7 +1,6 @@
 package domain;
 
 import error.Validator;
-import error.customExceptions.NotIntegerException;
 
 import java.util.Scanner;
 
@@ -28,11 +27,11 @@ public class Purchasing {
         Validator validator = new Validator();
         try {
             validator.checkAccuracyOfPurchasePrice(input);
-        } catch (NotIntegerException e) {
+            return true;
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return false;
         }
-        return true;
     }
 
     public int getPrice() {
