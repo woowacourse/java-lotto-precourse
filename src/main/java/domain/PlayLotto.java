@@ -92,8 +92,16 @@ public class PlayLotto {
         return true;
     }
 
-}
+    public boolean hasBonusNumber(List<Integer> winningLottoNumber,
+                                  int bonusNumber) {
+        if (winningLottoNumber.contains(bonusNumber)) {
+            System.out.println("당첨번호와 보너스 볼이 중복됬습니다.");
+            return false;
+        }
+        return true;
+    }
 
+}
 class GeneratingLottoNumber {
     private static final int LOTTO_COUNT = 6;
     private static final int LOTTO_NUMBER_BEGIN = 1;
