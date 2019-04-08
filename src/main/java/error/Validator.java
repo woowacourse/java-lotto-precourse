@@ -1,7 +1,10 @@
 package error;
 
-import error.customExceptions.MinPurchasePriceException;
+import error.customExceptions.MinimumPurchasePriceException;
 import error.customExceptions.NotIntegerException;
+import error.customExceptions.UndefinedException;
+
+import java.util.Arrays;
 
 public class Validator {
     private static final int MIN_PURCHASE_PRICE = 1000;
@@ -11,7 +14,13 @@ public class Validator {
             throw new NotIntegerException();
         }
         if (Integer.parseInt(input) < MIN_PURCHASE_PRICE) {
-            throw new MinPurchasePriceException(MIN_PURCHASE_PRICE);
+            throw new MinimumPurchasePriceException(MIN_PURCHASE_PRICE);
+        }
+    }
+
+    public void checkAccuracyOfWinningNumbers(String[] inputs) {
+        if (hasUndefined(inputs)) {
+            throw new UndefinedException();
         }
     }
 
@@ -22,5 +31,10 @@ public class Validator {
             return false;
         }
         return true;
+    }
+
+    private boolean hasUndefined(String[] inputs) {
+        int lengthOfFiltered = Arrays.stream(inputs).filter(i->!(i.equals(""))).toArray().length;
+        return (lengthOfFiltered != inputs.length);
     }
 }

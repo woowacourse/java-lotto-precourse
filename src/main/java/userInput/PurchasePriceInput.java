@@ -1,25 +1,25 @@
-package domain;
+package userInput;
 
 import error.Validator;
 
 import java.util.Scanner;
 
-public class Purchasing {
+public class PurchasePriceInput {
     private int price;
 
-    public Purchasing() {
+    public PurchasePriceInput() {
         Scanner scan = new Scanner(System.in);
         System.out.println("구입 금액을 입력해 주세요.");
         String input = null;
-        boolean isAccurateValue = false;
-        while (!isAccurateValue) {
+        boolean isAccurate = false;
+        while (!isAccurate) {
             input = scan.next();
-            isAccurateValue = validate(input);
+            isAccurate = validate(input);
         }
         price = Integer.parseInt(input);
     }
 
-    public Purchasing(int price) {
+    public PurchasePriceInput(int price) {
         this.price = price;
     }
 
