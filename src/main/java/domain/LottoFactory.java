@@ -2,6 +2,7 @@ package domain;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LottoFactory {
 
@@ -17,12 +18,16 @@ public class LottoFactory {
         return new Lotto(lottoNums);
     }
 
+    public Lotto getInstance(List<Integer> lottoNums) {
+        return new Lotto(lottoNums);
+    }
+
     private List<Integer> getLottoNums() {
         List<Integer> lottoNums = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUM_LENGTH; i++) {
             int lottoNum = lottoNumGenerator.generate();
             lottoNums.add(new Integer(lottoNum));
         }
-        return lottoNums;
+        return Collections.unmodifiableList(lottoNums);
     }
 }

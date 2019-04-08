@@ -1,6 +1,7 @@
 package domain.handler;
 
 import java.util.Scanner;
+import java.util.Arrays;
 
 import domain.validator.BonusNumValidator;
 import domain.validator.PurchaseAmountValidator;
@@ -21,7 +22,7 @@ public class LottoInputHandler {
         return getValidPurchaseAmount();
     }
 
-    public int[] geWinningNums() {
+    public int[] getWinningNums() {
         return getValidWinningNums();
     }
 
@@ -75,10 +76,6 @@ public class LottoInputHandler {
     }
 
     private int[] convertStringArrayToInt(String[] stringArray) {
-        int[] array = new int[stringArray.length];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = convertStringToInt(stringArray[i]);
-        }
-        return array;
+        return Arrays.stream(stringArray).mapToInt(Integer::parseInt).toArray();
     }
 }
