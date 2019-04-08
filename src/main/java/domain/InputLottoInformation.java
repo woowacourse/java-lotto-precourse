@@ -131,7 +131,7 @@ public class InputLottoInformation {
 
     private boolean checkOnlyNumber(String no) {
         int number = (no.charAt(0)-48);
-        if( number < minLottoNo || number > maxLottoNo) {
+        if (number < minLottoNo || number > maxLottoNo) {
             System.out.println(Message.errorMessage.get("ERROR_ONLYNUMBER"));
             return true;
         }
@@ -139,7 +139,7 @@ public class InputLottoInformation {
     }
 
     private boolean checkLimitNumber(int number) {
-        if ( (number > maxLottoNo)  || (number < minLottoNo) ) {
+        if ((number > maxLottoNo) || (number < minLottoNo)) {
             System.out.println(Message.errorMessage.get("ERROR_NUMBERLIMIT"));
             return true;
         }
@@ -147,7 +147,7 @@ public class InputLottoInformation {
     }
 
     private boolean checkOverlapNumber(int number) {
-        if( overlapBonusNo.contains(number) ) {
+        if (overlapBonusNo.contains(number) ) {
             System.out.println(Message.errorMessage.get("ERROR_OVERLAP"));
             return true;
         }

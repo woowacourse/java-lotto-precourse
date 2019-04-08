@@ -29,6 +29,7 @@ public class LottoGameManager {
         System.out.println(lotto.size()+Message.lottoOutputMessage.get("OUTPUT_BUYLOTTO"));
         outputLottoNumber();
         confirmWinOfLotto();
+        earningRate(money);
     }
 
     private void outputLottoNumber() {
@@ -65,7 +66,7 @@ public class LottoGameManager {
             reverse.push(rank);
         }
         int size = reverse.size();
-        for(int i =0; i<size; i++) {
+        for (int i =0; i<size; i++) {
             outputWinStatistics(reverse.pop());
         }
     }
@@ -75,12 +76,14 @@ public class LottoGameManager {
             return;
         }
         System.out.print(rank.getCountOfMatch()+"개 일치");
-        if(rank == Rank.SECOND) {
+        if (rank == Rank.SECOND) {
             System.out.print(" 보너스 볼 일치");
         }
         System.out.print("(");
         System.out.println(rank.getWinningMoney() +"원)- " + lottoStatisticsMap.get(rank)+"개");
     }
 
-
+    private void earningRate(int money) {
+        System.out.println("총 수익률은 " + (float)totalEarningRate / (float)money + "입니다.");
+    }
 }
