@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -10,6 +12,14 @@ public class WinningLotto {
 	public WinningLotto(Lotto lotto, int bonusNo) {
 		this.lotto = lotto;
 		this.bonusNo = bonusNo;
+	}
+
+	public List<Integer> getWinningNums() {
+		return this.lotto.getNumbers();
+	}
+
+	public int getBonusNum() {
+		return this.bonusNo;
 	}
 
 	public Rank match(Lotto userLotto) {

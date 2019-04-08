@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LottoMachine {
-	static Scanner in = new Scanner(System.in);
-
+	
 	private final int LOTTO_NUM_START = 1;
 	private final int LOTTO_NUM_END = 45;
 	private final int LOTTO_PRICE = 1000;
 	private final int ZERO_WON = 0;
 	private final int LOTTO_NUM_SELECT = 6;
 
-	private Lotto lotto[];
+	public Lotto lotto[];
 
 	private boolean isFull(List<Integer> numbers) {
 		return numbers.size() == LOTTO_NUM_SELECT;
@@ -59,6 +58,7 @@ public class LottoMachine {
 	}
 
 	public void buyLotto() {
+		Scanner in = new Scanner(System.in);
 		int money;
 		do {
 			System.out.println("구입금액을 입력해 주세요.(1000원 단위)");
