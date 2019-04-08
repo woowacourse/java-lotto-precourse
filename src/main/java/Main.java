@@ -18,6 +18,8 @@ public class Main {
             = "지난 주 당첨 번호를 입력해 주세요.";
     private final static String INPUT_BONUS_BALL
             = "보너스 볼을 입력해 주세요.";
+    private final static String BUY_COUNT
+            = "개를 구매하였습니다.";
     
     /** 로또 하나를 뽑아서 Lotto 객체로 반환 */
     private static Lotto getLotto() {
@@ -36,6 +38,7 @@ public class Main {
     private final static String[] getInput(String message) {
         Console console = System.console();
         String inputData = console.readLine(message + "\n"); // 메시지 출력
+        System.out.println(); // 보기 편하라고 빈 줄 하나 추가.
         return inputData.split(",\\s*"); // 정규 표현식 적용 - 띄어쓰기 때문
     }
     
@@ -102,8 +105,30 @@ public class Main {
         return temp / LOTTO_PRICE;
     }
     
+    /** 로또를 여러 개 구입하여 리스트로 반환한다. */
+    private static List<Lotto> buySomeLotto(int purchaseAmount) {
+        List<Lotto> lottoList = new ArrayList<Lotto>();
+        for (int i = 0; i < purchaseAmount; i++) {
+            lottoList.add(getLotto());
+        }
+        return lottoList;
+    }
+    
+    /** 돈을 내고 로또를 구입하여 출력한다. */
+    private static List<Lotto> lottoGame() {
+        int purchaseAmount = getPurchaseAmount();
+        System.out.println(purchaseAmount + BUY_COUNT);
+        List<Lotto> lottoList = buySomeLotto(purchaseAmount);
+        for (Lotto i: lottoList) {
+            System.out.println(i);
+        }
+        System.out.println(); // 마지막에 빈 줄 하나 추가.
+        return lottoList;
+    }
+    
     /** main 진입점 */
     public final static void main(String[] args) {
-        // Test code - 추후 삭제 예정
+        List<Lotto> lottoList = lottoGame();
+        WinningLotto winLotto = lastWeekWinningLotto();
     }
 }
