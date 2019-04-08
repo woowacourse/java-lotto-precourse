@@ -9,18 +9,11 @@ import util.RandomNumberMaker;
 import java.util.ArrayList;
 import java.util.List;
 
+import static domain.LottoConstant.*;
+
 public class LottoMaker {
-	private int lottoMinNumber;
-	private int lottoMaxNumber;
-	private int lottoSize;
 
-	public LottoMaker(int lottoMinNumber, int lottoMaxNumber, int lottoSize) {
-		this.lottoMinNumber = lottoMinNumber;
-		this.lottoMaxNumber = lottoMaxNumber;
-		this.lottoSize = lottoSize;
-	}
-
-	public List<Lotto> getRandomLottoList(int gameCount) {
+	public static List<Lotto> getRandomLottoList(int gameCount) {
 		List<Lotto> lottoList = new ArrayList<>();
 		for (int i = 0; i < gameCount; i++) {
 			lottoList.add(makeRandomLotto());
@@ -28,14 +21,14 @@ public class LottoMaker {
 		return lottoList;
 	}
 
-	private Lotto makeRandomLotto() {
+	private static Lotto makeRandomLotto() {
 		return new Lotto(makeRandomIntList());
 	}
 
-	private List<Integer> makeRandomIntList() {
+	private static List<Integer> makeRandomIntList() {
 		List<Integer> intList = new ArrayList<>();
-		for (int i = 0; i < lottoSize; i++) {
-			intList.add(RandomNumberMaker.getRandomNumber(lottoMaxNumber, lottoMinNumber));
+		for (int i = 0; i < LOTTO_SIZE; i++) {
+			intList.add(RandomNumberMaker.getRandomNumber(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER));
 		}
 		return intList;
 	}

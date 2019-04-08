@@ -20,7 +20,7 @@ class InputView {
 	private static final DuplicateValidator DUPLICATE_VALIDATOR = new DuplicateValidator();
 	private static final SizeValidator SIZE_VALIDATOR = new SizeValidator(LOTTO_SIZE);
 
-	public int getLottoCount() {
+	public static int getLottoCount() {
 		int money;
 		System.out.println("구입금액을 입력해주세요.");
 		do {
@@ -29,7 +29,7 @@ class InputView {
 		return (money / LOTTO_MIN_MONEY);
 	}
 
-	private boolean isValidMoney(int money) {
+	private static boolean isValidMoney(int money) {
 		if (money >= LOTTO_MIN_MONEY) {
 			return true;
 		}
@@ -37,7 +37,7 @@ class InputView {
 		return false;
 	}
 
-	public WinningLotto getWinningLotto() {
+	public static WinningLotto getWinningLotto() {
 		List<Integer> numbers = getWinningLottoNums();
 		int bonusNum;
 		do {
@@ -46,7 +46,7 @@ class InputView {
 		return new WinningLotto(new Lotto(numbers), bonusNum);
 	}
 
-	public List<Integer> getWinningLottoNums() {
+	private static List<Integer> getWinningLottoNums() {
 		List<Integer> temp = null;
 		do {
 			System.out.println("지난 주 당첨번호를 입력해 주세요.");
@@ -56,7 +56,7 @@ class InputView {
 		return temp;
 	}
 
-	public int getBonusNumber() {
+	private static int getBonusNumber() {
 		System.out.println("보너스 볼을 입력해주세요");
 		return InputUtil.getInt();
 	}

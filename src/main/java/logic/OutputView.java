@@ -10,6 +10,10 @@ import java.util.List;
 
 public class OutputView {
 
+	public static void printGameCount(int gameCount) {
+		System.out.println(gameCount + "개를 구매했습니다.");
+	}
+
 	public static void printLottoList(List<Lotto> lottoList) {
 		for (Lotto lotto : lottoList) {
 			System.out.println(lotto);
