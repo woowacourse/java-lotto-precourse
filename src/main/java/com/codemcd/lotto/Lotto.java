@@ -15,7 +15,7 @@ public class Lotto {
 
     public int getCountOfMatch(Lotto winningLotto) {
         int countOfMatch = 0;
-        for(int i = 0; i < numbers.size(); ++i) {
+        for (int i = 0; i < numbers.size(); ++i) {
             countOfMatch += (winningLotto.isMatchedNumber(numbers.get(i)) == true) ? 1 : 0;
         }
         return countOfMatch;
@@ -29,7 +29,7 @@ public class Lotto {
         StringBuilder numberWithComma = new StringBuilder();
         String delim = "";
         Iterator<Integer> it = numbers.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             numberWithComma.append(delim).append(it.next());
             delim = ", ";
         }
