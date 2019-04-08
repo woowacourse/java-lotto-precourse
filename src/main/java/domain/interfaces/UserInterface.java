@@ -5,7 +5,7 @@ import java.util.List;
 public interface UserInterface {
 
     int promptPurchaseAmount();
-    String promptWinningLottoNumber();
+    String[] promptWinningLottoNumber();
     int promptBonusNumber();
     void notifyInvalidPurchaseAmount();
     void printStatistics(List<Integer> lottos);

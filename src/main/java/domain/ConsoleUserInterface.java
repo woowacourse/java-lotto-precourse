@@ -15,10 +15,10 @@ public class ConsoleUserInterface implements UserInterface {
     }
 
     @Override
-    public String promptWinningLottoNumber() {
+    public String[] promptWinningLottoNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        return sc.nextLine().split(",");
     }
 
     @Override

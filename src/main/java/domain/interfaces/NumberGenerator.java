@@ -2,8 +2,8 @@ package domain.interfaces;
 
 public interface NumberGenerator {
 
-    int MIN = 1;
-    int MAX = 45;
+    int MIN_LOTTO_NUMBER = 1;
+    int MAX_LOTTO_NUMBER = 45;
 
     int getNumber();
 }

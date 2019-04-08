@@ -10,6 +10,6 @@ public class RandomNumberGenerator implements NumberGenerator {
 
     @Override
     public int getNumber() {
-        return random.nextInt(MAX) - MIN;
+        return random.nextInt(MAX_LOTTO_NUMBER) - MIN_LOTTO_NUMBER;
     }
 }
