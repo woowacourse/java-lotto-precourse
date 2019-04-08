@@ -23,8 +23,19 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 	
+	public List<Integer> getNumbers() {
+		return numbers;
+	}
+	
 	public boolean hasNumber(int number) {
 		return numbers.contains(number);
+	}
+	
+	public int matchCount(Lotto lotto) {
+		List<Integer> anotherNumbers = lotto.getNumbers();
+		
+		anotherNumbers.retainAll(numbers);
+		return anotherNumbers.size();
 	}
 
 	public void printNumbers() {
