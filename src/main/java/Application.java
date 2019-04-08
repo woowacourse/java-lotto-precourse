@@ -13,5 +13,7 @@ public class Application {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         LottoMachine lottoMachine = new LottoMachine(lottoNumberGenerator);
         List<Lotto> lottos = lottoMachine.purchaseLottos(purchasePrice);
+
+        userInterface.printLottos(lottos);
     }
 }
