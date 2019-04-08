@@ -7,6 +7,8 @@ package domain;
 public class Main {
 	public static void main(String[] args) {
 		InputView input = new InputView();
-		System.out.println(input.getMoney());
+		System.out.println(input.getLottoCount());
+		System.out.println(input.getWinningLotto());
+		System.out.println(input.getBonusNumber());
 	}
 }

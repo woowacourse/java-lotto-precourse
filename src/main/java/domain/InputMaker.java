@@ -5,11 +5,11 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputMaker {
-	private static final String BLANK_REGEX = "\\s*";
+	private static final String BLANK_REGEX = "(^\\s*$)";
 	private static final String NUMBER_REGEX = "(^[0-9]+$)";
-	//private static final String COMMA = ",";
 	private static final Scanner SCANNER = new Scanner(System.in);
 
 	public static int getInt() {
@@ -38,9 +38,9 @@ public class InputMaker {
 
 	private static boolean isBlank(String input) {
 		if (input.matches(BLANK_REGEX)) {
+			System.out.println("빈칸 입력하지 마세요.");
 			return true;
 		}
-		System.out.println("문자를 입력하세요");
 		return false;
 	}
 }
