@@ -51,4 +51,3 @@ public enum Rank {
         return this.countOfMatch == countOfMatch;
     }
 }
-

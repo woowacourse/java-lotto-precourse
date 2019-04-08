@@ -9,17 +9,15 @@ import java.util.Vector;
 public class Lotto {
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
-        printNumbers();
-    }
+    public Lotto(List<Integer> numbers) { this.numbers = numbers; }
 
-    public void printNumbers() {
+    public Lotto printNumbers() {
         final List<String> convertedNumbers = new Vector<>();
 
         for (Integer x : numbers) {
             convertedNumbers.add(String.valueOf(x));
         }
         System.out.println("[" + String.join(", ", convertedNumbers) + "]");
+        return this;
     }
 }
