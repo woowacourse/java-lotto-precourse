@@ -10,21 +10,18 @@ public class RandomNumber {
     private static final int MAX_LOTTO_SIZE = 6;
 
     public static List<Integer> makeLottoNumber() {
-
-        List<Integer> lottoNumber = new ArrayList<>();
+        List<Integer> lottoNumbers = new ArrayList<>();
         Random random = new Random();
-
-        while(lottoNumber.size() < MAX_LOTTO_SIZE) {
-            int number = random.nextInt(MAX_LOTTO_NUMBER ) + 1;
-            addNumber(lottoNumber, number);
+        while (lottoNumbers.size() < MAX_LOTTO_SIZE) {
+            int number = random.nextInt(MAX_LOTTO_NUMBER) + 1;
+            addLottoNumber(lottoNumbers, number);
         }
-
-        return lottoNumber;
+        return lottoNumbers;
     }
 
-    private static void addNumber(List<Integer> lottoNumber, int number) {
-        if(!lottoNumber.contains(number)) {
-            lottoNumber.add(number);
+    private static void addLottoNumber(List<Integer> lottoNumbers, int number) {
+        if (!lottoNumbers.contains(number)) {
+            lottoNumbers.add(number);
         }
     }
 }
