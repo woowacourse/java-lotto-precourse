@@ -1,5 +1,6 @@
 package domain.validator;
 
+import domain.LottoFactory;
 import domain.LottoNumGenerator;
 import org.junit.Test;
 
@@ -8,11 +9,11 @@ import static org.junit.Assert.*;
 public class WinningNumValidatorTest {
 
     @Test
-    public void testWinningNumIsNotValidIfWinningNumIsNull() throws AssertionError {
-        String[] winningNum = {null, null};
+    public void testWinningNumIsNotValidIfWinningNumLengthIsNotEqualToStandardValue() {
+        String[] winningNum = new String[LottoFactory.LOTTO_NUM_LENGTH - 1];
         WinningNumValidator winningNumValidator = new WinningNumValidator(winningNum);
 
-        boolean doesLottoNumValid = winningNumValidator.doesLottoNumIsNotNull();
+        boolean doesLottoNumValid = winningNumValidator.doesLottoNumLengthIsValid();
 
         assertFalse(doesLottoNumValid);
     }

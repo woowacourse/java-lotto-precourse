@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class LottoEvent {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final LottoInputHandler lottoInputHandler;
     private final LottoFactory lottoFactory;

@@ -2,9 +2,9 @@ package domain.handler;
 
 import java.util.Scanner;
 
-import domain.validator.LottoInputValidator;
 import domain.validator.PurchaseAmountValidator;
 import domain.validator.Validator;
+import domain.validator.WinningNumValidator;
 
 public class LottoInputHandler {
 
@@ -20,32 +20,45 @@ public class LottoInputHandler {
         return getValidPurchaseAmount();
     }
 
-    private int getValidPurchaseAmount() {
-        String validInput = null;
-        int purchaseAmount;
+    public int[] getWinningNums() {
+        String[] winningNums = null;
         do {
-            validInput = getValidUserInput();
-            purchaseAmount = parseIntFromUserInputString(validInput);
-            validator = new PurchaseAmountValidator(purchaseAmount);
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");     // TODO 출력을 담당하는 클래스에게 위임
+            winningNums = getUserInputArrayWithDelimiter(getUserInputString(), ",");
+            validator = new WinningNumValidator(winningNums);
         } while (!validator.doesValid());
-        return purchaseAmount;
+
+        return convertStringArrayToInt(winningNums);
     }
 
-    private String getValidUserInput() {
-        String input = null;
+    private int getValidPurchaseAmount() {
+        String purchaseAmount = null;
         do {
             System.out.println("구입금액을 입력해 주세요.");   // TODO 출력을 담당하는 클래스에게 위임
-            input = getUserInputString();
-            validator = new LottoInputValidator(input);
+            purchaseAmount = getUserInputString();
+            validator = new PurchaseAmountValidator(purchaseAmount);
         } while (!validator.doesValid());
-        return input;
+
+        return convertStringToInt(purchaseAmount);
     }
 
     private String getUserInputString() {
         return scanner.nextLine();
     }
 
-    private int parseIntFromUserInputString(String input) {
-        return Integer.parseInt(input);
+    private String[] getUserInputArrayWithDelimiter(String input, String delimiter) {
+        return input.split(delimiter);
+    }
+
+    private int convertStringToInt(String str) {
+        return Integer.parseInt(str);
+    }
+
+    private int[] convertStringArrayToInt(String[] stringArray) {
+        int[] array = new int[stringArray.length];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = convertStringToInt(stringArray[i]);
+        }
+        return array;
     }
 }

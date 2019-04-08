@@ -1,20 +1,29 @@
 package domain.validator;
 
+import domain.LottoEvent;
+
 public class PurchaseAmountValidator implements Validator {
 
-    int purchaseAmount;
+    String purchaseAmount;
 
-    public PurchaseAmountValidator(int purchaseAmount) {
+    public PurchaseAmountValidator(String purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
     }
 
     @Override
     public boolean doesValid() {
-        return doesChangeNotExist();
+        return doesPurchaseAmountInputIsValid() && doesChangeNotExist();
+    }
+
+    boolean doesPurchaseAmountInputIsValid() {
+        return new LottoInputValidator(purchaseAmount).doesValid();
     }
 
     boolean doesChangeNotExist() {
-        // TODO 로또 행사를 진행할 클래스에서 로또 가격 받아오기
-        return  (purchaseAmount % 1000) == 0;
+        return (convertStringToInt(purchaseAmount) % LottoEvent.LOTTO_PRICE) == 0;
+    }
+
+    private int convertStringToInt(String str) {
+        return Integer.parseInt(str);
     }
 }

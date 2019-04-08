@@ -14,7 +14,7 @@ public class LottoInputValidator implements Validator {
     }
 
     boolean doesInputIsNumeric() {
-        return input.matches("[0-9]+");
+        return input.matches("[0-9]+"); // TODO Pattern 미리 컴파일해서 match
     }
 
     boolean doesInputIsNotNull() {
