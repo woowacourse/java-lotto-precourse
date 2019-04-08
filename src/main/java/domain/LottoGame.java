@@ -8,6 +8,7 @@ public class LottoGame {
 	static private final String NUMBER_CHECK_REGEX = "^[0-9]*$";
 	static private final int LOTTO_PRICE = 1000;
 	static private final int LOTTO_BUY_LIMIT = 100000;
+    static private final double LOTTO_TOTAL_NUMBER = 45;
 	static private String money = "0";
 	
 	private int inputMoney() {
@@ -36,5 +37,11 @@ public class LottoGame {
 		}
 		return true; 
 	}
+	
+	private int makeRandomNumber() {
+    	int randomNumber = 0;
+    	randomNumber = (int) (Math.random() * LOTTO_TOTAL_NUMBER) + 1;
+    	return randomNumber;
+    }
 	
 }
