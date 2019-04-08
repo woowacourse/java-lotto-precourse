@@ -6,33 +6,31 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PlayLotto {
+    private final int LOTTO_PRICE = 1000;
+    private List<Lotto> myLotto = new ArrayList<>(); // 구입한 내 Lotto List
 
     public int insertMoney() {
+        int money;
         System.out.println("구입금액을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
-    }
-
-    public List<Lotto> purchaseLotto() {
-        int LOTTO_PRICE = 1000;
-        int money = insertMoney();
-        int numberOfLotto; // 구입할 Lotto 개수
-        List<Integer> lottoNumber; // Lotto 번호 List
-        Lotto lotto;
-        List<Lotto> myLotto = new ArrayList<>(); // 구입한 내 Lotto List
+        money = sc.nextInt();
         while (money < 0) {
             System.out.println("Lotto 구입금액은 0이상의 자연수입니다.");
             money = insertMoney();
         }
-        numberOfLotto = money / LOTTO_PRICE;
+        return money;
+    }
+
+    public void purchaseLotto() {
+        int money = insertMoney();
+        List<Integer> lottoNumber; // Lotto 번호 List
+        int numberOfLotto = money / LOTTO_PRICE; // 구입할 Lotto 개수
         System.out.printf("%d개를 구매했습니다.\n", numberOfLotto);
         for (int i = 0; i < numberOfLotto; i++) {
             lottoNumber = GeneratingLottoNumber.generatingLottoNumber();
             System.out.println(lottoNumber);
-            lotto = new Lotto(lottoNumber);
-            myLotto.add(lotto);
+            myLotto.add(new Lotto(lottoNumber));
         }
-        return myLotto;
     }
 
 }
