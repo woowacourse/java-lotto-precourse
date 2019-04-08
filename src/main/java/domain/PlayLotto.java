@@ -33,6 +33,19 @@ public class PlayLotto {
         }
     }
 
+    public List<Integer> insertWinningLottoNumber() {
+        Scanner sc = new Scanner(System.in);
+        String[] rawWinningNumber;
+        while (true) {
+            System.out.println("지난 주 당첨 번호를 입력해주세요.");
+            rawWinningNumber = sc.nextLine().split(",");
+            if (isValidNumberOfRange(rawWinningNumber) &&
+                    isValidSizeOfWinningNumber(rawWinningNumber)) { break; }
+        }
+        return convertString2Int(rawWinningNumber);
+
+    }
+
     public boolean isValidNumberOfRange(String[] rawWinningNumber) {
         List<Integer> intNumber = convertString2Int(rawWinningNumber);
         for (int number: intNumber) {
@@ -53,9 +66,9 @@ public class PlayLotto {
         return true;
     }
 
-    public List<Integer> convertString2Int(String[] strings) {
+    public List<Integer> convertString2Int(String[] rawWinningNumber) {
         List<Integer> intList = new ArrayList<>();
-        for (String str: strings) {
+        for (String str: rawWinningNumber) {
             intList.add(Integer.parseInt(str));
         }
         return intList;
