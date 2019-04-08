@@ -28,7 +28,6 @@ public class LottoGame {
 
 	public boolean generateWinningLotto() {
 		try {
-			
 			Lotto lotto = new Lotto(makeList(inputWinningNumbers()));
 			int bonusNumber = inputBonusNumber();
 
@@ -59,14 +58,14 @@ public class LottoGame {
 		return numberList.getList();
 	}
 
-	private int inputBonusNumber() {
+	private int inputBonusNumber() throws Exception {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println(REQUEST_BONUS_NUMBER);
-		while (!scanner.hasNextInt()) {
-			scanner.next();
-			System.out.println(WRONG_INPUT);
+		int bonus = scanner.nextInt();
+		if (bonus < 1 && 45 < bonus) {
+			throw new Exception();
 		}
-		return scanner.nextInt();
+		return bonus;
 	}
 }
