@@ -43,6 +43,10 @@ public class LottoGame {
 		return true; 
 	}
 	
+	private int purchaseLottoAmount(int money) {
+		return money / 1000;
+	}
+	
 	private int makeRandomNumber() {
     	int randomNumber = 0;
     	randomNumber = (int) (Math.random() * LOTTO_TOTAL_NUMBER) + 1;
