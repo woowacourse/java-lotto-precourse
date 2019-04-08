@@ -13,7 +13,8 @@ public class PlayMatchingLotto {
         int amountLotto = USER_PAYMENT/Const.PRIECE_OF_SINGLE_LOTTO;
         printLottoPaymentAmt(amountLotto);
         Lotto[] lottos = makeLottoObj(amountLotto);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(receiveLastWinLottoFromUser()),0);
+        Lotto winLotto = new Lotto(receiveLastWinLottoFromUser());
+        WinningLotto winningLotto = new WinningLotto(winLotto,receiveBonusFromUser(winLotto));
     }
 
     /**
@@ -123,13 +124,49 @@ public class PlayMatchingLotto {
 
     private List<Integer> addWinLottoList(List<Integer> winnerList, int num) throws LottoException{
         if(num < Const.MIN_NUM_OF_LOTTO_TO_SELECT || num > Const.MAX_NUM_OF_LOTTO_TO_SELECT) {
-            throw new LottoException(Const.EX_WIN_CONDITION_TO_USER);
+            throw new LottoException(Const.EX_LOTTO_CONDITION_TO_USER);
         }
         if(winnerList.contains(num)){
             throw new LottoException(Const.EX_WIN_NOT_OVERLAP_TO_USER);
         }
         winnerList.add(num);
         return winnerList;
+    }
+
+    private int receiveBonusFromUser(Lotto winLotto){
+        int bonus;
+        try{
+            bonus = receiveBonusFromUserException(winLotto);
+        } catch(NumberFormatException e){
+            System.out.println(Const.EX_BONUS_ONLY_NUM_TO_USER);
+            bonus = receiveBonusFromUser(winLotto);
+        } catch (LottoException e){
+            System.out.println(e.EXCEPTION_STR);
+            bonus = receiveBonusFromUser(winLotto);
+        }
+        return bonus;
+    }
+
+    private int receiveBonusFromUserException(Lotto winLotto) throws NumberFormatException, LottoException{
+        System.out.println(Const.STR_ENTER_LAST_WIN_BONUS);
+        Scanner sc = new Scanner(System.in);
+        int bonus = Integer.parseInt(sc.nextLine());
+        isBonusConditionOk(winLotto,bonus);
+        return bonus;
+    }
+
+    /**
+     * 보너스 볼 런타임 예외 조건
+     * 1. 1 이상 45 이하 숫자만 가능
+     * 2. 당첨 번호랑 중복되면 안됨.
+     * */
+    private void isBonusConditionOk(Lotto winLotto, int bonus) throws NumberFormatException, LottoException{
+        if(bonus < Const.MIN_NUM_OF_LOTTO_TO_SELECT || bonus > Const.MAX_NUM_OF_LOTTO_TO_SELECT){
+            throw new LottoException(Const.EX_LOTTO_CONDITION_TO_USER);
+        }
+        if(winLotto.getNumbers().contains(bonus)){
+            throw new LottoException(Const.EX_BONUS_NOT_OVERLAP_TO_USER);
+        }
     }
 
 }
