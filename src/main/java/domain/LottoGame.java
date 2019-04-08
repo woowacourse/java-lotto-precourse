@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 /**
  * LottoGame 전체를 위한 Class
- * TODO: PlayGame
  */
 public class LottoGame {
     /*
