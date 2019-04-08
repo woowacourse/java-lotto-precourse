@@ -2,8 +2,6 @@ package domain;
 
 import java.util.*;
 
-import domain.Lotto;
-
 public class PlayLotto {
     public static int purchase_amount;
     public static int purchase_money;
@@ -14,10 +12,10 @@ public class PlayLotto {
 
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_COUNT = 6;
+    private static final int MAX_LOTTO_NUM = 45;
 
     public static void main(String[] args) {
         getPurchaseAmount();
-        makeLottoObject();
         printLottos();
         getLastWeekNumber();
         makeResult();
@@ -33,6 +31,7 @@ public class PlayLotto {
             flag = isPurchaseMoneyValid(purchase_money);
         }
         purchase_amount = purchase_money / LOTTO_PRICE;
+        makeLottoObject();
     }
 
     public static boolean isPurchaseMoneyValid(int amount) {
@@ -55,8 +54,8 @@ public class PlayLotto {
     }
 
     public static void makeNumbers(List<Integer> numbers) {
-        while (numbers.size() < 6) {
-            int tmp_num = (int) (Math.random() * 45) + 1;
+        while (numbers.size() < LOTTO_COUNT) {
+            int tmp_num = (int) (Math.random() * MAX_LOTTO_NUM) + 1;
             addOrPassNumbers(tmp_num, numbers);
         }
     }
@@ -105,7 +104,7 @@ public class PlayLotto {
         for (int i = 0; i < LOTTO_COUNT; i++) {
             addOrPassLastWeekNumbers(Integer.parseInt(tmp_numbers[i]), tmp_bonus_num, tmp_nums);
         }
-        if (tmp_nums.size() != 6) {
+        if (tmp_nums.size() != LOTTO_COUNT) {
             System.out.println("다시 입력해주세요");
             return false;
         }
@@ -113,7 +112,7 @@ public class PlayLotto {
     }
 
     public static void addOrPassLastWeekNumbers(int num, int bonus_num, List<Integer> nums) {
-        if (!nums.contains(num) && num >= 1 && num <= 45 && num != bonus_num)
+        if (!nums.contains(num) && num >= 1 && num <= MAX_LOTTO_NUM && num != bonus_num)
             nums.add(num);
     }
 
@@ -141,31 +140,31 @@ public class PlayLotto {
 
     public static double countProfit() {
         double profit = 0.0;
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             profit += Rank.values()[i].getWinningMoney() * result.get(Rank.values()[i]);
         }
-        profit = profit /purchase_money;
+        profit = profit / purchase_money;
         return profit;
     }
 
-    public static void printresult(double profit){
+    public static void printresult(double profit) {
         StringBuilder sb = new StringBuilder();
         sb.append("\n당첨 통계\n-----------\n");
-        for (int i = 4; i>=0; i--){
+        for (int i = 4; i >= 0; i--) {
             Rank rank = Rank.values()[i];
             sb.append(makePrintString(rank));
         }
-        sb.append("총 수익률은 "+profit+"입니다.");
+        sb.append("총 수익률은 " + profit + "입니다.");
         System.out.println(sb.toString());
     }
 
-    public static String makePrintString(Rank rank){
+    public static String makePrintString(Rank rank) {
         String str;
-        if(rank == Rank.SECOND){
-            str = rank.getCountOfMatch()+"개 일치, 보너스 볼 일치 (" +rank.getWinningMoney() +"원) -"+result.get(rank) +"개\n";
+        if (rank == Rank.SECOND) {
+            str = rank.getCountOfMatch() + "개 일치, 보너스 볼 일치 (" + rank.getWinningMoney() + "원) -" + result.get(rank) + "개\n";
             return str;
         }
-        str = rank.getCountOfMatch()+"개 일치 (" +rank.getWinningMoney() +"원) -"+result.get(rank) +"개\n";
+        str = rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원) -" + result.get(rank) + "개\n";
         return str;
     }
 }
