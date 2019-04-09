@@ -44,10 +44,19 @@ public class LottoGame {
         printEarningsRate();
     }
 
-    private String input() {
-        Scanner scanner = new Scanner(System.in);
+    private void registerLottoes() {
+        lottoes = new ArrayList<>();
+        int lottoCount = getLottoCount();
 
-        return scanner.nextLine();
+        for (int i = 0; i < lottoCount; i++) {
+            lottoes.add(createLotto());
+        }
+    }
+
+    private int getLottoCount() {
+        int lottoPurchaseMoney = getLottoPurchaseMoney();
+
+        return lottoPurchaseMoney / LOTTO_PRICE;
     }
 
     private int getLottoPurchaseMoney() {
@@ -64,6 +73,12 @@ public class LottoGame {
         System.out.println(INPUT_LOTTO_PURCHASE_MONEY_MESSAGE);
 
         return input();
+    }
+
+    private String input() {
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextLine();
     }
 
     private boolean isValidLottoPurchaseMoney(String lottoPurchaseMoney) {
@@ -88,6 +103,13 @@ public class LottoGame {
         return number < 0;
     }
 
+    private Lotto createLotto() {
+        List<Integer> lottoNumbers = createLottoNumbers();
+        Collections.sort(lottoNumbers);
+
+        return new Lotto(lottoNumbers);
+    }
+
     private List<Integer> createLottoNumbers() {
         List<Integer> lottoNumbers = new ArrayList<>();
 
@@ -109,34 +131,6 @@ public class LottoGame {
         }
     }
 
-    private Lotto createLotto() {
-        List<Integer> lottoNumbers = createLottoNumbers();
-        Collections.sort(lottoNumbers);
-
-        return new Lotto(lottoNumbers);
-    }
-
-    private Lotto createLotto(List<Integer> lottoNumbers) {
-        Collections.sort(lottoNumbers);
-
-        return new Lotto(lottoNumbers);
-    }
-
-    private void registerLottoes() {
-        lottoes = new ArrayList<>();
-        int lottoCount = getLottoCount();
-
-        for (int i = 0; i < lottoCount; i++) {
-            lottoes.add(createLotto());
-        }
-    }
-
-    private int getLottoCount() {
-        int lottoPurchaseMoney = getLottoPurchaseMoney();
-
-        return lottoPurchaseMoney / LOTTO_PRICE;
-    }
-
     private void printLottoes() {
         System.out.println(lottoes.size() + LOTTO_COUNT_MESSAGE);
         for (Lotto lotto : lottoes) {
@@ -144,15 +138,15 @@ public class LottoGame {
         }
     }
 
+    private void registerWinningLotto() {
+        winningLotto = createWinningLotto();
+    }
+
     private WinningLotto createWinningLotto() {
         List<Integer> winningLottoNumbers = getWinningLottoNumbers();
         int bonusNumber = getBonusNumber(winningLottoNumbers);
 
         return new WinningLotto(createLotto(winningLottoNumbers), bonusNumber);
-    }
-
-    private void registerWinningLotto() {
-        winningLotto = createWinningLotto();
     }
 
     private List<Integer> getWinningLottoNumbers() {
@@ -175,8 +169,10 @@ public class LottoGame {
     private boolean isValidWinningLottoNumbers(String winningLottoNumbers) {
         List<String> segregatedWinningLottoNumbers = separateWinningLottoNumbers(winningLottoNumbers);
 
-        return isExactLength(segregatedWinningLottoNumbers) && isInteger(segregatedWinningLottoNumbers)
-                && isProperRange(segregatedWinningLottoNumbers) && !hasDuplicateNumber(segregatedWinningLottoNumbers);
+        return isExactLength(segregatedWinningLottoNumbers)
+                && isInteger(segregatedWinningLottoNumbers)
+                && isProperRange(segregatedWinningLottoNumbers)
+                && !hasDuplicateNumber(segregatedWinningLottoNumbers);
     }
 
     private List<String> separateWinningLottoNumbers(String winningLottoNumbers) {
@@ -243,6 +239,12 @@ public class LottoGame {
         return Integer.parseInt(bonusNumber) >= MIN_LOTTO_NUMBER && Integer.parseInt(bonusNumber) <= MAX_LOTTO_NUMBER;
     }
 
+    private Lotto createLotto(List<Integer> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+
+        return new Lotto(lottoNumbers);
+    }
+
     private void printResult() {
         System.out.println(RESULT_MESSAGE);
         printResultByRank(Rank.FIFTH);
@@ -254,12 +256,13 @@ public class LottoGame {
 
     private void printResultByRank(Rank rank) {
         if (rank == Rank.SECOND) {
-            System.out.printf(SECOND_RANK_RESULT_MESSAGE, rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(rank));
+            System.out.printf(SECOND_RANK_RESULT_MESSAGE,
+                    rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(rank));
 
             return;
         }
-
-        System.out.printf(RESULT_BY_RANK_MESSAGE, rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(rank));
+        System.out.printf(RESULT_BY_RANK_MESSAGE,
+                rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(rank));
     }
 
     private int getLottoCountByRank(Rank rank) {
@@ -270,6 +273,14 @@ public class LottoGame {
         }
 
         return lottoCount;
+    }
+
+    private void printEarningsRate() {
+        System.out.printf(EARNINGS_RATE_MESSAGE, getEarningsRate());
+    }
+
+    private double getEarningsRate() {
+        return (double) getWinningMoneyTotal() / (lottoes.size() * LOTTO_PRICE) * PERCENT;
     }
 
     private int getWinningMoneyTotal() {
@@ -284,13 +295,5 @@ public class LottoGame {
 
     private int getWinningMoneyTotalByRank(Rank rank) {
         return getLottoCountByRank(rank) * rank.getWinningMoney();
-    }
-
-    private double getEarningsRate() {
-        return (double) getWinningMoneyTotal() / (lottoes.size() * LOTTO_PRICE) * PERCENT;
-    }
-
-    private void printEarningsRate() {
-        System.out.printf(EARNINGS_RATE_MESSAGE, getEarningsRate());
     }
 }
