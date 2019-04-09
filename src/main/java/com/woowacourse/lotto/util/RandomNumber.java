@@ -28,9 +28,16 @@ public class RandomNumber {
 
 	private void addRandomNumber(List<Integer> list) {
 		Random random = new Random();
-		int randomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
+		boolean result;
+		int randomNumber;
 
+		do {
+			randomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
+			result = Validator.checkOverlapNumber(randomNumber, list);
+		}
+		while (!result);
 		list.add(randomNumber);
 	}
+
 
 }

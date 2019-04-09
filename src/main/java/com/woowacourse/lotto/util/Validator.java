@@ -9,13 +9,21 @@
  */
 package com.woowacourse.lotto.util;
 
-public class Validator {
+import java.util.List;
 
+public class Validator {
 	static public boolean checkPurchasingAmountValid(String amount) {
 		if (!amount.matches("[1-9][0-9]+")) {
 			return false;
 		}
 		if (Integer.parseInt(amount) < 1000) {
+			return false;
+		}
+		return true;
+	}
+
+	static public boolean checkOverlapNumber(int number, List<Integer> list) {
+		if (list.contains(number)) {
 			return false;
 		}
 		return true;

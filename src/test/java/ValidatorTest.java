@@ -8,12 +8,14 @@
  *  저작권 : 이예지
  */
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.woowacourse.lotto.util.Validator;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ValidatorTest {
-
 	@Test
 	public void checkPurchasingAmountValid_빈문자입력() {
 		String amount = "";
@@ -42,5 +44,17 @@ public class ValidatorTest {
 	public void checkPurchasingAmountValid_정상작동() {
 		String amount = "1000";
 		Assert.assertTrue(Validator.checkPurchasingAmountValid(amount));
+	}
+
+	@Test
+	public void checkOverlapNumberValid_중복존재() {
+		List<Integer> list = Arrays.asList(1, 2, 3, 4);
+		Assert.assertFalse(Validator.checkOverlapNumber(1, list));
+	}
+
+	@Test
+	public void checkOverlapNumberValid_정상작동() {
+		List<Integer> list = Arrays.asList(1, 2, 3, 4);
+		Assert.assertTrue(Validator.checkOverlapNumber(5, list));
 	}
 }
