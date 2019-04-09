@@ -2,9 +2,7 @@ package com.kwonmc.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class GameRunner {
     private Scanner sc = new Scanner(System.in);
@@ -15,7 +13,6 @@ public class GameRunner {
         printLottoInfo();
         inputLastWeekNumberAndBonusNo();
         printLottoMatchResult();
-        printLottoMoneyResult();
     }
 
     private void inputUserPurchaseAmount() {
@@ -95,14 +92,12 @@ public class GameRunner {
     }
 
     private void printLottoMatchResult() {
-        lottoMatchResultMessagePrinter();
+        lottoMatchResultHeaderMessagePrinter();
         RankList rankList = getRankList(game.getWinningLotto());
 
-        for (int i = rankList.size() - 2; i >= 0; i--) {
-            Rank tmpRank = rankList.getRankByIndex(i);
-            int tmpCounts = rankList.getCountsByIndex(i);
-            System.out.println(tmpRank.getCountOfMatch() + "개 일치(" + tmpRank.getWinningMoney() + "원)- " + tmpCounts +"개");
-        }
+        lottoMatchResultBodyMessagePrinter(rankList);
+
+        lottoMatchResultTailMessagePrinter();
     }
 
     private RankList getRankList(WinningLotto winningLotto) {
@@ -115,12 +110,35 @@ public class GameRunner {
         return rankList;
     }
 
-    private void lottoMatchResultMessagePrinter() {
+    private void lottoMatchResultBodyMessagePrinter(RankList rankList) {
+        for (int i = rankList.size() - 2; i >= 0; i--) {
+            Rank rank = rankList.getRankByIndex(i);
+            int counts = rankList.getCountsByIndex(i);
+            System.out.println(resultMessageMaker(rank, counts));
+        }
+    }
+
+    private String resultMessageMaker(Rank rank, int count) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(rank.getCountOfMatch());
+        stringBuilder.append("개 일치");
+        if (rank == Rank.SECOND) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        stringBuilder.append("(");
+        stringBuilder.append(rank.getWinningMoney());
+        stringBuilder.append("원)- ");
+        stringBuilder.append(count);
+        stringBuilder.append("개");
+        return stringBuilder.toString();
+    }
+
+    private void lottoMatchResultHeaderMessagePrinter() {
         System.out.println("당첨통계");
         System.out.println("---------");
     }
 
-    private void printLottoMoneyResult(/*int purchaseAmount, int winningAmount*/) {
+    private void lottoMatchResultTailMessagePrinter(/*int purchaseAmount, int winningAmount*/) {
         System.out.println("총 수익률은 0.000 입니다.");
     }
 }
