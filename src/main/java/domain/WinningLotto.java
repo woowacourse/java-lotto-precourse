@@ -1,9 +1,11 @@
 package domain;
 
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
-public class WinningLotto {
+public class WinningLotto implements Constants {
     private final Lotto lotto;
     private final int bonusNo;
 
@@ -13,7 +15,29 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        List<Integer> userNumbers = userLotto.getNumbers();
+        List<Integer> winningNumbers = lotto.getNumbers();
+        int countOfMatch = 0;
+        boolean matchBonus = false;
+
+        for (int i = 0; i < SIZE_OF_LOTTO; i++) {
+            if (userNumbers.contains(winningNumbers.get(i))) {
+                countOfMatch++;
+            }
+        }
+
+        if (userNumbers.contains(bonusNo)) {
+            matchBonus = true;
+        }
+
+        return Rank.valueOf(countOfMatch, matchBonus);
+    }
+
+    public Lotto getLotto() {
+        return lotto;
+    }
+
+    public int getBonusNo() {
+        return bonusNo;
     }
 }

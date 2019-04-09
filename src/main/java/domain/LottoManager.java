@@ -5,9 +5,7 @@
  */
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * 로또 번호를 생성하고 관리하는 클래스
@@ -16,9 +14,13 @@ import java.util.Random;
  * @author 이남준
  */
 public class LottoManager implements Constants {
-    LottoBuyer buyer = new LottoBuyer();
+    LottoBuyer buyer;
     WinningLotto winningLotto;
     private static Random random = new Random();
+
+    public LottoManager() {
+        buyer = new LottoBuyer();
+    }
 
     public static List<Integer> makeRandomNumber() {
 
@@ -31,6 +33,7 @@ public class LottoManager implements Constants {
             }
             randomNumber = random.nextInt(SIZE_OF_NUMBERS + 1) + 1;
         }
+        Collections.sort(randomNumbers);
         return randomNumbers;
     }
 
@@ -40,13 +43,31 @@ public class LottoManager implements Constants {
         int bonusNumber = makeBonusNumber(lottoNumbers);
 
         winningLotto = new WinningLotto(lotto, bonusNumber);
+        System.out.println("당첨 번호");
+        System.out.println(winningLotto.getLotto().getNumbers() + " + 보너스 : " + winningLotto.getBonusNo());
     }
 
     private int makeBonusNumber(List<Integer> lotto) {
         int randomNumber = random.nextInt(SIZE_OF_NUMBERS + 1);
-        while(lotto.contains(randomNumber)) {
+        while (lotto.contains(randomNumber)) {
             randomNumber = random.nextInt(SIZE_OF_NUMBERS + 1);
         }
         return randomNumber;
+    }
+
+    public void checkRanks() {
+        Lotto[] lottos = buyer.getPurchasedLottos();
+        Rank[] resultRanks = new Rank[buyer.getCountOfLottos()];
+
+        for (int i = 0; i < buyer.getCountOfLottos(); i++) {
+            resultRanks[i] = winningLotto.match(lottos[i]);
+        }
+
+        buyer.setRanks(resultRanks);
+    }
+
+    public void printResults() {
+        System.out.println();
+        System.out.println(buyer.getRanks()[0].getWinningMoney());
     }
 }

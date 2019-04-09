@@ -18,6 +18,8 @@ public class LottoBuyer implements Constants {
 
     Scanner scanner = new Scanner(System.in);
     private Lotto[] purchasedLottos;
+    private Rank[] ranks;
+    private int countOfLottos;
 
     public LottoBuyer() {
         buyLottos();
@@ -44,10 +46,24 @@ public class LottoBuyer implements Constants {
     }
 
     public void buyLottos() {
-        int countOfLottos = enterPrice() / 1000;
+        countOfLottos = enterPrice() / 1000;
         purchasedLottos = new Lotto[countOfLottos];
+        System.out.println(countOfLottos + "개를 구매했습니다.");
         for (int i = 0; i < countOfLottos; i++) {
             purchasedLottos[i] = new Lotto(LottoManager.makeRandomNumber());
+            System.out.println(purchasedLottos[i].getNumbers());
         }
+    }
+
+    public int getCountOfLottos() {
+        return countOfLottos;
+    }
+
+    public void setRanks(Rank[] ranks) {
+        this.ranks = ranks;
+    }
+
+    public Rank[] getRanks() {
+        return ranks;
     }
 }
