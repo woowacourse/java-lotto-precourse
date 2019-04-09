@@ -56,6 +56,20 @@ public class PlayLotto {
         return convertString2Int(rawWinningNumber);
     }
 
+    public void printWinningMessage(Rank matchResult, int number) {
+        int countOfMatch = matchResult.getCountOfMatch();
+        int winningMoney = matchResult.getWinningMoney();
+        int winningMinCount = matchResult.getWinningMinCount();
+        if (matchResult == Rank.SECOND) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n",
+                    countOfMatch, winningMoney, number);
+        }
+        else if (countOfMatch >=winningMinCount ) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n",
+                    countOfMatch, winningMoney, number);
+        }
+    }
+
     public boolean isDuplicatedNumber(String[] rawWinningNumber) {
         int frequency;
         List<Integer> intNumber = convertString2Int(rawWinningNumber);
@@ -121,8 +135,8 @@ public class PlayLotto {
         }
         return false;
     }
-
 }
+
 class GeneratingLottoNumber {
     private static final int LOTTO_COUNT = 6;
     private static final int LOTTO_NUMBER_BEGIN = 1;
