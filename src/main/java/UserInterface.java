@@ -7,7 +7,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 class UserInterface {
-
     private static final Scanner scanner = new Scanner(System.in);
     private static final String LOTTO_NUMBER_SEPARATOR = ",";
 

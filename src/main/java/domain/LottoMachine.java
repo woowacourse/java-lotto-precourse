@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
-
     private final static int PRICE = 1000;
+
     private LottoNumberGenerator lottoNumberGenerator;
 
     public LottoMachine(LottoNumberGenerator lottoNumberGenerator) {
