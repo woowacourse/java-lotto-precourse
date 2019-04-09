@@ -117,5 +117,28 @@ public class Lotto {
         System.out.println();
     }
 
+    public static int compareNumbers(Lotto winningLotto, Lotto userLotto) {
+        int count = 0;
+        for (int i=0, n= userLotto.numbers.size(); i<n; i++) {
+            count += checkMatch(winningLotto.numbers, userLotto.numbers.get(i));
+        }
+        return count;
+    }
+
+    private static int checkMatch(List<Integer> winningLottoNumbers, int userLottoNumber) {
+        int count = 0;
+        if (winningLottoNumbers.contains(userLottoNumber)) {
+            count = 1;
+        }
+        return count;
+    }
+
+    public static boolean compareBonus(int bonusNumber, Lotto userLotto) {
+        if (userLotto.numbers.contains(bonusNumber)) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

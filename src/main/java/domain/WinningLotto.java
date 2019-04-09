@@ -17,9 +17,37 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countOfMatch = Lotto.compareNumbers(this.lotto, userLotto);
+        boolean matchBonus = Lotto.compareBonus(this.bonusNo, userLotto);
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
+
+    public static List<Rank> createListOfUserLottosRanks(WinningLotto winningLotto, List<Lotto> listOfUserLottos) {
+        List<Rank> listOfUserLottosRanks = new ArrayList<>();
+        for (int i=0, n=listOfUserLottos.size(); i<n; i++) {
+            listOfUserLottosRanks.add(winningLotto.match(listOfUserLottos.get(i)));
+        }
+        return listOfUserLottosRanks;
+    }
+
+    public static WinningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
+        List<String> stringList = Arrays.asList(winningNumbers.split(","));
+        List<Integer> intListForWinningLotto = createIntListForWinningLotto(stringList);
+        Lotto currentLotto = new Lotto(intListForWinningLotto);
+        WinningLotto winningLotto = new WinningLotto(currentLotto, bonusNumber);
+        return winningLotto;
+    }
+
+    private static List<Integer> createIntListForWinningLotto(List<String> stringList) {
+        List<Integer> intListForWinningLotto = new ArrayList<>();
+        for (int i=0, n=stringList.size(); i<n; i++) {
+            intListForWinningLotto.add(Integer.parseInt(stringList.get(i)));
+        }
+        return intListForWinningLotto;
+
+    }
+
+
 
     public static String askUserWinningNumbers() {
         boolean isUserInputRight = false;
