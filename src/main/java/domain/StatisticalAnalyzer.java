@@ -1,11 +1,13 @@
 package domain;
 
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class StatisticalAnalyzer {
     private static final int COUNT_SCALE = 1;
+    private static final int MINIMUM_FRACTION_DIGIT = 1;
 
     public void initialize(HashMap<Rank, Integer> rankCounts, Rank[] typeOfranks) {
         for (Rank rank: typeOfranks) {
@@ -34,12 +36,30 @@ public class StatisticalAnalyzer {
         return (double) totalEarning / (double) totalPurchase;
     }
 
-    public void show(HashMap<Rank, Integer> rankCounts) {
+    public String getCouningMessageOf(HashMap<Rank, Integer> rankCounts, Rank rank) {
+        StringBuilder message = new StringBuilder();
 
+        message.append(rank.getCountOfMatch()).append("개 일치");
+        if (rank == Rank.SECOND) {
+            message.append(" , 보너스 볼 일치 ");
+        }
+        message.append(" (").append(rank.getWinningMoney()).append("원) - ");
+        message.append(rankCounts.get(rank)).append("개");
+        return message.toString();
+    }
+
+    public void show(HashMap<Rank, Integer> rankCounts) {
+        System.out.println("당첨 통계\n------");
+        for (Rank rank: rankCounts.keySet()) {
+            System.out.println(getCouningMessageOf(rankCounts, rank));
+        }
     }
 
     public void show(double earningRate) {
+        NumberFormat percentFormatter = NumberFormat.getPercentInstance();
 
+        percentFormatter.setMinimumFractionDigits(MINIMUM_FRACTION_DIGIT);
+        System.out.println("총 수익률은 " + percentFormatter.format(earningRate) + "입니다");
     }
 
     public void analyzeEarningsOf(HashMap<Lotto, Rank> lotteryResults) {
