@@ -13,7 +13,8 @@ public class LottoMachine {
 	private final int ZERO_WON = 0;
 	private final int LOTTO_NUM_SELECT = 6;
 
-	public Lotto lotto[];
+	public Lotto user_lotto[];
+	private int lottoNum = 0;
 
 	private boolean isFull(List<Integer> numbers) {
 		return numbers.size() == LOTTO_NUM_SELECT;
@@ -39,12 +40,12 @@ public class LottoMachine {
 	}
 
 	private void makeLotto(int lottoNum) {
-		lotto = new Lotto[lottoNum];
+		user_lotto = new Lotto[lottoNum];
 		for (int i = 0; i < lottoNum; ++i) {
 			List<Integer> user_nums = new ArrayList<Integer>(LOTTO_NUM_SELECT);
 			user_nums = randomNumList(user_nums);
 			Collections.sort(user_nums);
-			lotto[i] = new Lotto(user_nums); // 로또 객체 생성
+			user_lotto[i] = new Lotto(user_nums); // 로또 객체 생성
 			System.out.println(user_nums);
 		}
 	}
@@ -57,16 +58,17 @@ public class LottoMachine {
 		return true;
 	}
 
-	public void buyLotto() {
+	public Lotto [] buyLotto() {
 		Scanner in = new Scanner(System.in);
 		int money;
 		do {
 			System.out.println("구입금액을 입력해 주세요.(1000원 단위)");
 			money = in.nextInt();
 		} while (!isInputRight(money));
-		int lottoNum = money / LOTTO_PRICE;
+		lottoNum = money / LOTTO_PRICE;
 		System.out.println(lottoNum + "개를 구매했습니다.");
 		makeLotto(lottoNum);
+		return user_lotto;
 	}
 
 }

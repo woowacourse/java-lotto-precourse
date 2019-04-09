@@ -4,8 +4,8 @@ public class LottoMain {
 
 	public static void main(String[] args) {
 		LottoMachine lotto = new LottoMachine();
-		CompareNums cmp = new CompareNums();
-		lotto.buyLotto();
+		Lotto userLotto[] = lotto.buyLotto();
+		CompareNums cmp = new CompareNums(userLotto);
 		cmp.makeWinningLotto();
 	}
 }

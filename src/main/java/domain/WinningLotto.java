@@ -21,9 +21,18 @@ public class WinningLotto {
 	public int getBonusNum() {
 		return this.bonusNo;
 	}
+	
+	private int isContain(int num, int numOfMatch){
+		if (this.lotto.getNumbers().contains(num))
+			numOfMatch++;
+		return numOfMatch;
+	}
 
 	public Rank match(Lotto userLotto) {
-		// TODO 로직 구현
-		return null;
+		int numOfMatch = 0;
+		for (int num : userLotto.getNumbers()) {
+			numOfMatch = isContain(num, numOfMatch);
+		}
+		return Rank.valueOf(numOfMatch, userLotto.getNumbers().contains(this.bonusNo));
 	}
 }
