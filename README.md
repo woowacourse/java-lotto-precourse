@@ -11,15 +11,15 @@
 + 다음 Lotto 객체를 활용해 구현해야 한다.
   + Lotto 기본 생성자를 추가할 수 없다.
   + number 변수의 접근 제어자인 private를 변경 할 수 없다.
-  + Lotto에 필수(인스턴스 변수)를 추가할 수 없다.
+  + Lotto에 필드(인스턴스) 변수를 추가할 수 없다.
 + 다음 WinningLotto 객체를 활용해 구현해야 한다.
   + match() 메소드의 반환 값인 Rank는 저장소에서 제공한다.
   + WinningLotto 기본생성자를 추가할 수 없다.
   + lotto, bonusNo 변수의 접근 제어자인 private을 변경 할 수 없다.
-  + WinningLotto에 필드(인스턴스 변수)를 추가할 수 없다.
+  + WinningLotto에 필드(인스턴스) 변수를 추가할 수 없다.
 + 자바 코드 컨변션을 지키면서 프로그래밍한다.
 + indent(들여쓰기) depth를 2이 넘지 않도록 구현한다.
-+ 함수(또는 메소드)의 길기가 10라인을 넘어가지 않도록 구현한다. 
++ 함수(또는 메소드)의 길이 10라인을 넘어가지 않도록 구현한다. 
 + 함수(또는 메소드)의 인자 수를 3개 까지만 허용한다.
 + else 예약어를 쓰지 않는다.  
 
@@ -47,12 +47,12 @@
   + 수익률을 출력해야한다.
 
 ### 상수, 변수  목록
-+ private final int PRICE = 1000  
-+ private final int MAX_BALL_NUM = 45
-+ private final int NUM_BALL = 6
++ private final static int PRICE = 1000  
++ private final static int MAX_BALL_NUM = 45
++ private final static int NUM_BALL = 6
 + private static List<Lotto> myLottos
 + private static WinningLotto winningLotto
-+ private HashMap<Rank, Integer>(?) Result  
++ private static HashMap<Rank, Integer>(?) Result  
 
 
 ### 실행결과 예

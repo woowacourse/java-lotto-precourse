@@ -17,7 +17,7 @@ public class Lotto {
 	private final static int PRICE = 1000;
 	private final static int MAX_BALL_NUM = 45;
 	private final static int NUM_BALL = 6;
-	private static int Num_Lotto;
+	private static int numLotto;
 	private static List<Lotto> myLottos = new ArrayList<>();
 	private static WinningLotto winningLotto;
 	private static HashMap<Rank, Integer> result = new HashMap<Rank, Integer>(Rank.values().length);
@@ -33,7 +33,7 @@ public class Lotto {
 		System.out.println("구입금액을 입력해주세요. ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int ret = Integer.parseInt(br.readLine());
-		Num_Lotto = ret / PRICE;
+		numLotto = ret / PRICE;
 	}
 
 	private static void recurInputCost() {
@@ -54,9 +54,19 @@ public class Lotto {
 		Collections.sort(list);
 		return list;
 	}
+	
+	private static void generateMyLottos() {
+		System.out.println("\n" + numLotto + "개를 구매하였습니다.");
+		for (int i = 0; i < numLotto; i++) {
+			List<Integer> numbers = generateNumbers();
+			myLottos.add(new Lotto(numbers));
+			System.out.println(numbers.toString());
+		}
+	}
 
 	public static void main(String[] args) { // 객체로 불러 실행해야한다면 shell()로 대체한다.
 		recurInputCost();
+		generateMyLottos();
 
 	}
 }
