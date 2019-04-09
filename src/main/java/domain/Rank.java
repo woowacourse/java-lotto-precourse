@@ -53,9 +53,9 @@ public enum Rank {
 
     public static Rank getRankByString(String str) {
         for (Rank each : values()) {
-            if(each.toString().equals(str)) return each;
+            if (each.toString().equals(str))
+                return each;
         }
         return null;
     }
 }
-

@@ -15,7 +15,7 @@ public class LottoGame {
     sc.nextLine();
     control.setLottos();
 
-    System.out.println("\n"+control.getN()+"개를 구매했습니다.");
+    System.out.println("\n" + control.getN() + "개를 구매했습니다.");
     control.printLottos();
 
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
