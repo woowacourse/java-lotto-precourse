@@ -104,7 +104,7 @@ public class AppView {
         return (number >= AppController.MIN_LOTTO_VALUE) && (number <= AppController.MAX_LOTTO_VALUE);
     }
 
-    public static void printResultOfLotto() {
+    public static void printPrefixResultOfLotto() {
         outputLine("당첨 통계");
         outputLine("---------------");
     }

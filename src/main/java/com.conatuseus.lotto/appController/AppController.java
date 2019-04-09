@@ -8,6 +8,7 @@ import com.conatuseus.lotto.model.WinningLotto;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AppController {
@@ -23,6 +24,10 @@ public class AppController {
 
     public AppController() {
         this.user = new User();
+        this.mapInit();
+    }
+
+    private void mapInit() {
         this.setCountOfRankResult(new HashMap<>());
         this.getCountOfRankResult().put(Rank.FIRST, 0);
         this.getCountOfRankResult().put(Rank.SECOND, 0);
@@ -36,7 +41,7 @@ public class AppController {
         this.winningLotto = winningLotto;
     }
 
-    public WinningLotto getWinningLotto() {
+    private WinningLotto getWinningLotto() {
         return this.winningLotto;
     }
 
@@ -44,15 +49,16 @@ public class AppController {
         this.countOfRankResult = newMap;
     }
 
-    public Map<Rank, Integer> getCountOfRankResult() {
+    private Map<Rank, Integer> getCountOfRankResult() {
         return countOfRankResult;
     }
 
     public void run() throws IOException {
         AppView.outputLine(">> Lotto 게임을 시작합니다.");
-        user.setBuyMoney(AppView.inputMoney());
+        user.setMoney(AppView.inputMoney());
         user.makeLottoList();
         AppView.printLottoList(user.getLottoList());
+
         this.makeWinningLotto();
 
         this.countingRank();
@@ -61,13 +67,13 @@ public class AppController {
     }
 
     private void makeWinningLotto() throws IOException {
-        Lotto lotto = new Lotto(AppView.inputWinningLotto());
-        int bonusNumber;
+        List<Integer> scannedWinningLotto = AppView.inputWinningLotto();
+        Lotto scannedLotto = new Lotto(scannedWinningLotto);
+        int scannedBonusNumber;
         do {
-            bonusNumber = AppView.inputWinningBonusNumber();
-        }
-        while (bonusNumber == -1 || lotto.isContain(bonusNumber));
-        this.setWinningLotto(new WinningLotto(lotto, bonusNumber));
+            scannedBonusNumber = AppView.inputWinningBonusNumber();
+        } while (scannedBonusNumber == -1 || scannedLotto.isContain(scannedBonusNumber));
+        this.setWinningLotto(new WinningLotto(scannedLotto, scannedBonusNumber));
     }
 
     private void countingRank() {
@@ -83,12 +89,16 @@ public class AppController {
 
     private void printResult() {
         long rateOfReturn = 0L;
-        AppView.printResultOfLotto();
+        AppView.printPrefixResultOfLotto();
         for (int i = MIN_VALUE_RANK_INDEX; i >= MAX_VALUE_RANK_INDEX; i--) {
             Rank rank = Rank.values()[i];
             AppView.outputLine(rank.toString() + this.getCountOfRankResult().get(rank) + "개");
             rateOfReturn += (long) rank.getWinningMoney() * this.getCountOfRankResult().get(rank);
         }
-        AppView.outputLine(String.format("%.3f", (double) rateOfReturn / user.getBuyMoney()));
+        if (user.getMoney() == 0) {
+            AppView.outputLine("로또를 구매하지 않았습니다.");
+        } else {
+            AppView.outputLine(String.format("%.3f", (double) rateOfReturn / user.getMoney()));
+        }
     }
 }

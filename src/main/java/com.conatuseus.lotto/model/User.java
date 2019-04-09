@@ -7,7 +7,7 @@ import java.util.List;
 
 public class User {
     private List<Lotto> lottoList;
-    private int buyMoney;
+    private int money;
     private int numberOfLotto;
 
     public User() {
@@ -22,12 +22,12 @@ public class User {
         this.lottoList = lottoList;
     }
 
-    public int getBuyMoney() {
-        return buyMoney;
+    public int getMoney() {
+        return money;
     }
 
-    public void setBuyMoney(int money) {
-        this.buyMoney = money;
+    public void setMoney(int money) {
+        this.money = money;
         this.setNumberOfLotto(money / 1000);
     }
 
