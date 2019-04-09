@@ -2,21 +2,21 @@ package domain;
 
 public class LottoGame {
 
-    PurchaseInput purchase;
-    WinningLottoInput winningLotto;
+    private PurchaseInput purchase;
+    private WinningLottoInput winningLottoInput;
+    private WinningLotto winningLotto;
 
     public LottoGame() {
         purchase = new PurchaseInput();
-        winningLotto = new WinningLottoInput();
+        winningLottoInput = new WinningLottoInput();
         play();
     }
 
     private void play() {
         int amountLotto;
 
-        //amountLotto = purchase.purchaseLotto();
-        winningLotto.inputWinningLotto();
-
+        amountLotto = purchase.purchaseLotto();
+        winningLotto = winningLottoInput.decideWinningLotto();
     }
 
 }
