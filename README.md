@@ -58,7 +58,7 @@ public class WinningLotto {
 * 수익률을 계산해 출력해야 한다.
 
 ## 구현할 기능 목록
-* 당첨 통계와 수익률을 출력한다
+* 로또 행사를 진행한다
 
 ## 구현된 기능 목록
 1. 입력값은 오로지 숫자로 이루어져 있어야 한다
@@ -91,4 +91,7 @@ public class WinningLotto {
     * 이제 WinningNumValidator는 BonusNumValidator를 사용해 각 로또 번호가 1~45 범위의 숫자인지 검증한다
 12. 입력받은 당첨 번호, 보너스 번호를 사용해 당첨 로또를 생성한다
 13. 구입한 로또와 당첨 로또를 비교하여 당첨 여부를 판별한다
+14. 당첨 결과와 수익률을 출력한다
+    * LottoEventJudge가 로또 결과를 계산한 뒤, LottoOutputHandler에게 결과를 주입하는 방식으로 구현한다.
+    * 당첨 결과는 변동되면 안되는 사항이므로 immutable 하게 반환한다
 

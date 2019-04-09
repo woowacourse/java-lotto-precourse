@@ -33,7 +33,7 @@ public class LottoInputHandler {
     private int getValidBonusNum() {
         String bonusNum = null;
         do {
-            System.out.println("보너스 볼을 입력해 주세요.");   // TODO 출력을 담당하는 클래스에게 위임
+            LottoOutputHandler.printMessage("보너스 볼을 입력해 주세요.");
             bonusNum = getUserInputString();
             validator = new BonusNumValidator(bonusNum);
         } while (!validator.doesValid());
@@ -44,7 +44,7 @@ public class LottoInputHandler {
     private int[] getValidWinningNums() {
         String[] winningNums = null;
         do {
-            System.out.println("지난 주 당첨 번호를 입력해 주세요.");     // TODO 출력을 담당하는 클래스에게 위임
+            LottoOutputHandler.printMessage("지난 주 당첨 번호를 입력해 주세요.");
             winningNums = getUserInputArrayWithDelimiter(getUserInputString(), ",");
             validator = new WinningNumValidator(winningNums);
         } while (!validator.doesValid());
@@ -55,7 +55,7 @@ public class LottoInputHandler {
     private int getValidPurchaseAmount() {
         String purchaseAmount = null;
         do {
-            System.out.println("구입금액을 입력해 주세요.");   // TODO 출력을 담당하는 클래스에게 위임
+            LottoOutputHandler.printMessage("구입금액을 입력해 주세요.");
             purchaseAmount = getUserInputString();
             validator = new PurchaseAmountValidator(purchaseAmount);
         } while (!validator.doesValid());

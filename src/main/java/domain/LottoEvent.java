@@ -1,11 +1,13 @@
 package domain;
 
-import domain.handler.LottoInputHandler;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import domain.handler.LottoInputHandler;
+import domain.handler.LottoOutputHandler;
 
 public class LottoEvent {
 
@@ -47,7 +49,15 @@ public class LottoEvent {
         return new WinningLotto(winner, bonusNum);
     }
 
-    private List<Rank> getLottoEventResult(WinningLotto winningLotto) {
+    private void showResult(WinningLotto winningLotto, int purchaseAmount) {
+        Map<Rank, Integer> results = doLottoEvent(winningLotto);
+        LottoOutputHandler lottoOutputHandler = new LottoOutputHandler(results);
+
+        lottoOutputHandler.showLottoEventResult();
+        lottoOutputHandler.showProfitRate(purchaseAmount);
+    }
+
+    private Map<Rank, Integer> doLottoEvent(WinningLotto winningLotto) {
         return new LottoEventJudge(winningLotto).judgeLottoEvent(purchasedLotto);
     }
 

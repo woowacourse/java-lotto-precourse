@@ -14,11 +14,11 @@ public class Lotto {
 
     public int countMatchingLottoNum(Lotto lotto) {
         return (int) numbers.stream()
-                .filter((num) -> lotto.doesLottoContainsNum(num))
+                .filter((num) -> lotto.doesLottoContains(num))
                 .count();
     }
 
-    boolean doesLottoContainsNum(int num) {
+    boolean doesLottoContains(int num) {
         return numbers.contains(new Integer(num));
     }
 }
