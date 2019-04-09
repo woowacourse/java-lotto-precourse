@@ -50,5 +50,16 @@ public enum Rank {
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
+
+    public void printRank(int Count) {
+        if (countOfMatch < WINNING_MIN_COUNT) {
+            return;
+        }
+        if (this == Rank.SECOND) {
+            System.out.println(String.format("%d개 일치. 보너스볼 일치.(%d 원) - %d개", countOfMatch, winningMoney, Count));
+            return;
+        }
+        System.out.println(String.format("%d개 일치.(%d 원) - %d개", countOfMatch, winningMoney, Count));
+    }
 }
 

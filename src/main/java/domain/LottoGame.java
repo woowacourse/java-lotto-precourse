@@ -78,4 +78,15 @@ public class LottoGame {
         }
         return profitPercent;
     }
+
+    private void printLottoResult(Map<Rank, Integer> rankCounter, double profitPercent) {
+        // 당첨통계 출력
+        for (Map.Entry<Rank, Integer> entry : rankCounter.entrySet()) {
+            Rank rank = entry.getKey();
+            int count = entry.getValue();
+            rank.printRank(count);
+        }
+        // 수익률 출력
+        System.out.println("총 수익률은 " + String.format("%.1f", profitPercent) + "입니다");
+    }
 }
