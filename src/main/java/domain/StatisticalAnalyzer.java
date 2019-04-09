@@ -1,9 +1,9 @@
 package domain;
 
+
 import java.util.HashMap;
 
-public class LotteryStaticalAnalyzer {
+public class StatisticalAnalyzer {
     public void analyzeEarningsOf(HashMap<Lotto, Rank> lotteryResults) {
-
     }
 }
