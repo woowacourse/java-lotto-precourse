@@ -58,9 +58,8 @@ public class LottoGame {
         double EarningRate = 0;
 
         for (Rank rank : result.keySet()) {
-            EarningRate += result.get(rank) * rank.getWinningMoney();
+            EarningRate += (double) ((rank.getWinningMoney()) / (lottoAmount * TICKET_PRICE)) * result.get(rank) * PERCENTAGE;
         }
-        EarningRate = (EarningRate / (lottoAmount * TICKET_PRICE)) * PERCENTAGE;
         System.out.println("총 수익률은 " + String.format("%.3f", EarningRate) + "%입니다.");
     }
 
