@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Vector;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 어플리케이션 객체
@@ -25,10 +27,16 @@ public class App {
 
     private static final Scanner input = new Scanner(System.in);
     private static final List<Lotto> lottos = new Vector<>();
+    private static int spent;
+    private static long earned = 0;
 
     public static void main(String[] args) {
-        purchaseLottos(validateAmountAndGetNumber(inputAmount()));
-        printResult(matchLottos(getWinningLotto(validateWinningNumbers(parseWinningNumbers(inputWinningNumbers())), validateBonusNumber(inputBonusNumber()))));
+        try {
+            purchaseLottosAndPrint(validateAmountAndGetNumber(inputAmount()));
+            printResult(matchLottos(getWinningLotto(validateWinningNumbers(parseWinningNumbers(inputWinningNumbers())), validateBonusNumber(inputBonusNumber()))));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
     }
 
     private static int inputAmount() {
@@ -47,34 +55,35 @@ public class App {
         if (amount < 0) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
+        spent = amount / PRICE * PRICE;
         return amount / PRICE;
     }
 
-    private static void purchaseLottos(final int number) {
+    private static void purchaseLottosAndPrint(final int number) {
         System.out.println("\n" + number + "개를 구매했습니다.");
         for (int i = 0; i < number; i++) {
-            purchaseLottoAndPrint();
+            lottos.add(new Lotto(generateNumbers()).printNumbers());
         }
     }
 
     /*
-    1 ~ 45의 수열을 섞어서 앞 6개의 번호를 로또 자동 발권
+    1 ~ 45의 수열을 섞어서 앞 6개의 번호를 로또로 자동 발권
      */
-    private static void purchaseLottoAndPrint() {
-        final Lotto lotto;
-        final List<Integer> pickedNumbers;
+    private static List<Integer> generateNumbers() {
+        final List<Integer> numbers = new Vector<>();
 
         Collections.shuffle(SEQUENCE);
-        pickedNumbers = SEQUENCE.subList(0, LOTTO_NUMBER_OF_PICKS);
-        pickedNumbers.sort((a, b) -> a > b ? 1 : -1);
-        lotto = (new Lotto(pickedNumbers)).printNumbers();
-        lottos.add(lotto);
+        for (int x : SEQUENCE.subList(0, LOTTO_NUMBER_OF_PICKS)) {
+            numbers.add(x);
+        }
+        numbers.sort((a, b) -> a > b ? 1 : -1);
+        return numbers;
     }
 
     private static HashSet<String> inputWinningNumbers() {
         final HashSet<String> validator;
 
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         validator = new HashSet<>(Arrays.asList(input.next().split(",")));
         if (validator.size() != LOTTO_NUMBER_OF_PICKS) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
@@ -92,7 +101,7 @@ public class App {
     }
 
     private static List<Integer> validateWinningNumbers(final List<Integer> parsedList) {
-        parsedList.sort((a, b) -> a > b ? 1 : -1);
+        parsedList.sort((a, b) -> (a > b) ? 1 : -1);
         if (parsedList.get(0) < LOTTO_MIN) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
@@ -129,13 +138,45 @@ public class App {
         final List<Rank> rankings = new Vector<>();
 
         for (Lotto lotto : lottos) {
-            rankings.add(winningLotto.match(lotto));
+            final Rank rank = winningLotto.match(lotto);
+            final boolean temp = (rank.getCountOfMatch() == 0) || rankings.add(rank);
         }
         return rankings;
     }
 
     private static void printResult(List<Rank> rankings) {
-        System.out.println("\n당첨 통계\n---------");
+        final Map<Rank, Integer> rankTable = fillRankTable(rankings, createRankTable());
 
+        System.out.println("\n당첨 통계 \n---------");
+        for (Rank key : rankTable.keySet()) {
+            printRow(key, rankTable);
+            earned += key.getWinningMoney() * rankTable.get(key);
+        }
+        System.out.format("총 수익률은 %.3f입니다.", (double) earned / spent);
+    }
+
+    private static Map<Rank, Integer> createRankTable() {
+        final TreeMap<Rank, Integer> rankTable = new TreeMap<>();
+
+        for (Rank rank : Rank.values()) {
+            rankTable.put(rank, 0);
+        }
+        rankTable.remove(Rank.MISS);
+        return rankTable.descendingMap();
+    }
+
+    private static Map<Rank, Integer> fillRankTable(List<Rank> rankings, Map<Rank, Integer> rankTable) {
+        for (Rank rank : rankings) {
+            rankTable.put(rank, rankTable.get(rank) + 1);
+        }
+        return rankTable;
+    }
+
+    private static void printRow(Rank key, Map<Rank, Integer> rankTable) {
+        if (key == Rank.SECOND) {
+            System.out.println(key.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + key.getWinningMoney() + "원)- " + rankTable.get(key) + "개");
+            return;
+        }
+        System.out.println(key.getCountOfMatch() + "개 일치 (" + key.getWinningMoney() + "원)- " + rankTable.get(key) + "개");
     }
 }

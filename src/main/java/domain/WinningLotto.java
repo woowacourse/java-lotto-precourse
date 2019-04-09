@@ -15,11 +15,8 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        final int numberSum = App.LOTTO_NUMBER_OF_PICKS * 2;
+        final int NUMBER_A_PLUS_B = App.LOTTO_NUMBER_OF_PICKS * 2;
 
-        return Rank.valueOf(
-            numberSum - lotto.union(userLotto).size(),
-            userLotto.contains(bonusNo)
-        );
+        return Rank.valueOf(NUMBER_A_PLUS_B - lotto.union(userLotto).size(), userLotto.contains(bonusNo));
     }
 }
