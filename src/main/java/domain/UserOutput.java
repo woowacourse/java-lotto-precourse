@@ -21,24 +21,27 @@ public class UserOutput {
         System.out.println(lottoCount + "개를 구입하였습니다.");
     }
 
-    private void PrintLottoNumbers(int lottoOrder){
+    private void PrintLottoNumbers(int lottoOrder) {
         String purchaseResult; // 하나의 구매된 로또의 번호들
 
         List<Integer> lottoNumbers = this.lottoList.get(lottoOrder).getNumbers();
 
-        purchaseResult = String.join("," ,lottoNumbers.toString() );
+        purchaseResult = String.join(",", lottoNumbers.toString());
 
         System.out.println(purchaseResult);
 
     }
 
-    public void PrintWinStatistics(){
+    public void PrintWinStatistics() {
         System.out.println("당첨통계");
         System.out.println("---------");
+        for (int i = 0; i < lottoList.size(); i++) {
+
+        }
 
     }
 
-    private void PrintEarningRate(){
+    private void PrintEarningRate() {
         System.out.println("이후 구현 예정");
     }
 }

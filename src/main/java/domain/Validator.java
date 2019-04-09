@@ -17,7 +17,7 @@ public class Validator {
 
     public static boolean isValidWinningNumbers(List<Integer> winningNumbers) {
         return (isValidSize(winningNumbers) && isValidRangeLottoNumbers(winningNumbers)
-                && isOverlapLottoNumbers(winningNumbers))
+                && isNotOverlapLottoNumbers(winningNumbers))
                 ? true : false;
     }
 
@@ -36,12 +36,16 @@ public class Validator {
         return lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER ? true : false;
     }
 
-    public static boolean isOverlapLottoNumbers(List<Integer> lottoNumbers) {
+    public static boolean isNotOverlapLottoNumbers(List<Integer> lottoNumbers) {
         boolean duplicate = lottoNumbers.stream()
                 .distinct()
-                .count() != lottoNumbers.size();
+                .count() == lottoNumbers.size();
 
         return duplicate;
+    }
+
+    public static boolean isOverlapLottoNumber(List<Integer> lottoNumbers, int candidateLottoNumber) {
+        return lottoNumbers.contains(candidateLottoNumber) ? true : false;
     }
 
 

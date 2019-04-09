@@ -7,23 +7,32 @@ public class LottoGame {
     private LottoGenerator lottoGenerator;
     private UserOutput userOutput;
 
-    LottoGame(){
+    LottoGame() {
         userInput = new UserInput();
         lottoGenerator = new LottoGenerator();
         userOutput = new UserOutput();
     }
 
-    public void Start(){
+    public void Start() {
         int purchaseAmount = userInput.RecievePurchaseAmount();
-        lottoGenerator.GenerateAutoLottos(purchaseAmount);
+        lottoGenerator.GenerateLottoes(purchaseAmount);
 
         userOutput.PrintPurchaseResults();
 
         List<Integer> winningNumbers = userInput.RecieveWinningNumber();
         int bonusNumber = userInput.RecieveBonusNumber();
-        lottoGenerator.GenerateWinningLotto(winningNumbers,bonusNumber);
+        lottoGenerator.GenerateWinningLotto(winningNumbers, bonusNumber);
 
         userOutput.PrintWinStatistics();
+    }
+
+    private void MatchLottoNumbers() {
+        WinningLotto winningLotto = LottoGenerator.getWinningLotto();
+        List<Lotto> lottoes = LottoGenerator.getLottoList();
+
+        for (int i = 0; i < lottoes.size(); i++) {
+            Rank rank = winningLotto.match(lottoes.get(i));
+        }
     }
 
     public static void main(String[] args) {

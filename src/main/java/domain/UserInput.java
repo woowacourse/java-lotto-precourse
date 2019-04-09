@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class UserInput {
     private Scanner scanner = new Scanner(System.in);
+    private List<Integer> winningNumbers;
 
     public int RecievePurchaseAmount() {
         int lottoCount = 0;
@@ -42,7 +43,7 @@ public class UserInput {
 
         try {
             winningNumbers = TryToRecieveWinningNumber();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("올바른 숫자를 입력해 주세요");
             RecieveWinningNumber();
         }
@@ -52,10 +53,11 @@ public class UserInput {
 
     private List<Integer> TryToRecieveWinningNumber() throws IllegalArgumentException {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
+        scanner.nextLine();
         String winningNumber = scanner.nextLine();
 
         List<String> stringWinningNumbers = Arrays.asList(winningNumber.split(","));
-        List<Integer> winningNumbers = ConvertListTypeToInt(stringWinningNumbers);
+        winningNumbers = ConvertListTypeToInt(stringWinningNumbers);
 
         if (Validator.isValidWinningNumbers(winningNumbers)) {
             return winningNumbers;
@@ -64,12 +66,12 @@ public class UserInput {
         throw new IllegalArgumentException();
     }
 
-    public int RecieveBonusNumber(){
+    public int RecieveBonusNumber() {
         int bonusNumber = 0;
 
         try {
             bonusNumber = TryToRecieveBonusNumber();
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("올바른 보너스 번호를 입력해주세요.");
             RecieveBonusNumber();
         }
@@ -77,16 +79,17 @@ public class UserInput {
         return bonusNumber;
     }
 
-    private int TryToRecieveBonusNumber() throws IllegalArgumentException{
+    private int TryToRecieveBonusNumber() throws IllegalArgumentException {
         System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusNumber= scanner.nextInt();
+        int bonusNumber = scanner.nextInt();
 
-        if(Validator.isValidRangeLottoNumber(bonusNumber)){
+        if (Validator.isValidRangeLottoNumber(bonusNumber)
+                && Validator.isOverlapLottoNumber(winningNumbers, bonusNumber)) {
             return bonusNumber;
         }
 
         throw new IllegalArgumentException();
-   }
+    }
 
     private List<Integer> ConvertListTypeToInt(List<String> stringWinningNumbers) {
         List<Integer> WinningNumbers = stringWinningNumbers.stream()
