@@ -32,6 +32,13 @@ public class Validator {
         }
     }
 
+    public void checkAccuracyOfBonusNo(String input) {
+        if (!isInteger(input)) {
+            throw new NotIntegerException();
+        }
+
+    }
+
     private boolean isInteger(String input) {
         try {
             Integer.parseInt(input);

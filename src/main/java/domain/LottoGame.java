@@ -1,9 +1,8 @@
 package domain;
 
+import userInput.BonusBallInput;
 import userInput.PurchasePriceInput;
 import userInput.WinningNumbersInput;
-
-import java.util.List;
 
 public class LottoGame {
     public static void main(String[] args) {
@@ -12,7 +11,7 @@ public class LottoGame {
         lottoTickets.showNumberOfTicketsAndChanges();
         lottoTickets.showAll();
 
-        List<Integer> winningNumbers = new WinningNumbersInput().getNumbers();
-        
+        Lotto winningNumbers = new WinningNumbersInput().getWinningNumbers();
+        new BonusBallInput();
     }
 }

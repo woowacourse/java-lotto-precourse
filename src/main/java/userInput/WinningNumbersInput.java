@@ -1,14 +1,14 @@
 package userInput;
 
+import domain.Lotto;
 import error.Validator;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class WinningNumbersInput {
-    private List<Integer> numbers;
+    private Lotto winningNumbers;
 
     public WinningNumbersInput() {
         Scanner scan = new Scanner(System.in);
@@ -19,13 +19,12 @@ public class WinningNumbersInput {
             inputs = scan.next().split(",");
             isAccurate = validate(inputs);
         }
-        numbers = Arrays.stream(inputs).mapToInt(Integer::parseInt)
-                .sorted()
-                .boxed().collect(Collectors.toList());
+        winningNumbers = new Lotto(Arrays.stream(inputs).mapToInt(Integer::parseInt)
+                .sorted().boxed().collect(Collectors.toList()));
     }
 
-    public WinningNumbersInput(List<Integer> numbers) {
-        this.numbers = numbers;
+    public WinningNumbersInput(Lotto winningNumbers) {
+        this.winningNumbers = winningNumbers;
     }
 
     private boolean validate(String[] inputs) {
@@ -39,7 +38,7 @@ public class WinningNumbersInput {
         }
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public Lotto getWinningNumbers() {
+        return winningNumbers;
     }
 }
