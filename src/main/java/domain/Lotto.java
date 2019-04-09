@@ -38,18 +38,48 @@ public class Lotto {
     }
 
     private static boolean checkUserInput(String userInput) {
-        if (isItNonNumeric(userInput) || isItNotMultipleOf1000(userInput) || isSameAsOrSmallerThanZero(userInput)) {
+        if (isMoreThanOne(userInput) || isItNonNumeric(userInput) || isItNotMultipleOf1000(userInput)
+                || isSameAsOrSmallerThanZero(userInput)) {
             return false;
         }
         return true;
     }
 
-    private static boolean isItNonNumeric(String userInput) {
+    private static boolean isMoreThanOne(String userInput) {
+        List<String> listToCheckMoreThanOne = makeListToCheck(userInput);
+        if (listToCheckMoreThanOne.size() > 1) {
+            System.out.println("금액은 하나만 입력해 주세요");
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isItNonNumeric(String userInput) {
+        List<String> listToCheckNonNumeric = makeListToCheck(userInput);
+        boolean isNonNumeric = false;
+        while (!isNonNumeric && !listToCheckNonNumeric.isEmpty()) {
+            String currentUserInput = listToCheckNonNumeric.get(0);
+            listToCheckNonNumeric.remove(0);
+            isNonNumeric = checkNonNumberic(currentUserInput);
+        }
+        return isNonNumeric;
+    }
+
+    private static boolean checkNonNumberic(String userInput) {
         if (userInput.matches("[0-9]+")) {
             return false;
         }
-        System.out.println("양수인 숫자만 입력가능합니다");
+        System.out.println("양수인 숫자만 입력가능합니다!");
         return true;
+    }
+
+    public static List<String> makeListToCheck(String userInput) {
+        List<String> list = Arrays.asList(userInput.split(","));
+        List<String> listToCheck = new ArrayList<>();
+        for (int i=0, n=list.size(); i<n; i++) {
+            listToCheck.add(list.get(i));
+        }
+        return listToCheck;
     }
 
     private static boolean isItNotMultipleOf1000(String userInput) {

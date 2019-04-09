@@ -59,7 +59,7 @@ public class WinningLotto {
     }
 
     private static boolean checkUserInputWinningNumbers(String userInput) {
-        if (isThereEmptyString(userInput) || isNonNumericThere(userInput) || isDuplicate(userInput)
+        if (isThereEmptyString(userInput) || Lotto.isItNonNumeric(userInput) || isDuplicate(userInput)
                 || isNotBetween1And45(userInput) || isLengthNot6(userInput)) {
             return false;
         }
@@ -67,7 +67,7 @@ public class WinningLotto {
     }
 
     private static boolean isThereEmptyString(String userInput) {
-        List<String> listToCheckEmptyString = makeListToCheckEmptyString(userInput);
+        List<String> listToCheckEmptyString = Lotto.makeListToCheck(userInput);
         boolean isEmptyString =false;
         while(!isEmptyString && !listToCheckEmptyString.isEmpty()) {
             isEmptyString = checkStr(listToCheckEmptyString.get(0));
@@ -76,14 +76,6 @@ public class WinningLotto {
         return isEmptyString;
     }
 
-    private static List<String> makeListToCheckEmptyString(String userInput) {
-        List<String> list = Arrays.asList(userInput.split(","));
-        List<String> listToCheckEmptyString = new ArrayList<>();
-        for (int i=0, n=list.size(); i<n; i++) {
-            listToCheckEmptyString.add(list.get(i));
-        }
-        return listToCheckEmptyString;
-    }
 
     private static boolean checkStr(String currentStr) {
         if(currentStr.isEmpty()) {
@@ -93,16 +85,8 @@ public class WinningLotto {
         return false;
     }
 
-    private static boolean isNonNumericThere(String userInput) {
-        if (userInput.matches("[0-9,]+")) {
-            return false;
-        }
-        System.out.println("당첨번호는 양수인 정수만 입력해주세요");
-        return true;
-    }
-
     private static boolean isDuplicate(String userInput) {
-        List<String> listToCheckDuplicate = createListToCheckDuplicate(userInput);
+        List<String> listToCheckDuplicate = Lotto.makeListToCheck(userInput);
         boolean isDuplicating = false;
         while (!isDuplicating && !listToCheckDuplicate.isEmpty()) {
             String current = listToCheckDuplicate.get(0);
@@ -112,14 +96,6 @@ public class WinningLotto {
         return isDuplicating;
     }
 
-    private static List<String> createListToCheckDuplicate(String userInput) {
-        List<String> list = Arrays.asList(userInput.split(","));
-        List<String> listToCheckDuplicate = new ArrayList<>();
-        for (int i=0, n= list.size(); i<n; i++) {
-            listToCheckDuplicate.add(list.get(i));
-        }
-        return listToCheckDuplicate;
-    }
 
     private static boolean checkDuplicate(String current, List<String> list) {
         if(list.contains(current)) {
@@ -177,27 +153,11 @@ public class WinningLotto {
     }
 
     private static boolean checkUserInputBonus(String userInput, String winningNumbers) {
-        if (isNonNumberic(userInput) || isBonusNotBetween1And45(userInput) || isDuplicateInWinningNumbers(userInput, winningNumbers)) {
+        if (Lotto.isItNonNumeric(userInput) || isNotBetween1And45(userInput)
+                || isDuplicateInWinningNumbers(userInput, winningNumbers)) {
             return false;
         }
         return true;
-    }
-
-    private static boolean isNonNumberic(String userInput) {
-        if (userInput.matches("[0-9]+")) {
-            return false;
-        }
-        System.out.println("보너스 번호는 1~45의 숫자만 입력해주세요!");
-        return true;
-    }
-
-    private static boolean isBonusNotBetween1And45(String userInput) {
-        int intUserInput = Integer.parseInt(userInput);
-        if (intUserInput < 1 || intUserInput > 45) {
-            System.out.println("보너스 번호는 1에서 45의 숫자만 입력해주세요!");
-            return true;
-        }
-        return false;
     }
 
     private static boolean isDuplicateInWinningNumbers(String userInput, String winningNumbers) {
