@@ -58,20 +58,21 @@ public class LottoGame {
      */
     private Map<Rank, Integer> createSortAppliedRankCounter() {
         Map<Rank, Integer> rankSortedMap = new TreeMap<Rank, Integer>((Rank a, Rank b) -> {
-            return compareRank(a,b);
+            return compareRank(a, b);
         });
         return rankSortedMap;
     }
 
     /**
      * Rank를 countOfMatch의 오름차순으로 정렬하기위한 비교 함수
+     *
      * @param rankA
      * @param rankB
      * @return
      */
-    private int compareRank(Rank rankA, Rank rankB){
+    private int compareRank(Rank rankA, Rank rankB) {
         if (rankA.getWinningMoney() != rankB.getWinningMoney()) {
-            return (rankA.getWinningMoney() < rankB.getWinningMoney()) ? -1 :1;
+            return (rankA.getWinningMoney() < rankB.getWinningMoney()) ? -1 : 1;
         }
 
         return 0;
@@ -93,10 +94,8 @@ public class LottoGame {
         double totalLottoMoney = (double) (lottoCount * GameSetting.PRICE_PER_1LOTTO);
 
         for (Map.Entry<Rank, Integer> entry : rankCounter.entrySet()) {
-            Rank rank = entry.getKey();
             int count = entry.getValue();
-
-            profitPercent += (rank.getWinningMoney() * count) / totalLottoMoney;
+            profitPercent += (entry.getKey().getWinningMoney() * count) / totalLottoMoney;
         }
         return profitPercent;
     }
