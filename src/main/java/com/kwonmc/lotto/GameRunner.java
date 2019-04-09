@@ -96,25 +96,23 @@ public class GameRunner {
 
     private void printLottoMatchResult() {
         lottoMatchResultMessagePrinter();
-        WinningLotto winningLotto = this.game.getWinningLotto();
+        RankList rankList = getRankList(game.getWinningLotto());
 
+        for (int i = rankList.size() - 2; i >= 0; i--) {
+            Rank tmpRank = rankList.getRankByIndex(i);
+            int tmpCounts = rankList.getCountsByIndex(i);
+            System.out.println(tmpRank.getCountOfMatch() + "개 일치(" + tmpRank.getWinningMoney() + "원)- " + tmpCounts +"개");
+        }
+    }
+
+    private RankList getRankList(WinningLotto winningLotto) {
         RankList rankList = new RankList();
 
         for (Lotto lotto : this.game.getMyLottoList()) {
             rankList.add(winningLotto.match(lotto));
         }
 
-        for (int i = rankList.size() - 2; i >= 0; i++) {
-            System.out.println(rank);
-        }
-
-
-        System.out.println();
-        System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치(" + Rank.FIFTH.getWinningMoney() +"원) - 0개");
-        System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치(" + Rank.FOURTH.getWinningMoney() +"원) - 0개");
-        System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치(" + Rank.THIRD.getWinningMoney() +"원) - 0개");
-        System.out.println(Rank.SECOND.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + Rank.SECOND.getWinningMoney() +"원) - 0개");
-        System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치(" + Rank.FIRST.getWinningMoney() +"원) - 0개");
+        return rankList;
     }
 
     private void lottoMatchResultMessagePrinter() {
