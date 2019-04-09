@@ -158,7 +158,7 @@ public class LottoGame {
 
         for (int i = 0; i < NUM_OF_FIGURES; i++) {
             int number = winningNumbers.get(i);
-            if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) return false;
+            if (!checkRangeOfLottoNumber(number)) return false;
         }
 
         return true;
@@ -176,15 +176,23 @@ public class LottoGame {
     }
 
     /**
-     * indent 2
      * 보너스 볼이 로또 숫자 범위에 해당하는지, 이미 입력된 당첨번호와 중복되지 않는지 확인
      */
     private boolean checkBonusBallValidity(int bonusBall, List<Integer> winningNumbers) {
-        for (int i = 0; i < NUM_OF_FIGURES; i++) {
-            if (winningNumbers.contains(bonusBall)) return false;
-            if (bonusBall < MIN_LOTTO_NUMBER || bonusBall > MAX_LOTTO_NUMBER) return false;
+        if (winningNumbers.contains(bonusBall)) {
+            return false;
+        }
+        if (!checkRangeOfLottoNumber(bonusBall)) {
+            return false;
         }
 
         return true;
+    }
+
+    /**
+     * 로또 숫자 범위(1 ~ 45)에 해당하는지 확인
+     */
+    private boolean checkRangeOfLottoNumber(int number) {
+        return number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER;
     }
 }
