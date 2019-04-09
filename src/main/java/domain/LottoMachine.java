@@ -1,7 +1,8 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
 
@@ -13,27 +14,19 @@ public class LottoMachine {
     }
 
     public List<Lotto> purchaseLottos(int purchasePrice) {
-        List<Lotto> purchasedLottos = new ArrayList<>();
         validatePurchasePrice(purchasePrice);
 
-        int balance = purchasePrice;
-        while (canPurchase(balance)) {
-            balance -= PRICE;
-            Lotto lotto = purchaseLotto();
-            purchasedLottos.add(lotto);
-        }
+        int lottoCount = purchasePrice / PRICE;
 
-        return purchasedLottos;
+        return IntStream.rangeClosed(1, lottoCount)
+                .mapToObj(x -> purchaseLotto())
+                .collect(Collectors.toList());
     }
 
     private void validatePurchasePrice(int purchasePrice) {
         if (purchasePrice % PRICE != 0) {
             throw new IllegalArgumentException("로또 구매 금액을 정확히 입력 해 주세요. 금액 : " + purchasePrice);
         }
-    }
-
-    private boolean canPurchase(int remindMoney) {
-        return remindMoney >= PRICE;
     }
 
     private Lotto purchaseLotto() {
