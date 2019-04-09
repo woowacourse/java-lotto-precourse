@@ -10,11 +10,9 @@ public class PurchasePriceInput {
     public PurchasePriceInput() {
         Scanner scan = new Scanner(System.in);
         System.out.println("구입 금액을 입력해 주세요.");
-        String input = null;
-        boolean isAccurate = false;
-        while (!isAccurate) {
+        String input = scan.next();
+        while (!validate(input)) {
             input = scan.next();
-            isAccurate = validate(input);
         }
         price = Integer.parseInt(input);
     }
