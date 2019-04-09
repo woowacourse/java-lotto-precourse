@@ -22,7 +22,7 @@ public class GameRunner {
     }
 
     private void purchaseAmountMessagePrinter() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(Message.PURCHASE_AMOUNT);
     }
 
     private void printLottoInfo() {
@@ -34,7 +34,7 @@ public class GameRunner {
     }
 
     private void lottoInfoMessagePrinter(int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+        System.out.println(lottoCount + Message.LOTTO_INFO);
     }
 
     private void createLottoList(int lottoCount) {
@@ -76,11 +76,11 @@ public class GameRunner {
     }
 
     private void lastWeekNumberMessagePrinter() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(Message.LAST_WEEK_NUMBER);
     }
 
     private void bonusNoMessagePrinter() {
-        System.out.println("보너스 볼을 입력해주세요");
+        System.out.println(Message.BONUS_NO);
     }
 
     private ArrayList<Integer> arrayToList(int[] array) {
@@ -119,27 +119,21 @@ public class GameRunner {
     }
 
     private String resultMessageMaker(Rank rank, int count) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(rank.getCountOfMatch());
-        stringBuilder.append("개 일치");
-        if (rank == Rank.SECOND) {
-            stringBuilder.append(", 보너스 볼 일치");
-        }
-        stringBuilder.append("(");
-        stringBuilder.append(rank.getWinningMoney());
-        stringBuilder.append("원)- ");
-        stringBuilder.append(count);
-        stringBuilder.append("개");
-        return stringBuilder.toString();
+        return String.format(Message.RESULT_DESCRIPTION,
+                rank.getCountOfMatch(),
+                rank == Rank.SECOND ? Message.BONUS_TRUE : Message.BONUS_FALSE,
+                rank.getWinningMoney(),
+                count
+        );
     }
 
     private void lottoMatchResultHeaderMessagePrinter() {
-        System.out.println("당첨통계");
-        System.out.println("---------");
+        System.out.println(Message.LOTTO_MATCH_RESULT_HEADER);
+        System.out.println(Message.SEPARATION_LINE);
     }
 
     private void lottoMatchResultTailMessagePrinter(RankList rankList, int purchaseAmount) {
         double totalYield = (double) rankList.getTotalWinningAmount() / purchaseAmount;
-        System.out.println(String.format("총 수익률은 %.3f 입니다.", totalYield));
+        System.out.println(String.format(Message.RESULT_YIELD, totalYield));
     }
 }
