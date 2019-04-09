@@ -18,6 +18,6 @@ public class Application {
         LottoRankAnalyzer lottoRankAnalyzer = new LottoRankAnalyzer(winningLotto);
 
         userInterface.printRankCount(lottoRankAnalyzer.getLottoRankCount(lottos));
-        userInterface.printEarningRate(lottoRankAnalyzer.getEarningRate(lottos, purchasePrice));
+        userInterface.printEarningRate(lottoRankAnalyzer.getEarningRate(lottos));
     }
 }

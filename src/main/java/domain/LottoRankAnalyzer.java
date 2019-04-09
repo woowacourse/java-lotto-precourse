@@ -3,6 +3,9 @@ package domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static domain.LottoConst.LOTTO_PRICE;
+
+
 public class LottoRankAnalyzer {
     private WinningLotto winningLotto;
 
@@ -24,10 +27,11 @@ public class LottoRankAnalyzer {
                 .collect(Collectors.toList());
     }
 
-    public EarningRate getEarningRate(List<Lotto> lottos, int money) {
+    public EarningRate getEarningRate(List<Lotto> lottos) {
         List<Rank> ranks = calculateRank(lottos);
         long winningMoney = getWinningMoney(ranks);
-        return new EarningRate(winningMoney / (double) money);
+        int purchaseMoney = LOTTO_PRICE * lottos.size();
+        return new EarningRate(winningMoney / (double) purchaseMoney);
     }
 
     private long getWinningMoney(List<Rank> ranks) {
