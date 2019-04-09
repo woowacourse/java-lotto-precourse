@@ -32,7 +32,7 @@ public class Lotto {
                 return random.nextInt(45) + 1;
         }
 
-        public void getNumbers() {
-                System.out.println(numbers.toString());
+        public List getNumbers() {
+                return this.numbers;
         }
 }

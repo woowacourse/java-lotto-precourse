@@ -14,12 +14,16 @@ public class Main {
         private final static int ONCE_COST = 1000;
         private static Lotto[] lottos;
         private static WinningLotto winningLotto;
+        private static  List<Rank> ranks;
+        private static int[] winners = new int[5];
 
         public static void main(String args[]) throws IOException {
                 buyLotto();
                 makeLotto();
                 printLotto();
                 setWinningLotto();
+                matchLotto();
+
         }
 
         private static void buyLotto() {
@@ -41,7 +45,7 @@ public class Main {
 
         private static void printLotto() {
                 for (Lotto lotto : lottos) {
-                        lotto.getNumbers();
+                        System.out.println(lotto.getNumbers());
                 }
         }
 
@@ -68,4 +72,38 @@ public class Main {
                 System.out.println("보너스 볼을 입력해 주세요.");
                 return Integer.parseInt(bf.readLine());
         }
+
+        private static void matchLotto(){
+                for(Lotto lotto : lottos){
+                       ranks.add(winningLotto.match(lotto));
+                }
+                for(Rank rank : ranks){
+                        setWinnerArray(rank);
+                }
+
+        }
+
+        private static void setWinnerArray(Rank rank){
+                if(Rank.FIFTH == rank){
+                        winners[0]++;
+                        return;
+                }
+                if(Rank.FOURTH == rank){
+                        winners[1]++;
+                        return;
+                }
+                if(Rank.THIRD == rank){
+                        winners[2]++;
+                        return;
+                }
+                if(Rank.SECOND == rank){
+                        winners[3]++;
+                        return;
+                }
+                if(Rank.FIRST == rank){
+                        winners[4]++;
+                        return;
+                }
+        }
+
 }
