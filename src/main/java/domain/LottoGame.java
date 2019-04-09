@@ -155,7 +155,13 @@ public class LottoGame {
         return bonusNumber;
     }
 
+    public List<Integer> makeLastWinLotto(){
 
+        List<Integer> lastWinLotto;
+        lastWinLotto = getLastWinNumber();
+        int lastWinLottoNumber = addBonusLottoNumber();
 
-
+        lastWinLotto.add(lastWinLottoNumber);
+        return lastWinLotto;
+    }
 }
