@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.TreeMap;
+import java.util.Collections;
 
 public class LottoGame {
 
@@ -16,7 +18,7 @@ public class LottoGame {
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private List<Lotto> purchasedLottoList;
-    private WinningLotto win;
+    private WinningLotto winLotto;
 
     private int inputMoney() {
         Scanner scan = new Scanner(System.in);
@@ -98,14 +100,30 @@ public class LottoGame {
         return Integer.parseInt(inputBonus);
     }
 
+    private TreeMap makeResultMap() {
+        TreeMap<Rank, Integer> resultMap = new TreeMap<>(Collections.reverseOrder());
+        initMap(resultMap);
+        for(int i = 0; i < purchasedLottoList.size(); i++) {
+            Rank rank = winLotto.match(purchasedLottoList.get(i));
+            resultMap.put(rank, resultMap.get(rank) + 1);
+        }
+        return resultMap;
+    }
+
+    private void initMap(TreeMap<Rank,Integer> map) {
+        for(Rank rank: Rank.values()) {
+            map.put(rank, 0);
+        }
+    }
+
     public void run() {
         purchasedLottoList = new ArrayList<>();
         int money = inputMoney();
         int countOfLotto = getCountLotto(money);
         createLotto(countOfLotto);
         printLottoList(countOfLotto);
-        Lotto winLotto = new Lotto(inputWinNumber());
-        win = new WinningLotto(winLotto, inputBonusNumber());
+        Lotto lotto = new Lotto(inputWinNumber());
+        winLotto = new WinningLotto(lotto, inputBonusNumber());
         //TODO 결과 출력
     }
 }
