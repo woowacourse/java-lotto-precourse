@@ -40,10 +40,10 @@ public class Lotto {
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Integer> iterator = numbers.iterator();
 
-        return stringBuilderHelper(stringBuilder, iterator).toString();
+        return stringMaker(stringBuilder, iterator);
     }
 
-    private StringBuilder stringBuilderHelper(StringBuilder stringBuilder, Iterator<Integer> iterator) {
+    private String stringMaker(StringBuilder stringBuilder, Iterator<Integer> iterator) {
         stringBuilder.append("[");
         while(iterator.hasNext()) {
             stringBuilder.append(iterator.next());
@@ -52,6 +52,6 @@ public class Lotto {
             }
         }
         stringBuilder.append("]");
-        return stringBuilder;
+        return stringBuilder.toString();
     }
 }
