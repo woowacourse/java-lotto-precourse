@@ -1,7 +1,7 @@
 /*
  * UserInterface Interface
  *
- * @version 1.1
+ * @version 1.2
  *
  * @date 2019-04-09
  *
@@ -9,6 +9,9 @@
  * All rights reserved.
  */
 package domain.interfaces;
+
+import domain.Lotto;
+import domain.WinningLotto;
 
 public interface UserInterface {
 
@@ -20,4 +23,7 @@ public interface UserInterface {
 
     boolean isInputWinLotNumsValid(String winNums);
 
+    int inputBonusNum(Lotto preWinLotto);
+
+    boolean isInputBonusNumValid(Lotto winLotto, String bonusNum);
 }

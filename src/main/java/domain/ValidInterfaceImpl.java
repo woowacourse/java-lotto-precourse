@@ -1,7 +1,7 @@
 /*
  * ValidInterfaceImpl Class
  *
- * @version 1.1
+ * @version 1.2
  *
  * @date 2019-04-09
  *
@@ -30,9 +30,9 @@ public class ValidInterfaceImpl implements ValidInterface {
     }
 
     @Override
-    public void validConvertToIntType(String purchasePrice) {
+    public void validConvertToIntType(String num) {
         try {
-            Integer.parseInt(purchasePrice);
+            Integer.parseInt(num);
         } catch (Exception e) {
             throw new IllegalArgumentException("숫자 형태로 입력해주세요.");
         }
@@ -89,9 +89,9 @@ public class ValidInterfaceImpl implements ValidInterface {
     }
 
     @Override
-    public void validWinLottoNumRange(String winLottoNum) {
-        if ((Integer.parseInt(winLottoNum) < Lotto.MIN_LOTTO_NUM)
-                || (Integer.parseInt(winLottoNum) > Lotto.MAX_LOTTO_NUM)) {
+    public void validWinLottoNumRange(String lottoNum) {
+        if ((Integer.parseInt(lottoNum) < Lotto.MIN_LOTTO_NUM)
+                || (Integer.parseInt(lottoNum) > Lotto.MAX_LOTTO_NUM)) {
             throw new IllegalArgumentException("1~45 사이의 번호를 입력해주세요.");
         }
     }
@@ -101,6 +101,20 @@ public class ValidInterfaceImpl implements ValidInterface {
         Set<String> winLottoSet = new HashSet<>(Arrays.asList(winLottoNums));
         if (winLottoSet.size() != WinningLotto.WIN_NUMS_COUNT) {
             throw new IllegalArgumentException("중복되지않은 번호를 입력해주세요.");
+        }
+    }
+
+    @Override
+    public void validBonusNumSequence(Lotto preWinLotto, String bonusNum) {
+        validConvertToIntType(bonusNum);
+        validWinLottoNumRange(bonusNum);
+        validBonusNumDuplicateWithWinLotto(preWinLotto, Integer.parseInt(bonusNum));
+    }
+
+    @Override
+    public void validBonusNumDuplicateWithWinLotto(Lotto preWinLotto, int bonusNum) {
+        if(preWinLotto.contains(bonusNum)){
+            throw new IllegalArgumentException("당첨번호와 중복 되었습니다.");
         }
     }
 }

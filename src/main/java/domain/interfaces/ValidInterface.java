@@ -1,7 +1,7 @@
 /*
  * ValidInterface Interface
  *
- * @version 1.1
+ * @version 1.2
  *
  * @date 2019-04-09
  *
@@ -10,13 +10,16 @@
  */
 package domain.interfaces;
 
+import domain.Lotto;
+import domain.WinningLotto;
+
 public interface ValidInterface {
     int MAX_PURCHASE_MONEY = 100_000;
     int MIN_PURCHASE_MONEY = 1_000;
 
     void validPurchaseSequence(String purchasePrice);
 
-    void validConvertToIntType(String purchasePrice);
+    void validConvertToIntType(String num);
 
     void validPurchasePriceDivisibleByUnitPrice(int purchasePrice);
 
@@ -33,5 +36,9 @@ public interface ValidInterface {
     void validWinLottoNumRange(String winLottoNum);
 
     void validWinLottoDuplicate(String[] winLottoNums);
+
+    void validBonusNumSequence(Lotto preWinLotto, String bonusNum);
+
+    void validBonusNumDuplicateWithWinLotto(Lotto preWinLotto, int bonusNum);
 
 }

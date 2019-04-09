@@ -1,7 +1,7 @@
 /*
  * Lotto Class
  *
- * @version 1.1
+ * @version 1.2
  *
  * @date 2019-04-09
  *
@@ -25,5 +25,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public boolean contains(int num){
+        return numbers.contains(num);
+    }
     // 추가 기능 구현
 }

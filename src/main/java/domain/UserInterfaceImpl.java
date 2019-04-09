@@ -1,7 +1,7 @@
 /*
  * UserInterfaceImpl Class
  *
- * @version 1.1
+ * @version 1.2
  *
  * @date 2019-04-09
  *
@@ -65,6 +65,28 @@ public class UserInterfaceImpl implements UserInterface {
         try {
             valid.validPurchaseSequence(purchasePrice);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int inputBonusNum(Lotto preWinLotto) {
+        String bonusNum;
+        System.out.println("보너스 볼을 입력해 주세요.");
+        bonusNum = sc.nextLine();
+        if(!isInputBonusNumValid(preWinLotto,bonusNum)){
+            return inputBonusNum(preWinLotto);
+        }
+        return Integer.parseInt(bonusNum);
+    }
+
+    @Override
+    public boolean isInputBonusNumValid(Lotto preWinLotto, String bonusNum) {
+        try{
+            valid.validBonusNumSequence(preWinLotto, bonusNum);
+        }catch (Exception e){
             System.out.println(e.getMessage());
             return false;
         }
