@@ -55,6 +55,21 @@ public class PlayLotto {
         return convertString2Int(rawWinningNumber);
     }
 
+    public void printWinningStatistics(int money) {
+        System.out.println("\n당첨 통계");
+        System.out.println("-------");
+        int totalWinningPrice = 0;
+        List<Rank> lottoResultList = matchLotto();
+        int lottoFrequency;
+        for (Rank rank: Rank.values()) {
+            lottoFrequency = frequencyOfWinningLotto(lottoResultList, rank);
+            printWinningMessage(rank, lottoFrequency);
+            totalWinningPrice += lottoFrequency * rank.getWinningMoney();
+        }
+        System.out.printf("총 수익률은 %.3f입니다.\n",
+                (float) totalWinningPrice / money);
+    }
+
     public int frequencyOfWinningLotto(List<Rank> lottoResultList, Rank rank) {
         return Collections.frequency(lottoResultList, rank);
     }
