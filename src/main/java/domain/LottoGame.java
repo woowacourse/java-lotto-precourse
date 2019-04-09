@@ -44,22 +44,64 @@ public class LottoGame {
         return totalLotto;
     }
 
-    private void getLastWinNumber() {
+    private List<Integer> getLastWinNumber() {
 
         List<String> inputWinNumber;
-
-        while(true){
-            try{
+        List<Integer> result;
+        while (true) {
+            try {
                 Scanner lastNumber = new Scanner(System.in);
                 String lastWinString = lastNumber.nextLine();
                 inputWinNumber = Arrays.asList(lastWinString.split(","));
 
+                result = checkLastWinLotto(inputWinNumber);
                 break;
-            } catch (Exception e){
+            } catch (Exception e) {
 
                 System.out.println("다시 입력해주세요");
             }
         }
+        return result;
     }
+
+    private List<Integer> getInLastWinLotto(List<String> lastWinNumberList){
+
+        List<Integer> inputLastNumberInteger = new ArrayList<Integer>();
+        for(int i=0; i<lastWinNumberList.size(); i++){
+
+            inputLastNumberInteger.add(Integer.parseInt(lastWinNumberList.get(i)));
+        }
+        return inputLastNumberInteger;
+    }
+
+    private List<Integer> checkLastWinLotto(List<String> lastWinLotto){
+
+        checkLastLottoNumberisTrueAll(lastWinLotto);
+        List<Integer> lastWinLottoList = getInLastWinLotto(lastWinLotto);
+        
+        return lastWinLottoList;
+    }
+
+    private void checkLastLottoNumberisTrueAll(List<String> lottoNumberString){
+        for(int i=0;i<lottoNumberString.size();i++){
+
+            checkLastLottoNumberisTrue(lottoNumberString.get(i));
+        }
+    }
+
+    private void checkLastLottoNumberisTrue(String integer){
+
+        try{
+
+            Integer.parseInt(integer);
+        } catch (NumberFormatException e){
+
+            System.out.println("정확한 값을 입력 해주시기 바랍니다");
+            throw e;
+        }
+    }
+
+
+
 
 }
