@@ -13,6 +13,7 @@ package com.kwonmc.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -125,17 +126,35 @@ public class GameRunner {
     }
 
     private boolean lastWeekValidChecker(List<Integer> list) {
-        if (list.size() != 6) { // 입력된 숫자의 개수가 6개가 아니면
-            System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_NUMBERS
-                    + Strings.MESSAGE_RE_INPUT_PLEASE);
+        if (list.size() != Numbers.EACH_LOTTO_SIZE) { // 입력된 숫자의 개수가 6개가 아니면
+            numberCountInvalidMessagePrinter();
             return false;
         }
-        if (new HashSet<>(list).size() != 6) { // 입력된 숫자 중 중복된 숫자가 있다면
-            System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_REDUNDANT
-                    + Strings.MESSAGE_RE_INPUT_PLEASE);
+        if (Collections.min(list) < 1
+                || Collections.max(list) >= Numbers.TOTAL_LOTTO_POOL + 1) { // 입력된 숫자가 범위를 넘는다면
+            numberRangeInvalidMessagePrinter();
+            return false;
+        }
+        if (new HashSet<>(list).size() != Numbers.EACH_LOTTO_SIZE) { // 입력된 숫자 중 중복된 숫자가 있다면
+            numberRedundantInvalidMessagePrinter();
             return false;
         }
         return true;
+    }
+
+    private void numberCountInvalidMessagePrinter() {
+        System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_NUMBERS
+                + Strings.MESSAGE_RE_INPUT_PLEASE);
+    }
+
+    private void numberRangeInvalidMessagePrinter() {
+        System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_RANGE
+                + Strings.MESSAGE_RE_INPUT_PLEASE);
+    }
+
+    private void numberRedundantInvalidMessagePrinter() {
+        System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_REDUNDANT
+                + Strings.MESSAGE_RE_INPUT_PLEASE);
     }
 
     private void lastWeekNumberMessagePrinter() {
