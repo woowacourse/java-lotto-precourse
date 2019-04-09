@@ -1,3 +1,7 @@
+/*
+ * @WinningLotto.java     0.1 2019-04-10
+ * */
+
 package domain;
 
 /**
@@ -12,6 +16,11 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    /**
+     * 구입한 Lotto와 당첨 번호 및 보너스 볼과 비교
+     *
+     * @return 일치하는 갯수에 따라 등급 반환
+     */
     public Rank match(Lotto userLotto) {
         int countOfMatch = matchWinningNumber(userLotto);
         boolean matchBonus = false;
@@ -21,11 +30,14 @@ public class WinningLotto {
         return Rank.valueOf(countOfMatch, matchBonus);
     }
 
+    /**
+     * Lotto 번호와 당첨 번호 일치 갯수 반환
+     */
     public int matchWinningNumber(Lotto userLotto) {
         int countOfMatch = 0;
-        for (int number: lotto.getNumbers()) {
+        for (int number : lotto.getNumbers()) {
             if (userLotto.hasNumber(number)) {
-                countOfMatch ++;
+                countOfMatch++;
             }
         }
         return countOfMatch;
