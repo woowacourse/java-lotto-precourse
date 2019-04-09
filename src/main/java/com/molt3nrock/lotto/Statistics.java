@@ -3,6 +3,7 @@ package com.molt3nrock.lotto;
 import static com.molt3nrock.lotto.Constants.PRICE_PER_LOTTO;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,7 @@ class Statistics {
         System.out.println("---------");
         rankState.entrySet().stream()
             .filter(entry -> !entry.getKey().equals(Rank.MISS))
+            .sorted(Comparator.comparingInt(rank -> rank.getKey().getWinningMoney()))
             .map(Statistics::formatRankStateEntry)
             .forEach(System.out::println);
     }
