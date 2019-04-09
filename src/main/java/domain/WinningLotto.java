@@ -71,6 +71,34 @@ public class WinningLotto {
         return true;
     }
 
+    private static boolean isDuplicate(String userInput) {
+        List<String> listToCheckDuplicate = createListToCheckDuplicate(userInput);
+        boolean isDuplicating = false;
+        while (!isDuplicating && !listToCheckDuplicate.isEmpty()) {
+            String current = listToCheckDuplicate.get(0);
+            listToCheckDuplicate.remove(0);
+            isDuplicating = checkDuplicate(current, listToCheckDuplicate);
+        }
+        return isDuplicating;
+    }
+
+    private static List<String> createListToCheckDuplicate(String userInput) {
+        List<String> list = Arrays.asList(userInput.split(","));
+        List<String> listToCheckDuplicate = new ArrayList<>();
+        for (int i=0, n= list.size(); i<n; i++) {
+            listToCheckDuplicate.add(list.get(i));
+        }
+        return listToCheckDuplicate;
+    }
+
+    private static boolean checkDuplicate(String current, List<String> list) {
+        if(list.contains(current)) {
+            System.out.println("당첨번호에 중복되는 숫자가 있습니다.");
+            return true;
+        }
+        return false;
+    }
+
 
 
 
