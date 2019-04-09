@@ -15,27 +15,25 @@ public class AutoLotto {
     }
 
     public List<Integer> GenerateAuttoLotto() {
+        boolean isNotValidLottoNumber = true;
 
-        for(int i=0 ; i< LOTTO_NUMBER_COUNT; i++){
-            lottoNumbers.add(GenerateRandomNumber());
+        while(isNotValidLottoNumber){
+            GenerateRandomNumbers();
+            isNotValidLottoNumber = Validator.isOverlapLottoNumber(this.lottoNumbers);
         }
 
         return lottoNumbers;
     }
 
-    private int GenerateRandomNumber() {
-        boolean isNotValidLottoNumber = true;
-        int candidateLottoNumber = 0;
+    private void GenerateRandomNumbers() {
+        lottoNumbers.clear();
 
-        while (isNotValidLottoNumber) {
-            candidateLottoNumber = (int) ((Math.random() * MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
-            isNotValidLottoNumber = isOverlapLottoNumber(candidateLottoNumber);
+        for(int i=0 ; i< LOTTO_NUMBER_COUNT; i++){
+            int candidateLottoNumber =(int) ((Math.random() * MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
+            lottoNumbers.add(candidateLottoNumber);
         }
 
-        return candidateLottoNumber;
     }
 
-    private boolean isOverlapLottoNumber(int candidateLottoNumber) {
-        return lottoNumbers.contains(candidateLottoNumber) ? true : false;
-    }
+
 }
