@@ -41,6 +41,7 @@ public class LottoGame {
 	
 	public void confirmWinning(User user) {
 		Result result = user.calculateResult(winningLotto);
+		result.print();
 	}
 
 	private String[] inputWinningNumbers() {

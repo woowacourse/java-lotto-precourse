@@ -9,8 +9,10 @@
  */
 package edu.yk1028;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 당첨 결과를 저장하는 객체
@@ -19,8 +21,12 @@ import java.util.Map;
  *
  */
 public class Result {
+	private final int LOTTO_PRICE = 1000;
+	private final String WINNING_RESULT = "\n당첨 통계\n---------";
+	private final String TOTAL_YIELD = "총 수익률은 %.1f입니다.";
+
 	private int totalCount;
-	private Map<Rank, Integer> count = new HashMap<Rank, Integer>();
+	private Map<Rank, Integer> count = new TreeMap<Rank, Integer>(Comparator.reverseOrder());
 
 	public Result() {
 		totalCount = 0;
@@ -29,18 +35,19 @@ public class Result {
 		count.put(Rank.THIRD, 0);
 		count.put(Rank.FOURTH, 0);
 		count.put(Rank.FIFTH, 0);
-		count.put(Rank.MISS, 0);
 	}
 
 	public void add(Rank rank) {
 		totalCount++;
-		count.put(rank, count.get(rank) + 1);
+		if (rank != Rank.MISS) {
+			count.put(rank, count.get(rank) + 1);
+		}
 	}
 
 	public double calculateYield() {
-		return (double) calculateTotalMoney() / (double) (totalCount * 1000);
+		return (double) calculateTotalMoney() / (double) (totalCount * LOTTO_PRICE);
 	}
-	
+
 	private long calculateTotalMoney() {
 		long money = 0;
 		for (Rank rank : count.keySet()) {
@@ -48,4 +55,14 @@ public class Result {
 		}
 		return money;
 	}
+	
+	public void print() {
+		System.out.println(WINNING_RESULT);
+		for (Rank rank : count.keySet()) {
+			rank.print();
+			System.out.println(count.get(rank) + "개");
+		}
+		System.out.println(String.format(TOTAL_YIELD, calculateYield()));
+	}
+
 }

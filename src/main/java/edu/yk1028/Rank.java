@@ -60,5 +60,13 @@ public enum Rank {
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
+    
+    public void print() {
+    	String matchMessage = "개 일치";
+    	if (this == Rank.SECOND) {
+    		matchMessage += ", 보너스 볼 일치";
+    	}
+    	System.out.print(countOfMatch + matchMessage + " (" + winningMoney + "원)- ");
+    }
 }
 
