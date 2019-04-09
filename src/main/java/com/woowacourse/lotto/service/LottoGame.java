@@ -16,12 +16,24 @@ import com.woowacourse.lotto.domain.LottoFactory;
 
 public class LottoGame {
 	private List<Lotto> lottoList;
+	private LottoFactory lottoFactory;
+	private UserInput userInput;
+
+	public LottoGame() {
+		lottoFactory = new LottoFactory();
+		userInput = new UserInput();
+	}
 
 	private void getLottoList() {
-		UserInput userInput = new UserInput();
-		LottoFactory lottoFactory = new LottoFactory();
 		int lottoAmount = userInput.getPurchasingAmount();
 		this.lottoList = lottoFactory.createLottoList(lottoAmount);
+	}
+
+	private void getWinningLotto() {
+		Lotto winningLotto = new Lotto(userInput.getWinningNumber());
+
+		/* 테스트를 위한 출력 */
+		System.out.println(winningLotto);
 	}
 
 	public void start() {
@@ -31,5 +43,7 @@ public class LottoGame {
 		for (Lotto lotto : lottoList) {
 			System.out.println(lotto);
 		}
+
+		getWinningLotto();
 	}
 }

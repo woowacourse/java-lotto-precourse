@@ -9,13 +9,17 @@
  */
 package com.woowacourse.lotto.service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.woowacourse.lotto.util.Validator;
 
 public class UserInput {
 	static final String DEMAND_PURCHASING_AMOUNT = "구입금액을 입력해주세요.";
 	static final String DEMAND_USER_INPUT_AGAIN = "올바르지 않은 값입니다. 다시 입력해주세요.";
+	static final String DEMAND_WINNING_NUMBER = "지난 주 당첨 번호를 입력해주세요.";
 
 	private String inputValue() {
 		Scanner sc = new Scanner(System.in);
@@ -45,5 +49,11 @@ public class UserInput {
 
 	private void printUserInputAgain() {
 		System.out.println(DEMAND_USER_INPUT_AGAIN);
+	}
+
+	public List<Integer> getWinningNumber(){
+		System.out.println(DEMAND_WINNING_NUMBER);
+		List<String> winnigNumberList = Arrays.asList(inputValue().split(","));
+		return winnigNumberList.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
 	}
 }
