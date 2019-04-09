@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class UserInput {
-    private static final String SEPARATOR = ",";
+    static final String SEPARATOR = ",";
 
     private String input;
 
