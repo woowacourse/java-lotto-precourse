@@ -23,9 +23,22 @@ public class LottoEvent {
         purchasedLotto = new ArrayList<>();
     }
 
+    public void proceed() {
+        purchaseLotto();
+        WinningLotto winningLotto = createWinningLotto();
+
+        proceedEvent(winningLotto);
+    }
+
+    private void proceedEvent(WinningLotto winningLotto) {
+        Map<Rank, Integer> results = doLottoEvent(winningLotto);
+        showResult(results);
+    }
+
     private void purchaseLotto() {
         int purchaseAmount = lottoInputHandler.getPurchaseAmount();
         purchaseLottoWithPurchaseAmount(purchaseAmount);
+        LottoOutputHandler.showPurchasedLotto(purchasedLotto);
     }
 
     private void purchaseLottoWithPurchaseAmount(int purchaseAmount) {
@@ -49,11 +62,11 @@ public class LottoEvent {
         return new WinningLotto(winner, bonusNum);
     }
 
-    private void showResult(WinningLotto winningLotto, int purchaseAmount) {
-        Map<Rank, Integer> results = doLottoEvent(winningLotto);
+    private void showResult(Map<Rank, Integer> results) {
         LottoOutputHandler lottoOutputHandler = new LottoOutputHandler(results);
-
         lottoOutputHandler.showLottoEventResult();
+
+        int purchaseAmount = purchasedLotto.size() * LOTTO_PRICE;
         lottoOutputHandler.showProfitRate(purchaseAmount);
     }
 

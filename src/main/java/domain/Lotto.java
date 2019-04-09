@@ -18,6 +18,11 @@ public class Lotto {
                 .count();
     }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
     boolean doesLottoContains(int num) {
         return numbers.contains(new Integer(num));
     }
