@@ -1,13 +1,19 @@
 package domain;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInput {
+
+    private static final String SEPARATOR = ",";
     private String input;
 
     public UserInput() {
         Scanner s = new Scanner(System.in);
-        input = s.nextLine();
+        input = s.nextLine().trim();
     }
 
     private boolean isNumber(char character) {
@@ -30,28 +36,46 @@ public class UserInput {
         return count;
     }
 
-    public boolean isInRange(int bottom, int top) {
+    public boolean isInRange(String string, int bottom, int top) {
         int number;
 
-        if(!isZeroOrPositiveNumber(input)) {
+        if(!isZeroOrPositiveNumber(string)) {
             return false;
         }
-        number = Integer.parseInt(input);
+        number = Integer.parseInt(string);
 
         return number >= bottom && number <= top;
     }
 
-    public boolean isInRange(int bottom) {
+    public boolean isInRange(String string, int bottom) {
         int number;
 
-        if(!isZeroOrPositiveNumber(input)) {
+        if(!isZeroOrPositiveNumber(string)) {
             return false;
         }
-        number = Integer.parseInt(input);
+        number = Integer.parseInt(string);
 
         return number >= bottom;
     }
 
+    public List<Integer> convertsToLottoNumbers() {
+        List<Integer> integerList = new ArrayList<>();
+        List<String> strings = Arrays.asList(input.split(","));
+
+        for (String s : strings
+             ) {
+            addNumberToLottoNumberList(integerList, s.trim());
+        }
+        return integerList;
+    }
+
+    private void addNumberToLottoNumberList(List<Integer> integerList, String string) {
+        if(isInRange(string, Lotto.BOTTOM, Lotto.TOP)) {
+            integerList.add(Integer.parseInt(string));
+        }
+
+        return;
+    }
 
 
 
