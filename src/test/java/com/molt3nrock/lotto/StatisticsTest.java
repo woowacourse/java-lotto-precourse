@@ -26,17 +26,6 @@ public class StatisticsTest {
     }
 
     @Test
-    public void numberOfRank() {
-        Statistics statistics = Statistics.valueOf(lottoList, winningLotto);
-        assertEquals(1, statistics.numberOfRank(Rank.FIRST));
-        assertEquals(1, statistics.numberOfRank(Rank.SECOND));
-        assertEquals(1, statistics.numberOfRank(Rank.THIRD));
-        assertEquals(1, statistics.numberOfRank(Rank.FOURTH));
-        assertEquals(1, statistics.numberOfRank(Rank.FIFTH));
-        assertEquals(3, statistics.numberOfRank(Rank.MISS));
-    }
-
-    @Test
     public void displayRankState() {
         Statistics statistics = Statistics.valueOf(lottoList, winningLotto);
         statistics.displayRankState();

@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * 당첨 통계를 나타내는 클래스.
+ */
 class Statistics {
 
     private Map<Rank, Integer> rankState;
@@ -24,11 +27,6 @@ class Statistics {
         Statistics statistics = new Statistics(hashMap);
         lottoList.forEach(lotto -> statistics.classifyLotto(lotto, winningLotto));
         return statistics;
-    }
-
-    int numberOfRank(Rank rank) {
-        assert (rankState.containsKey(rank));
-        return rankState.get(rank);
     }
 
     void displayRankState() {
