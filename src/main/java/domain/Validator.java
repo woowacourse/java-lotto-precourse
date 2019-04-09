@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Validator {
 
     static final String WARNING_WHEN_INPUT_IS_NOT_INTEGER = "WARNING: 정수만 입력 가능합니다. 다시 입력해주세요.";
@@ -8,6 +11,7 @@ public class Validator {
     static final String WARNING_WHEN_LOTTO_INPUT_SMALL = "WARNING: 금액이 너무 적습니다. 1장의 금액은 " + GameSetting.PRICE_PER_1LOTTO + "원 입니다. 다시 입력해주세요.";
     static final String WARNING_WHEN_LOTTO_NUMBER_COUNT_NOT_MATCHING = "WARNING: 로또넘버는 " + GameSetting.LOTTO_NORMAL_NUMBER_COUNT + "개 이어야 합니다. 다시 입력해주세요.";
     static final String WARNING_WHEN_LOTTO_NUMBER_NOT_IN_RANGE = "WARNING:" + GameSetting.MIN_LOTTO_NUMBER + "~" + GameSetting.MAX_LOTTO_NUMBER + " 의 숫자들만 가능합니다. 다시 입력해주세요.";
+    static final String WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION = "WARNING: 중복되는 숫자가 있으면 안됩니다. 다시 입력해주세요.";
 
     public static boolean checkInputLottoMoney(String lottoCountInput) {
         if (!checkInputLottoMoneyLengthIsTooLong(lottoCountInput) ||
@@ -65,6 +69,26 @@ public class Validator {
         }
 
         return invalidValueNotFound;
+    }
+
+    public static boolean checkLottoNumbersInputHasNoDuplication(String[] numbers) {
+        Set<String> tempAddedLottoNumbers = createLottoSet(numbers);
+
+        // numbers에 중복된 문자열이 있었다면, numbers의 길이와 Set의 길이가 다름을 이용
+        if (numbers.length != tempAddedLottoNumbers.size()) {
+            System.out.println(WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
+            return false;
+        }
+        return true;
+    }
+
+    private static Set<String> createLottoSet(String[] numbers) {
+        Set<String> tempAddedLottoNumbers = new HashSet<String>();
+
+        for (int i = 0; (i < numbers.length); i++) {
+            tempAddedLottoNumbers.add(numbers[i]);
+        }
+        return tempAddedLottoNumbers;
     }
 
     //
