@@ -51,5 +51,9 @@ public enum Rank {
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
-}
 
+    @Override
+    public String toString() {
+        return String.format("%d개 일치 (%,10d원)", countOfMatch, winningMoney);
+    }
+}
