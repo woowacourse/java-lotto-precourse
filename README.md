@@ -28,7 +28,7 @@
     - [x] 서브로직 3-2: 당첨로또번호입력값 6개가 모두 모두 1~45 인지 확인
     - [x] 서브로직 3-3: 당첨로또번호입력값 6개가 모두 중복된것이 없는지 확인
 - [ ] 메인로직 4: 사용자로부터 보너스번호 입력받기
-    - [ ] 서브로직 4-1: 보너스번호가 유효한지 확인
+    - [x] 서브로직 4-1: 보너스번호가 유효한지 확인
 - [ ] 메인로직 5: 당첨로또, 수익률 계산하기
     - [ ] 서브로직 5-1: 로또 당첨결과 저장 로직 만들기
     - [ ] 서브로직 5-2: 수익률 계산 로직 만들기
@@ -62,6 +62,8 @@
 |checkLottoNumbersInputHasNoDuplication|6개 로또번호입력이 중복이 없는지 확인|
 |checkIsLottoNumberInRange|로또번호가 범위안에 있는 값인지 확인|
 |checkIsLottoNumberValid|로또번호가 유효한지 확인|
+|checkBonusLottoNumberValid|보너스로또넘버가 유효한지 확인|
+|checkIsAlreadyInLottoNumbers|입력이 이미 로또번호에 포함된 번호인지 확인해 반환|
 
 |GameSetting|게임의 세팅값을 담당|
 |---|---|

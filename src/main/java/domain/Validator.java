@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Validator {
@@ -123,5 +124,25 @@ public class Validator {
         }
 
         return true;
+    }
+
+    //
+    public static boolean checkBonusLottoNumberValid(List<Integer> winningLottoNumbers, String bonusNumberStringInput) {
+        if (!checkIsLottoNumberValid(bonusNumberStringInput)) {
+            return false;
+        }
+        int bonusNumber = Integer.parseInt(bonusNumberStringInput);
+        if (checkIsAlreadyInLottoNumbers(winningLottoNumbers, bonusNumber)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkIsAlreadyInLottoNumbers(List<Integer> winningNumberList, int lottoInput) {
+        if (winningNumberList.contains(lottoInput)) {
+            System.out.println(WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
+            return true;
+        }
+        return false;
     }
 }
