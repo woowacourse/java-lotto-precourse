@@ -22,20 +22,25 @@ public class Lotto {
 	public Lotto(List<Integer> numbers) {
 		this.numbers = numbers;
 	}
-	
-	public List<Integer> getNumbers() {
-		return numbers;
-	}
-	
+
 	public boolean hasNumber(int number) {
 		return numbers.contains(number);
 	}
+
+	public int matchCount(Lotto anotherLotto) {
+		int count = 0;
+
+		for (int number : numbers) {
+			count += anotherLotto.checkMatch(number);
+		}
+		return count;
+	}
 	
-	public int matchCount(Lotto lotto) {
-		List<Integer> anotherNumbers = lotto.getNumbers();
-		
-		anotherNumbers.retainAll(numbers);
-		return anotherNumbers.size();
+	public int checkMatch(int number) {
+		if(numbers.contains(number)) {
+			return 1;
+		}
+		return 0;
 	}
 
 	public void printNumbers() {

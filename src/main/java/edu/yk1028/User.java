@@ -58,8 +58,7 @@ public class User {
 		Result result = new Result();
 
 		for (Lotto lotto : lottos) {
-			Rank rank = winningLotto.match(lotto);
-			result.add(rank);
+			result.add(winningLotto.match(lotto));
 		}
 		return result;
 	}
