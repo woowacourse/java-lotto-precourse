@@ -38,6 +38,10 @@ public class LottoGame {
 		}
 		return true;
 	}
+	
+	public void confirmWinning(User user) {
+		Result result = user.calculateResult(winningLotto);
+	}
 
 	private String[] inputWinningNumbers() {
 		Scanner scanner = new Scanner(System.in);

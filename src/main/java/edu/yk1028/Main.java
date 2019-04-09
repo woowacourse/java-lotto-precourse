@@ -19,5 +19,6 @@ public class Main {
 		user.buyLottos(lottoMachine);
 		user.printLottos();
 		while(!lottoGame.generateWinningLotto());
+		lottoGame.confirmWinning(user);
 	}
 }

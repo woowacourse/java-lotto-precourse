@@ -53,4 +53,14 @@ public class User {
 			lotto.printNumbers();
 		}
 	}
+	
+	public Result calculateResult(WinningLotto winningLotto) {
+		Result result = new Result();
+
+		for (Lotto lotto : lottos) {
+			Rank rank = winningLotto.match(lotto);
+			result.add(rank);
+		}
+		return result;
+	}
 }
