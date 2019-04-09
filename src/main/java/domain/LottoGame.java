@@ -23,5 +23,8 @@ public class LottoGame {
     System.out.println("보너스 볼을 입력해 주세요.");
     int bonusNum = sc.nextInt();
     control.setWinningLotto(lastLotto, bonusNum);
+
+    System.out.println("\n당첨 통계\n---------");
+    control.printResult();
   }
 }

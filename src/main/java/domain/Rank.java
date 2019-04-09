@@ -50,5 +50,12 @@ public enum Rank {
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
+
+    public static Rank getRankByString(String str) {
+        for (Rank each : values()) {
+            if(each.toString().equals(str)) return each;
+        }
+        return null;
+    }
 }
 
