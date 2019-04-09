@@ -42,7 +42,7 @@ public class StatisticsTest {
         Statistics statistics = Statistics.valueOf(lottoList, winningLotto);
         int expectedGain = calcGain(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
         int expectedCost = lottoList.size() * PRICE_PER_LOTTO;
-        statistics.displayRossGainRation();
+        statistics.displayIncomeCostRatio();
         assertEquals(String.format("총 수익률은 %.3f입니다.\n", (float) expectedGain / expectedCost),
                      bo.toString());
     }
@@ -53,7 +53,7 @@ public class StatisticsTest {
         Statistics statistics = Statistics.valueOf(lottoList, winningLotto);
         int expectedGain = calcGain(Rank.FIFTH);
         int expectedCost = lottoList.size() * PRICE_PER_LOTTO;
-        statistics.displayRossGainRation();
+        statistics.displayIncomeCostRatio();
         assertEquals(String.format("총 수익률은 %.3f입니다.\n", (float) expectedGain / expectedCost),
                      bo.toString());
     }

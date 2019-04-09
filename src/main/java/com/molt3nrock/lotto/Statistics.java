@@ -40,13 +40,13 @@ class Statistics {
             .forEach(System.out::println);
     }
 
-    void displayRossGainRation() {
-        System.out.println(String.format("총 수익률은 %.3f입니다.", calculateRossRatio()));
+    void displayIncomeCostRatio() {
+        System.out.println(String.format("총 수익률은 %.3f입니다.", calculateIncomeCostRatio()));
     }
 
     void displayStatistics() {
         displayRankState();
-        displayRossGainRation();
+        displayIncomeCostRatio();
     }
 
     /**
@@ -61,7 +61,7 @@ class Statistics {
      *
      * 수익률 = 총 이득 / 총 투자
      */
-    private float calculateRossRatio() {
+    private float calculateIncomeCostRatio() {
         final int BASE_PRICE = 0;
         int totalGain = rankState.entrySet().stream()
             .map(entry -> entry.getValue() * entry.getKey().getWinningMoney())
