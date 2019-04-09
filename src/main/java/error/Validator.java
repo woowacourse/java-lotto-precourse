@@ -1,5 +1,7 @@
 package error;
 
+import domain.Lotto;
+import error.customExceptions.InvalidLottoException;
 import error.customExceptions.MinimumPurchasePriceException;
 import error.customExceptions.NotIntegerException;
 import error.customExceptions.UndefinedException;
@@ -25,6 +27,9 @@ public class Validator {
         if (!isInteger(inputs)) {
             throw new NotIntegerException();
         }
+        if (!areValidNumbersForLotto(inputs)) {
+            throw new InvalidLottoException();
+        }
     }
 
     private boolean isInteger(String input) {
@@ -44,5 +49,23 @@ public class Validator {
     private boolean hasUndefined(String[] inputs) {
         int lengthOfFiltered = Arrays.stream(inputs).filter(i->!(i.equals(""))).toArray().length;
         return (lengthOfFiltered != inputs.length);
+    }
+
+    private boolean areValidNumbersForLotto(String[] inputs) {
+        return (inputs.length == Lotto.SIZE_OF_LOTTO)
+                && (!haveDuplicate(inputs))
+                && (isCorrectRange(inputs));
+    }
+
+    private boolean haveDuplicate(String[] inputs) {
+        int lengthOfFiltered = Arrays.stream(inputs).distinct().toArray().length;
+        return (lengthOfFiltered != inputs.length);
+    }
+
+    private boolean isCorrectRange(String[] inputs) {
+        int lengthOfFiltered = Arrays.stream(inputs).mapToInt(Integer::parseInt)
+                .filter(i->(i >= Lotto.FIRST_NUMBER) && (i <= Lotto.LAST_NUMBER))
+                .toArray().length;
+        return (lengthOfFiltered == inputs.length);
     }
 }
