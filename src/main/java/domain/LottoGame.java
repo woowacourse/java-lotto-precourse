@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,11 +16,11 @@ public class LottoGame {
     }
 
     public static void alertMoneyNotice(int inputMoney, int MIN, int MAX) {
-        if (MIN >= inputMoney) {
+        if (MIN > inputMoney) {
             System.out.println("금액이 부족합니다.");
         }
 
-        if (inputMoney >= MAX) {
+        if (inputMoney > MAX) {
             System.out.println("1인당 최대 10만원까지 구매 가능합니다.");
         }
     }
@@ -89,11 +89,20 @@ public class LottoGame {
         int ONE_LOTTO_PRICE = 1000;
         int charge = money % ONE_LOTTO_PRICE;
 
-        return charge
+        return charge;
     }
 
     public static Lotto generateLotto() {
+        HashSet<Integer> numbers = new HashSet<>();
 
+        while (numbers.size() != 6) {
+            numbers.add((int) (Math.random() * 45 + 1));
+        }
+
+        List<Integer> lottoNumbers = new ArrayList<>(numbers);
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        return lotto;
     }
 
     public static List<Lotto> purchaseLotto(int money) {
@@ -108,8 +117,23 @@ public class LottoGame {
         return boughtLotto;
     }
 
+    public static void announcePurchaseResult(List<Lotto> lottos, int charge) {
+        int numberOfNumber = lottos.size();
+        String message = String.format(
+                "\n거스름돈은 %d 원이고, %d개를 구매하였습니다.",charge, numberOfNumber);
+
+        System.out.println(message);
+
+        for (Lotto lotto : lottos) {
+            lotto.showNumbers();
+        }
+    }
+
     public static void main(String[] args) {
         int paidMoney = receiveMoney();
+        int charge = getCharge(paidMoney);
         List<Lotto> purchasedLotto = purchaseLotto(paidMoney);
+
+        announcePurchaseResult(purchasedLotto, charge);
     }
 }
