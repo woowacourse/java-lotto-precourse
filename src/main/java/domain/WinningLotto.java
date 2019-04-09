@@ -1,5 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -34,6 +38,21 @@ public class WinningLotto {
             return false;
         }
         return true;
+    }
+
+    private static boolean isThereEmptyString(String userInput) {
+        List<String> list = Arrays.asList(userInput.split(","));
+        List<String> list2 = new ArrayList<>();
+        for (int i=0, n=list.size(); i<n; i++) {
+            list2.add(list.get(i));
+        }
+        boolean isEmptyString =false;
+        while(!isEmptyString && !list2.isEmpty()) {
+            String currentStr = list2.get(0);
+            list2.remove(0);
+            isEmptyString = checkStr(currentStr);
+        }
+        return isEmptyString;
     }
 
 
