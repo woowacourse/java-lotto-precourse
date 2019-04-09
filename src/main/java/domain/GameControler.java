@@ -50,6 +50,22 @@ public class GameControler {
     }
 
     public void printLottos() {
-        
+        for (Lotto item : lottos) {
+            printLotto(item);
+        }
+    }
+
+    public void printLotto(Lotto item) {
+        String[] temp = convertIntegersToChar(item.getNumbers());
+        String sentence = String.join(",", temp);
+        System.out.printf("[%s]\n", sentence);
+    }
+
+    public String[] convertIntegersToChar(List<Integer> integers) {
+        String[] temp = new String[integer.size()];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = Integer.toString(integers.get(i).intValue());
+        }
+        return temp;
     }
 }
