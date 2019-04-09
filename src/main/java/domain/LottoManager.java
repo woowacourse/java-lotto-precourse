@@ -4,18 +4,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 로또 게임 configuration과 사용자 인터페이스를 담당하는 객체
+ * 로또 게임 configuration을 담당하는 객체
  */
 public class LottoManager {
-    Scanner sc = new Scanner(System.in);
-    Validator validator = new Validator();
+    public static final int PRICE_PER_LOTTO = 1000;
+    public static final int WINNING_NUMBER_BOUND = 45 + 1;
+    public static final int WINNING_NUMBER_ORIGIN = 1;
+    public static final int NUM_OF_WINNING_NUMBERS = 6;
 
-    private final int PRICE_PER_LOTTO = 1000;
-    private final int NUM_OF_WINNING_NUMBER = 6;
-    private final int WINNING_NUMBER_BOUND = 45 + 1;
-    private final int WINNING_NUMBER_ORIGIN = 1;
-
-    private int purchaseAmount;
+    private Scanner sc = new Scanner(System.in);
+    private Validator validator = new Validator();
 
     public int inputPurchaseAmount() {
         String purchaseAmount;
@@ -24,16 +22,15 @@ public class LottoManager {
             System.out.println("구매 금액을 입력해주세요.");
             purchaseAmount = sc.nextLine();
         } while(!validator.isValidPurchase(purchaseAmount));
-
-        this.purchaseAmount = Integer.parseInt(purchaseAmount);
-        return this.purchaseAmount;
+        return Integer.parseInt(purchaseAmount);
     }
 
     public Lotto autoIssue() {
         Random random = new Random();
-        List<Integer> autoNumbers = random.ints(NUM_OF_WINNING_NUMBER, WINNING_NUMBER_ORIGIN, WINNING_NUMBER_BOUND)
-                                    .boxed()
-                                    .collect(Collectors.toList());
+        List<Integer> autoNumbers = random.ints(NUM_OF_WINNING_NUMBERS,
+                WINNING_NUMBER_ORIGIN, WINNING_NUMBER_BOUND)
+                .boxed()
+                .collect(Collectors.toList());
 
         return new Lotto(autoNumbers);
     }
@@ -47,7 +44,6 @@ public class LottoManager {
         }
         System.out.println("\n" + numberOfLotto + " 개를 구매하셨습니다.");
         showLottos(lottos);
-
         return lottos;
     }
 
@@ -55,7 +51,7 @@ public class LottoManager {
         for (Lotto lotto: lottos) {
             System.out.println(lotto.getNumbers());
         }
-        System.out.println("\n");
+        System.out.print("\n");
     }
 
     public Lotto inputWinningNumbers() {
@@ -67,7 +63,6 @@ public class LottoManager {
                     .map(s -> Integer.valueOf(s))
                     .collect(Collectors.toList());
         } while(!validator.isValidWinningNumbers(winningNumbers));
-
         return new Lotto(winningNumbers);
     }
 
@@ -75,14 +70,9 @@ public class LottoManager {
         String bonus;
 
         do {
-            System.out.println("보너스 볼을 읿력해주세요");
+            System.out.println("보너스 볼을 입력해주세요");
             bonus = sc.nextLine();
         } while(!validator.isValidBonus(bonus));
-
         return Integer.parseInt(bonus);
-    }
-
-    public void showEarningRate(HashMap<Lotto, Rank> matchResult) {
-
     }
 }
