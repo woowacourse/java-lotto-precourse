@@ -11,6 +11,19 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
-
+    
     // 추가 기능 구현
+    
+    public String toString() {   	
+    	String result = "[";
+    	
+    	for (int i = 0; i < this.numbers.size() - 1; i++) {
+    		result += this.numbers.get(i) + ", ";
+    	}
+    	
+    	result += this.numbers.get(5) + "]";
+    	
+    	return result;
+    }
+    
 }
