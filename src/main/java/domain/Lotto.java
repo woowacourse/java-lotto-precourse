@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,5 +13,17 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public List<Integer> getNumbers() {
+        return this.numbers;
+    }
+
+    public void printLottoNumbers() {
+        List<String> stringList = new ArrayList<>();
+
+        for (int number : numbers) {
+            stringList.add(Integer.toString(number));
+        }
+        String result = String.join(", ", stringList);
+        System.out.println("[" + result + "]");
+    }
 }
