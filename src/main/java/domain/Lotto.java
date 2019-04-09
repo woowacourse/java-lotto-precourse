@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,4 +14,7 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    public void showNumbers() {
+        System.out.println(Arrays.toString(numbers.toArray()));
+    }
 }
