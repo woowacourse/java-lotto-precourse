@@ -50,9 +50,22 @@ public class PlayLotto {
             System.out.println("지난 주 당첨 번호를 입력해주세요.");
             rawWinningNumber = sc.nextLine().split(",");
             if (isValidNumberOfRange(rawWinningNumber) &&
-                    isValidSizeOfWinningNumber(rawWinningNumber)) { break; }
+                    isValidSizeOfWinningNumber(rawWinningNumber) &&
+                    isDuplicatedNumber(rawWinningNumber)) { break; }
         }
         return convertString2Int(rawWinningNumber);
+    }
+
+    public boolean isDuplicatedNumber(String[] rawWinningNumber) {
+        int frequency;
+        List<Integer> intNumber = convertString2Int(rawWinningNumber);
+        for (int i = 1; i < 46; i++) {
+            frequency = Collections.frequency(intNumber, i);
+            if (frequency > 1) {
+                System.out.println("중복된 당첨번호가 있습니다.");
+                return false;}
+        }
+        return true;
     }
 
     public boolean isValidNumberOfRange(String[] rawWinningNumber) {
