@@ -2,13 +2,14 @@ package domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * 로또 게임 configuration을 담당하는 객체
  */
 public class LottoManager {
     public static final int PRICE_PER_LOTTO = 1000;
-    public static final int WINNING_NUMBER_BOUND = 45 + 1;
+    public static final int WINNING_NUMBER_BOUND = 45;
     public static final int WINNING_NUMBER_ORIGIN = 1;
     public static final int NUM_OF_WINNING_NUMBERS = 6;
 
@@ -25,12 +26,20 @@ public class LottoManager {
         return Integer.parseInt(purchaseAmount);
     }
 
+    public int randomPop(List<Integer> numberSet) {
+        int randomIdx = (new Random()).nextInt(numberSet.size());
+
+        return numberSet.remove(randomIdx);
+    }
+
     public Lotto autoIssue() {
-        Random random = new Random();
-        List<Integer> autoNumbers = random.ints(NUM_OF_WINNING_NUMBERS,
-                WINNING_NUMBER_ORIGIN, WINNING_NUMBER_BOUND)
-                .boxed()
-                .collect(Collectors.toList());
+        List<Integer> autoNumbers = new ArrayList<Integer>();
+        List<Integer> lottoNumberSet = IntStream.rangeClosed(WINNING_NUMBER_ORIGIN, WINNING_NUMBER_BOUND)
+                                                .boxed().collect(Collectors.toList());
+
+        for (int i = 0; i < NUM_OF_WINNING_NUMBERS; i++) {
+            autoNumbers.add(randomPop(lottoNumberSet));
+        }
 
         return new Lotto(autoNumbers);
     }
@@ -42,6 +51,7 @@ public class LottoManager {
         for (int i = 1; i <= numberOfLotto; i++) {
             lottos.add(autoIssue());
         }
+
         System.out.println("\n" + numberOfLotto + " 개를 구매하셨습니다.");
         showLottos(lottos);
         return lottos;
