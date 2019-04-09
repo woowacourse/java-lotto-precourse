@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 class Statistics {
 
@@ -23,8 +24,21 @@ class Statistics {
     }
 
     int numberOfRank(Rank rank) {
-        assert(rankState.containsKey(rank));
+        assert (rankState.containsKey(rank));
         return rankState.get(rank);
+    }
+
+    void displayRankState() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        rankState.entrySet().stream()
+            .filter(entry -> !entry.getKey().equals(Rank.MISS))
+            .map(Statistics::formatRankStateEntry)
+            .forEach(System.out::println);
+    }
+
+    private static String formatRankStateEntry(Entry<Rank, Integer> entry) {
+        return String.format("%s- %d개", entry.getKey(), entry.getValue());
     }
 
     private void classifyLotto(Lotto lotto, WinningLotto winningLotto) {

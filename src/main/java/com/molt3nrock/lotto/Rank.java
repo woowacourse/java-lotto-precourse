@@ -47,6 +47,15 @@ public enum Rank {
         throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
     }
 
+    @Override
+    public String toString() {
+        String bonusBallMessage = " ";
+        if (this.equals(Rank.SECOND)) {
+            bonusBallMessage = ", 보너스볼 일치";
+        }
+        return String.format("%d개 일치%s(%d원)",countOfMatch, bonusBallMessage, winningMoney);
+    }
+
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
