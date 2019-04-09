@@ -13,8 +13,12 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countOfMatch = matchWinningNumber(userLotto);
+        boolean matchBonus = false;
+        if (countOfMatch == 5) {
+            matchBonus = matchBonusNumber(userLotto);
+        }
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
 
     public int matchWinningNumber(Lotto userLotto) {
