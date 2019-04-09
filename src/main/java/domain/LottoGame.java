@@ -31,9 +31,15 @@ public class LottoGame {
 
     private static final String COUNT = "개";
 
+    private static final String YIELD = "총 수익률은 ";
+
+    private static final String YIELD_RESULT = "%입니다.";
+
     private static final int MONEY_MIN_BOUND = 0;
 
     private static final int MONEY_MAX_BOUND = 4000000;
+
+    private static final int PERCENT = 100;
 
     private MyLottoManager myLottoManager;
 
@@ -68,6 +74,7 @@ public class LottoGame {
         myLottoManager.buyLotto(money);
         winningLotto = winningLottoMaker.makeWinninglotto();
         matchLottoNumbers();
+        printLottoResult();
     }
 
     private void moneyInput() {
@@ -106,5 +113,13 @@ public class LottoGame {
 
     private void saveMatchResult(Integer count, Rank rank) {
         totalPrice += (count * rank.getWinningMoney());
+    }
+
+    private void printLottoResult() {
+        System.out.println(YIELD + caculateYield() + YIELD_RESULT);
+    }
+
+    private double caculateYield() {
+        return (double) (totalPrice) / money * PERCENT;
     }
 }
