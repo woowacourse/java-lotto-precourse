@@ -1,5 +1,6 @@
 import domain.Lotto;
 import domain.UserInput;
+import domain.WinningLotto;
 
 import java.util.List;
 import java.util.Scanner;
@@ -48,6 +49,12 @@ public class Game {
             System.out.println(lotto);
         }
         System.out.println();
+    }
+
+    public static WinningLotto getWinningLotto() {
+        Lotto lotto = getWinningLottoWithoutBonusNumber();
+        int bonusNumber = getBonusNumber(lotto);
+        return new WinningLotto(lotto, bonusNumber);
     }
 
 
