@@ -1,5 +1,5 @@
 /*
- * @WinningLottoMaker.java		1.00 2019/04/09
+ * @WinningLottoMaker.java		1.01 2019/04/10
  * 
  * Copyright(c)2019				HwiJin Hong.
  * All right reserved.
@@ -17,7 +17,7 @@ import java.util.Scanner;
 /**
  * 당첨 로또 번호를 만들어주는 클래스
  * 
- * @version 1.00 2019년 4월 9일
+ * @version 1.01 2019년 4월 10일
  * @author 홍휘진
  *
  */
@@ -94,15 +94,8 @@ public class WinningLottoMaker {
 
 	private boolean notLottoNumber(String lottoNumber, boolean validNumbers) {
 		if (!validNumbers) {
-			return validNumbers;
-		}
-		if (!LottoGame.isValidNumber(lottoNumber)) {
 			return false;
 		}
-		return isLottoNumber(lottoNumber);
-	}
-
-	private boolean isLottoNumber(String lottoNumber) {
 		int number = Integer.parseInt(lottoNumber);
 		return ((number <= Lotto.MAX_LOTTO_NUM) && (number >= Lotto.MIN_LOTTO_NUM));
 	}

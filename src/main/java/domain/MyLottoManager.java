@@ -1,5 +1,5 @@
 /*
- * @MyLottoManager.java	1.00 2019/04/10
+ * @MyLottoManager.java	1.01 2019/04/10
  * 
  * Copyright(c)2019		HwiJin Hong.
  * All right reserved.
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 내 로또를 매니지먼트 하는 클래스
  * 
- * @version 1.00 2019년 4월 10일
+ * @version 1.01 2019년 4월 10일
  * @author 홍휘진
  *
  */
@@ -61,7 +61,7 @@ public class MyLottoManager {
 	}
 
 	private boolean notEnoughMoney(int money) {
-		return (money < LOTTO_PRICE) ? true : false;
+		return (money < LOTTO_PRICE);
 	}
 	
 	public HashMap<Rank, Integer> matchWithWinningLotto(WinningLotto winningLotto) {

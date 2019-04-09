@@ -1,5 +1,5 @@
 /*
- * @LottoGame.java		1.00 2019/04/10
+ * @LottoGame.java		1.01 2019/04/10
  *
  * Copyright(c)2019		HwiJin Hong.
  * All right reserved.
@@ -17,7 +17,7 @@ import java.util.Scanner;
  * 로또게임이 진행되는 클래스
  *
  * @author 홍휘진
- * @version 1.00 2019년 4월 10일
+ * @version 1.01 2019년 4월 10일
  */
 public class LottoGame {
 
@@ -69,7 +69,7 @@ public class LottoGame {
         }
     }
 
-    public void lottogame() {
+    public void lottoGame() {
         moneyInput();
         myLottoManager.buyLotto(money);
         winningLotto = winningLottoMaker.makeWinninglotto();
@@ -89,10 +89,7 @@ public class LottoGame {
             return true;
         }
         money = Integer.parseInt(moneyScan);
-        if ((money < MONEY_MIN_BOUND) || (money > MONEY_MAX_BOUND)) {
-            return true;
-        }
-        return false;
+        return ((money < MONEY_MIN_BOUND) || (money > MONEY_MAX_BOUND));
     }
 
     public void matchLottoNumbers() {
