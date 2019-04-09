@@ -27,11 +27,8 @@ public class LottoService {
 
     public static List<Lotto> getOrder(int money) {
         int numberOfLotto = money / LOTTO_PRICE;
-        List<Lotto> lottos = new ArrayList<>();
 
-        for (int i = 0; i < numberOfLotto; i++) {
-            lottos.add(LottoMaker.getLotto());
-        }
+        List<Lotto> lottos = LottoMaker.getLottos(numberOfLotto);
         return lottos;
     }
 }

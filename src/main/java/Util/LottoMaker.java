@@ -18,12 +18,21 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 무작위 번호를 가진 로또를 생성하는 객체
+ * 로또를 생성하는 객체
  */
 public class LottoMaker {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_MAX_LENGTH = 6;
+
+    public static List<Lotto> getLottos(int numberOfLotto) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < numberOfLotto; i++) {
+            lottos.add(getLotto());
+        }
+        return lottos;
+    }
 
     public static Lotto getLotto() {
         List<Integer> lottoNumbers = new ArrayList<>(getUniqueNumberSet());
