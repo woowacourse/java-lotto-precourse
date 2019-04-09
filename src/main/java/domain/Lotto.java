@@ -32,5 +32,18 @@ public class Lotto {
 		}
     }
 
-    
+    public void printlotto() {
+    	
+    	System.out.print("[");
+    	
+    	for(int i = 0; i < numbers.size(); i++) {
+    		System.out.print(numbers.get(i));
+    		if(i < numbers.size()-1) {
+    			System.out.print(",");	
+    		}
+    	}
+ 
+    	System.out.println("]");
+	}
+
 }
