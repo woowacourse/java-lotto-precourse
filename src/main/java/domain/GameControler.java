@@ -11,14 +11,14 @@ import java.util.List;
  */
 
 public class GameControler {
-    private int n;
-    private int pre_money;
-    private int total_winning_money = 0;
+    private int n;  // 구매한 로또 갯수를 나타내는 변수
+    private int pre_money;  // 초기 구매비용을 나타내는 변수
+    private int total_winning_money = 0;    // 총 상금을 나타내는 변수
 
     private Random random = new Random();
-    private ArrayList<Lotto> lottos = new ArrayList<Lotto>();
-    private WinningLotto winning;
-    private ArrayList<Rank> match_lottos = new ArrayList<Rank>();
+    private WinningLotto winning;   // 당첨번호와 보너스번호를 저장하는 변수
+    private ArrayList<Lotto> lottos = new ArrayList<Lotto>();   // 유저가 구입한 로또를 저장하는 변수
+    private ArrayList<Rank> match_lottos = new ArrayList<Rank>();   // 유저가 구입한 로또의 Rank로 저장하는 변수
 
     GameControler(int n) {
         this.n = n / 1000;
@@ -29,6 +29,7 @@ public class GameControler {
         return n;
     }
 
+    // 유저가 구입한 로또의 갯수에 따라 로또를 셋팅하는 함수
     public void setLottos() {
         for (int i = 0; i < n; i++) {
             int[] temp = getNonRepitIntArray();
@@ -57,6 +58,7 @@ public class GameControler {
         return false;
     }
 
+    // 유저가 구입한 로또를 출력하는 함수
     public void printLottos() {
         for (Lotto item : lottos) {
             printLotto(item);
@@ -77,12 +79,14 @@ public class GameControler {
         return temp;
     }
 
+    // 당첨 번호와 보너스 번호를 셋팅하는 함수
     public void setWinningLotto(String str, int bonus) {
         String[] temp = str.split(",");
         List<Integer> numbers = Arrays.asList(temp).stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
         winning = new WinningLotto(new Lotto(numbers), bonus);
     }
 
+    // 최종 결과를 출력할 함수
     public void printResult() {
         matchingAll();
         String[] rank = { "FIFTH", "FOURTH", "THIRD", "SECOND", "FIRST" };
