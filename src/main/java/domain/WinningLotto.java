@@ -17,14 +17,16 @@ public class WinningLotto {
         int countOfMatch = 0;
         boolean matchBonus = userLotto.getNumbers().contains(bonusNo);
         for (int num : userLotto.getNumbers()) {
-            if (checkmatchCount(num)) {
-                countOfMatch++;
-            }
+            countOfMatch += matchCount(num);
         }
         return Rank.valueOf(countOfMatch, matchBonus);
     }
 
-    private boolean checkmatchCount(int num) {
-        return lotto.getNumbers().contains(num);
+    private int matchCount(int num) {
+        int countOfMatch = 0;
+        if (lotto.getNumbers().contains(num)) {
+            countOfMatch++;
+        }
+        return countOfMatch;
     }
 }
