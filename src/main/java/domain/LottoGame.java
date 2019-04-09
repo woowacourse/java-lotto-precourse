@@ -27,6 +27,7 @@ public class LottoGame {
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MAX_NUM = 45;
     private static final int LOTTO_MIN_NUM = 1;
+    private static final int PERCENTAGE = 100;
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -37,10 +38,10 @@ public class LottoGame {
 
         lottoList = lottoPurchase(lottoAmount);
         winningLotto = requestWinningLotto();
-        lottoResult(lottoList, winningLotto);
+        lottoResult(lottoList, winningLotto, lottoAmount);
     }
 
-    private void lottoResult(List<Lotto> lottoList, WinningLotto winningLotto) {
+    private void lottoResult(List<Lotto> lottoList, WinningLotto winningLotto, int lottoAmount) {
         Map<Rank, Integer> result = setResult();
         Rank rank;
 
@@ -50,6 +51,17 @@ public class LottoGame {
             result.put(rank, result.get(rank) + 1);
         }
         printResult(result);
+        printEarningRate(result, lottoAmount);
+    }
+
+    private void printEarningRate(Map<Rank, Integer> result, int lottoAmount) {
+        double EarningRate = 0;
+
+        for (Rank rank : result.keySet()) {
+            EarningRate += result.get(rank) * rank.getWinningMoney();
+        }
+        EarningRate = (EarningRate / (lottoAmount * TICKET_PRICE)) * PERCENTAGE;
+        System.out.println("총 수익률은 " + String.format("%.3f", EarningRate) + "%입니다.");
     }
 
     private void printResult(Map<Rank, Integer> result) {
