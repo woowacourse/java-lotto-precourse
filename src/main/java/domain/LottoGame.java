@@ -12,6 +12,7 @@ public class LottoGame {
         lottoTickets.showAll();
 
         Lotto winningNumbers = new WinningNumbersInput().getWinningNumbers();
-        new BonusBallInput();
+        int bonusNo = new BonusBallInput(winningNumbers).getBonusNo();
+
     }
 }

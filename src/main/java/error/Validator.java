@@ -29,12 +29,15 @@ public class Validator {
         }
     }
 
-    public void checkAccuracyOfBonusNo(String input) {
+    public void checkAccuracyOfBonusNo(String input, Lotto winningNumbers) {
         if (!isInteger(input)) {
             throw new NotIntegerException();
         }
         if (!isCorrectRange(input)) {
             throw new InvalidRangeException();
+        }
+        if (winningNumbers.contains(Integer.parseInt(input))) {
+            throw new InvalidBonusNoException();
         }
     }
 
