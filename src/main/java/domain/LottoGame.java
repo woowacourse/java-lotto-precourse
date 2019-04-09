@@ -19,6 +19,10 @@ public class LottoGame {
         makeLotto(numOfLotto);
         printLotto(numOfLotto);
         setWinningLotto();
+        Statistics statistics = new Statistics();
+        statistics.compileStatistics(lotto, winningLotto);
+        statistics.setRateOfReturn(numOfLotto);
+        statistics.printStatistics();
     }
 
     private int getNumOfLotto() {
