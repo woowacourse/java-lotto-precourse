@@ -1,6 +1,6 @@
 package com.molt3nrock.lotto;
 
-public class Constants {
+class Constants {
 
     static final int MINIMUM_NUMBER_OF_LOTTO = 1;
     static final int MAXIMUM_NUMBER_OF_LOTTO = 45;
