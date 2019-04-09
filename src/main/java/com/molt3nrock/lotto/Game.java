@@ -25,6 +25,14 @@ public class Game {
         }
     }
 
+    /**
+     * Lotto 구입 상태 출력.
+     *
+     * 거슬러 줄 돈이 있으면 그것을 출력하고 구입한 {@code List<Lotto>}의 숫자들을 출력합니다.
+     *
+     * @param money     사용자가 입력한 돈
+     * @param lottoList 생성된 Lotto List
+     */
     private static void displayLottoPurchaseResult(int money, List<Lotto> lottoList) {
         int moneyChange = money % PRICE_PER_LOTTO;
         if (money >= PRICE_PER_LOTTO && moneyChange > 0) {
