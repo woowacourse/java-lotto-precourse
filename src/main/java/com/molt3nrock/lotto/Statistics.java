@@ -41,6 +41,11 @@ class Statistics {
         System.out.println(String.format("총 수익률은 %.3f입니다.", calculateRossRatio()));
     }
 
+    void displayStatistics() {
+        displayRankState();
+        displayRossGainRation();
+    }
+
     private float calculateRossRatio() {
         final int PRICE_PER_LOTTO = 1000;
         int totalGain = rankState.entrySet().stream()

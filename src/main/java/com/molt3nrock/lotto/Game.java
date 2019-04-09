@@ -13,27 +13,42 @@ import java.util.stream.Collectors;
 
 public class Game {
 
-    private int parseInput(String line) throws IllegalArgumentException {
-        int money;
+    public static void main(String[] args) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int money = parseInputAsMoney(br);
+            List<Lotto> lottoList = LottoBuilder.create().withMoney(money).build();
+            displayBoughtLottoList(lottoList);
+            Statistics.valueOf(lottoList, getWiningLotto(br)).displayStatistics();
+        } catch (Exception e) {
+            System.out.println(String.format("게임 오류: %s", e.getMessage()));
+        }
+    }
+
+    private static void displayBoughtLottoList(List<Lotto> lottoList) {
+        System.out.println(String.format("%d개를 구매했습니다", lottoList.size()));
+        lottoList.forEach(System.out::println);
+    }
+
+    private static int parseInputAsMoney(BufferedReader br)
+        throws IllegalArgumentException, IOException {
         try {
-            money = Integer.parseInt(line);
+            System.out.println("구입금액을 입력해 주세요.");
+            return Integer.parseInt(br.readLine());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("올바른 돈이 아닙니다.");
         }
-        return money;
     }
 
-    private WinningLotto getWiningLotto() throws IOException, IllegalArgumentException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String line;
-        line = br.readLine();
-        List<Integer> winningNumbers = parseInputAsWinningNumbers(line);
-        line = br.readLine();
-        Integer bonusNumber = parseInputAsBonusNumber(line, winningNumbers);
+    private static WinningLotto getWiningLotto(BufferedReader br)
+        throws IOException, IllegalArgumentException {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> winningNumbers = parseInputAsWinningNumbers(br.readLine());
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Integer bonusNumber = parseInputAsBonusNumber(br.readLine(), winningNumbers);
         return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 
-    private Integer parseInputAsBonusNumber(String line, List<Integer> winningNumbers)
+    private static Integer parseInputAsBonusNumber(String line, List<Integer> winningNumbers)
         throws IllegalArgumentException {
         Integer bonusNumber = parseStringAsInteger(line);
         if (winningNumbers.stream().anyMatch(i -> i.equals(bonusNumber))
@@ -43,7 +58,8 @@ public class Game {
         return bonusNumber;
     }
 
-    private List<Integer> parseInputAsWinningNumbers(String line) throws IllegalArgumentException {
+    private static List<Integer> parseInputAsWinningNumbers(String line)
+        throws IllegalArgumentException {
         List<Integer> numbers = Arrays.stream(line.split(","))
             .map(s -> parseStringAsInteger(s.trim()))
             .filter(i -> i >= MINIMUM_NUMBER_OF_LOTTO && i <= MAXIMUM_NUMBER_OF_LOTTO)
@@ -54,7 +70,7 @@ public class Game {
         throw new IllegalArgumentException("올바른 당첨번호 입력이 아닙니다.");
     }
 
-    private Integer parseStringAsInteger(String input) throws IllegalArgumentException {
+    private static Integer parseStringAsInteger(String input) throws IllegalArgumentException {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
