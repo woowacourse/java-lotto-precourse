@@ -10,7 +10,7 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
