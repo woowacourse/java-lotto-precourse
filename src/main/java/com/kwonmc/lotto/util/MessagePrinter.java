@@ -47,7 +47,7 @@ public class MessagePrinter {
     }
 
     public static void numberRangeInvalid() {
-        System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_RANGE
+        System.out.println(Strings.MESSAGE_INVALID_RANGE
                 + Strings.MESSAGE_RE_INPUT_PLEASE);
     }
 
@@ -58,6 +58,11 @@ public class MessagePrinter {
 
     public static void lastWeekNumber() {
         System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
+    }
+
+    public static void bonusNoRangeInvalid() {
+        System.out.println(Strings.MESSAGE_INVALID_RANGE
+                + Strings.MESSAGE_RE_INPUT_PLEASE);
     }
 
     public static void bonusNoInvalid() {

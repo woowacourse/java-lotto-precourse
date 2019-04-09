@@ -159,6 +159,10 @@ public class GameRunner {
     }
 
     private boolean bonusNoValidChecker(Lotto lotto, int bonusNo) {
+        if (bonusNo < 1 || bonusNo >= Numbers.TOTAL_LOTTO_POOL + 1) {
+            MessagePrinter.bonusNoRangeInvalid();
+            return false;
+        }
         if (lotto.contains(bonusNo)) {
             MessagePrinter.bonusNoInvalid();
             return false;
