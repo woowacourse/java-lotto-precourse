@@ -36,4 +36,13 @@ public class Lotto {
 
         return possibleNumbers;
     }
+
+    public void printLottoNumbers() {
+        ArrayList<String> mylottoNumStringList = new ArrayList<String>();
+        for (int i = 0; i < numbers.size(); i++) {
+            mylottoNumStringList.add(numbers.get(i) + "");
+        }
+        String printComment = "[" + String.join(",", mylottoNumStringList) + "]";
+        System.out.println(printComment);
+    }
 }
