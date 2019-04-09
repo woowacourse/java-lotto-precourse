@@ -5,6 +5,7 @@ import java.util.List;
 
 public class LottoGenerator {
     private static List<Lotto> lottoList;
+    private WinningLotto winningLotto;
 
     LottoGenerator() {
         lottoList = new ArrayList<>();
@@ -21,6 +22,10 @@ public class LottoGenerator {
         AutoLotto autoLotto = new AutoLotto();
 
         lottoList.add(new Lotto(autoLotto.GenerateAuttoLotto()));
+    }
+
+    public void GenerateWinningLotto(List<Integer> winningNumbers){
+
     }
 
 

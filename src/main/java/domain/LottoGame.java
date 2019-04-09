@@ -18,7 +18,7 @@ public class LottoGame {
         lottoGenerator.GenerateAutoLottos(purchaseAmount);
         userOutput.PrintPurchaseResults();
         List<Integer> winningNumbers = userInput.RecieveWinningNumber();
-
+        int bonusNumber = userInput.RecieveBonusNumber();
     }
 
     public static void main(String[] args) {

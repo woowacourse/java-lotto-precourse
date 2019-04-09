@@ -8,6 +8,7 @@ public class UserInput {
 
     public int RecievePurchaseAmount() {
         int lottoCount = 0;
+
         try {
             lottoCount = TryToRecievePurchaseAmount();
         } catch (IllegalArgumentException e) {
@@ -45,7 +46,7 @@ public class UserInput {
             System.out.println("올바른 숫자를 입력해 주세요");
             RecieveWinningNumber();
         }
-        
+
         return winningNumbers;
     }
 
@@ -62,6 +63,24 @@ public class UserInput {
 
         throw new IllegalArgumentException(winningNumber + "는 올바른 값이 아닙니다.");
     }
+
+    public int RecieveBonusNumber(){
+        int bonusNumber = 0;
+
+        try {
+            bonusNumber = TryToRecieveBonusNumber();
+        }catch (IllegalArgumentException e){
+            System.out.println("올바른 보너스 번호를 입력해주세요.");
+            RecieveBonusNumber();
+        }
+
+        return bonusNumber;
+    }
+
+    private int TryToRecieveBonusNumber(){
+        System.out.println("이후 구현 예정정");
+        return 1;
+   }
 
     private List<Integer> ConvertListTypeToInt(List<String> stringWinningNumbers) {
         List<Integer> WinningNumbers = stringWinningNumbers.stream()
