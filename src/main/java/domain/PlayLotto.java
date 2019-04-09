@@ -123,10 +123,10 @@ public class PlayLotto {
      * @param money 구입 금액
      */
     public void printWinningStatistics(int money) {
-        System.out.println("\n당첨 통계\n-------");
         int totalWinningPrice = 0;
         List<Rank> lottoResultList = matchLotto();
         int lottoFrequency; // 당첨 등급별 빈도
+        System.out.println("\n당첨 통계\n-------");
         for (Rank rank : Rank.values()) {
             lottoFrequency = Collections.frequency(lottoResultList, rank);
             printWinningMessage(rank, lottoFrequency);
