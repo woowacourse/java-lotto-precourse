@@ -37,11 +37,8 @@ public class Validator {
     }
 
     private boolean isInteger(String[] inputs) {
-        boolean check = true;
-        for (String input : inputs) {
-            check = check && isInteger(input);
-        }
-        return check;
+        int lengthOfFiltered = Arrays.stream(inputs).filter(i->isInteger(i)).toArray().length;
+        return (lengthOfFiltered == inputs.length);
     }
 
     private boolean hasUndefined(String[] inputs) {
