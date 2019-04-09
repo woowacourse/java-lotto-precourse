@@ -16,4 +16,15 @@ public class WinningLotto {
         // TODO 로직 구현
         return null;
     }
+
+    public int matchWinningNumber(Lotto userLotto) {
+        int countOfMatch = 0;
+        for (int number: lotto.getNumbers()) {
+            if (userLotto.hasNumber(number)) {
+                countOfMatch ++;
+            }
+        }
+        return countOfMatch;
+    }
+
 }
