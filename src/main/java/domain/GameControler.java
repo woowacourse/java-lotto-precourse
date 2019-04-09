@@ -1,5 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * 로또게임에 필요한 함수를 생성해 놓은 클래스
  */
@@ -8,12 +12,36 @@ public class GameControler {
     private int n;
     private int pre_money;
 
+    private Random random = new Random();
+    private ArrayList<Lotto> lottos = new ArrayList<Lotto>();
+
     GameControler(int n) {
         this.n = n / 1000;
         this.pre_money = n;
     }
 
     public void setLottos() {
-        
+        for (int i = 0; i < n; i++) {
+            int[] temp = getNonRepitIntArray();
+            lottos.add(new Lotto(Arrays.stream(temp).boxed().collect(Collectors.toList())));
+        }
+    }
+
+    public int[] getNonRepitIntArray() {
+        int[] temp = new int[6];
+        for (int i = 0; i < temp.length; i++) {
+            int ran_num = random.nextInt(45)+1;
+            if (!(isRepit(temp, ran_num))) temp[i] = ran_num;
+            if (isRepit(temp, ran_num)) i--;
+        }
+        Arrays.sort(temp);
+        return temp;
+    }
+
+    public Boolean isRepit(int[] x,int num) {
+        for (int item : x) {
+            if (item == num) return true;
+        }
+        return false;
     }
 }
