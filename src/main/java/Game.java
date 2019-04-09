@@ -8,17 +8,19 @@ public class Game {
     static final String ASK_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     static final String NOT_PURCHASE_AMOUNT_ERROR = "1000 이상의 숫자를 입력해 주세요.";
     static final String NOT_LOTTO_NUMBERS_ERROR = "쉼표로 구분된, " +
-            "중복되지 않은 6 개의 로또 숫자(1~45)를 입력해 주세요.";
+            "중복되지 않은 6개의 로또 숫자(1~45)를 입력해 주세요.";
+    static final String NOT_BONUS_NUMBER_ERROR = "당첨 번호들과 중복되지 않는 1개의 " +
+            "로또 숫자(1~45)를 입력해 주세요.";
     static final String YOU_BOUGHT_IT = "개를 구매했습니다.";
     static final String ASK_WINNING_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
     static final String ASK_BONUS_BALL = "보너스 볼을 입력해 주세요.";
 
     public static int getPurchaseAmount() {
         System.out.println(ASK_PURCHASE_AMOUNT);
-        Scanner s =  new Scanner(System.in);
         String input;
+        Scanner s =  new Scanner(System.in);
         do {
-            input = s.nextLine();
+            input = s.nextLine().trim();
         }while(!isThereErrorInPurchaseAmount(input));
 
         return Integer.parseInt(input);
@@ -49,16 +51,35 @@ public class Game {
     }
 
 
-
-    private static List<Integer> getWinningLottoNumbers() {
-        System.out.println(ASK_WINNING_LOTTO);
+    public static int getBonusNumber(Lotto lotto) {
+        System.out.println(ASK_BONUS_BALL);
+        String input;
         Scanner s = new Scanner(System.in);
+        do {
+            input = s.nextLine().trim();
+        } while(!isThereErrorInBonusNumber(lotto, input));
+
+        return Integer.parseInt(input);
+    }
+
+    private static boolean isThereErrorInBonusNumber(Lotto lotto, String input) {
+        if(UserInput.isInRange(input, Lotto.BOTTOM, Lotto.TOP) &&
+                !lotto.hasNumber(Integer.parseInt(input))) {
+            return true;
+        }
+        System.out.println(NOT_BONUS_NUMBER_ERROR);
+        return false;
+    }
+
+    public static Lotto getWinningLottoWithoutBonusNumber() {
+        System.out.println(ASK_WINNING_LOTTO);
         String input;
         do {
+            Scanner s = new Scanner(System.in);
             input = s.nextLine();
         } while(!isThereErrorInLottoNumbers(input));
 
-        return UserInput.convertsToLottoNumbers(input);
+        return new Lotto(UserInput.convertsToLottoNumbers(input));
     }
 
     private static boolean isThereErrorInLottoNumbers(String input) {
