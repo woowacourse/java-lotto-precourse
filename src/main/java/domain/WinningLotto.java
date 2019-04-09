@@ -47,8 +47,6 @@ public class WinningLotto {
 
     }
 
-
-
     public static String askUserWinningNumbers() {
         boolean isUserInputRight = false;
         String userInput = "E @ askUserWinningNumbers";
@@ -69,18 +67,22 @@ public class WinningLotto {
     }
 
     private static boolean isThereEmptyString(String userInput) {
-        List<String> list = Arrays.asList(userInput.split(","));
-        List<String> list2 = new ArrayList<>();
-        for (int i=0, n=list.size(); i<n; i++) {
-            list2.add(list.get(i));
-        }
+        List<String> listToCheckEmptyString = makeListToCheckEmptyString(userInput);
         boolean isEmptyString =false;
-        while(!isEmptyString && !list2.isEmpty()) {
-            String currentStr = list2.get(0);
-            list2.remove(0);
-            isEmptyString = checkStr(currentStr);
+        while(!isEmptyString && !listToCheckEmptyString.isEmpty()) {
+            isEmptyString = checkStr(listToCheckEmptyString.get(0));
+            listToCheckEmptyString.remove(0);
         }
         return isEmptyString;
+    }
+
+    private static List<String> makeListToCheckEmptyString(String userInput) {
+        List<String> list = Arrays.asList(userInput.split(","));
+        List<String> listToCheckEmptyString = new ArrayList<>();
+        for (int i=0, n=list.size(); i<n; i++) {
+            listToCheckEmptyString.add(list.get(i));
+        }
+        return listToCheckEmptyString;
     }
 
     private static boolean checkStr(String currentStr) {
@@ -206,8 +208,4 @@ public class WinningLotto {
         }
         return false;
     }
-
-
-
-
 }
