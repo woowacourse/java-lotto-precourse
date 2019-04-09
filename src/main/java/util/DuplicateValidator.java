@@ -14,7 +14,6 @@ public class DuplicateValidator {
 		if (temp.size() == intList.size()) {
 			return false;
 		}
-		System.out.println("중복된 당첨번호를 입력했습니다.");
 		return true;
 	}
 
@@ -23,7 +22,6 @@ public class DuplicateValidator {
 		if (!intList.contains(bonusNum)) {
 			return false;
 		}
-		System.out.println("중복된 보너스 볼을 입력했습니다.");
 		return true;
 	}
 }

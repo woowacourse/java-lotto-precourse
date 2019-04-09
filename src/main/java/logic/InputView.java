@@ -38,15 +38,16 @@ class InputView {
 	}
 
 	public static WinningLotto getWinningLotto() {
-		List<Integer> numbers = getWinningLottoNums();
+		List<Integer> numbers = getWinningLottoList();
 		int bonusNum;
 		do {
 			bonusNum = getBonusNumber();
-		} while (DUPLICATE_VALIDATOR.isDuplicate(numbers, bonusNum) || !NUMBER_VALIDATOR.isValidNumber(bonusNum));
+		} while (DUPLICATE_VALIDATOR.isDuplicate(numbers, bonusNum)
+				|| !NUMBER_VALIDATOR.isValidNumber(bonusNum));
 		return new WinningLotto(new Lotto(numbers), bonusNum);
 	}
 
-	private static List<Integer> getWinningLottoNums() {
+	private static List<Integer> getWinningLottoList() {
 		List<Integer> temp = null;
 		do {
 			System.out.println("지난 주 당첨번호를 입력해 주세요.");

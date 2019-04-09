@@ -5,8 +5,10 @@ package logic;
 
 import domain.Lotto;
 import domain.LottoResult;
+import domain.Rank;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
 
@@ -25,10 +27,19 @@ public class OutputView {
 		printProfitRate(lottoResult);
 	}
 
-	public static void printLottoStatResult(LottoResult lottoResult) {
+	private static void printLottoStatResult(LottoResult lottoResult) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		lottoResult.printStatResult();
+		Map<Rank, Integer> map = lottoResult.getMap();
+		for (Rank rank : Rank.reverseValues()) {
+			printLottoRank(rank, map.get(rank));
+		}
+	}
+
+	private static void printLottoRank(Rank rank, Integer value) {
+		if (!(rank == Rank.MISS)) {
+			System.out.println(rank.toString() + " - " + value + "개");
+		}
 	}
 
 	public static void printProfitRate(LottoResult lottoResult) {

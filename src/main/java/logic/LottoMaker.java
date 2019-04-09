@@ -4,6 +4,7 @@
 package logic;
 
 import domain.Lotto;
+import util.DuplicateValidator;
 import util.RandomNumberMaker;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 import static domain.LottoConstant.*;
 
 public class LottoMaker {
+	private static final DuplicateValidator DUPLICATE_VALIDATOR = new DuplicateValidator();
 
 	public static List<Lotto> getRandomLottoList(int gameCount) {
 		List<Lotto> lottoList = new ArrayList<>();
@@ -22,7 +24,11 @@ public class LottoMaker {
 	}
 
 	private static Lotto makeRandomLotto() {
-		return new Lotto(makeRandomIntList());
+		List<Integer> intList;
+		do {
+			intList = makeRandomIntList();
+		} while (DUPLICATE_VALIDATOR.isDuplicate(intList));
+		return new Lotto(intList);
 	}
 
 	private static List<Integer> makeRandomIntList() {

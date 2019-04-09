@@ -22,11 +22,11 @@ class LottoPlayer {
 		gameCount = InputView.getLottoCount();
 		lottoList = LottoMaker.getRandomLottoList(gameCount);
 		OutputView.printGameCount(gameCount);
-		winningLotto = InputView.getWinningLotto();
+		OutputView.printLottoList(lottoList);
 	}
 
 	public void proceedLotto() {
-		OutputView.printLottoList(lottoList);
+		winningLotto = InputView.getWinningLotto();
 		LottoResult lottoResult = new LottoResult(lottoList, winningLotto);
 		OutputView.printResult(lottoResult);
 	}

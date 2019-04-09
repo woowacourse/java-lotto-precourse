@@ -25,7 +25,6 @@ public class NumberValidator {
 		if ((lottoMinNum <= number) && (number <= lottoMaxNum)) {
 			return true;
 		}
-		System.out.println("범위에 맞는 로또 번호를 입력하세요. (" + lottoMinNum + "~" + lottoMaxNum + ")");
 		return false;
 	}
 }

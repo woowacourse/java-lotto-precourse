@@ -16,7 +16,6 @@ public class SizeValidator {
 		if (intList.size() == this.lottoSize) {
 			return true;
 		}
-		System.out.println( lottoSize + "자리의 로또 번호를 입력하세요");
 		return false;
 	}
 }
