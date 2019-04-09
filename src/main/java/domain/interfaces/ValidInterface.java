@@ -1,7 +1,7 @@
 /*
  * ValidInterface Interface
  *
- * @version 1
+ * @version 1.1
  *
  * @date 2019-04-09
  *
@@ -14,11 +14,24 @@ public interface ValidInterface {
     int MAX_PURCHASE_MONEY = 100_000;
     int MIN_PURCHASE_MONEY = 1_000;
 
-    boolean validPurchasePrice(int purchaseAmount);
+    void validPurchaseSequence(String purchasePrice);
 
-    boolean validConvertToIntType(String inputPrice);
+    void validConvertToIntType(String purchasePrice);
 
-    boolean validPurchasePriceDivisibleByUnitPrice(int purchaseAmount);
+    void validPurchasePriceDivisibleByUnitPrice(int purchasePrice);
 
-    boolean validPurcahseSequence(String inputPrice);
+    void validPurchasePrice(int purchasePrice);
+
+    void validWinningLottoSequence(String winLottoNums);
+
+    void validWinLottoNumsInt(String[] winLottoNums);
+
+    void validWinLottoNumsCount(String[] winLottoNums);
+
+    void validWinLottoNumsRange(String[] winLottoNums);
+
+    void validWinLottoNumRange(String winLottoNum);
+
+    void validWinLottoDuplicate(String[] winLottoNums);
+
 }
