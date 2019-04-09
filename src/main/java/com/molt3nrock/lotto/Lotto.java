@@ -18,6 +18,7 @@ public class Lotto {
     public String toString() {
         List<String> numberStrings = numbers
             .stream()
+            .sorted()
             .map(Object::toString)
             .collect(Collectors.toList());
         return String.format("[%s]", String.join(", ", numberStrings));
