@@ -1,4 +1,4 @@
-package domain;
+package com.molt3nrock.lotto;
 
 /**
  * 당첨 번호를 담당하는 객체

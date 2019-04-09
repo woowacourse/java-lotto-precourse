@@ -1,4 +1,4 @@
-package domain;
+package com.molt3nrock.lotto;
 
 import java.util.List;
 
