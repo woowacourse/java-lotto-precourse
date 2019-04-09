@@ -63,8 +63,7 @@ public class PlayLotto {
     }
 
     public void printWinningStatistics(int money) {
-        System.out.println("\n당첨 통계");
-        System.out.println("-------");
+        System.out.println("\n당첨 통계\n-------");
         int totalWinningPrice = 0;
         List<Rank> lottoResultList = matchLotto();
         int lottoFrequency;
