@@ -87,7 +87,7 @@ public class WinningLotto {
 
     private static boolean checkStr(String currentStr) {
         if(currentStr.isEmpty()) {
-            System.out.println("6개의 숫자를 입력해 주세요!");
+            System.out.println("빈칸이 있습니다. 6개의 숫자를 입력해 주세요!");
             return true;
         }
         return false;
