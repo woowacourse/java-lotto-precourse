@@ -16,7 +16,9 @@ public class Validator {
     }
 
     public static boolean isValidWinningNumber(List<Integer> winningNumbers) {
-        return (isValidSize(winningNumbers) && isValidRangeLottoNumber(winningNumbers)) ? true : false;
+        return (isValidSize(winningNumbers) && isValidRangeLottoNumber(winningNumbers)
+                && isOverlapLottoNumber(winningNumbers))
+                ? true : false;
     }
 
     private static boolean isValidSize(List<Integer> winningNumbers) {

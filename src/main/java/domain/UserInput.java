@@ -2,25 +2,25 @@ package domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class UserInputReciever {
-    private static final int UNIT_OF_PURCHASE_AMOUNT = 1000;
-
+public class UserInput {
     private Scanner scanner = new Scanner(System.in);
 
     public int RecievePurchaseAmount() {
-        int purchaseAmount = 0;
+        int lottoCount = 0;
         try {
-            purchaseAmount = TryToRecievePurchaseAmount();
+            lottoCount = TryToRecievePurchaseAmount();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
+            System.exit(0);
         }
 
-        return FindLottoCount(purchaseAmount);
+        return lottoCount;
     }
 
     private int FindLottoCount(int purchaseAmount) {
+        final int UNIT_OF_PURCHASE_AMOUNT = 1000;
+
         return purchaseAmount / UNIT_OF_PURCHASE_AMOUNT;
     }
 
@@ -29,13 +29,27 @@ public class UserInputReciever {
         int purchaseAmount = scanner.nextInt();
 
         if (Validator.isValidPurchaseAmount(purchaseAmount)) {
-            return purchaseAmount;
+            int lottoCount = FindLottoCount(purchaseAmount);
+            return lottoCount;
         }
 
         throw new IllegalArgumentException(purchaseAmount + "는 유효하지 않은 값입니다.");
     }
 
-    public List<Integer> TryToRecieveWinningNumber() throws IllegalArgumentException {
+    public List<Integer> RecieveWinningNumber() {
+        List<Integer> winningNumbers = new ArrayList<>();
+
+        try {
+            winningNumbers = TryToRecieveWinningNumber();
+        } catch (IllegalArgumentException e){
+            System.out.println("올바른 숫자를 입력해 주세요");
+            RecieveWinningNumber();
+        }
+        
+        return winningNumbers;
+    }
+
+    private List<Integer> TryToRecieveWinningNumber() throws IllegalArgumentException {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
         String winningNumber = scanner.nextLine();
 
@@ -46,8 +60,9 @@ public class UserInputReciever {
             return winningNumbers;
         }
 
-        throw new IllegalArgumentException("올바른 당첨번호를 입력해주세요.");
+        throw new IllegalArgumentException(winningNumber + "는 올바른 값이 아닙니다.");
     }
+
     private List<Integer> ConvertListTypeToInt(List<String> stringWinningNumbers) {
         List<Integer> WinningNumbers = stringWinningNumbers.stream()
                 .map(Integer::valueOf)
@@ -55,6 +70,4 @@ public class UserInputReciever {
 
         return WinningNumbers;
     }
-
-
 }

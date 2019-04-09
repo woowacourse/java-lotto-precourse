@@ -1,20 +1,24 @@
 package domain;
 
+import java.util.List;
+
 public class LottoGame {
-    private UserInputReciever userInputReciever;
+    private UserInput userInput;
     private LottoGenerator lottoGenerator;
     private UserOutput userOutput;
 
     LottoGame(){
-        userInputReciever = new UserInputReciever();
+        userInput = new UserInput();
         lottoGenerator = new LottoGenerator();
         userOutput = new UserOutput();
     }
 
     public void Start(){
-        int purchaseAmount = userInputReciever.RecievePurchaseAmount();
-        lottoGenerator.GenerateLottos(purchaseAmount);
+        int purchaseAmount = userInput.RecievePurchaseAmount();
+        lottoGenerator.GenerateAutoLottos(purchaseAmount);
         userOutput.PrintPurchaseResults();
+        List<Integer> winningNumbers = userInput.RecieveWinningNumber();
+
     }
 
     public static void main(String[] args) {
