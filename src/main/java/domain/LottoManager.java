@@ -34,6 +34,7 @@ public class LottoManager implements Constants {
             randomNumber = random.nextInt(SIZE_OF_NUMBERS + 1) + 1;
         }
         Collections.sort(randomNumbers);
+
         return randomNumbers;
     }
 
@@ -43,7 +44,7 @@ public class LottoManager implements Constants {
         int bonusNumber = makeBonusNumber(lottoNumbers);
 
         winningLotto = new WinningLotto(lotto, bonusNumber);
-        System.out.println("당첨 번호");
+        System.out.println("\n" + "당첨 번호");
         System.out.println(winningLotto.getLotto().getNumbers() + " + 보너스 : " + winningLotto.getBonusNo());
     }
 
@@ -67,7 +68,21 @@ public class LottoManager implements Constants {
     }
 
     public void printResults() {
-        System.out.println();
-        System.out.println(buyer.getRanks()[0].getWinningMoney());
+        BuyerResult buyerResult = buyer.getBuyerResult();
+        int[] countOfWinningLottos = buyerResult.getCountOfWinningLottos();
+
+        System.out.println("\n" + "당첨 통계" + "\n" + "--------------");
+        System.out.println("3개 일치 (5000원) - " + countOfWinningLottos[4]);
+        System.out.println("4개 일치 (50000원) - " + countOfWinningLottos[3]);
+        System.out.println("5개 일치 (1500000원) - " + countOfWinningLottos[2]);
+        System.out.println("5개 일치, 보너스 볼 일치 (30000000원) - " + countOfWinningLottos[1]);
+        System.out.println("6개 일치 (2000000000원) - " + countOfWinningLottos[0]);
+        if(buyerResult.getTotalWinningMoney() == 0) {
+            System.out.println("총 수익률은 0.000 입니다.");
+            return;
+        }
+        System.out.println("총 수익률은 " + ((double)buyerResult.getTotalWinningMoney() / ((double)buyer.getCountOfLottos()
+                * 1000)) + "입니다.");
+
     }
 }

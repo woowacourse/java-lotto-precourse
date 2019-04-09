@@ -20,6 +20,8 @@ public class LottoBuyer implements Constants {
     private Lotto[] purchasedLottos;
     private Rank[] ranks;
     private int countOfLottos;
+    private int purchasedPrice;
+    private BuyerResult buyerResult = new BuyerResult();
 
     public LottoBuyer() {
         buyLottos();
@@ -30,10 +32,9 @@ public class LottoBuyer implements Constants {
     }
 
     private int enterPrice() {
-        int price;
         System.out.println("구입할 금액을 입력하세요.");
-        price = scanner.nextInt();
-        return checkPrice(price);
+        purchasedPrice = scanner.nextInt();
+        return checkPrice(purchasedPrice);
     }
 
 
@@ -61,9 +62,16 @@ public class LottoBuyer implements Constants {
 
     public void setRanks(Rank[] ranks) {
         this.ranks = ranks;
+        for(int i = 0; i <ranks.length; i++) {
+            buyerResult.setReults(ranks[i]);
+        }
     }
 
     public Rank[] getRanks() {
         return ranks;
+    }
+
+    public BuyerResult getBuyerResult() {
+        return buyerResult;
     }
 }
