@@ -26,8 +26,9 @@ public class Game {
     }
 
     private static void displayLottoPurchaseResult(int money, List<Lotto> lottoList) {
-        if (money >= PRICE_PER_LOTTO) {
-            System.out.println(String.format("잔돈 %d원을 거슬러 드립니다.", money % PRICE_PER_LOTTO));
+        int moneyChange = money % PRICE_PER_LOTTO;
+        if (money >= PRICE_PER_LOTTO && moneyChange > 0) {
+            System.out.println(String.format("잔돈 %d원을 거슬러 드립니다.", moneyChange));
         }
         System.out.println(String.format("%d개를 구매했습니다", lottoList.size()));
         lottoList.forEach(System.out::println);
