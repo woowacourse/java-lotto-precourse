@@ -1,7 +1,4 @@
-import domain.Lotto;
-import domain.LottoMachine;
-import domain.LottoNumberGenerator;
-import domain.WinningLotto;
+import domain.*;
 
 import java.util.List;
 
@@ -18,5 +15,9 @@ public class Application {
         userInterface.printLottos(lottos);
 
         WinningLotto winningLotto = userInterface.getWinningLotto();
+        LottoRankAnalyzer lottoRankAnalyzer = new LottoRankAnalyzer();
+        lottoRankAnalyzer.getLottoRankCount(lottos, winningLotto);
+
+        userInterface.printRankCount(lottoRankAnalyzer.getLottoRankCount(lottos, winningLotto));
     }
 }

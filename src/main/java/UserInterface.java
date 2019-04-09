@@ -1,7 +1,10 @@
 import domain.Lotto;
+import domain.LottoRankCount;
+import domain.Rank;
 import domain.WinningLotto;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -33,4 +36,16 @@ public class UserInterface {
 
         return new WinningLotto(lotto, BonusNo);
     }
+
+    void printRankCount(LottoRankCount lottoRankCount) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+
+        Arrays.stream(Rank.values())
+                .sorted(Comparator.reverseOrder())
+                .filter(rank -> rank != Rank.MISS)
+                .map(rank -> rank.getCountOfMatch() + "개 일치" + (rank == Rank.SECOND ? ", 보너스 볼 일치" : "") + " (" + rank.getWinningMoney() + "원)- " + lottoRankCount.getCount(rank) + "개")
+                .forEach(System.out::println);
+    }
+
 }
