@@ -125,8 +125,8 @@ public class LottoGame {
         createLottos(lottoCount);
         printLottos();
         createWinningLotto(sc);
-        Map<Rank, Integer> lottoMatchResult = calculateLottoMatch();    // 로또 당첨종류별 갯수
-        double profitPercent = calculateProfitRate(lottoMatchResult, lottoCount);   // 수익률
+        Map<Rank, Integer> lottoMatchResult = calculateLottoMatch();
+        double profitPercent = calculateProfitRate(lottoMatchResult, lottoCount);
         printLottoResult(lottoMatchResult, profitPercent);
     }
 }
