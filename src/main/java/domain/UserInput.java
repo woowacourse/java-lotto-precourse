@@ -7,12 +7,6 @@ public class UserInput {
     static final String SEPARATOR = ",";
 
 
-    private String input;
-
-    public UserInput() {
-        Scanner s = new Scanner(System.in);
-        input = s.nextLine().trim();
-    }
 
     private static boolean isNumber(char character) {
         return character >= '0' && character <= '9';
