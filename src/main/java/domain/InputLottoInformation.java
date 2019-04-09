@@ -187,16 +187,17 @@ public class InputLottoInformation {
         } catch (InputMismatchException ime) {
             sc = new Scanner(System.in);
             System.out.println(Message.errorMessage.get("ERROR_ONLYNUMBER"));
-            return getBonusBallOfLastWeek();
+            return setBonusBallOfLastWeek(number);
         }
         return number;
     }
 
     private boolean checkBonusBall(int number) {
-        if (checkLimitNumber(number)) {
+        if (checkOverlapNumber(number)) {
             return true;
         }
-        if (checkOverlapNumber(number)) {
+
+        if (checkLimitNumber(number)) {
             return true;
         }
         return false;
