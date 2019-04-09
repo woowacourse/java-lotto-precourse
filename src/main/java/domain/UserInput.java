@@ -41,6 +41,17 @@ public class UserInput {
         return number >= bottom && number <= top;
     }
 
+    public boolean isInRange(int bottom) {
+        int number;
+
+        if(!isZeroOrPositiveNumber(input)) {
+            return false;
+        }
+        number = Integer.parseInt(input);
+
+        return number >= bottom;
+    }
+
 
 
 
