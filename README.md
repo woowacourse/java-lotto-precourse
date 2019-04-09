@@ -33,11 +33,13 @@
     - [x] 서브로직 5-1: 로또 당첨결과 계산 로직 만들기
     - [x] 서브로직 5-2: 수익률 계산 로직 만들기
 - [x] 메인로직 6: 당첨로또, 수익률 결과 출력하기
+- [x] 메인로직 7: 전체 게임 진행 로직 구현
 
 ## 클래스별 세부 기능
 
 |LottoGame|로또게임 진행을 담당|
 |---|---|
+|getLottoCountFromUser|유저로부터 로또갯수를 받는 로직|
 |createLottos| 특정갯수의 로또객체를 생성해 반환|
 |printLottos|특정갯수의 로또객체정보를 출력|
 |calculateLottoMatch|로또 당첨결과를 계산|
@@ -45,6 +47,7 @@
 |addAllRankTypes|로또 당첨결과에 미리 모든 종류의 결과(Rank)를 입력해 0으로 초기화|
 |calculateProfitRate|수익률 계산|
 |printLottoResult|로또 당첨 결과를 출력(당첨로또 현황, 수익률)|
+|createWinningLotto|당첨로또 생성|
 
 |Lotto|로또 1장 객체|
 |---|---|

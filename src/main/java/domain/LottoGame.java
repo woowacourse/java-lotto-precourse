@@ -1,14 +1,20 @@
 package domain;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class LottoGame {
 
+    static final String COMMENT_WHEN_RECEIVE_INPUT_MONEY = "구입금액을 입력해 주세요.";
+
     static List<Lotto> lottoList;
     static WinningLotto winningLotto;
+
+    private int getLottoCountFromUser(Scanner sc) {
+        System.out.println(COMMENT_WHEN_RECEIVE_INPUT_MONEY);
+        int lottoCount = DataReceiver.getInputMoneyFromUser(sc) / GameSetting.PRICE_PER_1LOTTO;
+
+        return lottoCount;
+    }
 
     private void createLottos(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
@@ -24,6 +30,13 @@ public class LottoGame {
         for (int i = 0; i < lottoList.size(); i++) {
             lottoList.get(i).printLottoNumbers();
         }
+    }
+
+    private void createWinningLotto(Scanner sc) {
+        ArrayList<Integer> winNumberList = DataReceiver.getWinningLottoNumbersFromUser(sc);
+        int bonusNumber = DataReceiver.getBonusNumberFromUser(winNumberList, sc);
+
+        winningLotto = new WinningLotto(new Lotto(winNumberList), bonusNumber);
     }
 
     private Map<Rank, Integer> calculateLottoMatch() {
@@ -88,5 +101,17 @@ public class LottoGame {
         }
         // 수익률 출력
         System.out.println("총 수익률은 " + String.format("%.1f", profitPercent) + "입니다");
+    }
+
+    public void playGame() {
+        Scanner sc = new Scanner(System.in);
+        int lottoCount = getLottoCountFromUser(sc);
+
+        createLottos(lottoCount);
+        printLottos();
+        createWinningLotto(sc);
+        Map<Rank, Integer> lottoMatchResult = calculateLottoMatch();
+        double profitPercent = calculateProfitRate(lottoMatchResult, lottoCount);
+        printLottoResult(lottoMatchResult, profitPercent);
     }
 }
