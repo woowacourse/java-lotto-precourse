@@ -15,11 +15,7 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         // TODO 로직
         int countOfMatch = countOfMatch(userLotto);
-        boolean matchBonus = false;
-
-        if (userLotto.contains(bonusNo)) {
-            matchBonus = true;
-        }
+        boolean matchBonus = matchBonus(userLotto);
 
         return Rank.valueOf(countOfMatch, matchBonus);
     }
@@ -32,5 +28,13 @@ public class WinningLotto {
             }
         }
         return countOfMatch;
+    }
+
+    private boolean matchBonus(Lotto userLotto) {
+        boolean matchBonus = false;
+        if (userLotto.contains(bonusNo)) {
+            matchBonus = true;
+        }
+        return matchBonus;
     }
 }
