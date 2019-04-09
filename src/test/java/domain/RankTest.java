@@ -14,4 +14,9 @@ public class RankTest {
         assertEquals(Rank.FIRST,Rank.valueOf(6,false));
 
     }
+
+    @Test
+    public void valueOfRank(){
+        assertEquals(2_000_000_000, Rank.FIRST.getWinningMoney());
+    }
 }
