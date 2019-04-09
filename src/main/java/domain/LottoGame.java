@@ -41,11 +41,21 @@ public class LottoGame {
 
     private List<Integer> getRandomList(){
         List<Integer> randomList = new ArrayList<>();
+        int randomNum;
         Random random = new Random();
-        for(int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-            randomList.add(random.nextInt(MAX_LOTTO_NUMBER) + 1);
+        while(randomList.size() < LOTTO_NUMBER_COUNT) {
+            randomNum = random.nextInt(LOTTO_NUMBER_COUNT) + 1;
+            removeDuplication(randomList, randomNum);
+            randomList.add(randomNum);
         }
         return randomList;
+    }
+
+    private void removeDuplication(List<Integer> list, int num) {
+        if(list.contains(num)) {
+            int idx = list.indexOf(num);
+            list.remove(idx);
+        }
     }
 
     private void printLottoList(int countLotto) {
