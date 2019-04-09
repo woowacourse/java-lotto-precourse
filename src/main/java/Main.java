@@ -1,6 +1,7 @@
 import java.util.*;
 import java.util.stream.*;
 import java.io.Console;
+import java.text.DecimalFormat;
 import domain.*;
 
 public class Main {
@@ -20,6 +21,8 @@ public class Main {
             = "보너스 볼을 입력해 주세요.";
     private final static String BUY_COUNT
             = "개를 구매하였습니다.";
+    private final static String PRINT_STAT_MSG
+            = "당첨 통계\n" + "-".repeat(10);
     
     /** 로또 하나를 뽑아서 Lotto 객체로 반환 */
     private static Lotto getLotto() {
@@ -152,15 +155,25 @@ public class Main {
         return result;
     }
     
+    /** 총 수익률 메시지를 출력. */
+    private final static String getTotalProfitRateMsg(List<Lotto> lottoList,
+            Map<Rank, Integer> rankStat) {
+        DecimalFormat fmt = new DecimalFormat("0.###");
+        double rate = (double)getTotalPrizeMoney(rankStat)
+                / (double)(lottoList.size() * LOTTO_PRICE); // 명시적 형변환
+        return "총 수익률은 " + fmt.format(rate) + "입니다.";
+    }
+    
     /** main 진입점 */
     public final static void main(String[] args) {
         List<Lotto> lottoList = lottoGame();
         WinningLotto winLotto = lastWeekWinningLotto();
         Map<Rank, Integer> rankStat = getRankStat(lottoList, winLotto);
+        System.out.println(PRINT_STAT_MSG);
         rankStat.forEach((k, v) -> {
             System.out.println(k.getRankDescription() + " - " + v + "개");
         });
-        int totalPrize = getTotalPrizeMoney(rankStat);
-        System.out.println(totalPrize);
+        String totalProfitRateMsg = getTotalProfitRateMsg(lottoList, rankStat);
+        System.out.println(totalProfitRateMsg);
     }
 }
