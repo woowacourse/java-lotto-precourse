@@ -1,81 +1,74 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class LottoGame {
-    public static boolean isStringNumber(String inputMoney) {
+    public static boolean isStringNumber(String number) {
         try {
-            Integer.parseInt(inputMoney);
+            Integer.parseInt(number);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    public static void alertMoneyNotice(int inputMoney, int MIN, int MAX) {
-        if (MIN > inputMoney) {
-            System.out.println("금액이 부족합니다.");
-        }
-
-        if (inputMoney > MAX) {
-            System.out.println("1인당 최대 10만원까지 구매 가능합니다.");
-        }
-    }
-
-    public static boolean isProperMoney(int inputMoney) {
-        int MIN_LOTTO_PRICE = 1000;
-        int MAX_LOTTO_PRICE = 100000;
-
-        alertMoneyNotice(inputMoney, MIN_LOTTO_PRICE, MAX_LOTTO_PRICE);
-
-        if ((MIN_LOTTO_PRICE <= inputMoney)
-                && (inputMoney <= MAX_LOTTO_PRICE)) {
+    public static boolean isRangeIn(int number, int min, int max) {
+        if ((min <= number) && (number <= max)) {
             return true;
         }
 
         return false;
     }
 
-    public static int payMoney() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("구입금액을 입력해주세요.");
-        String inputMoney = scanner.nextLine();
-        boolean isProper = isStringNumber(inputMoney);
+    public static void alertMoneyNotice(int inputMoney, int min, int max) {
+        if (min > inputMoney) {
+            System.out.println("금액이 부족합니다.");
+        }
 
-        if (!isProper) {
-            inputMoney = repayMoney();
+        if (inputMoney > max) {
+            System.out.println("1인당 최대 10만원까지 구매 가능합니다.");
+        }
+    }
+
+    public static boolean isProperMoney(String inputMoney) {
+        if (isStringNumber(inputMoney)) {
+            int MIN_LOTTO_PRICE = 1000;
+            int MAX_LOTTO_PRICE = 100000;
+            int money = Integer.parseInt(inputMoney);
+
+            alertMoneyNotice(money, MIN_LOTTO_PRICE, MAX_LOTTO_PRICE);
+
+            return isRangeIn(money, MIN_LOTTO_PRICE, MAX_LOTTO_PRICE);
+        }
+
+        return false;
+    }
+
+    public static String inputMoney(boolean isFirstTry) {
+        Scanner scanner = new Scanner(System.in);
+
+        if (isFirstTry) {
+            System.out.println("구입 금액을 입력해 주세요.");
+        } else {
+            System.out.println("구입 금액을 제대로 입력해 주세요.");
+        }
+
+        String answer = scanner.nextLine();
+        return answer;
+    }
+
+    public static int payMoney() {
+        boolean isFirstTry = true;
+        String inputMoney = inputMoney(isFirstTry);
+        boolean isProper = isProperMoney(inputMoney);
+
+        while (!isProper) {
+            isFirstTry = false;
+            inputMoney = inputMoney(isFirstTry);
+            isProper = isProperMoney(inputMoney);
         }
 
         return Integer.parseInt(inputMoney);
-    }
-
-    public static String repayMoney() {
-        boolean isProper = false;
-        String inputMoney = "";
-
-        while (!isProper) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("구입금액을 제대로 입력해주세요.");
-            inputMoney = scanner.nextLine();
-            isProper = isStringNumber(inputMoney);
-        }
-
-        return inputMoney;
-    }
-
-    public static int receiveMoney() {
-        boolean isProper = false;
-        int paidMoney = 0;
-
-        while (!isProper) {
-            paidMoney = payMoney();
-            isProper = isProperMoney(paidMoney);
-        }
-
-        return paidMoney;
     }
 
     public static int getPurchasableNumber(int money) {
@@ -100,20 +93,7 @@ public class LottoGame {
         }
 
         List<Integer> lottoNumbers = new ArrayList<>(numbers);
-
         return lottoNumbers;
-    }
-
-    public static List<Lotto> purchaseLotto(int money) {
-        int purchasableLotto = getPurchasableNumber(money);
-        List<Lotto> boughtLotto = new ArrayList<>();
-
-        for (int i = 0; i < purchasableLotto; i++) {
-            Lotto lotto = new Lotto(generateLottoNumber());
-            boughtLotto.add(lotto);
-        }
-
-        return boughtLotto;
     }
 
     public static void announcePurchaseResult(List<Lotto> lottos, int charge) {
@@ -128,21 +108,38 @@ public class LottoGame {
         }
     }
 
+    public static List<Lotto> purchaseLotto(int money) {
+        int purchasableLotto = getPurchasableNumber(money);
+        int charge = getCharge(money);
+        List<Lotto> boughtLotto = new ArrayList<>();
+
+        for (int i = 0; i < purchasableLotto; i++) {
+            Lotto lotto = new Lotto(generateLottoNumber());
+            boughtLotto.add(lotto);
+        }
+
+        announcePurchaseResult(boughtLotto, charge);
+        return boughtLotto;
+    }
+
     public static boolean isProperLength(String[] inputNumbers) {
         int PROPER_LOTTO_LENGTH = 6;
+        Set<String> removeDuplicate = new HashSet<>(Arrays.asList(inputNumbers));
 
-        if (inputNumbers.length == PROPER_LOTTO_LENGTH) {
+        if (removeDuplicate.size() == PROPER_LOTTO_LENGTH) {
             return true;
         }
 
         return false;
     }
 
-    public static boolean isProperLottoNumber(String number) {
-        if (isStringNumber(number)) {
-            int numberInt = Integer.parseInt(number);
+    public static boolean isProperLottoNumber(String inputnumber) {
+        if (isStringNumber(inputnumber)) {
+            int MIN_LOTTO_NUMBER = 1;
+            int MAX_LOTTO_NUMBER = 45;
+            int number = Integer.parseInt(inputnumber);
 
-            return (1 <= numberInt) && (numberInt <= 45);
+            return isRangeIn(number, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
         }
 
         return false;
@@ -172,9 +169,7 @@ public class LottoGame {
         }
 
         String inputNumbers = scanner.nextLine();
-        String[] inputNumbersList = inputNumbers.split(",");
-
-        return inputNumbersList;
+        return inputNumbers.split(",");
     }
 
     public static String[] receiveWinningNumbers() {
@@ -191,6 +186,15 @@ public class LottoGame {
         return inputNumbers;
     }
 
+    public static boolean isProperBonusNumber(String inputBonusNumber,
+                                              String[] inputLottoNumber) {
+        if (isProperLottoNumber(inputBonusNumber)) {
+            return !Arrays.asList(inputLottoNumber).contains(inputBonusNumber);
+        }
+
+        return false;
+    }
+
     public static String inputBonusNumber(boolean isFirstTry) {
         Scanner scanner = new Scanner(System.in);
 
@@ -201,19 +205,18 @@ public class LottoGame {
         }
 
         String inputBonusNumber = scanner.nextLine();
-
         return inputBonusNumber;
     }
 
-    public static int receiveBonusNumber() {
+    public static int receiveBonusNumber(String[] lottoNumbers) {
         boolean isFirstTry = true;
         String inputBonusNumber = inputBonusNumber(isFirstTry);
-        boolean isProper = isProperLottoNumber(inputBonusNumber);
+        boolean isProper = isProperBonusNumber(inputBonusNumber, lottoNumbers);
 
         while (!isProper) {
             isFirstTry = false;
             inputBonusNumber = inputBonusNumber(isFirstTry);
-            isProper = isProperLottoNumber(inputBonusNumber);
+            isProper = isProperBonusNumber(inputBonusNumber, lottoNumbers);
         }
 
         return Integer.parseInt(inputBonusNumber);
@@ -230,8 +233,9 @@ public class LottoGame {
     }
 
     public static WinningLotto generateWinningLotto() {
-        List<Integer> numbers = changeElementTypeStrToInt(receiveWinningNumbers());
-        int bonusNumber = receiveBonusNumber();
+        String[] inputNumbers = receiveWinningNumbers();
+        List<Integer> numbers = changeElementTypeStrToInt(inputNumbers);
+        int bonusNumber = receiveBonusNumber(inputNumbers);
 
         Lotto lotto = new Lotto(numbers);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
@@ -240,12 +244,8 @@ public class LottoGame {
     }
 
     public static void main(String[] args) {
-        int paidMoney = receiveMoney();
-        int charge = getCharge(paidMoney);
+        int paidMoney = payMoney();
         List<Lotto> purchasedLotto = purchaseLotto(paidMoney);
-
-        announcePurchaseResult(purchasedLotto, charge);
-        generateWinningLotto();
-
+        WinningLotto winningLotto = generateWinningLotto();
     }
 }
