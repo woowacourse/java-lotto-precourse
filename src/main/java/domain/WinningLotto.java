@@ -126,6 +126,18 @@ public class WinningLotto {
         return false;
     }
 
+    private static boolean isLengthNot6(String userInput) {
+        List<String> list = Arrays.asList(userInput.split(","));
+        int n = list.size();
+        if (n != 6) {
+            System.out.println("당첨번호는 6개를 입력해주세요");
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 
 
