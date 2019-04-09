@@ -14,7 +14,10 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     public static Lotto createRandomLotto() {
         ArrayList<Integer> totalNumbers = createPossibleNumbers();
         ArrayList<Integer> lottoNumbers = new ArrayList<Integer>();
@@ -45,4 +48,20 @@ public class Lotto {
         String printComment = "[" + String.join(",", mylottoNumStringList) + "]";
         System.out.println(printComment);
     }
+
+    public boolean checkNumberContain(int number) {
+        return numbers.contains(number);
+    }
+
+    public int getCountOfMatch(List<Integer> inputNumbers) {
+        int countOfMatch = 0;
+        for (int i = 0; i < numbers.size(); i++) {
+            if (numbers.contains(inputNumbers.get(i))) {
+                countOfMatch++;
+            }
+        }
+
+        return countOfMatch;
+    }
+
 }
