@@ -37,6 +37,22 @@ public class LottoGame {
     return purchasePrice;
   }
 
+  private boolean IsAlreadyNumber(int oneNumber, boolean[] DuplicateCheck){
+    if(DuplicateCheck[oneNumber])
+      return false;
+    return true;
+  }
+
+  private int MakeRandomNum(boolean[] DuplicateCheck){
+    Random random = new Random();
+    int randomNum;
+    do{
+      randomNum = random.nextInt(45)+1;
+    }while(!IsAlreadyNumber(randomNum, DuplicateCheck));
+    DuplicateCheck[randomNum] = true;
+    return randomNum;
+  }
+
   public void StartLotto(){
     purchasePrice = InputPurchasePrice();
     if(!IsValidAmount(purchasePrice)) {
