@@ -23,4 +23,7 @@ public class Lotto {
         return String.format("[%s]",String.join(", ", numberStrings));
     }
 
+    public List<Integer> getNumbers() {
+        return this.numbers;
+    }
 }
