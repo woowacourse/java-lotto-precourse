@@ -149,7 +149,7 @@ public class LottoGame {
     }
 
     public static boolean isProperLottoNumbers(String[] inputNumbers) {
-        if (isProperLength(inputNumbers)) {
+        if (!isProperLength(inputNumbers)) {
             return false;
         }
 
@@ -166,9 +166,9 @@ public class LottoGame {
         Scanner scanner = new Scanner(System.in);
 
         if (isFirstTry) {
-            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         } else {
-            System.out.println("지난 주 당첨 번호를 제대로 입력해 주세요.");
+            System.out.println("\n지난 주 당첨 번호를 제대로 입력해 주세요.");
         }
 
         String inputNumbers = scanner.nextLine();
@@ -190,15 +190,53 @@ public class LottoGame {
 
         return inputNumbers;
     }
-    
-    public static WinningLotto generateWinningLotto(String[] lottoNumbers) {
+
+    public static String inputBonusNumber(boolean isFirstTry) {
+        Scanner scanner = new Scanner(System.in);
+
+        if (isFirstTry) {
+            System.out.println("\n보너스 볼을 입력해 주세요.");
+        } else {
+            System.out.println("\n보너스 볼을 제대로 입력해 주세요.");
+        }
+
+        String inputBonusNumber = scanner.nextLine();
+
+        return inputBonusNumber;
+    }
+
+    public static int receiveBonusNumber() {
+        boolean isFirstTry = true;
+        String inputBonusNumber = inputBonusNumber(isFirstTry);
+        boolean isProper = isProperLottoNumber(inputBonusNumber);
+
+        while (!isProper) {
+            isFirstTry = false;
+            inputBonusNumber = inputBonusNumber(isFirstTry);
+            isProper = isProperLottoNumber(inputBonusNumber);
+        }
+
+        return Integer.parseInt(inputBonusNumber);
+    }
+
+    public static List<Integer> changeElementTypeStrToInt(String[] lottoNumbers) {
         List<Integer> numbers = new ArrayList<>();
 
         for (String number : lottoNumbers) {
             numbers.add(Integer.parseInt(number));
         }
 
-        return
+        return numbers;
+    }
+
+    public static WinningLotto generateWinningLotto() {
+        List<Integer> numbers = changeElementTypeStrToInt(receiveWinningNumbers());
+        int bonusNumber = receiveBonusNumber();
+
+        Lotto lotto = new Lotto(numbers);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+
+        return winningLotto;
     }
 
     public static void main(String[] args) {
@@ -207,5 +245,7 @@ public class LottoGame {
         List<Lotto> purchasedLotto = purchaseLotto(paidMoney);
 
         announcePurchaseResult(purchasedLotto, charge);
+        generateWinningLotto();
+
     }
 }
