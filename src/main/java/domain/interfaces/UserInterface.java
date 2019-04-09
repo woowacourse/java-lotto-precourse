@@ -1,13 +1,18 @@
 package domain.interfaces;
 
+import domain.Lotto;
+
 import java.util.List;
 
 public interface UserInterface {
 
     int promptPurchaseAmount();
+    void printLottoList(List<Lotto> lottos,int validLottoCount);
     String[] promptWinningLottoNumber();
     int promptBonusNumber();
     void notifyInvalidPurchaseAmount();
-    void printStatistics(List<Integer> lottos);
+    void notifyInvalidWinningLotto();
+    void notifyInvalidBonusNumber();
+    void printStatistics();
 
 }

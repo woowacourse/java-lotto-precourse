@@ -12,5 +12,18 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public void hi(){
+        System.out.println(numbers);
+    }
+
+    @Override
+    public String toString(){
+        return numbers.toString();
+    }
+
     // 추가 기능 구현
 }
