@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -69,6 +70,30 @@ public class Lotto {
             return true;
         }
         return false;
+    }
+
+    private static List<Integer> makeListOfRandomNumbers() {
+        List<Integer> listOf45 = makeListOf45();
+        List<Integer> listOf6RandomNumbers = makeListOf6RandomNumbers(listOf45);
+        return listOf6RandomNumbers;
+    }
+
+    private static List<Integer> makeListOf6RandomNumbers(List<Integer> listOf45) {
+        List<Integer> listOf6RandomNumbers = new ArrayList<>();
+        for (int i = STARTING_INDEX_OF_LOTTO_NUMBERS; i < ENDING_INDEX_OF_LOTTO_NUMBERS+1; i++) {
+            int randomNumberIndex = (int) (Math.random()*listOf45.size());
+            listOf6RandomNumbers.add(listOf45.get(randomNumberIndex));
+            listOf45.remove(randomNumberIndex);
+        }
+        return listOf6RandomNumbers;
+    }
+
+    private static List<Integer> makeListOf45() {
+        List<Integer>  listOf45 = new ArrayList<>();
+        for (int i=LOTTO_MIN_NUMBER; i<LOTTO_MAX_NUMBER+1; i++) {
+            listOf45.add(i);
+        }
+        return listOf45;
     }
 
 }
