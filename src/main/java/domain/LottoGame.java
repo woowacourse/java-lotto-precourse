@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.Collections;
+import java.util.Map;
 
 public class LottoGame {
 
@@ -103,17 +104,27 @@ public class LottoGame {
     private TreeMap makeResultMap() {
         TreeMap<Rank, Integer> resultMap = new TreeMap<>(Collections.reverseOrder());
         initMap(resultMap);
-        for(int i = 0; i < purchasedLottoList.size(); i++) {
+        for (int i = 0; i < purchasedLottoList.size(); i++) {
             Rank rank = winLotto.match(purchasedLottoList.get(i));
             resultMap.put(rank, resultMap.get(rank) + 1);
         }
         return resultMap;
     }
 
-    private void initMap(TreeMap<Rank,Integer> map) {
-        for(Rank rank: Rank.values()) {
+    private void initMap(TreeMap<Rank, Integer> map) {
+        for (Rank rank : Rank.values()) {
             map.put(rank, 0);
         }
+    }
+
+    private void printResult() {
+        TreeMap<Rank, Integer> result = makeResultMap();
+        for (Map.Entry<Rank, Integer> entry : result.entrySet()) {
+            Rank rank = entry.getKey();
+            int count = entry.getValue();
+            rank.printRank(count);
+        }
+
     }
 
     public void run() {
@@ -124,6 +135,6 @@ public class LottoGame {
         printLottoList(countOfLotto);
         Lotto lotto = new Lotto(inputWinNumber());
         winLotto = new WinningLotto(lotto, inputBonusNumber());
-        //TODO 결과 출력
+        printResult();
     }
 }
