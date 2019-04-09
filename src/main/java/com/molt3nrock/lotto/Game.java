@@ -4,6 +4,9 @@ import static com.molt3nrock.lotto.Constants.COUNT_OF_NUMBERS_PER_LOTTO;
 import static com.molt3nrock.lotto.Constants.MAXIMUM_NUMBER_OF_LOTTO;
 import static com.molt3nrock.lotto.Constants.MINIMUM_NUMBER_OF_LOTTO;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +21,16 @@ public class Game {
             throw new IllegalArgumentException("올바른 돈이 아닙니다.");
         }
         return money;
+    }
+
+    private WinningLotto getWiningLotto() throws IOException, IllegalArgumentException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        line = br.readLine();
+        List<Integer> winningNumbers = parseInputAsWinningNumbers(line);
+        line = br.readLine();
+        Integer bonusNumber = parseInputAsBonusNumber(line, winningNumbers);
+        return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 
     private Integer parseInputAsBonusNumber(String line, List<Integer> winningNumbers)
