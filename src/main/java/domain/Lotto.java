@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -39,17 +36,26 @@ public class Lotto {
     }
 
     private static Lotto generateLotto() {
-        List<Integer> numbers = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
 
-        for(int i = 0; i < COUNT_OF_LOTTO_NUMBERS; i++) {
-            numbers.add(generateRandomNumbers(BOTTOM, TOP));
+        while(set.size() < COUNT_OF_LOTTO_NUMBERS){
+            set.add(generateRandomNumber(BOTTOM, TOP));
         }
+        List<Integer> numberList = new ArrayList<>(set);
 
-        return new Lotto(numbers);
+        return new Lotto(numberList);
     }
 
-    public static int generateRandomNumbers(int bottom, int top) {
+    private static int generateRandomNumber(int bottom, int top) {
         int number = (int)(Math.random() * (top - bottom + 1) + bottom);
         return number;
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

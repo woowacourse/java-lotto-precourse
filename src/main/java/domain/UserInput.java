@@ -13,11 +13,11 @@ public class UserInput {
         input = s.nextLine().trim();
     }
 
-    private boolean isNumber(char character) {
+    private static boolean isNumber(char character) {
         return character >= '0' && character<= '9';
     }
 
-    private boolean isZeroOrPositiveNumber(String string) {
+    private static boolean isZeroOrPositiveNumber(String string) {
         int count = 0;
         for (int i = 0; i < string.length(); i++) {
             count =  incrementsIfTrue(count, isNumber(string.charAt(i)));
@@ -26,14 +26,14 @@ public class UserInput {
         return count == string.length() && string.length() != 0;
     }
 
-    private int incrementsIfTrue(int count, boolean bool) {
+    private static int incrementsIfTrue(int count, boolean bool) {
         if(bool) {
             count = count + 1;
         }
         return count;
     }
 
-    public boolean isInRange(String string, int bottom, int top) {
+    public static boolean isInRange(String string, int bottom, int top) {
         int number;
 
         if(!isZeroOrPositiveNumber(string)) {
@@ -44,7 +44,7 @@ public class UserInput {
         return number >= bottom && number <= top;
     }
 
-    public boolean isInRange(String string, int bottom) {
+    public static boolean isInRange(String string, int bottom) {
         int number;
 
         if(!isZeroOrPositiveNumber(string)) {
@@ -57,7 +57,7 @@ public class UserInput {
 
     public List<Integer> convertsToLottoNumbers() {
         List<Integer> integerList = new ArrayList<>();
-        List<String> strings = Arrays.asList(input.split(","));
+        List<String> strings = Arrays.asList(input.split(SEPARATOR));
 
         for (String s : strings
              ) {
@@ -74,11 +74,10 @@ public class UserInput {
         return;
     }
 
-    public boolean hasRepeatedNumbers(List<Integer> integerList) {
-        Set<Integer> set = new HashSet<>();
-        set.addAll(integerList);
+    public static boolean hasRepeatedNumbers(List<Integer> integerList) {
+        Set<Integer> set = new HashSet<>(integerList);
 
-        return set.size() == integerList.size();
+        return set.size() != integerList.size();
     }
 
 
