@@ -2,12 +2,12 @@ package domain;
 
 import static domain.Constants.*;
 
-public class Statistics {
-    long winningMoney = 0;
-    int[] winningCount = new int[NUM_OF_RANK];
-    double rateOfReturn;
+class Statistics {
+    private long winningMoney = 0;
+    private int[] winningCount = new int[NUM_OF_RANK];
+    private double rateOfReturn;
 
-    public void printStatistics() {
+    void printStatistics() {
         System.out.printf("\n당첨 통계\n");
         System.out.printf("---------\n");
         System.out.printf("%d개 일치 (%d원)- %d개\n", Rank.FIFTH.getCountOfMatch(), Rank.FIFTH.getWinningMoney(), winningCount[Rank.FIFTH.ordinal()]);
@@ -18,7 +18,7 @@ public class Statistics {
         System.out.printf("총 수익률은 %.3f입니다.\n", rateOfReturn);
     }
 
-    public void compileStatistics(Lotto[] lotto, WinningLotto winningLotto) {
+    void compileStatistics(Lotto[] lotto, WinningLotto winningLotto) {
         for (int i = 0; i < lotto.length; i++) {
             Rank rank = winningLotto.match(lotto[i]);
             winningMoney += rank.getWinningMoney();
@@ -26,7 +26,7 @@ public class Statistics {
         }
     }
 
-    public void setRateOfReturn(int numOfLotto) {
+    void setRateOfReturn(int numOfLotto) {
         rateOfReturn = (double) winningMoney / (numOfLotto * MIN_UNIT);
     }
 }
