@@ -6,11 +6,11 @@ import domain.*;
 
 public class Main {
     /** 상수 영역 */
+    private final static Random random = new Random();
     private final static int LOTTO_NUM_START = 1;
     private final static int LOTTO_NUM_END = 45;
     private final static int LOTTO_NUM_LENGTH = 6;
     private final static int LOTTO_PRICE = 1000;
-    private final static Random random = new Random();
     private final static String INPUT_INT_ERROR
             = "올바른 숫자가 입력되지 않았습니다. 다시 입력해 주세요.";
     private final static String INPUT_PURCHASE_AMOUNT
@@ -144,6 +144,19 @@ public class Main {
         return map;
     }
     
+    /** 당첨 통계를 출력할 때 사용할 문자열 생성. */
+    private final static String getRankMsg(Map<Rank, Integer> rankStat) {
+        String result = "";
+        for (Map.Entry<Rank, Integer> entry : rankStat.entrySet()) {
+            Rank key = entry.getKey();
+            int value = entry.getValue();
+            result += key.equals(Rank.MISS)
+                    ? "" // 낙첨은 당첨 통계에서 출력하지 않기 위해 넣은 삼항식
+                    : key.getRankDescription() + " - " + value + "개\n";
+        }
+        return result;
+    }
+    
     /** 총 당첨금 계산 */
     private final static int getTotalPrizeMoney(Map<Rank, Integer> rankStat) {
         int result = 0;
@@ -155,12 +168,15 @@ public class Main {
         return result;
     }
     
-    /** 총 수익률 메시지를 출력. */
-    private final static String getTotalProfitRateMsg(List<Lotto> lottoList,
+    /** 총 수익률 메시지를 생성. */
+    private final static String getProfitRateMsg(List<Lotto> lottoList,
             Map<Rank, Integer> rankStat) {
-        DecimalFormat fmt = new DecimalFormat("0.###");
-        double rate = (double)getTotalPrizeMoney(rankStat)
-                / (double)(lottoList.size() * LOTTO_PRICE); // 명시적 형변환
+        DecimalFormat fmt = new DecimalFormat("0.###"); // 소수점 아래 3자리까지
+        double rate = (double) getTotalPrizeMoney(rankStat)
+                / (double) (lottoList.size() * LOTTO_PRICE); // 명시적 형변환
+        if (Double.isNaN(rate)) { // 0으로 나뉠 경우 대비
+            rate = 0;
+        }
         return "총 수익률은 " + fmt.format(rate) + "입니다.";
     }
     
@@ -170,10 +186,7 @@ public class Main {
         WinningLotto winLotto = lastWeekWinningLotto();
         Map<Rank, Integer> rankStat = getRankStat(lottoList, winLotto);
         System.out.println(PRINT_STAT_MSG);
-        rankStat.forEach((k, v) -> {
-            System.out.println(k.getRankDescription() + " - " + v + "개");
-        });
-        String totalProfitRateMsg = getTotalProfitRateMsg(lottoList, rankStat);
-        System.out.println(totalProfitRateMsg);
+        System.out.println(getRankMsg(rankStat));
+        System.out.println(getProfitRateMsg(lottoList, rankStat));
     }
 }
