@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoGame {
@@ -75,7 +78,38 @@ public class LottoGame {
         return paidMoney;
     }
 
+    public static int getPurchasableNumber(int money) {
+        int ONE_LOTTO_PRICE = 1000;
+        int purchasableNumber = money / ONE_LOTTO_PRICE;
+
+        return purchasableNumber;
+    }
+
+    public static int getCharge(int money) {
+        int ONE_LOTTO_PRICE = 1000;
+        int charge = money % ONE_LOTTO_PRICE;
+
+        return charge
+    }
+
+    public static Lotto generateLotto() {
+
+    }
+
+    public static List<Lotto> purchaseLotto(int money) {
+        int purchasableLotto = getPurchasableNumber(money);
+        List<Lotto> boughtLotto = new ArrayList<>();
+
+        for (int i = 0; i < purchasableLotto; i++) {
+            Lotto lotto = generateLotto();
+            boughtLotto.add(lotto);
+        }
+
+        return boughtLotto;
+    }
+
     public static void main(String[] args) {
-        receiveMoney();
+        int paidMoney = receiveMoney();
+        List<Lotto> purchasedLotto = purchaseLotto(paidMoney);
     }
 }
