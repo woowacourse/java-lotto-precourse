@@ -104,6 +104,15 @@ public class GameRunner {
 
     private void inputLastWeekNumberAndBonusNo() {
         lastWeekNumberMessagePrinter();
+        Lotto lotto = getLastWeek();
+
+        bonusNoMessagePrinter();
+        int bonusNo = getBonusNo(lotto);
+
+        game.setWinningLotto(new WinningLotto(lotto, bonusNo));
+    }
+
+    private Lotto getLastWeek() {
         String[] lastWeekStr;
         List<Integer> arrayList;
         do {
@@ -112,12 +121,7 @@ public class GameRunner {
             arrayList = intArrToList(lastWeekInt);
         } while (!lastWeekValidChecker(arrayList));
 
-        Lotto lotto = listToLotto(arrayList);
-
-        bonusNoMessagePrinter();
-        int bonusNo = getBonusNo(lotto);
-
-        game.setWinningLotto(new WinningLotto(lotto, bonusNo));
+        return listToLotto(arrayList);
     }
 
     private boolean lastWeekValidChecker(List<Integer> list) {
@@ -127,13 +131,12 @@ public class GameRunner {
             return false;
         }
         if (new HashSet<>(list).size() != 6) { // 입력된 숫자 중 중복된 숫자가 있다면
-            System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_REDAUNDANT
+            System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_REDUNDANT
                     + Strings.MESSAGE_RE_INPUT_PLEASE);
             return false;
         }
         return true;
     }
-
 
     private void lastWeekNumberMessagePrinter() {
         System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);

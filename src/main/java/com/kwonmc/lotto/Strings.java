@@ -33,7 +33,7 @@ class Strings {
     static final String MESSAGE_PURCHASE_INVALID = "최소 구매 금액은 1000원 입니다.";
     static final String MESSAGE_BONUS_INVALID = "이미 당첨번호에 포함된 번호입니다.";
     static final String MESSAGE_LASTWEEK_INVALID_NUMBERS = "당첨번호는 6개입니다.";
-    static final String MESSAGE_LASTWEEK_INVALID_REDAUNDANT = "중복된 숫자가 포함되어 있습니다.";
+    static final String MESSAGE_LASTWEEK_INVALID_REDUNDANT = "중복된 숫자가 포함되어 있습니다.";
 
     static final String MESSAGE_RE_INPUT_PLEASE = " 다시 입력해주세요.";
 
