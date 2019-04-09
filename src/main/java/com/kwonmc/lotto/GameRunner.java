@@ -25,7 +25,6 @@ import java.util.Scanner;
  * @author kwonmc
  * @see Game
  * @see Numbers
- * @see Strings
  */
 public class GameRunner {
     private Scanner sc = new Scanner(System.in);
@@ -39,22 +38,12 @@ public class GameRunner {
     }
 
     private void inputUserPurchaseAmount() {
-        purchaseAmountMessagePrinter();
+        MessagePrinter.purchaseAmount();
+
         int purchaseAmount = getPurchaseAmount();
         game.setPurchaseAmount(purchaseAmount);
-        changeAmountMessagePrinter(purchaseAmount);
-    }
 
-    private void purchaseAmountMessagePrinter() {
-        System.out.println(Strings.MESSAGE_PURCHASE_AMOUNT);
-    }
-
-    private boolean purchaseAmountValidChecker(int purchaseAmount) {
-        if (purchaseAmount < Numbers.LOTTO_COUNT_CRITERIA) {
-            System.out.println(Strings.MESSAGE_PURCHASE_INVALID);
-            return false;
-        }
-        return true;
+        MessagePrinter.changeAmount(purchaseAmount);
     }
 
     private int getPurchaseAmount() {
@@ -65,23 +54,20 @@ public class GameRunner {
         return purchaseAmount;
     }
 
-    private void changeAmountMessagePrinter(int purchaseAmount) {
-        int changeAmount = purchaseAmount % Numbers.LOTTO_COUNT_CRITERIA;
-        if (changeAmount != 0) {
-            System.out.println(String.format(Strings.MESSAGE_CHANGE_AMOUNT, changeAmount));
+    private boolean purchaseAmountValidChecker(int purchaseAmount) {
+        if (purchaseAmount < Numbers.LOTTO_COUNT_CRITERIA) {
+            System.out.println(Strings.MESSAGE_PURCHASE_INVALID);
+            return false;
         }
+        return true;
     }
 
     private void printLottoInfo() {
         System.out.println();
         int lottoCount = countLotto();
-        lottoInfoMessagePrinter(lottoCount);
+        MessagePrinter.lottoInfo(lottoCount);
         createLottoList(lottoCount);
         printLottoList();
-    }
-
-    private void lottoInfoMessagePrinter(int lottoCount) {
-        System.out.println(lottoCount + Strings.MESSAGE_LOTTO_INFO);
     }
 
     private void createLottoList(int lottoCount) {
@@ -104,10 +90,10 @@ public class GameRunner {
     }
 
     private void inputLastWeekNumberAndBonusNo() {
-        lastWeekNumberMessagePrinter();
+        MessagePrinter.lastWeekNumber();
         Lotto lotto = getLastWeek();
 
-        bonusNoMessagePrinter();
+        MessagePrinter.bonusNo();
         int bonusNo = getBonusNo(lotto);
 
         game.setWinningLotto(new WinningLotto(lotto, bonusNo));
@@ -127,38 +113,19 @@ public class GameRunner {
 
     private boolean lastWeekValidChecker(List<Integer> list) {
         if (list.size() != Numbers.EACH_LOTTO_SIZE) { // 입력된 숫자의 개수가 6개가 아니면
-            numberCountInvalidMessagePrinter();
+            MessagePrinter.numberCountInvalid();
             return false;
         }
         if (Collections.min(list) < 1
                 || Collections.max(list) >= Numbers.TOTAL_LOTTO_POOL + 1) { // 입력된 숫자가 범위를 넘는다면
-            numberRangeInvalidMessagePrinter();
+            MessagePrinter.numberRangeInvalid();
             return false;
         }
         if (new HashSet<>(list).size() != Numbers.EACH_LOTTO_SIZE) { // 입력된 숫자 중 중복된 숫자가 있다면
-            numberRedundantInvalidMessagePrinter();
+            MessagePrinter.numberRedundantInvalid();
             return false;
         }
         return true;
-    }
-
-    private void numberCountInvalidMessagePrinter() {
-        System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_NUMBERS
-                + Strings.MESSAGE_RE_INPUT_PLEASE);
-    }
-
-    private void numberRangeInvalidMessagePrinter() {
-        System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_RANGE
-                + Strings.MESSAGE_RE_INPUT_PLEASE);
-    }
-
-    private void numberRedundantInvalidMessagePrinter() {
-        System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_REDUNDANT
-                + Strings.MESSAGE_RE_INPUT_PLEASE);
-    }
-
-    private void lastWeekNumberMessagePrinter() {
-        System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
     }
 
     private int[] strArrToIntArr(String[] strArray) {
@@ -189,23 +156,19 @@ public class GameRunner {
 
     private boolean bonusNoValidChecker(Lotto lotto, int bonusNo) {
         if (lotto.contains(bonusNo)) {
-            System.out.println(Strings.MESSAGE_BONUS_INVALID + Strings.MESSAGE_RE_INPUT_PLEASE);
+            MessagePrinter.bonusNoInvalid();
             return false;
         }
         return true;
     }
 
-    private void bonusNoMessagePrinter() {
-        System.out.println(Strings.MESSAGE_BONUS_NO);
-    }
-
     private void printLottoMatchResult() {
-        lottoMatchResultHeadMessagePrinter();
+        MessagePrinter.lottoResultHead();
         RankList rankList = getRankList(game.getWinningLotto());
 
-        lottoMatchResultBodyMessagePrinter(rankList);
+        MessagePrinter.lottoResultBody(rankList);
 
-        lottoMatchResultTailMessagePrinter(rankList, game.getPurchaseAmount());
+        MessagePrinter.lottoResultTail(rankList, game.getPurchaseAmount());
     }
 
     private RankList getRankList(WinningLotto winningLotto) {
@@ -216,32 +179,5 @@ public class GameRunner {
         }
 
         return rankList;
-    }
-
-    private void lottoMatchResultBodyMessagePrinter(RankList rankList) {
-        for (int i = rankList.size() - Numbers.SKIPPING_LAST_INDEX; i >= 0; i--) {
-            Rank rank = rankList.getRankByIndex(i);
-            int counts = rankList.getCountsByIndex(i);
-            System.out.println(resultMessageMaker(rank, counts));
-        }
-    }
-
-    private String resultMessageMaker(Rank rank, int count) {
-        return String.format(Strings.MESSAGE_RESULT_DESCRIPTION,
-                rank.getCountOfMatch(),
-                rank == Rank.SECOND ? Strings.MESSAGE_BONUS_TRUE : Strings.MESSAGE_BONUS_FALSE,
-                rank.getWinningMoney(),
-                count
-        );
-    }
-
-    private void lottoMatchResultHeadMessagePrinter() {
-        System.out.println(Strings.MESSAGE_LOTTO_MATCH_RESULT_HEADER);
-        System.out.println(Strings.MESSAGE_SEPARATION_LINE);
-    }
-
-    private void lottoMatchResultTailMessagePrinter(RankList rankList, int purchaseAmount) {
-        double totalYield = (double) rankList.getTotalWinningAmount() / purchaseAmount;
-        System.out.println(String.format(Strings.MESSAGE_RESULT_YIELD, totalYield));
     }
 }
