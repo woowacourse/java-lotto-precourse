@@ -12,12 +12,16 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public List<Integer> getNumbers(){
+        return this.numbers;
+    }
+
     @Override
     public String toString() {
         return this.numbers.toString();
     }
 
-    public boolean isContain(int bonusNumber) {
-        return this.numbers.contains(bonusNumber);
+    public boolean isContain(int number) {
+        return this.numbers.contains(number);
     }
 }

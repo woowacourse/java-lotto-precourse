@@ -1,7 +1,11 @@
 import com.conatuseus.lotto.appView.AppView;
+import com.conatuseus.lotto.model.Lotto;
+import com.conatuseus.lotto.model.Rank;
+import com.conatuseus.lotto.model.WinningLotto;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertThat;
@@ -51,7 +55,35 @@ public class test {
         assertThat(AppView.isWinningLottoValid(check[10]),is(false));
     }
 
+    @Test
     public void 보너스_번호_입력_유효성_확인(){
+
+        assertThat(AppView.isWinningBonusValid("1"),is(true));
+        assertThat(AppView.isWinningBonusValid("2"),is(true));
+        assertThat(AppView.isWinningBonusValid("46"),is(false));
+        assertThat(AppView.isWinningBonusValid(""),is(false));
+        assertThat(AppView.isWinningBonusValid("-1"),is(false));
+        assertThat(AppView.isWinningBonusValid("50"),is(false));
+        assertThat(AppView.isWinningBonusValid("~~!!"),is(false));
+        assertThat(AppView.isWinningBonusValid("A"),is(false));
+        assertThat(AppView.isWinningBonusValid("*"),is(false));
+
+    }
+
+    @Test
+    public void 사용자의_로또와_당첨로또_match함수_확인(){
+        WinningLotto winningLotto=new WinningLotto(new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,6))),7);
+
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(1,2,3,40,41,42)))),is(Rank.FIFTH));       // 3개 일치
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(40,41,42,43,44,45)))),is(Rank.MISS));     // 0개 일치
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(40,41,42,43,44,7)))),is(Rank.MISS));      // 보너스번호만 일치
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,41,42)))),is(Rank.FOURTH));       // 4개 일치
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,42)))),is(Rank.THIRD));         // 5개 일치
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)))),is(Rank.FIRST));          // 6개 일치
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,7)))),is(Rank.SECOND));         // 5개+ 보너스 일치
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(1,10,20,40,41,42)))),is(Rank.MISS));     // 1개 일치
+        assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(1,2,30,40,41,42)))),is(Rank.MISS));      // 2개 일치
+
 
     }
 }

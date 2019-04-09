@@ -8,6 +8,10 @@ import com.conatuseus.lotto.model.WinningLotto;
 import java.io.IOException;
 
 public class AppController {
+    public static final int LOTTO_LENGTH = 6;
+    public static final int MAX_LOTTO_VALUE = 45;
+    public static final int MIN_LOTTO_VALUE = 1;
+
     private User user;
     private WinningLotto winningLotto;
 

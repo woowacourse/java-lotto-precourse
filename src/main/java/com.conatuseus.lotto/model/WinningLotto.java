@@ -1,5 +1,7 @@
 package com.conatuseus.lotto.model;
 
+import com.conatuseus.lotto.appController.AppController;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -13,9 +15,16 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countOfMatch = 0;
+        for (int i = 0; i < AppController.LOTTO_LENGTH; i++) {
+            countOfMatch += this.isMatches(userLotto, i);
+        }
+
+        return userLotto.isContain(bonusNo) ? Rank.valueOf(countOfMatch, true)
+                : Rank.valueOf(countOfMatch, false);
     }
 
-
+    private int isMatches(Lotto userLotto, int index) {
+        return this.lotto.isContain(userLotto.getNumbers().get(index)) ? 1 : 0;
+    }
 }

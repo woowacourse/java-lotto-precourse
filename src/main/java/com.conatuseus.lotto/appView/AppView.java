@@ -1,5 +1,6 @@
 package com.conatuseus.lotto.appView;
 
+import com.conatuseus.lotto.appController.AppController;
 import com.conatuseus.lotto.model.Lotto;
 
 import java.io.BufferedReader;
@@ -10,9 +11,6 @@ import java.util.*;
 public class AppView {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static final String NUMBER_REGEX = "[0-9]+";
-    private static final int LOTTO_LENGTH = 6;
-    private static final int MAX_LOTTO_VALUE = 45;
-    private static final int MIN_LOTTO_VALUE = 1;
 
     /* AppView 클래스 기본생성자*/
     public AppView() {
@@ -65,23 +63,23 @@ public class AppView {
     }
 
     public static boolean isWinningLottoValid(String[] scannedNumbers) {
-        if (scannedNumbers.length != LOTTO_LENGTH) {
+        if (scannedNumbers.length != AppController.LOTTO_LENGTH) {
             return false;
         }
 
         int i = 0;
         Set<Integer> set = new HashSet<>();
-        while (i < LOTTO_LENGTH && scannedNumbers[i].length() >= 1
+        while (i < AppController.LOTTO_LENGTH && scannedNumbers[i].length() >= 1
                 && scannedNumbers[i].matches(NUMBER_REGEX) && isWinningNumberValid(Integer.parseInt(scannedNumbers[i]))) {
             set.add(Integer.parseInt(scannedNumbers[i]));
             i++;
         }
 
-        return set.size() == LOTTO_LENGTH;
+        return set.size() == AppController.LOTTO_LENGTH;
     }
 
     public static boolean isWinningNumberValid(int scannedNumber) {
-        return scannedNumber >= MIN_LOTTO_VALUE && scannedNumber <= MAX_LOTTO_VALUE;
+        return scannedNumber >= AppController.MIN_LOTTO_VALUE && scannedNumber <= AppController.MAX_LOTTO_VALUE;
     }
 
     public static List<Integer> StringArrayToIntList(String[] scannedNumbers) {
@@ -103,6 +101,6 @@ public class AppView {
             return false;
         }
         int number = Integer.parseInt(scannedNumber);
-        return (number >= MIN_LOTTO_VALUE) && (number <= MAX_LOTTO_VALUE);
+        return (number >= AppController.MIN_LOTTO_VALUE) && (number <= AppController.MAX_LOTTO_VALUE);
     }
 }
