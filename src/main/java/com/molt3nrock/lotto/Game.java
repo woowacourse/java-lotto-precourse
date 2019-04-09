@@ -20,6 +20,16 @@ public class Game {
         return money;
     }
 
+    private Integer parseInputAsBonusNumber(String line, List<Integer> winningNumbers)
+        throws IllegalArgumentException {
+        Integer bonusNumber = parseStringAsInteger(line);
+        if (winningNumbers.stream().anyMatch(i -> i.equals(bonusNumber))
+            || bonusNumber < MINIMUM_NUMBER_OF_LOTTO || bonusNumber > MAXIMUM_NUMBER_OF_LOTTO) {
+            throw new IllegalArgumentException("올바른 보너스번호 입력이 아닙니다.");
+        }
+        return bonusNumber;
+    }
+
     private List<Integer> parseInputAsWinningNumbers(String line) throws IllegalArgumentException {
         List<Integer> numbers = Arrays.stream(line.split(","))
             .map(s -> parseStringAsInteger(s.trim()))
