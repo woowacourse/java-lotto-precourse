@@ -1,5 +1,6 @@
 package com.molt3nrock.lotto;
 
+import static com.molt3nrock.lotto.Constants.PRICE_PER_LOTTO;
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
@@ -51,7 +52,7 @@ public class StatisticsTest {
     public void displayRossGainRationGain() {
         Statistics statistics = Statistics.valueOf(lottoList, winningLotto);
         int expectedGain = calcGain(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
-        int expectedCost = lottoList.size() * 1000;
+        int expectedCost = lottoList.size() * PRICE_PER_LOTTO;
         statistics.displayRossGainRation();
         assertEquals(String.format("총 수익률은 %.3f입니다.\n", (float) expectedGain / expectedCost),
                      bo.toString());
@@ -62,7 +63,7 @@ public class StatisticsTest {
         winningLotto = new WinningLotto(new Lotto(Arrays.asList(45, 44, 43, 13, 12, 11)), 4);
         Statistics statistics = Statistics.valueOf(lottoList, winningLotto);
         int expectedGain = calcGain(Rank.FIFTH);
-        int expectedCost = lottoList.size() * 1000;
+        int expectedCost = lottoList.size() * PRICE_PER_LOTTO;
         statistics.displayRossGainRation();
         assertEquals(String.format("총 수익률은 %.3f입니다.\n", (float) expectedGain / expectedCost),
                      bo.toString());

@@ -1,5 +1,7 @@
 package com.molt3nrock.lotto;
 
+import static com.molt3nrock.lotto.Constants.PRICE_PER_LOTTO;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +49,6 @@ class Statistics {
     }
 
     private float calculateRossRatio() {
-        final int PRICE_PER_LOTTO = 1000;
         int totalGain = rankState.entrySet().stream()
             .map(entry -> entry.getValue() * entry.getKey().getWinningMoney())
             .reduce(0, (accumulation, prizeMoney) -> accumulation + prizeMoney);
