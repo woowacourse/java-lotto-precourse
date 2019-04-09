@@ -1,3 +1,8 @@
+/*
+ * @PlayLotto.java     0.1 2019-04-10
+ * Copyright(c) 2019 LeeYunSeop All rights reserved.
+ * */
+
 package domain;
 
 import utils.Utils;
@@ -7,10 +12,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Lotto는 다음 순서로 진행한다.
+ * 1. Lotto 구입 금액 입력
+ * 2. 금액에 맞는 갯수 구입
+ * 3. 당첨 번호 입력
+ * 4. 보너스 볼 입력
+ * 5. 당첨 확인 및 통계 출력
+ *
+ * @author yun
+ * @version 0.1
+ */
 public class PlayLotto {
     private List<Lotto> myLotto = new ArrayList<>(); // 구입한 내 Lotto List
-    private WinningLotto winningLotto;
+    private WinningLotto winningLotto; // 당첨 번호 및 보너스 볼
 
+    /**
+     * Lotto 실행
+     */
     public void play() {
         int money = insertMoney();
         purchaseLotto(money);
@@ -18,6 +37,12 @@ public class PlayLotto {
         printWinningStatistics(money);
     }
 
+    /**
+     * 구입 금액 입력
+     * 0 이상의 자연수
+     *
+     * @return 구입 금액
+     */
     public int insertMoney() {
         int money;
         System.out.println("구입금액을 입력해 주세요.");
@@ -31,18 +56,28 @@ public class PlayLotto {
         return money;
     }
 
+    /**
+     * 구입 금액으로 Lotto 구매
+     * 한 장당 1000원
+     * myLotto instance variable에 Lotto object 저장
+     *
+     * @param money 구입 금액
+     */
     public void purchaseLotto(int money) {
         List<Integer> lottoNumber; // Lotto 번호 List
         int lottoPrice = 1000;
         int numberOfLotto = money / lottoPrice; // 구입할 Lotto 개수
         System.out.printf("\n%d개를 구매했습니다.\n", numberOfLotto);
         for (int i = 0; i < numberOfLotto; i++) {
-            lottoNumber = generatingLottoNumber();
+            lottoNumber = generatingLottoNumber(); // Lotto 번호 생성
             System.out.println(lottoNumber);
             myLotto.add(new Lotto(lottoNumber));
         }
     }
 
+    /**
+     * winningLotto instance variable에 당첨 번호와 보너스 볼 저장
+     */
     public void setWinningLotto() {
         List<Integer> winningLottoNumber = insertWinningLottoNumber();
         int bonusNumber;
@@ -50,10 +85,15 @@ public class PlayLotto {
         do {
             bonusNumber = insertBonusNumber();
             validBonusNumber = new ValidBonusNumber(winningLottoNumber, bonusNumber);
-        } while (!validBonusNumber.isValid());
+        } while (validBonusNumber.isValid());
         winningLotto = new WinningLotto(new Lotto(winningLottoNumber), bonusNumber);
     }
 
+    /**
+     * 당첨 번호 입력
+     *
+     * @return 크기가 6인 중복 없는 1 ~ 45 사이의 자연수 List
+     */
     public List<Integer> insertWinningLottoNumber() {
         Scanner sc = new Scanner(System.in);
         String[] rawWinningNumber;
@@ -66,17 +106,27 @@ public class PlayLotto {
         return Utils.convertString2Int(rawWinningNumber);
     }
 
+    /**
+     * 보너스 볼 입력
+     */
     public int insertBonusNumber() {
         Scanner sc = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해주세요.");
         return sc.nextInt();
     }
 
+    /**
+     * 당첨 통계 출력
+     * 당첨 등급에 대해 각 당첨 횟수 출력
+     * 총 수익률 출력
+     *
+     * @param money 구입 금액
+     */
     public void printWinningStatistics(int money) {
         System.out.println("\n당첨 통계\n-------");
         int totalWinningPrice = 0;
         List<Rank> lottoResultList = matchLotto();
-        int lottoFrequency;
+        int lottoFrequency; // 당첨 등급별 빈도
         for (Rank rank : Rank.values()) {
             lottoFrequency = Collections.frequency(lottoResultList, rank);
             printWinningMessage(rank, lottoFrequency);
@@ -86,6 +136,11 @@ public class PlayLotto {
                 (float) totalWinningPrice / money);
     }
 
+    /**
+     * 구입한 Lotto와 당첨 번호를 비교
+     *
+     * @return 당첨 결과
+     */
     public List<Rank> matchLotto() {
         Rank lottoResult;
         List<Rank> lottoResultList = new ArrayList<>();
@@ -96,6 +151,12 @@ public class PlayLotto {
         return lottoResultList;
     }
 
+    /**
+     * 등급에 따른 메세지 출력
+     *
+     * @param matchResult 당첨 등급
+     * @param number      당첨 등급의 빈도수
+     */
     public void printWinningMessage(Rank matchResult, int number) {
         int countOfMatch = matchResult.getCountOfMatch();
         int winningMoney = matchResult.getWinningMoney();
@@ -109,10 +170,15 @@ public class PlayLotto {
         }
     }
 
+    /**
+     * Lotto 번호 생성
+     *
+     * @return 1 ~ 45 사이, 크기가 6인 List
+     */
     public List<Integer> generatingLottoNumber() {
-        int lottoCount = 6;
-        int lottoNumberBegin = 1;
-        int lottoNumberEnd = 45;
+        int lottoCount = 6; // Lotto 숫자 갯수
+        int lottoNumberBegin = 1; // Lotto 숫자 범위, 시작
+        int lottoNumberEnd = 45; // Lotto 숫자 범위, 끝
         List<Integer> lottoNumber = new ArrayList<>();
         for (int number = lottoNumberBegin; number <= lottoNumberEnd; number++) {
             lottoNumber.add(number);
@@ -133,7 +199,7 @@ class ValidBonusNumber extends ValidLottoNumber {
     }
 
     public boolean isValid() {
-        return isValidBonusNumber() && !hasBonusNumber();
+        return !isValidBonusNumber() || hasBonusNumber();
     }
 
     public boolean isValidBonusNumber() {
