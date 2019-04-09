@@ -92,7 +92,7 @@ public class GameRunner {
     }
 
     private int countLotto() {
-        return game.getPurchaseAmount() / Numbers.LOTTO_COUNT_CRITERIA;
+        return (game.getPurchaseAmount() / Numbers.LOTTO_COUNT_CRITERIA);
     }
 
     private void inputLastWeekNumberAndBonusNo() {
@@ -101,10 +101,7 @@ public class GameRunner {
         Lotto lotto = stringArrayToLotto(lastWeekStr);
 
         bonusNoMessagePrinter();
-        int bonusNo;
-        do {
-            bonusNo = sc.nextInt();
-        } while (!bonusNoValidChecker(lotto, bonusNo));
+        int bonusNo = getBonusNo(lotto);
 
         game.setWinningLotto(new WinningLotto(lotto, bonusNo));
     }
@@ -121,9 +118,17 @@ public class GameRunner {
         System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
     }
 
+    private int getBonusNo(Lotto lotto) {
+        int bonusNo;
+        do {
+            bonusNo = sc.nextInt();
+        } while (!bonusNoValidChecker(lotto, bonusNo));
+        return bonusNo;
+    }
+
     private boolean bonusNoValidChecker(Lotto lotto, int bonusNo) {
         if (lotto.contains(bonusNo)) {
-            System.out.println(Strings.MESSAGE_BONUSNO_INVALID + Strings.MESSAGE_RE_INPUT_PLEASE);
+            System.out.println(Strings.MESSAGE_BONUS_INVALID + Strings.MESSAGE_RE_INPUT_PLEASE);
             return false;
         }
         return true;
@@ -142,7 +147,7 @@ public class GameRunner {
     }
 
     private void printLottoMatchResult() {
-        lottoMatchResultHeaderMessagePrinter();
+        lottoMatchResultHeadMessagePrinter();
         RankList rankList = getRankList(game.getWinningLotto());
 
         lottoMatchResultBodyMessagePrinter(rankList);
@@ -177,7 +182,7 @@ public class GameRunner {
         );
     }
 
-    private void lottoMatchResultHeaderMessagePrinter() {
+    private void lottoMatchResultHeadMessagePrinter() {
         System.out.println(Strings.MESSAGE_LOTTO_MATCH_RESULT_HEADER);
         System.out.println(Strings.MESSAGE_SEPARATION_LINE);
     }
