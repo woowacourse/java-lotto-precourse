@@ -65,4 +65,16 @@ public class Game {
     private void sortNumbers(List<Integer> numbers) {
         Collections.sort(numbers);
     }
+
+    private List<Integer> createLottoNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+
+        while (checkSizeNumbers(numbers)) {
+            int randomNum = createRandomNumber();
+            addNumbers(numbers, randomNum);
+            sortNumbers(numbers);
+        }
+
+        return numbers;
+    }
 }
