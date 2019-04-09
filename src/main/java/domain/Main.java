@@ -16,21 +16,29 @@ public class Main {
         public static void main(String args[]) {
                 buyLotto();
                 makeLotto();
+                printLotto();
         }
 
-        public static void buyLotto() {
+        private static void buyLotto() {
                 System.out.println("구입금액을 입력해 주세요.");
                 Scanner sc = new Scanner(System.in);
                 int money = sc.nextInt();
 
                 lottoCount = money / ONCE_COST;
                 lottos = new Lotto[lottoCount];
+                System.out.println();
                 System.out.println(lottoCount + "개를 구매했습니다.");
         }
 
-        public static void makeLotto() {
+        private static void makeLotto() {
                 for(int i = 0 ; i < lottoCount; i++){
                         lottos[i] = Lotto.init();
+                }
+        }
+
+        private static void printLotto(){
+                for(Lotto lotto : lottos){
+                        lotto.getNumbers();
                 }
         }
 }
