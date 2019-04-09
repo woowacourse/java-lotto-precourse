@@ -48,6 +48,18 @@ class Statistics {
         displayRossGainRation();
     }
 
+    /**
+     * 로또 수익률 계산 메쏘드.
+     *
+     * rankState: {@code Map<Rank, Integer>}
+     * - Rank: Lotto 의 Rank
+     * - Integer: Rank 에 해당하는 Lotto 의 갯수.
+     *
+     * 총 이득 = rankState.keys().getWinningMoney() 의 합
+     * 총 투자 = PRICE_PER_LOTTO * 모든 rankState.values() 의 합
+     *
+     * 수익률 = 총 이득 / 총 투자
+     */
     private float calculateRossRatio() {
         int totalGain = rankState.entrySet().stream()
             .map(entry -> entry.getValue() * entry.getKey().getWinningMoney())
