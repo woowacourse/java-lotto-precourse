@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * 사용자가 구입한 로또 리스트를 생성하기위한 클래스
+ */
 class LottoBuilder implements MoneyLottoBuilder, FinalLottoBuilder {
 
     private int money = 0;
@@ -46,11 +49,23 @@ class LottoBuilder implements MoneyLottoBuilder, FinalLottoBuilder {
     }
 }
 
+/**
+ * {@code LotteBuilder} 의 {@code money} 값의 지정을 강제하기 위한 인터페이스.
+ *
+ * LotteBuilder 의 withMoney() 를 호출 한 이후에만 build()를 사용 할 수 있도록
+ * {@code MoneyLottoBuilder}와 {@code FinalLottoBuilder}를 이용하여 build() 메쏘드의 접근을 제어 합니다.
+ */
 interface MoneyLottoBuilder {
 
     FinalLottoBuilder withMoney(int money);
 }
 
+/**
+ * {@code LotteBuilder} 의 {@code build()} 메쏘드 접근 제어를 위한 인터페이스.
+ *
+ * LotteBuilder 의 withMoney() 를 호출 한 이후에만 build()를 사용 할 수 있도록
+ * {@code MoneyLottoBuilder}와 {@code FinalLottoBuilder}를 이용하여 build() 메쏘드의 접근을 제어 합니다.
+ */
 interface FinalLottoBuilder {
 
     List<Lotto> build();
