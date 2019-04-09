@@ -59,7 +59,7 @@ public enum Rank {
             }
         }
 
-        throw new IllegalArgumentException(countOfMatch + Message.EXCEPTION_MESSAGE);
+        throw new IllegalArgumentException(countOfMatch + Strings.EXCEPTION_MESSAGE);
     }
 
     private boolean matchCount(int countOfMatch) {

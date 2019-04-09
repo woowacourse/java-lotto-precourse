@@ -1,5 +1,5 @@
 /*
- * @(#)Message.java
+ * @(#)Strings.java
  *
  * v 0.0.0
  *
@@ -17,7 +17,7 @@ package com.kwonmc.lotto;
  * @version 0.0.0
  * @author kwonmc
  */
-class Message {
+class Strings {
     // GameRunner 문자열들
     static String PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     static String LOTTO_INFO = "개를 구매했습니다.";
@@ -32,4 +32,9 @@ class Message {
 
     // Rank 문자열들
     static String EXCEPTION_MESSAGE = "는 유효하지 않은 값입니다.";
+
+    // Lotto
+    static String OPEN_SQUARE_BRACKET = "[";
+    static String CLOSE_SQUARE_BRACKET = "]";
+    static String LOTTO_NUMBER_DELIMITER = ", ";
 }

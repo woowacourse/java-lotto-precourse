@@ -59,14 +59,14 @@ public class Lotto {
     }
 
     private String stringMaker(StringBuilder stringBuilder, Iterator<Integer> iterator) {
-        stringBuilder.append("[");
+        stringBuilder.append(Strings.OPEN_SQUARE_BRACKET);
         while(iterator.hasNext()) {
             stringBuilder.append(iterator.next());
             if (iterator.hasNext()) {
-                stringBuilder.append(", ");
+                stringBuilder.append(Strings.LOTTO_NUMBER_DELIMITER);
             }
         }
-        stringBuilder.append("]");
+        stringBuilder.append(Strings.CLOSE_SQUARE_BRACKET);
         return stringBuilder.toString();
     }
 }

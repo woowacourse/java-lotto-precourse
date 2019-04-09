@@ -39,7 +39,7 @@ public class GameRunner {
     }
 
     private void purchaseAmountMessagePrinter() {
-        System.out.println(Message.PURCHASE_AMOUNT);
+        System.out.println(Strings.PURCHASE_AMOUNT);
     }
 
     private void printLottoInfo() {
@@ -51,7 +51,7 @@ public class GameRunner {
     }
 
     private void lottoInfoMessagePrinter(int lottoCount) {
-        System.out.println(lottoCount + Message.LOTTO_INFO);
+        System.out.println(lottoCount + Strings.LOTTO_INFO);
     }
 
     private void createLottoList(int lottoCount) {
@@ -93,11 +93,11 @@ public class GameRunner {
     }
 
     private void lastWeekNumberMessagePrinter() {
-        System.out.println(Message.LAST_WEEK_NUMBER);
+        System.out.println(Strings.LAST_WEEK_NUMBER);
     }
 
     private void bonusNoMessagePrinter() {
-        System.out.println(Message.BONUS_NO);
+        System.out.println(Strings.BONUS_NO);
     }
 
     private ArrayList<Integer> arrayToList(int[] array) {
@@ -137,21 +137,21 @@ public class GameRunner {
     }
 
     private String resultMessageMaker(Rank rank, int count) {
-        return String.format(Message.RESULT_DESCRIPTION,
+        return String.format(Strings.RESULT_DESCRIPTION,
                 rank.getCountOfMatch(),
-                rank == Rank.SECOND ? Message.BONUS_TRUE : Message.BONUS_FALSE,
+                rank == Rank.SECOND ? Strings.BONUS_TRUE : Strings.BONUS_FALSE,
                 rank.getWinningMoney(),
                 count
         );
     }
 
     private void lottoMatchResultHeaderMessagePrinter() {
-        System.out.println(Message.LOTTO_MATCH_RESULT_HEADER);
-        System.out.println(Message.SEPARATION_LINE);
+        System.out.println(Strings.LOTTO_MATCH_RESULT_HEADER);
+        System.out.println(Strings.SEPARATION_LINE);
     }
 
     private void lottoMatchResultTailMessagePrinter(RankList rankList, int purchaseAmount) {
         double totalYield = (double) rankList.getTotalWinningAmount() / purchaseAmount;
-        System.out.println(String.format(Message.RESULT_YIELD, totalYield));
+        System.out.println(String.format(Strings.RESULT_YIELD, totalYield));
     }
 }
