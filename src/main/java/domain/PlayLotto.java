@@ -35,7 +35,7 @@ public class PlayLotto {
         int numberOfLotto = money / lottoPrice; // 구입할 Lotto 개수
         System.out.printf("\n%d개를 구매했습니다.\n", numberOfLotto);
         for (int i = 0; i < numberOfLotto; i++) {
-            lottoNumber = GeneratingLottoNumber.generatingLottoNumber();
+            lottoNumber = generatingLottoNumber();
             System.out.println(lottoNumber);
             myLotto.add(new Lotto(lottoNumber));
         }
@@ -169,19 +169,16 @@ public class PlayLotto {
         }
         return false;
     }
-}
 
-class GeneratingLottoNumber {
-    private static final int LOTTO_COUNT = 6;
-    private static final int LOTTO_NUMBER_BEGIN = 1;
-    private static final int LOTTO_NUMBER_END = 45;
-
-    static List<Integer> generatingLottoNumber() {
+    public List<Integer> generatingLottoNumber() {
+        int lottoCount = 6;
+        int lottoNumberBegin = 1;
+        int lottoNumberEnd = 45;
         List<Integer> lottoNumber = new ArrayList<>();
-        for (int number = LOTTO_NUMBER_BEGIN; number < LOTTO_NUMBER_END+1; number++) {
+        for (int number = lottoNumberBegin; number < lottoNumberEnd+1; number++) {
             lottoNumber.add(number);
         }
         Collections.shuffle(lottoNumber);
-        return lottoNumber.subList(0, LOTTO_COUNT);
+        return lottoNumber.subList(0, lottoCount);
     }
 }
