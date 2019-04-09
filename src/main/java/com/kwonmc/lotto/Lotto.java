@@ -36,8 +36,8 @@ public class Lotto {
 
     public static Lotto lottoMaker() {
         ArrayList<Integer> lottoArray = new ArrayList<>();
-        while (lottoArray.size() < 6) {
-            int random = (int) (Math.random() * 45) + 1;
+        while (lottoArray.size() < Numbers.EACH_LOTTO_SIZE) {
+            int random = (int) (Math.random() * Numbers.TOTAL_LOTTO_POOL) + 1;
             if (!lottoArray.contains(random)) {
                 lottoArray.add(random);
             }

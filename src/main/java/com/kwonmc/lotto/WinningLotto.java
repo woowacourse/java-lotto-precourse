@@ -35,7 +35,7 @@ public class WinningLotto {
     }
 
     private int countOfMatch(Lotto userLotto) {
-        int countOfMatch = 0;
+        int countOfMatch = Numbers.NONE;
         for (Integer num : this.lotto.getNumbers()) {
             if (userLotto.contains(num)) {
                 countOfMatch++;

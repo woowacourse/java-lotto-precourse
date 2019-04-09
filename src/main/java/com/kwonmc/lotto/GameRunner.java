@@ -70,7 +70,7 @@ public class GameRunner {
     }
 
     private int countLotto() {
-        return game.getPurchaseAmount() / 1000;
+        return game.getPurchaseAmount() / Numbers.LOTTO_COUNT_CRITERIA;
     }
 
     private void inputLastWeekNumberAndBonusNo() {
@@ -128,7 +128,7 @@ public class GameRunner {
     }
 
     private void lottoMatchResultBodyMessagePrinter(RankList rankList) {
-        for (int i = rankList.size() - 2; i >= 0; i--) {
+        for (int i = rankList.size() - Numbers.SKIPPING_LAST_INDEX; i >= 0; i--) {
             // rankList 의 마지막 원소는 MISS 이므로 마지막 원소는 건너뛰기 위해 -2
             Rank rank = rankList.getRankByIndex(i);
             int counts = rankList.getCountsByIndex(i);

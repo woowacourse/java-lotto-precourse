@@ -1,5 +1,5 @@
 /*
- * @(#)Number.java
+ * @(#)Numbers.java
  *
  * v 0.0.0
  *
@@ -17,7 +17,7 @@ package com.kwonmc.lotto;
  * @version 0.0.0
  * @author kwonmc
  */
-class Number {
+class Numbers {
     private static final int ZERO = 0;
     private static final int SIX = 6;
 

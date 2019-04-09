@@ -25,9 +25,9 @@ public class RankList {
     private int[] counts;
 
     public RankList() {
-        this.ranks = new ArrayList<>(6); // enum Rank 의 순서대로 indexing
-        this.counts = new int[6]; // enum Rank 의 순서대로 counting 하기 위한 배열
-        Collections.addAll(this.ranks, Rank.values());
+        ranks = new ArrayList<>(Numbers.RANKLIST_CAPACITY); // enum Rank 의 순서대로 indexing
+        counts = new int[Numbers.RANKLIST_CAPACITY]; // enum Rank 의 순서대로 counting 하기 위한 배열
+        Collections.addAll(ranks, Rank.values());
     }
 
     public int size() {
@@ -35,7 +35,7 @@ public class RankList {
     }
 
     public boolean add(Rank rank) {
-        int index = this.ranks.indexOf(rank);
+        int index = ranks.indexOf(rank);
         this.counts[index]++;
         return true;
     }
