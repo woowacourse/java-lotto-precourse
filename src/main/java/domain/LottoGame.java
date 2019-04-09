@@ -1,20 +1,16 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static domain.LottoMoney.getLottoMoney;
 
 public class LottoGame {
 
-    private static List<Integer> lastWinNumber = new ArrayList<Integer>();
     private static final int LOTTO_LENGTH = 6;
     private static final int END_LOTTO_NUMBER = 45;
     private static final int START_LOTTO_NUMBER = 1;
 
-    public static List<Integer> makeLottoNumber(){
+    private List<Integer> makeLottoNumber(){
 
         Random lottoNumber = new Random();
         List<Integer> lottoNumberList = new ArrayList<Integer>();
@@ -26,7 +22,7 @@ public class LottoGame {
         return lottoNumberList;
     }
 
-    public static void takeLottoNumber(List<Lotto> lottoNumberList,int getMoney){
+    private void takeLottoNumber(List<Lotto> lottoNumberList,int getMoney){
 
         for(int i=0;i<getMoney;i++){
 
@@ -35,7 +31,7 @@ public class LottoGame {
         }
     }
 
-    public static void makeTotalLotto(){
+    public List<Lotto> makeTotalLotto(){
 
         int lottoMoney = getLottoMoney();
         List<Lotto> totalLotto = new ArrayList<Lotto>();
@@ -45,16 +41,25 @@ public class LottoGame {
             totalLotto.add(lottoNumber);
         }
         takeLottoNumber(totalLotto, lottoMoney);
+        return totalLotto;
     }
 
-    public static void getLastWinNumber(){
+    private void getLastWinNumber() {
 
-        Scanner lastNumber = new Scanner(System.in);
-        String lastWinString = lastNumber.nextLine();
-        String[] lastWinStringArray = lastWinString.split(",");
+        List<String> inputWinNumber;
 
-        for(int i=0; i< lastWinStringArray.length; i++){
-            lastWinNumber.add(Integer.parseInt(lastWinStringArray[i]));
+        while(true){
+            try{
+                Scanner lastNumber = new Scanner(System.in);
+                String lastWinString = lastNumber.nextLine();
+                inputWinNumber = Arrays.asList(lastWinString.split(","));
+
+                break;
+            } catch (Exception e){
+
+                System.out.println("다시 입력해주세요");
+            }
         }
     }
+
 }
