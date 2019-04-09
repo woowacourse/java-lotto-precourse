@@ -85,7 +85,7 @@ public class WinningLottoInput {
         int isInRangeElement = 0;
 
         if (boxElement >= ConstValue.MINIMUM_LOTTO_NUMBER
-                && boxElement <= ConstValue.MAXMUM_LOTTO_NUMBER) {
+                && boxElement <= ConstValue.MAXIMUM_LOTTO_NUMBER) {
             isInRangeElement = 1;
         }
         return isInRangeElement;
@@ -128,7 +128,7 @@ public class WinningLottoInput {
 
     private boolean isOutRangeNumber(int number) {
         return number < ConstValue.MINIMUM_LOTTO_NUMBER
-                || number > ConstValue.MAXMUM_LOTTO_NUMBER;
+                || number > ConstValue.MAXIMUM_LOTTO_NUMBER;
     }
 
     private boolean noContainBonusNumber(String number){
