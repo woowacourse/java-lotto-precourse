@@ -5,20 +5,32 @@ package domain;
  */
 public enum Rank {
     FIRST(6, 2_000_000_000), // 1등
-    SECOND(5, 30_000_000), // 2등
+    SECOND(5, 30_000_000, ", 보너스 볼 일치"), // 2등
     THIRD(5, 1_500_000), // 3등
     FOURTH(4, 50_000), // 4등
     FIFTH(3, 5_000), // 5등
     MISS(0, 0);
 
+    private static final String MATCH_COUNT = "개 일치";
+
+    private static final String LEFT = "(";
+
+    private static final String RIGHT = "원)";
+
     private static final int WINNING_MIN_COUNT = 3;
 
     private int countOfMatch;
     private int winningMoney;
+    private String rankString;
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+    }
+
+    private Rank(int countOfMatch, int winningMoney, String rankString){
+        this(countOfMatch, winningMoney);
+        this.rankString = rankString;
     }
 
     public int getCountOfMatch() {
@@ -49,6 +61,17 @@ public enum Rank {
 
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder rankStatus = new StringBuilder();
+        rankStatus.append(countOfMatch).append(MATCH_COUNT);
+        if (this.equals(Rank.SECOND)){
+            rankStatus.append(rankString);
+        }
+        rankStatus.append(LEFT).append(winningMoney).append(RIGHT);
+        return rankStatus.toString();
     }
 }
 

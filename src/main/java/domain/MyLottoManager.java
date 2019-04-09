@@ -1,5 +1,5 @@
 /*
- * @MyLottoManager.java	1.00 2019/04/09
+ * @MyLottoManager.java	1.00 2019/04/10
  * 
  * Copyright(c)2019		HwiJin Hong.
  * All right reserved.
@@ -10,13 +10,14 @@
 
 package domain;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * 내 로또를 매니지먼트 하는 클래스
  * 
- * @version 1.00 2019년 4월 9일
+ * @version 1.00 2019년 4월 10일
  * @author 홍휘진
  *
  */
@@ -50,7 +51,7 @@ public class MyLottoManager {
 		System.out.println(lottoListSize + BUY_MESSAGE);
 		addLottoToList();
 	}
-	
+
 	private void addLottoToList() {
 		for (int i = 0; i < lottoListSize; i++) {
 			Lotto lotto = randomLotto.makeRandomLotto();
@@ -62,5 +63,21 @@ public class MyLottoManager {
 	private boolean notEnoughMoney(int money) {
 		return (money < LOTTO_PRICE) ? true : false;
 	}
+	
+	public HashMap<Rank, Integer> matchWithWinningLotto(WinningLotto winningLotto) {
+		HashMap<Rank, Integer> rankList = new HashMap<>();
+		initRankList(rankList);
+		Rank rank;
+		for (Lotto lotto : lottoList) {
+			rank = winningLotto.match(lotto);
+			rankList.replace(rank, rankList.get(rank) + WinningLotto.MATCH);
+		}
+		return rankList;
+	}
 
+	private void initRankList(HashMap<Rank, Integer> rankList){
+		for (Rank rank : Rank.values()){
+			rankList.put(rank, WinningLotto.NOT_MATCH);
+		}
+	}
 }
