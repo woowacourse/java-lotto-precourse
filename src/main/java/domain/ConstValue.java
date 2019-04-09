@@ -8,6 +8,8 @@ public class ConstValue {
     /* 쉼표(, )로 구분된 6개의 수 */
     public static final String SIX_NUMBERS_DIVIDED_COMMA = "^([0-9]+,){5}[0-9]+$";
 
+    public static final String NUMBER_PATTERNS = "^[0-9]+$";
+
     public static final int LOTTO_COUNT_SIZE = 6;
 
     public static final int MINIMUM_LOTTO_NUMBER = 1;

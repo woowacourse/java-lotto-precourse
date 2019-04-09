@@ -7,9 +7,16 @@ import java.util.regex.Pattern;
 
 public class WinningLottoInput {
 
+    private TreeSet<Integer> checkSameElementBox;
 
     public void inputWinningLotto() {
         inputLastWinningLotto();
+        inputBonusNumber();
+
+        Iterator<Integer> iter = checkSameElementBox.iterator();
+        while (iter.hasNext()) {
+            System.out.printf(iter.next() + " ");
+        }
     }
 
     private void inputLastWinningLotto() {
@@ -20,11 +27,10 @@ public class WinningLottoInput {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             winningLottoInput = sc.nextLine().replace(" ", "");
         } while (!checkValidWinningLottoInput(winningLottoInput));
-        System.out.println("ok");
     }
 
     private boolean checkValidWinningLottoInput(String winningLotto) {
-        TreeSet<Integer> checkSameElementBox = new TreeSet<>();
+        checkSameElementBox = new TreeSet<>();
 
         if (!isDividedComma(winningLotto)) {
             System.out.println("쉼표(,)로 구분하여 6자리를 입력해 주세요.");
@@ -32,7 +38,7 @@ public class WinningLottoInput {
         }
         addElementIntoSet(winningLotto, checkSameElementBox);
 
-        return isValidNumber(checkSameElementBox);
+        return isValidElement(checkSameElementBox);
     }
 
     private boolean isDividedComma(String numbers) {
@@ -48,16 +54,17 @@ public class WinningLottoInput {
         }
     }
 
-    private boolean isValidNumber(TreeSet<Integer> box) {
-        boolean validNumber = true;
+    private boolean isValidElement(TreeSet<Integer> box) {
+        boolean validElement = true;
+
         if (isDuplicatedNumbers(box)) {
             System.out.println("중복된 숫자가 존재합니다.");
-            validNumber = !validNumber;
+            validElement = !validElement;
         } else if (isContainOutRangeNumber(box)) {
-            System.out.println("1부터 45 사이의 숫자만 입력해주세요.");
-            validNumber = !validNumber;
+            System.out.println("1부터 45 사이의 숫자만 입력해 주세요.");
+            validElement = !validElement;
         }
-        return validNumber;
+        return validElement;
     }
 
     private boolean isDuplicatedNumbers(TreeSet<Integer> box) {
@@ -69,17 +76,68 @@ public class WinningLottoInput {
 
         Iterator<Integer> iter = box.iterator();
         while (iter.hasNext()) {
-            validRangeNumCount += isInRange(iter.next());
+            validRangeNumCount += isElementInRange(iter.next());
         }
         return validRangeNumCount != ConstValue.LOTTO_COUNT_SIZE;
     }
 
-    private int isInRange(int boxElement) {
-        int inRangeCount = 0;
+    private int isElementInRange(int boxElement) {
+        int isInRangeElement = 0;
+
         if (boxElement >= ConstValue.MINIMUM_LOTTO_NUMBER
                 && boxElement <= ConstValue.MAXMUM_LOTTO_NUMBER) {
-            inRangeCount = 1;
+            isInRangeElement = 1;
         }
-        return inRangeCount;
+        return isInRangeElement;
+    }
+
+    private void inputBonusNumber() {
+        String bonusNumberInput;
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            bonusNumberInput = sc.nextLine();
+        } while (!checkValidBonusNumberInput(bonusNumberInput));
+
+        checkSameElementBox.add(Integer.parseInt(bonusNumberInput));
+    }
+
+    private boolean checkValidBonusNumberInput(String bonusNumber) {
+        return isValidNumber(bonusNumber)
+                && noContainBonusNumber(bonusNumber);
+    }
+
+    private boolean isValidNumber(String number){
+        boolean validNumber = true;
+
+        if (!isNumber(number)) {
+            System.out.println("숫자를 입력해주세요.");
+            validNumber = !validNumber;
+        } else if (isOutRangeNumber(Integer.parseInt(number))) {
+            System.out.println("1부터 45 사이의 숫자만 입력해 주세요.");
+            validNumber = !validNumber;
+        }
+        return validNumber;
+    }
+
+    private boolean isNumber(String number) {
+        String pattern = ConstValue.NUMBER_PATTERNS;
+        return Pattern.matches(pattern, number);
+    }
+
+    private boolean isOutRangeNumber(int number) {
+        return number < ConstValue.MINIMUM_LOTTO_NUMBER
+                || number > ConstValue.MAXMUM_LOTTO_NUMBER;
+    }
+
+    private boolean noContainBonusNumber(String number){
+        boolean isUniqueNumber = true;
+
+        if(checkSameElementBox.contains(Integer.parseInt(number))){
+            System.out.println("당첨 번호에 중복된 수가 존재합니다.");
+            isUniqueNumber = !isUniqueNumber;
+        };
+        return isUniqueNumber;
     }
 }
