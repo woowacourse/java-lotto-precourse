@@ -16,7 +16,7 @@ public class WinningLotto {
         int countOfMatch = matchWinningNumber(userLotto);
         boolean matchBonus = false;
         if (countOfMatch == 5) {
-            matchBonus = matchBonusNumber(userLotto);
+            matchBonus = userLotto.hasNumber(bonusNo);
         }
         return Rank.valueOf(countOfMatch, matchBonus);
     }
@@ -30,9 +30,4 @@ public class WinningLotto {
         }
         return countOfMatch;
     }
-
-    public boolean matchBonusNumber(Lotto userLotto) {
-        return userLotto.hasNumber(bonusNo);
-    }
-
 }
