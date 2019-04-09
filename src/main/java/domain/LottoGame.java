@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * LottoGame을 담당하는 객체입니다.
@@ -35,6 +37,34 @@ public class LottoGame {
 
         lottoList = lottoPurchase(lottoAmount);
         winningLotto = requestWinningLotto();
+        lottoResult(lottoList, winningLotto);
+    }
+
+    private void lottoResult(List<Lotto> lottoList, WinningLotto winningLotto) {
+        Map<Rank, Integer> result = setResult();
+        Rank rank;
+
+        System.out.println("당첨 통계\n----------");
+        for (int i = 0; i < lottoList.size(); i++) {
+            rank = winningLotto.match(lottoList.get(i));
+            result.put(rank, result.get(rank) + 1);
+        }
+        printResult(result);
+    }
+
+    private void printResult(Map<Rank, Integer> result) {
+        for (int i = Rank.values().length - 1; i >= 0; i--) {
+            Rank.values()[i].printMessage(result.get(Rank.values()[i]));
+        }
+    }
+
+    private Map<Rank, Integer> setResult() {
+        Map<Rank, Integer> result = new LinkedHashMap<>();
+
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
+        }
+        return result;
     }
 
     private WinningLotto requestWinningLotto() {

@@ -4,21 +4,23 @@ package domain;
  * 로또 등수를 의미하는 enum
  */
 public enum Rank {
-    FIRST(6, 2_000_000_000), // 1등
-    SECOND(5, 30_000_000), // 2등
-    THIRD(5, 1_500_000), // 3등
-    FOURTH(4, 50_000), // 4등
-    FIFTH(3, 5_000), // 5등
-    MISS(0, 0);
+    FIRST(6, 2_000_000_000, "6개 일치(2000000000원) - "), // 1등
+    SECOND(5, 30_000_000, "5개 일치, 보너스볼 일치(30000000원) - "), // 2등
+    THIRD(5, 1_500_000, "5개 일치(150000원) - "), // 3등
+    FOURTH(4, 50_000, "4개 일치(50000원) - "), // 4등
+    FIFTH(3, 5_000, "3개 일치(5000원) - "), // 5등
+    MISS(0, 0, "");
 
     private static final int WINNING_MIN_COUNT = 3;
 
     private int countOfMatch;
     private int winningMoney;
+    private String message;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    private Rank(int countOfMatch, int winningMoney, String message) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+        this.message = message;
     }
 
     public int getCountOfMatch() {
@@ -49,6 +51,12 @@ public enum Rank {
 
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
+    }
+
+    public void printMessage(int count){
+        if (this != MISS) {
+            System.out.println(message + count +"개");
+        }
     }
 }
 

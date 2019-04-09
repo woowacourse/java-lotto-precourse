@@ -12,5 +12,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    protected int countMatch(Lotto winningLotto) {
+        return (int) numbers.stream().
+                filter(winningLotto::containNumber).
+                count();
+    }
+
+    protected boolean containNumber(int number) {
+        return numbers.contains(number);
+    }
 }
