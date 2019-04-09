@@ -53,6 +53,18 @@ public class LottoGame {
     return randomNum;
   }
 
+  private List<Integer> MakeLottoCombination(){
+    List<Integer> oneLottoList = new ArrayList(8);
+    boolean[] DuplicateCheck = new boolean[46];
+    for(int i=1;i<=maxLottoNum;i++){
+      DuplicateCheck[i] = false;
+    }
+    for(int i=0;i<oneLottoAmount;i++){
+      oneLottoList.add(MakeRandomNum(DuplicateCheck));
+    }
+    return oneLottoList;
+  }
+
   public void StartLotto(){
     purchasePrice = InputPurchasePrice();
     if(!IsValidAmount(purchasePrice)) {
@@ -61,6 +73,7 @@ public class LottoGame {
     }
     purchaseAmount = purchasePrice/oneLottoPrice;
     System.out.println("\n"+purchaseAmount+"개를 구매했습니다.");
+    List<Integer> oneLottoCombination = MakeLottoCombination();
     /*
     for (int i = 0; i < oneLottoAmount; i++) {
       System.out.print(list.get(i) + " ");
