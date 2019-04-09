@@ -16,12 +16,12 @@ public class WinningLotto {
         int countOfMatch = 0;
         boolean match = false;
 
-        for(Integer number : userLotto.getNumbers()){
-            if(lotto.getNumbers().contains(number)){
+        for (Integer number : userLotto.getNumbers()) {
+            if (lotto.getNumbers().contains(number)) {
                 countOfMatch++;
             }
 
-            if(!match){
+            if (!match) {
                 match = (bonusNo == number);
             }
         }

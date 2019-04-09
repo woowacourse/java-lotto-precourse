@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,30 +38,25 @@ public class UserInterface extends CheckValidity {
     }
 
     public boolean validateWinnerNumbers(String[] winnerNumbers) {
-        if (!checkLottoNumberLength(winnerNumbers)) {
+        if (!checkLottoNumberLength(winnerNumbers) || !checkDoubleNumbers(winnerNumbers)) {
             return false;
         }
 
-        List<Integer> winnerNumberList = new ArrayList<>();
-        int number;
         for (String winnerNumber : winnerNumbers) {
-            if (!checkIntegerFormat(winnerNumber)) {
+            if (!checkWinnerNumber(winnerNumber)) {
                 return false;
             }
-
-            number = Integer.parseInt(winnerNumber);
-            if (!checkLottoNumberScope(number)) {
-                return false;
-            }
-
-            if (checkDouble(winnerNumberList, number)) {
-                return false;
-            }
-
-            winnerNumberList.add(number);
         }
 
         return true;
+    }
+
+    private boolean checkWinnerNumber(String winnerNumberStr) {
+        if (!checkIntegerFormat(winnerNumberStr)) {
+            return false;
+        }
+
+        return checkLottoNumberScope(Integer.parseInt(winnerNumberStr));
     }
 
     public String inputBonusBall() {
@@ -76,7 +70,7 @@ public class UserInterface extends CheckValidity {
         }
 
         int bonusBall = Integer.parseInt(bonusBallStr);
-        if (checkDouble(winnerNumbers, bonusBall)) {
+        if (checkDoubleBonus(winnerNumbers, bonusBall)) {
             return false;
         }
 

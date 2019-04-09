@@ -1,7 +1,9 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 class CheckValidity {
     private static final int MIN_NUMBER = 1;
@@ -23,15 +25,21 @@ class CheckValidity {
         return !((number < MIN_NUMBER) || (MAX_NUMBER < number));
     }
 
-    boolean checkDouble(List<Integer> numArr, int number) {
+    boolean checkDoubleBonus(List<Integer> numArr, int number) {
         return numArr.contains(number);
     }
 
-    boolean checkMinimumPurchaseAmount(int purchaseAmount){
+    boolean checkMinimumPurchaseAmount(int purchaseAmount) {
         return (purchaseAmount >= MIN_PURCHASE_AMOUNT);
     }
 
-    boolean checkLottoNumberLength(String[] lottStr){
+    boolean checkLottoNumberLength(String[] lottStr) {
         return (lottStr.length == LENGTH_LOTTO);
+    }
+
+    boolean checkDoubleNumbers(String[] lottoStr) {
+        Set<String> lottoSet = new HashSet<>(Arrays.asList(lottoStr));
+
+        return (lottoSet.size() == LENGTH_LOTTO);
     }
 }
