@@ -24,7 +24,14 @@ public class StatisticalAnalyzer {
     }
 
     public double calculateEarningRateBy(HashMap<Rank, Integer> rankCounts) {
-        return 0;
+        int totalPurchase = rankCounts.values().stream().mapToInt(Integer::intValue).sum()
+                * LottoManager.PRICE_PER_LOTTO;
+        int totalEarning = 0;
+
+        for (Rank rank: rankCounts.keySet()) {
+            totalEarning += rank.getWinningMoney() * rankCounts.get(rank);
+        }
+        return (double) totalEarning / (double) totalPurchase;
     }
 
     public void show(HashMap<Rank, Integer> rankCounts) {
