@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class UserInterface {
 
     private static final Scanner scanner = new Scanner(System.in);
+    private static final String LOTTO_NUMBER_SEPARATOR = ",";
 
     int getPurchasePrice() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -23,7 +24,7 @@ public class UserInterface {
     WinningLotto getWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String LottoWithComma = scanner.nextLine();
-        List<Integer> WinningLottoNumbers = Arrays.stream(LottoWithComma.split(","))
+        List<Integer> WinningLottoNumbers = Arrays.stream(LottoWithComma.split(LOTTO_NUMBER_SEPARATOR))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         Lotto lotto = new Lotto(WinningLottoNumbers);
