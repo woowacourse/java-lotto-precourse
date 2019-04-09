@@ -153,6 +153,14 @@ public class WinningLotto {
         return true;
     }
 
+    private static boolean isNonNumberic(String userInput) {
+        if (userInput.matches("[0-9]+")) {
+            return false;
+        }
+        System.out.println("보너스 번호는 1~45의 숫자만 입력해주세요!");
+        return true;
+    }
+
 
 
 
