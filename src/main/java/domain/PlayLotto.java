@@ -23,6 +23,7 @@ public class PlayLotto {
         money = sc.nextInt();
         while (money < 0) {
             System.out.println("Lotto 구입금액은 0이상의 자연수입니다.");
+            System.out.println("구입금액을 입력해 주세요.");
             money = sc.nextInt();
         }
         return money;
@@ -52,13 +53,12 @@ public class PlayLotto {
     public List<Integer> insertWinningLottoNumber() {
         Scanner sc = new Scanner(System.in);
         String[] rawWinningNumber;
-        while (true) {
+        do {
             System.out.println("지난 주 당첨 번호를 입력해주세요.");
             rawWinningNumber = sc.nextLine().split(",");
-            if (isValidNumberOfRange(rawWinningNumber) &&
-                    isValidSizeOfWinningNumber(rawWinningNumber) &&
-                    isDuplicatedNumber(rawWinningNumber)) { break; }
-        }
+        } while (!isValidNumberOfRange(rawWinningNumber) ||
+                !isValidSizeOfWinningNumber(rawWinningNumber) ||
+                !isDuplicatedNumber(rawWinningNumber));
         return convertString2Int(rawWinningNumber);
     }
 
