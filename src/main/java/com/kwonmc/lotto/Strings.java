@@ -29,6 +29,7 @@ class Strings {
     static String LOTTO_MATCH_RESULT_HEADER = "당첨통계";
     static String SEPARATION_LINE = "---------";
     static String RESULT_YIELD = "총 수익률은 %.3f입니다.";
+    static String CHANGE_AMOUNT = "거스름돈은 %s원 입니다.";
 
     // Rank 문자열들
     static String EXCEPTION_MESSAGE = "는 유효하지 않은 값입니다.";

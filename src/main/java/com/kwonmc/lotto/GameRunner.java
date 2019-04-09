@@ -36,10 +36,18 @@ public class GameRunner {
         purchaseAmountMessagePrinter();
         int purchaseAmount = sc.nextInt();
         game.setPurchaseAmount(purchaseAmount);
+        changeAmountMessagePrinter(purchaseAmount);
     }
 
     private void purchaseAmountMessagePrinter() {
         System.out.println(Strings.PURCHASE_AMOUNT);
+    }
+
+    private void changeAmountMessagePrinter(int purchaseAmount) {
+        int changeAmount = purchaseAmount % Numbers.LOTTO_COUNT_CRITERIA;
+        if (changeAmount != 0) {
+            System.out.println(String.format(Strings.CHANGE_AMOUNT, changeAmount));
+        }
     }
 
     private void printLottoInfo() {
