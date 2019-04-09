@@ -13,6 +13,8 @@ package com.kwonmc.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -102,8 +104,15 @@ public class GameRunner {
 
     private void inputLastWeekNumberAndBonusNo() {
         lastWeekNumberMessagePrinter();
-        String[] lastWeekStr = sc.next().trim().split(",");
-        Lotto lotto = stringArrayToLotto(lastWeekStr);
+        String[] lastWeekStr;
+        List<Integer> arrayList;
+        do {
+            lastWeekStr = sc.next().trim().split(",");
+            int[] lastWeekInt = strArrToIntArr(lastWeekStr);
+            arrayList = intArrToList(lastWeekInt);
+        } while (!lastWeekValidChecker(arrayList));
+
+        Lotto lotto = listToLotto(arrayList);
 
         bonusNoMessagePrinter();
         int bonusNo = getBonusNo(lotto);
@@ -111,16 +120,41 @@ public class GameRunner {
         game.setWinningLotto(new WinningLotto(lotto, bonusNo));
     }
 
+    private boolean lastWeekValidChecker(List<Integer> list) {
+        if (list.size() != 6) { // 입력된 숫자의 개수가 6개가 아니면
+            System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_NUMBERS
+                    + Strings.MESSAGE_RE_INPUT_PLEASE);
+            return false;
+        }
+        if (new HashSet<>(list).size() != 6) { // 입력된 숫자 중 중복된 숫자가 있다면
+            System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_REDAUNDANT
+                    + Strings.MESSAGE_RE_INPUT_PLEASE);
+            return false;
+        }
+        return true;
+    }
+
+
     private void lastWeekNumberMessagePrinter() {
         System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
     }
 
-    private Lotto stringArrayToLotto(String[] strArray) {
-        int[] intArray = Arrays.stream(strArray)
+    private int[] strArrToIntArr(String[] strArray) {
+        return Arrays.stream(strArray)
                 .mapToInt(Integer::parseInt)
                 .toArray();
-        ArrayList<Integer> lottoList = arrayToList(intArray);
-        return new Lotto(lottoList);
+    }
+
+    private List<Integer> intArrToList(int[] array) {
+        List<Integer> list = new ArrayList<>();
+        for (int i : array) {
+            list.add(i);
+        }
+        return list;
+    }
+
+    private Lotto listToLotto(List<Integer> list) {
+        return new Lotto(list);
     }
 
     private int getBonusNo(Lotto lotto) {
@@ -141,14 +175,6 @@ public class GameRunner {
 
     private void bonusNoMessagePrinter() {
         System.out.println(Strings.MESSAGE_BONUS_NO);
-    }
-
-    private ArrayList<Integer> arrayToList(int[] array) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int i : array) {
-            list.add(i);
-        }
-        return list;
     }
 
     private void printLottoMatchResult() {
