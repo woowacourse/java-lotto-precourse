@@ -72,6 +72,17 @@ public class Lotto {
         return false;
     }
 
+    public static List<Lotto> makeListOfUserLottos(String userInput) {
+        int intUserInput = Integer.parseInt(userInput);
+        int quantitiesOfLottos = intUserInput/PRICE_OF_ONE_LOTTO;
+        List<Lotto> listOfUserLottos = new ArrayList<>();
+        for (int i=0; i<quantitiesOfLottos; i++) {
+            Lotto currentLotto = new Lotto(makeListOfRandomNumbers());
+            listOfUserLottos.add(currentLotto);
+        }
+        return listOfUserLottos;
+    }
+
     private static List<Integer> makeListOfRandomNumbers() {
         List<Integer> listOf45 = makeListOf45();
         List<Integer> listOf6RandomNumbers = makeListOf6RandomNumbers(listOf45);
