@@ -170,9 +170,14 @@ public class WinningLotto {
         return false;
     }
 
-
-
-
+    private static boolean isDuplicateInWinningNumbers(String userInput, String winningNumbers) {
+        List<String> listOfWinningNumbers = Arrays.asList(winningNumbers.split(","));
+        if (listOfWinningNumbers.contains(userInput)) {
+            System.out.println("보너스번호는 당첨번호와 중복되면 안됩니다. 다시 입력해주세요!");
+            return true;
+        }
+        return false;
+    }
 
 
 
