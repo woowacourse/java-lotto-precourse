@@ -62,12 +62,13 @@ public class Lotto {
         return true;
     }
 
-
-
-
-
-
-
-
+    private static boolean isSameAsOrSmallerThanZero(String userInput) {
+        int intUserInput = Integer.parseInt(userInput);
+        if (intUserInput <= 0) {
+            System.out.println("금액은 0보다 큰 금액으로 입력해주세요!");
+            return true;
+        }
+        return false;
+    }
 
 }
