@@ -50,5 +50,16 @@ public enum Rank {
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
     }
+
+    @Override
+    public String toString(){
+        if(this == MISS){
+            return "";
+        }
+        if(this == SECOND){
+            return this.getCountOfMatch()+"개 일치, 보너스볼 일치 ("+this.getWinningMoney()+"원) - ";
+        }
+        return this.getCountOfMatch()+"개 일치 ("+this.getWinningMoney()+"원) - ";
+    }
 }
 

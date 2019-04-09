@@ -7,11 +7,13 @@ import java.util.List;
 
 public class User {
     private List<Lotto> lottoList;
-    private int money;
+    private int buyMoney;
+    private int prizeMoney;
     private int numberOfLotto;
 
     public User() {
         this.setLottoList(new LinkedList<>());
+        this.setPrizeMoney(0);
     }
 
     public List<Lotto> getLottoList() {
@@ -22,13 +24,21 @@ public class User {
         this.lottoList = lottoList;
     }
 
-    public int getMoney() {
-        return money;
+    public int getBuyMoney() {
+        return buyMoney;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void setBuyMoney(int money) {
+        this.buyMoney = money;
         this.setNumberOfLotto(money / 1000);
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public void setPrizeMoney(int prizeMoney) {
+        this.prizeMoney = prizeMoney;
     }
 
     public int getNumberOfLotto() {
@@ -44,5 +54,4 @@ public class User {
             this.getLottoList().add(new Lotto(MakeRandom.makeRandomNumberList()));
         }
     }
-
 }

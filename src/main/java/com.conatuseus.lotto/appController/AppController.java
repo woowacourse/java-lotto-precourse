@@ -14,27 +14,34 @@ public class AppController {
     public static final int LOTTO_LENGTH = 6;
     public static final int MAX_LOTTO_VALUE = 45;
     public static final int MIN_LOTTO_VALUE = 1;
+    private static final int MIN_VALUE_RANK_INDEX = 4;
+    private static final int MAX_VALUE_RANK_INDEX = 0;
 
     private User user;
     private WinningLotto winningLotto;
-    private HashMap<Rank,Integer> countOfRankResult;
+    private Map<Rank, Integer> countOfRankResult;
 
     public AppController() {
         this.user = new User();
-        this.countOfRankResult = new HashMap<>();
-        this.countOfRankResult.put(Rank.FIRST, 0);
-        this.countOfRankResult.put(Rank.SECOND, 0);
-        this.countOfRankResult.put(Rank.THIRD, 0);
-        this.countOfRankResult.put(Rank.FOURTH, 0);
-        this.countOfRankResult.put(Rank.FIFTH, 0);
+        this.setCountOfRankResult(new HashMap<>());
+        this.getCountOfRankResult().put(Rank.FIRST, 0);
+        this.getCountOfRankResult().put(Rank.SECOND, 0);
+        this.getCountOfRankResult().put(Rank.THIRD, 0);
+        this.getCountOfRankResult().put(Rank.FOURTH, 0);
+        this.getCountOfRankResult().put(Rank.FIFTH, 0);
+        this.getCountOfRankResult().put(Rank.MISS, 0);
     }
 
-    public void setWinningLotto(WinningLotto winningLotto) {
+    private void setWinningLotto(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
     }
 
     public WinningLotto getWinningLotto() {
         return this.winningLotto;
+    }
+
+    private void setCountOfRankResult(Map<Rank, Integer> newMap) {
+        this.countOfRankResult = newMap;
     }
 
     public Map<Rank, Integer> getCountOfRankResult() {
@@ -43,12 +50,13 @@ public class AppController {
 
     public void run() throws IOException {
         AppView.outputLine(">> Lotto 게임을 시작합니다.");
-        user.setMoney(AppView.inputMoney());
+        user.setBuyMoney(AppView.inputMoney());
         user.makeLottoList();
         AppView.printLottoList(user.getLottoList());
         this.makeWinningLotto();
 
         this.countingRank();
+        this.printResult();
         AppView.outputLine("<< Lotto 게임을 종료합니다.");
     }
 
@@ -63,7 +71,6 @@ public class AppController {
     }
 
     private void countingRank() {
-        Rank rank;
         for (Lotto userLotto : this.user.getLottoList()) {
             this.addCountOfRank(userLotto);
         }
@@ -71,8 +78,14 @@ public class AppController {
 
     private void addCountOfRank(Lotto userLotto) {
         Rank rank = this.getWinningLotto().match(userLotto);
-        if (this.getCountOfRankResult().containsKey(rank)) {
-            this.getCountOfRankResult().put(rank, this.getCountOfRankResult().get(rank) + 1);
+        this.getCountOfRankResult().put(rank, this.getCountOfRankResult().get(rank) + 1);
+    }
+
+    private void printResult() {
+        AppView.printResultOfLotto();
+        for (int i = MIN_VALUE_RANK_INDEX; i >= MAX_VALUE_RANK_INDEX; i--) {
+            Rank rank = Rank.values()[i];
+            AppView.outputLine(rank.toString() + this.getCountOfRankResult().get(rank) + "개");
         }
     }
 
