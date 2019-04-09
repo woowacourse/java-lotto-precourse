@@ -17,4 +17,10 @@ public class LottoGame {
         }
         lottoList = createdLottoList;
     }
+
+    private void printLottos() {
+        for (int i = 0; i < lottoList.size(); i++) {
+            lottoList.get(i).printLottoNumbers();
+        }
+    }
 }
