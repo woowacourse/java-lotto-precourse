@@ -20,7 +20,7 @@ public class Lotto {
             .stream()
             .map(Object::toString)
             .collect(Collectors.toList());
-        return String.format("[%s]",String.join(", ", numberStrings));
+        return String.format("[%s]", String.join(", ", numberStrings));
     }
 
     List<Integer> getNumbers() {

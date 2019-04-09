@@ -53,7 +53,7 @@ public enum Rank {
         if (this.equals(Rank.SECOND)) {
             bonusBallMessage = ", 보너스볼 일치";
         }
-        return String.format("%d개 일치%s(%d원)",countOfMatch, bonusBallMessage, winningMoney);
+        return String.format("%d개 일치%s(%d원)", countOfMatch, bonusBallMessage, winningMoney);
     }
 
     private boolean matchCount(int countOfMatch) {

@@ -34,8 +34,7 @@ public class Game {
         lottoList.forEach(System.out::println);
     }
 
-    private static int getMoney(BufferedReader br)
-        throws IllegalArgumentException, IOException {
+    private static int getMoney(BufferedReader br) throws IllegalArgumentException, IOException {
         try {
             System.out.println("구입금액을 입력해 주세요.");
             return Integer.parseInt(br.readLine());

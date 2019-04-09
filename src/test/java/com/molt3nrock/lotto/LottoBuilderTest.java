@@ -19,7 +19,7 @@ public class LottoBuilderTest {
 
     @Test
     public void buildIllegalNotEnough() {
-        try{
+        try {
             LottoBuilder.create().withMoney(999).build();
         } catch (IllegalArgumentException e) {
             assertEquals("로또를 구입하기에 돈이 충분하지 않습니다.", e.getMessage());
@@ -28,7 +28,7 @@ public class LottoBuilderTest {
 
     @Test
     public void buildIllegalNegative() {
-        try{
+        try {
             LottoBuilder.create().withMoney(-1).build();
         } catch (IllegalArgumentException e) {
             assertEquals("로또를 구입하기에 돈이 충분하지 않습니다.", e.getMessage());
