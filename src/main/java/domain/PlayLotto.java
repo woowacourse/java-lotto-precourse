@@ -22,8 +22,7 @@ public class PlayLotto {
         return money;
     }
 
-    public void purchaseLotto() {
-        int money = insertMoney();
+    public void purchaseLotto(int money) {
         List<Integer> lottoNumber; // Lotto 번호 List
         int numberOfLotto = money / LOTTO_PRICE; // 구입할 Lotto 개수
         System.out.printf("%d개를 구매했습니다.\n", numberOfLotto);
