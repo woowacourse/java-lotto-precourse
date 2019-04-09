@@ -36,4 +36,8 @@ public class LottoGame {
     private boolean checkPriceValidity(int purchasePrice) {
         return purchasePrice >= MIN_UNIT && purchasePrice <= MAX_SUM_OF_PRICE && purchasePrice % MIN_UNIT == 0;
     }
+
+    private void printLotto(int numOfLotto) {
+        System.out.printf("\n%d개를 구매했습니다.\n", numOfLotto);
+    }
 }
