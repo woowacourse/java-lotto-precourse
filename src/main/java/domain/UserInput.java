@@ -57,11 +57,11 @@ public class UserInput {
         List<String> stringWinningNumbers = Arrays.asList(winningNumber.split(","));
         List<Integer> winningNumbers = ConvertListTypeToInt(stringWinningNumbers);
 
-        if (Validator.isValidWinningNumber(winningNumbers)) {
+        if (Validator.isValidWinningNumbers(winningNumbers)) {
             return winningNumbers;
         }
 
-        throw new IllegalArgumentException(winningNumber + "는 올바른 값이 아닙니다.");
+        throw new IllegalArgumentException();
     }
 
     public int RecieveBonusNumber(){
@@ -77,9 +77,15 @@ public class UserInput {
         return bonusNumber;
     }
 
-    private int TryToRecieveBonusNumber(){
-        System.out.println("이후 구현 예정정");
-        return 1;
+    private int TryToRecieveBonusNumber() throws IllegalArgumentException{
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber= scanner.nextInt();
+
+        if(Validator.isValidRangeLottoNumber(bonusNumber)){
+            return bonusNumber;
+        }
+
+        throw new IllegalArgumentException();
    }
 
     private List<Integer> ConvertListTypeToInt(List<String> stringWinningNumbers) {

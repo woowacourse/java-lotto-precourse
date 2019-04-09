@@ -15,9 +15,9 @@ public class Validator {
                 true : false;
     }
 
-    public static boolean isValidWinningNumber(List<Integer> winningNumbers) {
-        return (isValidSize(winningNumbers) && isValidRangeLottoNumber(winningNumbers)
-                && isOverlapLottoNumber(winningNumbers))
+    public static boolean isValidWinningNumbers(List<Integer> winningNumbers) {
+        return (isValidSize(winningNumbers) && isValidRangeLottoNumbers(winningNumbers)
+                && isOverlapLottoNumbers(winningNumbers))
                 ? true : false;
     }
 
@@ -25,14 +25,18 @@ public class Validator {
         return winningNumbers.size() == VALID_LOTTO_SIZE ? true : false;
     }
 
-    private static boolean isValidRangeLottoNumber(List<Integer> winningNumbers) {
+    private static boolean isValidRangeLottoNumbers(List<Integer> winningNumbers) {
         int validCount = (int) winningNumbers.stream()
                 .filter(n -> (n >= MIN_LOTTO_NUMBER && n <= MAX_LOTTO_NUMBER)).count();
 
         return validCount == VALID_LOTTO_SIZE ? true : false;
     }
 
-    public static boolean isOverlapLottoNumber(List<Integer> lottoNumbers) {
+    public static boolean isValidRangeLottoNumber(int lottoNumber) {
+        return lottoNumber >= MIN_LOTTO_NUMBER && lottoNumber <= MAX_LOTTO_NUMBER ? true : false;
+    }
+
+    public static boolean isOverlapLottoNumbers(List<Integer> lottoNumbers) {
         boolean duplicate = lottoNumbers.stream()
                 .distinct()
                 .count() != lottoNumbers.size();

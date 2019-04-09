@@ -31,4 +31,14 @@ public class UserOutput {
         System.out.println(purchaseResult);
 
     }
+
+    public void PrintWinStatistics(){
+        System.out.println("당첨통계");
+        System.out.println("---------");
+
+    }
+
+    private void PrintEarningRate(){
+        System.out.println("이후 구현 예정");
+    }
 }

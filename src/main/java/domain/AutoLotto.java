@@ -19,7 +19,7 @@ public class AutoLotto {
 
         while(isNotValidLottoNumber){
             GenerateRandomNumbers();
-            isNotValidLottoNumber = Validator.isOverlapLottoNumber(this.lottoNumbers);
+            isNotValidLottoNumber = Validator.isOverlapLottoNumbers(this.lottoNumbers);
         }
 
         return lottoNumbers;

@@ -24,7 +24,7 @@ public class LottoGenerator {
         lottoList.add(new Lotto(autoLotto.GenerateAuttoLotto()));
     }
 
-    public void GenerateWinningLotto(List<Integer> winningNumbers){
+    public void GenerateWinningLotto(List<Integer> winningNumbers,int bonusNumber){
 
     }
 
