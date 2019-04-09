@@ -13,10 +13,13 @@ public class Main {
         static int lottoCount;
         private final static int ONCE_COST = 1000;
         private static Lotto[] lottos;
-        public static void main(String args[]) {
+        private static WinningLotto winningLotto;
+
+        public static void main(String args[]) throws IOException {
                 buyLotto();
                 makeLotto();
                 printLotto();
+                setWinningLotto();
         }
 
         private static void buyLotto() {
@@ -31,14 +34,38 @@ public class Main {
         }
 
         private static void makeLotto() {
-                for(int i = 0 ; i < lottoCount; i++){
+                for (int i = 0; i < lottoCount; i++) {
                         lottos[i] = Lotto.init();
                 }
         }
 
-        private static void printLotto(){
-                for(Lotto lotto : lottos){
+        private static void printLotto() {
+                for (Lotto lotto : lottos) {
                         lotto.getNumbers();
                 }
+        }
+
+        private static void setWinningLotto() throws IOException {
+                List winningList = getWinningNumber();
+                int bonusNo = getBonusNumber();
+                winningLotto = new WinningLotto(new Lotto(winningList), bonusNo);
+        }
+
+        private static List getWinningNumber() throws IOException {
+                System.out.println("지난 주 당첨 번호를 입력해 주세요");
+
+                BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+                String[] num = bf.readLine().split(",");
+                List winningList = new ArrayList();
+                for (int i = 0; i < num.length; i++) {
+                        winningList.add(Integer.parseInt(num[i]));
+                }
+                return winningList;
+        }
+
+        private static int getBonusNumber() throws IOException {
+                BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+                System.out.println("보너스 볼을 입력해 주세요.");
+                return Integer.parseInt(bf.readLine());
         }
 }
