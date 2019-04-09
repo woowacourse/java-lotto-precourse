@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PlayLotto {
-    private final int LOTTO_PRICE = 1000;
     private List<Lotto> myLotto = new ArrayList<>(); // 구입한 내 Lotto List
     private WinningLotto winningLotto;
 
@@ -31,8 +30,9 @@ public class PlayLotto {
 
     public void purchaseLotto(int money) {
         List<Integer> lottoNumber; // Lotto 번호 List
-        int numberOfLotto = money / LOTTO_PRICE; // 구입할 Lotto 개수
-        System.out.printf("%d개를 구매했습니다.\n", numberOfLotto);
+        int lottoPrice = 1000;
+        int numberOfLotto = money / lottoPrice; // 구입할 Lotto 개수
+        System.out.printf("\n%d개를 구매했습니다.\n", numberOfLotto);
         for (int i = 0; i < numberOfLotto; i++) {
             lottoNumber = GeneratingLottoNumber.generatingLottoNumber();
             System.out.println(lottoNumber);
