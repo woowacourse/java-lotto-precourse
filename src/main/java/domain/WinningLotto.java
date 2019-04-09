@@ -30,7 +30,7 @@ public class WinningLotto {
         }
     }
 
-    public Rank match(Lotto userLotto) {
+    Rank match(Lotto userLotto) {
         int countOfMatch = userLotto.getCountOfMatchedNumber(lotto);
         boolean matchBonus = userLotto.hasNumber(bonusNo);
 

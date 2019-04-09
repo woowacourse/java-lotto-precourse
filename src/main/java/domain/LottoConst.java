@@ -1,6 +1,6 @@
 package domain;
 
-public class LottoConst {
+class LottoConst {
     private LottoConst(){}
 
     final static int LOTTO_MIN_NUMBER = 1;
