@@ -14,6 +14,10 @@ public class RankList {
         System.out.println(ranks.size());
     }
 
+    public int size() {
+        return ranks.size();
+    }
+
     public boolean add(Rank rank) {
         int index = this.ranks.indexOf(rank);
         this.counts[index]++;

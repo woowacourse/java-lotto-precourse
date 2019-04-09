@@ -104,6 +104,8 @@ public class GameRunner {
             rankList.add(winningLotto.match(lotto));
         }
 
+        for (int i = rankList)
+
 
         System.out.println();
         System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치(" + Rank.FIFTH.getWinningMoney() +"원) - 0개");
