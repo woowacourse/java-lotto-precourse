@@ -107,4 +107,15 @@ public class Lotto {
         return listOf45;
     }
 
+    public static void printLottos(List<Lotto> listOfUserLottos) {
+        System.out.println();
+        int n = listOfUserLottos.size();
+        System.out.println(n + "개를 구매했습니다.");
+        for(int i=0; i<n; i++) {
+            System.out.println(listOfUserLottos.get(i).numbers);
+        }
+        System.out.println();
+    }
+
+
 }
