@@ -14,7 +14,16 @@ public class LottoGame {
     int num = getThePriceOfLotto() / 1000;
     System.out.println(num + "개를 구매했습니다.");
     ArrayList<Lotto> lottoArrayList = initLottoArrayList(num);
-    getWinLotto();
+    WinningLotto winningLotto = getWinLotto();
+    ArrayList<Rank> lottoRanks = getRanks(lottoArrayList, winningLotto);
+  }
+
+  private ArrayList<Rank> getRanks(ArrayList<Lotto> lottoArrayList, WinningLotto winningLotto) {
+    ArrayList<Rank> lottoRanks = new ArrayList<Rank>();
+    for(Lotto lotto : lottoArrayList){
+      lottoRanks.add(winningLotto.match(lotto));
+    }
+    return lottoRanks;
   }
 
   public int getThePriceOfLotto() {
@@ -59,4 +68,5 @@ public class LottoGame {
     Lotto winner = new Lotto(win);
     return winner;
   }
+
 }
