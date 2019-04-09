@@ -34,7 +34,7 @@ public class LottoGame {
 		return randomNumber;
 	}
 
-	public static boolean isValid(List<Integer> temp) {
+	public static boolean isNotValid(List<Integer> temp) {
 		boolean result = false;
 		for (int i = 0; i < LOTTO_NUM_LENGTH - 1; i++) {
 			result |= (temp.get(i) == temp.get(i + 1));
@@ -47,7 +47,7 @@ public class LottoGame {
 		do {
 			lottoNum = getRandomNumber();
 			Collections.sort(lottoNum);
-		} while (isValid(lottoNum));
+		} while (isNotValid(lottoNum));
 		System.out.println(lottoNum);
 		return lottoNum;
 
@@ -63,31 +63,42 @@ public class LottoGame {
 	
 	public static List<Integer> getWinningNumber() {
 		List<Integer> winningNumber = new ArrayList<Integer>();
-		System.out.println("\n지난 추 당첨 번호를 입력해 주세요.");
 		String[] input = scan.nextLine().split(",");
-		
+		if(input.length!=LOTTO_NUM_LENGTH) {
+			System.out.println("숫자의 갯수가 6개가 넘습니다!\n다시 입력해주세요.");
+			return getWinningNumber();
+		}
 		for(int i=0; i<LOTTO_NUM_LENGTH; ++i) {
 			winningNumber.add(Integer.parseInt(input[i]));
 		}
 		return winningNumber;
 	}
 	
+	public static boolean isNotWinningValidRange(List<Integer> winningNumber) {
+		boolean result = false;
+		for(int i=0; i<LOTTO_NUM_LENGTH; ++i) {
+			result |= (winningNumber.get(i)>45 || winningNumber.get(i)<1);
+		}
+		return result;
+	}
+	
 	public static void printErrorMessage(int tryNum) {
 		if(tryNum>0) {
-			System.out.println("중복 숫자는 입력할 수 없습니다.");
+			System.out.println("중복 숫자와 범위 밖 숫자는 입력할 수 없습니다.");
+			System.out.println("다시 입력하십시오.");
 		}
 	}
 	
 	public static List<Integer> scanWinningNumber() {
 		List<Integer> winningNumber;
+		System.out.println("\n지난 추 당첨 번호를 입력해 주세요.");
 		int tryNum=0;
 		do {
 			printErrorMessage(tryNum);
 			winningNumber = getWinningNumber();
 			Collections.sort(winningNumber);
 			++tryNum;
-		}while(isValid(winningNumber));
-		
+		}while(isNotValid(winningNumber)||isNotWinningValidRange(winningNumber));
 		return winningNumber;
 	}
 	
@@ -101,7 +112,7 @@ public class LottoGame {
 		return result;
 	}
 	
-	public static boolean isValidRange(int bonusNumber) {
+	public static boolean isNotBonusValidRange(int bonusNumber) {
 		boolean result = false;
 		if(bonusNumber>45||bonusNumber<1) {
 			return true;
@@ -113,8 +124,8 @@ public class LottoGame {
 	public static int scanBonusNumber(Lotto winningNumber) {
 		System.out.println("보너스 볼을 입력해주세요.");
 		int bonusNumber = scan.nextInt();
-		while(isAlready(winningNumber, bonusNumber)||isValidRange(bonusNumber)) {
-			System.out.println("1~45 범위내의 숫자가 아니거나 당첨 숫자와 중복됩니다.");
+		while(isAlready(winningNumber, bonusNumber)||isNotBonusValidRange(bonusNumber)) {
+			System.out.println("당첨 숫자와 중복되는 수와 범위 밖 숫자는 입력할 수 없습니다.");
 			System.out.println("다시 입력하십시오.");
 			bonusNumber=scan.nextInt();
 		}
