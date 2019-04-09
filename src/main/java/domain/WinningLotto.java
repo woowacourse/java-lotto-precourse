@@ -99,6 +99,33 @@ public class WinningLotto {
         return false;
     }
 
+    private static boolean isNotBetween1And45(String userInput) {
+        List<Integer> intListToCheckBetween1And45 = createListToCheckBetween1And45(userInput);
+        boolean overLimit = false;
+        while (!overLimit && !intListToCheckBetween1And45.isEmpty()) {
+            overLimit = checkLimit(intListToCheckBetween1And45.get(0));
+            intListToCheckBetween1And45.remove(0);
+        }
+        return overLimit;
+    }
+
+    private static List<Integer> createListToCheckBetween1And45 (String userInput) {
+        List<String> list = Arrays.asList(userInput.split(","));
+        List<Integer> listToCheckBetween1And45 = new ArrayList<>();
+        for (int i=0, n=list.size(); i<n; i++) {
+            listToCheckBetween1And45.add(Integer.parseInt(list.get(i)));
+        }
+        return listToCheckBetween1And45;
+    }
+
+    private static boolean checkLimit(int currentNumber) {
+        if(currentNumber < 1 || currentNumber > 45) {
+            System.out.println("당첨번호는 1~45사이에 넣어주세요!");
+            return true;
+        }
+        return false;
+    }
+
 
 
 
