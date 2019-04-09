@@ -188,6 +188,14 @@ public class PlayLotto {
     }
 }
 
+/**
+ * 보너스 볼 입력에 대한 검사
+ * 1 ~ 45 사이의 자연수
+ * 당첨 번호와 중복 여부
+ *
+ * @author yun
+ * @version 0.1
+ */
 class ValidBonusNumber extends ValidLottoNumber {
     private int bonusNumber;
     private List<Integer> winningLottoNumber;
@@ -198,10 +206,20 @@ class ValidBonusNumber extends ValidLottoNumber {
         this.bonusNumber = bonusNumber;
     }
 
+    /**
+     * 보너스 볼이 유효성 여부
+     *
+     * @return 조건을 만족하면 false
+     */
     public boolean isValid() {
         return !isValidBonusNumber() || hasBonusNumber();
     }
 
+    /**
+     * 보너스 볼이 1 ~ 45 사이 속하는지 확인
+     *
+     * @return 조건 만족시 true
+     */
     public boolean isValidBonusNumber() {
         if (LOTTO_NUMBER_BEGIN <= bonusNumber &&
                 bonusNumber <= LOTTO_NUMBER_END) {
@@ -211,6 +229,11 @@ class ValidBonusNumber extends ValidLottoNumber {
         return false;
     }
 
+    /**
+     * 보너스 볼이 당첨 번호와 중복 여부
+     *
+     * @return 중복시 true
+     */
     public boolean hasBonusNumber() {
         if (winningLottoNumber.contains(bonusNumber)) {
             System.out.println("당첨번호와 보너스 볼이 중복됬습니다.");
