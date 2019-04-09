@@ -9,6 +9,7 @@ public class Lotto {
     static final int TOP = 45;
     static final int BOTTOM = 1;
     static final int COUNT_OF_LOTTO_NUMBERS = 6;
+    static final int PRICE = 1000;
 
     private final List<Integer> numbers;
 
