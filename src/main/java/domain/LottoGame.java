@@ -97,15 +97,25 @@ public class LottoGame {
 		for(int i=0; i<LOTTO_NUM_LENGTH; ++i) {
 			result |= (winningNumber.getNumbers().get(i)==bonusNumber);
 		}
+		
 		return result;
+	}
+	
+	public static boolean isValidRange(int bonusNumber) {
+		boolean result = false;
+		if(bonusNumber>45||bonusNumber<1) {
+			return true;
+		}
+		return false;
+		
 	}
 	
 	public static int scanBonusNumber(Lotto winningNumber) {
 		System.out.println("보너스 볼을 입력해주세요.");
 		int bonusNumber = scan.nextInt();
-		if(isAlready(winningNumber, bonusNumber)) {
-			System.out.println("당첨 숫자와 보너스 숫자는 중복될 수 없습니다.");
-			System.out.println("보너스 볼을 다시 입력해주세요.");
+		while(isAlready(winningNumber, bonusNumber)||isValidRange(bonusNumber)) {
+			System.out.println("1~45 범위내의 숫자가 아니거나 당첨 숫자와 중복됩니다.");
+			System.out.println("다시 입력하십시오.");
 			bonusNumber=scan.nextInt();
 		}
 		return bonusNumber;
