@@ -1,6 +1,9 @@
 package domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 import static domain.Constants.*;
 
@@ -9,11 +12,17 @@ public class LottoGame {
     private Lotto[] lotto;
     private WinningLotto winningLotto;
 
+    /**
+     * 프로그램의 진입점
+     */
     public static void main(String[] args) {
         LottoGame game = new LottoGame();
         game.doGame();
     }
 
+    /**
+     * 전체 게임을 진행하는 메소드
+     */
     private void doGame() {
         int numOfLotto = getNumOfLotto();
         makeLotto(numOfLotto);
@@ -40,6 +49,9 @@ public class LottoGame {
         return purchasePrice;
     }
 
+    /**
+     * 입력받은 구입금액이 최소금액 이상, 최대금액 이하, 1000원 단위인지 확인
+     */
     private boolean checkPriceValidity(int purchasePrice) {
         return purchasePrice >= MIN_UNIT && purchasePrice <= MAX_SUM_OF_PRICE && purchasePrice % MIN_UNIT == 0;
     }
@@ -54,6 +66,9 @@ public class LottoGame {
         }
     }
 
+    /**
+     * 6개의 랜덤 숫자로 구성된 리스트에 중복이 없으면 리턴
+     */
     private List<Integer> getLottoNumbers() {
         List<Integer> numbers;
 
@@ -78,6 +93,10 @@ public class LottoGame {
         return (int) (Math.random() * MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER;
     }
 
+    /**
+     * indent 2
+     * 리스트에 있는 6개의 숫자가 중복되지 않는지 확인
+     */
     private boolean checkNumbersOverlap(List<Integer> numbers) {
         int[] checkOverlap = new int[MAX_LOTTO_NUMBER + 1];
 
@@ -116,6 +135,9 @@ public class LottoGame {
         return winningNumbers;
     }
 
+    /**
+     * 사용자 입력을 ',' 기준으로 쪼개어 리스트로 리턴
+     */
     private List<Integer> makeWinningNumbersList(String userInput) {
         List<Integer> winningNumbers = new ArrayList<>();
         String[] winningNumbersArray = userInput.split(",");
@@ -127,6 +149,10 @@ public class LottoGame {
         return winningNumbers;
     }
 
+    /**
+     * indent 2
+     * 사용자가 6개의 숫자를 입력했는지, 각 숫자는 로또 숫자 범위에 해당하는지 확인
+     */
     private boolean checkLottoNumbers(List<Integer> winningNumbers) {
         if (winningNumbers.size() != NUM_OF_FIGURES) return false;
 
@@ -149,6 +175,10 @@ public class LottoGame {
         return bonusBall;
     }
 
+    /**
+     * indent 2
+     * 보너스 볼이 로또 숫자 범위에 해당하는지, 이미 입력된 당첨번호와 중복되지 않는지 확인
+     */
     private boolean checkBonusBallValidity(int bonusBall, List<Integer> winningNumbers) {
         for (int i = 0; i < NUM_OF_FIGURES; i++) {
             if (winningNumbers.contains(bonusBall)) return false;
