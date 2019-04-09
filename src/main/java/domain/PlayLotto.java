@@ -56,6 +56,16 @@ public class PlayLotto {
         return convertString2Int(rawWinningNumber);
     }
 
+    public List<Rank> matchLotto() {
+        Rank lottoResult;
+        List<Rank> lottoResultList = new ArrayList<>();
+        for (Lotto lotto: myLotto) {
+            lottoResult = winningLotto.match(lotto);
+            lottoResultList.add(lottoResult);
+        }
+        return lottoResultList;
+    }
+
     public void printWinningMessage(Rank matchResult, int number) {
         int countOfMatch = matchResult.getCountOfMatch();
         int winningMoney = matchResult.getWinningMoney();
