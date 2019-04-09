@@ -14,8 +14,9 @@ public class LottoGame {
 		int lottoCount = price / 1000;
 		System.out.println(lottoCount + "개를 구매했습니다.");
 		List<Lotto> lottoList = makeLottoList(lottoCount);
+		Lotto winningNumber; 
 		scan.nextLine();
-		WinningLotto winLotto = new WinningLotto(new Lotto(scanWinningNumber()), scanBonusNumber());
+		WinningLotto winLotto = new WinningLotto(winningNumber = new Lotto(scanWinningNumber()), scanBonusNumber(winningNumber));
 
 	}
 
@@ -62,15 +63,13 @@ public class LottoGame {
 	
 	public static List<Integer> getWinningNumber() {
 		List<Integer> winningNumber = new ArrayList<Integer>();
-		
-		System.out.println();
-		System.out.println("지난 추 당첨 번호를 입력해 주세요.");
+		System.out.println("\n지난 추 당첨 번호를 입력해 주세요.");
 		String[] input = scan.nextLine().split(",");
+		
 		for(int i=0; i<LOTTO_NUM_LENGTH; ++i) {
 			winningNumber.add(Integer.parseInt(input[i]));
 		}
 		return winningNumber;
-		/*입력 확인용*/
 	}
 	
 	public static void printErrorMessage(int tryNum) {
@@ -93,12 +92,24 @@ public class LottoGame {
 	}
 	
 	
-	public static int scanBonusNumber() {
-		System.out.println("보너스 볼을 입력해주세요.");
-		int bonusNumber = scan.nextInt();
-		return bonusNumber;
+	public static boolean isAlready(Lotto winningNumber, int bonusNumber) {
+		boolean result = false;
+		for(int i=0; i<LOTTO_NUM_LENGTH; ++i) {
+			result |= (winningNumber.getNumbers().get(i)==bonusNumber);
+		}
+		return result;
 	}
 	
-	
+	public static int scanBonusNumber(Lotto winningNumber) {
+		System.out.println("보너스 볼을 입력해주세요.");
+		int bonusNumber = scan.nextInt();
+		if(isAlready(winningNumber, bonusNumber)) {
+			System.out.println("당첨 숫자와 보너스 숫자는 중복될 수 없습니다.");
+			System.out.println("보너스 볼을 다시 입력해주세요.");
+			bonusNumber=scan.nextInt();
+		}
+		return bonusNumber;
+	}
+
 
 }
