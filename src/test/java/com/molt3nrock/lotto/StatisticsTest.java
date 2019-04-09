@@ -30,7 +30,7 @@ public class StatisticsTest {
         Statistics statistics = Statistics.valueOf(lottoList, winningLotto);
         statistics.displayRankState();
         String expected =
-            Stream.of("당첨 통계", "---------", "3개 일치 (5000원)- 1개", "4개 일치 (50000원)- 1개",
+            Stream.of("\n당첨 통계", "---------", "3개 일치 (5000원)- 1개", "4개 일치 (50000원)- 1개",
                       "5개 일치 (1500000원)- 1개", "5개 일치, 보너스볼 일치(30000000원)- 1개",
                       "6개 일치 (2000000000원)- 1개")
                 .map(s -> s + "\n").reduce("", (a, b) -> a + b);

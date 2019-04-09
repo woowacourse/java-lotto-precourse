@@ -31,7 +31,7 @@ class Statistics {
     }
 
     void displayRankState() {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         rankState.entrySet().stream()
             .filter(entry -> !entry.getKey().equals(Rank.MISS))
