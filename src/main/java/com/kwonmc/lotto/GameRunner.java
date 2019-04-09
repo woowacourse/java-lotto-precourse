@@ -97,7 +97,7 @@ public class GameRunner {
 
         lottoMatchResultBodyMessagePrinter(rankList);
 
-        lottoMatchResultTailMessagePrinter();
+        lottoMatchResultTailMessagePrinter(rankList, game.getPurchaseAmount());
     }
 
     private RankList getRankList(WinningLotto winningLotto) {
@@ -138,7 +138,8 @@ public class GameRunner {
         System.out.println("---------");
     }
 
-    private void lottoMatchResultTailMessagePrinter(/*int purchaseAmount, int winningAmount*/) {
-        System.out.println("총 수익률은 0.000 입니다.");
+    private void lottoMatchResultTailMessagePrinter(RankList rankList, int purchaseAmount) {
+        double totalYield = (double) rankList.getTotalWinningAmount() / purchaseAmount;
+        System.out.println(String.format("총 수익률은 %.3f 입니다.", totalYield));
     }
 }
