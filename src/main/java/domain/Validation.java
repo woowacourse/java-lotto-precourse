@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.regex.Pattern;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Validation {
 
@@ -15,4 +17,52 @@ public class Validation {
         return true;
     }
 
+    public static boolean isValidWinLottoInput(String str) {
+        String[] winNum = str.split(",");
+        List<String> temp = new ArrayList<>();
+        if (!isValidWinNumberLength(winNum)) {
+            System.out.println("길이 오류");
+            return false;
+        }
+        if (!isValidWinLottoNumber(winNum)) {
+            System.out.println("숫자 오류");
+            return false;
+        }
+        for (String num : winNum) {
+            if (temp.contains(num)) {
+                System.out.println("중복오류");
+                return false;
+            }
+            temp.add(num);
+        }
+
+        return true;
+    }
+
+    private static boolean isValidWinNumberLength(String[] str) {
+        return str.length == LottoGame.LOTTO_NUMBER_COUNT;
+    }
+
+    private static boolean isValidWinLottoNumber(String[] str) {
+        boolean finish = true;
+        int idx = 0;
+        while (finish && (idx < str.length)) {
+            finish = isNumber(str[idx]);
+            idx++;
+        }
+
+        return finish;
+    }
+
+    private static boolean isNumber(String str) {
+        try {
+            int num = Integer.parseInt(str);
+            if (num < 1 || num > 45) {
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
 }
