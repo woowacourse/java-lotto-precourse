@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Display {
 
-    private static final int limitOfLotto = 6;
     private static Scanner sc = new Scanner(System.in);
     private static List<Integer> winningLotto = new ArrayList<Integer>();
+
 
     private Display() {
     }
@@ -42,16 +42,13 @@ public class Display {
         return bonusNo;
     }
 
-    public static void showStatistics(int[] countRank, Rank[] ranks) {
+    public static void showStatistics() {
         System.out.println("당첨통계");
         System.out.println("-------");
-        for (int i = ranks.length - 2; i >= 0; i--) {
-            System.out.println(ranks[i].getCountOfMatch() + "개 일치 (" + ranks[i].getWinningMoney() + "원)- " + countRank[i] + "개");
-        }
+        Profit.showStatistics();
     }
 
-    public static void showProfitRate(int[] countRank, int money) {
-        double profitRate = Profit.calculateProfitRate(countRank, money);
-        System.out.println("총 수익륭은 " + profitRate + "입니다.");
+    public static void showProfitRate(int money) {
+        Profit.showProfitRate(money);
     }
 }

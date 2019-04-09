@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,5 +19,20 @@ public class Lotto {
 
     public String toString(){
         return numbers.toString();
+    }
+
+    public  boolean contains(int number){
+        return numbers.contains(number);
+    }
+
+    public ArrayList<Integer> returnArrayList(){
+        return new ArrayList<>(numbers);
+    }
+
+    public ArrayList<Integer> retainAll(Lotto comparedLotto){
+        ArrayList<Integer> originalList = returnArrayList();
+        ArrayList<Integer> winningList = comparedLotto.returnArrayList();
+        originalList.retainAll(winningList);
+        return originalList;
     }
 }
