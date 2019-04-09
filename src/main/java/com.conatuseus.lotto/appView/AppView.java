@@ -103,4 +103,9 @@ public class AppView {
         int number = Integer.parseInt(scannedNumber);
         return (number >= AppController.MIN_LOTTO_VALUE) && (number <= AppController.MAX_LOTTO_VALUE);
     }
+
+    public static void printResultOfLotto(){
+        outputLine("당첨 통계");
+        outputLine("---------------");
+    }
 }
