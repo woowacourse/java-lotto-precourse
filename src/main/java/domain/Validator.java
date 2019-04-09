@@ -58,7 +58,7 @@ public class Validator {
             return false;
         }
         String[] numbers = winningLottoInput.split(",");
-        if (!checkLottoNumbersInputHasNoDuplication(numbers) ||
+        if (checkDuplicationIfHasPrintWarning(numbers) ||
                 !checkLottoNumbersInputHasNoInvalidValue(numbers)) {
             return false;
         }
@@ -84,24 +84,25 @@ public class Validator {
         return invalidValueNotFound;
     }
 
-    public static boolean checkLottoNumbersInputHasNoDuplication(String[] numbers) {
-        Set<String> tempAddedLottoNumbers = createLottoSet(numbers);
-
+    public static boolean checkDuplicationIfHasPrintWarning(String[] numbers) {
         // numbers에 중복된 문자열이 있었다면, numbers의 길이와 Set의 길이가 다름을 이용
-        if (numbers.length != tempAddedLottoNumbers.size()) {
+        if (checkLottoNumbersHasDuplication(numbers)) {
             System.out.println(WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    private static Set<String> createLottoSet(String[] numbers) {
+    private static boolean checkLottoNumbersHasDuplication(String[] numbers) {
         Set<String> tempAddedLottoNumbers = new HashSet<String>();
 
         for (int i = 0; (i < numbers.length); i++) {
             tempAddedLottoNumbers.add(numbers[i]);
         }
-        return tempAddedLottoNumbers;
+        if(tempAddedLottoNumbers.size() != numbers.length){
+            return false;
+        }
+        return true;
     }
 
     //

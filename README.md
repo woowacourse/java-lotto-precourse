@@ -68,7 +68,8 @@
 |checkInputLottoMoneyLengthIsTooLong|로또구입금액이 너무 긴지 확인(오버플로우 방지 목적)|
 |checkLottoNumbersInputLengthIsValid|6개 로또번호입력이 갯수가 맞는지 확인|
 |checkLottoNumbersInputHasNoInvalidValue|6개 로또번호입력이 모두 유효한지 확인|
-|checkLottoNumbersInputHasNoDuplication|6개 로또번호입력이 중복이 없는지 확인|
+|checkDuplicationIfHasPrintWarning|6개 로또번호입력이 중복이 있는지 확인. 있다면 Warning을 출력|
+|checkLottoNumbersHasDuplication|6개 로또번호 입력이 중복이 있는지 확인 후 반환|
 |checkIsLottoNumberInRange|로또번호가 범위안에 있는 값인지 확인|
 |checkIsLottoNumberValid|로또번호가 유효한지 확인|
 |checkBonusLottoNumberValid|보너스로또넘버가 유효한지 확인|

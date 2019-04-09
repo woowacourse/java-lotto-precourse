@@ -28,7 +28,7 @@ public class DataReceiver {
         return winningNumbers;
     }
 
-    private static ArrayList<Integer> transformWinningNumberInputToIntegerList(String winningNumbersInput){
+    private static ArrayList<Integer> transformWinningNumberInputToIntegerList(String winningNumbersInput) {
         String[] correctNumbers = winningNumbersInput.split(",");
         ArrayList<Integer> winningNumbers = new ArrayList<Integer>();
         for (int i = 0; i < correctNumbers.length; i++) {
