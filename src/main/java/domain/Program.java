@@ -3,9 +3,12 @@ package domain;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * 로또 프로그램에 사용되는 메소드를 담은 class
+ */
 public class Program extends Config {
 
-    public Lotto[] typeSelect(Machine machine, Shop shop, int buyingCash) {
+    public static Lotto[] typeSelect(Machine machine, Shop shop, int buyingCash) {
         System.out.println("자동은 1번 수동은 2번을 입력해주세요.");
         Scanner scan = new Scanner(System.in);
         String typeString = scan.next();
@@ -18,13 +21,13 @@ public class Program extends Config {
         return typeSelect(machine, shop, buyingCash);
     }
 
-    public int inputPrice() {
+    public static int inputPrice() {
         System.out.println("구매할 금액을 입력해 주세요.");
         int price = checkPriceValidation(INITIAL_VALUE);
         return price;
     }
 
-    public float calculateEarningrate(float amount, Rank[] rank) {
+    public static float calculateEarningrate(float amount, Rank[] rank) {
         float winningMoney = 0;
         for (int i = 0; i < rank.length; i++) {
             winningMoney = winningMoney + rank[i].getWinningMoney();
@@ -32,7 +35,7 @@ public class Program extends Config {
         return (winningMoney / amount);
     }
 
-    public Rank[] createRankBundle(Lotto[] lottobundle, WinningLotto winningLotto) {
+    public static Rank[] createRankBundle(Lotto[] lottobundle, WinningLotto winningLotto) {
         Rank[] rankBundle = new Rank[lottobundle.length];
         for (int i = 0; i < lottobundle.length; i++) {
             rankBundle[i] = winningLotto.match(lottobundle[i]);
@@ -40,7 +43,7 @@ public class Program extends Config {
         return rankBundle;
     }
 
-    public void printLottoResult(Rank[] rankbundle, float Earningrate) {
+    public static void printLottoResult(Rank[] rankbundle, float Earningrate) {
         System.out.println("당첨 통계\n----------");
         System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() + ")-" + createCountOfMatchAmount(rankbundle, Rank.FIFTH.getWinningMoney()) + "개");
         System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치 (" + Rank.FOURTH.getWinningMoney() + ")-" + createCountOfMatchAmount(rankbundle, Rank.FOURTH.getWinningMoney()) + "개");
@@ -50,7 +53,7 @@ public class Program extends Config {
         System.out.println("총 수익률은 " + Earningrate + "입니다.");
     }
 
-    public void printLotto(Lotto[] lottobundle) {
+    public static void printLotto(Lotto[] lottobundle) {
         int amount = lottobundle.length;
         System.out.println(amount + "개를 구매했습니다.");
         for (int i = 0; i < amount; i++) {
@@ -58,7 +61,7 @@ public class Program extends Config {
         }
     }
 
-    private int checkPriceValidation(int price) {
+    private static int checkPriceValidation(int price) {
         Scanner scan = new Scanner(System.in);
         try {
             int signedprice = scan.nextInt();
@@ -70,7 +73,7 @@ public class Program extends Config {
         return price;
     }
 
-    private int checkPrice(int price) {
+    private static int checkPrice(int price) {
         if (price < 0) {
             System.out.println("0원보다 큰 금액을 입력해 주세요.");
             price = checkPriceValidation(INITIAL_VALUE);
@@ -82,7 +85,7 @@ public class Program extends Config {
         return price;
     }
 
-    private int createCountOfMatchAmount(Rank[] rank, int winningMoney) {
+    private static int createCountOfMatchAmount(Rank[] rank, int winningMoney) {
         int countOfMatchAmount = 0;
         for (int i = 0; i < rank.length; i++) {
             countOfMatchAmount = countOfMatchAmount + pulsCountOfMatchAmount(rank[i].getWinningMoney(), winningMoney);
@@ -90,7 +93,7 @@ public class Program extends Config {
         return countOfMatchAmount;
     }
 
-    private int pulsCountOfMatchAmount(int userWinningMoney, int winningMoney) {
+    private static int pulsCountOfMatchAmount(int userWinningMoney, int winningMoney) {
         if (userWinningMoney == winningMoney) {
             return 1;
         }

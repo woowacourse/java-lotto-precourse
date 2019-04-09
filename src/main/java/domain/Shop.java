@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * 수동 로또 및 당첨 로또를 생성하는 class
+ */
 public class Shop extends Config {
 
     private Lotto[] lottoBundle;

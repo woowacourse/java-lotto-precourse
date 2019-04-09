@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * 로또를 구매하는 유저를 의미하는 class
+ */
 public class User {
     private int buyingCash;
 

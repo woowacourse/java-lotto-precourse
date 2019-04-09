@@ -4,6 +4,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * 보너스 번호를 의미하는 class
+ */
 public class BonusNumber extends Config {
     private int bonusNumber;
 

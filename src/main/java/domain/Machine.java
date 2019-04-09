@@ -3,6 +3,9 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 자동 로또를 생성하는 기계를 의미하는 class
+ */
 public class Machine extends Config {
     private List<Integer> lottoMachineNumber = new ArrayList<>();
     private int count;

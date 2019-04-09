@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 
+/**
+ * 로또 번호를 담은 배열을 담은 class
+ */
 public class LottoPaper extends Config {
     private String[] lottoString;
     private int[] lottoNumber;
