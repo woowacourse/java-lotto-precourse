@@ -15,4 +15,6 @@ public class Lotto {
     public boolean hasNumber(int number) {
         return numbers.contains(number);
     }
+
+    public List<Integer> getNumbers() {return numbers;}
 }
