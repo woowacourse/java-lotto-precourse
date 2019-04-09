@@ -161,6 +161,15 @@ public class WinningLotto {
         return true;
     }
 
+    private static boolean isBonusNotBetween1And45(String userInput) {
+        int intUserInput = Integer.parseInt(userInput);
+        if (intUserInput < 1 || intUserInput > 45) {
+            System.out.println("보너스 번호는 1에서 45의 숫자만 입력해주세요!");
+            return true;
+        }
+        return false;
+    }
+
 
 
 
