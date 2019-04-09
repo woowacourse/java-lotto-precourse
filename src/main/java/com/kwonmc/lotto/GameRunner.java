@@ -96,10 +96,10 @@ public class GameRunner {
         lottoMatchResultMessagePrinter();
         WinningLotto winningLotto = this.game.getWinningLotto();
 
-        ArrayList<Rank> gameResult = new ArrayList<>();
+        RankList rankList = new RankList();
         for (Lotto lotto : this.game.getMyLottoList()) {
             Rank tmp = winningLotto.match(lotto);
-            gameResult.add(tmp);
+            rankList.put(tmp)
         }
 
         for (Rank each : gameResult) {
