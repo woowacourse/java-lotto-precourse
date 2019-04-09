@@ -7,6 +7,6 @@ import domain.Lotto;
  */
 public class InvalidRangeException extends IllegalArgumentException {
     public InvalidRangeException() {
-        super(Lotto.FIRST_NUMBER + "~" + Lotto.LAST_NUMBER + " 사이의 정수를 입력해 주세요.");
+        super(Lotto.FIRST_NUMBER + " ~ " + Lotto.LAST_NUMBER + " 사이의 정수를 입력해 주세요.");
     }
 }

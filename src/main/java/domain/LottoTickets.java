@@ -49,8 +49,9 @@ public class LottoTickets {
     public void showAll() {
         for (int i = 0; i < tickets.size(); i++) {
             System.out.println(tickets.get(i).toString());
-            sleep();
+            sleep(TIME_TO_BREAK);
         }
+        System.out.println();
     }
 
     private void pause() {
@@ -61,9 +62,9 @@ public class LottoTickets {
         }
     }
 
-    private void sleep() {
+    private void sleep(int timeToBreak) {
         try {
-            Thread.sleep(TIME_TO_BREAK);
+            Thread.sleep(timeToBreak);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
