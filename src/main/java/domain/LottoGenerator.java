@@ -10,18 +10,19 @@ public class LottoGenerator {
         lottoList = new ArrayList<>();
     }
 
-    public void GenerateLottos(int lottoCount) {
+    public void GenerateAutoLottos(int lottoCount) {
 
         for (int i = 0; i < lottoCount; i++) {
-            GenerateLotto();
+            GenerateAutoLotto();
         }
     }
 
-    private void GenerateLotto() {
+    private void GenerateAutoLotto() {
         AutoLotto autoLotto = new AutoLotto();
 
         lottoList.add(new Lotto(autoLotto.GenerateAuttoLotto()));
     }
+
 
     public static List<Lotto> getLottoList() {
         return lottoList;
