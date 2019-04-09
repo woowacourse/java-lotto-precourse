@@ -54,7 +54,7 @@ public class Validation {
         return finish;
     }
 
-    private static boolean isNumber(String str) {
+    public static boolean isNumber(String str) {
         try {
             int num = Integer.parseInt(str);
             if (num < 1 || num > 45) {

@@ -10,6 +10,7 @@ public class LottoGame {
     private static final String MESSAGE_INPUT_MONEY = "구매금액을 입력해 주세요.";
     private static final String MESSAGE_GET_LOTTO = "개를 구매했습니다.";
     private static final String MESSAGE_INPUT_WIN_LOTTO = "지난 주 당첨번호를 입력해 주세요.";
+    private static final String MESSAGE_INPUT_BONUS = "보너스 볼을 입력해주세요.";
     private static final int LOTTO_PRICE = 1000;
     private static final int MAX_LOTTO_NUMBER = 45;
     public static final int LOTTO_NUMBER_COUNT = 6;
@@ -83,5 +84,16 @@ public class LottoGame {
             number.add(Integer.parseInt(num));
         }
         return number;
+    }
+
+    private int inputBonusNumber() {
+        System.out.println(MESSAGE_INPUT_BONUS);
+        Scanner scan = new Scanner(System.in);
+        String inputBonus;
+        do{
+            inputBonus = scan.nextLine();
+        }
+        while(!Validation.isNumber(inputBonus));
+        return Integer.parseInt(inputBonus);
     }
 }
