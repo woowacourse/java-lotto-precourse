@@ -127,6 +127,34 @@ public class LottoGame {
         }
     }
 
+    private int addBonusLottoNumber(){
+
+        int bonusNumber;
+        while(true){
+            try{
+                bonusNumber = checkBonusLottoNumberRange();
+                break;
+            } catch (Exception e){
+
+                System.out.println("보너스 번호를 다시 입력해주세요");
+            }
+        }
+        return bonusNumber;
+
+    }
+
+    private int checkBonusLottoNumberRange(){
+
+        Scanner bonusLottoNumber = new Scanner(System.in);
+        int bonusNumber = bonusLottoNumber.nextInt();
+
+        if((bonusNumber < START_LOTTO_NUMBER) || (bonusNumber > END_LOTTO_NUMBER)){
+
+            throw new IllegalArgumentException();
+        }
+        return bonusNumber;
+    }
+
 
 
 
