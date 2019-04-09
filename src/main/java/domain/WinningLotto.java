@@ -136,6 +136,18 @@ public class WinningLotto {
         return false;
     }
 
+    public static int askUserBonusNumber(String winningNumbers) {
+        boolean isUserInputRight = false;
+        String userInput = "E @ askBonusNumer()";
+        while (!isUserInputRight) {
+            userInput = Lotto.askAndReceiveInput("보너스 볼을 입력해 주세요.");
+            isUserInputRight = checkUserInputBonus(userInput, winningNumbers);
+        }
+        return Integer.parseInt(userInput);
+    }
+
+
+
 
 
 
