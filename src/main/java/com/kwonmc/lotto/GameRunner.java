@@ -37,9 +37,20 @@ public class GameRunner {
 
     private void inputUserPurchaseAmount() {
         purchaseAmountMessagePrinter();
-        int purchaseAmount = sc.nextInt();
+        int purchaseAmount;
+        do {
+            purchaseAmount = sc.nextInt();
+        } while (!purchaseAmountValidChecker(purchaseAmount));
         game.setPurchaseAmount(purchaseAmount);
         changeAmountMessagePrinter(purchaseAmount);
+    }
+
+    private boolean purchaseAmountValidChecker(int purchaseAmount) {
+        if (purchaseAmount < 1000) {
+            System.out.println(Strings.MESSAGE_PURCHASE_INVALID);
+            return false;
+        }
+        return true;
     }
 
     private void purchaseAmountMessagePrinter() {
