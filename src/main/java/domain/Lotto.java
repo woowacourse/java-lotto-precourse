@@ -1,6 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -13,4 +15,25 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    public static Lotto createRandomLotto() {
+        ArrayList<Integer> totalNumbers = createPossibleNumbers();
+        ArrayList<Integer> lottoNumbers = new ArrayList<Integer>();
+        for (int j = 0; j < GameSetting.LOTTO_NORMAL_NUMBER_COUNT; j++) {
+            int randomIndex = (new Random()).nextInt(totalNumbers.size());
+            int randomNumber = totalNumbers.get(randomIndex);
+            totalNumbers.remove(randomIndex);
+
+            lottoNumbers.add(randomNumber);
+        }
+        return new Lotto(lottoNumbers);
+    }
+
+    private static ArrayList<Integer> createPossibleNumbers() {
+        ArrayList<Integer> possibleNumbers = new ArrayList<Integer>();
+        for (int i = GameSetting.MIN_LOTTO_NUMBER; i <= GameSetting.MAX_LOTTO_NUMBER; i++) {
+            possibleNumbers.add(i);
+        }
+
+        return possibleNumbers;
+    }
 }
