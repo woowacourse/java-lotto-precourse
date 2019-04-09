@@ -7,6 +7,8 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * LottoGame을 담당하는 객체입니다.
@@ -20,12 +22,56 @@ public class LottoGame {
     private static final int LOTTO_MAX_NUM = 45;
     private static final int LOTTO_MIN_NUM = 1;
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     private List<Lotto> lottoList = new ArrayList<>();
+    private WinningLotto winningLotto;
 
     public void start() {
         int lottoAmount = getLottoAmount();
 
         lottoPurchase(lottoAmount);
+        requestWinningLotto();
+    }
+
+    private void requestWinningLotto() {
+        List<Integer> winningNumbers;
+        String userInput;
+
+        do {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.(,구분으로 입력)");
+            userInput = scanner.nextLine();
+            winningNumbers = checkRightWinningNumber(userInput);
+        } while (!checkNumberLength(winningNumbers));
+    }
+
+    private boolean checkNumberLength(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != LOTTO_SIZE) {
+            System.out.println("입력이 잘못 되었습니다. 중복하지 않는 1~45까지의 숫자 6개를 입력해 주세요.");
+            System.out.println();
+            return false;
+        }
+        return true;
+    }
+
+    private List<Integer> checkRightWinningNumber(String userInput) {
+        String[] splitInput = userInput.split(",");
+        return Arrays.stream(splitInput).
+                limit(LOTTO_SIZE).
+                distinct().
+                filter(this::checkNumber).
+                map(i -> Integer.parseInt(i.trim())).
+                filter(this::checkLottoRange).
+                sorted().
+                collect(Collectors.toList());
+    }
+
+    private boolean checkLottoRange(int number) {
+        if ((number < LOTTO_MIN_NUM) || (number > LOTTO_MAX_NUM)) {
+            System.out.println("[" + number + "] 로또 숫자 범위(1~45)를 벗어났습니다.");
+            return false;
+        }
+        return true;
     }
 
     private void lottoPurchase(int lottoAmount) {
@@ -64,7 +110,6 @@ public class LottoGame {
     }
 
     private int requestPurchaseAmount() {
-        Scanner scanner = new Scanner(System.in);
         String purchaseAmount;
 
         do {
@@ -76,9 +121,9 @@ public class LottoGame {
 
     private boolean checkNumber(String userInput) {
         try {
-            Integer.parseInt(userInput);
+            Integer.parseInt(userInput.trim());
         } catch (NumberFormatException e) {
-            System.out.println("숫자를 입력해 주세요.");
+            System.out.println("[" + userInput + "]는 숫자가 아닙니다. 숫자를 입력해 주세요.");
             return false;
         }
         return true;
