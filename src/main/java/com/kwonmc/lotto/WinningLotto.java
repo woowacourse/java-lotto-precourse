@@ -14,19 +14,23 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         // TODO 로직
-        int countOfMatch = 0;
+        int countOfMatch = countOfMatch(userLotto);
         boolean matchBonus = false;
-
-        for (Integer num : this.lotto.getNumbers()) {
-            if (userLotto.contains(num)) {
-                countOfMatch++;
-            }
-        }
 
         if (userLotto.contains(bonusNo)) {
             matchBonus = true;
         }
 
         return Rank.valueOf(countOfMatch, matchBonus);
+    }
+
+    private int countOfMatch(Lotto userLotto) {
+        int countOfMatch = 0;
+        for (Integer num : this.lotto.getNumbers()) {
+            if (userLotto.contains(num)) {
+                countOfMatch++;
+            }
+        }
+        return countOfMatch;
     }
 }
