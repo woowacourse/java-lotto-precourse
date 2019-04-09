@@ -65,4 +65,17 @@ public class LottoGame {
             rankCounter.put(rank, 0);
         }
     }
+
+    private double calculateProfitRate(Map<Rank, Integer> rankCounter, int lottoCount) {
+        double profitPercent = 0;
+        double totalLottoMoney = (double) (lottoCount * GameSetting.PRICE_PER_1LOTTO);
+
+        for (Map.Entry<Rank, Integer> entry : rankCounter.entrySet()) {
+            Rank rank = entry.getKey();
+            int count = entry.getValue();
+
+            profitPercent += (rank.getWinningMoney() * count) / totalLottoMoney;
+        }
+        return profitPercent;
+    }
 }

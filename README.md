@@ -31,7 +31,7 @@
     - [x] 서브로직 4-1: 보너스번호가 유효한지 확인
 - [ ] 메인로직 5: 당첨로또, 수익률 계산하기
     - [x] 서브로직 5-1: 로또 당첨결과 계산 로직 만들기
-    - [ ] 서브로직 5-2: 수익률 계산 로직 만들기
+    - [x] 서브로직 5-2: 수익률 계산 로직 만들기
 - [ ] 메인로직 6: 당첨로또, 수익률 결과 출력하기
 
 ## 클래스별 세부 기능
@@ -40,9 +40,10 @@
 |---|---|
 |createLottos| 특정갯수의 로또객체를 생성해 반환|
 |printLottos|특정갯수의 로또객체정보를 출력|
-|calculateLottoMatch|로또 당첨결과를 계산하여 반환|
+|calculateLottoMatch|로또 당첨결과를 계산|
 |createSortAppliedRankCounter|countOfMatch수의 오름차순으로 항상 정렬되도록 sort함수적용된 Map 생성|
 |addAllRankTypes|로또 당첨결과에 미리 모든 종류의 결과(Rank)를 입력해 0으로 초기화|
+|calculateProfitRate|수익률 계산|
 
 |Lotto|로또 1장 객체|
 |---|---|
