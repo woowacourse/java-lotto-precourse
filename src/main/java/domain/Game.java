@@ -62,5 +62,7 @@ public class Game {
         }
     }
 
-    
+    private void sortNumbers(List<Integer> numbers) {
+        Collections.sort(numbers);
+    }
 }
