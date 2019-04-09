@@ -45,6 +45,17 @@ public class Lotto {
         return true;
     }
 
+    private static boolean isItNonNumeric(String userInput) {
+        if (userInput.matches("[0-9]+")) {
+            return false;
+        }
+        System.out.println("양수인 숫자만 입력가능합니다");
+        return true;
+    }
+
+
+
+
 
 
 
