@@ -1,7 +1,7 @@
 package domain;
 
 public class EarningRate {
-    private double value;
+    private final double value;
 
     EarningRate(double value) {
         this.value = value;

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoRankCount {
-    private Map<Rank, Integer> rankCount;
+    private final Map<Rank, Integer> rankCount;
 
     LottoRankCount() {
         rankCount = new HashMap<>();

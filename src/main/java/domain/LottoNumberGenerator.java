@@ -10,7 +10,7 @@ import static domain.LottoConst.LOTTO_MIN_NUMBER;
 import static domain.LottoConst.LOTTO_NUMBER_COUNT;
 
 public class LottoNumberGenerator {
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public LottoNumberGenerator() {
         numbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)

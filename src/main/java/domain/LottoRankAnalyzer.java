@@ -7,7 +7,7 @@ import static domain.LottoConst.LOTTO_PRICE;
 
 
 public class LottoRankAnalyzer {
-    private WinningLotto winningLotto;
+    private final WinningLotto winningLotto;
 
     public LottoRankAnalyzer(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
