@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -32,7 +35,7 @@ public class Lotto {
 		int ret = Integer.parseInt(br.readLine());
 		Num_Lotto = ret / PRICE;
 	}
-	
+
 	private static void recurInputCost() {
 		try {
 			inputCost();
@@ -40,6 +43,16 @@ public class Lotto {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
 			recurInputCost();
 		}
+	}
+
+	private static List<Integer> generateNumbers() {
+		Set<Integer> set = new LinkedHashSet<>(NUM_BALL);
+		while (set.size() < NUM_BALL) {
+			set.add((int) (Math.random() * MAX_BALL_NUM) + 1);
+		}
+		List<Integer> list = new ArrayList<Integer>(set);
+		Collections.sort(list);
+		return list;
 	}
 
 	public static void main(String[] args) { // 객체로 불러 실행해야한다면 shell()로 대체한다.
