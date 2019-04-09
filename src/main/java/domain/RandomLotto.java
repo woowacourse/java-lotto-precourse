@@ -27,11 +27,9 @@ public class RandomLotto {
 
 	private static final int MIN_LOTTO_NUM = 1;
 
-	private static final int LOTTO_NUMBERS = 6;
-
 	public Lotto makeRandomLotto() {
 		List<Integer> numbers = new LinkedList<>();
-		for (int i = 0; i < LOTTO_NUMBERS; i++) {
+		for (int i = 0; i < Lotto.LOTTO_NUMBER_SIZE; i++) {
 			numbers.add(makeRandomNumber());
 		}
 		return new Lotto(numbers);
