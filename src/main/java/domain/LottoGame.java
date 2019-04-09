@@ -78,8 +78,25 @@ public class LottoGame {
 
         checkLastLottoNumberisTrueAll(lastWinLotto);
         List<Integer> lastWinLottoList = getInLastWinLotto(lastWinLotto);
-        
+        checkLastLottoNumber(lastWinLottoList);
+
         return lastWinLottoList;
+    }
+
+    private void checkLastLottoNumber(List<Integer> lastWinLotto){
+
+        for(int i=0;i<lastWinLotto.size();i++){
+
+            checkLottoNumberRange(lastWinLotto,i);
+        }
+    }
+
+    private void checkLottoNumberRange(List<Integer> lastWinLotto, int numberLocation){
+        if(lastWinLotto.get(numberLocation) < START_LOTTO_NUMBER || lastWinLotto.get(numberLocation) > END_LOTTO_NUMBER){
+
+            System.out.println("범위");
+            throw new IllegalArgumentException();
+        }
     }
 
     private void checkLastLottoNumberisTrueAll(List<String> lottoNumberString){
