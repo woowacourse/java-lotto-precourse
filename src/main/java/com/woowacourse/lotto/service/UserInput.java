@@ -31,7 +31,7 @@ public class UserInput {
 			amount = inputValue();
 			result = getAmountValidResult(amount);
 		}
-		while (result != true);
+		while (!result);
 		return Integer.parseInt(amount);
 	}
 
