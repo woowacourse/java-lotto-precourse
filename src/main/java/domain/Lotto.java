@@ -29,7 +29,7 @@ public class Lotto {
 
     public static List<Lotto> generateLottos(int purchaseAmount) {
         List<Lotto> lottos = new ArrayList<>();
-        for(int i = 0; i < purchaseAmount/1000; i++) {
+        for (int i = 0; i < purchaseAmount / 1000; i++) {
             lottos.add(generateLotto());
         }
 
@@ -39,7 +39,7 @@ public class Lotto {
     public static Lotto generateLotto() {
         Set<Integer> set = new HashSet<>();
 
-        while(set.size() < COUNT_OF_LOTTO_NUMBERS){
+        while (set.size() < COUNT_OF_LOTTO_NUMBERS) {
             set.add(generateRandomNumber(BOTTOM, TOP));
         }
         List<Integer> numberList = new ArrayList<>(set);
@@ -48,7 +48,7 @@ public class Lotto {
     }
 
     private static int generateRandomNumber(int bottom, int top) {
-        int number = (int)(Math.random() * (top - bottom + 1) + bottom);
+        int number = (int) (Math.random() * (top - bottom + 1) + bottom);
         return number;
     }
 

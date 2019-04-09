@@ -18,7 +18,7 @@ public class WinningLotto {
         int countOfMatch = countMatch(userLotto);
 
         // TODO 로직 구현
-        return Rank.valueOf(countOfMatch, userLotto.hasNumber(bonusNo)) ;
+        return Rank.valueOf(countOfMatch, userLotto.hasNumber(bonusNo));
     }
 
     private int countMatch(Lotto userLotto) {
@@ -26,5 +26,10 @@ public class WinningLotto {
         set.addAll(lotto.returnNumbers());
 
         return userLotto.returnNumbers().size() + lotto.returnNumbers().size() - set.size();
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString() + bonusNo;
     }
 }

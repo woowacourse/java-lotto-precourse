@@ -19,16 +19,16 @@ public class Game {
     public static int getPurchaseAmount() {
         System.out.println(ASK_PURCHASE_AMOUNT);
         String input;
-        Scanner s =  new Scanner(System.in);
+        Scanner s = new Scanner(System.in);
         do {
             input = s.nextLine().trim();
-        }while(!isThereErrorInPurchaseAmount(input));
+        } while (!isThereErrorInPurchaseAmount(input));
 
         return Integer.parseInt(input);
     }
 
     private static boolean isThereErrorInPurchaseAmount(String input) {
-        if(UserInput.isInRange(input, Lotto.PRICE)) {
+        if (UserInput.isInRange(input, Lotto.PRICE)) {
             return true;
         }
         System.out.println(NOT_PURCHASE_AMOUNT_ERROR);
@@ -45,7 +45,7 @@ public class Game {
         System.out.println();
         System.out.println(lottos.size() + YOU_BOUGHT_IT);
         for (Lotto lotto : lottos
-             ) {
+        ) {
             System.out.println(lotto);
         }
         System.out.println();
@@ -64,13 +64,13 @@ public class Game {
         Scanner s = new Scanner(System.in);
         do {
             input = s.nextLine().trim();
-        } while(!isThereErrorInBonusNumber(lotto, input));
+        } while (!isThereErrorInBonusNumber(lotto, input));
 
         return Integer.parseInt(input);
     }
 
     private static boolean isThereErrorInBonusNumber(Lotto lotto, String input) {
-        if(UserInput.isInRange(input, Lotto.BOTTOM, Lotto.TOP) &&
+        if (UserInput.isInRange(input, Lotto.BOTTOM, Lotto.TOP) &&
                 !lotto.hasNumber(Integer.parseInt(input))) {
             return true;
         }
@@ -84,14 +84,14 @@ public class Game {
         do {
             Scanner s = new Scanner(System.in);
             input = s.nextLine();
-        } while(!isThereErrorInLottoNumbers(input));
+        } while (!isThereErrorInLottoNumbers(input));
 
         return new Lotto(UserInput.convertsToLottoNumbers(input));
     }
 
     private static boolean isThereErrorInLottoNumbers(String input) {
         List<Integer> lottoNumbers = UserInput.convertsToLottoNumbers(input);
-        if(lottoNumbers.size() == Lotto.COUNT_OF_LOTTO_NUMBERS
+        if (lottoNumbers.size() == Lotto.COUNT_OF_LOTTO_NUMBERS
                 && (!UserInput.hasRepeatedNumbers(lottoNumbers))) {
             return true;
         }

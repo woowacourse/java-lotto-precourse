@@ -15,20 +15,20 @@ public class UserInput {
     }
 
     private static boolean isNumber(char character) {
-        return character >= '0' && character<= '9';
+        return character >= '0' && character <= '9';
     }
 
     private static boolean isZeroOrPositiveNumber(String string) {
         int count = 0;
         for (int i = 0; i < string.length(); i++) {
-            count =  incrementsIfTrue(count, isNumber(string.charAt(i)));
+            count = incrementsIfTrue(count, isNumber(string.charAt(i)));
         }
 
         return count == string.length() && string.length() != 0;
     }
 
     private static int incrementsIfTrue(int count, boolean bool) {
-        if(bool) {
+        if (bool) {
             count = count + 1;
         }
         return count;
@@ -37,7 +37,7 @@ public class UserInput {
     public static boolean isInRange(String string, int bottom, int top) {
         int number;
 
-        if(!isZeroOrPositiveNumber(string)) {
+        if (!isZeroOrPositiveNumber(string)) {
 
             return false;
         }
@@ -48,7 +48,7 @@ public class UserInput {
     public static boolean isInRange(String string, int bottom) {
         int number;
 
-        if(!isZeroOrPositiveNumber(string)) {
+        if (!isZeroOrPositiveNumber(string)) {
             return false;
         }
         number = Integer.parseInt(string);
@@ -61,14 +61,14 @@ public class UserInput {
         List<String> strings = Arrays.asList(string.split(SEPARATOR));
 
         for (String s : strings
-             ) {
+        ) {
             addNumberToLottoNumberList(integerList, s.trim());
         }
         return integerList;
     }
 
     private static void addNumberToLottoNumberList(List<Integer> integerList, String string) {
-        if(isInRange(string, Lotto.BOTTOM, Lotto.TOP)) {
+        if (isInRange(string, Lotto.BOTTOM, Lotto.TOP)) {
             integerList.add(Integer.parseInt(string));
         }
 
@@ -80,7 +80,6 @@ public class UserInput {
 
         return set.size() != integerList.size();
     }
-
 
 
 }

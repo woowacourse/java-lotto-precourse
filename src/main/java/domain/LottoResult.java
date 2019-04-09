@@ -19,17 +19,17 @@ public class LottoResult {
 
     Map<Rank, Integer> rankMap;
 
-    public LottoResult (List<Lotto> lottos, WinningLotto winningLotto) {
+    public LottoResult(List<Lotto> lottos, WinningLotto winningLotto) {
         initializeRankMap();
-        for(Lotto lotto : lottos) {
+        for (Lotto lotto : lottos) {
             incrementValueIfMapHasKey(winningLotto.match(lotto));
         }
     }
 
     private void initializeRankMap() {
         rankMap = new HashMap<>();
-        for ( Rank rank : Rank.values()
-             ) {
+        for (Rank rank : Rank.values()
+        ) {
             rankMap.put(rank, 0);
         }
     }
@@ -41,8 +41,8 @@ public class LottoResult {
 
     private int calculateProfit() {
         int profit = 0;
-        for ( Rank rank : rankMap.keySet()
-             ) {
+        for (Rank rank : rankMap.keySet()
+        ) {
             profit += rankMap.get(rank) * rank.getWinningMoney();
         }
         return profit;
@@ -62,8 +62,8 @@ public class LottoResult {
 
     private int countOfLottos() {
         int total = 0;
-        for ( int number : rankMap.values()
-             ) {
+        for (int number : rankMap.values()
+        ) {
             total += number;
         }
         return total;
@@ -73,7 +73,7 @@ public class LottoResult {
     public void show() {
         System.out.println(INITIAL_WORD);
         for (Rank rank : getRankListWithoutMISSinReversedOrder()
-             ) {
+        ) {
             String string = stringOfOneRankResult(rank);
             System.out.println(string);
         }
@@ -86,9 +86,9 @@ public class LottoResult {
                 ROUND_NUMBER) + THIS);
     }
 
-    private String stringOfOneRankResult (Rank rank) {
-        String string = rank.getWinningMoney() + BETWEEN_WORDS +rankMap.get(rank) + COUNT;
-        if(rank == Rank.SECOND) {
+    private String stringOfOneRankResult(Rank rank) {
+        String string = rank.getWinningMoney() + BETWEEN_WORDS + rankMap.get(rank) + COUNT;
+        if (rank == Rank.SECOND) {
             string = rank.getCountOfMatch() + HOW_MANY_SECOND + string;
             return string;
         }
