@@ -20,6 +20,10 @@ public class GameControler {
         this.pre_money = n;
     }
 
+    public int getN() {
+        return n;
+    }
+
     public void setLottos() {
         for (int i = 0; i < n; i++) {
             int[] temp = getNonRepitIntArray();
@@ -43,5 +47,9 @@ public class GameControler {
             if (item == num) return true;
         }
         return false;
+    }
+
+    public void printLottos() {
+        
     }
 }

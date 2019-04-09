@@ -14,5 +14,8 @@ public class LottoGame {
     GameControler control = new GameControler(sc.nextInt());
     sc.nextLine();
     control.setLottos();
+
+    System.out.println("\n"+control.getN()+"개를 구매했습니다.");
+    control.printLottos();
   }
 }
