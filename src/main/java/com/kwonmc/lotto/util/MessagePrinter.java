@@ -9,66 +9,72 @@
  * WoowahanTechCamp, Seoul, KOREA
  * All right Reserved
  */
-package com.kwonmc.lotto;
+package com.kwonmc.lotto.util;
+
+import com.kwonmc.lotto.GameRunner;
+import com.kwonmc.lotto.Rank;
+import com.kwonmc.lotto.RankList;
+import com.kwonmc.lotto.consts.Numbers;
+import com.kwonmc.lotto.consts.Strings;
 
 /**
- * 게임 메시지를 프린트하는 유틸리티 메서드를 모아둔 객체
+ * 게임 메시지 프린트를 위한 유틸리티 객체
  *
  * @version 0.0.0
  * @author kwonmc
  * @see GameRunner
  * @see Strings
  */
-class MessagePrinter {
-    static void purchaseAmount() {
+public class MessagePrinter {
+    public static void purchaseAmount() {
         System.out.println(Strings.MESSAGE_PURCHASE_AMOUNT);
     }
 
-    static void changeAmount(int purchaseAmount) {
+    public static void changeAmount(int purchaseAmount) {
         int changeAmount = purchaseAmount % Numbers.LOTTO_COUNT_CRITERIA;
         if (changeAmount != 0) {
             System.out.println(String.format(Strings.MESSAGE_CHANGE_AMOUNT, changeAmount));
         }
     }
 
-    static void lottoInfo(int lottoCount) {
+    public static void lottoInfo(int lottoCount) {
         System.out.println(lottoCount + Strings.MESSAGE_LOTTO_INFO);
     }
 
-    static void numberCountInvalid() {
+    public static void numberCountInvalid() {
         System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_NUMBERS
                 + Strings.MESSAGE_RE_INPUT_PLEASE);
     }
 
-    static void numberRangeInvalid() {
+    public static void numberRangeInvalid() {
         System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_RANGE
                 + Strings.MESSAGE_RE_INPUT_PLEASE);
     }
 
-    static void numberRedundantInvalid() {
+    public static void numberRedundantInvalid() {
         System.out.println(Strings.MESSAGE_LASTWEEK_INVALID_REDUNDANT
                 + Strings.MESSAGE_RE_INPUT_PLEASE);
     }
 
-    static void lastWeekNumber() {
+    public static void lastWeekNumber() {
         System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
     }
 
-    static void bonusNoInvalid() {
+    public static void bonusNoInvalid() {
         System.out.println(Strings.MESSAGE_BONUS_INVALID
                 + Strings.MESSAGE_RE_INPUT_PLEASE);
     }
 
-    static void bonusNo() {
+    public static void bonusNo() {
         System.out.println(Strings.MESSAGE_BONUS_NO);
     }
 
-    static void lottoResultHead() {
+    public static void lottoResultHead() {
         System.out.println(Strings.MESSAGE_LOTTO_MATCH_RESULT_HEADER);
         System.out.println(Strings.MESSAGE_SEPARATION_LINE);
     }
 
-    static void lottoResultBody(RankList rankList) {
+    public static void lottoResultBody(RankList rankList) {
         for (int i = rankList.size() - Numbers.SKIPPING_LAST_INDEX; i >= 0; i--) {
             Rank rank = rankList.getRankByIndex(i);
             int counts = rankList.getCountsByIndex(i);
@@ -85,7 +91,7 @@ class MessagePrinter {
         );
     }
 
-    static void lottoResultTail(RankList rankList, int purchaseAmount) {
+    public static void lottoResultTail(RankList rankList, int purchaseAmount) {
         double totalYield = (double) rankList.getTotalWinningAmount() / purchaseAmount;
         System.out.println(String.format(Strings.MESSAGE_RESULT_YIELD, totalYield));
     }

@@ -11,6 +11,9 @@
  */
 package com.kwonmc.lotto;
 
+import com.kwonmc.lotto.consts.Numbers;
+import com.kwonmc.lotto.consts.Strings;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
