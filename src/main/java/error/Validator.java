@@ -1,10 +1,7 @@
 package error;
 
 import domain.Lotto;
-import error.customExceptions.InvalidLottoException;
-import error.customExceptions.MinimumPurchasePriceException;
-import error.customExceptions.NotIntegerException;
-import error.customExceptions.UndefinedException;
+import error.customExceptions.*;
 
 import java.util.Arrays;
 
@@ -36,7 +33,9 @@ public class Validator {
         if (!isInteger(input)) {
             throw new NotIntegerException();
         }
-
+        if (!isCorrectRange(input)) {
+            throw new InvalidRangeException();
+        }
     }
 
     private boolean isInteger(String input) {
@@ -67,6 +66,11 @@ public class Validator {
     private boolean haveDuplicate(String[] inputs) {
         int lengthOfFiltered = Arrays.stream(inputs).distinct().toArray().length;
         return (lengthOfFiltered != inputs.length);
+    }
+
+    private boolean isCorrectRange(String input) {
+        int number = Integer.parseInt(input);
+        return (number >= Lotto.FIRST_NUMBER) && (number <= Lotto.LAST_NUMBER);
     }
 
     private boolean isCorrectRange(String[] inputs) {
