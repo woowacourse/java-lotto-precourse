@@ -24,7 +24,7 @@ public class PlayLotto {
         money = sc.nextInt();
         while (money < 0) {
             System.out.println("Lotto 구입금액은 0이상의 자연수입니다.");
-            money = insertMoney();
+            money = sc.nextInt();
         }
         return money;
     }
