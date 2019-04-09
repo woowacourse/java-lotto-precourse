@@ -67,11 +67,12 @@ public class LottoGame {
     
     private ArrayList<Lotto> makeLotto() {
     	ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
+    	int money = inputMoney();
     	
-    	for (int i = 0; i < purchaseLottoAmount(inputMoney()); i++) {
+    	for (int i = 0; i < purchaseLottoAmount(money); i++) {
     		lottoList.add(new Lotto(makeLottoNumberList()));
     	}
-    	
+
     	return lottoList;
     }
     
