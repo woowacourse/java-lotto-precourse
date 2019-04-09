@@ -1,14 +1,11 @@
 package domain;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class UserInput {
-
     private static final String SEPARATOR = ",";
+
     private String input;
 
     public UserInput() {
@@ -75,6 +72,13 @@ public class UserInput {
         }
 
         return;
+    }
+
+    public boolean hasRepeatedNumbers(List<Integer> integerList) {
+        Set<Integer> set = new HashSet<>();
+        set.addAll(integerList);
+
+        return set.size() == integerList.size();
     }
 
 
