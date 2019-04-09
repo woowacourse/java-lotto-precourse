@@ -243,6 +243,15 @@ class ValidBonusNumber extends ValidLottoNumber {
     }
 }
 
+/**
+ * 당첨 번호가 규칙을 만족하는지 검사
+ * 1 ~ 45 사이의 자연수
+ * 크기가 6인 List
+ * 중복여부
+ *
+ * @author yun
+ * @version 0.1
+ */
 class ValidLottoNumber {
     protected final int LOTTO_NUMBER_BEGIN = 1;
     protected final int LOTTO_NUMBER_END = 45;
@@ -252,15 +261,25 @@ class ValidLottoNumber {
         this.rawWinningNumber = rawWinningNumber;
     }
 
+    /**
+     * 조건을 만족 여부
+     *
+     * @return 만족시 false
+     */
     public boolean isValid() {
         return !isValidNumberOfRange() ||
                 !isValidSizeOfWinningNumber() ||
                 !isDuplicatedNumber();
     }
 
+    /**
+     * 중복 여부
+     *
+     * @return 중복시 false
+     */
     public boolean isDuplicatedNumber() {
         int frequency;
-        int threshold = 1;
+        int threshold = 1; // 중복여부 기준
         List<Integer> intNumber = Utils.convertString2Int(rawWinningNumber);
         for (int i = LOTTO_NUMBER_BEGIN; i <= LOTTO_NUMBER_END; i++) {
             frequency = Collections.frequency(intNumber, i);
@@ -272,6 +291,11 @@ class ValidLottoNumber {
         return true;
     }
 
+    /**
+     * 1 ~ 45 사이의 자연수
+     *
+     * @return 만족시 true
+     */
     public boolean isValidNumberOfRange() {
         List<Integer> intNumber = Utils.convertString2Int(rawWinningNumber);
         for (int number : intNumber) {
@@ -283,8 +307,13 @@ class ValidLottoNumber {
         return true;
     }
 
+    /**
+     * 콤마(,)로 구분한 당첨 번호 크기 확인
+     *
+     * @return 크기가 6이면 true
+     */
     public boolean isValidSizeOfWinningNumber() {
-        int lottoCount = 6;
+        int lottoCount = 6; // Lotto List 사이즈
         if (rawWinningNumber.length != lottoCount) {
             System.out.println("당첨번호는 콤마(,)로 구분하며 6개의 자연수입니다.");
             return false;
