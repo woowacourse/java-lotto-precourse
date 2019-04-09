@@ -14,6 +14,7 @@ public class Game {
         } while (printPurchaseCount());
 
         createLottoObjectArray();
+        createLottoInstance();
     }
 
     private void buyLotto() {
@@ -76,5 +77,11 @@ public class Game {
         }
 
         return numbers;
+    }
+
+    private void createLottoInstance() {
+        for (int i = 0; i < purchaseCount; i++) {
+            lottos[i] = new Lotto(createLottoNumbers());
+        }
     }
 }
