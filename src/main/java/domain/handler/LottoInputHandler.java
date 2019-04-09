@@ -1,5 +1,6 @@
 package domain.handler;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -26,16 +27,16 @@ public class LottoInputHandler {
         return getValidWinningNums();
     }
 
-    public int getBonusNum() {
-        return getValidBonusNum();
+    public int getBonusNum(List<Integer> winningNumList) {
+        return getValidBonusNum(winningNumList);
     }
 
-    private int getValidBonusNum() {
+    private int getValidBonusNum(List<Integer> winningNumList) {
         String bonusNum = null;
         do {
             LottoOutputHandler.printMessage("보너스 볼을 입력해 주세요.");
             bonusNum = getUserInputString();
-            validator = new BonusNumValidator(bonusNum);
+            validator = new BonusNumValidator(bonusNum, winningNumList);
         } while (!validator.doesValid());
 
         return convertStringToInt(bonusNum);

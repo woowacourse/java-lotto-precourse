@@ -7,6 +7,7 @@ import java.util.Collections;
 public class LottoFactory {
 
     public static final int LOTTO_NUM_LENGTH = 6;
+
     private final LottoNumGenerator lottoNumGenerator;
 
     public LottoFactory() {
@@ -25,7 +26,7 @@ public class LottoFactory {
     private List<Integer> getLottoNums() {
         List<Integer> lottoNums = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUM_LENGTH; i++) {
-            int lottoNum = lottoNumGenerator.generate();
+            int lottoNum = lottoNumGenerator.generateNonDuplicateLottoNum(lottoNums);
             lottoNums.add(new Integer(lottoNum));
         }
         return Collections.unmodifiableList(lottoNums);

@@ -1,26 +1,34 @@
 package domain.validator;
 
-import domain.LottoNumGenerator;
+import java.util.List;
 
 public class BonusNumValidator implements Validator {
 
     private final String bonusNum;
+    private final List<Integer> winningNumList;
 
-    public BonusNumValidator(String bonusNum) {
+    public BonusNumValidator(String bonusNum, List<Integer> winningNumList) {
         this.bonusNum = bonusNum;
+        this.winningNumList = winningNumList;
     }
 
     @Override
     public boolean doesValid() {
-        return doesBonusNumNotExceedBound();
+        return doesBonusNumInputIsValid()
+                && doesBonusNumIsValid()
+                && doesBonusNumIsNotDuplicate();
     }
 
-    boolean doesBonusNumNotExceedBound() {
-        int lowerBound = LottoNumGenerator.LOTTO_NUM_LOWER_BOUND;
-        int upperBound = LottoNumGenerator.LOTTO_NUM_UPPER_BOUND;
-        int num = convertStringToInt(bonusNum);
+    boolean doesBonusNumInputIsValid() {
+        return new LottoInputValidator(bonusNum).doesValid();
+    }
 
-        return lowerBound <= num && num <= upperBound;
+    boolean doesBonusNumIsValid() {
+        return new LottoNumValidator(bonusNum).doesValid();
+    }
+
+    boolean doesBonusNumIsNotDuplicate() {
+        return !winningNumList.contains(convertStringToInt(bonusNum));
     }
 
     private int convertStringToInt(String str) {

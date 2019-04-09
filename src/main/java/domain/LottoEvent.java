@@ -52,7 +52,7 @@ public class LottoEvent {
 
     private WinningLotto createWinningLotto() {
         List<Integer> winningNumList = convertIntArrayToList(lottoInputHandler.getWinningNums());
-        int bonusNum = lottoInputHandler.getBonusNum();
+        int bonusNum = lottoInputHandler.getBonusNum(winningNumList);
 
         return createWinningLottoWithParams(winningNumList, bonusNum);
     }

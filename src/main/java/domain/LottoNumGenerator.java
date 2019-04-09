@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Random;
+import java.util.List;
 
 public class LottoNumGenerator {
 
@@ -13,8 +14,12 @@ public class LottoNumGenerator {
         random = new Random();
     }
 
-    public int generate() {
-        return generateLottoNumInRangeFromLowerBoundToUpperBound();
+    public int generateNonDuplicateLottoNum(List<Integer> lottoNums) {
+        int num = generateLottoNumInRangeFromLowerBoundToUpperBound();
+        while (lottoNums.contains(num)) {
+            num = generateLottoNumInRangeFromLowerBoundToUpperBound();
+        }
+        return num;
     }
 
     private int generateLottoNumInRangeFromLowerBoundToUpperBound() {

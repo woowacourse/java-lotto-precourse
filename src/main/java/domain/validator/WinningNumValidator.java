@@ -34,8 +34,8 @@ public class WinningNumValidator implements Validator {
 
     boolean doesEachLottoNumIsValid() {
         long numOfInvalidLottoNum = lottoNumList.stream()
-                .map(BonusNumValidator::new)
-                .filter((bonusNumValidator) -> !bonusNumValidator.doesValid())
+                .map(LottoNumValidator::new)
+                .filter((lottoNumValidator) -> !lottoNumValidator.doesValid())
                 .count();
         return numOfInvalidLottoNum == 0;
     }
