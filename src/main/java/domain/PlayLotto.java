@@ -10,6 +10,13 @@ public class PlayLotto {
     private List<Lotto> myLotto = new ArrayList<>(); // 구입한 내 Lotto List
     private WinningLotto winningLotto;
 
+    public void play() {
+        int money = insertMoney();
+        purchaseLotto(money);
+        setWinningLotto();
+        printWinningStatistics(money);
+    }
+
     public int insertMoney() {
         int money;
         System.out.println("구입금액을 입력해 주세요.");
