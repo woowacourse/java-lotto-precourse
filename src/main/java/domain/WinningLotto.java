@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.HashSet;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -13,7 +15,16 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
+        int countOfMatch = countMatch(userLotto);
+
         // TODO 로직 구현
-        return null;
+        return Rank.valueOf(countOfMatch, userLotto.hasNumber(bonusNo)) ;
+    }
+
+    private int countMatch(Lotto userLotto) {
+        HashSet<Integer> set = new HashSet<>(userLotto.returnNumbers());
+        set.addAll(lotto.returnNumbers());
+
+        return userLotto.returnNumbers().size() + lotto.returnNumbers().size() - set.size();
     }
 }

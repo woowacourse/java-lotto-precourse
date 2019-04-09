@@ -35,7 +35,7 @@ public class Lotto {
         return lottos;
     }
 
-    private static Lotto generateLotto() {
+    public static Lotto generateLotto() {
         Set<Integer> set = new HashSet<>();
 
         while(set.size() < COUNT_OF_LOTTO_NUMBERS){
@@ -51,7 +51,9 @@ public class Lotto {
         return number;
     }
 
-
+    public List<Integer> returnNumbers() {
+        return numbers;
+    }
 
 
     @Override
