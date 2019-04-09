@@ -7,6 +7,18 @@ public class Validator {
     static final String WARNING_WHEN_LOTTO_INPUT_COUNT_OVER = "WARNING: 입력이 너무 깁니다. " + MAX_POSSIBLE_LOTTO_INPUT_LENGTH + "자리 아래로 다시 입력해주세요.";
     static final String WARNING_WHEN_LOTTO_INPUT_SMALL = "WARNING: 금액이 너무 적습니다. 1장의 금액은 " + GameSetting.PRICE_PER_1LOTTO + "원 입니다. 다시 입력해주세요.";
 
+    public static boolean checkInputLottoMoney(String lottoCountInput) {
+        if (!checkInputLottoMoneyLengthIsTooLong(lottoCountInput) ||
+                !checkIsInteger(lottoCountInput)) {
+            return false;
+        }
+        int inputMoney = Integer.parseInt(lottoCountInput);
+        if (checkInputLottoMoneyIsUnderMinvalue(inputMoney)) {
+            return false;
+        }
+        return true;
+    }
+
     public static boolean checkIsInteger(String inputNumber) {
         try {
             Integer.parseInt(inputNumber);
