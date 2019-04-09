@@ -42,4 +42,12 @@ public class Game {
     private void createLottoObjectArray() {
         lottos = new Lotto[purchaseCount];
     }
+
+    private boolean checkSizeNumbers(List<Integer> numbers) {
+        if (numbers.size() == 6) {
+            return false;
+        }
+
+        return true;
+    }
 }
