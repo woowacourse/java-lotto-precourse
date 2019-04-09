@@ -78,16 +78,12 @@ public class PlayLotto {
         List<Rank> lottoResultList = matchLotto();
         int lottoFrequency;
         for (Rank rank : Rank.values()) {
-            lottoFrequency = frequencyOfWinningLotto(lottoResultList, rank);
+            lottoFrequency = Collections.frequency(lottoResultList, rank);
             printWinningMessage(rank, lottoFrequency);
             totalWinningPrice += lottoFrequency * rank.getWinningMoney();
         }
         System.out.printf("총 수익률은 %.3f입니다.\n",
                 (float) totalWinningPrice / money);
-    }
-
-    public int frequencyOfWinningLotto(List<Rank> lottoResultList, Rank rank) {
-        return Collections.frequency(lottoResultList, rank);
     }
 
     public List<Rank> matchLotto() {
