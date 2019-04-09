@@ -27,4 +27,8 @@ public class WinningLotto {
         return countOfMatch;
     }
 
+    public boolean matchBonusNumber(Lotto userLotto) {
+        return userLotto.hasNumber(bonusNo);
+    }
+
 }
