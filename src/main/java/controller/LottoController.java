@@ -16,7 +16,7 @@ public class LottoController {
 
     private List<Lotto> lottoList = new ArrayList<>();
     private WinningLotto winningLotto;
-    private Map<Rank, Integer> rankMap = new HashMap<>();
+    private Map<Rank, Integer> rankMap = new HashMap<>();     // <Rank, 당첨 횟수>
 
     public LottoController(int money) {
         for (int i = 0; i < money / LOTTO_PRICE; i++) {
@@ -26,10 +26,10 @@ public class LottoController {
 
     public void setWinningLotto(Lotto lotto, int bonusNo) {
         this.winningLotto = new WinningLotto(lotto, bonusNo);
-        matchLottoList();
+        matchLotto();
     }
 
-    private void matchLottoList() {
+    private void matchLotto() {
         for (Lotto lotto : lottoList) {
             Rank rank = winningLotto.match(lotto);
             rankMap.put(rank, rankMap.getOrDefault(rank, 0) + 1);
@@ -57,7 +57,7 @@ public class LottoController {
     }
 
     public double getLottoYield() {
-        long totalPrizes = 0;
+        long totalPrizes = 0;       // 로또 당첨 금액이 Integer보다 클 수 있다.
 
         for (Rank rank : rankMap.keySet()) {
             totalPrizes += rank.getWinningMoney() * rankMap.get(rank);
