@@ -36,4 +36,16 @@ public class Result {
 		totalCount++;
 		count.put(rank, count.get(rank) + 1);
 	}
+
+	public double calculateYield() {
+		return (double) calculateTotalMoney() / (double) (totalCount * 1000);
+	}
+	
+	private long calculateTotalMoney() {
+		long money = 0;
+		for (Rank rank : count.keySet()) {
+			money += count.get(rank) * rank.getWinningMoney();
+		}
+		return money;
+	}
 }
