@@ -18,6 +18,7 @@ public class LottoGame {
         int numOfLotto = getNumOfLotto();
         makeLotto(numOfLotto);
         printLotto(numOfLotto);
+        setWinningLotto();
     }
 
     private int getNumOfLotto() {
@@ -90,5 +91,66 @@ public class LottoGame {
         for (int i = 0; i < numOfLotto; i++) {
             lotto[i].printLottoNumbers();
         }
+    }
+
+    private void setWinningLotto() {
+        List<Integer> winningNumbers = getWinningNumbers();
+        int bonusBall = getBonusBall(winningNumbers);
+        Lotto winner = new Lotto(winningNumbers);
+
+        winningLotto = new WinningLotto(winner, bonusBall);
+    }
+
+    private List<Integer> getWinningNumbers() {
+        List<Integer> winningNumbers;
+        do {
+            System.out.printf("\n지난 주 당첨 번호를 입력해 주세요.\n");
+            String userInput = scan.nextLine();
+            winningNumbers = makeWinningNumbersList(userInput);
+        } while (!(checkLottoNumbers(winningNumbers) && checkNumbersOverlap(winningNumbers)));
+
+        return winningNumbers;
+    }
+
+    private List<Integer> makeWinningNumbersList(String userInput) {
+        List<Integer> winningNumbers = new ArrayList<>();
+        String[] winningNumbersArray = userInput.split(",");
+
+        for (int i = 0; i < winningNumbersArray.length; i++) {
+            winningNumbers.add(Integer.parseInt(winningNumbersArray[i]));
+        }
+
+        return winningNumbers;
+    }
+
+    private boolean checkLottoNumbers(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != NUM_OF_FIGURES) return false;
+
+        for (int i = 0; i < NUM_OF_FIGURES; i++) {
+            int number = winningNumbers.get(i);
+            if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) return false;
+        }
+
+        return true;
+    }
+
+    private int getBonusBall(List<Integer> winningNumbers) {
+        int bonusBall;
+
+        do {
+            System.out.printf("\n보너스 볼을 입력해 주세요.\n");
+            bonusBall = scan.nextInt();
+        } while (!checkBonusBallValidity(bonusBall, winningNumbers));
+
+        return bonusBall;
+    }
+
+    private boolean checkBonusBallValidity(int bonusBall, List<Integer> winningNumbers) {
+        for (int i = 0; i < NUM_OF_FIGURES; i++) {
+            if (winningNumbers.contains(bonusBall)) return false;
+            if (bonusBall < MIN_LOTTO_NUMBER || bonusBall > MAX_LOTTO_NUMBER) return false;
+        }
+
+        return true;
     }
 }
