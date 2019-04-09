@@ -6,6 +6,7 @@ import java.util.*;
 public class UserInput {
     static final String SEPARATOR = ",";
 
+
     private String input;
 
     public UserInput() {
@@ -37,10 +38,10 @@ public class UserInput {
         int number;
 
         if(!isZeroOrPositiveNumber(string)) {
+
             return false;
         }
         number = Integer.parseInt(string);
-
         return number >= bottom && number <= top;
     }
 

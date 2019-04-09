@@ -6,10 +6,10 @@ import java.util.*;
  * 로또 한장을 의미하는 객체
  */
 public class Lotto {
-    static final int TOP = 45;
-    static final int BOTTOM = 1;
-    static final int COUNT_OF_LOTTO_NUMBERS = 6;
-    static final int PRICE = 1000;
+    public static final int TOP = 45;
+    public static final int BOTTOM = 1;
+    public static final int COUNT_OF_LOTTO_NUMBERS = 6;
+    public static final int PRICE = 1000;
 
     private final List<Integer> numbers;
 
