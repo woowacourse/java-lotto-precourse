@@ -55,12 +55,12 @@ public class PlayLotto {
     public List<Integer> insertWinningLottoNumber() {
         Scanner sc = new Scanner(System.in);
         String[] rawWinningNumber;
+        ValidLottoNumber validLottoNumber;
         do {
             System.out.println("지난 주 당첨 번호를 입력해주세요.");
             rawWinningNumber = sc.nextLine().split(",");
-        } while (!isValidNumberOfRange(rawWinningNumber) ||
-                !isValidSizeOfWinningNumber(rawWinningNumber) ||
-                !isDuplicatedNumber(rawWinningNumber));
+            validLottoNumber = new ValidLottoNumber(rawWinningNumber);
+        } while (validLottoNumber.isValid());
         return Utils.convertString2Int(rawWinningNumber);
     }
 
@@ -69,7 +69,7 @@ public class PlayLotto {
         int totalWinningPrice = 0;
         List<Rank> lottoResultList = matchLotto();
         int lottoFrequency;
-        for (Rank rank: Rank.values()) {
+        for (Rank rank : Rank.values()) {
             lottoFrequency = frequencyOfWinningLotto(lottoResultList, rank);
             printWinningMessage(rank, lottoFrequency);
             totalWinningPrice += lottoFrequency * rank.getWinningMoney();
@@ -85,7 +85,7 @@ public class PlayLotto {
     public List<Rank> matchLotto() {
         Rank lottoResult;
         List<Rank> lottoResultList = new ArrayList<>();
-        for (Lotto lotto: myLotto) {
+        for (Lotto lotto : myLotto) {
             lottoResult = winningLotto.match(lotto);
             lottoResultList.add(lottoResult);
         }
@@ -99,43 +99,10 @@ public class PlayLotto {
         if (matchResult == Rank.SECOND) {
             System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n",
                     countOfMatch, winningMoney, number);
-        }
-        else if (countOfMatch >=winningMinCount ) {
+        } else if (countOfMatch >= winningMinCount) {
             System.out.printf("%d개 일치 (%d원)- %d개\n",
                     countOfMatch, winningMoney, number);
         }
-    }
-
-    public boolean isDuplicatedNumber(String[] rawWinningNumber) {
-        int frequency;
-        List<Integer> intNumber = Utils.convertString2Int(rawWinningNumber);
-        for (int i = 1; i < 46; i++) {
-            frequency = Collections.frequency(intNumber, i);
-            if (frequency > 1) {
-                System.out.println("중복된 당첨번호가 있습니다.");
-                return false;}
-        }
-        return true;
-    }
-
-    public boolean isValidNumberOfRange(String[] rawWinningNumber) {
-        List<Integer> intNumber = Utils.convertString2Int(rawWinningNumber);
-        for (int number: intNumber) {
-            if (number < 0 || number > 45) {
-                System.out.println("당첨번호는 1 ~ 45 사이의 자연수입니다.");
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isValidSizeOfWinningNumber(String[] rawWinningNumber) {
-        int sizeOfWinningNumber = 6; // 당첨번호의 갯수
-        if (rawWinningNumber.length != sizeOfWinningNumber) {
-            System.out.println("당첨번호는 콤마(,)로 구분하며 6자리입니다.");
-            return false;
-        }
-        return true;
     }
 
     public int insertBonusNumber() {
@@ -149,7 +116,9 @@ public class PlayLotto {
     }
 
     public boolean isValidBonusNumber(int bonusNumber) {
-        if (0 < bonusNumber && bonusNumber <= 45) { return true; }
+        if (0 < bonusNumber && bonusNumber <= 45) {
+            return true;
+        }
         System.out.println("보너스 볼의 범위는 1 ~ 45 사이의 자연수입니다.");
         System.out.println("보너스 볼을 입력해주세요.");
         return false;
@@ -169,10 +138,60 @@ public class PlayLotto {
         int lottoNumberBegin = 1;
         int lottoNumberEnd = 45;
         List<Integer> lottoNumber = new ArrayList<>();
-        for (int number = lottoNumberBegin; number < lottoNumberEnd+1; number++) {
+        for (int number = lottoNumberBegin; number <= lottoNumberEnd; number++) {
             lottoNumber.add(number);
         }
         Collections.shuffle(lottoNumber);
         return lottoNumber.subList(0, lottoCount);
+    }
+}
+
+class ValidLottoNumber {
+    private final int LOTTO_NUMBER_BEGIN = 1;
+    private final int LOTTO_NUMBER_END = 45;
+    private String[] rawWinningNumber;
+
+    public ValidLottoNumber(String[] rawWinningNumber) {
+        this.rawWinningNumber = rawWinningNumber;
+    }
+
+    public boolean isValid() {
+        return !isValidNumberOfRange() ||
+                !isValidSizeOfWinningNumber() ||
+                !isDuplicatedNumber();
+    }
+
+    public boolean isDuplicatedNumber() {
+        int frequency;
+        int threshold = 1;
+        List<Integer> intNumber = Utils.convertString2Int(rawWinningNumber);
+        for (int i = LOTTO_NUMBER_BEGIN; i <= LOTTO_NUMBER_END; i++) {
+            frequency = Collections.frequency(intNumber, i);
+            if (frequency > threshold) {
+                System.out.println("중복된 당첨번호가 있습니다.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isValidNumberOfRange() {
+        List<Integer> intNumber = Utils.convertString2Int(rawWinningNumber);
+        for (int number : intNumber) {
+            if (number < LOTTO_NUMBER_BEGIN || number > LOTTO_NUMBER_END) {
+                System.out.println("당첨번호는 1 ~ 45 사이의 자연수입니다.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isValidSizeOfWinningNumber() {
+        int lottoCount = 6;
+        if (rawWinningNumber.length != lottoCount) {
+            System.out.println("당첨번호는 콤마(,)로 구분하며 6개의 자연수입니다.");
+            return false;
+        }
+        return true;
     }
 }
