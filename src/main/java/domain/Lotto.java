@@ -38,5 +38,14 @@ public class Lotto {
         return userInputMoneyAmount;
     }
 
+    private static boolean checkUserInput(String userInput) {
+        if (isItNonNumeric(userInput) || isItNotMultipleOf1000(userInput) || isSameAsOrSmallerThanZero(userInput)) {
+            return false;
+        }
+        return true;
+    }
+
+
+
 
 }
