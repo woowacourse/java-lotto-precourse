@@ -8,12 +8,10 @@ import java.util.List;
 public class User {
     private List<Lotto> lottoList;
     private int buyMoney;
-    private int prizeMoney;
     private int numberOfLotto;
 
     public User() {
         this.setLottoList(new LinkedList<>());
-        this.setPrizeMoney(0);
     }
 
     public List<Lotto> getLottoList() {
@@ -31,14 +29,6 @@ public class User {
     public void setBuyMoney(int money) {
         this.buyMoney = money;
         this.setNumberOfLotto(money / 1000);
-    }
-
-    public int getPrizeMoney() {
-        return prizeMoney;
-    }
-
-    public void setPrizeMoney(int prizeMoney) {
-        this.prizeMoney = prizeMoney;
     }
 
     public int getNumberOfLotto() {

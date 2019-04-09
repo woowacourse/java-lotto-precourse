@@ -52,14 +52,14 @@ public enum Rank {
     }
 
     @Override
-    public String toString(){
-        if(this == MISS){
+    public String toString() {
+        if (this == MISS) {
             return "";
         }
-        if(this == SECOND){
-            return this.getCountOfMatch()+"개 일치, 보너스볼 일치 ("+this.getWinningMoney()+"원) - ";
+        if (this == SECOND) {
+            return this.getCountOfMatch() + "개 일치, 보너스볼 일치 (" + this.getWinningMoney() + "원) - ";
         }
-        return this.getCountOfMatch()+"개 일치 ("+this.getWinningMoney()+"원) - ";
+        return this.getCountOfMatch() + "개 일치 (" + this.getWinningMoney() + "원) - ";
     }
 }
 

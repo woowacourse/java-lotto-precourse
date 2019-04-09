@@ -82,11 +82,13 @@ public class AppController {
     }
 
     private void printResult() {
+        long rateOfReturn = 0L;
         AppView.printResultOfLotto();
         for (int i = MIN_VALUE_RANK_INDEX; i >= MAX_VALUE_RANK_INDEX; i--) {
             Rank rank = Rank.values()[i];
             AppView.outputLine(rank.toString() + this.getCountOfRankResult().get(rank) + "개");
+            rateOfReturn += (long) rank.getWinningMoney() * this.getCountOfRankResult().get(rank);
         }
+        AppView.outputLine(String.format("%.3f", (double) rateOfReturn / user.getBuyMoney()));
     }
-
 }
