@@ -50,4 +50,10 @@ public class Game {
 
         return true;
     }
+
+    private int createRandomNumber() {
+        int randomNum = (int)(Math.random() * 45) + 1;
+
+        return randomNum;
+    }
 }
