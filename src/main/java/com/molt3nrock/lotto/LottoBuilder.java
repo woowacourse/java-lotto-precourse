@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 class LottoBuilder implements MoneyLottoBuilder, FinalLottoBuilder {
 
@@ -30,9 +31,8 @@ class LottoBuilder implements MoneyLottoBuilder, FinalLottoBuilder {
 
     @Override
     public List<Lotto> build() {
-        return IntStream
-            .range(0, money / PRICE_PER_LOTTO)
-            .mapToObj(i -> new Lotto(generateNumbers()))
+        return Stream.generate(() -> new Lotto(generateNumbers()))
+            .limit(money / PRICE_PER_LOTTO)
             .collect(Collectors.toList());
     }
 
