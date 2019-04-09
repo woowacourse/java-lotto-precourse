@@ -94,15 +94,24 @@ public class GameRunner {
 
     private void printLottoMatchResult() {
         lottoMatchResultMessagePrinter();
+        WinningLotto winningLotto = this.game.getWinningLotto();
+
+        ArrayList<Rank> gameResult = new ArrayList<>();
+        for (Lotto lotto : this.game.getMyLottoList()) {
+            Rank tmp = winningLotto.match(lotto);
+            gameResult.add(tmp);
+        }
+
+        for (Rank each : gameResult) {
+            System.out.println(each);
+        }
+
+        System.out.println();
         System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치(" + Rank.FIFTH.getWinningMoney() +"원) - 0개");
         System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치(" + Rank.FOURTH.getWinningMoney() +"원) - 0개");
         System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치(" + Rank.THIRD.getWinningMoney() +"원) - 0개");
         System.out.println(Rank.SECOND.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + Rank.SECOND.getWinningMoney() +"원) - 0개");
         System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치(" + Rank.FIRST.getWinningMoney() +"원) - 0개");
-        System.out.println(Rank.valueOf(6, false).getCountOfMatch());
-        System.out.println(Rank.valueOf(5, true).getCountOfMatch());
-        System.out.println(Rank.valueOf(4, true).getCountOfMatch());
-        System.out.println(Rank.valueOf(5, false).getCountOfMatch());
     }
 
     private void lottoMatchResultMessagePrinter() {
@@ -110,7 +119,7 @@ public class GameRunner {
         System.out.println("---------");
     }
 
-    private void printLottoMoneyResult() {
+    private void printLottoMoneyResult(/*int purchaseAmount, int winningAmount*/) {
         System.out.println("총 수익률은 0.000 입니다.");
     }
 }

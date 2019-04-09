@@ -32,10 +32,7 @@ public class Lotto {
     }
 
     public boolean contains(Integer number) {
-        if (this.numbers.contains(number)) {
-            return true;
-        }
-        return false;
+        return (this.numbers.contains(number));
     }
 
     @Override
