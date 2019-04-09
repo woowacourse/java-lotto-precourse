@@ -14,16 +14,23 @@ public class User {
     }
 
     private void purchaseLotto() {
-        String input;
+        String price;
 
-        System.out.println("구입금액을 입력해 주세요.");
-        input = sc.nextLine();
+        do {
+            System.out.println("구입금액을 입력해 주세요.");
+            price = sc.nextLine();
+        } while (checkPrice(price));
 
-        if(!isValidPrice(input)){
+        calculateAmountLotto(Integer.parseInt(price));
+    }
+
+    private boolean checkPrice(String price) {
+        boolean reInput = false;
+        if (!isValidPrice(price)) {
             System.out.println("구입금액은 1,000 단위 입니다.");
-            purchaseLotto();
+            reInput = true;
         }
-
+        return reInput;
     }
 
     /**
@@ -38,5 +45,9 @@ public class User {
     private boolean isValidPrice(String invalidInput) {
         String naturalNumPattern = "^[0-9]+000$";
         return Pattern.matches(naturalNumPattern, invalidInput);
+    }
+
+    private void calculateAmountLotto(int price) {
+        amountLotto = price / 1000;
     }
 }
