@@ -21,8 +21,8 @@ public class WinningLotto {
 	public int getBonusNum() {
 		return this.bonusNo;
 	}
-	
-	private int isContain(int num, int numOfMatch){
+
+	private int isContain(int num, int numOfMatch) {
 		if (this.lotto.getNumbers().contains(num))
 			numOfMatch++;
 		return numOfMatch;

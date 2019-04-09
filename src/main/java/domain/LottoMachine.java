@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LottoMachine {
-	
+
 	private final int LOTTO_NUM_START = 1;
 	private final int LOTTO_NUM_END = 45;
 	private final int LOTTO_PRICE = 1000;
@@ -58,7 +58,7 @@ public class LottoMachine {
 		return true;
 	}
 
-	public Lotto [] buyLotto() {
+	public Lotto[] buyLotto() {
 		Scanner in = new Scanner(System.in);
 		int money;
 		do {

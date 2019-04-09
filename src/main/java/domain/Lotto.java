@@ -16,5 +16,4 @@ public class Lotto {
 		return this.numbers;
 	}
 
-	// 추가 기능 구현
 }
