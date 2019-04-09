@@ -120,9 +120,22 @@ public class Main {
         return lottoList;
     }
     
+    /** 당첨 통계를 내기 위한 밑준비. */
+    private static Map<Rank, Integer> initRankStat() {
+        Map<Rank, Integer> stat = new LinkedHashMap<>();
+        for (Rank rank : Rank.values()) {
+            stat.put(rank, 0);
+        }
+        return stat;
+    }
+    
     /** main 진입점 */
     public final static void main(String[] args) {
         List<Lotto> lottoList = lottoGame();
         WinningLotto winLotto = lastWeekWinningLotto();
+        Map<Rank, Integer> rankMap = initRankStat();
+        // rankMap.forEach((k, v) -> {
+        //     System.out.println(k.getRankDescription() + " - " + v + "개");
+        // });
     }
 }
