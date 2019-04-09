@@ -101,14 +101,17 @@ public class GameRunner {
         Lotto lotto = stringArrayToLotto(lastWeekStr);
 
         bonusNoMessagePrinter();
-        int bonusNo = sc.nextInt();
+        int bonusNo;
+        do {
+            bonusNo = sc.nextInt();
+        } while (!bonusNoValidChecker(lotto, bonusNo));
 
         game.setWinningLotto(new WinningLotto(lotto, bonusNo));
     }
 
     private Lotto stringArrayToLotto(String[] strArray) {
         int[] intArray = Arrays.stream(strArray)
-                .mapToInt(Integer::valueOf)
+                .mapToInt(Integer::parseInt)
                 .toArray();
         ArrayList<Integer> lottoList = arrayToList(intArray);
         return new Lotto(lottoList);
@@ -116,6 +119,14 @@ public class GameRunner {
 
     private void lastWeekNumberMessagePrinter() {
         System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
+    }
+
+    private boolean bonusNoValidChecker(Lotto lotto, int bonusNo) {
+        if (lotto.contains(bonusNo)) {
+            System.out.println(Strings.MESSAGE_BONUSNO_INVALID + Strings.MESSAGE_RE_INPUT_PLEASE);
+            return false;
+        }
+        return true;
     }
 
     private void bonusNoMessagePrinter() {

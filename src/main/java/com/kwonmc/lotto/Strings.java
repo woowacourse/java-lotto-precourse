@@ -30,7 +30,10 @@ class Strings {
     static final String MESSAGE_SEPARATION_LINE = "---------";
     static final String MESSAGE_RESULT_YIELD = "총 수익률은 %.3f입니다.";
     static final String MESSAGE_CHANGE_AMOUNT = "거스름돈은 %s원 입니다.";
-    static final String MESSAGE_PURCHASE_INVALID = "최소 구매 금액은 1000원 입니다. 다시 입력해주세요.";
+    static final String MESSAGE_PURCHASE_INVALID = "최소 구매 금액은 1000원 입니다.";
+    static final String MESSAGE_BONUSNO_INVALID = "이미 당첨번호에 포함된 번호입니다.";
+
+    static final String MESSAGE_RE_INPUT_PLEASE = " 다시 입력해주세요.";
 
     // Rank 문자열들
     static final String MESSAGE_EXCEPTION = "는 유효하지 않은 값입니다.";
