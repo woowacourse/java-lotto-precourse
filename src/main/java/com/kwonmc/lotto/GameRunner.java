@@ -100,6 +100,10 @@ public class GameRunner {
 
         RankList rankList = new RankList();
 
+        for (Lotto lotto : this.game.getMyLottoList()) {
+            rankList.add(winningLotto.match(lotto));
+        }
+
 
         System.out.println();
         System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치(" + Rank.FIFTH.getWinningMoney() +"원) - 0개");

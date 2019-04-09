@@ -15,6 +15,8 @@ public class RankList {
     }
 
     public boolean add(Rank rank) {
-        
+        int index = this.ranks.indexOf(rank);
+        this.counts[index]++;
+        return true;
     }
 }
