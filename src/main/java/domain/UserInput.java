@@ -56,9 +56,9 @@ public class UserInput {
         return number >= bottom;
     }
 
-    public List<Integer> convertsToLottoNumbers() {
+    public static List<Integer> convertsToLottoNumbers(String string) {
         List<Integer> integerList = new ArrayList<>();
-        List<String> strings = Arrays.asList(input.split(SEPARATOR));
+        List<String> strings = Arrays.asList(string.split(SEPARATOR));
 
         for (String s : strings
              ) {
@@ -67,7 +67,7 @@ public class UserInput {
         return integerList;
     }
 
-    private void addNumberToLottoNumberList(List<Integer> integerList, String string) {
+    private static void addNumberToLottoNumberList(List<Integer> integerList, String string) {
         if(isInRange(string, Lotto.BOTTOM, Lotto.TOP)) {
             integerList.add(Integer.parseInt(string));
         }
