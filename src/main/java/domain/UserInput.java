@@ -33,7 +33,7 @@ public class UserInput {
         return count;
     }
 
-    public static boolean isInRange(String string, int bottom, int top) {
+    private static boolean isInRange(String string, int bottom, int top) {
         int number;
 
         if(!isZeroOrPositiveNumber(string)) {
