@@ -146,6 +146,13 @@ public class WinningLotto {
         return Integer.parseInt(userInput);
     }
 
+    private static boolean checkUserInputBonus(String userInput, String winningNumbers) {
+        if (isNonNumberic(userInput) || isBonusNotBetween1And45(userInput) || isDuplicateInWinningNumbers(userInput, winningNumbers)) {
+            return false;
+        }
+        return true;
+    }
+
 
 
 
