@@ -1,5 +1,9 @@
 package com.molt3nrock.lotto;
 
+import static com.molt3nrock.lotto.Constants.COUNT_OF_NUMBERS_PER_LOTTO;
+import static com.molt3nrock.lotto.Constants.MAXIMUM_NUMBER_OF_LOTTO;
+import static com.molt3nrock.lotto.Constants.MINIMUM_NUMBER_OF_LOTTO;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,10 +12,7 @@ import java.util.stream.IntStream;
 
 class LottoBuilder implements MoneyLottoBuilder, FinalLottoBuilder {
 
-    private static final int MINIMUM_NUMBER_OF_LOTTO = 1;
-    private static final int MAXIMUM_NUMBER_OF_LOTTO = 45;
     private static final int PRICE_PER_LOTTO = 1000;
-    private static final int COUNT_OF_NUMBERS_PER_LOTTO = 6;
     private int money = 0;
 
     static MoneyLottoBuilder create() {
