@@ -55,5 +55,23 @@ public class WinningLotto {
         return isEmptyString;
     }
 
+    private static boolean checkStr(String currentStr) {
+        if(currentStr.isEmpty()) {
+            System.out.println("6개의 숫자를 입력해 주세요!");
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isNonNumericThere(String userInput) {
+        if (userInput.matches("[0-9,]+")) {
+            return false;
+        }
+        System.out.println("당첨번호는 양수인 정수만 입력해주세요");
+        return true;
+    }
+
+
+
 
 }
