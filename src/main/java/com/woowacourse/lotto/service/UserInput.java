@@ -32,11 +32,10 @@ public class UserInput {
 			result = getAmountValidResult(amount);
 		}
 		while (result != true);
-
 		return Integer.parseInt(amount);
 	}
 
-	public boolean getAmountValidResult(String amount) {
+	private boolean getAmountValidResult(String amount) {
 		if (!Validator.checkPurchasingAmountValid(amount)) {
 			printUserInputAgain();
 			return false;
@@ -44,7 +43,7 @@ public class UserInput {
 		return true;
 	}
 
-	public void printUserInputAgain() {
+	private void printUserInputAgain() {
 		System.out.println(DEMAND_USER_INPUT_AGAIN);
 	}
 }
