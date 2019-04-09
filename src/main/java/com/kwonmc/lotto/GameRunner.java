@@ -41,8 +41,7 @@ public class GameRunner {
     private void createLottoList(int lottoCount) {
         ArrayList<Lotto> tmpLottoList = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            Lotto tmp = new Lotto(Lotto.lottoMaker());
-            tmpLottoList.add(tmp);
+            tmpLottoList.add(Lotto.lottoMaker());
         }
         game.setMyLottoList(tmpLottoList);
     }

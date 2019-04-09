@@ -19,6 +19,7 @@ public class WinningLotto {
         for (Integer num : this.lotto.getNumbers()) {
 
         }
+
         return null;
     }
 }

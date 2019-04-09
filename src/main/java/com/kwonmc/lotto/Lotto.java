@@ -19,22 +19,27 @@ public class Lotto {
         return numbers;
     }
 
-    public static ArrayList<Integer> lottoMaker() {
-        ArrayList<Integer> aLotto = new ArrayList<>();
-        while (aLotto.size() < 6) {
+    public static Lotto lottoMaker() {
+        ArrayList<Integer> lottoArray = new ArrayList<>();
+        while (lottoArray.size() < 6) {
             int random = (int) (Math.random() * 45) + 1;
-            if (!aLotto.contains(random)) {
-                aLotto.add(random);
+            if (!lottoArray.contains(random)) {
+                lottoArray.add(random);
             }
         }
-        aLotto.sort(null);
-        return aLotto;
+        lottoArray.sort(null);
+        return new Lotto(lottoArray);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<Integer> iterator = numbers.iterator();
+
+        return stringBuilderHelper(stringBuilder, iterator).toString();
+    }
+
+    private StringBuilder stringBuilderHelper(StringBuilder stringBuilder, Iterator<Integer> iterator) {
         stringBuilder.append("[");
         while(iterator.hasNext()) {
             stringBuilder.append(iterator.next());
@@ -43,6 +48,6 @@ public class Lotto {
             }
         }
         stringBuilder.append("]");
-        return stringBuilder.toString();
+        return stringBuilder;
     }
 }

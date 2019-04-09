@@ -26,4 +26,8 @@ public class Game {
     public void setWinningLotto(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
     }
+
+    public WinningLotto getWinningLotto() {
+        return winningLotto;
+    }
 }
