@@ -17,9 +17,7 @@ public class LottoOutputHandler {
     public void showLottoEventResult() {
         printMessage("당첨 통계\n--------");
         lottoEventResult.forEach((key, value) -> {
-            Rank rank = key;
-            printMessage(rank.getCountOfMatch() + "개 일치 ("
-                    + rank.getWinningMoney() + "원) - " + value);
+            showRank(key, value);
         });
     }
 
@@ -42,5 +40,14 @@ public class LottoOutputHandler {
 
     public static void printMessage(String message) {
         System.out.println(message);
+    }
+
+    private void showRank(Rank rank, Integer numOfWinningRank) {
+        String additional = "";
+        if (rank == Rank.SECOND) {
+            additional += ", 보너스 볼 일치";
+        }
+        printMessage(rank.getCountOfMatch() + "개 일치" + additional
+                + "(" + rank.getWinningMoney() + "원) - " + numOfWinningRank);
     }
 }

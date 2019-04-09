@@ -58,6 +58,7 @@ public class WinningLotto {
 * 수익률을 계산해 출력해야 한다.
 
 ## 구현할 기능 목록
+* 로또의 각 난수는 중복이 없어야 한다
 
 ## 구현된 기능 목록
 1. 입력값은 오로지 숫자로 이루어져 있어야 한다
@@ -94,4 +95,5 @@ public class WinningLotto {
     * LottoEventJudge가 로또 결과를 계산한 뒤, LottoOutputHandler에게 결과를 주입하는 방식으로 구현한다.
     * 당첨 결과는 변동되면 안되는 사항이므로 immutable 하게 반환한다
 15. 로또 행사를 진행한다
+16. 당첨 번호 입력값의 공백을 제거해야 한다
 

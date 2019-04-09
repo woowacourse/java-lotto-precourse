@@ -45,7 +45,7 @@ public class LottoInputHandler {
         String[] winningNums = null;
         do {
             LottoOutputHandler.printMessage("지난 주 당첨 번호를 입력해 주세요.");
-            winningNums = getUserInputArrayWithDelimiter(getUserInputString(), ",");
+            winningNums = getUserInputWithDelimiter(getUserInputString(), ",");
             validator = new WinningNumValidator(winningNums);
         } while (!validator.doesValid());
 
@@ -67,8 +67,17 @@ public class LottoInputHandler {
         return scanner.nextLine();
     }
 
-    private String[] getUserInputArrayWithDelimiter(String input, String delimiter) {
-        return input.split(delimiter);
+    private String[] getUserInputWithDelimiter(String input, String delimiter) {
+        String[] inputArray = input.split(delimiter);
+        eraseCharacterExcludingDigits(inputArray);
+
+        return inputArray;
+    }
+
+    private void eraseCharacterExcludingDigits(String[] inputs) {
+        for (int i = 0; i < inputs.length; i++) {
+            inputs[i] = inputs[i].replaceAll("\\s", "");
+        }
     }
 
     private int convertStringToInt(String str) {
