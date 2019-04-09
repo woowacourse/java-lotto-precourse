@@ -44,7 +44,7 @@ public enum Rank {
                         }
                 }
 
-                throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
+                throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입 니다.");
         }
 
         private boolean matchCount(int countOfMatch) {
