@@ -37,24 +37,29 @@ public class GameRunner {
 
     private void inputUserPurchaseAmount() {
         purchaseAmountMessagePrinter();
-        int purchaseAmount;
-        do {
-            purchaseAmount = sc.nextInt();
-        } while (!purchaseAmountValidChecker(purchaseAmount));
+        int purchaseAmount = getPurchaseAmount();
         game.setPurchaseAmount(purchaseAmount);
         changeAmountMessagePrinter(purchaseAmount);
     }
 
+    private void purchaseAmountMessagePrinter() {
+        System.out.println(Strings.MESSAGE_PURCHASE_AMOUNT);
+    }
+
     private boolean purchaseAmountValidChecker(int purchaseAmount) {
-        if (purchaseAmount < 1000) {
+        if (purchaseAmount < Numbers.LOTTO_COUNT_CRITERIA) {
             System.out.println(Strings.MESSAGE_PURCHASE_INVALID);
             return false;
         }
         return true;
     }
 
-    private void purchaseAmountMessagePrinter() {
-        System.out.println(Strings.MESSAGE_PURCHASE_AMOUNT);
+    private int getPurchaseAmount() {
+        int purchaseAmount;
+        do {
+            purchaseAmount = sc.nextInt();
+        } while (!purchaseAmountValidChecker(purchaseAmount));
+        return purchaseAmount;
     }
 
     private void changeAmountMessagePrinter(int purchaseAmount) {
@@ -106,16 +111,16 @@ public class GameRunner {
         game.setWinningLotto(new WinningLotto(lotto, bonusNo));
     }
 
+    private void lastWeekNumberMessagePrinter() {
+        System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
+    }
+
     private Lotto stringArrayToLotto(String[] strArray) {
         int[] intArray = Arrays.stream(strArray)
                 .mapToInt(Integer::parseInt)
                 .toArray();
         ArrayList<Integer> lottoList = arrayToList(intArray);
         return new Lotto(lottoList);
-    }
-
-    private void lastWeekNumberMessagePrinter() {
-        System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
     }
 
     private int getBonusNo(Lotto lotto) {
