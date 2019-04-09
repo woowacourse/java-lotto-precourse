@@ -23,6 +23,7 @@ public class Validator {
 
     /**
      * 입력금액 문자열 유효성 검사
+     *
      * @param lottoCountInput
      * @return
      */
@@ -56,6 +57,7 @@ public class Validator {
 
     /**
      * 당첨로또 문자열 유효성 검사
+     *
      * @param winningLottoInput
      * @return
      */
@@ -104,7 +106,7 @@ public class Validator {
         for (int i = 0; (i < numbers.length); i++) {
             tempAddedLottoNumbers.add(numbers[i]);
         }
-        if(tempAddedLottoNumbers.size() != numbers.length){
+        if (tempAddedLottoNumbers.size() != numbers.length) {
             return true;
         }
         return false;
@@ -112,6 +114,7 @@ public class Validator {
 
     /**
      * 보너스번호 문자열 유효성 검사
+     *
      * @param winningLottoNumbers
      * @param bonusNumberStringInput
      * @return
@@ -137,6 +140,7 @@ public class Validator {
 
     /**
      * 단일 로또넘버 문자열 유효성 검사
+     *
      * @param inputLottoNumber
      * @return
      */
