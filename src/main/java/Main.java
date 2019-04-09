@@ -141,13 +141,26 @@ public class Main {
         return map;
     }
     
+    /** 총 당첨금 계산 */
+    private final static int getTotalPrizeMoney(Map<Rank, Integer> rankStat) {
+        int result = 0;
+        for (Map.Entry<Rank, Integer> entry : rankStat.entrySet()) {
+            Rank key = entry.getKey();
+            int value = entry.getValue();
+            result += key.getWinningMoney() * value;
+        }
+        return result;
+    }
+    
     /** main 진입점 */
     public final static void main(String[] args) {
         List<Lotto> lottoList = lottoGame();
         WinningLotto winLotto = lastWeekWinningLotto();
-        Map<Rank, Integer> rankMap = getRankStat(lottoList, winLotto);
-        rankMap.forEach((k, v) -> {
+        Map<Rank, Integer> rankStat = getRankStat(lottoList, winLotto);
+        rankStat.forEach((k, v) -> {
             System.out.println(k.getRankDescription() + " - " + v + "개");
         });
+        int totalPrize = getTotalPrizeMoney(rankStat);
+        System.out.println(totalPrize);
     }
 }
