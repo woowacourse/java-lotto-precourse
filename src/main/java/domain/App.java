@@ -12,27 +12,23 @@ import java.util.HashSet;
  * 어플리케이션 객체
  */
 public class App {
+    private static final int LOTTO_MIN = 1;
+    private static final int LOTTO_MAX = 45;
+    public static final int LOTTO_NUMBER_OF_PICKS = 6;
+    private static final int PRICE = 1000;
+    private static final List<Integer> SEQUENCE = new Vector<>();
+    static {
+        for (int i = LOTTO_MIN; i <= LOTTO_MAX; i++) {
+            SEQUENCE.add(i);
+        }
+    }
+
     private static final Scanner input = new Scanner(System.in);
     private static final List<Lotto> lottos = new Vector<>();
 
-    private static final int LOTTO_MIN = 1;
-    private static final int LOTTO_MAX = 45;
-    private static final int LOTTO_NUMBER_OF_PICKS = 6;
-    private static final int PRICE = 1000;
-    private static final List<Integer> SEQUENCE;
-
-    static {
-        final List<Integer> numbers = new Vector<>();
-
-        for (int i = LOTTO_MIN; i <= LOTTO_MAX; i++) {
-            numbers.add(i);
-        }
-        SEQUENCE = numbers;
-    }
-
     public static void main(String[] args) {
         purchaseLottos(validateAmountAndGetNumber(inputAmount()));
-        getWinningLotto(validateWinningNumbers(parseWinningNumbers(inputWinningNumbers())), validateBonusNumber(inputBonusNumber()));
+        printResult(matchLottos(getWinningLotto(validateWinningNumbers(parseWinningNumbers(inputWinningNumbers())), validateBonusNumber(inputBonusNumber()))));
     }
 
     private static int inputAmount() {
@@ -127,5 +123,19 @@ public class App {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
         return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
+    }
+
+    private static List<Rank> matchLottos(WinningLotto winningLotto) {
+        final List<Rank> rankings = new Vector<>();
+
+        for (Lotto lotto : lottos) {
+            rankings.add(winningLotto.match(lotto));
+        }
+        return rankings;
+    }
+
+    private static void printResult(List<Rank> rankings) {
+        System.out.println("\n당첨 통계\n---------");
+
     }
 }

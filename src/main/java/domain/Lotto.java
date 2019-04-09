@@ -2,6 +2,7 @@ package domain;
 
 import java.util.List;
 import java.util.Vector;
+import java.util.HashSet;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -19,5 +20,16 @@ public class Lotto {
         }
         System.out.println("[" + String.join(", ", convertedNumbers) + "]");
         return this;
+    }
+
+    public HashSet<Integer> union(Lotto rhs) {
+        final List<Integer> appendedList = new Vector<>(numbers);
+        appendedList.addAll(rhs.numbers);
+
+        return new HashSet<>(appendedList);
+    }
+
+    public boolean contains(final int x) {
+        return numbers.contains(x);
     }
 }
