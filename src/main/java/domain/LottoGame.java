@@ -58,8 +58,8 @@ public class LottoGame {
 
     /**
      * TreeMap을 생성해 반환합니다. TreeMap은 key(Rank)가 countOfMatch의 내림차순으로 정렬하기로
-     * 약속되어있습니다. 이렇게 하는 이유는, 앞으로 여러 Rank가 추가되더라도 Rank.java 에만 그 종류를
-     * 추가하면 Rank별로 print할때 자동으로 정렬이 되어 print되도록 하기 위함입니다.
+     * 약속되어있습니다. 이렇게 하는 이유는, 앞으로 여러 Rank가 추가되더라도 Rank Enum 에만 그 종류를
+     * 추가하면, 추후 Rank별로 print할때 자동으로 정렬이 되어 print되도록 하기 위함입니다.
      *
      * @return Map<Rank, Integer> 랭크별로 갯수를 세는데 이용되는 Map 반환
      */
@@ -86,9 +86,9 @@ public class LottoGame {
     }
 
     /**
-     * rankCounter를 입력받아, 모든 종류의 Rank를 미리 입력해놓는 함수입니다.
-     *
-     * @return Map<Rank, Integer>
+     * rankCounter는 Rank종류별 갯수를 저장하기위한 자료구조 입니다. 이 자료구조에 미리
+     * 모든 종류의 Rank를 0으로 초기화 합니다.
+     * @param rankCounter Rank종류별로, 몇개가 당첨됬는지 저장하기위한 자료구조
      */
     private void addAllRankTypes(Map<Rank, Integer> rankCounter) {
         for (Rank rank : Rank.values()) {
