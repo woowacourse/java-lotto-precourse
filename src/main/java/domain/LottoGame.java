@@ -5,7 +5,6 @@ import java.util.*;
 public class LottoGame {
 
     static final String COMMENT_WHEN_RECEIVE_INPUT_MONEY = "구입금액을 입력해 주세요.";
-
     static List<Lotto> lottoList;
     static WinningLotto winningLotto;
 
@@ -59,13 +58,23 @@ public class LottoGame {
      */
     private Map<Rank, Integer> createSortAppliedRankCounter() {
         Map<Rank, Integer> rankSortedMap = new TreeMap<Rank, Integer>((Rank a, Rank b) -> {
-            if (a.getWinningMoney() != b.getWinningMoney()) {
-                return (a.getWinningMoney() < b.getWinningMoney()) ? -1 : 1;
-            }
-
-            return 0;
+            return compareRank(a,b);
         });
         return rankSortedMap;
+    }
+
+    /**
+     * Rank를 countOfMatch의 오름차순으로 정렬하기위한 비교 함수
+     * @param rankA
+     * @param rankB
+     * @return
+     */
+    private int compareRank(Rank rankA, Rank rankB){
+        if (rankA.getWinningMoney() != rankB.getWinningMoney()) {
+            return (rankA.getWinningMoney() < rankB.getWinningMoney()) ? -1 :1;
+        }
+
+        return 0;
     }
 
     /**

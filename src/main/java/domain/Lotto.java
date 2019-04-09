@@ -18,6 +18,17 @@ public class Lotto {
         return numbers;
     }
 
+    public int getCountOfMatch(List<Integer> inputNumbers) {
+        int countOfMatch = 0;
+        for (int i = 0; i < numbers.size(); i++) {
+            if (numbers.contains(inputNumbers.get(i))) {
+                countOfMatch++;
+            }
+        }
+
+        return countOfMatch;
+    }
+
     public static Lotto createRandomLotto() {
         ArrayList<Integer> totalNumbers = createPossibleNumbers();
         ArrayList<Integer> lottoNumbers = new ArrayList<Integer>();
@@ -25,7 +36,6 @@ public class Lotto {
             int randomIndex = (new Random()).nextInt(totalNumbers.size());
             int randomNumber = totalNumbers.get(randomIndex);
             totalNumbers.remove(randomIndex);
-
             lottoNumbers.add(randomNumber);
         }
         return new Lotto(lottoNumbers);
@@ -52,16 +62,4 @@ public class Lotto {
     public boolean checkNumberContain(int number) {
         return numbers.contains(number);
     }
-
-    public int getCountOfMatch(List<Integer> inputNumbers) {
-        int countOfMatch = 0;
-        for (int i = 0; i < numbers.size(); i++) {
-            if (numbers.contains(inputNumbers.get(i))) {
-                countOfMatch++;
-            }
-        }
-
-        return countOfMatch;
-    }
-
 }

@@ -26,7 +26,7 @@ public class Validator {
         return true;
     }
 
-    public static boolean checkIsInteger(String inputNumber) {
+    private static boolean checkIsInteger(String inputNumber) {
         try {
             Integer.parseInt(inputNumber);
             return true;
@@ -36,7 +36,7 @@ public class Validator {
         }
     }
 
-    public static boolean checkInputLottoMoneyLengthIsTooLong(String lottoCountInput) {
+    private static boolean checkInputLottoMoneyLengthIsTooLong(String lottoCountInput) {
         if (lottoCountInput.length() > MAX_POSSIBLE_LOTTO_INPUT_LENGTH) {
             System.out.println(WARNING_WHEN_LOTTO_INPUT_COUNT_OVER);
             return false;
@@ -44,7 +44,7 @@ public class Validator {
         return true;
     }
 
-    public static boolean checkInputLottoMoneyIsUnderMinvalue(int inputMoney) {
+    private static boolean checkInputLottoMoneyIsUnderMinvalue(int inputMoney) {
         if (inputMoney < GameSetting.PRICE_PER_1LOTTO) {
             System.out.println(WARNING_WHEN_LOTTO_INPUT_SMALL);
             return true;
@@ -52,7 +52,6 @@ public class Validator {
         return false;
     }
 
-    //
     public static boolean checkWinningLottoNumbers(String winningLottoInput) {
         if (!checkLottoNumbersInputLengthIsValid(winningLottoInput)) {
             return false;
@@ -65,7 +64,7 @@ public class Validator {
         return true;
     }
 
-    public static boolean checkLottoNumbersInputLengthIsValid(String winningLottoInput) {
+    private static boolean checkLottoNumbersInputLengthIsValid(String winningLottoInput) {
         String[] numbers = winningLottoInput.split(",");
 
         if (numbers.length != GameSetting.LOTTO_NORMAL_NUMBER_COUNT) {
@@ -75,16 +74,15 @@ public class Validator {
         return true;
     }
 
-    public static boolean checkLottoNumbersInputHasNoInvalidValue(String[] numbers) {
+    private static boolean checkLottoNumbersInputHasNoInvalidValue(String[] numbers) {
         boolean invalidValueNotFound = true;
         for (int i = 0; (i < numbers.length) && (invalidValueNotFound); i++) {
             invalidValueNotFound = checkIsLottoNumberValid(numbers[i]);
         }
-
         return invalidValueNotFound;
     }
 
-    public static boolean checkDuplicationIfHasPrintWarning(String[] numbers) {
+    private static boolean checkDuplicationIfHasPrintWarning(String[] numbers) {
         // numbers에 중복된 문자열이 있었다면, numbers의 길이와 Set의 길이가 다름을 이용
         if (checkLottoNumbersHasDuplication(numbers)) {
             System.out.println(WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
@@ -100,12 +98,11 @@ public class Validator {
             tempAddedLottoNumbers.add(numbers[i]);
         }
         if(tempAddedLottoNumbers.size() != numbers.length){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    //
     public static boolean checkIsLottoNumberValid(String inputLottoNumber) {
         if (!checkIsInteger(inputLottoNumber)) {
             return false;
@@ -117,17 +114,15 @@ public class Validator {
         return true;
     }
 
-    public static boolean checkIsLottoNumberInRange(int lottoInput) {
+    private static boolean checkIsLottoNumberInRange(int lottoInput) {
         if ((lottoInput < GameSetting.MIN_LOTTO_NUMBER) ||
                 (lottoInput > GameSetting.MAX_LOTTO_NUMBER)) {
             System.out.println(WARNING_WHEN_LOTTO_NUMBER_NOT_IN_RANGE);
             return false;
         }
-
         return true;
     }
 
-    //
     public static boolean checkBonusLottoNumberValid(List<Integer> winningLottoNumbers, String bonusNumberStringInput) {
         if (!checkIsLottoNumberValid(bonusNumberStringInput)) {
             return false;
@@ -139,7 +134,7 @@ public class Validator {
         return true;
     }
 
-    public static boolean checkIsAlreadyInLottoNumbers(List<Integer> winningNumberList, int lottoInput) {
+    private static boolean checkIsAlreadyInLottoNumbers(List<Integer> winningNumberList, int lottoInput) {
         if (winningNumberList.contains(lottoInput)) {
             System.out.println(WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
             return true;

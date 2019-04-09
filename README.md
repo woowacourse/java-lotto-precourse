@@ -48,6 +48,7 @@
 |calculateProfitRate|수익률 계산|
 |printLottoResult|로또 당첨 결과를 출력(당첨로또 현황, 수익률)|
 |createWinningLotto|당첨로또 생성|
+|compareRank|Rank를 countOfMatch의 오름차순으로 정렬하기위한 비교 함수|
 
 |Lotto|로또 1장 객체|
 |---|---|
