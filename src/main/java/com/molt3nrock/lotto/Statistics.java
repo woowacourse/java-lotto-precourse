@@ -21,9 +21,10 @@ class Statistics {
     }
 
     static Statistics valueOf(List<Lotto> lottoList, WinningLotto winningLotto) {
+        final int DEFAULT_RANK_COUNT = 0;
         HashMap<Rank, Integer> hashMap = new HashMap<>();
         Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.MISS)
-            .forEach(rank -> hashMap.putIfAbsent(rank, 0));
+            .forEach(rank -> hashMap.putIfAbsent(rank, DEFAULT_RANK_COUNT));
         Statistics statistics = new Statistics(hashMap);
         lottoList.forEach(lotto -> statistics.classifyLotto(lotto, winningLotto));
         return statistics;
