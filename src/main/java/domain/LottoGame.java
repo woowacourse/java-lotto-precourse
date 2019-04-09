@@ -16,6 +16,7 @@ public class LottoGame {
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private List<Lotto> purchasedLottoList;
+    private WinningLotto win;
 
     private int inputMoney() {
         Scanner scan = new Scanner(System.in);
@@ -90,10 +91,21 @@ public class LottoGame {
         System.out.println(MESSAGE_INPUT_BONUS);
         Scanner scan = new Scanner(System.in);
         String inputBonus;
-        do{
+        do {
             inputBonus = scan.nextLine();
         }
-        while(!Validation.isNumber(inputBonus));
+        while (!Validation.isNumber(inputBonus));
         return Integer.parseInt(inputBonus);
+    }
+
+    public void run() {
+        purchasedLottoList = new ArrayList<>();
+        int money = inputMoney();
+        int countOfLotto = getCountLotto(money);
+        createLotto(countOfLotto);
+        printLottoList(countOfLotto);
+        Lotto winLotto = new Lotto(inputWinNumber());
+        win = new WinningLotto(winLotto, inputBonusNumber());
+        //TODO 결과 출력
     }
 }
