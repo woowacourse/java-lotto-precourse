@@ -15,9 +15,9 @@ public class Application {
         userInterface.printLottos(lottos);
 
         WinningLotto winningLotto = userInterface.getWinningLotto();
-        LottoRankAnalyzer lottoRankAnalyzer = new LottoRankAnalyzer();
-        lottoRankAnalyzer.getLottoRankCount(lottos, winningLotto);
+        LottoRankAnalyzer lottoRankAnalyzer = new LottoRankAnalyzer(winningLotto);
 
-        userInterface.printRankCount(lottoRankAnalyzer.getLottoRankCount(lottos, winningLotto));
+        userInterface.printRankCount(lottoRankAnalyzer.getLottoRankCount(lottos));
+        userInterface.printEarningRate(lottoRankAnalyzer.getEarningRate(lottos, purchasePrice));
     }
 }

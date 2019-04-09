@@ -1,7 +1,4 @@
-import domain.Lotto;
-import domain.LottoRankCount;
-import domain.Rank;
-import domain.WinningLotto;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -48,4 +45,7 @@ public class UserInterface {
                 .forEach(System.out::println);
     }
 
+    void printEarningRate(EarningRate earningRate) {
+        System.out.println(String.format("총 수익률은 %.3f 입니다.", earningRate.getValue()));
+    }
 }
