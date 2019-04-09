@@ -15,7 +15,11 @@ public class UserInputReciever {
            e.printStackTrace();
         }
 
-        return purchaseAmount;
+        return FindLottoCount();
+    }
+
+    private int FindLottoCount(){
+        return purchaseAmount / UNIT_OF_PURCHASE_AMOUNT;
     }
 
     private void TryToRecievePurchaseAmount() throws IllegalArgumentException {

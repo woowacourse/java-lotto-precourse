@@ -7,6 +7,7 @@ public class UserOutput {
     private List<Lotto> lottoList;
 
     public void PrintPurchaseResults() {
+
         lottoList = LottoGenerator.getLottoList();
         PrintPurchaseCounts();
 
@@ -24,8 +25,10 @@ public class UserOutput {
         String purchaseResult; // 하나의 구매된 로또의 번호들
 
         List<Integer> lottoNumbers = this.lottoList.get(lottoOrder).getNumbers();
+
         purchaseResult = String.join("," ,lottoNumbers.toString() );
-        System.out.println("["+purchaseResult+"]");
-        
+
+        System.out.println(purchaseResult);
+
     }
 }
