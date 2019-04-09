@@ -95,7 +95,7 @@ public class GameRunner {
 
     private void inputLastWeekNumberAndBonusNo() {
         MessagePrinter.lastWeekNumber();
-        Lotto lotto = getLastWeek();
+        Lotto lotto = getLastWeekNumbers();
 
         MessagePrinter.bonusNo();
         int bonusNo = getBonusNo(lotto);
@@ -103,7 +103,7 @@ public class GameRunner {
         game.setWinningLotto(new WinningLotto(lotto, bonusNo));
     }
 
-    private Lotto getLastWeek() {
+    private Lotto getLastWeekNumbers() {
         String[] lastWeekStr;
         List<Integer> arrayList;
         do {
