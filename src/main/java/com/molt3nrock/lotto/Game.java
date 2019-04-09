@@ -3,6 +3,7 @@ package com.molt3nrock.lotto;
 import static com.molt3nrock.lotto.Constants.COUNT_OF_NUMBERS_PER_LOTTO;
 import static com.molt3nrock.lotto.Constants.MAXIMUM_NUMBER_OF_LOTTO;
 import static com.molt3nrock.lotto.Constants.MINIMUM_NUMBER_OF_LOTTO;
+import static com.molt3nrock.lotto.Constants.PRICE_PER_LOTTO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,21 +16,24 @@ public class Game {
 
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-            int money = parseAsMoney(br);
+            int money = getMoney(br);
             List<Lotto> lottoList = LottoBuilder.create().withMoney(money).build();
-            displayBoughtLottoList(lottoList);
+            displayLottoPurchaseResult(money, lottoList);
             Statistics.valueOf(lottoList, getWiningLotto(br)).displayStatistics();
         } catch (Exception e) {
             System.out.println(String.format("게임 오류: %s", e.getMessage()));
         }
     }
 
-    private static void displayBoughtLottoList(List<Lotto> lottoList) {
+    private static void displayLottoPurchaseResult(int money, List<Lotto> lottoList) {
+        if (money >= PRICE_PER_LOTTO) {
+            System.out.println(String.format("잔돈 %d원을 거슬러 드립니다.", money % PRICE_PER_LOTTO));
+        }
         System.out.println(String.format("%d개를 구매했습니다", lottoList.size()));
         lottoList.forEach(System.out::println);
     }
 
-    private static int parseAsMoney(BufferedReader br)
+    private static int getMoney(BufferedReader br)
         throws IllegalArgumentException, IOException {
         try {
             System.out.println("구입금액을 입력해 주세요.");
