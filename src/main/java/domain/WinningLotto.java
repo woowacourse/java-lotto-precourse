@@ -22,18 +22,9 @@ public class WinningLotto {
         userNumbers.retainAll(lotto.getNumbers());
         int matchCount = userNumbers.size();
 
-        boolean matchBonus = isMatchBonus(userLotto.getNumbers());
+        boolean matchBonus = userLotto.getNumbers().contains(bonusNo);
 
         return Rank.valueOf(matchCount, matchBonus);
     }
-
-    private boolean isMatchBonus(List<Integer> numbers) {
-        if (numbers.contains(bonusNo)) {
-            return true;
-        }
-
-        return false;
-    }
-
 
 }

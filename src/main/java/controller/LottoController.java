@@ -6,8 +6,10 @@ import domain.WinningLotto;
 
 import java.util.*;
 
+/**
+ * 로또 번호 관리하고 결과를 만드는 클래스
+ */
 public class LottoController {
-
     private static final int LOTTO_BOUND = 45;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_PRICE = 1000;
@@ -55,7 +57,7 @@ public class LottoController {
     }
 
     public double getLottoYield() {
-        int totalPrizes = 0;
+        long totalPrizes = 0;
 
         for (Rank rank : rankMap.keySet()) {
             totalPrizes += rank.getWinningMoney() * rankMap.get(rank);

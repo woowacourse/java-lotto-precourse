@@ -1,9 +1,12 @@
 package view;
 
+/**
+ * 프로그램 메인 클래스
+ */
 public class Main {
 
     public static void main (String[] args) {
-        UserInput userView = new UserInput();
+        UserView userView = new UserView();
 
         try {
             userView.inputMoney();
