@@ -48,5 +48,9 @@ public class LottoGame {
         return randomList;
     }
 
-
+    private void printLottoList(int countLotto) {
+        for(int i = 0; i < countLotto; i++) {
+            purchasedLottoList.get(i).printLotto();
+        }
+    }
 }
