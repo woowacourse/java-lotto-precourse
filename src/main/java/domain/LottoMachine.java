@@ -14,6 +14,7 @@ public class LottoMachine {
 
     public List<Lotto> purchaseLottos(int purchasePrice) {
         List<Lotto> purchasedLottos = new ArrayList<>();
+        validatePurchasePrice(purchasePrice);
 
         int balance = purchasePrice;
         while (canPurchase(balance)) {
@@ -23,6 +24,12 @@ public class LottoMachine {
         }
 
         return purchasedLottos;
+    }
+
+    private void validatePurchasePrice(int purchasePrice) {
+        if (purchasePrice % PRICE != 0) {
+            throw new IllegalArgumentException("로또 구매 금액을 정확히 입력 해 주세요. 금액 : " + purchasePrice);
+        }
     }
 
     private boolean canPurchase(int remindMoney) {
