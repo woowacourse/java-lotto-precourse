@@ -31,4 +31,13 @@ public class RankList {
     public int getCountsByIndex(int index) {
         return counts[index];
     }
+
+    public int getTotalWinningAmount() {
+        int winningAmount = 0;
+        for (int i = 0; i < 6; i++) {
+            int eachRankAmount = ranks.get(i).getWinningMoney() * counts[i];
+            winningAmount += eachRankAmount;
+        }
+        return winningAmount;
+    }
 }
