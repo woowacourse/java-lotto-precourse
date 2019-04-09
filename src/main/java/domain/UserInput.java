@@ -14,12 +14,12 @@ public class UserInput {
         return character >= '0' && character<= '9';
     }
 
-    public boolean isZeroOrPositiveNumber(String string) {
+    private boolean isZeroOrPositiveNumber(String string) {
         int count = 0;
         for (int i = 0; i < string.length(); i++) {
             count =  incrementsIfTrue(count, isNumber(string.charAt(i)));
         }
-        System.out.println(count);
+
         return count == string.length() && string.length() != 0;
     }
 
@@ -29,6 +29,19 @@ public class UserInput {
         }
         return count;
     }
+
+    public boolean isInRange(int bottom, int top) {
+        int number;
+
+        if(!isZeroOrPositiveNumber(input)) {
+            return false;
+        }
+        number = Integer.parseInt(input);
+
+        return number >= bottom && number <= top;
+    }
+
+
 
 
 }
