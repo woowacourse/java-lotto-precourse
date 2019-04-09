@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -139,6 +137,29 @@ public class Lotto {
         }
         return false;
     }
+
+    public static List<Rank> makeListOfRanksInOrder() {
+        List<Rank> rankList = Arrays.asList(Rank.values());
+        List<Rank> rankListReversed = new ArrayList<>();
+        for (int i=rankList.size()-2; i>=0; i--) {
+            rankListReversed.add(rankList.get(i));
+        }
+        return rankListReversed;
+    }
+
+    public static List<Integer> makeListOfRankOccurences(List<Rank> listOfRanksInOrder, List<Rank> listOfUserLottosRanks) {
+        List<Integer> listOfRankOccurences = new ArrayList<>();
+        for (int i=0, n= listOfRanksInOrder.size(); i<n; i++) {
+            listOfRankOccurences.add(Collections.frequency(listOfUserLottosRanks, listOfRanksInOrder.get(i)));
+        }
+        return listOfRankOccurences;
+    }
+
+
+
+
+
+
 
 
 }
