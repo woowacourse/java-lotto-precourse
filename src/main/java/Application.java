@@ -1,6 +1,7 @@
 import domain.Lotto;
 import domain.LottoMachine;
 import domain.LottoNumberGenerator;
+import domain.WinningLotto;
 
 import java.util.List;
 
@@ -15,5 +16,7 @@ public class Application {
         List<Lotto> lottos = lottoMachine.purchaseLottos(purchasePrice);
 
         userInterface.printLottos(lottos);
+
+        WinningLotto winningLotto = userInterface.getWinningLotto();
     }
 }
