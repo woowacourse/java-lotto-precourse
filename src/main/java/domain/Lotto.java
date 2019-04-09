@@ -5,35 +5,22 @@ import java.util.List;
 /**
  * 로또 한장을 의미하는 객체
  */
-public class Lotto {
-    private static final int ONE = 1;
-    private static final int ZERO = 0;
-
+class Lotto {
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    protected void printLottoNumbers() {
+    void printLottoNumbers() {
         System.out.println(numbers.toString());
     }
 
-    protected int getCountOfMatch(Lotto winningLotto) {
-        int countOfMatch = 0;
-
-        for (int number : numbers) {
-            countOfMatch += winningLotto.hasNumber(number) ? ONE : ZERO;
-        }
-
-        return countOfMatch;
+    int getCountOfMatch(Lotto winningLotto) {
+        return Math.toIntExact(numbers.stream().filter(winningLotto.numbers::contains).count());
     }
 
-    protected boolean hasBonusNumber(int bonusNumber) {
-        return hasNumber(bonusNumber);
-    }
-
-    private boolean hasNumber(int numberToCompare) {
+    boolean hasNumber(int numberToCompare) {
         return numbers.contains(numberToCompare);
     }
 }

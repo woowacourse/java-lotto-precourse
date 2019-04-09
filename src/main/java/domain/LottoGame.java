@@ -11,45 +11,29 @@ public class LottoGame {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int LOTTO_PRICE = 1000;
-    private static final int ONE = 1;
-    private static final int ZERO = 0;
-    private static final int EARNINGS_RATE_DECIMAL_POINT = 2;
     private static final int PERCENT = 100;
-    private static final String INPUT_LOTTO_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
-    private static final String INPUT_WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String WINNING_LOTTO_NUMBERS_DELIMITER = ",";
-    private static final String INPUT_LOTTO_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String RESULT_MESSAGE = "당첨 통계\n-------------------------------------------";
-    private static final String RESULT_BY_RANK_MESSAGE = "%d개 일치 (%d원)- %d개\n";
-    private static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
-    private static final String EARNINGS_RATE_MESSAGE = "총 수익률은 %." + EARNINGS_RATE_DECIMAL_POINT + "f%%입니다.";
 
-    private List<Lotto> lottoes;
+    private List<Lotto> lottoList;
     private WinningLotto winningLotto;
-
-    public LottoGame() {
-
-    }
 
     public void turnOn() {
         run();
     }
 
     private void run() {
-        registerLottoes();
-        printLottoes();
+        registerLottoList();
+        printLottoList();
         registerWinningLotto();
         printResult();
         printEarningsRate();
     }
 
-    private void registerLottoes() {
-        lottoes = new ArrayList<>();
+    private void registerLottoList() {
+        lottoList = new ArrayList<>();
         int lottoCount = getLottoCount();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottoes.add(createLotto());
+            lottoList.add(createLotto());
         }
     }
 
@@ -70,7 +54,7 @@ public class LottoGame {
     }
 
     private String inputLottoPurchaseMoney() {
-        System.out.println(INPUT_LOTTO_PURCHASE_MONEY_MESSAGE);
+        System.out.println("구입금액을 입력해 주세요.");
 
         return input();
     }
@@ -131,9 +115,9 @@ public class LottoGame {
         }
     }
 
-    private void printLottoes() {
-        System.out.println(lottoes.size() + LOTTO_COUNT_MESSAGE);
-        for (Lotto lotto : lottoes) {
+    private void printLottoList() {
+        System.out.println(String.format("%d개를 구매했습니다.", lottoList.size()));
+        for (Lotto lotto : lottoList) {
             lotto.printLottoNumbers();
         }
     }
@@ -161,7 +145,7 @@ public class LottoGame {
     }
 
     private String inputWinningLottoNumbers() {
-        System.out.println(INPUT_WINNING_LOTTO_NUMBER_MESSAGE);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         return input();
     }
@@ -176,7 +160,7 @@ public class LottoGame {
     }
 
     private List<String> separateWinningLottoNumbers(String winningLottoNumbers) {
-        return Arrays.asList(winningLottoNumbers.split(WINNING_LOTTO_NUMBERS_DELIMITER));
+        return Arrays.asList(winningLottoNumbers.split(","));
     }
 
     /* 쉼표로 구분한 당첨번호의 길이가 6인지 판단하는 메소드 */
@@ -226,7 +210,7 @@ public class LottoGame {
     }
 
     private String inputBonusNumber() {
-        System.out.println(INPUT_LOTTO_BONUS_NUMBER_MESSAGE);
+        System.out.println("보너스 볼을 입력해 주세요.");
 
         return input();
     }
@@ -246,7 +230,7 @@ public class LottoGame {
     }
 
     private void printResult() {
-        System.out.println(RESULT_MESSAGE);
+        System.out.println("당첨 통계\n-------------------------------------------");
         printResultByRank(Rank.FIFTH);
         printResultByRank(Rank.FOURTH);
         printResultByRank(Rank.THIRD);
@@ -256,31 +240,25 @@ public class LottoGame {
 
     private void printResultByRank(Rank rank) {
         if (rank == Rank.SECOND) {
-            System.out.printf(SECOND_RANK_RESULT_MESSAGE,
-                    rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(rank));
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개",
+                    rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(rank)));
 
             return;
         }
-        System.out.printf(RESULT_BY_RANK_MESSAGE,
-                rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(rank));
+        System.out.println(String.format("%d개 일치 (%d원)- %d개",
+                rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(rank)));
     }
 
     private int getLottoCountByRank(Rank rank) {
-        int lottoCount = 0;
-
-        for (Lotto lotto : lottoes) {
-            lottoCount += winningLotto.match(lotto) == rank ? ONE : ZERO;
-        }
-
-        return lottoCount;
+        return Math.toIntExact(lottoList.stream().filter(lotto -> winningLotto.match(lotto) == rank).count());
     }
 
     private void printEarningsRate() {
-        System.out.printf(EARNINGS_RATE_MESSAGE, getEarningsRate());
+        System.out.println(String.format("총 수익률은 %.2f%%입니다.", getEarningsRate()));
     }
 
     private double getEarningsRate() {
-        return (double) getWinningMoneyTotal() / (lottoes.size() * LOTTO_PRICE) * PERCENT;
+        return (double) getWinningMoneyTotal() / (lottoList.size() * LOTTO_PRICE) * PERCENT;
     }
 
     private int getWinningMoneyTotal() {

@@ -3,18 +3,18 @@ package domain;
 /**
  * 당첨 번호를 담당하는 객체
  */
-public class WinningLotto {
+class WinningLotto {
     private final Lotto lotto;
-    private final int bonusNo;
+    private final int bonusNumber;
 
-    public WinningLotto(Lotto lotto, int bonusNo) {
+    WinningLotto(Lotto lotto, int bonusNumber) {
         this.lotto = lotto;
-        this.bonusNo = bonusNo;
+        this.bonusNumber = bonusNumber;
     }
 
-    public Rank match(Lotto userLotto) {
+    Rank match(Lotto userLotto) {
         int countOfMatch = userLotto.getCountOfMatch(lotto);
-        boolean matchBonus = userLotto.hasBonusNumber(bonusNo);
+        boolean matchBonus = userLotto.hasNumber(bonusNumber);
 
         return Rank.valueOf(countOfMatch, matchBonus);
     }
