@@ -155,11 +155,38 @@ public class Lotto {
         return listOfRankOccurences;
     }
 
+    public static void printStatistics(List<Rank> listOfRanksInOrder, List<Integer> listOfRankOccurences) {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        printFirstThree(listOfRanksInOrder, listOfRankOccurences);
+        printRest(listOfRanksInOrder, listOfRankOccurences);
+    }
 
+    private static void printFirstThree(List<Rank> listOfRanksInOrder, List<Integer> listOfRankOccurences) {
+        for (int i=0, n=listOfRanksInOrder.size()-2; i<n; i++) {
+            System.out.print(listOfRanksInOrder.get(i).getCountOfMatch() + "개 일치 (");
+            System.out.print(listOfRanksInOrder.get(i).getWinningMoney() + "원)-");
+            System.out.println(listOfRankOccurences.get(i) + "개");
+        }
+    }
 
+    private static void printRest(List<Rank> listOfRanksInOrder, List<Integer> listOfRankOccurences) {
+        System.out.print(listOfRanksInOrder.get(3).getCountOfMatch() + "개 일치, 보너스 볼 일치 (");
+        System.out.print(listOfRanksInOrder.get(3).getWinningMoney() + "원)-");
+        System.out.println(listOfRankOccurences.get(3) + "개");
+        System.out.print(listOfRanksInOrder.get(4).getCountOfMatch() + "개 일치 (");
+        System.out.print(listOfRanksInOrder.get(4).getWinningMoney() + "원)-");
+        System.out.println(listOfRankOccurences.get(4) + "개");
+    }
 
-
-
-
-
+    public static void printProfitRate(String userInput, List<Rank> listOfUserLottoRanks) {
+        double doubleUserInput = Double.parseDouble(userInput);
+        double total = 0;
+        for (int i=0, n=listOfUserLottoRanks.size(); i<n; i++) {
+            total += listOfUserLottoRanks.get(i).getWinningMoney();
+        }
+        double profitRate = total/doubleUserInput;
+        System.out.println("총 수익률은 " +profitRate+"입니다.");
+    }
 }
