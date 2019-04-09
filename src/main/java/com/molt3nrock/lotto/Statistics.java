@@ -56,8 +56,8 @@ class Statistics {
      * - Rank: Lotto 의 Rank
      * - Integer: Rank 에 해당하는 Lotto 의 갯수.
      *
-     * 총 이득 = rankState.keys().getWinningMoney() 의 합
-     * 총 투자 = PRICE_PER_LOTTO * 모든 rankState.values() 의 합
+     * 총 이득 = rankState 의 각 entry.getKey().getWinningMoney() x entry.getValue() 의 합
+     * 총 투자 = PRICE_PER_LOTTO x 모든 rankState.values() 의 합
      *
      * 수익률 = 총 이득 / 총 투자
      */
