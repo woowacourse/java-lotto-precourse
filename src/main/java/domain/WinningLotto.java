@@ -28,5 +28,13 @@ public class WinningLotto {
         return userInput;
     }
 
+    private static boolean checkUserInputWinningNumbers(String userInput) {
+        if (isThereEmptyString(userInput) || isNonNumericThere(userInput) || isDuplicate(userInput)
+                || isNotBetween1And45(userInput) || isLengthNot6(userInput)) {
+            return false;
+        }
+        return true;
+    }
+
 
 }
