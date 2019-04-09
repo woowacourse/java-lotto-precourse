@@ -100,7 +100,7 @@ public class Main {
     }
     
     /** 로또를 여러 개 구입하여 리스트로 반환한다. */
-    private static List<Lotto> buySomeLotto(int purchaseAmount) {
+    private final static List<Lotto> buySomeLotto(int purchaseAmount) {
         List<Lotto> lottoList = new ArrayList<Lotto>();
         for (int i = 0; i < purchaseAmount; i++) {
             lottoList.add(getLotto());
@@ -109,7 +109,7 @@ public class Main {
     }
     
     /** 돈을 내고 로또를 구입하여 출력한다. */
-    private static List<Lotto> lottoGame() {
+    private final static List<Lotto> lottoGame() {
         int purchaseAmount = getSingleInt(INPUT_PURCHASE_AMOUNT) / LOTTO_PRICE;
         System.out.println(purchaseAmount + BUY_COUNT);
         List<Lotto> lottoList = buySomeLotto(purchaseAmount);
@@ -120,8 +120,8 @@ public class Main {
         return lottoList;
     }
     
-    /** 당첨 통계를 내기 위한 밑준비. */
-    private static Map<Rank, Integer> initRankStat() {
+    /** 당첨 통계를 내기 위한 밑준비. 자료 구조를 준비한다. */
+    private final static Map<Rank, Integer> initRankStat() {
         Map<Rank, Integer> stat = new LinkedHashMap<>();
         for (Rank rank : Rank.values()) {
             stat.put(rank, 0);
@@ -129,13 +129,25 @@ public class Main {
         return stat;
     }
     
+    /** 당첨 통계 작성. */
+    private final static Map<Rank, Integer> getRankStat(List<Lotto> lottoList,
+            WinningLotto winLotto) {
+        Map<Rank, Integer> map = initRankStat();
+        Rank key;
+        for (Lotto lotto : lottoList) {
+            key = winLotto.match(lotto);
+            map.put(key, map.get(key) + 1);
+        }
+        return map;
+    }
+    
     /** main 진입점 */
     public final static void main(String[] args) {
         List<Lotto> lottoList = lottoGame();
         WinningLotto winLotto = lastWeekWinningLotto();
-        Map<Rank, Integer> rankMap = initRankStat();
-        // rankMap.forEach((k, v) -> {
-        //     System.out.println(k.getRankDescription() + " - " + v + "개");
-        // });
+        Map<Rank, Integer> rankMap = getRankStat(lottoList, winLotto);
+        rankMap.forEach((k, v) -> {
+            System.out.println(k.getRankDescription() + " - " + v + "개");
+        });
     }
 }
