@@ -53,6 +53,17 @@ public class Lotto {
         return true;
     }
 
+    private static boolean isItNotMultipleOf1000(String userInput) {
+        int intUserInput = Integer.parseInt(userInput);
+        if (intUserInput%PRICE_OF_ONE_LOTTO == 0) {
+            return false;
+        }
+        System.out.println("입력금액은 1000원 단위로만 입력해주세요!");
+        return true;
+    }
+
+
+
 
 
 
