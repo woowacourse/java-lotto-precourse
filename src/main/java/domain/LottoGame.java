@@ -92,7 +92,7 @@ public class LottoGame {
         return charge;
     }
 
-    public static Lotto generateLotto() {
+    public static List<Integer> generateLottoNumber() {
         HashSet<Integer> numbers = new HashSet<>();
 
         while (numbers.size() != 6) {
@@ -100,9 +100,8 @@ public class LottoGame {
         }
 
         List<Integer> lottoNumbers = new ArrayList<>(numbers);
-        Lotto lotto = new Lotto(lottoNumbers);
 
-        return lotto;
+        return lottoNumbers;
     }
 
     public static List<Lotto> purchaseLotto(int money) {
@@ -110,7 +109,7 @@ public class LottoGame {
         List<Lotto> boughtLotto = new ArrayList<>();
 
         for (int i = 0; i < purchasableLotto; i++) {
-            Lotto lotto = generateLotto();
+            Lotto lotto = new Lotto(generateLottoNumber());
             boughtLotto.add(lotto);
         }
 
@@ -127,6 +126,79 @@ public class LottoGame {
         for (Lotto lotto : lottos) {
             lotto.showNumbers();
         }
+    }
+
+    public static boolean isProperLength(String[] inputNumbers) {
+        int PROPER_LOTTO_LENGTH = 6;
+
+        if (inputNumbers.length == PROPER_LOTTO_LENGTH) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean isProperLottoNumber(String number) {
+        if (isStringNumber(number)) {
+            int numberInt = Integer.parseInt(number);
+
+            return (1 <= numberInt) && (numberInt <= 45);
+        }
+
+        return false;
+    }
+
+    public static boolean isProperLottoNumbers(String[] inputNumbers) {
+        if (isProperLength(inputNumbers)) {
+            return false;
+        }
+
+        for (String number : inputNumbers) {
+            if (!isProperLottoNumber(number)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static String[] inputWinningNumbers(boolean isFirstTry) {
+        Scanner scanner = new Scanner(System.in);
+
+        if (isFirstTry) {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        } else {
+            System.out.println("지난 주 당첨 번호를 제대로 입력해 주세요.");
+        }
+
+        String inputNumbers = scanner.nextLine();
+        String[] inputNumbersList = inputNumbers.split(",");
+
+        return inputNumbersList;
+    }
+
+    public static String[] receiveWinningNumbers() {
+        boolean isFirstTry = true;
+        String[] inputNumbers = inputWinningNumbers(isFirstTry);
+        boolean isProper = isProperLottoNumbers(inputNumbers);
+
+        while (!isProper) {
+            isFirstTry = false;
+            inputNumbers = inputWinningNumbers(isFirstTry);
+            isProper = isProperLottoNumbers(inputNumbers);
+        }
+
+        return inputNumbers;
+    }
+    
+    public static WinningLotto generateWinningLotto(String[] lottoNumbers) {
+        List<Integer> numbers = new ArrayList<>();
+
+        for (String number : lottoNumbers) {
+            numbers.add(Integer.parseInt(number));
+        }
+
+        return
     }
 
     public static void main(String[] args) {
