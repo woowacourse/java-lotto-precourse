@@ -1,5 +1,7 @@
 package domain;
 
+import utils.Utils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -59,7 +61,7 @@ public class PlayLotto {
         } while (!isValidNumberOfRange(rawWinningNumber) ||
                 !isValidSizeOfWinningNumber(rawWinningNumber) ||
                 !isDuplicatedNumber(rawWinningNumber));
-        return convertString2Int(rawWinningNumber);
+        return Utils.convertString2Int(rawWinningNumber);
     }
 
     public void printWinningStatistics(int money) {
@@ -106,7 +108,7 @@ public class PlayLotto {
 
     public boolean isDuplicatedNumber(String[] rawWinningNumber) {
         int frequency;
-        List<Integer> intNumber = convertString2Int(rawWinningNumber);
+        List<Integer> intNumber = Utils.convertString2Int(rawWinningNumber);
         for (int i = 1; i < 46; i++) {
             frequency = Collections.frequency(intNumber, i);
             if (frequency > 1) {
@@ -117,7 +119,7 @@ public class PlayLotto {
     }
 
     public boolean isValidNumberOfRange(String[] rawWinningNumber) {
-        List<Integer> intNumber = convertString2Int(rawWinningNumber);
+        List<Integer> intNumber = Utils.convertString2Int(rawWinningNumber);
         for (int number: intNumber) {
             if (number < 0 || number > 45) {
                 System.out.println("당첨번호는 1 ~ 45 사이의 자연수입니다.");
@@ -134,14 +136,6 @@ public class PlayLotto {
             return false;
         }
         return true;
-    }
-
-    public List<Integer> convertString2Int(String[] rawWinningNumber) {
-        List<Integer> intList = new ArrayList<>();
-        for (String str: rawWinningNumber) {
-            intList.add(Integer.parseInt(str));
-        }
-        return intList;
     }
 
     public int insertBonusNumber() {
