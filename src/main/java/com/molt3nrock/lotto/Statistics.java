@@ -64,5 +64,4 @@ class Statistics {
         Rank rank = winningLotto.match(lotto);
         rankState.computeIfPresent(rank, (rankKey, count) -> count + 1);
     }
-
 }
