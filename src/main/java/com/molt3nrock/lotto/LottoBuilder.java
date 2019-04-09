@@ -39,11 +39,10 @@ class LottoBuilder implements MoneyLottoBuilder, FinalLottoBuilder {
     private static List<Integer> generateNumbers() {
         ArrayList<Integer> integers = IntStream
             .range(MINIMUM_NUMBER_OF_LOTTO, MAXIMUM_NUMBER_OF_LOTTO + 1)
-            .limit(COUNT_OF_NUMBERS_PER_LOTTO)
             .boxed()
             .collect(Collectors.toCollection(ArrayList::new));
         Collections.shuffle(integers);
-        return integers;
+        return integers.stream().limit(COUNT_OF_NUMBERS_PER_LOTTO).collect(Collectors.toList());
     }
 }
 
