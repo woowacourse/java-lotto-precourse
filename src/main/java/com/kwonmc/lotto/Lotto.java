@@ -31,6 +31,13 @@ public class Lotto {
         return new Lotto(lottoArray);
     }
 
+    public boolean contains(Integer number) {
+        if (this.numbers.contains(number)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

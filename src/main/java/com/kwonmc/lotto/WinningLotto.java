@@ -14,7 +14,7 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         // TODO 로직
-        int countOfMatch;
+        int countOfMatch = 0;
 
         for (Integer num : this.lotto.getNumbers()) {
 
