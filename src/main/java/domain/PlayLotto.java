@@ -56,6 +56,10 @@ public class PlayLotto {
         return convertString2Int(rawWinningNumber);
     }
 
+    public int frequencyOfWinningLotto(List<Rank> lottoResultList, Rank rank) {
+        return Collections.frequency(lottoResultList, rank);
+    }
+
     public List<Rank> matchLotto() {
         Rank lottoResult;
         List<Rank> lottoResultList = new ArrayList<>();
