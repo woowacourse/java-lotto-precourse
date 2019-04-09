@@ -19,20 +19,12 @@ public class LottoFactory {
 
 	public List<Lotto> createLottoList(int amount) {
 		int lottoCount = amount / LOTTO_PRICE;
+		RandomNumber randomNumber = new RandomNumber();
 		List<Lotto> lottoList = new ArrayList<>();
 
 		while (lottoCount-- > 0) {
-			lottoList.add(createLotto());
+			lottoList.add(new Lotto(randomNumber.createNumberList()));
 		}
-
 		return lottoList;
 	}
-
-	private Lotto createLotto() {
-		RandomNumber randomNumber = new RandomNumber();
-		Lotto lotto = new Lotto(randomNumber.createNumberList());
-
-		return lotto;
-	}
-
 }
