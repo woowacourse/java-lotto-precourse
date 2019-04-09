@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * 로또게임에 필요한 함수를 생성해 놓은 클래스
@@ -14,6 +15,7 @@ public class GameControler {
 
     private Random random = new Random();
     private ArrayList<Lotto> lottos = new ArrayList<Lotto>();
+    private WinningLotto winning;
 
     GameControler(int n) {
         this.n = n / 1000;
@@ -27,7 +29,8 @@ public class GameControler {
     public void setLottos() {
         for (int i = 0; i < n; i++) {
             int[] temp = getNonRepitIntArray();
-            lottos.add(new Lotto(Arrays.stream(temp).boxed().collect(Collectors.toList())));
+            lottos.add(new Lotto(Arrays.stream(temp)
+            .boxed().collect(Collectors.toList())));
         }
     }
 
@@ -67,5 +70,14 @@ public class GameControler {
             temp[i] = Integer.toString(integers.get(i).intValue());
         }
         return temp;
+    }
+
+    public void setWinningLotto(String str, int bonus) {
+        String[] temp = str.split(",");
+        List<Integer> numbers = Arrays
+        .asList(temp).stream()
+        .map(s -> Integer.parseInt(s))
+        .collect(Collectors.toList());
+        winning = new WinningLotto(new Lotto(numbers), bonus);
     }
 }
