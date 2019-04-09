@@ -1,3 +1,10 @@
+/*
+ * Class: Rank.java
+ * Version: 1.0
+ * Date: 2019-04-09
+ * Author: Kibaek Yoo
+ */
+
 package domain;
 
 /**

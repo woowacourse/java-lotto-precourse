@@ -1,3 +1,10 @@
+/*
+ * Class: Validator.java
+ * Version: 1.0
+ * Date: 2019-04-09
+ * Author: Kibaek Yoo
+ */
+
 package domain;
 
 import java.util.HashSet;
@@ -14,6 +21,11 @@ public class Validator {
     static final String WARNING_WHEN_LOTTO_NUMBER_NOT_IN_RANGE = "WARNING:" + GameSetting.MIN_LOTTO_NUMBER + "~" + GameSetting.MAX_LOTTO_NUMBER + " 의 숫자들만 가능합니다. 다시 입력해주세요.";
     static final String WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION = "WARNING: 중복되는 숫자가 있으면 안됩니다. 다시 입력해주세요.";
 
+    /**
+     * 입력금액 문자열 유효성 검사
+     * @param lottoCountInput
+     * @return
+     */
     public static boolean checkInputLottoMoney(String lottoCountInput) {
         if (!checkInputLottoMoneyLengthIsTooLong(lottoCountInput) ||
                 !checkIsInteger(lottoCountInput)) {
@@ -24,16 +36,6 @@ public class Validator {
             return false;
         }
         return true;
-    }
-
-    private static boolean checkIsInteger(String inputNumber) {
-        try {
-            Integer.parseInt(inputNumber);
-            return true;
-        } catch (Exception e) {
-            System.out.println(WARNING_WHEN_INPUT_IS_NOT_INTEGER);
-            return false;
-        }
     }
 
     private static boolean checkInputLottoMoneyLengthIsTooLong(String lottoCountInput) {
@@ -52,6 +54,11 @@ public class Validator {
         return false;
     }
 
+    /**
+     * 당첨로또 문자열 유효성 검사
+     * @param winningLottoInput
+     * @return
+     */
     public static boolean checkWinningLottoNumbers(String winningLottoInput) {
         if (!checkLottoNumbersInputLengthIsValid(winningLottoInput)) {
             return false;
@@ -103,26 +110,12 @@ public class Validator {
         return false;
     }
 
-    public static boolean checkIsLottoNumberValid(String inputLottoNumber) {
-        if (!checkIsInteger(inputLottoNumber)) {
-            return false;
-        }
-        int inputNumberInt = Integer.parseInt(inputLottoNumber);
-        if (!checkIsLottoNumberInRange(inputNumberInt)) {
-            return false;
-        }
-        return true;
-    }
-
-    private static boolean checkIsLottoNumberInRange(int lottoInput) {
-        if ((lottoInput < GameSetting.MIN_LOTTO_NUMBER) ||
-                (lottoInput > GameSetting.MAX_LOTTO_NUMBER)) {
-            System.out.println(WARNING_WHEN_LOTTO_NUMBER_NOT_IN_RANGE);
-            return false;
-        }
-        return true;
-    }
-
+    /**
+     * 보너스번호 문자열 유효성 검사
+     * @param winningLottoNumbers
+     * @param bonusNumberStringInput
+     * @return
+     */
     public static boolean checkBonusLottoNumberValid(List<Integer> winningLottoNumbers, String bonusNumberStringInput) {
         if (!checkIsLottoNumberValid(bonusNumberStringInput)) {
             return false;
@@ -140,5 +133,40 @@ public class Validator {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 단일 로또넘버 문자열 유효성 검사
+     * @param inputLottoNumber
+     * @return
+     */
+    public static boolean checkIsLottoNumberValid(String inputLottoNumber) {
+        if (!checkIsInteger(inputLottoNumber)) {
+            return false;
+        }
+        int inputNumberInt = Integer.parseInt(inputLottoNumber);
+        if (!checkIsLottoNumberInRange(inputNumberInt)) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean checkIsInteger(String inputNumber) {
+        try {
+            Integer.parseInt(inputNumber);
+            return true;
+        } catch (Exception e) {
+            System.out.println(WARNING_WHEN_INPUT_IS_NOT_INTEGER);
+            return false;
+        }
+    }
+
+    private static boolean checkIsLottoNumberInRange(int lottoInput) {
+        if ((lottoInput < GameSetting.MIN_LOTTO_NUMBER) ||
+                (lottoInput > GameSetting.MAX_LOTTO_NUMBER)) {
+            System.out.println(WARNING_WHEN_LOTTO_NUMBER_NOT_IN_RANGE);
+            return false;
+        }
+        return true;
     }
 }

@@ -1,3 +1,10 @@
+/*
+ * Class: LottoGame.java
+ * Version: 1.0
+ * Date: 2019-04-09
+ * Author: Kibaek Yoo
+ */
+
 package domain;
 
 import java.util.*;
@@ -118,8 +125,8 @@ public class LottoGame {
         createLottos(lottoCount);
         printLottos();
         createWinningLotto(sc);
-        Map<Rank, Integer> lottoMatchResult = calculateLottoMatch();
-        double profitPercent = calculateProfitRate(lottoMatchResult, lottoCount);
+        Map<Rank, Integer> lottoMatchResult = calculateLottoMatch();    // 로또 당첨종류별 갯수
+        double profitPercent = calculateProfitRate(lottoMatchResult, lottoCount);   // 수익률
         printLottoResult(lottoMatchResult, profitPercent);
     }
 }
