@@ -62,11 +62,12 @@ class Statistics {
      * 수익률 = 총 이득 / 총 투자
      */
     private float calculateRossRatio() {
+        final int BASE_PRICE = 0;
         int totalGain = rankState.entrySet().stream()
             .map(entry -> entry.getValue() * entry.getKey().getWinningMoney())
-            .reduce(0, (accumulation, prizeMoney) -> accumulation + prizeMoney);
+            .reduce(BASE_PRICE, (accumulation, prizeMoney) -> accumulation + prizeMoney);
         int totalCost = rankState.values().stream()
-            .reduce(0, (accumulation, count) -> accumulation + count * PRICE_PER_LOTTO);
+            .reduce(BASE_PRICE, (accumulation, count) -> accumulation + count * PRICE_PER_LOTTO);
         return (float) totalGain / totalCost;
     }
 
