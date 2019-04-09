@@ -20,6 +20,9 @@ import java.util.Scanner;
  *
  * @version 0.0.0
  * @author kwonmc
+ * @see Game
+ * @see Numbers
+ * @see Strings
  */
 public class GameRunner {
     private Scanner sc = new Scanner(System.in);
@@ -40,13 +43,13 @@ public class GameRunner {
     }
 
     private void purchaseAmountMessagePrinter() {
-        System.out.println(Strings.PURCHASE_AMOUNT);
+        System.out.println(Strings.MESSAGE_PURCHASE_AMOUNT);
     }
 
     private void changeAmountMessagePrinter(int purchaseAmount) {
         int changeAmount = purchaseAmount % Numbers.LOTTO_COUNT_CRITERIA;
         if (changeAmount != 0) {
-            System.out.println(String.format(Strings.CHANGE_AMOUNT, changeAmount));
+            System.out.println(String.format(Strings.MESSAGE_CHANGE_AMOUNT, changeAmount));
         }
     }
 
@@ -59,7 +62,7 @@ public class GameRunner {
     }
 
     private void lottoInfoMessagePrinter(int lottoCount) {
-        System.out.println(lottoCount + Strings.LOTTO_INFO);
+        System.out.println(lottoCount + Strings.MESSAGE_LOTTO_INFO);
     }
 
     private void createLottoList(int lottoCount) {
@@ -101,11 +104,11 @@ public class GameRunner {
     }
 
     private void lastWeekNumberMessagePrinter() {
-        System.out.println(Strings.LAST_WEEK_NUMBER);
+        System.out.println(Strings.MESSAGE_LAST_WEEK_NUMBER);
     }
 
     private void bonusNoMessagePrinter() {
-        System.out.println(Strings.BONUS_NO);
+        System.out.println(Strings.MESSAGE_BONUS_NO);
     }
 
     private ArrayList<Integer> arrayToList(int[] array) {
@@ -137,7 +140,6 @@ public class GameRunner {
 
     private void lottoMatchResultBodyMessagePrinter(RankList rankList) {
         for (int i = rankList.size() - Numbers.SKIPPING_LAST_INDEX; i >= 0; i--) {
-            // rankList 의 마지막 원소는 MISS 이므로 마지막 원소는 건너뛰기 위해 -2
             Rank rank = rankList.getRankByIndex(i);
             int counts = rankList.getCountsByIndex(i);
             System.out.println(resultMessageMaker(rank, counts));
@@ -145,21 +147,21 @@ public class GameRunner {
     }
 
     private String resultMessageMaker(Rank rank, int count) {
-        return String.format(Strings.RESULT_DESCRIPTION,
+        return String.format(Strings.MESSAGE_RESULT_DESCRIPTION,
                 rank.getCountOfMatch(),
-                rank == Rank.SECOND ? Strings.BONUS_TRUE : Strings.BONUS_FALSE,
+                rank == Rank.SECOND ? Strings.MESSAGE_BONUS_TRUE : Strings.MESSAGE_BONUS_FALSE,
                 rank.getWinningMoney(),
                 count
         );
     }
 
     private void lottoMatchResultHeaderMessagePrinter() {
-        System.out.println(Strings.LOTTO_MATCH_RESULT_HEADER);
-        System.out.println(Strings.SEPARATION_LINE);
+        System.out.println(Strings.MESSAGE_LOTTO_MATCH_RESULT_HEADER);
+        System.out.println(Strings.MESSAGE_SEPARATION_LINE);
     }
 
     private void lottoMatchResultTailMessagePrinter(RankList rankList, int purchaseAmount) {
         double totalYield = (double) rankList.getTotalWinningAmount() / purchaseAmount;
-        System.out.println(String.format(Strings.RESULT_YIELD, totalYield));
+        System.out.println(String.format(Strings.MESSAGE_RESULT_YIELD, totalYield));
     }
 }

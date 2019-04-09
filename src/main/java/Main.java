@@ -16,6 +16,7 @@ import com.kwonmc.lotto.GameRunner;
  *
  * @version 0.0.0
  * @author kwonmc
+ * @see GameRunner
  */
 public class Main {
     public static void main(String[] args) {

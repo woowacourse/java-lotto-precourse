@@ -18,6 +18,7 @@ import java.util.ArrayList;
  *
  * @version 0.0.0
  * @author kwonmc
+ * @see WinningLotto
  */
 class Game {
     private int purchaseAmount; // 구매금액

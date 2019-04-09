@@ -19,6 +19,7 @@ import java.util.Collections;
  *
  * @version 0.0.0
  * @author kwonmc
+ * @see Numbers
  */
 public class RankList {
     private ArrayList<Rank> ranks;

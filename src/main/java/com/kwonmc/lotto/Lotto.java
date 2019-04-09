@@ -21,6 +21,8 @@ import java.util.List;
  * @version 0.0.0
  * @author kwonmc
  * @author WoowahanTechCamp
+ * @see Lotto
+ * @see Numbers
  */
 public class Lotto {
     private final List<Integer> numbers;

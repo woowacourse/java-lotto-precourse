@@ -17,6 +17,7 @@ package com.kwonmc.lotto;
  * @version 0.0.0
  * @author WoowahanTechCamp
  * @author kwonmc
+ * @see Strings
  */
 public enum Rank {
     FIRST(6, 2_000_000_000), // 1등
@@ -59,7 +60,7 @@ public enum Rank {
             }
         }
 
-        throw new IllegalArgumentException(countOfMatch + Strings.EXCEPTION_MESSAGE);
+        throw new IllegalArgumentException(countOfMatch + Strings.MESSAGE_EXCEPTION);
     }
 
     private boolean matchCount(int countOfMatch) {
