@@ -2,7 +2,9 @@ package com.kwonmc.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class GameRunner {
     private Scanner sc = new Scanner(System.in);
@@ -97,14 +99,7 @@ public class GameRunner {
         WinningLotto winningLotto = this.game.getWinningLotto();
 
         RankList rankList = new RankList();
-        for (Lotto lotto : this.game.getMyLottoList()) {
-            Rank tmp = winningLotto.match(lotto);
-            rankList.put(tmp)
-        }
 
-        for (Rank each : gameResult) {
-            System.out.println(each);
-        }
 
         System.out.println();
         System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치(" + Rank.FIFTH.getWinningMoney() +"원) - 0개");
