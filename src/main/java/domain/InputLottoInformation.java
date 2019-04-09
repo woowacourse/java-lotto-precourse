@@ -147,8 +147,16 @@ public class InputLottoInformation {
     }
 
     private boolean checkOnlyNumber(String no) {
-        int number = (no.charAt(0) - 48);
-        if (number < minLottoNo || number > maxLottoNo) {
+        boolean checkstate = false;
+        int size = 0;
+        while (size < no.length() && !checkstate) {
+            checkstate = checkOnlyNumberState(no.charAt(size++) - 48);
+        }
+        return checkstate;
+    }
+
+    private boolean checkOnlyNumberState(int no) {
+        if (no < minLottoNo || no > maxLottoNo) {
             System.out.println(Message.errorMessage.get("ERROR_ONLYNUMBER"));
             return true;
         }
