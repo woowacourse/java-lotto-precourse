@@ -52,6 +52,18 @@ public class Validator {
     }
 
     //
+    public static boolean checkWinningLottoNumbers(String winningLottoInput) {
+        if (!checkLottoNumbersInputLengthIsValid(winningLottoInput)) {
+            return false;
+        }
+        String[] numbers = winningLottoInput.split(",");
+        if (!checkLottoNumbersInputHasNoDuplication(numbers) ||
+                !checkLottoNumbersInputHasNoInvalidValue(numbers)) {
+            return false;
+        }
+        return true;
+    }
+
     public static boolean checkLottoNumbersInputLengthIsValid(String winningLottoInput) {
         String[] numbers = winningLottoInput.split(",");
 
