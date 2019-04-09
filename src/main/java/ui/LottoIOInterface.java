@@ -12,11 +12,11 @@ import java.util.List;
 public interface LottoIOInterface {
     int insertMoney();
 
-    int[] inputWinningLottoNumbers();
+    List<Integer> inputWinningLottoNumbers();
 
-    int inputBounusNumber(WinningLotto lotto);
+    int inputBounusNumber(Lotto lotto);
 
-    void showLottoNumbers(List<Lotto> lottos);
+    void showLottos(List<Lotto> lottos);
 
     void showWinningStatistics(List<Rank> ranks);
 }
