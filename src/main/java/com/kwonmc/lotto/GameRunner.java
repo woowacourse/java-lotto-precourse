@@ -104,7 +104,9 @@ public class GameRunner {
             rankList.add(winningLotto.match(lotto));
         }
 
-        for (int i = rankList)
+        for (int i = rankList.size() - 2; i >= 0; i++) {
+            System.out.println(rank);
+        }
 
 
         System.out.println();

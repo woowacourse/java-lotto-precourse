@@ -23,4 +23,12 @@ public class RankList {
         this.counts[index]++;
         return true;
     }
+
+    public Rank getRankByIndex(int index) {
+        return ranks.get(index);
+    }
+
+    public int getCountsByIndex(int index) {
+        return counts[index];
+    }
 }
