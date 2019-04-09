@@ -93,8 +93,7 @@ public class GameRunner {
     }
 
     private void printLottoMatchResult() {
-        System.out.println("당첨통계");
-        System.out.println("---------");
+        lottoMatchResultMessagePrinter();
         System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치(" + Rank.FIFTH.getWinningMoney() +"원) - 0개");
         System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치(" + Rank.FOURTH.getWinningMoney() +"원) - 0개");
         System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치(" + Rank.THIRD.getWinningMoney() +"원) - 0개");
@@ -104,6 +103,11 @@ public class GameRunner {
         System.out.println(Rank.valueOf(5, true).getCountOfMatch());
         System.out.println(Rank.valueOf(4, true).getCountOfMatch());
         System.out.println(Rank.valueOf(5, false).getCountOfMatch());
+    }
+
+    private void lottoMatchResultMessagePrinter() {
+        System.out.println("당첨통계");
+        System.out.println("---------");
     }
 
     private void printLottoMoneyResult() {
