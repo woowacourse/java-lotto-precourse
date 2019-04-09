@@ -56,4 +56,11 @@ public class Game {
 
         return randomNum;
     }
+    private void addNumbers(List<Integer> numbers, int randomNumber) {
+        if (numbers.indexOf(randomNumber) == -1) {
+            numbers.add(randomNumber);
+        }
+    }
+
+    
 }
