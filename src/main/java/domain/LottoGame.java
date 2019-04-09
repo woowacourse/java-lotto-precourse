@@ -6,9 +6,13 @@
 
 package domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * LottoGame을 담당하는 객체입니다.
@@ -24,25 +28,44 @@ public class LottoGame {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    private List<Lotto> lottoList = new ArrayList<>();
-    private WinningLotto winningLotto;
-
     public void start() {
         int lottoAmount = getLottoAmount();
+        List<Lotto> lottoList;
+        WinningLotto winningLotto;
 
-        lottoPurchase(lottoAmount);
-        requestWinningLotto();
+        lottoList = lottoPurchase(lottoAmount);
+        winningLotto = requestWinningLotto();
     }
 
-    private void requestWinningLotto() {
+    private WinningLotto requestWinningLotto() {
         List<Integer> winningNumbers;
         String userInput;
 
         do {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.(,구분으로 입력)");
             userInput = scanner.nextLine();
-            winningNumbers = checkRightWinningNumber(userInput);
+            winningNumbers = convertWinningNumber(userInput);
         } while (!checkNumberLength(winningNumbers));
+        return new WinningLotto(new Lotto(winningNumbers), requestBonusNo(winningNumbers));
+    }
+
+    private int requestBonusNo(List<Integer> winningNumbers) {
+        String userInput;
+
+        do {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            userInput = scanner.nextLine();
+        } while (!checkNumber(userInput) || !checkDuplicateBonusNo(winningNumbers, Integer.parseInt(userInput.trim()))
+                || !checkLottoRange(Integer.parseInt(userInput.trim())));
+        return Integer.parseInt(userInput.trim());
+    }
+
+    private boolean checkDuplicateBonusNo(List<Integer> winningNumbers, int bonusNo) {
+        if (winningNumbers.contains(bonusNo)) {
+            System.out.println("당첨 숫자와 중복됩니다. 다시 입력해 주세요.");
+            return false;
+        }
+        return true;
     }
 
     private boolean checkNumberLength(List<Integer> winningNumbers) {
@@ -54,7 +77,7 @@ public class LottoGame {
         return true;
     }
 
-    private List<Integer> checkRightWinningNumber(String userInput) {
+    private List<Integer> convertWinningNumber(String userInput) {
         String[] splitInput = userInput.split(",");
         return Arrays.stream(splitInput).
                 limit(LOTTO_SIZE).
@@ -74,11 +97,14 @@ public class LottoGame {
         return true;
     }
 
-    private void lottoPurchase(int lottoAmount) {
+    private List<Lotto> lottoPurchase(int lottoAmount) {
+        List<Lotto> lottoList = new ArrayList<>();
+
         System.out.println(lottoAmount + "개를 구매했습니다.");
         for (int i = 0; i < lottoAmount; i++) {
             lottoList.add(makeLotto());
         }
+        return lottoList;
     }
 
     private Lotto makeLotto() {
