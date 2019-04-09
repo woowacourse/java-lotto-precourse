@@ -1,3 +1,14 @@
+/*
+ * @(#)Lotto.java
+ *
+ * v 0.0.0
+ *
+ * 2019.04.09
+ *
+ * Copyright (c) 2019 KwonMC.
+ * WoowahanTechCamp, Seoul, KOREA
+ * All right Reserved
+ */
 package com.kwonmc.lotto;
 
 import java.util.ArrayList;
@@ -6,6 +17,10 @@ import java.util.List;
 
 /**
  * 로또 한장을 의미하는 객체
+ *
+ * @version 0.0.0
+ * @author kwonmc
+ * @author WoowahanTechCamp
  */
 public class Lotto {
     private final List<Integer> numbers;

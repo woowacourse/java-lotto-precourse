@@ -1,7 +1,22 @@
+/*
+ * @(#)WinningLotto.java
+ *
+ * v 0.0.0
+ *
+ * 2019.04.09
+ *
+ * Copyright (c) 2019 KwonMC.
+ * WoowahanTechCamp, Seoul, KOREA
+ * All right Reserved
+ */
 package com.kwonmc.lotto;
 
 /**
  * 당첨 번호를 담당하는 객체
+ *
+ * @version 0.0.0
+ * @author kwonmc
+ * @author WoowahanTechCamp
  */
 public class WinningLotto {
     private final Lotto lotto;
@@ -13,7 +28,6 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직
         int countOfMatch = countOfMatch(userLotto);
         boolean matchBonus = matchBonus(userLotto);
 

@@ -1,9 +1,26 @@
+/*
+ * @(#)GameRunner.java
+ *
+ * v 0.0.0
+ *
+ * 2019.04.09
+ *
+ * Copyright (c) 2019 KwonMC.
+ * WoowahanTechCamp, Seoul, KOREA
+ * All right Reserved
+ */
 package com.kwonmc.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * 게임을 진행하는 객체
+ *
+ * @version 0.0.0
+ * @author kwonmc
+ */
 public class GameRunner {
     private Scanner sc = new Scanner(System.in);
     private Game game = new Game();
@@ -58,7 +75,7 @@ public class GameRunner {
 
     private void inputLastWeekNumberAndBonusNo() {
         lastWeekNumberMessagePrinter();
-        String[] lastWeekStr = sc.next().split(",");
+        String[] lastWeekStr = sc.next().trim().split(",");
         Lotto lotto = stringArrayToLotto(lastWeekStr);
 
         bonusNoMessagePrinter();
@@ -112,6 +129,7 @@ public class GameRunner {
 
     private void lottoMatchResultBodyMessagePrinter(RankList rankList) {
         for (int i = rankList.size() - 2; i >= 0; i--) {
+            // rankList 의 마지막 원소는 MISS 이므로 마지막 원소는 건너뛰기 위해 -2
             Rank rank = rankList.getRankByIndex(i);
             int counts = rankList.getCountsByIndex(i);
             System.out.println(resultMessageMaker(rank, counts));

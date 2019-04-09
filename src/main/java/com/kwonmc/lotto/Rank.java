@@ -1,7 +1,22 @@
+/*
+ * @(#)Rank.java
+ *
+ * v 0.0.0
+ *
+ * 2019.04.09
+ *
+ * Copyright (c) 2019 KwonMC.
+ * WoowahanTechCamp, Seoul, KOREA
+ * All right Reserved
+ */
 package com.kwonmc.lotto;
 
 /**
  * 로또 등수를 의미하는 enum
+ *
+ * @version 0.0.0
+ * @author WoowahanTechCamp
+ * @author kwonmc
  */
 public enum Rank {
     FIRST(6, 2_000_000_000), // 1등
@@ -44,7 +59,7 @@ public enum Rank {
             }
         }
 
-        throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
+        throw new IllegalArgumentException(countOfMatch + Message.EXCEPTION_MESSAGE);
     }
 
     private boolean matchCount(int countOfMatch) {

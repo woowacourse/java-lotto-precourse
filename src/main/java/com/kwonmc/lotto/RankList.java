@@ -1,8 +1,25 @@
+/*
+ * @(#)RankList.java
+ *
+ * v 0.0.0
+ *
+ * 2019.04.09
+ *
+ * Copyright (c) 2019 KwonMC.
+ * WoowahanTechCamp, Seoul, KOREA
+ * All right Reserved
+ */
 package com.kwonmc.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Rank 객체와 그 개수를 보관하기 위한 객체
+ *
+ * @version 0.0.0
+ * @author kwonmc
+ */
 public class RankList {
     private ArrayList<Rank> ranks;
     private int[] counts;
@@ -11,7 +28,6 @@ public class RankList {
         this.ranks = new ArrayList<>(6); // enum Rank 의 순서대로 indexing
         this.counts = new int[6]; // enum Rank 의 순서대로 counting 하기 위한 배열
         Collections.addAll(this.ranks, Rank.values());
-        System.out.println(ranks.size());
     }
 
     public int size() {
