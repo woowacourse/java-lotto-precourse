@@ -56,6 +56,14 @@ public class Validator {
                 && isMultipleOfLottoPrice(purchaseAmount);
     }
 
+    public boolean isNumericIntList(List<String> userInput) {
+        List<String> numerics = userInput.stream()
+                .filter(str -> isNemericInt(str))
+                .collect(Collectors.toList());
+
+        return numerics.size() == userInput.size();
+    }
+
     public boolean isInBounds(List<String> userInput) {
         List<Integer> outbounds = userInput.stream().map(Integer::parseInt)
                 .filter(number -> (number > LottoManager.WINNING_NUMBER_BOUND)
@@ -88,13 +96,7 @@ public class Validator {
     }
 
     public boolean isValidWinningNumbers(List<String> userInput) {
-        boolean validNumerics = true;
-
-        for (String str: userInput) {
-            validNumerics = validNumerics && isNemericInt(str);
-        }
-
-        return validNumerics && isInBounds(userInput) && isValidSize(userInput)
+        return isNumericIntList(userInput) && isInBounds(userInput) && isValidSize(userInput)
                 && !hasDuplicateNumbers(userInput);
     }
 
