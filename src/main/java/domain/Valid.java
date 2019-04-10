@@ -36,5 +36,17 @@ public class Valid {
     public static boolean isWrongSizeOfWinningNumbers(String winningNumbers) {
         return winningNumbers.split(Message.SPOT).length != Const.CREATE_LOTTO_NUMBER_TIME;
     }
+    public static boolean isContainOutOfLottoScope(String[] winningNumbers) {
+        boolean outOfScope = false;
+        for (int i = 0; i < winningNumbers.length; i++) {
+            outOfScope = outOfScope || isOutOfScope(Integer.parseInt(winningNumbers[i]));
+        }
+
+        return outOfScope;
+    }
+
+    public static boolean isOutOfScope(int number) {
+        return !(number >= Const.MIN_LIMIT_LOTTO_NUMBER && number <= Const.MAX_LIMIT_LOTTO_NUMBER);
+    }
 
 }
