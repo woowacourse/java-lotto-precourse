@@ -19,9 +19,20 @@ public class WinningLottoGenerator {
 		String[] splitedWinningNumbers = winningNumbers.split(",");
 		List<Integer> listWinningNumbers = new ArrayList<Integer>();
 		for (int i = 0; i < splitedWinningNumbers.length; i++) {
-			int winningNumber = Integer.parseInt(splitedWinningNumbers[i]);
+			int winningNumber = changeTypeStringToInt(splitedWinningNumbers[i]);
 			listWinningNumbers.add(winningNumber);
 		}
 		return listWinningNumbers;
+	}
+
+	private int changeTypeStringToInt(String inputWinningNumber) {
+		int winningNumber;
+		try {
+			winningNumber = Integer.parseInt(inputWinningNumber);
+		} catch (NumberFormatException e) {
+			// 당첨 번호가 정수가 아닐 경우, -1을 반환하여 1 ~ 45가 아니도록 한다.
+			return -1;
+		}
+		return winningNumber;
 	}
 }
