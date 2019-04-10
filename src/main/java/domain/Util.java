@@ -10,11 +10,7 @@ public class Util {
         System.out.println(message);
     }
 
-    public static void printConsole(List<Integer> message){
-        System.out.println(message);
-    }
-
-    public static void printConsole(int message){
+    public static void printConsole(List<Integer> message) {
         System.out.println(message);
     }
 
@@ -25,24 +21,38 @@ public class Util {
     public static Integer fromStringToInteger(String inputString) {
         try {
             return Integer.parseInt(inputString);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             throw ex;
         }
     }
 
-    public static String removeBlank(String inputString){
+    public static String removeBlank(String inputString) {
         return inputString.replace(" ", "");
     }
 
-    public static int divideThousand(int number){
-        return number /1000;
+    public static int divideThousand(int number) {
+        return number / 1000;
     }
 
-    public static boolean isGreaterThanZero(int input){
+    public static boolean isGreaterThanZero(int input) {
         return (input > 0);
     }
 
-    public static String[] splitStringbyComma(String string){
+    public static String[] splitStringbyComma(String string) {
         return string.split(",");
     }
+
+    public static String getRankMessage(Rank rank, int rankCount){
+        if (rank != Rank.SECOND){
+            return rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- " + rankCount + "개";
+        }
+        return rank.getCountOfMatch() + "개 일치, 보너스볼 일치 (" + rank.getWinningMoney() + "원)- " + rankCount + "개";
+    }
+
+    public static void checkBonusNumber(List<Integer> winningLottoNumber, int winningLottoBonus) {
+        if (winningLottoNumber.contains(winningLottoBonus)){
+            throw new IllegalArgumentException("보너스번호는 당첨번호와 같은 수를 가질 수 없습니다.");
+        }
+    }
+
 }

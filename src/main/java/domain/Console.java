@@ -4,13 +4,13 @@ import java.util.*;
 
 public class Console {
     private final static int LOTTO_NUMBER_COUNT = 6;
-
+    private final static int MINIMUM_LOTTO_PRICE = 1000;
 
     public static int getInputLottoMoney(){
         Util.printConsole("구입금액을 입력해 주세요.");
-        int inputLottoCount = Util.divideThousand(Util.fromStringToInteger(Util.getConsoleInput()));
+        int inputLottoCount = Util.divideThousand(Util.fromStringToInteger(Util.removeBlank(Util.getConsoleInput())));
         if (!Util.isGreaterThanZero(inputLottoCount)){
-            throw new IllegalArgumentException("로또를 구입할 수 없습니다. 1000원 이상 입력해 주세요.");
+            throw new IllegalArgumentException("로또를 구입할 수 없습니다. "+ MINIMUM_LOTTO_PRICE + " 이상 입력해 주세요.");
         }
         return inputLottoCount;
     }
@@ -21,11 +21,9 @@ public class Console {
         for (String string : Util.splitStringbyComma(Util.removeBlank(Util.getConsoleInput()))){
             result.add(Util.fromStringToInteger(string));
         }
-
         if (result.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또번호는 " + LOTTO_NUMBER_COUNT + "개 필요합니다.");
         }
-
         return result;
     }
 
@@ -35,9 +33,10 @@ public class Console {
     }
 
     public static void printResult(Map<Rank,Integer> results){
-        for(Rank rank : results.keySet()){
-            Util.printConsole(rank.getCountOfMatch() + "개 일치("+rank.getWinningMoney()+"원) - " + results.get(rank) + "개");
+        for(Map.Entry<Rank, Integer> entry : results.entrySet()){
+            Rank rank = entry.getKey();
+            Integer count = entry.getValue();
+            Util.printConsole(Util.getRankMessage(rank,count));
         }
-
     }
 }
