@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class LottoGenerator {
 	static final int EACH_LOTTO_PRICE = 1000;
 	static final int MIN_LOTTO_NUMBER = 1;
@@ -50,5 +51,14 @@ public class LottoGenerator {
 			}
 		}
 		return lottoNumbers;
+	}
+	
+	private List<Lotto> generateLotto(int lottoCount) {
+		List<Lotto> userLottos = new ArrayList<Lotto>();
+		while (userLottos.size() < lottoCount) {
+			Lotto newLotto = new Lotto(makeLottoNumbers());
+			userLottos.add(newLotto);
+		}
+		return userLottos;
 	}
 }
