@@ -1,6 +1,6 @@
 package util;
 
-import domain.Lotto;
+import domain.*;
 
 public class PrintUtil {
         public void printPurchaseInputMessage(){
@@ -20,5 +20,9 @@ public class PrintUtil {
         public void printPurchasedLotto(Lotto lotto){
                 String message = lotto.getNumbers().toString();
                 System.out.println(message);
+        }
+
+        public void printLastWeekWinningNumberInputMessage(){
+                System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         }
 }
