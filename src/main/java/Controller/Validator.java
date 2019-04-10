@@ -49,11 +49,11 @@ public class Validator {
      */
     public static boolean checkWinningLottoNumbers(String winningLottoInput) {
         String[] numbers = winningLottoInput.split(",");
-        if (!checkNumbersLengthIsValid(numbers)) {
-            return false;
-        }
-        if (checkNumbersNoDuplication(numbers) ||
-                !checkNumbersInRange(numbers)) {
+
+        if (!checkNumbersLengthIsValid(numbers) ||
+                !checkEachStringIsInteger(numbers) ||
+                !checkNumbersDontOverlap(numbers) ||
+                !checkEachStringInRange(numbers)) {
             return false;
         }
         return true;
@@ -67,15 +67,23 @@ public class Validator {
         return true;
     }
 
-    private static boolean checkNumbersInRange(String[] numbers) {
+    private static boolean checkEachStringIsInteger(String[] numbers) {
         boolean invalidValueNotFound = true;
         for (int i = 0; (i < numbers.length) && (invalidValueNotFound); i++) {
-            invalidValueNotFound = checkIsLottoNumberValid(numbers[i]);
+            invalidValueNotFound = checkIsInteger(numbers[i]);
         }
         return invalidValueNotFound;
     }
 
-    private static boolean checkNumbersNoDuplication(String[] numbers) {
+    private static boolean checkEachStringInRange(String[] numbers) {
+        boolean invalidValueNotFound = true;
+        for (int i = 0; (i < numbers.length) && (invalidValueNotFound); i++) {
+            invalidValueNotFound = checkIsLottoNumberInRange(Integer.parseInt(numbers[i]));
+        }
+        return invalidValueNotFound;
+    }
+
+    private static boolean checkNumbersDontOverlap(String[] numbers) {
         Set<String> tempAddedLottoNumbers = new HashSet<String>();
         for (int i = 0; (i < numbers.length); i++) {
             tempAddedLottoNumbers.add(numbers[i]);

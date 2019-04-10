@@ -131,8 +131,9 @@ WARNING: 로또넘버는 6개 이어야 합니다. 다시 입력해주세요.
 |---|---|
 |checkIsInteger|해당값이 정수로 변환가능한지 확인|
 |checkNumbersLengthIsValid|당첨로또입력의 갯수 확인|
-|checkNumbersInRange|당첨로또입력의 모든숫자가 1~45인지 확인|
-|checkNumbersNoDuplication|당첨로또입력이 중복 없는지 확인|
+|checkEachStringIsInteger|당첨로또입력의 모든숫자가 정수로 변환가능한지 확인|
+|checkEachStringInRange|당첨로또입력의 모든숫자가 1~45인지 확인|
+|checkNumbersDontOverlap|당첨로또입력이 중복 없는지 확인|
 |checkIsLottoNumberInRange|로또번호가 범위안에 있는 값인지 확인|
 |checkIsLottoNumberValid|로또번호가 유효한지 확인|
 |checkBonusLottoNumberValid|보너스로또넘버가 유효한지 확인|
