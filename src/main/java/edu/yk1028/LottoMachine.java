@@ -48,17 +48,16 @@ public class LottoMachine {
 	private List<Integer> generateLottoNumbers() {
 		List<Integer> numberList = new ArrayList<Integer>();
 		Set<Integer> numberSet = new HashSet<Integer>();
-		
-		while(numberSet.size() != LottoConstant.NUMBER_OF_LOTTO_NUMBERS) {
+
+		while (numberSet.size() != LottoConstant.NUMBER_OF_LOTTO_NUMBERS) {
 			numberSet.add(makeRandomLottoNumber());
 		}
 		numberList.addAll(numberSet);
 		return numberList;
 	}
-	
+
 	private int makeRandomLottoNumber() {
 		Random random = new Random();
-		return random.nextInt((LottoConstant.SIZE_OF_RANGE) 
-				+ LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER);
+		return random.nextInt((LottoConstant.SIZE_OF_RANGE) + LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER);
 	}
 }

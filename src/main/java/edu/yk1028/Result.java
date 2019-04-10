@@ -48,6 +48,7 @@ public class Result {
 
 	private long calculateTotalMoney() {
 		long money = 0;
+		
 		for (Rank rank : count.keySet()) {
 			money += count.get(rank) * rank.getWinningMoney();
 		}

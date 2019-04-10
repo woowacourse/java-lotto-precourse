@@ -29,6 +29,7 @@ public class User {
 	public boolean buyLottos(LottoMachine lottoMachine) {
 		try {
 			int money = insertMoney();
+			
 			this.lottos = lottoMachine.cellLottos(money);
 			System.out.println(lottos.size() + PURCHASE_LOTTO_TAIL_MESSAGE);
 		} catch (Exception e) {

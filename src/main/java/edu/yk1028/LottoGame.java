@@ -40,10 +40,9 @@ public class LottoGame {
 		}
 		return true;
 	}
-	
+
 	public void confirmWinning(User user) {
-		Result result = user.calculateResult(winningLotto);
-		result.print();
+		user.calculateResult(winningLotto).print();
 	}
 
 	private String[] inputWinningNumbers() {
@@ -70,13 +69,13 @@ public class LottoGame {
 
 		System.out.println(REQUEST_BONUS_NUMBER);
 		int bonus = scanner.nextInt();
-		if (bonus < 1 && 45 < bonus) {
+		if ((bonus < 1) && (45 < bonus)) {
 			throw new OutOfRangeException();
 		}
 		return bonus;
 	}
-	
-	private WinningLotto makeWinningLotto(Lotto lotto,int bonus) throws Exception {
+
+	private WinningLotto makeWinningLotto(Lotto lotto, int bonus) throws Exception {
 		if (lotto.hasNumber(bonus)) {
 			throw new DuplicateException();
 		}
