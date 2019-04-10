@@ -37,7 +37,8 @@ public class NumberList {
 		if (list.contains(number)) {
 			throw new DuplicateException();
 		}
-		if (number < 1 || 45 < number) {
+		if (number < LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER 
+				|| LottoConstant.MAXIMUM_RANGE_OF_LOTTO_NUMBER < number) {
 			throw new OutOfRangeException();
 		}
 		list.add(number);

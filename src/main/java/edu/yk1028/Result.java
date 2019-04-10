@@ -20,7 +20,6 @@ import java.util.TreeMap;
  *
  */
 public class Result {
-	private final int LOTTO_PRICE = 1000;
 	private final String WINNING_RESULT = "\n당첨 통계\n---------";
 	private final String TOTAL_YIELD = "총 수익률은 %.1f입니다.";
 
@@ -44,7 +43,7 @@ public class Result {
 	}
 
 	public double calculateYield() {
-		return (double) calculateTotalMoney() / (double) (totalCount * LOTTO_PRICE);
+		return (double) calculateTotalMoney() / (double) (totalCount * LottoConstant.LOTTO_PRICE);
 	}
 
 	private long calculateTotalMoney() {

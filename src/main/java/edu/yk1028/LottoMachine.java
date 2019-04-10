@@ -25,20 +25,15 @@ import edu.yk1028.Exception.MoneyLackException;
  *
  */
 public class LottoMachine {
-	private final int MIN_MONEY = 1000;
-	private final int LOTTO_PRICE = 1000;
-	private final int NUMBER_OF_LOTTO_NUMBERS = 6;
-	private final int BOUND_OF_LOTTO_NUMBER = 45;
-	
 	public List<Lotto> cellLottos(int money) throws Exception {
-		if (money < MIN_MONEY) {
+		if (money < LottoConstant.MIN_MONEY) {
 			throw new MoneyLackException();
 		}
 		return generateLottos(maximumNumberOfLotto(money));
 	}
 
 	private int maximumNumberOfLotto(int money) {
-		return money / LOTTO_PRICE;
+		return money / LottoConstant.LOTTO_PRICE;
 	}
 
 	private List<Lotto> generateLottos(int count) {
@@ -53,11 +48,17 @@ public class LottoMachine {
 	private List<Integer> generateLottoNumbers() {
 		List<Integer> numberList = new ArrayList<Integer>();
 		Set<Integer> numberSet = new HashSet<Integer>();
-		Random random = new Random();
-
-		for (; numberSet.size() < NUMBER_OF_LOTTO_NUMBERS;
-					numberSet.add(random.nextInt(BOUND_OF_LOTTO_NUMBER) + 1));
+		
+		while(numberSet.size() != LottoConstant.NUMBER_OF_LOTTO_NUMBERS) {
+			numberSet.add(makeRandomLottoNumber());
+		}
 		numberList.addAll(numberSet);
 		return numberList;
+	}
+	
+	private int makeRandomLottoNumber() {
+		Random random = new Random();
+		return random.nextInt((LottoConstant.SIZE_OF_RANGE) 
+				+ LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER);
 	}
 }

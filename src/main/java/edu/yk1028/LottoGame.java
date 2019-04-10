@@ -21,7 +21,6 @@ import edu.yk1028.Exception.OutOfRangeException;
  * 로또 당첨을 담당하는 객체
  */
 public class LottoGame {
-	private final int NUMBER_OF_LOTTO_NUMBERS = 6;
 	private final String NUMBER_SEPARATOR = ",";
 	private final String REQUEST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 	private final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
@@ -57,7 +56,7 @@ public class LottoGame {
 	private List<Integer> makeList(String[] numbers) throws Exception {
 		NumberList numberList = new NumberList();
 
-		if (numbers.length != NUMBER_OF_LOTTO_NUMBERS) {
+		if (numbers.length != LottoConstant.NUMBER_OF_LOTTO_NUMBERS) {
 			throw new CountMismatchException();
 		}
 		for (String number : numbers) {
