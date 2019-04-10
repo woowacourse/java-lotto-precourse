@@ -51,4 +51,9 @@ public class LottoBank {
 		}
 		return bonusNo;
 	}
+	
+	private void printAndfixErr(String ErrMsg) {
+		System.out.println(ErrMsg);
+		setWinningLotto();
+	}
 }
