@@ -27,14 +27,16 @@ public class User {
 
 	private List<Lotto> lottos;
 
-	public void buyLottos(LottoMachine lottoMachine) {
+	public boolean buyLottos(LottoMachine lottoMachine) {
 		try {
 			int money = insertMoney();
 			this.lottos = lottoMachine.cellLottos(money);
 			System.out.println(lottos.size() + PURCHASE_LOTTO_TAIL_MESSAGE);
 		} catch (Exception e) {
 			System.out.println(PURCHASE_FAILED);
+			return false;
 		}
+		return true;
 	}
 
 	private int insertMoney() {

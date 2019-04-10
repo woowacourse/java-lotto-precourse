@@ -16,7 +16,7 @@ public class Main {
 		LottoMachine lottoMachine = new LottoMachine();
 		LottoGame lottoGame = new LottoGame();
 
-		user.buyLottos(lottoMachine);
+		while(!user.buyLottos(lottoMachine));
 		user.printLottos();
 		while(!lottoGame.generateWinningLotto());
 		lottoGame.confirmWinning(user);
