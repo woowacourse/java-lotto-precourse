@@ -33,13 +33,6 @@ public enum RankResult {
         throw new IllegalArgumentException(rank + "는 유효하지 않은 값입니다.");
     }
 
-    private static RankResult initMatchRank(RankResult rankResult, Rank rank) {
-        if (rankResult.rank == rank) {
-            return rankResult;
-        }
-        throw new IllegalArgumentException(rank + "는 유효하지 않은 값입니다.");
-    }
-
     public int getCount() {
         return count;
     }
