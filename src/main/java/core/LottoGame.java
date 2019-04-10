@@ -1,23 +1,29 @@
 package core;
 
+import domain.Lotto;
 import domain.Person;
+import domain.Store;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoGame {
     private Person player;
+    private Store lottoStore;
     private Scanner scanner;
 
     public LottoGame() {
         player = new Person();
+        lottoStore = new Store();
         scanner = new Scanner(System.in);
     }
 
     public void init() {
         enterBudget();
+        sellLotto();
     }
 
-    private void enterBudget() {
+    private boolean enterBudget() {
         int budget = 0;
         System.out.println("구입 금액을 입력해 주세요.");
         try {
@@ -27,6 +33,16 @@ public class LottoGame {
             enterBudget();
         }
         if (!player.setBudget(budget))
-            System.out.println("마이너스 통장을 갖고 있어서 살 수 없습니다.");
+            return false;
+        return true;
+    }
+
+    private boolean sellLotto() {
+        List<Lotto> lottoList = lottoStore.sellLotto(player.payBudget());
+        if (lottoList.size() == 0)
+            return false;
+        player.keepLotto(lottoList);
+
+        return true;
     }
 }
