@@ -19,7 +19,6 @@ public class Lotto {
 	private final static int PRICE = 1000;
 	private final static int MAX_BALL_NUM = 45;
 	private final static int NUM_BALL = 6;
-	private static int numLotto;
 	private static List<Lotto> myLottos = new ArrayList<>();
 	private static WinningLotto winningLotto;
 	private static HashMap<Rank, Integer> result = new HashMap<Rank, Integer>(Rank.values().length);
@@ -50,14 +49,15 @@ public class Lotto {
 		return list;
 	}
 
-	private static void inputCost() {
+	private static int inputCost() {
+		int ret = 0;
 		try {
-			numLotto = inputInt("구입금액을 입력해주세요. ") / PRICE;
+			ret = inputInt("구입금액을 입력해주세요. ") / PRICE;
 		} catch (Exception e) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
-			inputCost();
+			ret = inputCost();
 		}
-		System.out.println();
+		return ret;
 	}
 
 	private static List<Integer> generateNumbers() {
@@ -71,13 +71,18 @@ public class Lotto {
 	}
 
 	private static void generateMyLottos() {
-		System.out.println(numLotto + "개를 구매하였습니다.");
+		int numLotto = inputCost();
+		System.out.println("\n" + numLotto + "개를 구매하였습니다.");
 		for (int i = 0; i < numLotto; i++) {
 			List<Integer> numbers = generateNumbers();
 			myLottos.add(new Lotto(numbers));
 			System.out.println(numbers.toString());
 		}
 		System.out.println();
+	}
+
+	private static int numMyLottos() {
+		return myLottos.size();
 	}
 
 	private static int isValidIntForLotto(int num) {
@@ -106,18 +111,19 @@ public class Lotto {
 			list = inputIntList("지난 주 당첨 번호를 입력해주세요. (,로 구분한 6자리 숫자)");
 		} catch (Exception e) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
-			recurInputIntList();
+			list = recurInputIntList();
 		}
 		return list;
 	}
 
 	private static Lotto customLotto() {
 		List<Integer> list = recurInputIntList();
+		Lotto custom = new Lotto(list);
 		if (!isValidIntListForLotto(list)) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
-			customLotto();
+			custom = customLotto();
 		}
-		return new Lotto(list);
+		return custom;
 	}
 
 	private static int recurInputBonusBall() {
@@ -126,7 +132,7 @@ public class Lotto {
 			ball = inputInt("보너스 볼을 입력해 주세요.");
 		} catch (Exception e) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
-			recurInputBonusBall();
+			ball = recurInputBonusBall();
 		}
 		return ball;
 	}
@@ -135,7 +141,7 @@ public class Lotto {
 		int ball = recurInputBonusBall();
 		if (isValidIntForLotto(ball) == 0 || winLotto.contains(ball)) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
-			inputBonusBall(winLotto);
+			ball = inputBonusBall(winLotto);
 		}
 		return ball;
 	}
@@ -174,7 +180,7 @@ public class Lotto {
 		for (Rank rank : result.keySet()) {
 			ret += rank.getWinningMoney() * result.get(rank);
 		}
-		return (double) ret / (numLotto * PRICE);
+		return (double) ret / (numMyLottos() * PRICE);
 	}
 
 	private static void printResult() {
@@ -188,7 +194,6 @@ public class Lotto {
 	}
 
 	public static void main(String[] args) { // 객체로 불러 실행하고자 한다면 shell()로 대체한다.
-		inputCost();
 		generateMyLottos();
 		inputWinningLotto();
 		initResult();
