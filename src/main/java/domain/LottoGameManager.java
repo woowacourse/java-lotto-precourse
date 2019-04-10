@@ -32,6 +32,18 @@ public class LottoGameManager {
 		return Double.parseDouble(df.format(lottoReward / lottoPrice));
 	}
 
+	public static void print(LinkedHashMap<Rank, Integer> lottoResult) {
+		System.out.println();
+		System.out.println("당첨 통계");
+		System.out.println("------");
+		double yeild = getYield(lottoResult);
+		for (Map.Entry<Rank, Integer> entry : lottoResult.entrySet()) {
+			System.out.print(entry.getKey().getCountOfMatch() + "개 일치 ");
+			System.out.println("(" + entry.getKey().getWinningMoney() + "원) - " + entry.getValue() + "개");
+		}
+		System.out.println("총 수익률은 " + yeild + "입니다.");
+	}
+
 	public static void main(String[] args) {
 		List<Lotto> userLottos = new LottoGenerator().generateUserLottos();
 		WinningLotto winningLotto = new WinningLottoGenerator().generateWinningLotto();
@@ -40,5 +52,6 @@ public class LottoGameManager {
 			Rank rank = winningLotto.match(userLottos.get(i));
 			lottoResult.put(rank, lottoResult.get(rank) + 1);
 		}
+		print(lottoResult);
 	}
 }
