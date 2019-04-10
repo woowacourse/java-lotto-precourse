@@ -7,7 +7,7 @@
 
 package Controller;
 
-import database.UserView;
+import database.UserViewData;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,7 +24,7 @@ public class DataReceiver {
     }
 
     public static String getWinningLottoNumbersFromUser(Scanner sc) {
-        System.out.println(UserView.COMMENT_WHEN_GET_WINNING_LOTTO_NUMBERS_FROM_USER);
+        System.out.println(UserViewData.COMMENT_WHEN_GET_WINNING_LOTTO_NUMBERS_FROM_USER);
         String winningNumbersFromUser = sc.nextLine();
         while (!Validator.checkWinningLottoNumbers(winningNumbersFromUser)) {
             winningNumbersFromUser = sc.nextLine();
@@ -33,7 +33,7 @@ public class DataReceiver {
     }
 
     public static int getBonusNumberFromUser(ArrayList<Integer> winningNumberList, Scanner sc) {
-        System.out.println(UserView.COMMENT_WHEN_GET_BONUS_NUMBER_FROM_USER);
+        System.out.println(UserViewData.COMMENT_WHEN_GET_BONUS_NUMBER_FROM_USER);
         String bonusNumberFromUser = sc.nextLine();
         while (!Validator.checkIsInteger(bonusNumberFromUser) ||
                 !Validator.checkIsLottoNumberInRange(Integer.parseInt(bonusNumberFromUser)) ||

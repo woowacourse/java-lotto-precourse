@@ -8,7 +8,7 @@
 package Controller;
 
 import database.GameSetting;
-import database.UserView;
+import database.UserViewData;
 import lottodata.Lotto;
 import lottodata.Rank;
 import lottodata.WinningLotto;
@@ -17,7 +17,7 @@ import java.util.*;
 
 public class LottoGame {
     private static int getLottoCountFromUser(Scanner sc) {
-        System.out.println(UserView.COMMENT_WHEN_RECEIVE_INPUT_MONEY);
+        System.out.println(UserViewData.COMMENT_WHEN_RECEIVE_INPUT_MONEY);
         int lottoCount = DataReceiver.getInputMoneyFromUser(sc) / GameSetting.PRICE_PER_1LOTTO;
 
         return lottoCount;

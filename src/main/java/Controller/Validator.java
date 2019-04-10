@@ -8,7 +8,7 @@
 package Controller;
 
 import database.GameSetting;
-import database.UserView;
+import database.UserViewData;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Validator {
 
     private static boolean checkInputLottoMoneyIsUnderMinvalue(int inputMoney) {
         if (inputMoney < GameSetting.PRICE_PER_1LOTTO) {
-            System.out.println(UserView.WARNING_WHEN_LOTTO_INPUT_SMALL);
+            System.out.println(UserViewData.WARNING_WHEN_LOTTO_INPUT_SMALL);
             return true;
         }
         return false;
@@ -49,7 +49,7 @@ public class Validator {
 
     private static boolean checkNumbersLengthIsValid(String[] numbers) {
         if (numbers.length != GameSetting.LOTTO_NORMAL_NUMBER_COUNT) {
-            System.out.println(UserView.WARNING_WHEN_LOTTO_NUMBER_COUNT_NOT_MATCHING);
+            System.out.println(UserViewData.WARNING_WHEN_LOTTO_NUMBER_COUNT_NOT_MATCHING);
             return false;
         }
         return true;
@@ -77,7 +77,7 @@ public class Validator {
             tempAddedLottoNumbers.add(numbers[i]);
         }
         if (tempAddedLottoNumbers.size() != numbers.length) {
-            System.out.println(UserView.WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
+            System.out.println(UserViewData.WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
             return false;
         }
         return true;
@@ -85,7 +85,7 @@ public class Validator {
 
     public static boolean checkIsAlreadyInLottoNumbers(List<Integer> winningNumberList, int lottoInput) {
         if (winningNumberList.contains(lottoInput)) {
-            System.out.println(UserView.WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
+            System.out.println(UserViewData.WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
             return true;
         }
         return false;
@@ -96,7 +96,7 @@ public class Validator {
             Integer.parseInt(inputNumber);
             return true;
         } catch (Exception e) {
-            System.out.println(UserView.WARNING_WHEN_INPUT_IS_NOT_INTEGER);
+            System.out.println(UserViewData.WARNING_WHEN_INPUT_IS_NOT_INTEGER);
             return false;
         }
     }
@@ -104,7 +104,7 @@ public class Validator {
     public static boolean checkIsLottoNumberInRange(int lottoInput) {
         if ((lottoInput < GameSetting.MIN_LOTTO_NUMBER) ||
                 (lottoInput > GameSetting.MAX_LOTTO_NUMBER)) {
-            System.out.println(UserView.WARNING_WHEN_LOTTO_NUMBER_NOT_IN_RANGE);
+            System.out.println(UserViewData.WARNING_WHEN_LOTTO_NUMBER_NOT_IN_RANGE);
             return false;
         }
         return true;

@@ -1,6 +1,6 @@
 package database;
 
-public class UserView {
+public class UserViewData {
     public static final String COMMENT_WHEN_RECEIVE_INPUT_MONEY = "구입금액을 입력해 주세요.";
     public static final String COMMENT_WHEN_GET_WINNING_LOTTO_NUMBERS_FROM_USER = "지난 주 당첨 번호를 입력해주세요.";
     public static final String COMMENT_WHEN_GET_BONUS_NUMBER_FROM_USER = "보너스 볼을 입력해 주세요.";
