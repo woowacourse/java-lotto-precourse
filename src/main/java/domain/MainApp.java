@@ -20,7 +20,14 @@ public class MainApp {
      */
     public static int getIntegerFromUser() throws InputMismatchException {
         Scanner rd = new Scanner(System.in);
-        return rd.nextInt();
+        while(true) {
+            try {
+                return rd.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("잘못된 입력입니다. 1000으로 나누어 떨어지는 양의 정수를 입력해 주세요.");
+                rd.nextLine();
+            }
+        }
     }
 
 }
