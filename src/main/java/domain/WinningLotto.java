@@ -1,5 +1,10 @@
 package domain;
 
+import domain.util.Constant;
+import domain.util.Input;
+
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -11,6 +16,14 @@ public class WinningLotto {
         this.lotto = lotto;
         this.bonusNo = bonusNo;
     }
+
+
+    public static WinningLotto createWinningLotto() {
+        Lotto fiveNumberlLotto = new Lotto(Input.inputWiningNum());
+        int bonumsNum = Input.inputBonusNum(fiveNumberlLotto.getLottoNum());
+        return new WinningLotto(fiveNumberlLotto, bonumsNum);
+    }
+
 
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현

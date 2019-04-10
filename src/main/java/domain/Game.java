@@ -9,15 +9,16 @@ import java.util.List;
 
 
 public class Game {
-    public List <Lotto> userLottoList = new ArrayList();
+    public List<Lotto> userLottoList = new ArrayList();
+    public WinningLotto winningLotto;
 
-    void startGame () {
+    public void startGame() {
         int insertedMoney = Input.insertMoney();
         buyingLotto(insertedMoney);
-
+        winningLotto = WinningLotto.createWinningLotto();
     }
 
-    private void buyingLotto(int money){
+    private void buyingLotto(int money) {
         int numberOfLotto = getNumberOfLotto(money);
         for (int i = 0; i < numberOfLotto; i++) {
             userLottoList.add(Lotto.creatLotto());
@@ -25,10 +26,11 @@ public class Game {
         PrintScan.printUserLottoInformation(userLottoList, numberOfLotto);
     }
 
-    int getNumberOfLotto(int money){
+    int getNumberOfLotto(int money) {
         int quotient = money / Constant.PRICE_OF_LOTTO;
         int rest = money % Constant.PRICE_OF_LOTTO;
         if (rest > 0) PrintScan.printRestMoney(rest);
         return quotient;
     }
+
 }
