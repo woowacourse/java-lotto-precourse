@@ -12,5 +12,8 @@ public class Valid {
         }
         return false;
     }
-        
+    public static boolean isMinusInput(String input) {
+        return Integer.parseInt(input) < 0;
+    }
+      
 }
