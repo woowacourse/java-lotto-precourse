@@ -3,7 +3,9 @@ package domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,11 +18,12 @@ public class LottoGame {
     ArrayList<Lotto> lottoArrayList = initLottoArrayList(num);
     WinningLotto winningLotto = getWinLotto();
     ArrayList<Rank> lottoRanks = getRanks(lottoArrayList, winningLotto);
+    printRanks(lottoRanks);
   }
 
   private ArrayList<Rank> getRanks(ArrayList<Lotto> lottoArrayList, WinningLotto winningLotto) {
     ArrayList<Rank> lottoRanks = new ArrayList<Rank>();
-    for(Lotto lotto : lottoArrayList){
+    for (Lotto lotto : lottoArrayList) {
       lottoRanks.add(winningLotto.match(lotto));
     }
     return lottoRanks;
@@ -69,4 +72,32 @@ public class LottoGame {
     return winner;
   }
 
+  public void printRanks(ArrayList<Rank> lottoRanks) {
+    Map<Rank, Integer> rankIntegerMap = countRank(lottoRanks);
+    System.out.println("당첨 통계\n---------");
+    System.out.println("3개 일치 (5000원)-" + rankIntegerMap.get(Rank.FIFTH) + "개");
+    System.out.println("4개 일치 (50000원)-" + rankIntegerMap.get(Rank.FOURTH) + "개");
+    System.out.println("5개 일치 (1500000원)-" + rankIntegerMap.get(Rank.THIRD) + "개");
+    System.out.println("5개 일치, 보너스 볼 일치 (30000000원)-" + rankIntegerMap.get(Rank.SECOND) + "개");
+    System.out.println("6개 일치 (2000000000원)-" + rankIntegerMap.get(Rank.FIRST) + "개");
+  }
+
+  public Map<Rank, Integer> countRank(ArrayList<Rank> listOfRank) {
+    Map<Rank, Integer> rankMap = setMap();
+    for (Rank rank : listOfRank) {
+      rankMap.replace(rank, rankMap.get(rank) + 1);
+    }
+    return rankMap;
+  }
+
+  public Map<Rank, Integer> setMap() {
+    Map<Rank, Integer> rankMap = new HashMap<Rank, Integer>();
+    rankMap.put(Rank.FIRST, 0);
+    rankMap.put(Rank.SECOND, 0);
+    rankMap.put(Rank.THIRD, 0);
+    rankMap.put(Rank.FOURTH, 0);
+    rankMap.put(Rank.FIFTH, 0);
+    rankMap.put(Rank.MISS, 0);
+    return rankMap;
+  }
 }
