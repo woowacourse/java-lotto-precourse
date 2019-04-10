@@ -48,6 +48,15 @@ public class WinningLotto {
         }
         return correctAmount;
     }
+    
+    private boolean findSecondCorrect(List<Integer> amountList, int bonusNumber){
+
+        boolean findSecondState = false;
+        if(amountList.contains(bonusNumber)){
+            findSecondState = true;
+        }
+        return findSecondState;
+    }
 
 
 
