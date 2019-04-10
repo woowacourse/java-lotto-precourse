@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -9,9 +10,19 @@ public class ResultInformation {
 
     private static final int MIN_MONEY = 1000;
 
-    public ResultInformation(List<Rank> ranks) {
-        this.ranks = ranks;
+    public ResultInformation(List<Lotto> lottos, WinningLotto winningLotto) {
+        this.ranks = matchLottosAndWinningLotto(lottos, winningLotto);
         this.enumMap = createEnumMap();
+    }
+
+    private List<Rank> matchLottosAndWinningLotto(List<Lotto> lottos, WinningLotto winningLotto) {
+        List<Rank> rankList = new ArrayList<>();
+
+        for (Lotto lotto : lottos) {
+            rankList.add(winningLotto.match(lotto));
+        }
+
+        return rankList;
     }
 
     private EnumMap<Rank, Integer> initialEnumMap() {
