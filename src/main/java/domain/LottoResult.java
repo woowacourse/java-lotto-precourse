@@ -24,11 +24,11 @@ public class LottoResult {
     private void setRankingResult(List<Rank> rankList){
         for(Rank rank : rankList){
             matchRank(rank);
-            setWinMeney(rank);
+            setWinMoney(rank);
         }
     }
 
-    public void calWinningMoneyPersent(int userPayment){
+    public void calWinningMoneyPercent(int userPayment){
         winningMoneyPercent = (float)winningMoney / (float)userPayment;
     }
 
@@ -48,7 +48,7 @@ public class LottoResult {
         }
     }
 
-    private void setWinMeney(Rank rank){
+    private void setWinMoney(Rank rank){
         winningMoney += rank.getWinningMoney();
     }
 

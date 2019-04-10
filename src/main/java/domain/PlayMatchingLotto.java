@@ -205,7 +205,7 @@ public class PlayMatchingLotto {
     private void setResultLotto(List<Rank> ranks, int USER_PAYMENT){
         printResultTitle();
         LottoResult lottoResult = new LottoResult(ranks);
-        lottoResult.calWinningMoneyPersent(USER_PAYMENT);
+        lottoResult.calWinningMoneyPercent(USER_PAYMENT);
         lottoResult.printRankResultList();
         printResultLotto(lottoResult);
     }
