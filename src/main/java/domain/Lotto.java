@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -12,5 +13,11 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public void printNums() {
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+
+        for (Integer i : numbers)
+            joiner.add(String.valueOf(i));
+        System.out.println(joiner.toString());
+    }
 }

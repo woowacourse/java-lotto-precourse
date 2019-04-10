@@ -32,16 +32,24 @@ public class LottoGame {
             System.out.println("잘못된 입력입니다.");
             enterBudget();
         }
-        if (!player.setBudget(budget))
-            return false;
-        return true;
+
+        return player.setBudget(budget);
     }
 
     private boolean sellLotto() {
         List<Lotto> lottoList = lottoStore.sellLotto(player.payBudget());
         if (lottoList.size() == 0)
             return false;
+        printLotto(lottoList);
         player.keepLotto(lottoList);
+
+        return true;
+    }
+
+    private boolean printLotto(List<Lotto> lottoList) {
+        System.out.println("\n" + lottoList.size() + "개를 구매하셨습니다.");
+        for (Lotto lotto : lottoList)
+            lotto.printNums();
 
         return true;
     }
