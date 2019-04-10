@@ -27,16 +27,26 @@ public class LottoGame {
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusBall = sc.nextInt();
         makeWinningLotto(winningNumbers, bonusBall);
-        gameResult();
+        gameResult(purchaseAmount);
     }
 
-    private void gameResult(){
-        List<Integer> matchResult = getMatchResult();
+    private void gameResult(int purchaseAmount){
+        List<Integer> matchResult = getMatchResults();
+        System.out.println("당첨 통계");
+        System.out.println("-------");
+        int totalProfit = 0;
         for (int i = 4; i >= 0; i--){
             Rank rank = Rank.values()[i];
-            String result = "(" + rank.getWinningMoney() + "원) - " + matchResult.get(rank.ordinal()) + "개";
+            int winningCount = matchResult.get(rank.ordinal());
+            String result = "(" + rank.getWinningMoney() + "원) - " + winningCount + "개";
+            totalProfit += rank.getWinningMoney() * winningCount;
             printMatchResult(rank, result);
         }
+        System.out.printf("총 수익률은 %.2f%%입니다.\n", calculateProfit(purchaseAmount, totalProfit));
+    }
+
+    private double calculateProfit(int purchaseAmount, int totalProfit){
+        return ((double) totalProfit / purchaseAmount) * 100;
     }
 
     private void printMatchResult(Rank rank, String result){
@@ -49,7 +59,7 @@ public class LottoGame {
         System.out.println(result);
     }
 
-    private List<Integer> getMatchResult(){
+    private List<Integer> getMatchResults(){
         int [] matchResult = new int[6];
         for (Lotto lotto : this.lottos){
             Rank result = winningLotto.match(lotto);
