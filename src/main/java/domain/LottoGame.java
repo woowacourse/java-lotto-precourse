@@ -243,9 +243,58 @@ public class LottoGame {
         return winningLotto;
     }
 
+    public static List<Integer> getLottoResult(List<Lotto> userLottos,
+                                            WinningLotto winningLotto) {
+        List<Integer> lottoResult = Arrays.asList(0,0,0,0,0,0);
+
+        for (Lotto lotto : userLottos) {
+            Rank rank = winningLotto.match(lotto);
+            lottoResult.set(rank.ordinal(), lottoResult.get(rank.ordinal()) + 1);
+        }
+
+        return lottoResult;
+    }
+
+    public static void announceRankResult(Rank rank, int countOfMatch,
+                                          int winningMoney, int countOfWin) {
+        if (rank == Rank.SECOND) {
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개",
+                    countOfMatch, winningMoney, countOfWin));
+        } else if (rank != Rank.MISS) {
+            System.out.println(String.format("%d개 일치(%d원) - %d개",
+                    countOfMatch, winningMoney, countOfWin));
+        }
+    }
+
+    public static int getRankResult(List<Integer> result, Rank rank) {
+        int countOfMatch = rank.getCountOfMatch();
+        int winningMoney = rank.getWinningMoney();
+        int countOfWin = result.get(rank.ordinal());
+        int totalWinningMoney = winningMoney * countOfWin;
+
+        announceRankResult(rank, countOfMatch, winningMoney, countOfWin);
+
+        return totalWinningMoney;
+    }
+
+    public static int getWinningMoney(List<Lotto> userLottos,
+                                      WinningLotto winningLotto) {
+        int totalWinningMoney = 0;
+        List<Integer> result = getLottoResult(userLottos,winningLotto);
+
+        System.out.println("\n당첨통계\n--------");
+
+       for (Rank rank : Rank.values()) {
+            totalWinningMoney += getRankResult(result, rank);
+        }
+
+        return totalWinningMoney;
+    }
+
     public static void main(String[] args) {
         int paidMoney = payMoney();
         List<Lotto> purchasedLotto = purchaseLotto(paidMoney);
         WinningLotto winningLotto = generateWinningLotto();
+        System.out.println(getWinningMoney(purchasedLotto, winningLotto));
     }
 }
