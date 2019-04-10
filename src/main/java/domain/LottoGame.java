@@ -103,7 +103,7 @@ public class LottoGame {
     	do {
     		splitedNumber = inputWinningNumber();
     		intWinningNumberList = convertToIntList(splitedNumber);
-    	} while (!checkDuplicate(intWinningNumberList) && !checkRange(intWinningNumberList));
+    	} while (!(checkDuplicate(intWinningNumberList) && checkRange(intWinningNumberList)));
  
     	return intWinningNumberList;
     }
@@ -111,6 +111,7 @@ public class LottoGame {
     private List<String> splitStringByComma(String winningNumber) {
     	String[] winningNumberArray = winningNumber.split(",");
     	List<String> splitedNumber = new ArrayList<String>();
+    	
     	for (int i = 0; i < winningNumberArray.length; i++) {
     		splitedNumber.add(winningNumberArray[i].trim());
     	}
@@ -124,7 +125,7 @@ public class LottoGame {
     	for (int i = 0; i < splitedNumberList.size(); i++) {
     		containNotNumber = (Pattern.matches(NUMBER_CHECK_REGEX, splitedNumberList.get(i)) && containNotNumber == true) ? true : false;
     	}
-    
+    	
     	return containNotNumber;
     }
     
@@ -140,6 +141,7 @@ public class LottoGame {
     
     private boolean checkDuplicate(List<Integer> splitedNumberList) {
     	HashSet<Integer> setForCheckDuplicate = new HashSet<Integer>(splitedNumberList);
+
     	return setForCheckDuplicate.size() == 6 ? true : false;
     }
     
@@ -150,9 +152,56 @@ public class LottoGame {
     	for (int i = 0; i < numberList.size(); i++) {
     		rightRange = (numberList.get(i) >= 1 && numberList.get(i) <= 45 && rightRange == true) ? true : false;
     	}
-    	
+
     	return rightRange;
     }
+    
+    
+    private int setBonusBall(List<Integer> winningNumber) {
+    	String bonusBall = "";
+    	
+    	do {
+    		System.out.println("보너스 볼을 입력해 주세요.");
+    		bonusBall = sc.nextLine().trim();
+    	} while (!validateBonusBall(bonusBall, winningNumber));
+
+    	return Integer.parseInt(bonusBall);
+    }
+    
+    private boolean validateBonusBall(String bonusBall, List<Integer> winningNumber) {
+    	int intBonusBall = 0;
+    	
+    	if (checkNumberOrNot(bonusBall)) {
+    		intBonusBall = Integer.parseInt(bonusBall);
+    		return (checkRange(intBonusBall) && !checkContained(winningNumber, intBonusBall)) ? true : false;
+    	}
+    	
+    	return false;
+    }
+    
+    private boolean checkRange(int bonusBall) {
+    	boolean inRange = (bonusBall > 0 && bonusBall < 46) ? true : false;
+    	
+    	if (!inRange) {
+    		System.out.println("1부터 45까지의 숫자를 입력하세요.");
+    		return inRange;
+    	}
+
+    	return inRange;
+    }
+    
+    private boolean checkContained(List<Integer> winningNumber, int bonusBall) {
+    	boolean isContained = winningNumber.contains(bonusBall);
+
+    	if (isContained) {
+    		System.out.println("당첨 번호와 중복되지 않는 값을 입력하세요.");
+    		return isContained;
+    	}
+    	
+    	return isContained;
+    }
+    
+   
     
     public static void main(String[] args) {
     	// test용 main 함수
@@ -162,8 +211,10 @@ public class LottoGame {
 			System.out.println(lottos.get(i).toString());
 		}
 		
-		System.out.println(lg.inputWinningNumber());
-		System.out.println(lg.checkValidation().toString());
+		List<Integer> winNum = lg.checkValidation();
+		
+		System.out.println(winNum.toString());
+		System.out.println(lg.setBonusBall(winNum));
 	}
     
 }
