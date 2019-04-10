@@ -11,6 +11,8 @@ import domain.validator.WinningNumValidator;
 
 public class LottoInputHandler {
 
+    private static final String delimiter = ",";
+
     private final Scanner scanner;
     private Validator validator;
 
@@ -45,8 +47,9 @@ public class LottoInputHandler {
     private int[] getValidWinningNums() {
         String[] winningNums = null;
         do {
-            LottoOutputHandler.printMessage("지난 주 당첨 번호를 입력해 주세요.");
-            winningNums = getUserInputWithDelimiter(getUserInputString(), ",");
+            LottoOutputHandler.printMessage("지난 주 당첨 번호를 입력해 주세요. "
+                     + "(각 번호는 '" + delimiter + "' 로 구분해주세요)" );
+            winningNums = getUserInputWithDelimiter(getUserInputString(), delimiter);
             validator = new WinningNumValidator(winningNums);
         } while (!validator.doesValid());
 

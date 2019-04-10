@@ -25,18 +25,14 @@ public class WinningNumValidator implements Validator {
     }
 
     boolean doesEachLottoNumInputIsValid() {
-        long numOfInvalidLottoNumInput = lottoNumList.stream()
+        return !lottoNumList.stream()
                 .map(LottoInputValidator::new)
-                .filter((inputValidator) -> !inputValidator.doesValid())
-                .count();
-        return numOfInvalidLottoNumInput == 0;
+                .anyMatch((inputValidator) -> !inputValidator.doesValid());
     }
 
     boolean doesEachLottoNumIsValid() {
-        long numOfInvalidLottoNum = lottoNumList.stream()
+        return !lottoNumList.stream()
                 .map(LottoNumValidator::new)
-                .filter((lottoNumValidator) -> !lottoNumValidator.doesValid())
-                .count();
-        return numOfInvalidLottoNum == 0;
+                .anyMatch((lottoNumValidator) -> !lottoNumValidator.doesValid());
     }
 }

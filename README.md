@@ -86,7 +86,7 @@ public class WinningLotto {
     * 리팩토링 내용
         * 기존에는 LottoInputHandler가 LottoInputValidator를 사용해 로또 행사의 모든 input을 검증하는 형태로 구현했다
             * input 검증: 입력은 숫자여야 한다, 입력은 양수여야 한다, 입력은 null이 아니여야 한다.
-        * **이제 LottInputHandler는 input 검증을 신경쓰지 않는다. 단지 유효한 구입 금액, 당첨 번호를 가져오기만 한다.**
+        * **이제 LottInputHandler는 input 검증도 Validator에게 위임하며, 단지 유효한 구입 금액/당첨 번호를 가져오기만 한다.**
             * PurchaseAmountValidator/WinningNumValidator가 LottoInputValidator를 사용해 입력값을 검증한다.
 11. 유효한 보너스 번호를 입력받는다
     * 이제 WinningNumValidator는 BonusNumValidator를 사용해 각 로또 번호가 1~45 범위의 숫자인지 검증한다
@@ -100,5 +100,8 @@ public class WinningLotto {
 17. 로또의 각 난수는 중복이 없어야 한다
     * 미처 다루지 못했던 규칙이 추가되었기 때문에 Validator 구현들의 수정이 필요했다
     * 이제 LottoNumValidator가 '1~45 사이의 난수'를 검증하고, 나머지 Validator 구현체가 LottoNumValidator를 사용해 추가적인 검증을 수행한다.
+18. 불필요한 필드의 수를 줄인다
+    * 로또 구입 목록은 '로또 생성 클래스', '사용자 입력 처리 클래스'가 있으면 언제든지 생성할 수 있다.
+    * 따라서 필드로 사용하기 보다는 지역 변수로서 사용한다
 
 
