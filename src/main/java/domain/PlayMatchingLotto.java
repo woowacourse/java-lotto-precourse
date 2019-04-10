@@ -12,9 +12,12 @@ public class PlayMatchingLotto {
         USER_PAYMENT = setPayment();
         int amountLotto = USER_PAYMENT/Const.PRIECE_OF_SINGLE_LOTTO;
         printLottoPaymentAmt(amountLotto);
-        Lotto[] userLotto = makeLottoObj(amountLotto);
+        List<Lotto> userLotto = makeLottoList(amountLotto);
         Lotto winLotto = new Lotto(setLastWinLotto());
         WinningLotto winningLotto = new WinningLotto(winLotto, setBonus(winLotto));
+        List<Rank> ranks = new ArrayList<>();
+        ranks = setRankList(winningLotto, userLotto,ranks);
+        setResultLotto(ranks, USER_PAYMENT);
     }
 
     /**
@@ -63,11 +66,11 @@ public class PlayMatchingLotto {
         System.out.println(amountLotto + Const.STR_NOTI_PAYMENTLOTTO_AMT);
     }
 
-    private Lotto[] makeLottoObj(int amountLotto){
-        Lotto[] userLotto = new Lotto[amountLotto];
+    private List<Lotto> makeLottoList(int amountLotto){
+        List<Lotto> userLotto = new ArrayList<>(amountLotto);
         for(int i = 0 ; i < amountLotto ; i++){
-            userLotto[i] = new Lotto(makeLottoNumList());
-            userLotto[i].printLottoNums();
+            userLotto.add(i,new Lotto(makeLottoNumList()));
+            userLotto.get(i).printLottoNums();
         }
         return userLotto;
     }
@@ -186,6 +189,35 @@ public class PlayMatchingLotto {
         if(winLotto.getNumbers().contains(bonus)){
             throw new LottoException(Const.EX_BONUS_NOT_OVERLAP_TO_USER);
         }
+    }
+
+    private List<Rank> setRankList(WinningLotto winningLotto, List<Lotto> userLotto, List<Rank> ranks){
+        for(Lotto ulotto : userLotto){
+            ranks.add(winningLotto.match(ulotto));
+        }
+        return ranks;
+    }
+
+    /**
+     * Rank List를 사용해 결과 세팅.
+     * 세팅 후 결과 출력.
+     * */
+    private void setResultLotto(List<Rank> ranks, int USER_PAYMENT){
+        printResultTitle();
+        LottoResult lottoResult = new LottoResult(ranks);
+        lottoResult.calWinningMoneyPersent(USER_PAYMENT);
+        lottoResult.printRankResultList();
+        printResultLotto(lottoResult);
+    }
+
+    private void printResultTitle(){
+        System.out.println(Const.RESULT_TITLE);
+        System.out.println(Const.RESULT_BAR);
+    }
+
+    private void printResultLotto(LottoResult lottoResult){
+        String resultStr = Const.RESULT_PRIZE_PERCENT_FRONT + lottoResult.getWinningMoneyPercent() + Const.RESULT_PRIZE_PERCENT_BACK;
+        System.out.println(resultStr);
     }
 
 }

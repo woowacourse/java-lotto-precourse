@@ -1,6 +1,8 @@
 package constnum;
 
 public class Const {
+    public static final int ZERO = 0;
+
     public static final int PRIECE_OF_SINGLE_LOTTO = 1000;
 
     public static final int MIN_PRICE_OF_LOTTO_BUY = PRIECE_OF_SINGLE_LOTTO;
@@ -25,5 +27,14 @@ public class Const {
     public static final String EX_WIN_CNT_CONDITION_TO_USER = "로또 당첨 번호는 6개입니다. 다시 입력하세요.";
     public static final String EX_BONUS_ONLY_NUM_TO_USER = "숫자 하나만 입력해주세요";
     public static final String EX_BONUS_NOT_OVERLAP_TO_USER = "당첨 번호와 중복되지 않는 번호를 입력하세요.";
+
+    public static final String RESULT_TITLE = "\n당첨 통계";
+    public static final String RESULT_BAR = "---------";
+    public static final String RESULT_RANK_STR_MATCH_COUNT = "개 일치";
+    public static final String RESULT_RANK_STR_ROUND = " (";
+    public static final String RESULT_RANK_STR_BONUS = ", 보너스볼 일치";
+    public static final String RESULT_RANK_STR_PRIZE = "원) - ";
+    public static final String RESULT_PRIZE_PERCENT_FRONT = "총 수익률은 ";
+    public static final String RESULT_PRIZE_PERCENT_BACK = " 입니다.";
 
 }
