@@ -9,5 +9,7 @@ public class LottoGame {
         Controller controller = new Controller();
 
         controller.askHowMany();
+        controller.buyLotto();
+        controller.showLottosNumber();
     }
 }
