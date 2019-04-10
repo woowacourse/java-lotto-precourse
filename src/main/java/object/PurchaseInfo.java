@@ -19,6 +19,11 @@ public class PurchaseInfo {
                 this.lottos = purchaseLottos();
         }
 
+        public void printPurchasedLottosNumber() {
+                PrintUtil.printPurchaseConfirmMessage(this.purchaseAmount);
+                PrintUtil.printPurchasedLottoList(lottos);
+        }
+
         private List<Lotto> purchaseLottos() {
                 List<Lotto> lottos = new ArrayList<Lotto>();
                 PurchsedLottoNumberCreator creator = new PurchsedLottoNumberCreator();
