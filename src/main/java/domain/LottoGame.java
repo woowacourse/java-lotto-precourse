@@ -59,7 +59,7 @@ public class LottoGame {
     public void lottoGame() {
         moneyInput();
         myLottoManager.buyLotto(money);
-        matchLottoNumbers(winningLottoMaker.makeWinninglotto());
+        matchLottoNumbers(winningLottoMaker.makeWinningLotto());
     }
 
     private void moneyInput() {
@@ -69,17 +69,8 @@ public class LottoGame {
         }
     }
 
-    public static boolean isValidNumber(String numberScan) {
-        try {
-            Integer.parseInt(numberScan);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     private boolean notValidMoney(String moneyScan) {
-        if (!isValidNumber(moneyScan)) {
+        if (!Validator.isValidNumber(moneyScan)) {
             return true;
         }
         money = Integer.parseInt(moneyScan);
@@ -111,7 +102,7 @@ public class LottoGame {
     }
 
     private void printLottoResult(int totalPrice) {
-        System.out.println(YIELD + caculateYield(totalPrice) + YIELD_RESULT);
+        System.out.println(YIELD + String.format("%.3f", caculateYield(totalPrice)) + YIELD_RESULT);
     }
 
     private double caculateYield(int totalPrice) {

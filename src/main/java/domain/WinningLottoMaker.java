@@ -41,7 +41,7 @@ public class WinningLottoMaker {
 		this.scanner = scanner;
 	}
 
-	public WinningLotto makeWinninglotto() {
+	public WinningLotto makeWinningLotto() {
 		winnerLottoInput();
 		bonusNumberInput();
 		return new WinningLotto(lastWeekLotto, bonusNo);
@@ -62,14 +62,14 @@ public class WinningLottoMaker {
 	}
 
 	private boolean notValidLotto(String lottoScan) {
-		if (notValidString(lottoScan)) {
+		if (Validator.notValidString(lottoScan)) {
 			return true;
 		}
 		return notLotto(lottoScan.split(","));
 	}
 
 	private boolean notValidBonusLotto(String lottoScan) {
-		if (!LottoGame.isValidNumber(lottoScan)) {
+		if (!Validator.isValidNumber(lottoScan)) {
 			return true;
 		}
 		bonusNo = Integer.parseInt(lottoScan);
@@ -85,14 +85,10 @@ public class WinningLottoMaker {
 		}
 		boolean validNumbers = true;
 		for (String lottoNumber : lottoNumbers) {
-			validNumbers &= LottoGame.isValidNumber(lottoNumber);
+			validNumbers &= Validator.isValidNumber(lottoNumber);
 			validNumbers &= notLottoNumber(lottoNumber, validNumbers);
 		}
 		return validNumbers ? !parseWinnerLotto(lottoNumbers) : true;
-	}
-
-	private boolean notValidString(String lottoScan) {
-		return !lottoScan.contains(",");
 	}
 
 	private boolean notLottoNumber(String lottoNumber, boolean validNumbers) {
