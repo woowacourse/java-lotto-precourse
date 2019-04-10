@@ -20,4 +20,18 @@ public class LottoTest {
         Lotto lotto = new Lotto(targetNumber);
         assertEquals(targetNumber, lotto.getLottoNumbers());
     }
+
+    @Test
+    public void lottoNumberTest() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(1);
+        lottoNumbers.add(2);
+        lottoNumbers.add(3);
+        lottoNumbers.add(4);
+        lottoNumbers.add(5);
+        lottoNumbers.add(6);
+
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertEquals(lottoNumbers, lotto.getLottoNumbers());
+    }
 }
