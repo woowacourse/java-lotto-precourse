@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputValid {
@@ -35,5 +38,18 @@ public class InputValid {
             return Result.fail(Message.MONEY_HAS_REMAINDER);
         }
         return Result.ok();
+    }
+
+    public Lotto checkWinningNumbers(String winningNumbers) {
+        Result result = isValidWinningNumbers(winningNumbers);
+        while (!result.isValid()) {
+            result.printErrorMessage(Message.INPUT_WIN_MESSAGE);
+            winningNumbers = sc.nextLine();
+            result = isValidWinningNumbers(winningNumbers);
+        }
+
+        List<Integer> list = new ArrayList<>();
+        new ArrayList<>(Arrays.asList(winningNumbers.split(Message.SPOT))).forEach(r -> list.add(Integer.parseInt(r)));
+        return new Lotto(list);
     }
 }
