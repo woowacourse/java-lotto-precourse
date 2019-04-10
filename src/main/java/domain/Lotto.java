@@ -1,7 +1,6 @@
 package domain;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -18,23 +17,14 @@ public class Lotto {
     }
 
     // 추가 기능 구현
-    public List<Integer> getLottoNumber() {
-
-        while (duplicateNumberCheck(numbers, createLottoNumber()).size() != LOTTO_SIZE) {
+    public void getLottoNumber() {
+        Set<Integer> set = new TreeSet<>();
+        while (set.size() != 6) {
+            set.add(createLottoNumber());
         }
 
-        Collections.sort(numbers);
+        numbers.addAll(set);
         System.out.println(printLottoNumber(numbers));
-
-        return numbers;
-    }
-
-    private List<Integer> duplicateNumberCheck(List<Integer> numbers, int checkNumber) {
-        if (!numbers.contains(checkNumber)) {
-            numbers.add(checkNumber);
-            return numbers;
-        }
-        return numbers;
     }
 
     private int createLottoNumber() {
@@ -45,5 +35,13 @@ public class Lotto {
         return String.join(",", String.valueOf(numbers));
     }
 
+    public void assignWinningLotto(String inputWinningLotto){
+        String[] winningLottoArray = inputWinningLotto.split(",");
+        for(String number : winningLottoArray){
+            numbers.add(Integer.parseInt(number));
+        }
+
+        System.out.println(printLottoNumber(numbers));
+    }
 
 }
