@@ -13,6 +13,8 @@ public class LottoManager {
     public static final int WINNING_NUMBER_ORIGIN = 1;
     public static final int NUM_OF_WINNING_NUMBERS = 6;
 
+    private List<Integer> winningNumbers;
+
     private Scanner sc = new Scanner(System.in);
     private Validator validator = new Validator();
 
@@ -23,6 +25,7 @@ public class LottoManager {
             System.out.println("구매 금액을 입력해주세요.");
             purchaseAmount = sc.nextLine();
         } while(!validator.isValidPurchase(purchaseAmount));
+
         return Integer.parseInt(purchaseAmount);
     }
 
@@ -78,7 +81,9 @@ public class LottoManager {
             System.out.println("지난 주 당첨 번호를 입력해주세요.");
             winningNumbers = trim(sc.nextLine().split(","));
         } while(!validator.isValidWinningNumbers(winningNumbers));
-        return new Lotto((winningNumbers.stream().map(Integer::parseInt).collect(Collectors.toList())));
+
+        this.winningNumbers = winningNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
+        return new Lotto(this.winningNumbers);
     }
 
     public int inputBonus() {
@@ -87,7 +92,8 @@ public class LottoManager {
         do {
             System.out.println("보너스 볼을 입력해주세요");
             bonus = sc.nextLine();
-        } while(!validator.isValidBonus(bonus));
+        } while(!validator.isValidBonus(bonus, winningNumbers));
+
         return Integer.parseInt(bonus);
     }
 }

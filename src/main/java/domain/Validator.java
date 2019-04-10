@@ -108,7 +108,7 @@ public class Validator {
                 && !hasDuplicateNumbers(winningNumbers);
     }
 
-    public boolean isValidBonus(String Bonus) {
+    public boolean isValidBonus(String Bonus, List<Integer> winningNumbers) {
         return true;
     }
 }
