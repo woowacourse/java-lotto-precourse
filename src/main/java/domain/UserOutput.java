@@ -26,7 +26,6 @@ public class UserOutput {
         String purchaseResult; // 하나의 구매된 로또의 번호들
 
         List<Integer> lottoNumbers = this.lottoList.get(lottoOrder).getNumbers();
-
         purchaseResult = String.join(",", lottoNumbers.toString());
 
         System.out.println(purchaseResult);
@@ -40,7 +39,7 @@ public class UserOutput {
         System.out.println("---------");
         rankStream.filter(rs -> rs.getCountOfMatch() != 0).forEach(rs -> PrintWinResult(rs, userRanks));
 
-        PrintEarningRate(userRanks,purchaseAmount);
+        PrintEarningRate(userRanks, purchaseAmount);
     }
 
     private void PrintWinResult(Rank rank, List<Rank> userRanks) {
@@ -64,8 +63,11 @@ public class UserOutput {
                 .mapToInt(ur -> ur.getWinningMoney())
                 .sum();
 
-        double earningRate = sumOfPrize / purchaseAmount;
+        System.out.println(sumOfPrize);
+        System.out.println(purchaseAmount);
 
-        System.out.printf("수익률은 "+earningRate+"입니다.");
+        double earningRate = sumOfPrize / (double)purchaseAmount;
+
+        System.out.printf("수익률은 " + earningRate + "입니다.");
     }
 }

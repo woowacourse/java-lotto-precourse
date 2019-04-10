@@ -8,31 +8,25 @@ public class UserInput {
     private List<Integer> winningNumbers;
 
     public int RecievePurchaseAmount() {
-        int lottoCount = 0;
+        int purchaseAmount = 0;
 
         try {
-            lottoCount = TryToRecievePurchaseAmount();
+            purchaseAmount = TryToRecievePurchaseAmount();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             System.exit(0);
         }
 
-        return lottoCount;
-    }
-
-    private int FindLottoCount(int purchaseAmount) {
-        final int UNIT_OF_PURCHASE_AMOUNT = 1000;
-
-        return purchaseAmount / UNIT_OF_PURCHASE_AMOUNT;
+        return purchaseAmount;
     }
 
     private int TryToRecievePurchaseAmount() throws IllegalArgumentException {
         System.out.println("구매금액을 입력해 주세요.");
         int purchaseAmount = scanner.nextInt();
+        scanner.nextLine();
 
         if (Validator.isValidPurchaseAmount(purchaseAmount)) {
-            int lottoCount = FindLottoCount(purchaseAmount);
-            return lottoCount;
+            return purchaseAmount;
         }
 
         throw new IllegalArgumentException(purchaseAmount + "는 유효하지 않은 값입니다.");
@@ -44,8 +38,8 @@ public class UserInput {
         try {
             winningNumbers = TryToRecieveWinningNumber();
         } catch (IllegalArgumentException e) {
-            System.out.println("올바른 숫자를 입력해 주세요");
-            RecieveWinningNumber();
+            e.printStackTrace();
+            System.exit(0);
         }
 
         return winningNumbers;
@@ -62,7 +56,7 @@ public class UserInput {
             return winningNumbers;
         }
 
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(winningNumber + "은 유효하지 않은 값입니다.");
     }
 
     public int RecieveBonusNumber() {
@@ -71,8 +65,8 @@ public class UserInput {
         try {
             bonusNumber = TryToRecieveBonusNumber();
         } catch (IllegalArgumentException e) {
-            System.out.println("올바른 보너스 번호를 입력해주세요.");
-            RecieveBonusNumber();
+            e.printStackTrace();
+            System.exit(0);
         }
 
         return bonusNumber;
@@ -87,7 +81,7 @@ public class UserInput {
             return bonusNumber;
         }
 
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(bonusNumber + "은 유효하지 않은 값입니다.");
     }
 
     private List<Integer> ConvertListTypeToInt(List<String> stringWinningNumbers) {

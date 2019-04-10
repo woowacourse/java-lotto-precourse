@@ -6,16 +6,23 @@ import java.util.List;
 public class LottoGenerator {
     private static List<Lotto> lottoList;
     private static WinningLotto winningLotto;
+    private static final int PRIZE_OF_LOTTO = 1000;
 
     LottoGenerator() {
         lottoList = new ArrayList<>();
     }
 
-    public void GenerateLottoes(int lottoCount) {
+    public void GenerateLottoes(int purchaseAmount) {
+        int lottoCount = FindLottoCount(purchaseAmount);
 
         for (int i = 0; i < lottoCount; i++) {
             GenerateLotto();
         }
+    }
+
+    private int FindLottoCount(int purchaseAmount) {
+        return purchaseAmount / PRIZE_OF_LOTTO;
+
     }
 
     private void GenerateLotto() {
@@ -24,9 +31,9 @@ public class LottoGenerator {
         lottoList.add(new Lotto(randomNumberGenerator.GenerateRandomNumbers()));
     }
 
-    public void GenerateWinningLotto(List<Integer> winningNumbers,int bonusNumber){
+    public void GenerateWinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         Lotto lotto = new Lotto(winningNumbers);
-        winningLotto = new WinningLotto(lotto,bonusNumber);
+        winningLotto = new WinningLotto(lotto, bonusNumber);
     }
 
     public static WinningLotto getWinningLotto() {
