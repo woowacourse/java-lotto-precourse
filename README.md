@@ -33,3 +33,7 @@ LottoGameStart 클래스
 - RandomCreateNum : 랜덤으로 번호 생성
 
 - PrintNumber : 로또 숫자 전체 출력
+
+-ThisWeekNumber ; 이번주 당첨 숫자 번호
+
+-ThisWeekBonusNumber : 이번주 보너스 숫자 번호
