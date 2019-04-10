@@ -144,4 +144,14 @@ public class WinningLotto {
         }
         return count;
     }
+
+    public static void main(String[] args){
+
+        int money = LottoMoney.getLottoMoney();
+        LottoGame nowLotto = new LottoGame();
+        List<Lotto> lottoList = nowLotto.makeTotalLotto(money);
+        WinningLotto winLotto = new WinningLotto(nowLotto.getLastWinNumber(),nowLotto.addBonusLottoNumber());
+        int takeMoney = winLotto.takeLottoMoney(winLotto.saveRank(winLotto,lottoList),lottoList);
+        winLotto.printLottoRank(winLotto.matchAmount(lottoList),takeMoney,money);
+    }
 }
