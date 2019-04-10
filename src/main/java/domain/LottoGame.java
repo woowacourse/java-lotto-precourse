@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class LottoGame {
 	static private Scanner sc = new Scanner(System.in);
-	static private final String NUMBER_CHECK_REGEX = "^[0-9]*$";
+	static private final String NUMBER_CHECK_REGEX = "^[0-9]+$";
 	static private final int LOTTO_PRICE = 1000;
 	static private final int LOTTO_BUY_LIMIT = 100000;
     static private final double LOTTO_TOTAL_NUMBER = 45;
@@ -90,7 +90,6 @@ public class LottoGame {
     		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     		winningNumber = sc.nextLine();
     		winningNumberList = splitStringByComma(winningNumber);
-    		System.out.println(checkContainNotNumber(winningNumberList));
     	} while(winningNumber.length() == 0);
 
     	return null;
@@ -112,14 +111,14 @@ public class LottoGame {
     	
     	for (int i = 0; i < splitedNumberList.size(); i++) {
     		containNotNumber = (Pattern.matches(NUMBER_CHECK_REGEX, splitedNumberList.get(i)) && containNotNumber == true) ? true : false;
-    		System.out.println(containNotNumber);
     	}
 
     	return containNotNumber;
     }
     
-    private boolean checkLength(List<String> splitedNumberList) {
-    	return (splitedNumberList.size() == 6) ? true : false;
+    private boolean checkDuplicate(List<String> splitedNumberList) {
+    	HashSet<String> setForCheckDuplicate = new HashSet<String>(splitedNumberList);
+    	return setForCheckDuplicate.size() == 6 ? true : false;
     }
     
     
