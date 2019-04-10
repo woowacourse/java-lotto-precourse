@@ -14,6 +14,12 @@ public class MainAppTest extends TestCase {
     static final int INVALID_MONEY_TO_BUY_LOTTO_NOT_TIMES_OF_LOTTO_PRICE = 1200;
     static final int INVALID_MONEY_TO_BUY_LOTTO_ZERO = 0;
     static final int INVALID_MONEY_TO_BUY_LOTTO_NEGATIVE_NUMBER = -1000;
+
+    static final Integer[] VALID_LOTTO_NUMBERS = new Integer[] {1, 15, 22, 33, 35, 42};
+    static final Integer[] INVALID_LOTTO_NUMBERS_NOT_SIX = new Integer[] {1, 15, 22, 33, 35, 42, 44};
+    static final Integer[] INVALID_LOTTO_NUMBERS_OUT_OF_BOUNDS = new Integer[] {-32, 15, 22, 33, 35, 4255};
+    static final Integer[] INVALID_LOTTO_NUMBERS_DUPLICATION = new Integer[] {15, 15, 22, 33, 35, 42};
+
     @Test
     public void testIsValidMoneyToBuyLotto() throws Exception {
         int testMoney;
@@ -73,5 +79,38 @@ public class MainAppTest extends TestCase {
     public void testPrintLotto() throws Exception {
         Lotto testLotto = new Lotto(Arrays.asList(new Integer[] {1, 15, 22, 33, 35, 42}));
         assertEquals("[1, 15, 22, 33, 35, 42]", testLotto.toString());
+    }
+
+    @Test
+    public void testIsValidWinningNumber() throws Exception {
+        ArrayList<Integer> testWinningNumbers;
+        boolean isValid;
+
+        testWinningNumbers = new ArrayList<Integer>(Arrays.asList(VALID_LOTTO_NUMBERS));
+        isValid = MainApp.areValidWinningNumbers(testWinningNumbers);
+        assertEquals(true, isValid);
+
+        testWinningNumbers = new ArrayList<Integer>(Arrays.asList(INVALID_LOTTO_NUMBERS_NOT_SIX));
+        isValid = MainApp.areValidWinningNumbers(testWinningNumbers);
+        assertEquals(false, isValid);
+
+        testWinningNumbers = new ArrayList<Integer>(Arrays.asList(INVALID_LOTTO_NUMBERS_OUT_OF_BOUNDS));
+        isValid = MainApp.areValidWinningNumbers(testWinningNumbers);
+        assertEquals(false, isValid);
+
+        testWinningNumbers = new ArrayList<Integer>(Arrays.asList(INVALID_LOTTO_NUMBERS_DUPLICATION));
+        isValid = MainApp.areValidWinningNumbers(testWinningNumbers);
+        assertEquals(false, isValid);
+    }
+
+    @Test
+    public void testIsSet() throws Exception {
+        ArrayList<Integer> testList;
+
+        testList = new ArrayList<Integer>(Arrays.asList(VALID_LOTTO_NUMBERS));
+        assertEquals(true, MainApp.isSet(testList));
+
+        testList = new ArrayList<Integer>(Arrays.asList(INVALID_LOTTO_NUMBERS_DUPLICATION));
+        assertEquals(false, MainApp.isSet(testList));
     }
 }

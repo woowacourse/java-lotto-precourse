@@ -6,9 +6,11 @@ public class MainApp {
     static final int MIN_VALID_MONEY_TO_BUY_LOTTO = 1000;
     static final int LOTTO_PRICE = 1000;
     static final String MESSAGE_WRONG_MONEY_TO_BUY_LOTTO = "잘못된 입력입니다. 1000으로 나누어 떨어지는 양의 정수를 입력해 주세요.";
+    static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
+
 
     public static void main(String[] args) {
-        printLottos(createLottosWorth(5000));
     }
 
 
@@ -86,5 +88,35 @@ public class MainApp {
         }
     }
 
+    /**
+     * 당첨 번호가 적절한 지 검사하는 메소드
+     */
+    public static boolean areValidWinningNumbers(ArrayList<Integer> winningNumbers) {
+        if (winningNumbers.size() != 6) {  // 숫자는 총 6개 이어야 한다.
+            return false;
+        }
 
+        Collections.sort(winningNumbers);
+        if (!isValidLottoNumber(winningNumbers.get(0)) || !isValidLottoNumber(winningNumbers.get(winningNumbers.size()-1))) {
+            return false;                  // 리스트의 최솟값과 최댓값이 적절한 로또 번호라면 그 사이에 있는 값은 적절함이 자명하다.
+        }
+
+        return isSet(winningNumbers);      // 숫자들 간의 중복이 없어야 한다.
+    }
+
+    /**
+     * 적절한 로또 번호인지 확인하는 메소드
+     */
+    public static boolean isValidLottoNumber(int lottoNumber) {
+        return (lottoNumber >= MIN_LOTTO_NUMBER) && (lottoNumber <= MAX_LOTTO_NUMBER);
+    }
+
+    /**
+     * 주어진 정수 리스트에 중복이 있는 지 확인하는 메소드
+     */
+    public static boolean isSet(ArrayList<Integer> listNumbers) {
+        HashSet<Integer> setNumbers = new HashSet<Integer>(listNumbers);
+
+        return setNumbers.size() == listNumbers.size();
+    }
 }
