@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * 사용자 입력의 유효성 검사
+ * 사용자 입력과 로또들의 유효성 검사 객체
  *
  * @version 1.0(2019.04.09)
  * @author jongyoon Kim
@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class Validator {
     public static final int AMOUNT_UNIT = 1000;
     public static final int LOTTO_MAXIMUM_NUMBER_VALUE = 45;
+    public static final int LOTTO_MAXIMUM_NUMBER_COUNT = 6;
     private static final String NUMBER_PATTERN = "^[0-9]*$";
     private static final String DIGIT_PATTERN = "^\\d{1,2},\\d{1,2},\\d{1,2},\\d{1,2},\\d{1,2},\\d{1,2}$";
     private static final String ERROR_MSG_AMOUNT_UNIT_MESSAGE = "1000원 단위로 적어주세요!";
@@ -60,7 +61,7 @@ public class Validator {
         return false;
     }
 
-    public boolean isDuplicateAndNumOverValue(int num, List<Integer> numbers){
+    public boolean isBonusDuplicateAndNumOverValue(int num, List<Integer> numbers){
         if(numbers.contains(num)){
             System.out.println(ERROR_MSG_BONUS_DUPLICATE_NUMBERLIST);
             return true;
@@ -70,5 +71,9 @@ public class Validator {
             return true;
         }
         return false;
+    }
+
+    public boolean isExistLottoInLottoList(ArrayList<Lotto> lottoList, Lotto lotto){
+        return lottoList.contains(lotto);
     }
 }
