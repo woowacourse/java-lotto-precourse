@@ -1,9 +1,11 @@
+import domain.Lotto;
 import domain.MainApp;
 import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 
 public class MainAppTest extends TestCase {
@@ -57,5 +59,12 @@ public class MainAppTest extends TestCase {
         System.setIn(in);
         enteredMoney = MainApp.getMoneyToBuyLotto();
         assertEquals(testMoney, enteredMoney);
+    }
+
+    @Test
+    public void testCreateLottosWorth() throws Exception {
+        int testMoney = VALID_MONEY_TO_BUY_LOTTO;
+        ArrayList<Lotto> lottos = MainApp.createLottosWorth(VALID_MONEY_TO_BUY_LOTTO);
+        assertEquals(1, lottos.size());
     }
 }

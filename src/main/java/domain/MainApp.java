@@ -64,5 +64,18 @@ public class MainApp {
         return new Lotto(arrLottoNumbers);
     }
 
+    /**
+     * 로또 구입 금액에 해당하는 수의 로또를 발급하는 메소드
+     */
+    public static ArrayList<Lotto> createLottosWorth(int money) {
+        int numberOfLottos = money / LOTTO_PRICE;
+        ArrayList<Lotto> listOfLottos = new ArrayList<Lotto>();
+
+        for (int i=0; i<numberOfLottos; i++) {
+            listOfLottos.add(createRandomLotto());
+        }
+        return listOfLottos;
+    }
+
 
 }
