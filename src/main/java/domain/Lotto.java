@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -15,5 +16,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public int countMatchedNumber(Lotto otherLotto) {
+        return (int) numbers.stream()
+                .filter(number -> otherLotto.numbers.contains(number))
+                .count();
+    }
+
+    boolean hasBall(int number) {
+        return numbers.contains(number);
+    }
 }
