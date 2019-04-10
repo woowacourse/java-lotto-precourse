@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import edu.yk1028.Exception.MoneyLackException;
+
 /**
  * 사용자에게 로또를 발급하는 객체
  * 
@@ -27,12 +29,10 @@ public class LottoMachine {
 	private final int LOTTO_PRICE = 1000;
 	private final int NUMBER_OF_LOTTO_NUMBERS = 6;
 	private final int BOUND_OF_LOTTO_NUMBER = 45;
-	private final String REQUEST_MONEY_OVER_MINIMUM = String.format("최소 구입 금액은 %d원입니다.", MIN_MONEY);
 	
 	public List<Lotto> cellLottos(int money) throws Exception {
 		if (money < MIN_MONEY) {
-			System.out.println(REQUEST_MONEY_OVER_MINIMUM);
-			throw new Exception();
+			throw new MoneyLackException();
 		}
 		return generateLottos(maximumNumberOfLotto(money));
 	}

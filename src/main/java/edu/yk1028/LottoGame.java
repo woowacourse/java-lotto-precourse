@@ -13,6 +13,10 @@ package edu.yk1028;
 import java.util.List;
 import java.util.Scanner;
 
+import edu.yk1028.Exception.CountMismatchException;
+import edu.yk1028.Exception.DuplicateException;
+import edu.yk1028.Exception.OutOfRangeException;
+
 /**
  * 로또 당첨을 담당하는 객체
  */
@@ -21,7 +25,7 @@ public class LottoGame {
 	private final String NUMBER_SEPARATOR = ",";
 	private final String REQUEST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 	private final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-	private final String FAIL_GENERATEING_WINNING_LOTTO = "잘못된 당첨 번호입니다.";
+	private final String FAIL_GENERATEING_WINNING_LOTTO = "당첨 로또 생성에 실패했습니다.\n";
 
 	private WinningLotto winningLotto;
 
@@ -54,7 +58,7 @@ public class LottoGame {
 		NumberList numberList = new NumberList();
 
 		if (numbers.length != NUMBER_OF_LOTTO_NUMBERS) {
-			throw new Exception();
+			throw new CountMismatchException();
 		}
 		for (String number : numbers) {
 			numberList.add(Integer.parseInt(number.trim()));
@@ -68,14 +72,14 @@ public class LottoGame {
 		System.out.println(REQUEST_BONUS_NUMBER);
 		int bonus = scanner.nextInt();
 		if (bonus < 1 && 45 < bonus) {
-			throw new Exception();
+			throw new OutOfRangeException();
 		}
 		return bonus;
 	}
 	
 	private WinningLotto makeWinningLotto(Lotto lotto,int bonus) throws Exception {
 		if (lotto.hasNumber(bonus)) {
-			throw new Exception();
+			throw new DuplicateException();
 		}
 		return new WinningLotto(lotto, bonus);
 	}

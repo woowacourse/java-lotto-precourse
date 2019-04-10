@@ -13,6 +13,9 @@ package edu.yk1028;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.yk1028.Exception.DuplicateException;
+import edu.yk1028.Exception.OutOfRangeException;
+
 /**
  * 리스트에 추가시 유효성 검사를 하기 위한 객체
  * 
@@ -31,8 +34,11 @@ public class NumberList {
 	}
 
 	public void add(int number) throws Exception {
-		if(list.contains(number) || number < 1 || 45 < number) {
-			throw new Exception();
+		if (list.contains(number)) {
+			throw new DuplicateException();
+		}
+		if (number < 1 || 45 < number) {
+			throw new OutOfRangeException();
 		}
 		list.add(number);
 	}
