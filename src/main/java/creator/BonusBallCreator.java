@@ -1,5 +1,6 @@
-package domain;
+package creator;
 
+import domain.BonusBall;
 import util.InputUtil;
 import util.PrintUtil;
 
