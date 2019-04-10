@@ -18,6 +18,12 @@ public class LottoGame {
         statistic(ranks,money);
     }
 
+    private List<Lotto> purchase(int money) {
+        Purchase purchase = new Purchase(money);            // 로또산다
+        purchase.printLottoListOfUser();                  // 로또 출력
+        return purchase.getLottoList();
+    }
+    
     private int checkMoney(InputValid input, Scanner sc) {
         System.out.print(Message.INPUT_MONEY_MESSAGE);
         int money = input.checkMoney(sc.nextLine());
