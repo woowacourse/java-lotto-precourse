@@ -6,9 +6,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -29,19 +31,30 @@ public class Lotto {
 	}
 
 	// 추가 기능 구현
-	private static void inputCost() throws NumberFormatException, IOException {
-		System.out.println("구입금액을 입력해주세요. ");
+	private static int inputInt(String massage) throws NumberFormatException, IOException {
+		System.out.println(massage);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int ret = Integer.parseInt(br.readLine());
-		numLotto = ret / PRICE;
+		return ret;
 	}
 
-	private static void recurInputCost() {
+	private static List<Integer> inputIntList(String massage) throws NumberFormatException, IOException {
+		List<Integer> list = new ArrayList<Integer>();
+		System.out.println(massage);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine(), ",");
+		while (st.hasMoreTokens()) {
+			list.add(Integer.parseInt(st.nextToken()));
+		}
+		return list;
+	}
+
+	private static void inputCost() {
 		try {
-			inputCost();
+			numLotto = inputInt("구입금액을 입력해주세요. ") / PRICE;
 		} catch (Exception e) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
-			recurInputCost();
+			inputCost();
 		}
 	}
 
@@ -54,7 +67,7 @@ public class Lotto {
 		Collections.sort(list);
 		return list;
 	}
-	
+
 	private static void generateMyLottos() {
 		System.out.println("\n" + numLotto + "개를 구매하였습니다.");
 		for (int i = 0; i < numLotto; i++) {
@@ -64,9 +77,76 @@ public class Lotto {
 		}
 	}
 
+	private static int isValidIntForLotto(int num) {
+		return ((num > 0) && (num <= MAX_BALL_NUM)) ? 1 : 0;
+	}
+
+	private static boolean isValidLengthForLotto(List<Integer> list) {
+		Set set = new LinkedHashSet<Integer>(list);
+		return (set.size() == NUM_BALL);
+	}
+
+	private static boolean isValidIntListForLotto(List<Integer> list) {
+		if(!isValidLengthForLotto(list))
+			return false;
+		int bool = 1;
+		Iterator<Integer> it = list.iterator();
+		while (it.hasNext()) {
+			bool *= isValidIntForLotto(it.next());
+		}
+		return (bool == 1);
+	}
+
+	private static List<Integer> recurInputIntList() {
+		List<Integer> list = new ArrayList<Integer>();
+		try {
+			list = inputIntList("\n지난 주 당첨 번호를 입력해주세요. (,로 구분한 6자리 숫자)");
+		} catch (Exception e) {
+			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
+			recurInputIntList();
+		}
+		return list;
+	}
+
+	private static Lotto customLotto() {
+		List<Integer> list = recurInputIntList();
+		if (!isValidIntListForLotto(list)) {
+			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
+			customLotto();
+		}
+		return new Lotto(list);
+	}
+
+	private static int recurInputBonusBall() {
+		int ball = 0;
+		try {
+			ball = inputInt("\n보너스 볼을 입력해 주세요.");
+		} catch (Exception e) {
+			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
+			recurInputBonusBall();
+		}
+		return ball;
+	}
+
+	private static int inputBonusBall() {
+		int ball = recurInputBonusBall();
+		if (isValidIntForLotto(ball) == 0) {
+			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
+			inputBonusBall();
+		}
+		return ball;
+	}
+
+	private static void inputWinningLotto() {
+		Lotto lotto = customLotto();
+		int bonusNo = inputBonusBall();
+		winningLotto = new WinningLotto(lotto, bonusNo);
+	}
+
 	public static void main(String[] args) { // 객체로 불러 실행해야한다면 shell()로 대체한다.
-		recurInputCost();
+		inputCost();
 		generateMyLottos();
+		inputWinningLotto();
 
 	}
 }
