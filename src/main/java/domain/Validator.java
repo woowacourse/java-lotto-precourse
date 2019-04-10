@@ -44,8 +44,8 @@ public class Validator {
         return duplicate;
     }
 
-    public static boolean isOverlapLottoNumber(List<Integer> lottoNumbers, int candidateLottoNumber) {
-        return lottoNumbers.contains(candidateLottoNumber) ? true : false;
+    public static boolean isNotOverlapLottoNumber(List<Integer> lottoNumbers, int candidateLottoNumber) {
+        return lottoNumbers.contains(candidateLottoNumber) ? false : true;
     }
 
 

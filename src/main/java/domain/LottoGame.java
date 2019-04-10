@@ -25,7 +25,7 @@ public class LottoGame {
         lottoGenerator.GenerateWinningLotto(winningNumbers, bonusNumber);
         List<Rank> ranks =  MatchLottoNumbers();
 
-        userOutput.PrintWinStatistics(ranks);
+        userOutput.PrintWinStatistics(ranks,purchaseAmount);
     }
 
     private List<Rank> MatchLottoNumbers() {

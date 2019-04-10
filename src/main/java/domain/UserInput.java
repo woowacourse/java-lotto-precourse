@@ -53,7 +53,6 @@ public class UserInput {
 
     private List<Integer> TryToRecieveWinningNumber() throws IllegalArgumentException {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
-        scanner.nextLine();
         String winningNumber = scanner.nextLine();
 
         List<String> stringWinningNumbers = Arrays.asList(winningNumber.split(","));
@@ -84,7 +83,7 @@ public class UserInput {
         int bonusNumber = scanner.nextInt();
 
         if (Validator.isValidRangeLottoNumber(bonusNumber)
-                && Validator.isOverlapLottoNumber(winningNumbers, bonusNumber)) {
+                && Validator.isNotOverlapLottoNumber(winningNumbers, bonusNumber)) {
             return bonusNumber;
         }
 

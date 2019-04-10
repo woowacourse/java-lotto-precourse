@@ -40,6 +40,7 @@ public class UserOutput {
         System.out.println("---------");
         rankStream.filter(rs -> rs.getCountOfMatch() != 0).forEach(rs -> PrintWinResult(rs, userRanks));
 
+        PrintEarningRate(userRanks,purchaseAmount);
     }
 
     private void PrintWinResult(Rank rank, List<Rank> userRanks) {
@@ -58,6 +59,13 @@ public class UserOutput {
 
 
     private void PrintEarningRate(List<Rank> userRanks, int purchaseAmount) {
+        int sumOfPrize = userRanks.stream()
+                .filter(ur -> ur.getWinningMoney() > 0)
+                .mapToInt(ur -> ur.getWinningMoney())
+                .sum();
 
+        double earningRate = sumOfPrize / purchaseAmount;
+
+        System.out.printf("수익률은 "+earningRate+"입니다.");
     }
 }

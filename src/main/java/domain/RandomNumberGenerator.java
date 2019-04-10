@@ -29,7 +29,7 @@ public class RandomNumberGenerator {
 
         while (isOverlap) {
             candidateLottoNumber = (int) ((Math.random() * MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
-            isOverlap = Validator.isOverlapLottoNumber(lottoNumbers, candidateLottoNumber);
+            isOverlap = !Validator.isNotOverlapLottoNumber(lottoNumbers, candidateLottoNumber);
         }
 
         return candidateLottoNumber;
