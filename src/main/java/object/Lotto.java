@@ -21,6 +21,10 @@ public class Lotto implements LottoNumber {
                 return otherLotto.countMatchNumber(this.numbers);
         }
 
+        public boolean hasBonusBall(int bonusBall){
+                return this.numbers.contains(bonusBall);
+        }
+
         private int countMatchNumber(List<Integer> otherLottoNumbers){
                 int matchCount=0;
                 for(int otherNumber : otherLottoNumbers){

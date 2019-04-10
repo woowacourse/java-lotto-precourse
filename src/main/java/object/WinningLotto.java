@@ -19,11 +19,11 @@ public class WinningLotto implements LottoNumber {
         }
 
         private int matchOfNumber(Lotto userLotto){
-                for(int i=0;userLotto.)
+                return userLotto.requestCountMatchNumber(this.lotto);
         }
 
-        private int matchOfBonusBall(){
-
+        private boolean matchOfBonusBall(Lotto userLotto){
+                return userLotto.hasBonusBall(this bonusNo);
         }
 
 }
