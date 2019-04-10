@@ -2,9 +2,10 @@ package ui;
 
 import domain.Lotto;
 import domain.Rank;
-import domain.WinningLotto;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author delf
@@ -18,5 +19,12 @@ public interface LottoIOInterface {
 
     void showLottos(List<Lotto> lottos);
 
-    void showWinningStatistics(List<Rank> ranks);
+    void showWinningStatistics(Map<Rank, Integer> ranks);
+
+    /**
+     * 간단한 문자열 출력
+     */
+    static void showPlaneText(String s) {
+        System.out.println(s);
+    }
 }

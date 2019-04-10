@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 로또 등수를 의미하는 enum
  */
@@ -54,6 +57,18 @@ public enum Rank {
 
     @Override
     public String toString() {
-        return String.format("%d개 일치 (%,10d원)", countOfMatch, winningMoney);
+        String note = "";
+        if (this == Rank.SECOND) {
+            note = ", 보너스볼 일치";
+        }
+        return String.format("%d개 일치%s (%,10d원)", countOfMatch, note, winningMoney);//
+    }
+
+    public static Map<Rank, Integer> RANK_COUNTER() {
+        Map<Rank, Integer> map = new HashMap<>();
+        for(Rank r : Rank.values()) {
+            map.put(r, 0);
+        }
+        return map;
     }
 }

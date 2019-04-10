@@ -32,4 +32,10 @@ public class Lotto {
         }
         return count;
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
 }
