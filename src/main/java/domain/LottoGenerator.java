@@ -9,7 +9,6 @@ public class LottoGenerator {
     private static List<Lotto> lottoList;
     private static WinningLotto winningLotto;
 
-
     LottoGenerator() {
         lottoList = new ArrayList<>();
     }

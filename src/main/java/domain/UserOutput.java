@@ -37,9 +37,10 @@ public class UserOutput {
     public void PrintWinStatistics(List<Rank> userRanks, int purchaseAmount) {
         Stream<Rank> rankStream = Stream.of(Rank.values());
 
-        System.out.println("당첨통계");
+        System.out.println("당첨 통계");
         System.out.println("---------");
-        rankStream.filter(rs -> rs.getCountOfMatch() != ZERO).forEach(rs -> PrintWinResult(rs, userRanks));
+        rankStream.filter(rs -> rs.getCountOfMatch() != ZERO) //Rank에서 CountOfMatch가 0이 아닌것에 대해서만 PrintWinResult 호출
+                .forEach(rs -> PrintWinResult(rs, userRanks));
 
         PrintEarningRate(userRanks, purchaseAmount);
     }
@@ -55,7 +56,6 @@ public class UserOutput {
 
         System.out.println(rank.getCountOfMatch() + "개 일치, (" + rank.getWinningMoney() + "원)-"
                 + matchCountperRank + "개");
-
     }
 
 
@@ -65,7 +65,7 @@ public class UserOutput {
                 .mapToInt(ur -> ur.getWinningMoney())
                 .sum();
 
-        double earningRate = sumOfPrize / (double)purchaseAmount;
+        double earningRate = sumOfPrize / (double) purchaseAmount;
 
         System.out.printf("수익률은 " + earningRate + "입니다.");
     }

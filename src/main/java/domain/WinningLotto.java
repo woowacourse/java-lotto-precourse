@@ -16,10 +16,10 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         List<Integer> winningNumbers = this.lotto.getNumbers();
-        List<Integer> userLottoNumber = userLotto.getNumbers();
+        List<Integer> userLottoNumbers = userLotto.getNumbers();
 
-        int matchCount = (int) winningNumbers.stream().filter(n -> userLottoNumber.contains(n)).count();
-        boolean matchBonus = userLottoNumber.contains(this.bonusNo);
+        int matchCount = (int) winningNumbers.stream().filter(n -> userLottoNumbers.contains(n)).count();
+        boolean matchBonus = userLottoNumbers.contains(this.bonusNo);
 
         Rank userRank = Rank.valueOf(matchCount, matchBonus);
         return userRank;

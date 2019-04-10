@@ -19,6 +19,7 @@ public class RandomNumberGenerator {
         for (int i = 0; i < LOTTO_SIZE; i++) {
             lottoNumbers.add(GenerateRandomNumber());
         }
+
         return lottoNumbers;
     }
 
