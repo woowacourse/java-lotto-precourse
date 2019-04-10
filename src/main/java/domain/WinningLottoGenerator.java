@@ -3,9 +3,14 @@ package domain;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class WinningLottoGenerator {
+	static private final String NUMBER_CHECK_REGEX = "^[0-9]+$";
+	
+	LottoGame lottoGame = new LottoGame();
+	Scanner sc = new Scanner(System.in);
 	
 	// 당첨 번호 생성 함수
     private List<Integer> makeWinningNumber() {
@@ -82,6 +87,51 @@ public class WinningLottoGenerator {
     	}
 
     	return rightRange;
+    }
+    
+    // 보너스 번호 생성 함수
+    private int makeBonusNumber(List<Integer> winningNumber) {
+    	String bonusNumber = "";
+    	
+    	do {
+    		System.out.println("보너스 볼을 입력해 주세요.");
+    		bonusNumber = sc.nextLine().trim();
+    	} while (!validateBonusBall(bonusNumber, winningNumber));
+
+    	return Integer.parseInt(bonusNumber);
+    }
+    
+    private boolean validateBonusBall(String bonusNumber, List<Integer> winningNumber) {
+    	int intBonusNumber = 0;
+
+    	if (lottoGame.checkNumberOrNot(bonusNumber)) {
+    		intBonusNumber = Integer.parseInt(bonusNumber);
+    		return (checkRange(intBonusNumber) && !checkContained(winningNumber, intBonusNumber)) ? true : false;
+    	}
+    	
+    	return false;
+    }
+    
+    private boolean checkRange(int bonusNumber) {
+    	boolean inRange = (bonusNumber > 0 && bonusNumber < 46) ? true : false;
+    	
+    	if (!inRange) {
+    		System.out.println("1부터 45까지의 숫자를 입력하세요.");
+    		return inRange;
+    	}
+
+    	return inRange;
+    }
+    
+    private boolean checkContained(List<Integer> winningNumber, int bonusNumber) {
+    	boolean isContained = winningNumber.contains(bonusNumber);
+
+    	if (isContained) {
+    		System.out.println("당첨 번호와 중복되지 않는 값을 입력하세요.");
+    		return isContained;
+    	}
+    	
+    	return isContained;
     }
 
 }
