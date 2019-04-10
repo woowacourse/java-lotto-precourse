@@ -1,14 +1,19 @@
 package object.mainobject;
 
-import javafx.util.Pair;
-import matcher.Matcher;
+import domain.Rank;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WinningStats {
-        private final List<Pair<Integer,Boolean>> stats;
-        private Matcher matcher;
-        public WinningStats(PurchaseInfo){
-
+        private final Map<Rank,Integer> stats;
+        public WinningStats(){
+                stats = new HashMap<Rank,Integer>()
+                stats.put(Rank.FIRST,0);
+                stats.put(Rank.SECOND,0);
+                stats.put(Rank.THIRD,0);
+                stats.put(Rank.FOURTH,0);
+                stats.put(Rank.FIFTH,0);
+                stats.put(Rank.MISS,0);
         }
 }
