@@ -50,6 +50,7 @@ public class LottoIO {
             checkInvalidInput(winningLottoNumberString[i]);
             winningLottoNumber.add(Integer.parseInt(winningLottoNumberString[i]));
         }
+        checkDuplicate(winningLottoNumberString);
         return (winningLottoNumber);
     }
 
@@ -94,6 +95,20 @@ public class LottoIO {
      */
     public static void checkInvalidInput(int bonusNumber) throws IOException {
         if (bonusNumber < 1 || bonusNumber > LottoConstant.RANDOM_NUMBER_LIMIT) {
+            throw new IOException();
+        }
+    }
+
+    /*
+     * 보너스 볼 숫자가 중복된 숫자인 경우 예외 처리
+     */
+    public static void checkDuplicate(String[] winningLottoNumberString) throws IOException {
+        List<Integer> winningLottoNumberIntegerList = new ArrayList<Integer>();
+        for (int i = 0; i < winningLottoNumberString.length; i++) {
+            winningLottoNumberIntegerList.add(Integer.parseInt(winningLottoNumberString[i]));
+        }
+        HashSet<Integer> winningLottoNumberHashSet = new HashSet<Integer>(winningLottoNumberIntegerList);
+        if (winningLottoNumberHashSet.size() != winningLottoNumberIntegerList.size()) {
             throw new IOException();
         }
     }
