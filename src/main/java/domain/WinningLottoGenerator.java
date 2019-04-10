@@ -81,17 +81,17 @@ public class WinningLottoGenerator {
 		return !overlap; // overlap이 True일 때: 중복이 존재(유효하지 않음), overlap이 False일 때: 중복이 존재하지 않음(유효함)
 	}
 
-	private int inputBonusNumberFromUser() {
+	private int inputBonusNumberFromUser(List<Integer> winningNumbers) {
 		int bonusNumberFromUser;
 		do {
 			System.out.println("보너스 볼을 입력해 주세요.");
 			bonusNumberFromUser = changeTypeStringToInt(scanner.next());
-		} while (!validateBonusNumber(bonusNumberFromUser));
+		} while (!validateBonusNumber(bonusNumberFromUser, winningNumbers));
 		return bonusNumberFromUser;
 	}
 
-	private boolean validateBonusNumber(int bonusNumber) {
-		if (!validateBonusNumberRange(bonusNumber)) {
+	private boolean validateBonusNumber(int bonusNumber, List<Integer> winningNumbers) {
+		if (!validateBonusNumberRange(bonusNumber) || !validateBonusNumberOverlap(bonusNumber, winningNumbers)) {
 			System.out.println("보너스 볼 번호가 잘못 되었습니다.");
 			return false;
 		}
@@ -100,6 +100,12 @@ public class WinningLottoGenerator {
 
 	private boolean validateBonusNumberRange(int bonusNumber) {
 		if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER)
+			return false;
+		return true;
+	}
+
+	private boolean validateBonusNumberOverlap(int bonusNumber, List<Integer> winningNumbers) {
+		if (winningNumbers.contains(bonusNumber))
 			return false;
 		return true;
 	}
