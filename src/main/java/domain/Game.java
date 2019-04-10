@@ -91,4 +91,10 @@ public class Game {
 
         System.out.println(numbers);
     }
+
+    private void repeatOutputLottoNumbers() {
+        for (int i = 0; i < lottos.length; i++) {
+            outputLottoNumbers(lottos[i]);
+        }
+    }
 }
