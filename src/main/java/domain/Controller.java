@@ -10,12 +10,18 @@ import java.util.Scanner;
 public class Controller {
     private static final int MINIMUM_MONEY = 1000;      //로또 구입할수 있는 최소 가격
     private static final int MAXIMUM_MONEY = 100000;    //로또 구입할수 있는 최대 가격
-    Scanner scanner = new Scanner(System.in);
     private static final int LOTTOS_NUMBER = 7;         //로또의 번호 갯수
     private static final int LOTTOS_LIMIT_NUMBER = 45;  //로또번호 한도 숫자
 
     private int money;
-    private List<Lotto> lottos = new ArrayList<>();
+    private Message message;
+    private List<Lotto> lottos;
+    private Scanner scanner;
+
+    public Controller() {
+        scanner = new Scanner(System.in);
+        lottos = new ArrayList<>();
+    }
 
     public void askHowMany() {
         String inputValue;
@@ -31,13 +37,13 @@ public class Controller {
         try {
             money = Integer.parseInt(inputValue);
 
-            return checkInputRight();
+            return checkInputRangeRight();
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    public boolean checkInputRight() {
+    public boolean checkInputRangeRight() {
         return ((money >= MINIMUM_MONEY) && (money <= MAXIMUM_MONEY));
     }
 
