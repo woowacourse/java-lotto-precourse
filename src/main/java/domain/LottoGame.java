@@ -24,6 +24,15 @@ public class LottoGame {
     return true;
   }
 
+  private boolean IsValidNumber(String number){
+    String regEx = "^[0-9]{1}$|^[1-3]{1}[0-9]{1}$|^4{1}[0-5]{1}$";
+    if(number.matches(regEx))
+      return true;
+    System.out.println("잘못된 당첨 숫자입니다.");
+    System.exit(0);
+    return false;
+  }
+
   private int InputPurchasePrice(){
     Scanner sc = new Scanner(System.in);
     System.out.println("구입금액을 입력해 주세요.");
@@ -92,8 +101,11 @@ public class LottoGame {
 
       private List<Integer> StringToIntegerLotto(String winLotto){
         String[] winNumberList = winLotto.split(",");
-        List<Integer> winningList = new ArrayList(Lotto.oneLottoAmount);
-        for(int i=0;i<Lotto.oneLottoAmount;i++){
+        for(int i=0;i<oneLottoAmount;i++){
+          IsValidNumber(winNumberList[i]);
+        }
+        List<Integer> winningList = new ArrayList(oneLottoAmount);
+        for(int i=0;i<oneLottoAmount;i++){
             winningList.add(Integer.parseInt(winNumberList[i]));
         }
         return winningList;
@@ -101,16 +113,13 @@ public class LottoGame {
 
     private Lotto InputWinningNumber(){
         Scanner sc = new Scanner(System.in);
-        String regEx = "^([1-45]),([1-45]),([1-45]),([1-45]),([1-45]),([1-45])$";
         String winningInput = sc.nextLine();
-        /*
-        if(!winningInput.matches(regEx))
-            return null;
-        */
         List<Integer> winningList = StringToIntegerLotto(winningInput);
+        /*
         for (int i = 0; i < Lotto.oneLottoAmount; i++) {
             System.out.print(winningList.get(i)+" ");
         }
+        */
         Lotto winningNumber = new Lotto(winningList);
         return winningNumber;
     }
