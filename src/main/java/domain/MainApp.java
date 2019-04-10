@@ -60,16 +60,16 @@ public class MainApp {
             lottoNumbers.add(randomNumber);
         }
 
-        ArrayList<Integer> arrLottoNumbers = new ArrayList<Integer>(lottoNumbers);  // TreeSet 을 ArrayList 로 변환한다.
+        List<Integer> arrLottoNumbers = new ArrayList<Integer>(lottoNumbers);  // TreeSet 을 ArrayList 로 변환한다.
         return new Lotto(arrLottoNumbers);
     }
 
     /**
      * 로또 구입 금액에 해당하는 수의 로또를 발급하는 메소드
      */
-    public static ArrayList<Lotto> createLottosWorth(int money) {
+    public static List<Lotto> createLottosWorth(int money) {
         int numberOfLottos = money / LOTTO_PRICE;
-        ArrayList<Lotto> listOfLottos = new ArrayList<Lotto>();
+        List<Lotto> listOfLottos = new ArrayList<Lotto>();
 
         for (int i=0; i<numberOfLottos; i++) {
             listOfLottos.add(createRandomLotto());
@@ -80,7 +80,7 @@ public class MainApp {
     /**
      * 로또 번호들을 출력하는 메소드
      */
-    public static void printLottos(ArrayList<Lotto> lottoList) {
+    public static void printLottos(List<Lotto> lottoList) {
         Iterator<Lotto> it = lottoList.iterator();
 
         while(it.hasNext()) {
@@ -91,7 +91,7 @@ public class MainApp {
     /**
      * 당첨 번호가 적절한 지 검사하는 메소드
      */
-    public static boolean areValidWinningNumbers(ArrayList<Integer> winningNumbers) {
+    public static boolean areValidWinningNumbers(List<Integer> winningNumbers) {
         if (winningNumbers.size() != 6) {  // 숫자는 총 6개 이어야 한다.
             return false;
         }
@@ -114,7 +114,7 @@ public class MainApp {
     /**
      * 주어진 정수 리스트에 중복이 있는 지 확인하는 메소드
      */
-    public static boolean isSet(ArrayList<Integer> listNumbers) {
+    public static boolean isSet(List<Integer> listNumbers) {
         HashSet<Integer> setNumbers = new HashSet<Integer>(listNumbers);
 
         return setNumbers.size() == listNumbers.size();

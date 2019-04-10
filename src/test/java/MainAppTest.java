@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class MainAppTest extends TestCase {
@@ -71,7 +72,7 @@ public class MainAppTest extends TestCase {
     @Test
     public void testCreateLottosWorth() throws Exception {
         int testMoney = VALID_MONEY_TO_BUY_LOTTO;
-        ArrayList<Lotto> lottos = MainApp.createLottosWorth(VALID_MONEY_TO_BUY_LOTTO);
+        List<Lotto> lottos = MainApp.createLottosWorth(VALID_MONEY_TO_BUY_LOTTO);
         assertEquals(1, lottos.size());
     }
 
@@ -83,7 +84,7 @@ public class MainAppTest extends TestCase {
 
     @Test
     public void testIsValidWinningNumber() throws Exception {
-        ArrayList<Integer> testWinningNumbers;
+        List<Integer> testWinningNumbers;
         boolean isValid;
 
         testWinningNumbers = new ArrayList<Integer>(Arrays.asList(VALID_LOTTO_NUMBERS));
@@ -105,7 +106,7 @@ public class MainAppTest extends TestCase {
 
     @Test
     public void testIsSet() throws Exception {
-        ArrayList<Integer> testList;
+        List<Integer> testList;
 
         testList = new ArrayList<Integer>(Arrays.asList(VALID_LOTTO_NUMBERS));
         assertEquals(true, MainApp.isSet(testList));
