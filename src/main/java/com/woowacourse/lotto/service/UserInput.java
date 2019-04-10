@@ -51,9 +51,23 @@ public class UserInput {
 		System.out.println(DEMAND_USER_INPUT_AGAIN);
 	}
 
-	public List<Integer> getWinningNumber(){
+	public List<Integer> getWinningNumber() {
+		boolean result;
+		List<String> winnigNumberList;
 		System.out.println(DEMAND_WINNING_NUMBER);
-		List<String> winnigNumberList = Arrays.asList(inputValue().split(","));
+		do{
+			winnigNumberList = Arrays.asList(inputValue().split(","));
+			result = getWinningNumberValidResult(winnigNumberList);
+		}while(!result);
 		return winnigNumberList.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
 	}
+
+	private boolean getWinningNumberValidResult(List<String> winnigNumberList){
+		if(!Validator.checkWinningNumberListValid(winnigNumberList)){
+			printUserInputAgain();
+			return false;
+		}
+		return true;
+	}
+
 }

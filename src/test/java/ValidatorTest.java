@@ -57,4 +57,59 @@ public class ValidatorTest {
 		List<Integer> list = Arrays.asList(1, 2, 3, 4);
 		Assert.assertTrue(Validator.checkOverlapNumber(5, list));
 	}
+
+	@Test
+	public void checkWinningNumberListValid_7자리이상(){
+		List<String> list = Arrays.asList("1", "2", "3", "4","5","6","7");
+		Assert.assertFalse(Validator.checkWinningNumberListValid(list));
+	}
+
+	@Test
+	public void checkWinningNumberListValid_6자리미만(){
+		List<String> list = Arrays.asList("1", "2", "3", "4","5");
+		Assert.assertFalse(Validator.checkWinningNumberListValid(list));
+	}
+
+	@Test
+	public void checkRangeWinningNumberList_문자입력(){
+		List<String> list = Arrays.asList("1,2,3,4,5,abc".split(","));
+		Assert.assertFalse(Validator.checkRangeWinningNumberList(list));
+	}
+
+	@Test
+	public void checkRangeWinningNumberList_빈문자입력(){
+		List<String> list = Arrays.asList("1,2,,4,5,6".split(","));
+		Assert.assertFalse(Validator.checkRangeWinningNumberList(list));
+	}
+
+	@Test
+	public void checkRangeWinningNumberList_공백입력(){
+		List<String> list = Arrays.asList("1,2,3,4,5, ".split(","));
+		Assert.assertFalse(Validator.checkRangeWinningNumberList(list));
+	}
+
+	@Test
+	public void checkRangeWinningNumberList_범위에서벗어난숫자입력(){
+		List<String> list = Arrays.asList("1,2,3,4,5,46".split(","));
+		Assert.assertFalse(Validator.checkRangeWinningNumberList(list));
+	}
+
+	@Test
+	public void checkRangeWinningNumberList_정상작동(){
+		List<String> list = Arrays.asList("1,2,3,4,5,45".split(","));
+		Assert.assertTrue(Validator.checkRangeWinningNumberList(list));
+	}
+
+	@Test
+	public void checkOverlapNumberList_중복존재(){
+		List<String> list = Arrays.asList("1,2,3,4,5,5".split(","));
+		Assert.assertFalse(Validator.checkOverlapNumberList(list));
+	}
+
+	@Test
+	public void checkOverlapNumberList_정상작동(){
+		List<String> list = Arrays.asList("1,2,3,4,5,6".split(","));
+		Assert.assertTrue(Validator.checkOverlapNumberList(list));
+	}
+
 }
