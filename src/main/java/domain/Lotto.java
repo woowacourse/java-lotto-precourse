@@ -13,9 +13,9 @@ public class Lotto {
     }
 
     protected int countMatch(Lotto winningLotto) {
-        return (int) numbers.stream().
-                filter(winningLotto::containNumber).
-                count();
+        return (int) numbers.stream()
+                .filter(winningLotto::containNumber)
+                .count();
     }
 
     protected boolean containNumber(int number) {

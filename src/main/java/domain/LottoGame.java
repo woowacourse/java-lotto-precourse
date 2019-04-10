@@ -120,14 +120,14 @@ public class LottoGame {
 
     private List<Integer> convertWinningNumber(String userInput) {
         String[] splitInput = userInput.split(",");
-        return Arrays.stream(splitInput).
-                limit(LOTTO_SIZE).
-                distinct().
-                filter(this::checkNumber).
-                map(i -> Integer.parseInt(i.trim())).
-                filter(this::checkLottoRange).
-                sorted().
-                collect(Collectors.toList());
+        return Arrays.stream(splitInput)
+                .limit(LOTTO_SIZE)
+                .distinct()
+                .filter(this::checkNumber)
+                .map(i -> Integer.parseInt(i.trim()))
+                .filter(this::checkLottoRange)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private boolean checkLottoRange(int number) {
