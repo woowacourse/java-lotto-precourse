@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -91,8 +92,13 @@ public class LottoGame {
 
     	return null;
     }
-   
     
+    private List<String> splitStringByComma(String winningNumberList) {
+    	List<String> splitedNumber = new ArrayList<>(Arrays.asList(winningNumberList.split(",")));
+
+    	return splitedNumber;
+    }
+
     public static void main(String[] args) {
     	// test용 main 함수
 		LottoGame lg = new LottoGame();
