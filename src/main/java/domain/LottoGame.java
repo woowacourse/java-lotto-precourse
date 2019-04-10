@@ -19,21 +19,58 @@ public class LottoGame {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int NUMBER_OF_LOTTO = 6;
+    private static final int SET_STANDARD_NUM = 1;
 
     public void run() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        int lottoGameMoney = inputLottoMoney();
-        int lottoRound = calculateLottoRound(lottoGameMoney);
+        int lottoRound = calculateLottoRound(inputLottoMoney());
         List<Lotto> lottoList = getLottoList(lottoRound);
         printLottoNumbers(lottoList);
         System.out.println(INPUT_LAST_NUMBER);
         WinningLotto winningLotto = getWinningLotto();
+        HashMap<Rank, Integer> rankMap = getMatch(lottoList, winningLotto);
+    }
+
+    private HashMap<Rank, Integer> getMatch(List<Lotto> lottoList, WinningLotto winningLotto) {
+        HashMap<Rank, Integer> matchResult = new HashMap<>();
+        List<Rank> ranks = getRankArray(winningLotto, lottoList);
+
+        for (Rank rank : ranks) {
+            isKeyContains(matchResult, rank);
+        }
+
+        return matchResult;
+    }
+
+    private void isKeyContains(HashMap<Rank, Integer> result, Rank rank) {
+        if (!result.containsKey(rank)) {
+            result.put(rank, SET_STANDARD_NUM);
+            return;
+        }
+        if (result.containsKey(rank)) {
+            int valueCount = result.get(rank);
+            valueCount++;
+            result.put(rank, valueCount);
+        }
+    }
+
+    private List<Rank> getRankArray(WinningLotto winningLotto, List<Lotto> lottoList) {
+        List<Rank> ranks = new ArrayList<>();
+
+        for (Lotto lotto : lottoList) {
+            ranks.add(winningLotto.match(lotto));
+        }
+
+        return ranks;
     }
 
     private WinningLotto getWinningLotto() {
+        int bonusBall;
         Lotto lotto = new Lotto(getLastWinningNumberList());
         System.out.println(INPUT_BONUS_MESSAGE);
-        int bonusBall = inputBonusBall(lotto);
+
+        bonusBall = inputBonusBall(lotto);
+
         return new WinningLotto(lotto, bonusBall);
     }
 

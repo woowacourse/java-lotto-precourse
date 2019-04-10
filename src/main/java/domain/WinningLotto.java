@@ -12,8 +12,22 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    private int isContains(Lotto userLotto, int countNumber) {
+        if (userLotto.getNumbers().contains(countNumber)) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int matchCount = 0;
+        boolean bonusPoint = userLotto.getNumbers().contains(bonusNo);
+
+        for (int i = 0; i < userLotto.getNumbers().size(); i++) {
+            matchCount += isContains(userLotto, lotto.getNumbers().get(i));
+        }
+
+        return Rank.valueOf(matchCount, bonusPoint);
     }
 }
