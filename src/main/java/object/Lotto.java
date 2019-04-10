@@ -16,4 +16,8 @@ public class Lotto implements LottoNumber {
                 String numbers = this.numbers.toString();
                 System.out.println(numbers);
         }
+
+        public boolean hasBonusBall(int bonusBall) {
+                return this.numbers.contains(bonusBall);
+        }
 }
