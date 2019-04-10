@@ -12,19 +12,19 @@ public class UserLottosTest {
         UserLottos userLottos = new UserLottos(count);
     }
 
-    @Test
-    public void constructorTest() {
-        int count = Util.divideThousand(Util.fromStringToInteger("3000"));
-        UserLottos userLottos = new UserLottos(count);
-        assertEquals(3,userLottos.getUserLottosCount());
-
-        count = Util.divideThousand(Util.fromStringToInteger("10000"));
-        UserLottos userLottos1 = new UserLottos(count);
-        assertEquals(10, userLottos1.getUserLottosCount());
-
-        count = Util.divideThousand(Util.fromStringToInteger("1100"));
-        UserLottos userLottos2 = new UserLottos(count);
-        assertEquals(1, userLottos2.getUserLottosCount());
-    }
+//    @Test
+//    public void constructorTest() {
+//        int count = Util.divideThousand(Util.fromStringToInteger("3000"));
+//        UserLottos userLottos = new UserLottos(count);
+//        assertEquals(3,userLottos.getUserLottosCount());
+//
+//        count = Util.divideThousand(Util.fromStringToInteger("10000"));
+//        UserLottos userLottos1 = new UserLottos(count);
+//        assertEquals(10, userLottos1.getUserLottosCount());
+//
+//        count = Util.divideThousand(Util.fromStringToInteger("1100"));
+//        UserLottos userLottos2 = new UserLottos(count);
+//        assertEquals(1, userLottos2.getUserLottosCount());
+//    }
 
 }

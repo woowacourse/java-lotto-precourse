@@ -4,14 +4,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * 유저가 구매한 로또들을 관리하는 객체.
+ */
 public class UserLottos {
     private final int MIN_LOTTO_NUMBER = 1;
     private final int MAX_LOTTO_NUMBER = 45;
     private final int LOTTO_NUMBER_COUNT = 6;
 
     private List<Lotto> userLottos;
-    private List<Integer> basicLottoNumbers;
-    private Map<Rank, Integer> ResultMap = new LinkedHashMap<>();
+    private List<Integer> lottoNumberPool;
+    private Map<Rank, Integer> ResultMap = new LinkedHashMap<>(); // <Rank, 당첨횟수>
 
     public UserLottos(int lottoCount) {
         Util.printConsole(lottoCount + "개를 구매했습니다.");
@@ -20,7 +23,8 @@ public class UserLottos {
 
     private void makeLottos(int lottoCount) {
         userLottos = new ArrayList<>();
-        basicLottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
+        //1부터 45까지 숫자를 풀에 담아놓는다.
+        lottoNumberPool = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
         for (int i = 0; i < lottoCount; i++) {
             List<Integer> selectedLottoNumbers = generateLottoNumber();
             Util.printConsole(selectedLottoNumbers);
@@ -29,8 +33,8 @@ public class UserLottos {
     }
 
     private List<Integer> generateLottoNumber() {
-        Collections.shuffle(basicLottoNumbers);
-        List<Integer> selectedLottoNumbers = new ArrayList<>(basicLottoNumbers.subList(0, LOTTO_NUMBER_COUNT));
+        Collections.shuffle(lottoNumberPool);
+        List<Integer> selectedLottoNumbers = new ArrayList<>(lottoNumberPool.subList(0, LOTTO_NUMBER_COUNT));
         Collections.sort(selectedLottoNumbers);
         return selectedLottoNumbers;
     }
@@ -44,6 +48,7 @@ public class UserLottos {
     }
 
     private void makeResultMap() {
+        // Rank는 FIRST부터 기술되어 있다. 당첨금이 낮은순으로 출력해야 하므로 순서를 거꾸로 ResultMap에 넣는다.
         for (int i = 5; i >= 0; i--) {
             ResultMap.put(Rank.values()[i], 0);
         }

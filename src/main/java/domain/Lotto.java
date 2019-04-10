@@ -13,10 +13,12 @@ public class Lotto {
     }
 
     // 추가 기능 구현
-    public List<Integer> getLottoNumbers(){
+    public List<Integer> getLottoNumbers() {
         return numbers;
     }
-    public Rank getResultRank(WinningLotto winningLotto){
+
+    // 자기 자신의 당첨 결과를 리턴한다.
+    public Rank getResultRank(WinningLotto winningLotto) {
         return winningLotto.match(this);
     }
 }

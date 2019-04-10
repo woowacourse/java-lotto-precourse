@@ -15,7 +15,7 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
         boolean bonus = userLotto.getLottoNumbers().contains(bonusNo);
-        userLotto.getLottoNumbers().retainAll(lotto.getLottoNumbers());
-        return Rank.valueOf(userLotto.getLottoNumbers().size(), bonus);
+        userLotto.getLottoNumbers().retainAll(lotto.getLottoNumbers()); // !!주의!! retainAll()은 전달된 리스트 내용이 바뀔수 있다.
+        return Rank.valueOf(userLotto.getLottoNumbers().size(), bonus); // 지금은 결과를 확인한 후 번호는 필요 없으므로 사용했다.
     }
 }

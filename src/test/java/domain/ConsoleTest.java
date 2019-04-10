@@ -71,4 +71,11 @@ public class ConsoleTest {
         assertEquals(numbers,Console.getWinningLottoNumber());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void duplicateTest() {
+        String input = "1,2,3,4,5,1";
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+        Console.getWinningLottoNumber();
+    }
 }
