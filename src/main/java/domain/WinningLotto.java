@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -13,7 +16,24 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countOfMatch;
+        boolean isMatchBonusNo;
+
+        countOfMatch = checkSameLottoNumber(userLotto);
+        isMatchBonusNo = checkMatchBonusNumber(userLotto);
+
+        return Rank.valueOf(countOfMatch, isMatchBonusNo);
+    }
+
+    private int checkSameLottoNumber(Lotto userLotto){
+        List<Integer> copyUserLotto = new ArrayList<>(userLotto.getNumbers());
+        List<Integer> copyWinningLotto = new ArrayList<>(lotto.getNumbers());
+
+        copyUserLotto.retainAll(copyWinningLotto);
+        return copyUserLotto.size();
+    }
+
+    private boolean checkMatchBonusNumber(Lotto userLotto){
+        return userLotto.getNumbers().contains(bonusNo);
     }
 }

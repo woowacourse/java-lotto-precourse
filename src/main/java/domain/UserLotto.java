@@ -55,4 +55,8 @@ public class UserLotto {
             iter.next().printLottoNumber();
         }
     }
+
+    public List<Lotto> getUserLottoList() {
+        return userLottoList;
+    }
 }

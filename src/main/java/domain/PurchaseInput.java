@@ -5,10 +5,6 @@ import java.util.regex.Pattern;
 
 public class PurchaseInput {
 
-    public PurchaseInput() {
-
-    }
-
     public int purchaseLotto() {
         String price;
         Scanner sc = new Scanner(System.in);

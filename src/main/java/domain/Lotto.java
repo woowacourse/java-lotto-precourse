@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,5 +15,9 @@ public class Lotto {
     // 추가 기능 구현
     public void printLottoNumber(){
         System.out.println(numbers);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }

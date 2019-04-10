@@ -142,7 +142,7 @@ public class WinningLottoInput {
     }
 
     private WinningLotto createWinningLotto(){
-        List<Integer> winningNumberList = new ArrayList<Integer>(winningNumbers);
+        List<Integer> winningNumberList = new ArrayList<>(winningNumbers);
 
         Lotto lotto = new Lotto(winningNumberList);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
