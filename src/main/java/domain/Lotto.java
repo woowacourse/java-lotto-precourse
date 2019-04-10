@@ -28,7 +28,9 @@ public class Lotto {
 
         set.stream().forEach(r -> addNumber(r));
     }
-    
+    private int createRandomNumber() {
+        return (int) (Math.random() * Const.MAX_LIMIT_LOTTO_NUMBER) + Const.MIN_LIMIT_LOTTO_NUMBER;
+    }
     public boolean isOverlapToBonusNumber(String BonusNumber) {
         return numbers.contains(Integer.parseInt(BonusNumber));
     }
