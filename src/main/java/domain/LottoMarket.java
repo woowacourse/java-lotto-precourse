@@ -28,22 +28,22 @@ public class LottoMarket {
 		System.out.println(PURCHASE_PRICE_MESSAGE);
 		purchasePrice = SCANNER.nextInt();
 		int changes = purchasePrice % LOTTO_PAY;
+		
 		if (changes != 0) {
 			System.out.println(CHANGES_MESSAGE + changes);
 			purchasePrice -= changes;
 		}
 	}
-
+	
 	private ArrayList<Integer> makeLottoNumbers() {
-		SortedSet<Integer> lottoNumberSet = new TreeSet<Integer>();
-		ArrayList<Integer> lottoNumberList = new ArrayList<Integer>();
-
-		while (lottoNumberSet.size() < MAX_LOTTO_SIZE) {
+		SortedSet<Integer> lottoNumbersSet = new TreeSet<Integer>();
+		
+		while (lottoNumbersSet.size() < MAX_LOTTO_SIZE) {
 			int randomlottoNumber = RANDOM.nextInt(MAX_LOTTO_NUM) + 1;
-			lottoNumberSet.add(randomlottoNumber);
+			lottoNumbersSet.add(randomlottoNumber);
 		}
-		lottoNumberList.addAll(lottoNumberSet);
-		return lottoNumberList;
+		ArrayList<Integer> lottoNumbersList = new ArrayList<Integer>(lottoNumbersSet);
+		return lottoNumbersList;
 	}
 	
 	private void makeLottoList(int lottoCount) {
