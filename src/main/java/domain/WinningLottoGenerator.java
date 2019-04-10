@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -8,8 +10,18 @@ import java.util.Scanner;
 public class WinningLottoGenerator {
 	Scanner scanner = new Scanner(System.in);
 
-	private String inputWinningNumbersFromUser() {
+	private List<Integer> inputWinningNumbersFromUser() {
 		System.out.println("지난 주 당첨 번호를 입력해주세요.");
-		return scanner.next();
+		return getSplitedWinningNumbers(scanner.next());
+	}
+
+	private List<Integer> getSplitedWinningNumbers(String winningNumbers) {
+		String[] splitedWinningNumbers = winningNumbers.split(",");
+		List<Integer> listWinningNumbers = new ArrayList<Integer>();
+		for (int i = 0; i < splitedWinningNumbers.length; i++) {
+			int winningNumber = Integer.parseInt(splitedWinningNumbers[i]);
+			listWinningNumbers.add(winningNumber);
+		}
+		return listWinningNumbers;
 	}
 }
