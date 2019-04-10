@@ -130,7 +130,6 @@ WARNING: 로또넘버는 6개 이어야 합니다. 다시 입력해주세요.
 |Validator|값이 에러를 갖는지 확인하는 로직을 담당|
 |---|---|
 |checkIsInteger|해당값이 정수로 변환가능한지 확인|
-|checkInputLottoMoneyLengthIsTooLong|로또구입금액이 너무 긴지 확인(오버플로우 방지 목적)|
 |checkLottoNumbersInputLengthIsValid|6개 로또번호입력이 갯수가 맞는지 확인|
 |checkLottoNumbersInputHasNoInvalidValue|6개 로또번호입력이 모두 유효한지 확인|
 |checkDuplicationIfHasPrintWarning|6개 로또번호입력이 중복이 있는지 확인. 있다면 Warning을 출력|

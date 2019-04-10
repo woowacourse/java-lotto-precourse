@@ -23,20 +23,11 @@ public class Validator {
      * @return
      */
     public static boolean checkInputLottoMoney(String lottoCountInput) {
-        if (!checkInputLottoMoneyLengthIsTooLong(lottoCountInput) ||
-                !checkIsInteger(lottoCountInput)) {
+        if (!checkIsInteger(lottoCountInput)) {
             return false;
         }
         int inputMoney = Integer.parseInt(lottoCountInput);
         if (checkInputLottoMoneyIsUnderMinvalue(inputMoney)) {
-            return false;
-        }
-        return true;
-    }
-
-    private static boolean checkInputLottoMoneyLengthIsTooLong(String lottoCountInput) {
-        if (lottoCountInput.length() > UserView.MAX_POSSIBLE_LOTTO_INPUT_LENGTH) {
-            System.out.println(UserView.WARNING_WHEN_LOTTO_INPUT_COUNT_OVER);
             return false;
         }
         return true;
