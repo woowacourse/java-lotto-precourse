@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 로또를 생성하는 객체
  */
-class LottoSystem {
+class LottoGenerator {
 
     Lotto getLotto() {
         return createLotto();
@@ -21,7 +21,7 @@ class LottoSystem {
     private List<Integer> createLottoNumbers() {
         List<Integer> lottoNumbers = new ArrayList<>();
 
-        while (lottoNumbers.size() < LottoGameSystem.THE_NUMBER_OF_LOTTO_NUMBERS) {
+        while (lottoNumbers.size() < LottoGame.THE_NUMBER_OF_LOTTO_NUMBERS) {
             int lottoNumber = createLottoNumber();
             addLottoNumber(lottoNumber, lottoNumbers);
         }
@@ -30,7 +30,7 @@ class LottoSystem {
     }
 
     private int createLottoNumber() {
-        return (int) (Math.random() * LottoGameSystem.MAX_LOTTO_NUMBER) + LottoGameSystem.MIN_LOTTO_NUMBER;
+        return (int) (Math.random() * LottoGame.MAX_LOTTO_NUMBER) + LottoGame.MIN_LOTTO_NUMBER;
     }
 
     private void addLottoNumber(int lottoNumber, List<Integer> lottoNumbers) {

@@ -12,8 +12,8 @@ class Lotto {
         this.numbers = numbers;
     }
 
-    void printLottoNumbers() {
-        System.out.println(numbers.toString());
+    String getLottoNumberString() {
+        return numbers.toString();
     }
 
     int getCountOfMatch(Lotto winningLotto) {

@@ -9,7 +9,10 @@ class LottoEarningsRateSystem {
     private static final int PERCENT = 100;
 
     double getEarningsRate(List<Lotto> lottoList, WinningLotto winningLotto) {
-        return (double) getWinningMoneyTotal(lottoList, winningLotto) / (lottoList.size() * LottoGameSystem.LOTTO_PRICE) * PERCENT;
+
+        /* 당첨금액 / (로또개수 * 로또가격) * 100 */
+        return (double) getWinningMoneyTotal(lottoList, winningLotto)
+                / (lottoList.size() * LottoGame.LOTTO_PRICE) * PERCENT;
     }
 
     private int getWinningMoneyTotal(List<Lotto> lottoList, WinningLotto winningLotto) {
@@ -30,14 +33,13 @@ class LottoEarningsRateSystem {
         return Math.toIntExact(lottoList.stream().filter(lotto -> winningLotto.match(lotto) == rank).count());
     }
 
-    void printResultByRank(List<Lotto> lottoList, WinningLotto winningLotto, Rank rank) {
+    String getResultByRankMessage(List<Lotto> lottoList, WinningLotto winningLotto, Rank rank) {
         if (rank == Rank.SECOND) {
-            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개",
-                    rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(lottoList, winningLotto, rank)));
-
-            return;
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n",
+                    rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(lottoList, winningLotto, rank));
         }
-        System.out.println(String.format("%d개 일치 (%d원)- %d개",
-                rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(lottoList, winningLotto, rank)));
+
+        return String.format("%d개 일치 (%d원)- %d개\n",
+                rank.getCountOfMatch(), rank.getWinningMoney(), getLottoCountByRank(lottoList, winningLotto, rank));
     }
 }

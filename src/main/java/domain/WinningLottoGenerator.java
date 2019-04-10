@@ -5,13 +5,9 @@ import java.util.*;
 /**
  * 당첨번호를 생성하는 객체
  */
-class WinningLottoSystem {
+class WinningLottoGenerator {
 
-    WinningLotto getWinningLotto(List<Integer> winningLottoNumbers, int bonusNumber) {
-        return createWinningLotto(winningLottoNumbers, bonusNumber);
-    }
-
-    private WinningLotto createWinningLotto(List<Integer> winningLottoNumbers, int bonusNumber) {
+    WinningLotto createWinningLotto(List<Integer> winningLottoNumbers, int bonusNumber) {
         return new WinningLotto(createLotto(winningLottoNumbers), bonusNumber);
     }
 
