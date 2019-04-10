@@ -54,7 +54,7 @@
  - 사용자가 입력한 로또 번호는 쉼표 기준으로 분리해야 한다.
  - 사용자가 입력한 로또 번호는 모두 다 다른 번호여야 한다.
  - 사용자가 입력한 보너스 번호는 미리 입력한 6개의 로또 번호와 달라야 한다.
- - 로또 번호는 1~45여야 한다.
+ - 로또 번호는 1~45 사이 여야 한다.
  - 사용자가 잘못된 입력을 하면 다시 입력받도록 한다.
  
  
@@ -62,8 +62,8 @@
  - 컴퓨터가 뽑아주는 로또 객체의 서로 다른 6개 번호는 다른 로또 객체의 번호와 '겹칠' 수 있다.
  - 컴퓨터가 뽑아준 로또 번호를 보여준다.
  - 컴퓨터가 뽑은 로또 번호와 사용자 로또 번호를 비교한다.
- 
- - 사행성 방지를 위해 사용자가 입력할 수 있는 돈은 50만원 이하로 제한한다.
+
+ - 사용자가 구매한 로또들의 통계를 보여준다. 
  - 사용자가 거둔 수익률을 보여준다.
 
 ## 구현해야될 객체
@@ -89,12 +89,20 @@
   - inputMoney() // 구입 금액을 입력하는 기능
   - showBoughtLotto() // 구입한 로또의 숫자를 보여주는 기능 
   - inputLastWeekWinningNumbers() // 지난주 당첨 숫자를 입력하는 기능
+  - processMoney() // 사용자가 입력한 구입 금액을 가공하는 기능
+  - processString() // 사용자가 입력한 로또 번호를 가공하는 기능
+  - processBonusNo() // 사용자가 입력한 보너스 번호를 가공하는 기능
   - inputBonusNumber() // 보너스 번호를 입력하는 기능
   - showStatistics() // 당첨 통계를 보여주는 기능
   - showProfitRate() // 수익률을 보여주는 기능
 
  - Profit
   - calculateProfitRate() // 수익률을 계산하는 기능
+  - initMap() // Profit 객체에서 활용하는 Map 데이터 구조 초기화를 위한 기능
+  - addUserRanks() // 로또 당첨 등급을 추가하는 기능
+  - calculateRank() // 로또 당첨 등급을 계산하는 기능
+  - showStatistics() // 당첨 통계를 보여주는 기능
+  - showProfitRate() // 수익률을 보여주는 기능
 
 - Game
   - inputUserLotto() // 사용자로부터 로또 게임에 필요한 데이터를 입력받고, 게임을 준비하는 기능
@@ -102,5 +110,29 @@
   - inputWinningLotto() // 사용자로부터 당첨 로또에 필요한 데이터를 입력받고, 준비하는 기능
   - makeWinningLotto() // 당첨 번호를 만드는 기능
   - calculateRank() // 사용자가 가지고 있는 로또의 당첨 정도를 확인하는 기능
+  - displayResults // 로또 게임의 결과를 보여주는 기능
   - initGame() // 로또 게임을 시작하는 기능
  
+- Check
+  - isBonusNoValid() // 보너스 번호가 유효한지 확인하는 기능
+  - isSixNumbers() // 사용자가 입력한 로또 번호가 6개 있는지 확인하는 기능
+  - limitValidity() // 사용자가 입력한 로또 번호가 1 ~ 45 사이인지 확인하는 기능
+  - usedValidity() // 사용자가 입력한 로또 번호가 겹치는지 확인하는 기능
+  - producingInteger() // 사용자가 입력한 로또 번호를 활용할 수 있게 가공하는 기능
+  - splitUserInput() // 사용자가 입력한 로또 번호를 ,기준으로 나누는 기능
+
+- NumberException
+
+ ## 함수형 프로그래밍
+
+ >for (int i = FIFTH_INDEX; i < rankList.size(); i++) {    
+&nbsp;&nbsp;System.out.println(rankList.get(i).getCountOfMatch() + "개 일치 (" + rankList.get(i).getWinningMoney() + "원)- " + COUNT_RANKS.get(rankList.get(i)) + "개");  
+ >       }  
+
+ >rankList.stream().filter(rank -> rank != Rank.MISS).forEach(  
+ >&nbsp;&nbsp;               rank -> {  
+ >&nbsp;&nbsp;&nbsp;&nbsp;                   System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- " + COUNT_RANKS.get(rank) + "개");  
+ >&nbsp;&nbsp;               }  
+ >       );
+ 
+ - 함수형 프로그래밍을 부분적으로 도입했다. 아쉬운 부분은 2번의 코드를 indent의 depth가 2 이어서 이 코드에서는 쓰지 못했다.
