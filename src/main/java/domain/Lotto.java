@@ -24,13 +24,14 @@ public class Lotto {
 	private static WinningLotto winningLotto;
 	private static HashMap<Rank, Integer> result = new HashMap<Rank, Integer>(Rank.values().length);
 
-	private final List<Integer> numbers;
+	private final List<Integer> numbers; // 중복된 숫자가 있으면 안되니 set이 더 좋을 것 같은데, 혹시 list의 더 좋은 점이 있는 지 궁금합니다.
 
 	public Lotto(List<Integer> numbers) {
 		this.numbers = numbers;
 	}
 
 	// 추가 기능 구현
+
 	private static int inputInt(String massage) throws NumberFormatException, IOException {
 		System.out.println(massage);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -87,7 +88,7 @@ public class Lotto {
 	}
 
 	private static boolean isValidIntListForLotto(List<Integer> list) {
-		if(!isValidLengthForLotto(list))
+		if (!isValidLengthForLotto(list))
 			return false;
 		int bool = 1;
 		Iterator<Integer> it = list.iterator();
@@ -143,10 +144,23 @@ public class Lotto {
 		winningLotto = new WinningLotto(lotto, bonusNo);
 	}
 
-	public static void main(String[] args) { // 객체로 불러 실행해야한다면 shell()로 대체한다.
+	public static void main(String[] args) { // 객체로 불러 실행하고자 한다면 shell()로 대체한다.
 		inputCost();
 		generateMyLottos();
 		inputWinningLotto();
 
+	}
+
+	boolean contains(int num) {
+		return numbers.contains(num);
+	}
+
+	int numOfSharedNumber(Lotto compLotto) {
+		int ret = 0;
+		Iterator<Integer> it = numbers.iterator();
+		while (it.hasNext()) {
+			ret += compLotto.contains(it.next()) ? 1 : 0;
+		}
+		return ret;
 	}
 }
