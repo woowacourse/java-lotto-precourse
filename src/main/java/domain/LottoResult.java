@@ -39,7 +39,7 @@ public class LottoResult {
         }
     }
 
-    public void calWinningMoneyPercent(int userPayment) {
+    protected void calWinningMoneyPercent(int userPayment) {
         winningMoneyPercent = (float) winningMoney / (float) userPayment;
     }
 
@@ -50,7 +50,7 @@ public class LottoResult {
         }
     }
 
-    public float getWinningMoneyPercent() {
+    protected float getWinningMoneyPercent() {
         return winningMoneyPercent;
     }
 

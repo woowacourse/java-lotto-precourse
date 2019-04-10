@@ -33,19 +33,19 @@ public enum RankResult {
         throw new IllegalArgumentException(rank + "는 유효하지 않은 값입니다.");
     }
 
-    public int getCount() {
+    protected int getCount() {
         return count;
     }
 
-    public String getRankResultStr() {
+    protected String getRankResultStr() {
         return rankResultStr;
     }
 
-    public Rank getRank() {
+    protected Rank getRank() {
         return rank;
     }
 
-    public void ifMatchRankIncreaseCount(Rank rank) {
+    protected void ifMatchRankIncreaseCount(Rank rank) {
         if (this.rank == rank) {
             increaseCountOne();
         }
