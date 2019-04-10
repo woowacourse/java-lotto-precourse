@@ -17,4 +17,10 @@ public class LottoGame {
         List<Rank> ranks = matchWinningLottoAndLottoList(lottoList, winLotto, bonusNo);    
         statistic(ranks,money);
     }
+
+    private int checkMoney(InputValid input, Scanner sc) {
+        System.out.print(Message.INPUT_MONEY_MESSAGE);
+        int money = input.checkMoney(sc.nextLine());
+        return money;
+    }
 }
