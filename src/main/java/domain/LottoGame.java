@@ -22,14 +22,14 @@ public class LottoGame {
 		
 		do {
 			System.out.println("구매금액을 입력해 주세요.");
-			money = sc.nextLine();
+			money = sc.nextLine().trim();
 		} while(!checkNumberOrNot(money) || !devideByThousand(money));
 
 		return Integer.parseInt(money);
 	}
 	
-	private boolean checkNumberOrNot(String money) {
-		if (Pattern.matches(NUMBER_CHECK_REGEX, money) && Integer.parseInt(money) != 0) {
+	private boolean checkNumberOrNot(String strNumber) {
+		if (Pattern.matches(NUMBER_CHECK_REGEX, strNumber)) {
 			return true;
 		}
 		
@@ -152,14 +152,6 @@ public class LottoGame {
     	}
     	
     	return rightRange;
-    }
-    
-    private String inputBonusBall() {
-    	String bonusBall = "0";
-    	
-    	bonusBall = sc.nextLine();
-    
-    	return bonusBall;
     }
     
     public static void main(String[] args) {
