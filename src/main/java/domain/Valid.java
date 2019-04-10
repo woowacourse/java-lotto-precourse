@@ -25,4 +25,5 @@ public class Valid {
         return (money % Const.ONE_LOTTO_MONEY) != 0;
     }
 
+  
 }

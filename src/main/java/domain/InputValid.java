@@ -52,4 +52,23 @@ public class InputValid {
         new ArrayList<>(Arrays.asList(winningNumbers.split(Message.SPOT))).forEach(r -> list.add(Integer.parseInt(r)));
         return new Lotto(list);
     }
+
+    private Result isValidWinningNumbers(String winningNumbers) {
+        if (Valid.isSplitException(winningNumbers)) {
+            return Result.fail(Message.SPLIT_EXCEPTION);
+        }
+        if (Valid.isWrongSizeOfWinningNumbers(winningNumbers)) {
+            return Result.fail(Message.IMPROPER_PRIZE);
+        }
+        if (Valid.isInputHasChar(winningNumbers.split(Message.SPOT))) {
+            return Result.fail(Message.INPUT_HAS_CHAR);
+        }
+        if (Valid.isContainOutOfLottoScope(winningNumbers.split(Message.SPOT))) {
+            return Result.fail(Message.OUT_OF_SCOPE_NUMBER);
+        }
+        if (Valid.isOverlapNumber(winningNumbers.split(Message.SPOT))) {
+            return Result.fail(Message.OVERLAP_NUMBERS);
+        }
+        return Result.ok();
+    }
 }
