@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMain {
@@ -8,12 +7,12 @@ public class LottoMain {
         UserLottos userLottos = new UserLottos(Console.getInputLottoMoney());
         List<Integer> winningLottoNumber = Console.getWinningLottoNumber();
         int winningLottoBonus = Console.getWinngLottoBonus();
+        Util.checkBonusNumber(winningLottoNumber, winningLottoBonus);
+
         Lotto winningLottoBase = new Lotto(winningLottoNumber);
         WinningLotto winningLotto = new WinningLotto(winningLottoBase, winningLottoBonus);
-
-        System.out.println("당첨통계");
-        System.out.println("-----");
-
-        userLottos.getResultLottos(winningLotto);
+        userLottos.checkUserLottos(winningLotto);
     }
+
+
 }
