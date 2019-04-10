@@ -99,16 +99,14 @@ WARNING: 로또넘버는 6개 이어야 합니다. 다시 입력해주세요.
 
 |LottoGame|로또게임 진행을 담당|
 |---|---|
-|getLottoCountFromUser|유저로부터 로또갯수를 받는 로직|
+|getLottoCountFromUser|유저로부터 로또갯수 입력받기|
 |createLottos| 특정갯수의 로또객체를 생성해 반환|
 |printLottos|특정갯수의 로또객체정보를 출력|
+|createInitializedRankCounter|로또 당첨결과 계산하기위한 자료구조(Map)생성 후 반환|
 |calculateLottoMatch|로또 당첨결과를 계산|
-|createSortAppliedRankCounter|countOfMatch수의 오름차순으로 항상 정렬되도록 sort함수적용된 Map 생성|
-|addAllRankTypes|로또 당첨결과에 미리 모든 종류의 결과(Rank)를 입력해 0으로 초기화|
 |calculateProfitRate|수익률 계산|
 |printLottoResult|로또 당첨 결과를 출력(당첨로또 현황, 수익률)|
 |createWinningLotto|당첨로또 생성|
-|compareRank|Rank를 countOfMatch의 오름차순으로 정렬하기위한 비교 함수|
 |playGame|게임 실행 함수|
 
 |Lotto|로또 1장 객체|
