@@ -1,9 +1,16 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class LottoGame {
+	static private final int FIRST = 2000000000;
+	static private final int SECOND = 30000000;
+	static private final int THIRD = 1500000;
+	static private final int FOURTH = 50000;
+	static private final int FIFTH = 5000;
 	
 	LottoGenerator lottoGenerator = new LottoGenerator();
 	WinningLottoGenerator winLottoGenerator = new WinningLottoGenerator();
@@ -38,5 +45,19 @@ public class LottoGame {
 		
 		return rank;
     }
+    
+    private HashMap<Integer, Integer> initHashMap() {
+  		LinkedHashMap<Integer, Integer> result = new LinkedHashMap<Integer, Integer>();
+  		
+  		result.put(0, 0);
+  		result.put(FIFTH, 0);
+  		result.put(FOURTH, 0);
+  		result.put(THIRD, 0);
+  		result.put(SECOND, 0);
+  		result.put(FIRST, 0);
+  		
+  		return result;
+      }
+
 	
 }
