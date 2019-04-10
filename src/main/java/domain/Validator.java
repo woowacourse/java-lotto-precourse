@@ -67,6 +67,14 @@ public class Validator {
         return true;
     }
 
+    public boolean isValidSize(List<String> userInput) {
+        if (userInput.size() != LottoManager.NUM_OF_WINNING_NUMBERS) {
+            System.out.println(LottoManager.NUM_OF_WINNING_NUMBERS + "개의 숫자를 쉼표로 구분해 입력해주세요.");
+            return false;
+        }
+        return true;
+    }
+
     public boolean isValidWinningNumbers(List<String> userInput) {
         boolean validNumerics = true;
 
@@ -74,7 +82,7 @@ public class Validator {
             validNumerics = validNumerics && isNemericInt(str);
         }
 
-        return validNumerics && isInBounds(userInput);
+        return validNumerics && isInBounds(userInput) && isValidSize(userInput);
     }
 
     public boolean isValidBonus(String Bonus) {
