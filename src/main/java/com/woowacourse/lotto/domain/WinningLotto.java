@@ -13,7 +13,13 @@ public class WinningLotto {
 	}
 
 	public Rank match(Lotto userLotto) {
-		// TODO 로직 구현
-		return null;
+		boolean bonusResult = false;
+
+		if (userLotto.getNumbers().contains(bonusNo)) {
+			bonusResult = true;
+		}
+		userLotto.getNumbers().retainAll(lotto.getNumbers()); //winningLotto와 일치하는 숫자들만 userLotto에 남는다.
+		Rank rank = Rank.valueOf(userLotto.getNumbers().size(), bonusResult);
+		return rank;
 	}
 }

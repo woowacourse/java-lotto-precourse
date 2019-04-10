@@ -9,6 +9,7 @@
  */
 package com.woowacourse.lotto.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -58,7 +59,7 @@ public class UserInput {
 		List<String> winnigNumberList;
 		System.out.println(DEMAND_WINNING_NUMBER);
 		do {
-			winnigNumberList = Arrays.asList(inputValue().split(","));
+			winnigNumberList = new ArrayList<>(Arrays.asList(inputValue().split(",")));
 			result = getWinningNumberValidResult(winnigNumberList);
 		}
 		while (!result);
