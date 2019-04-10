@@ -76,4 +76,16 @@ public class LottoBank {
 		}
 		showMatchResult();
 	}	
+	
+	private void showMatchResult() {
+		for (int i = 0; i < LottoRule.REWARDS.getNums().length; i++) {
+			if (matchResults.containsKey(LottoRule.REWARDS.getNums()[i])) {
+				System.out.print(LottoRule.RANKNAMES.getNames()[i]);
+				System.out.println(matchResults.get(LottoRule.REWARDS.getNums()[i]) + "개");
+			} else {
+				System.out.print(LottoRule.RANKNAMES.getNames()[i]);
+				System.out.println(0 + "개");
+			}
+		}
+	}
 }
