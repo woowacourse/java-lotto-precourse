@@ -14,6 +14,11 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
-        return null;
+        int matchCount = 0;
+        for (int number : userLotto.getNumbers()) {
+            matchCount = (lotto.getNumbers().contains(number)) ? matchCount + 1 : matchCount;
+        }
+        boolean stateMatchBonus = userLotto.getNumbers().contains(bonusNo);
+        return Rank.valueOf(matchCount, stateMatchBonus);
     }
 }
