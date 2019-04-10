@@ -2,6 +2,7 @@ package com.molt3nrock.lotto;
 
 import static com.molt3nrock.lotto.Constants.PRICE_PER_LOTTO;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -63,14 +64,26 @@ class Statistics {
      *
      * 수익률 = 총 이득 / 총 투자
      */
-    private float calculateIncomeCostRatio() {
-        final int BASE_PRICE = 0;
-        int totalGain = rankState.entrySet().stream()
+    private BigDecimal calculateIncomeCostRatio() {
+        final int FLOATING_POINT_PRECISION = 3;
+        BigDecimal totalGain = BigDecimal.valueOf(calculateTotalGain());
+        BigDecimal totalCost = BigDecimal.valueOf(calculateTotalCost());
+        return totalGain.divide(totalCost, FLOATING_POINT_PRECISION, BigDecimal.ROUND_HALF_UP);
+    }
+
+    private int calculateTotalGain() {
+        final int ADDITION_IDENTITY = 0;
+        return rankState.entrySet()
+            .stream()
             .map(entry -> entry.getValue() * entry.getKey().getWinningMoney())
-            .reduce(BASE_PRICE, (accumulation, prizeMoney) -> accumulation + prizeMoney);
-        int totalCost = rankState.values().stream()
-            .reduce(BASE_PRICE, (accumulation, count) -> accumulation + count * PRICE_PER_LOTTO);
-        return (float) totalGain / totalCost;
+            .reduce(ADDITION_IDENTITY, (acc, prizeMoney) -> acc + prizeMoney);
+    }
+
+    private int calculateTotalCost() {
+        return PRICE_PER_LOTTO * rankState.values()
+            .stream()
+            .mapToInt(Integer::intValue)
+            .sum();
     }
 
     private static String formatRankStateEntry(Entry<Rank, Integer> entry) {
