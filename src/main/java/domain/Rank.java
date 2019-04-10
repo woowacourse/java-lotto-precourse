@@ -11,6 +11,7 @@ public enum Rank {
     FIFTH(3, 5_000), // 5등
     MISS(0, 0);
 
+    /* 당첨번호 최소 갯수 */
     private static final int WINNING_MIN_COUNT = 3;
 
     private int countOfMatch;
@@ -39,7 +40,7 @@ public enum Rank {
         }
 
         for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
+            if (rank.matchCount(countOfMatch) && rank != SECOND) {
                 return rank;
             }
         }
