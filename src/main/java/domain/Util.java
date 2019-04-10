@@ -15,7 +15,7 @@ public class Util {
     }
 
     public static String getConsoleInput() {
-        return sc.nextLine();
+        return removeBlank(sc.nextLine());
     }
 
     public static Integer fromStringToInteger(String inputString) {
