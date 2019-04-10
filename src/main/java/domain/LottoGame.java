@@ -11,9 +11,7 @@ import java.util.*;
 
 public class LottoGame {
 
-    static final String COMMENT_WHEN_RECEIVE_INPUT_MONEY = "구입금액을 입력해 주세요.";
-    static List<Lotto> lottoList;
-    static WinningLotto winningLotto;
+    final String COMMENT_WHEN_RECEIVE_INPUT_MONEY = "구입금액을 입력해 주세요.";
     final Rank[] rankDisplayOrder = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
 
     private int getLottoCountFromUser(Scanner sc) {
@@ -23,30 +21,30 @@ public class LottoGame {
         return lottoCount;
     }
 
-    private void createLottos(int lottoCount) {
+    private List<Lotto> createLottos(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
         List<Lotto> createdLottoList = new LinkedList<Lotto>();
         for (int i = 0; i < lottoCount; i++) {
             Lotto createdLotto = Lotto.createRandomLotto();
             createdLottoList.add(createdLotto);
         }
-        lottoList = createdLottoList;
+        return createdLottoList;
     }
 
-    private void printLottos() {
+    private void printLottos(List<Lotto> lottoList) {
         for (int i = 0; i < lottoList.size(); i++) {
             lottoList.get(i).printLottoNumbers();
         }
     }
 
-    private void createWinningLotto(Scanner sc) {
+    private WinningLotto createWinningLotto(Scanner sc) {
         ArrayList<Integer> winNumberList = DataReceiver.getWinningLottoNumbersFromUser(sc);
         int bonusNumber = DataReceiver.getBonusNumberFromUser(winNumberList, sc);
 
-        winningLotto = new WinningLotto(new Lotto(winNumberList), bonusNumber);
+        return new WinningLotto(new Lotto(winNumberList), bonusNumber);
     }
 
-    private Map<Rank, Integer> calculateLottoMatch() {
+    private Map<Rank, Integer> calculateLottoMatch(List<Lotto> lottoList, WinningLotto winningLotto) {
         Map<Rank, Integer> rankCounter = createInitializedRankCounter();
 
         for (int i = 0; i < lottoList.size(); i++) {
@@ -89,10 +87,10 @@ public class LottoGame {
         Scanner sc = new Scanner(System.in);
         int lottoCount = getLottoCountFromUser(sc);
 
-        createLottos(lottoCount);
-        printLottos();
-        createWinningLotto(sc);
-        Map<Rank, Integer> lottoMatchResult = calculateLottoMatch();
+        List<Lotto> lottoList = createLottos(lottoCount);
+        printLottos(lottoList);
+        WinningLotto winningLotto = createWinningLotto(sc);
+        Map<Rank, Integer> lottoMatchResult = calculateLottoMatch(lottoList, winningLotto);
         double profitPercent = calculateProfitRate(lottoMatchResult, lottoCount);
         printLottoResult(lottoMatchResult, profitPercent);
     }
