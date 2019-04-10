@@ -38,6 +38,10 @@ public class PurchaseInfo {
                 return stats;
         }
 
+        public double makeYiend(long revenue){
+                return revenue/this.purchaseAmount;
+        }
+
         private List<Lotto> purchaseLottos() {
                 List<Lotto> lottos = new ArrayList<Lotto>();
                 PurchsedLottoNumberCreator creator = new PurchsedLottoNumberCreator();

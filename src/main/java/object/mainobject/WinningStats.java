@@ -9,21 +9,29 @@ import java.util.Map;
 public class WinningStats {
         private final PurchaseInfo purchaseInfo;
         private final WinningLotto winningLotto;
-        private final Map<Rank, Integer> stats;
+        private Map<Rank, Integer> stats;
+        private long revenue;
+        private double yield;
 
         public WinningStats(PurchaseInfo purchaseInfo, WinningLotto winningLotto) {
                 this.purchaseInfo = purchaseInfo;
                 this.winningLotto = winningLotto;
-                this.stats = new HashMap<Rank, Integer>()
-                this.stats.put(Rank.FIRST, 0);
-                this.stats.put(Rank.SECOND, 0);
-                this.stats.put(Rank.THIRD, 0);
-                this.stats.put(Rank.FOURTH, 0);
-                this.stats.put(Rank.FIFTH, 0);
-                this.stats.put(Rank.MISS, 0);
+                this.stats = new HashMap<Rank, Integer>();
+                for(Rank rank : Rank.values()){
+                        this.stats.put(rank,0);
+                }
+                revenue = 0;
+                yield = 0;
         }
 
         public void makeWinningStats() {
                 purchaseInfo.makeWinningStats(this.stats, this.winningLotto);
+        }
+
+        public void makeYield(){
+                for(Rank rank : Rank.values()){
+                        this.revenue += this.stats.get(rank) * rank.getWinningMoney();
+                }
+                this.yield = purchaseInfo.makeYield(this.revenue);
         }
 }
