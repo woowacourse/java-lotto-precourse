@@ -99,45 +99,51 @@ public class LottoGame {
     return userLotto;
   }
 
-      private List<Integer> StringToIntegerLotto(String winLotto){
-        String[] winNumberList = winLotto.split(",");
-        for(int i=0;i<oneLottoAmount;i++){
-          IsValidNumber(winNumberList[i]);
-        }
-        List<Integer> winningList = new ArrayList(oneLottoAmount);
-        for(int i=0;i<oneLottoAmount;i++){
-            winningList.add(Integer.parseInt(winNumberList[i]));
-        }
-        return winningList;
+  private List<Integer> StringToIntegerLotto(String winLotto){
+    String[] winNumberList = winLotto.split(",");
+    for(int i=0;i<oneLottoAmount;i++){
+      IsValidNumber(winNumberList[i]);
     }
+    List<Integer> winningList = new ArrayList(oneLottoAmount);
+    for(int i=0;i<oneLottoAmount;i++){
+        winningList.add(Integer.parseInt(winNumberList[i]));
+    }
+    return winningList;
+  }
 
-    private Lotto InputWinningNumber(){
-        Scanner sc = new Scanner(System.in);
-        String winningInput = sc.nextLine();
-        List<Integer> winningList = StringToIntegerLotto(winningInput);
+  private Lotto InputWinningNumber(){
+    Scanner sc = new Scanner(System.in);
+    String winningInput = sc.nextLine();
+    List<Integer> winningList = StringToIntegerLotto(winningInput);
         /*
         for (int i = 0; i < Lotto.oneLottoAmount; i++) {
             System.out.print(winningList.get(i)+" ");
         }
         */
-        Lotto winningNumber = new Lotto(winningList);
-        return winningNumber;
-    }
+    Lotto winningNumber = new Lotto(winningList);
+    return winningNumber;
+  }
 
-    private static int InputBonusNumber(){
-        Scanner sc = new Scanner(System.in);
-        int bonusNum = sc.nextInt();
-        return bonusNum;
-    }
+  private static int InputBonusNumber(){
+    Scanner sc = new Scanner(System.in);
+    int bonusNum = sc.nextInt();
+    return bonusNum;
+  }
 
-    public WinningLotto InputWinningLotto(){
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto winningNumber = InputWinningNumber();
-        System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusNum = InputBonusNumber();
-        WinningLotto winLotto = new WinningLotto(winningNumber, bonusNum);
-        return winLotto;
+  public WinningLotto InputWinningLotto(){
+    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    Lotto winningNumber = InputWinningNumber();
+    System.out.println("보너스 볼을 입력해 주세요.");
+    int bonusNum = InputBonusNumber();
+    WinningLotto winLotto = new WinningLotto(winningNumber, bonusNum);
+    return winLotto;
+  }
+
+  private void MatchEachLotto(List<Lotto> userLotto, WinningLotto winLotto){
+    for(int i=0;i<purchaseAmount;i++){
+      winLotto.match(userLotto.get(i));
     }
+  }
 
   public void StartLotto(){
     this.InputUserPurchase();
@@ -145,6 +151,7 @@ public class LottoGame {
       return;
     List<Lotto> userLotto = MakeUserLottoList();
     WinningLotto winLotto = InputWinningLotto();
+    MatchEachLotto(userLotto, winLotto);
   }
 
   public static void main(String args[]){

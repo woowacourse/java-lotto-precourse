@@ -18,6 +18,14 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
-        return null;
+        int countOfMatch = 0;
+        List<Integer> winLottoList = this.lotto.getNumbers();
+        for(int i=0;i<Lotto.oneLottoAmount;i++) {
+            countOfMatch += userLotto.IsIncludeWinNumber(winLottoList.get(i));
+        }
+        boolean matchBonus = userLotto.IsIncludeBonusNumber(this.bonusNo);
+        System.out.println(countOfMatch + ", " + matchBonus);
+        Rank rank = Rank.valueOf(countOfMatch, matchBonus);
+        return rank;
     }
 }

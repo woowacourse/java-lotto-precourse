@@ -13,6 +13,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public List<Integer> getNumbers(){ return this.numbers;}
+
     public void PrintLottoNum(){
         System.out.print("[");
         for (int i = 0; i < oneLottoAmount-1; i++) {
@@ -20,6 +22,18 @@ public class Lotto {
         }
         System.out.print(numbers.get(oneLottoAmount-1));
         System.out.println("]");
+    }
+
+    public int IsIncludeWinNumber(int winningNumber) {
+        if(numbers.contains(winningNumber))
+            return 1;
+        return 0;
+    }
+
+    public boolean IsIncludeBonusNumber(int bonusNum){
+        if(numbers.contains(bonusNum))
+            return true;
+        return false;
     }
     // 추가 기능 구현
 }
