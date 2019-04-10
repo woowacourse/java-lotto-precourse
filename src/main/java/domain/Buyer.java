@@ -9,16 +9,16 @@ public class Buyer {
 
     private static final int MIN_MONEY = 1000;
 
-    public Buyer(int money){
+    public Buyer(int money) {
         this.money = money;
         this.lottos = buyLottos();
     }
 
-    private List<Lotto> buyLottos(){
+    private List<Lotto> buyLottos() {
         List<Lotto> lottoList = new ArrayList<>();
         int lottoCnt = money / MIN_MONEY;
 
-        for(int i=0; i<lottoCnt; i++){
+        for (int i = 0; i < lottoCnt; i++) {
             lottoList.add(new Lotto(Lotto.generateLottoNumber()));
         }
 

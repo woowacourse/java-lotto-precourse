@@ -26,13 +26,13 @@ public class ResultInformation {
     }
 
     private EnumMap<Rank, Integer> initialEnumMap() {
-        EnumMap<Rank, Integer> initalMap = new EnumMap<>(Rank.class);
+        EnumMap<Rank, Integer> initialMap = new EnumMap<>(Rank.class);
 
         for (Rank type : Rank.values()) {
-            initalMap.put(type, 0);
+            initialMap.put(type, 0);
         }
 
-        return initalMap;
+        return initialMap;
     }
 
     private EnumMap<Rank, Integer> createEnumMap() {
