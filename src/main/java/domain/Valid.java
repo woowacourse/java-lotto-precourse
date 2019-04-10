@@ -25,5 +25,13 @@ public class Valid {
         return (money % Const.ONE_LOTTO_MONEY) != 0;
     }
 
-  
+    public static boolean isSplitException(String winningNumbers) {
+        try {
+            winningNumbers.split(Message.SPOT);
+        } catch (Exception e) {
+            return true;
+        }
+        return false;
+    }
+
 }
