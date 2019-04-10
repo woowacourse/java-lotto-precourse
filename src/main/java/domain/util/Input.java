@@ -1,8 +1,10 @@
 package domain.util;
 
+import domain.Game;
+
 import java.util.InputMismatchException;
 public class Input {
-    public static final int MIN_INPUT_MONEY = 1_000;
+    public static final int MIN_INPUT_MONEY = Game.PRICE_OF_LOTTO;
     public static final int MAX_INPUT_MONEY = 2_147_483_647;
 
     public static int insertMoney(){

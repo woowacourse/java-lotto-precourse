@@ -14,5 +14,9 @@ public class PrintScan {
         System.out.format("%d이상 %d이하의 숫자를 입력해 주세요.%n",Input.MIN_INPUT_MONEY,Input.MAX_INPUT_MONEY);
     }
 
+    public static void printRestMoney(int restMoney){
+        System.out.format("%d원의 거스름돈이 남았습니다.%n",restMoney);
+    }
+
 
 }
