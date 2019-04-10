@@ -20,7 +20,7 @@ public class PlayMatchingLotto {
 
     public void play() {
         USER_PAYMENT = setPayment();
-        int amountLotto = USER_PAYMENT / Const.PRIECE_OF_SINGLE_LOTTO;
+        int amountLotto = USER_PAYMENT / Const.PRICE_OF_SINGLE_LOTTO;
         printLottoPaymentAmt(amountLotto);
         List<Lotto> userLotto = makeLottoList(amountLotto);
         Lotto winLotto = new Lotto(setLastWinLotto());

@@ -3,9 +3,9 @@ package constnum;
 public class Const {
     public static final int ZERO = 0;
 
-    public static final int PRIECE_OF_SINGLE_LOTTO = 1000;
+    public static final int PRICE_OF_SINGLE_LOTTO = 1000;
 
-    public static final int MIN_PRICE_OF_LOTTO_BUY = PRIECE_OF_SINGLE_LOTTO;
+    public static final int MIN_PRICE_OF_LOTTO_BUY = PRICE_OF_SINGLE_LOTTO;
     public static final int MAX_PRICE_OF_LOTTO_BUY = 100000;
 
     public static final int MIN_NUM_OF_LOTTO_TO_SELECT = 1;
