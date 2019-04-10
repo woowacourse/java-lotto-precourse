@@ -15,12 +15,12 @@ import java.util.Random;
 
 public class RandomNumber {
 	static final int LOTTO_MAX_NUMBER = 45;
-	static final int NUMBER_COUNT = 6;
+	public static final int LOTTO_NUMBER_COUNT = 6;
 
 	public List<Integer> createNumberList() {
 		List<Integer> lottoNumberList = new ArrayList<>();
 
-		for (int i = 0; i < NUMBER_COUNT; ++i) {
+		for (int i = 0; i < LOTTO_NUMBER_COUNT; ++i) {
 			addRandomNumber(lottoNumberList);
 		}
 		return lottoNumberList;
