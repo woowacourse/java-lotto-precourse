@@ -1,7 +1,7 @@
 /*
  * UserInterface Interface
  *
- * @version 1.2
+ * @version 1.3
  *
  * @date 2019-04-09
  *
@@ -12,6 +12,8 @@ package domain.interfaces;
 
 import domain.Lotto;
 import domain.WinningLotto;
+
+import java.util.List;
 
 public interface UserInterface {
 
@@ -26,4 +28,8 @@ public interface UserInterface {
     int inputBonusNum(Lotto preWinLotto);
 
     boolean isInputBonusNumValid(Lotto winLotto, String bonusNum);
+
+    void printBoughtLottos(List<Lotto> lottoList);
+
+    void printLottoNums(Lotto lotto);
 }

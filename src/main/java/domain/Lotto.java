@@ -1,7 +1,7 @@
 /*
  * Lotto Class
  *
- * @version 1.2
+ * @version 1.3
  *
  * @date 2019-04-09
  *
@@ -11,6 +11,7 @@
 package domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -28,5 +29,9 @@ public class Lotto {
     public boolean contains(int num){
         return numbers.contains(num);
     }
-    // 추가 기능 구현
+
+    @Override
+    public String toString() {
+        return "[" +numbers.stream().map(s->String.valueOf(s)).collect(Collectors.joining(", ")) + "]";
+    }
 }

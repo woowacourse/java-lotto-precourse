@@ -1,7 +1,7 @@
 /*
  * UserInterfaceImpl Class
  *
- * @version 1.2
+ * @version 1.3
  *
  * @date 2019-04-09
  *
@@ -14,6 +14,7 @@ import domain.interfaces.UserInterface;
 import domain.interfaces.UtilityInterface;
 import domain.interfaces.ValidInterface;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterfaceImpl implements UserInterface {
@@ -91,5 +92,18 @@ public class UserInterfaceImpl implements UserInterface {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void printBoughtLottos(List<Lotto> lottoList) {
+        System.out.println( lottoList.size() + "개를 구매했습니다.");
+        for( Lotto lotto : lottoList){
+            printLottoNums(lotto);
+        }
+    }
+
+    @Override
+    public void printLottoNums(Lotto lotto) {
+        System.out.println(lotto.toString());
     }
 }
