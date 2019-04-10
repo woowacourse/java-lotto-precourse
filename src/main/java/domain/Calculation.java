@@ -2,15 +2,18 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 
+/**
+ * 계산을 담당하는 클래스
+ * 로또 게임 관련된 모든 계산 과정을 진행한다.
+ */
 public class Calculation {
 
     /*
      * 구입 금액을 받아서 금액에 맞는 로또 개수 계산
      */
     public static int calcLottoCount(int price) {
-        return (price/1000);
+        return (price/LottoConstant.LOTTO_PRICE);
     }
 
     /*
@@ -23,7 +26,7 @@ public class Calculation {
     }
 
     /*
-     * 전체 로또 구매 개수에 대한 수익률 계산을 위한 메소드
+     * 전체 로또 구매 개수에 대한 수익률 계산
      */
     public static double calcYield(List<Rank> rankList, int lottoCount) {
         int totalWinning = 0;
@@ -32,7 +35,7 @@ public class Calculation {
         totalWinning += calcYieldOneRank(rankList, Rank.THIRD.getCountOfMatch(), false);
         totalWinning += calcYieldOneRank(rankList, Rank.SECOND.getCountOfMatch(), true);
         totalWinning += calcYieldOneRank(rankList, Rank.FIRST.getCountOfMatch(), false);
-        return ((double)totalWinning / (lottoCount * 1000));
+        return ((double)totalWinning / (lottoCount * LottoConstant.LOTTO_PRICE));
     }
 
 }

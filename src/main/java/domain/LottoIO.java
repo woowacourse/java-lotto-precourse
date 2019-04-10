@@ -54,11 +54,12 @@ public class LottoIO {
         return (winningLottoNumber);
     }
 
-    public static int receiveBonusNumber() throws IOException {
+    public static int receiveBonusNumber(List<Integer> winningLottoNumberList) throws IOException {
         Scanner s = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
             int bonusNumber = s.nextInt();
+            checkDuplicateBonusNumber(winningLottoNumberList, bonusNumber);
             return bonusNumber;
         } catch (InputMismatchException e) {
             System.out.println("숫자만 입력 가능 합니다.");
@@ -67,11 +68,21 @@ public class LottoIO {
     }
 
     /*
+     * 보너스 볼의 번호가 당첨 번호와 중복 되는 경우 예외 처리
+     */
+    public static void checkDuplicateBonusNumber(List<Integer> winningLottoNumberList, int bonusNumber) throws IOException {
+        if (winningLottoNumberList.contains(bonusNumber)) {
+            System.err.println("보너스 볼이 당첨 번호와 중복 됩니다.");
+            throw new IOException();
+        }
+    }
+    /*
      * 구입 금액이 1000원 미만인 경우 예외 처리
      */
     public static void checkInvalidPrice(String priceString) throws IOException {
         int price = Integer.parseInt(priceString);
-        if (price < 1000) {
+        if (price < LottoConstant.LOTTO_PRICE) {
+            System.err.println("로또를 구매할 수 없습니다.");
             throw new IOException();
         }
     }
@@ -84,6 +95,7 @@ public class LottoIO {
             int lottoNumber = Integer.parseInt(winningLottoNumber);
             checkInvalidInput(lottoNumber);
         } catch (NumberFormatException e) {
+            System.err.println("숫자가 아닙니다.");
             throw new IOException();
         } catch (IOException e2) {
             throw new IOException();
@@ -94,7 +106,8 @@ public class LottoIO {
      * 받은 숫자가 1 ~ 45 사이의 숫자가 아닌 경우 예외 처리
      */
     public static void checkInvalidInput(int bonusNumber) throws IOException {
-        if (bonusNumber < 1 || bonusNumber > LottoConstant.RANDOM_NUMBER_LIMIT) {
+        if (bonusNumber < LottoConstant.RANDOM_NUMBER_LOWER_LIMIT || bonusNumber > LottoConstant.RANDOM_NUMBER_UPPER_LIMIT) {
+            System.err.println("1 ~ 45 사이의 숫자가 아닙니다.");
             throw new IOException();
         }
     }

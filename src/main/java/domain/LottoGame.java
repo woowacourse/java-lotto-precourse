@@ -46,7 +46,7 @@ public class LottoGame {
     public void playLottoGame(List<Lotto> lottoList) {
         try {
             List<Integer> winningLottoNumberList = LottoIO.receiveWinningLotto();
-            int bonusNumber = LottoIO.receiveBonusNumber();
+            int bonusNumber = LottoIO.receiveBonusNumber(winningLottoNumberList);
             LottoIO.checkInvalidInput(bonusNumber);
             Lotto lotto = new Lotto(winningLottoNumberList);
             WinningLotto winningLotto = new WinningLotto(lotto,bonusNumber);
