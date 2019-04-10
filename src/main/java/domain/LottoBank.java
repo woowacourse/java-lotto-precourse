@@ -88,4 +88,15 @@ public class LottoBank {
 			}
 		}
 	}
+	
+	public void calUserProfit() {
+		double totalProfit = 0;
+		for (int lottoReward : LottoRule.REWARDS.getNums()) {
+			if (matchResults.containsKey(lottoReward)) {
+				totalProfit = totalProfit + matchResults.get(lottoReward) * lottoReward;
+			}
+		}
+		totalProfit = totalProfit / (lottoShop.getUserLottos().size() * LottoRule.PRICE.getNum());
+		System.out.println("총 수익률은 " + totalProfit + " 입니다.");
+	}
 }
