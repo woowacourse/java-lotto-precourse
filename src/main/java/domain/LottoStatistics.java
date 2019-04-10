@@ -17,5 +17,6 @@ public class LottoStatistics {
         for (Lotto getlotto : lotto) {
             System.out.println(getlotto.getNumbers());
         }
+        List<Integer> getwinLotto = user.getWinningLotto();
     }
 }
