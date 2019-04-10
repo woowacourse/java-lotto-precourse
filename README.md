@@ -18,4 +18,14 @@ Lotto 클래스
 
 - GetLottoNumber : 로또 숫자 반환
 
- 
+LottoGameStart 클래스
+
+- GetMoney : 금액 입력
+
+- GetNumOfLotto : 로또 개수 반환
+
+- CreateLotto : 로또 그룹 생성 
+
+- InputLottoNum : 로또 번호 입력
+
+- RandomCreateNum : 랜덤으로 번호 생성
