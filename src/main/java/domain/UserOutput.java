@@ -39,33 +39,28 @@ public class UserOutput {
 
         System.out.println("당첨 통계");
         System.out.println("---------");
-        rankStream.filter(rs -> rs.getCountOfMatch() != ZERO) //Rank에서 CountOfMatch가 0이 아닌것에 대해서만 PrintWinResult 호출
+        rankStream.filter(rs -> rs.getCountOfMatch() != ZERO) // Rank에서 CountOfMatch가 0이 아닌것에 대해서만 PrintWinResult 호출
                 .forEach(rs -> PrintWinResult(rs, userRanks));
 
         PrintEarningRate(userRanks, purchaseAmount);
     }
 
     private void PrintWinResult(Rank rank, List<Rank> userRanks) {
-        int matchCountperRank = (int) userRanks.stream().filter(r -> r == rank).count();
+        int matchCountPerRank = Calculator.CalculateMatchCountPerRank(rank, userRanks);
 
         if (rank == Rank.SECOND) {
             System.out.println(rank.getCountOfMatch() + "개 일치, 보너스 볼 일치 (" + rank.getWinningMoney() + "원)-"
-                    + matchCountperRank + "개");
+                    + matchCountPerRank + "개");
             return;
         }
 
         System.out.println(rank.getCountOfMatch() + "개 일치, (" + rank.getWinningMoney() + "원)-"
-                + matchCountperRank + "개");
+                + matchCountPerRank + "개");
     }
 
 
     private void PrintEarningRate(List<Rank> userRanks, int purchaseAmount) {
-        int sumOfPrize = userRanks.stream()
-                .filter(ur -> ur.getWinningMoney() > ZERO)
-                .mapToInt(ur -> ur.getWinningMoney())
-                .sum();
-
-        double earningRate = sumOfPrize / (double) purchaseAmount;
+        double earningRate = Calculator.CalculateEarningRate(userRanks, purchaseAmount);
 
         System.out.printf("수익률은 " + earningRate + "입니다.");
     }

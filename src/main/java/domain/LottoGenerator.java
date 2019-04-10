@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static domain.Constant.*;
@@ -26,9 +27,20 @@ public class LottoGenerator {
     }
 
     private void GenerateLotto() {
-        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        lottoList.add(new Lotto(GenerateRandomNumbers()));
+    }
 
-        lottoList.add(new Lotto(randomNumberGenerator.GenerateRandomNumbers()));
+    public List<Integer> GenerateRandomNumbers() {
+        HashSet<Integer> lottoNumberSet = new HashSet<>();
+        List<Integer> lottoNumbers = new ArrayList<>();
+        int lottoNumber;
+
+        while (lottoNumberSet.size() < LOTTO_SIZE) {
+            lottoNumber = (int) ((Math.random() * MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
+            lottoNumberSet.add(lottoNumber);
+        }
+
+        return lottoNumbers;
     }
 
     public void GenerateWinningLotto(List<Integer> winningNumbers, int bonusNumber) {
