@@ -15,6 +15,7 @@ public class LottoGame {
 	static private final int LOTTO_BUY_LIMIT = 100000;
     static private final double LOTTO_TOTAL_NUMBER = 45;
 	static private final int LOTTO_MAXIMUM_COUNT = 6;
+
 	
 	private int inputMoney() {
 		String money = "0";
@@ -81,23 +82,35 @@ public class LottoGame {
     }
 
     
-    private List<Integer> inputWinningNumber() {
+    private List<String> inputWinningNumber() {
     	String winningNumber = "";
-    	List<String> winningNumberList = new ArrayList<String>();
+    	List<String> splitedNumber = new ArrayList<>();
     	
     	do {
     		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     		winningNumber = sc.nextLine();
-    		winningNumberList = splitStringByComma(winningNumber);
-    	} while(winningNumber.length() == 0);
-
-    	return null;
+    		splitedNumber = splitStringByComma(winningNumber);
+    	} while (!checkContainNotNumber(splitedNumber));
+    	
+    	return splitedNumber;
+    }
+    
+    
+    private List<Integer> checkValidation() {
+    	List<String> splitedNumber = new ArrayList<>();
+      	List<Integer> intWinningNumberList = new ArrayList<Integer>();
+      	
+    	do {
+    		splitedNumber = inputWinningNumber();
+    		intWinningNumberList = convertToIntList(splitedNumber);
+    	} while (!checkDuplicate(intWinningNumberList) && !checkRange(intWinningNumberList));
+ 
+    	return intWinningNumberList;
     }
     
     private List<String> splitStringByComma(String winningNumber) {
     	String[] winningNumberArray = winningNumber.split(",");
-    	List<String> splitedNumber = new ArrayList<>();
-    	
+    	List<String> splitedNumber = new ArrayList<String>();
     	for (int i = 0; i < winningNumberArray.length; i++) {
     		splitedNumber.add(winningNumberArray[i].trim());
     	}
@@ -111,13 +124,8 @@ public class LottoGame {
     	for (int i = 0; i < splitedNumberList.size(); i++) {
     		containNotNumber = (Pattern.matches(NUMBER_CHECK_REGEX, splitedNumberList.get(i)) && containNotNumber == true) ? true : false;
     	}
-    	
-    	return containNotNumber;
-    }
     
-    private boolean checkDuplicate(List<String> splitedNumberList) {
-    	HashSet<String> setForCheckDuplicate = new HashSet<String>(splitedNumberList);
-    	return setForCheckDuplicate.size() == 6 ? true : false;
+    	return containNotNumber;
     }
     
     private List<Integer> convertToIntList(List<String> splitedNumberList) {
@@ -129,6 +137,12 @@ public class LottoGame {
     	
     	return intWinningNumberList;
     }
+    
+    private boolean checkDuplicate(List<Integer> splitedNumberList) {
+    	HashSet<Integer> setForCheckDuplicate = new HashSet<Integer>(splitedNumberList);
+    	return setForCheckDuplicate.size() == 6 ? true : false;
+    }
+    
     
     private boolean checkRange(List<Integer> numberList) {
     	boolean rightRange = true;
@@ -149,6 +163,7 @@ public class LottoGame {
 		}
 		
 		System.out.println(lg.inputWinningNumber());
+		System.out.println(lg.checkValidation().toString());
 	}
     
 }
