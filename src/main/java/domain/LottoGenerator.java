@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
-
+/*
+ * 구입 금액을 입력 받아 로또를 생성하는 객체
+ */
 public class LottoGenerator {
 	static final int EACH_LOTTO_PRICE = 1000;
 	static final int MIN_LOTTO_NUMBER = 1;
@@ -60,5 +61,13 @@ public class LottoGenerator {
 			userLottos.add(newLotto);
 		}
 		return userLottos;
+	}
+	
+	private void printLottos(int lottoCount, List<Lotto> userLottos) {
+		System.out.println();
+		System.out.println(lottoCount+"개를 구매했습니다.");
+		for(int i = 0; i < lottoCount; i++) {
+			System.out.println(userLottos.get(i).getNumbers());
+		}
 	}
 }
