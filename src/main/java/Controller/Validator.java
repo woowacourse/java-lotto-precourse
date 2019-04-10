@@ -48,20 +48,18 @@ public class Validator {
      * @return
      */
     public static boolean checkWinningLottoNumbers(String winningLottoInput) {
-        if (!checkLottoNumbersInputLengthIsValid(winningLottoInput)) {
+        String[] numbers = winningLottoInput.split(",");
+        if (!checkNumbersLengthIsValid(numbers)) {
             return false;
         }
-        String[] numbers = winningLottoInput.split(",");
-        if (checkDuplicationIfHasPrintWarning(numbers) ||
-                !checkLottoNumbersInputHasNoInvalidValue(numbers)) {
+        if (checkNumbersNoDuplication(numbers) ||
+                !checkNumbersInRange(numbers)) {
             return false;
         }
         return true;
     }
 
-    private static boolean checkLottoNumbersInputLengthIsValid(String winningLottoInput) {
-        String[] numbers = winningLottoInput.split(",");
-
+    private static boolean checkNumbersLengthIsValid(String[] numbers) {
         if (numbers.length != GameSetting.LOTTO_NORMAL_NUMBER_COUNT) {
             System.out.println(UserView.WARNING_WHEN_LOTTO_NUMBER_COUNT_NOT_MATCHING);
             return false;
@@ -69,7 +67,7 @@ public class Validator {
         return true;
     }
 
-    private static boolean checkLottoNumbersInputHasNoInvalidValue(String[] numbers) {
+    private static boolean checkNumbersInRange(String[] numbers) {
         boolean invalidValueNotFound = true;
         for (int i = 0; (i < numbers.length) && (invalidValueNotFound); i++) {
             invalidValueNotFound = checkIsLottoNumberValid(numbers[i]);
@@ -77,25 +75,16 @@ public class Validator {
         return invalidValueNotFound;
     }
 
-    private static boolean checkDuplicationIfHasPrintWarning(String[] numbers) {
-        // numbers에 중복된 문자열이 있었다면, numbers의 길이와 Set의 길이가 다름을 이용
-        if (checkLottoNumbersHasDuplication(numbers)) {
-            System.out.println(UserView.WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean checkLottoNumbersHasDuplication(String[] numbers) {
+    private static boolean checkNumbersNoDuplication(String[] numbers) {
         Set<String> tempAddedLottoNumbers = new HashSet<String>();
-
         for (int i = 0; (i < numbers.length); i++) {
             tempAddedLottoNumbers.add(numbers[i]);
         }
         if (tempAddedLottoNumbers.size() != numbers.length) {
-            return true;
+            System.out.println(UserView.WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
