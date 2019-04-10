@@ -13,7 +13,7 @@ public class Game {
     private int totalPrizeMoney = 0;
 
     public void start() {
-        int money = Input.inputMoneyAndReturn();
+        int money = Input.returnMoney();
         buyLotto(money);
         Output.printLottoNumbers(lottoList);
         WinningLotto winningLotto = Input.inputWinningAndBonusNumber();
