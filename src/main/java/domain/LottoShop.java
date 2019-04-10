@@ -58,4 +58,8 @@ public class LottoShop {
 			lotto.printLotto();
 		}
 	}
+	
+	public List<Lotto> getUserLottos() {
+		return userLottos;
+	}
 }
