@@ -64,16 +64,21 @@ public class LottoManager {
         System.out.print("\n");
     }
 
+    public List<String> trim(String[] splited) {
+        return Arrays.stream(splited)
+                .map(str -> str.trim())
+                .filter(str -> !str.equals(""))
+                .collect(Collectors.toList());
+    }
+
     public Lotto inputWinningNumbers() {
-        List<Integer> winningNumbers;
+        List<String> winningNumbers;
 
         do {
             System.out.println("지난 주 당첨 번호를 입력해주세요.");
-            winningNumbers = Arrays.stream(sc.nextLine().split(","))
-                    .map(s -> Integer.valueOf(s))
-                    .collect(Collectors.toList());
+            winningNumbers = trim(sc.nextLine().split(","));
         } while(!validator.isValidWinningNumbers(winningNumbers));
-        return new Lotto(winningNumbers);
+        return new Lotto((winningNumbers.stream().map(Integer::parseInt).collect(Collectors.toList())));
     }
 
     public int inputBonus() {
