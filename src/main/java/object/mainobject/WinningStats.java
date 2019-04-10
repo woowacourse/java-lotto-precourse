@@ -2,6 +2,7 @@ package object.mainobject;
 
 import domain.Rank;
 import object.WinningLotto;
+import util.PrintUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,5 +34,10 @@ public class WinningStats {
                         this.revenue += this.stats.get(rank) * rank.getWinningMoney();
                 }
                 this.yield = purchaseInfo.makeYiend(this.revenue);
+        }
+
+        public void printStats(){
+                PrintUtil.printWinningStats(this.stats);
+                PrintUtil.printYiend(this.yield);
         }
 }
