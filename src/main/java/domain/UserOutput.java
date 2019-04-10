@@ -3,6 +3,8 @@ package domain;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static domain.Constant.*;
+
 public class UserOutput {
 
     private List<Lotto> lottoList;
@@ -37,7 +39,7 @@ public class UserOutput {
 
         System.out.println("당첨통계");
         System.out.println("---------");
-        rankStream.filter(rs -> rs.getCountOfMatch() != 0).forEach(rs -> PrintWinResult(rs, userRanks));
+        rankStream.filter(rs -> rs.getCountOfMatch() != ZERO).forEach(rs -> PrintWinResult(rs, userRanks));
 
         PrintEarningRate(userRanks, purchaseAmount);
     }
@@ -59,12 +61,9 @@ public class UserOutput {
 
     private void PrintEarningRate(List<Rank> userRanks, int purchaseAmount) {
         int sumOfPrize = userRanks.stream()
-                .filter(ur -> ur.getWinningMoney() > 0)
+                .filter(ur -> ur.getWinningMoney() > ZERO)
                 .mapToInt(ur -> ur.getWinningMoney())
                 .sum();
-
-        System.out.println(sumOfPrize);
-        System.out.println(purchaseAmount);
 
         double earningRate = sumOfPrize / (double)purchaseAmount;
 

@@ -3,10 +3,12 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static domain.Constant.*;
+
 public class LottoGenerator {
     private static List<Lotto> lottoList;
     private static WinningLotto winningLotto;
-    private static final int PRIZE_OF_LOTTO = 1000;
+
 
     LottoGenerator() {
         lottoList = new ArrayList<>();
@@ -22,7 +24,6 @@ public class LottoGenerator {
 
     private int FindLottoCount(int purchaseAmount) {
         return purchaseAmount / PRIZE_OF_LOTTO;
-
     }
 
     private void GenerateLotto() {
