@@ -90,24 +90,32 @@ public class LottoGame {
     		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     		winningNumber = sc.nextLine();
     		winningNumberList = splitStringByComma(winningNumber);
+    		System.out.println(checkContainNotNumber(winningNumberList));
     	} while(winningNumber.length() == 0);
 
     	return null;
     }
     
     private List<String> splitStringByComma(String winningNumber) {
-    	List<String> splitedNumber = new ArrayList<>(Arrays.asList(winningNumberList.split(",")));
+    	List<String> splitedNumber = new ArrayList<>(Arrays.asList(winningNumber.split(",")));
 
     	return splitedNumber;
     }
     
-    private boolean checkLength(List<String> splitedNumber) {
-    	return (splitedNumber.size() == 6) ? true : false;
+    private boolean checkLength(List<String> splitedNumberList) {
+    	return (splitedNumberList.size() == 6) ? true : false;
     }
     
-    
+    private boolean checkContainNotNumber(List<String> splitedNumberList) {
+    	boolean containNotNumber = true;
+    	
+    	for (int i = 0; i < splitedNumberList.size(); i++) {
+    		containNotNumber = (Pattern.matches(NUMBER_CHECK_REGEX, splitedNumberList.get(i).trim()) && containNotNumber == true) ? true : false;
+    	}
 
-   
+    	return containNotNumber;
+    }
+    
     
     public static void main(String[] args) {
     	// test용 main 함수
