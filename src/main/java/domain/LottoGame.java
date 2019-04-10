@@ -97,11 +97,21 @@ public class LottoGame {
 		for(int i = 3; i < 8; i++) {
 			String printResult = "";
 			j = (i >= 6) ? i-1 : i;
-			printResult += ((j == 6) ? j + "개 일치," : j + "개 일치, 보너스 볼 일치") +;
+			printResult += ((j == 6) ? j + "개 일치," : j + "개 일치, 보너스 볼 일치");
 			printResult += " ("+ iterators.get(0).next() + "원 ) - " + iterators.get(1).next() + "개";
 			System.out.println(printResult);
 		}
 	}
 
+	private void printProfitRate(List<Iterator<Integer>> iterators, HashMap<Integer, Integer> result) {
+		int totalIncome = 0;
+		int purchaseCost = result.size() * 1000;
+		
+		while (iterators.get(0).hasNext()) {
+			totalIncome += iterators.get(0).next() * iterators.get(1).next();
+		}
+		
+		System.out.println("총 수익률은 " + (double) totalIncome / (double) purchaseCost + "입니다.");
+	}
 	
 }
