@@ -14,11 +14,18 @@ public class LottoBuy {
     }
 
     static void lottos_Object_Create(){
-
+        lottos = new Lotto[lotto_money/Info.DIVISION];
+        for (int i = Info.ZERO; i < lotto_money/Info.DIVISION; i++){
+            lottos[i] = new Lotto(RandomNumberCreate.set_Change_List());
+            RandomNumberCreate.random_Set_Number_Reset();
+        }
     }
 
-
-
+    static void lottos_Number_Print(){
+        for (int i =Info.ZERO; i < lottos.length; i++){
+            lottos[i].lotto_Number_Print();
+        }
+    }
 
 
 }
