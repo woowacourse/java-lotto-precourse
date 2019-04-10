@@ -154,11 +154,7 @@ public class LottoIO {
     public static void printRankAll(List<Rank> rankList) {
         Rank[] rank = Rank.values();
         for (int i = 0; i < LottoConstant.LOTTO_PRINT_RANK_LIMIT; i++) {
-            if (rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i] == Rank.SECOND) {
-                printRankCount(rankList, Rank.SECOND.getCountOfMatch(), true);
-                continue;
-            }
-            printRankCount(rankList, rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i].getCountOfMatch(), false);
+            printRankCount(rankList, rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i].getCountOfMatch(), (rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i] == Rank.SECOND));
         }
     }
 }

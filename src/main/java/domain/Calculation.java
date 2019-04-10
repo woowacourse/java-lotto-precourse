@@ -32,9 +32,8 @@ public class Calculation {
         int totalWinning = 0;
         Rank[] rank = Rank.values();
         for (int i = 0; i < LottoConstant.LOTTO_PRINT_RANK_LIMIT; i++) {
-            totalWinning += calcYieldOneRank(rankList, rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i].getCountOfMatch(), false);
+            totalWinning += calcYieldOneRank(rankList, rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i].getCountOfMatch(), (rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i] == Rank.SECOND));
         }
-        totalWinning += calcYieldOneRank(rankList, Rank.SECOND.getCountOfMatch(), true);
         return ((double)totalWinning / (lottoCount * LottoConstant.LOTTO_PRICE));
     }
 
