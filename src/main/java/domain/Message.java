@@ -17,6 +17,7 @@ public class Message {
     public static final String STATISTIC_MESSAGE = "당첨통계\n--------";
     public static final String MATCH_MESSAGE_BONUS = "%d개 일치,보너스볼 일치 (%d원)- %d개 \n";
     public static final String MATCH_MESSAGE = "%d개 일치 (%d원)- %d개 \n";
+    public static final String GAIN_RATE_MESSAGE = "총 수익률은 %.3f 입니다.";
     public static final String SPOT=",";
     public static final String SPACE =" ";
     public static final String TAB="\t";

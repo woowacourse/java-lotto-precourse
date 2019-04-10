@@ -17,7 +17,7 @@ public class Statistic {
         this.money = money;
     }
     public void print() {
-        System.out.println(STATISTIC_MESSAGE);
+        System.out.println(Message.STATISTIC_MESSAGE);
         statistic();
         for (int i = 3; i <= 7; i++) {
             Rank rank = Rank.valueOf((i >= 6 ? (i - 1) : i), (i == 6));
@@ -37,5 +37,8 @@ public class Statistic {
             return;
         }
         resultOfRank[rank.getCountOfMatch()]++;
+    }
+    private void printReward() {
+        System.out.format(Message.GAIN_RATE_MESSAGE, (reward / money));
     }
 }
