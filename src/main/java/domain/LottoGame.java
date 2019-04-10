@@ -81,7 +81,6 @@ public class LottoGame {
     }
 
     
-    
     private List<Integer> inputWinningNumber() {
     	String winningNumber = "";
     	List<String> winningNumberList = new ArrayList<String>();
@@ -112,7 +111,7 @@ public class LottoGame {
     	for (int i = 0; i < splitedNumberList.size(); i++) {
     		containNotNumber = (Pattern.matches(NUMBER_CHECK_REGEX, splitedNumberList.get(i)) && containNotNumber == true) ? true : false;
     	}
-
+    	
     	return containNotNumber;
     }
     
@@ -121,6 +120,15 @@ public class LottoGame {
     	return setForCheckDuplicate.size() == 6 ? true : false;
     }
     
+    private List<Integer> convertToIntList(List<String> splitedNumberList) {
+    	List<Integer> intWinningNumberList = new ArrayList<Integer>();
+    	
+    	for (int i = 0; i < splitedNumberList.size(); i++) {
+    		intWinningNumberList.add(Integer.parseInt(splitedNumberList.get(i)));
+    	}
+    	
+    	return intWinningNumberList;
+    }
     
     public static void main(String[] args) {
     	// test용 main 함수
