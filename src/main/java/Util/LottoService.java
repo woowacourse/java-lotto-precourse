@@ -13,12 +13,7 @@ package Util;
 import domain.Lotto;
 import domain.WinningLotto;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * 사용자의 로또 서비스를 담당하는 객체
@@ -27,6 +22,10 @@ public class LottoService {
     private static final int LOTTO_PRICE = 1_000;
 
     public static List<Lotto> getOrder(int money) {
+        if (LOTTO_PRICE > money) {
+            throw new IllegalArgumentException("주문 금액은 최소 1,000원 이상이어야 합니다.");
+        }
+
         int numberOfLotto = money / LOTTO_PRICE;
 
         List<Lotto> lottos = LottoMaker.getLottos(numberOfLotto);
