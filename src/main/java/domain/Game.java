@@ -17,6 +17,7 @@ public class Game {
         buyingLotto(insertedMoney);
         winningLotto = WinningLotto.createWinningLotto();
         RankResult rankResult = new RankResult(userLottoList, winningLotto);
+        rankResult.getRankResult();
     }
 
     private void buyingLotto(int money) {
