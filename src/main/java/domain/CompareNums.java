@@ -146,7 +146,7 @@ public class CompareNums {
 		printStats(rank, winTable);
 	}
 
-	public int countWin(Rank rank) {
+	private int countWin(Rank rank) {
 		HashMap<Rank, Integer> rankH = new HashMap<Rank, Integer>();
 		rankH.put(Rank.FIRST, FIRST);
 		rankH.put(Rank.SECOND, SECOND);
@@ -158,7 +158,7 @@ public class CompareNums {
 		return rankH.get(rank);
 	}
 
-	public void printStats(Rank rank[], int[] winTable) {
+	private void printStats(Rank rank[], int[] winTable) {
 		System.out.println("당첨 통계\n----------");
 		int winningMoney = 0;
 		for (Rank r : rank) {
