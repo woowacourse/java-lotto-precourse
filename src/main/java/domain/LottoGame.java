@@ -13,6 +13,8 @@ public class LottoGame {
 
   public int purchasePrice;
   public int purchaseAmount;
+  public int[] matchCount;
+  public int totalReward;
 
   private boolean IsValidAmount(int purchasePrice){
     if(purchasePrice < 0){
@@ -139,10 +141,35 @@ public class LottoGame {
     return winLotto;
   }
 
-  private void MatchEachLotto(List<Lotto> userLotto, WinningLotto winLotto){
-    for(int i=0;i<purchaseAmount;i++){
-      winLotto.match(userLotto.get(i));
+  private void InitializeMatchCount(){
+    matchCount = new int[6];
+    for(int i=0;i<6;i++){
+      matchCount[i]=0;
     }
+  }
+
+  private void CalculateTotal(Rank rank){
+    this.totalReward += rank.getWinningMoney();
+  }
+
+  private void MatchEachLotto(List<Lotto> userLotto, WinningLotto winLotto){
+    InitializeMatchCount();
+    for(int i=0;i<purchaseAmount;i++){
+      Rank rank = winLotto.match(userLotto.get(i));
+      CalculateTotal(rank);
+      matchCount[rank.ordinal()]++;
+    }
+  }
+
+  public void PrintResult(){
+    System.out.println("당첨통계");
+    System.out.println("-----------------");
+    System.out.println("3개 일치 (5000원) - " + matchCount[4] + "개");
+    System.out.println("4개 일치 (50000원) - " + matchCount[3] + "개");
+    System.out.println("5개 일치 (1500000원) - " + matchCount[2] + "개");
+    System.out.println("5개 일치; 보너스 볼 일치(3000000원) - " + matchCount[1] + "개");
+    System.out.println("6개 일치 (2000000000원) - " + matchCount[0] + "개");
+    System.out.println("총 수익률은 " + (float)totalReward/purchasePrice + "입니다.");
   }
 
   public void StartLotto(){
@@ -152,6 +179,7 @@ public class LottoGame {
     List<Lotto> userLotto = MakeUserLottoList();
     WinningLotto winLotto = InputWinningLotto();
     MatchEachLotto(userLotto, winLotto);
+    PrintResult();
   }
 
   public static void main(String args[]){

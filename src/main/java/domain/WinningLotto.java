@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * 당첨 번호를 담당하는 객체
@@ -24,7 +22,6 @@ public class WinningLotto {
             countOfMatch += userLotto.IsIncludeWinNumber(winLottoList.get(i));
         }
         boolean matchBonus = userLotto.IsIncludeBonusNumber(this.bonusNo);
-        System.out.println(countOfMatch + ", " + matchBonus);
         Rank rank = Rank.valueOf(countOfMatch, matchBonus);
         return rank;
     }
