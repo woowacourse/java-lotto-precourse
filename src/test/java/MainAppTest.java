@@ -7,20 +7,28 @@ import java.io.InputStream;
 
 
 public class MainAppTest extends TestCase {
+    static final int VALID_MONEY_TO_BUY_LOTTO = 1000;
+    static final int INVALID_MONEY_TO_BUY_LOTTO_NOT_TIMES_OF_LOTTO_PRICE = 1200;
+    static final int INVALID_MONEY_TO_BUY_LOTTO_ZERO = 0;
+    static final int INVALID_MONEY_TO_BUY_LOTTO_NEGATIVE_NUMBER = -1000;
     @Test
     public void testIsValidMoneyToBuyLotto() throws Exception {
         int testMoney;
         boolean isValid;
 
-        testMoney = 1000;
+        testMoney = VALID_MONEY_TO_BUY_LOTTO;
         isValid = MainApp.isValidMoneyToBuyLotto(testMoney);
         assertEquals(true, isValid);
 
-        testMoney = 1200;
+        testMoney = INVALID_MONEY_TO_BUY_LOTTO_NEGATIVE_NUMBER;
         isValid = MainApp.isValidMoneyToBuyLotto(testMoney);
         assertEquals(false, isValid);
 
-        testMoney = -1000;
+        testMoney = INVALID_MONEY_TO_BUY_LOTTO_NOT_TIMES_OF_LOTTO_PRICE;
+        isValid = MainApp.isValidMoneyToBuyLotto(testMoney);
+        assertEquals(false, isValid);
+
+        testMoney = INVALID_MONEY_TO_BUY_LOTTO_ZERO;
         isValid = MainApp.isValidMoneyToBuyLotto(testMoney);
         assertEquals(false, isValid);
     }
@@ -30,7 +38,7 @@ public class MainAppTest extends TestCase {
         int testInteger, enteredInteger;
         String strTestInteger;
 
-        testInteger = 4000;
+        testInteger = VALID_MONEY_TO_BUY_LOTTO;
         strTestInteger = Integer.toString(testInteger);
         InputStream in = new ByteArrayInputStream(strTestInteger.getBytes());
         System.setIn(in);
@@ -38,5 +46,16 @@ public class MainAppTest extends TestCase {
         assertEquals(testInteger, enteredInteger);
     }
 
+    @Test
+    public void testGetMoneyToBuyLotto() throws Exception {
+        int testMoney, enteredMoney;
+        String strTestMoney;
 
+        testMoney = VALID_MONEY_TO_BUY_LOTTO;
+        strTestMoney = Integer.toString(testMoney);
+        InputStream in = new ByteArrayInputStream(strTestMoney.getBytes());
+        System.setIn(in);
+        enteredMoney = MainApp.getMoneyToBuyLotto();
+        assertEquals(testMoney, enteredMoney);
+    }
 }
