@@ -2,13 +2,12 @@ package domain;
 
 import java.util.*;
 
-import static domain.LottoMoney.getLottoMoney;
-
 public class LottoGame {
 
     private static final int LOTTO_LENGTH = 6;
     private static final int END_LOTTO_NUMBER = 45;
     private static final int START_LOTTO_NUMBER = 1;
+    public static final int GET_LOTTO_MONEY = 1000;
 
     private List<Integer> makeLottoNumber(){
 
@@ -18,8 +17,20 @@ public class LottoGame {
         for(int i = 0; i<LOTTO_LENGTH; i++){
 
             lottoNumberList.add(lottoNumber.nextInt(END_LOTTO_NUMBER)+START_LOTTO_NUMBER);
+            for(int j=0; j<i;j++){
+
+                i = checkLottoNumber(lottoNumberList,i,j);
+            }
         }
         return lottoNumberList;
+    }
+
+    private int checkLottoNumber(List<Integer> lottoNumberList,int location, int afterLocation){
+        if(lottoNumberList.get(location) == lottoNumberList.get(afterLocation)){
+            lottoNumberList.remove(location);
+            location--;
+        }
+        return location;
     }
 
     private void takeLottoNumber(List<Lotto> lottoNumberList,int getMoney){
@@ -28,12 +39,14 @@ public class LottoGame {
 
             Lotto lottoNumber = lottoNumberList.get(i);
             lottoNumber.showBuyLotto(lottoNumberList.get(i));
+
         }
     }
 
-    public List<Lotto> makeTotalLotto(){
+    public List<Lotto> makeTotalLotto(int money){
 
-        int lottoMoney = getLottoMoney();
+        int lottoMoney = money/GET_LOTTO_MONEY;
+        System.out.println(lottoMoney + "개를 구매했습니다.");
         List<Lotto> totalLotto = new ArrayList<Lotto>();
         for(int i=0; i<lottoMoney; i++){
 
@@ -44,10 +57,11 @@ public class LottoGame {
         return totalLotto;
     }
 
-    private List<Integer> getLastWinNumber() {
+    public Lotto getLastWinNumber() {
 
         List<String> inputWinNumber;
         List<Integer> result;
+        System.out.println("지난주 당첨 번호를 입력해주세요");
         while (true) {
             try {
                 Scanner lastNumber = new Scanner(System.in);
@@ -61,7 +75,8 @@ public class LottoGame {
                 System.out.println("다시 입력해주세요");
             }
         }
-        return result;
+        Lotto lastLotto = new Lotto(result);
+        return lastLotto;
     }
 
     private List<Integer> getInLastWinLotto(List<String> lastWinNumberList){
@@ -70,8 +85,19 @@ public class LottoGame {
         for(int i=0; i<lastWinNumberList.size(); i++){
 
             inputLastNumberInteger.add(Integer.parseInt(lastWinNumberList.get(i)));
+            for(int j=0; j<i;j++){
+
+                i = checkLastInLottoNumber(inputLastNumberInteger,i,j);
+            }
         }
         return inputLastNumberInteger;
+    }
+    private int checkLastInLottoNumber(List<Integer> lottoNumberList,int location, int afterLocation){
+        if(lottoNumberList.get(location) == lottoNumberList.get(afterLocation)){
+            System.out.println("로또 번호는 중복하여 선택이 안됩니다");
+            throw new IllegalArgumentException();
+        }
+        return location;
     }
 
     private List<Integer> checkLastWinLotto(List<String> lastWinLotto){
@@ -95,7 +121,7 @@ public class LottoGame {
     private void checkLottoNumberRange(List<Integer> lastWinLotto, int numberLocation){
         if(lastWinLotto.get(numberLocation) < START_LOTTO_NUMBER || lastWinLotto.get(numberLocation) > END_LOTTO_NUMBER){
 
-            System.out.println("범위");
+            System.out.println("로또 번호는 1 ~ 45 까지 입력가능합니다.");
             throw new IllegalArgumentException();
         }
     }
@@ -103,7 +129,7 @@ public class LottoGame {
 
         while(lastWinLotto.size() != LOTTO_LENGTH){
 
-            System.out.println("갯수");
+            System.out.println("로또 번호는 6개를 선택 하셔야합니다");
             throw new IllegalArgumentException();
         }
     }
@@ -127,9 +153,10 @@ public class LottoGame {
         }
     }
 
-    private int addBonusLottoNumber(){
+    public int addBonusLottoNumber(){
 
         int bonusNumber;
+        System.out.println("보너스 볼을 입력해 주세요");
         while(true){
             try{
                 bonusNumber = checkBonusLottoNumberRange();
@@ -153,15 +180,5 @@ public class LottoGame {
             throw new IllegalArgumentException();
         }
         return bonusNumber;
-    }
-
-    public List<Integer> makeLastWinLotto(){
-
-        List<Integer> lastWinLotto;
-        lastWinLotto = getLastWinNumber();
-        int lastWinLottoNumber = addBonusLottoNumber();
-
-        lastWinLotto.add(lastWinLottoNumber);
-        return lastWinLotto;
     }
 }
