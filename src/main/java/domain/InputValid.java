@@ -83,4 +83,20 @@ public class InputValid {
 
         return Integer.parseInt(bonusNumber);
     }
+
+    private Result isValidBonusNumber(String bonusNumber, Lotto winningLotto) {
+        if (Valid.isOneMoreInput(bonusNumber)) {
+            return Result.fail(Message.ONE_MORE_INPUT);
+        }
+        if (Valid.isInputHasChar(new String[]{bonusNumber})) {
+            return Result.fail(Message.INPUT_HAS_CHAR);
+        }
+        if (Valid.isOutOfScope(Integer.parseInt(bonusNumber))) {
+            return Result.fail(Message.OUT_OF_SCOPE_NUMBER);
+        }
+        if (winningLotto.isOverlapToBonusNumber(bonusNumber)) {
+            return Result.fail(Message.OVERLAP_BONUS);
+        }
+        return Result.ok();
+    }
 }

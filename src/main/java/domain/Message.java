@@ -11,6 +11,7 @@ public class Message {
     public static final String IMPROPER_PRIZE = "당첨번호는 6개 여야 합니다.";
     public static final String OUT_OF_SCOPE_NUMBER = "당첨번호는 1~45사이의 숫자만 가능합니다.";
     public static final String OVERLAP_NUMBERS = "당첨번호는 서로다른 수여야 합니다.";
+    public static final String OVERLAP_BONUS = "보너스볼은 당첨번호에 없는 수여야 합니다.";
     public static final String INPUT_BONUS_MESSAGE = "보너스 번호를 입력해 주세요:";
 
     public static final String SPOT=",";
