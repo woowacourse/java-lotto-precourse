@@ -78,6 +78,30 @@ public class LottoGame {
     	
     	return lottoList;
     }
-  
+
+    
+    
+    private List<Integer> inputWinningNumber() {
+    	String winningNumber = "";
+    	
+    	do {
+    		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+    		winningNumber = sc.nextLine();
+    	} while(winningNumber.length() == 0);
+
+    	return null;
+    }
+   
+    
+    public static void main(String[] args) {
+    	// test용 main 함수
+		LottoGame lg = new LottoGame();
+		ArrayList<Lotto> lottos = lg.makeLotto();
+		for (int i = 0; i < lottos.size(); i++) {
+			System.out.println(lottos.get(i).toString());
+		}
+		
+		System.out.println(lg.inputWinningNumber());
+	}
     
 }
