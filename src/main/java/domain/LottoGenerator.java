@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class LottoTickets {
-    private static final int TIME_TO_BREAK = 300;
+public class LottoGenerator {
     private List<Lotto> tickets = new ArrayList<>();
 
-    public LottoTickets(int numberOfTickets) {
+    public LottoGenerator(int numberOfTickets) {
         generateTickets(numberOfTickets);
     }
 
@@ -27,22 +26,6 @@ public class LottoTickets {
         }
 
         return new ArrayList<>(numbers);
-    }
-
-    public void showAll() {
-        for (int i = 0; i < tickets.size(); i++) {
-            System.out.println(tickets.get(i).toString());
-            sleep(TIME_TO_BREAK);
-        }
-        System.out.println();
-    }
-
-    private void sleep(int timeToBreak) {
-        try {
-            Thread.sleep(timeToBreak);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public List<Lotto> getTickets() {

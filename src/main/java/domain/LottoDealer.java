@@ -1,22 +1,13 @@
 package domain;
 
 import java.io.IOException;
+import java.util.List;
 
-public class Cashier {
+public class LottoDealer {
     private static final int LOWER_BOUND_OF_CHANGE = 0;
-    private int purchasePrice;
-    private int numberOfTickets;
 
-    public Cashier(int purchasePrice) {
-        this.purchasePrice = purchasePrice;
-        this.numberOfTickets = calculateNumberOfTickets();
-    }
-
-    private int calculateNumberOfTickets() {
-        return (purchasePrice / Lotto.PRICE);
-    }
-
-    public void showInfo() {
+    public List<Lotto> sellTickets(int purchasePrice) {
+        int numberOfTickets = calculateNumberOfTickets(purchasePrice);
         System.out.print(numberOfTickets + "개를 구매했습니다. ");
         int change = purchasePrice % Lotto.PRICE;
         if (change > LOWER_BOUND_OF_CHANGE) {
@@ -24,10 +15,11 @@ public class Cashier {
         }
         pause();
         System.out.println();
+        return new LottoGenerator(numberOfTickets).getTickets();
     }
 
-    public int getNumberOfTickets() {
-        return numberOfTickets;
+    private int calculateNumberOfTickets(int purchasePrice) {
+        return (purchasePrice / Lotto.PRICE);
     }
 
     private void pause() {

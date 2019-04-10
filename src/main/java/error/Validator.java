@@ -6,14 +6,12 @@ import error.customExceptions.*;
 import java.util.Arrays;
 
 public class Validator {
-    private static final int MIN_PURCHASE_PRICE = 1000;
-
     public void checkAccuracyOfPurchasePrice(String input) {
         if (!isInteger(input)) {
             throw new NotIntegerException();
         }
-        if (Integer.parseInt(input) < MIN_PURCHASE_PRICE) {
-            throw new MinimumPurchasePriceException(MIN_PURCHASE_PRICE);
+        if (Integer.parseInt(input) < Lotto.PRICE) {
+            throw new MinimumPurchasePriceException(Lotto.PRICE);
         }
     }
 

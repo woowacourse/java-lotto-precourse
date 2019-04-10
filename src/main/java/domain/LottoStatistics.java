@@ -2,42 +2,43 @@ package domain;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoStatistics {
-    private static final int INIT_COUNT = 0;
+    private static final int INIT_VALUE = 0;
     private static final int COUNTING = 1;
     private WinningLotto winningLotto;
-    private LottoTickets lottoTickets;
+    private List<Lotto> tickets;
     private Map<Rank, Integer> statistics = new HashMap<>();
 
-    public LottoStatistics(WinningLotto winningLotto, LottoTickets lottoTickets) {
+    public LottoStatistics(WinningLotto winningLotto, List<Lotto> tickets) {
         this.winningLotto = winningLotto;
-        this.lottoTickets = lottoTickets;
+        this.tickets = tickets;
         initStatistics();
         calculateStatistics();
     }
 
     private void initStatistics() {
         for (Rank rank : Rank.values()) {
-            statistics.put(rank, INIT_COUNT);
+            statistics.put(rank, INIT_VALUE);
         }
     }
 
     private void calculateStatistics() {
-        for (Lotto ticket : lottoTickets.getTickets()) {
+        for (Lotto ticket : tickets) {
             Rank rank = winningLotto.match(ticket);
             statistics.put(rank, statistics.get(rank) + COUNTING);
         }
     }
 
     private double calculateReturnRate() {
-        long totalProfit = 0;
+        long totalProfit = INIT_VALUE;
         for (Rank rank : Rank.values()) {
             totalProfit += ((long) rank.getWinningMoney()) * statistics.get(rank);
         }
-        long investment = lottoTickets.getTickets().size() * Lotto.PRICE;
-        return (double) totalProfit / investment;
+        long investment = tickets.size() * Lotto.PRICE;
+        return totalProfit / (double) investment;
     }
 
     public void show() {

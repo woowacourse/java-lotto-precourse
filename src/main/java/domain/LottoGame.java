@@ -1,20 +1,20 @@
 package domain;
 
 import userInput.BonusBallInput;
-import userInput.PurchasePriceInput;
 import userInput.WinningNumbersInput;
+
+import java.util.List;
 
 public class LottoGame {
     public static void main(String[] args) {
-        int purchasePrice = new PurchasePriceInput().getPrice();
-        Cashier cashier = new Cashier(purchasePrice);
-        LottoTickets lottoTickets = new LottoTickets(cashier.getNumberOfTickets());
-        cashier.showInfo();
-        lottoTickets.showAll();
+        LottoBuyer lottoBuyer = new LottoBuyer();
+        List<Lotto> tickets = new LottoDealer().sellTickets(lottoBuyer.getPurchasePrice());
+        lottoBuyer.setTickets(tickets);
+        lottoBuyer.showAllTickets();
 
-        Lotto winningNumbers = new WinningNumbersInput().getWinningNumbers();
-        int bonusNo = new BonusBallInput(winningNumbers).getBonusNo();
+        Lotto winningNumbers = WinningNumbersInput.getWinningNumbers();
+        int bonusNo = BonusBallInput.getBonusBall(winningNumbers);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNo);
-        new LottoStatistics(winningLotto, lottoTickets).show();
+        new LottoStatistics(winningLotto, tickets).show();
     }
 }
