@@ -17,6 +17,9 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         final int NUMBER_A_PLUS_B = App.LOTTO_NUMBER_OF_PICKS * 2;
 
+        /*
+        n(A ∩ B) = n(A) + n(B) - n(A ∪ B), A, B는 집합, n()은 집합의 원소의 개수
+         */
         return Rank.valueOf(
             NUMBER_A_PLUS_B - lotto.unionSet(userLotto).size(),
             userLotto.contains(bonusNo)

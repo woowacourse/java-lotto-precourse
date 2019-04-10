@@ -24,8 +24,8 @@ public class Lotto {
 
     public HashSet<Integer> unionSet(Lotto rhs) {
         final List<Integer> appendedList = new Vector<>(numbers);
-
         appendedList.addAll(rhs.numbers);
+
         return new HashSet<>(appendedList);
     }
 

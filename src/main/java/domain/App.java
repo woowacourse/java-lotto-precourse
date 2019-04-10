@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Collections;
 import java.util.Vector;
 import java.util.Arrays;
-import java.util.HashSet
+import java.util.HashSet;
 import java.util.TreeMap;
 
 /**
@@ -46,12 +46,13 @@ public class App {
     }
 
     App() {
-        inputAmount().validateAmountAndGetNumber().purchaseAndPrintLottos();
-        inputWinningNumbers().parseWinningNumbers().validateWinningNumbers();
-        inputBonusNumber().validateBonusNumber();
-        getWinningLotto().matchLottos();
-        initRankTable().fillRankTable();
-        printResult();
+        inputAmount().validateAmountAndGetNumber()
+        .purchaseAndPrintLottos()
+        .inputWinningNumbers().parseWinningNumbers().validateWinningNumbers()
+        .inputBonusNumber().validateBonusNumber()
+        .getWinningLotto().matchLottos()
+        .initRankTable().fillRankTable()
+        .printResult();
     }
 
     private App inputAmount() {
@@ -134,13 +135,14 @@ public class App {
         return this;
     }
 
-    private void validateBonusNumber() {
+    private App validateBonusNumber() {
         if (bonusNumber < LOTTO_MIN || bonusNumber > LOTTO_MAX) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
+        return this;
     }
 
     private App getWinningLotto() {
@@ -151,6 +153,9 @@ public class App {
         return this;
     }
 
+    /*
+    MISS를 제외한 등수를 전부 콜렉션에 모음
+     */
     private App matchLottos() {
         for (Lotto lotto : lottos) {
             Rank rank = winningLotto.match(lotto);
@@ -168,6 +173,9 @@ public class App {
         return this;
     }
 
+    /*
+    등수를 키로 하는 트리맵을 이용해 등수의 개수를 센다
+     */
     private App fillRankTable() {
         for (Rank rank : rankings) {
             rankTable.put(rank, rankTable.get(rank) + 1);
@@ -181,7 +189,8 @@ public class App {
             printRow(key);
             earned += key.getWinningMoney() * rankTable.get(key);
         }
-        System.out.format("총 수익률은 %.3f입니다.", (double) earned / spent);
+        System.out.format("총 수익률은 %.3f%%입니다.",
+            (((double) earned / spent) - 1.0) * 100.0);
         return this;
     }
 
