@@ -1,6 +1,8 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -75,6 +77,16 @@ public class Validator {
         return true;
     }
 
+    public boolean hasDuplicateNumbers(List<String> userInput) {
+        Set<String> numerics = new HashSet<String>(userInput);
+
+        if (numerics.size() != userInput.size()) {
+            System.out.println("중복되는 숫자는 포함할 수 없습니다.");
+            return true;
+        }
+        return false;
+    }
+
     public boolean isValidWinningNumbers(List<String> userInput) {
         boolean validNumerics = true;
 
@@ -82,7 +94,8 @@ public class Validator {
             validNumerics = validNumerics && isNemericInt(str);
         }
 
-        return validNumerics && isInBounds(userInput) && isValidSize(userInput);
+        return validNumerics && isInBounds(userInput) && isValidSize(userInput)
+                && !hasDuplicateNumbers(userInput);
     }
 
     public boolean isValidBonus(String Bonus) {
