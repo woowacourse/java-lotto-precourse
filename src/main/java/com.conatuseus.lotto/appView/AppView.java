@@ -11,6 +11,7 @@ import java.util.*;
 public class AppView {
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static final String NUMBER_REGEX = "[0-9]+";
+    public static final int FAIL_INPUT = -1;
 
     /* AppView 클래스 기본생성자*/
     public AppView() {
@@ -42,7 +43,7 @@ public class AppView {
             return false;
         }
         int tInputMoney = Integer.parseInt(scannedMoney);
-        return (tInputMoney % 1000) == 0;
+        return (tInputMoney % AppController.LOTTO_COST) == 0;
     }
 
     public static void printLottoList(List<Lotto> lottoList) {
@@ -93,7 +94,7 @@ public class AppView {
     public static int inputWinningBonusNumber() throws IOException {
         outputLine("보너스 볼을 입력해 주세요.");
         String scannedNumber = br.readLine();
-        return isWinningBonusValid(scannedNumber) ? Integer.parseInt(scannedNumber) : -1;
+        return isWinningBonusValid(scannedNumber) ? Integer.parseInt(scannedNumber) : FAIL_INPUT;
     }
 
     public static boolean isWinningBonusValid(String scannedNumber) {

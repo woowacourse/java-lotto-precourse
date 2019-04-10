@@ -2,6 +2,8 @@ package com.conatuseus.lotto.model;
 
 import com.conatuseus.lotto.appController.AppController;
 
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -26,5 +28,12 @@ public class WinningLotto {
 
     private int isMatches(Lotto userLotto, int index) {
         return this.lotto.isContain(userLotto.getNumbers().get(index)) ? 1 : 0;
+    }
+
+    @Override
+    public String toString(){
+        List<Integer> ret=this.lotto.getNumbers();
+        ret.add(bonusNo);
+        return ret.toString();
     }
 }

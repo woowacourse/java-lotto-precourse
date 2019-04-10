@@ -1,3 +1,4 @@
+import com.conatuseus.lotto.appController.AppController;
 import com.conatuseus.lotto.appView.AppView;
 import com.conatuseus.lotto.model.Lotto;
 import com.conatuseus.lotto.model.Rank;
@@ -85,5 +86,20 @@ public class test {
         assertThat(winningLotto.match(new Lotto(new ArrayList<>(Arrays.asList(1,2,30,40,41,42)))),is(Rank.MISS));      // 2개 일치
 
 
+    }
+
+    @Test
+    public void 사용자로또_당첨개수_확인(){
+        AppController appController=new AppController();
+
+    }
+
+    @Test
+    public void 수익률_계산_확인(){
+        AppController appController=new AppController();
+        assertThat(appController.getReturnOfRate(5000L,10000),is(0.5));
+        assertThat(appController.getReturnOfRate(10000L,5000),is(2.0));
+        assertThat(appController.getReturnOfRate(2_000_000_000L,1_000_000),is(2000.0));
+        assertThat(appController.getReturnOfRate(5000L,8000),is(0.625));
     }
 }
