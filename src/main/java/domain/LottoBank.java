@@ -30,4 +30,18 @@ public class LottoBank {
 		}
 		winLotto = new WinningLotto(new Lotto(winnerLottoNumbers), bonusNo);
 	}
+	
+	private String checkValid(String winnerNums) {
+		if(winnerNums.split(",").length != LottoRule.LottoLENGTH.getNum()) 
+			printAndfixErr(ErrMsg.NumLengthErr.getMsg());
+		for(String winnerNum : winnerNums.split(",")) {
+			try {
+				if((Integer.parseInt(winnerNum) < LottoRule.BEGINNUM.getNum()) || (Integer.parseInt(winnerNum) > LottoRule.ENDNUM.getNum())) 
+					printAndfixErr(ErrMsg.OutOfRangeErr.getMsg());
+			} catch(NumberFormatException e) {
+				printAndfixErr(ErrMsg.InputMismatchErr.getMsg());
+			}
+		}
+		return winnerNums;
+	}
 }
