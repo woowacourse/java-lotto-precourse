@@ -104,7 +104,7 @@ public class LottoGame {
         System.out.println(message);
 
         for (Lotto lotto : lottos) {
-            lotto.showNumbers();
+            System.out.println(lotto.getNumbers());
         }
     }
 
