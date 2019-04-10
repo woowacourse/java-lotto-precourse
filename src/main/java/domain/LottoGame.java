@@ -27,6 +27,11 @@ public class LottoGame {
         System.out.print(Message.INPUT_WIN_MESSAGE);
         Lotto lotto = input.checkWinningNumbers(sc.nextLine());
         return lotto;
+    }
+    private int checkBonusNumber(InputValid input, Scanner sc, Lotto winningLotto) {
+        System.out.print(Message.INPUT_BONUS_MESSAGE);
+        int bonus = input.checkBonusNumber(sc.nextLine(), winningLotto);
+        return bonus;
 
     }
 
