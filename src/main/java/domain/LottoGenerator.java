@@ -28,6 +28,18 @@ public class LottoGenerator {
 		return MAX_LOTTO_NUMBER;
 	}
 
+	public int getLottoCount(int lottoPrice) {
+		return (lottoPrice / EACH_LOTTO_PRICE);
+	}
+
+	public List<Lotto> generateUserLottos() {
+		int lottoPrice = inputLottoPriceFromUser();
+		int lottoCount = getLottoCount(lottoPrice);
+		List<Lotto> userLotts = generateLotto(lottoCount);
+		printLottos(lottoCount, userLotts);
+		return userLotts;
+	}
+
 	private int inputLottoPriceFromUser() {
 		int lottoPrice;
 		do {
