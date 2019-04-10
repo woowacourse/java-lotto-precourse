@@ -31,7 +31,6 @@ public class PrintUtil {
         }
 
         private void printPurchasedLotto(Lotto lotto){
-                String message = lotto.getNumbers().toString();
-                System.out.println(message);
+                lotto.printNumbers();
         }
 }
