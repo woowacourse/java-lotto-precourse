@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class UserOutput {
 
@@ -32,9 +33,12 @@ public class UserOutput {
 
     }
 
-    public void PrintWinStatistics(List<Rank> userRanks) {
+    public void PrintWinStatistics(List<Rank> userRanks, int purchaseAmount) {
+        Stream<Rank> rankStream = Stream.of(Rank.values());
+
         System.out.println("당첨통계");
         System.out.println("---------");
+        rankStream.filter(rs -> rs.getCountOfMatch() != 0).forEach(rs -> PrintWinResult(rs, userRanks));
 
     }
 
@@ -44,15 +48,16 @@ public class UserOutput {
         if (rank == Rank.SECOND) {
             System.out.println(rank.getCountOfMatch() + "개 일치, 보너스 볼 일치 (" + rank.getWinningMoney() + "원)-"
                     + matchCountperRank + "개");
+            return;
         }
 
         System.out.println(rank.getCountOfMatch() + "개 일치, (" + rank.getWinningMoney() + "원)-"
-                + matchCountperRank+"개");
+                + matchCountperRank + "개");
 
     }
 
 
-    private void PrintEarningRate() {
-        System.out.println("이후 구현 예정");
+    private void PrintEarningRate(List<Rank> userRanks, int purchaseAmount) {
+
     }
 }
