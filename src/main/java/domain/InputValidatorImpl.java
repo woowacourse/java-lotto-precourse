@@ -2,55 +2,81 @@ package domain;
 
 import domain.interfaces.InputValidator;
 
+import java.util.Arrays;
+
 public class InputValidatorImpl implements InputValidator {
 
     private final static int LOTTO_BOUND_SIZE = 46;
     private static boolean[] isPicked;
+    private static boolean isValid;
 
     @Override
     public boolean isValidPurchaseAmount(int purchaseAmount) {
-        /*if (purchaseAmount > MAX_AFFORDABLE_LOTTO_PURCHASE_AMOUNT) {
-            return false;
-        }*/
         if (purchaseAmount < MINIMUM_PURCHASE_AMOUNT) {
+            System.out.println("올바른 금액을 입력해 주세요.");
             return false;
         }
         if (purchaseAmount % PRICE_PER_LOTTO != 0) {
+            System.out.println("올바른 금액을 입력해 주세요.");
             return false;
         }
         return true;
     }
+
+
 
     @Override
     public boolean isValidWinningLotto(int lottoLength, String[] winningLotto) {
-        boolean flag = true;
+        isValid = true;
         isPicked = new boolean[LOTTO_BOUND_SIZE];
-        if (lottoLength > LOTTO_LENGTH) {
+        checkInput(lottoLength);
+        for (String s : winningLotto) {
+            checkInput(lottoLength, s);
+            isValidLottoNumber(Integer.parseInt(s));
+        }
+        if (!isValid){
+            System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
             return false;
         }
-        for (String s : winningLotto){
-            int num = Integer.parseInt(s);
-            //공백입력은 인티저 변환시 int 값이 48인가? 쉼표는? 아스키코드 값으로 변환되는가?
-            flag = isValidLottoNumber(num);
-        }
-        if (!flag) { return false; }
         return true;
     }
 
-    @Override
-    public boolean isValidLottoNumber(int num) {
-        if (num > MIN_LOTTO_NUMBER && num < MAX_LOTTO_NUMBER && isPicked[num] == false) {
-            isPicked[num] = true;
-            return true;
+    public void checkInput(int lottoLength){
+        if (lottoLength == 0) {
+            isValid = false;
         }
-        return false;
+    }
+
+    public void checkInput(int lottoLength, String s) {
+        if (lottoLength != LOTTO_LENGTH || s.equals(" ")) {
+            isValid = false;
+        }
+    }
+
+    @Override
+    public void isValidLottoNumber(int num) {
+        if (num >= MIN_LOTTO_NUMBER && num <= MAX_LOTTO_NUMBER && isPicked[num] == false) {
+            isPicked[num] = true;
+            return;
+        }
+        if (num < MIN_LOTTO_NUMBER || num > MAX_LOTTO_NUMBER) {
+            isValid = false;
+            return;
+        }
+        if (isPicked[num]) {
+            isValid = false;
+            return;
+        }
     }
 
     @Override
     public boolean isValidBonusNumber(int bonusNo) {
-        if (bonusNo > MIN_BONUS_NUMBER && bonusNo < MAX_BONUS_NUMBER && isPicked[bonusNo] == false) {
-            return true;
+        if (bonusNo < MIN_BONUS_NUMBER || bonusNo > MAX_BONUS_NUMBER) {
+            return false;
         }
-        return false;
+        if (isPicked[bonusNo]) {
+            return false;
+        }
+        return true;
     }
 }

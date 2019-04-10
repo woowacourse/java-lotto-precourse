@@ -1,6 +1,7 @@
 package domain.interfaces;
 
 import domain.Lotto;
+import domain.Rank;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public interface UserInterface {
     void notifyInvalidPurchaseAmount();
     void notifyInvalidWinningLotto();
     void notifyInvalidBonusNumber();
-    void printStatistics();
+    void printStatistics(Rank rankValueForPrint, int wins);
+    void printProfitRate();
 
 }

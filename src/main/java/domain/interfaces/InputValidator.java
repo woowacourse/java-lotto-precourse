@@ -1,5 +1,7 @@
 package domain.interfaces;
 
+import java.util.InputMismatchException;
+
 public interface InputValidator {
 
     int MAX_AFFORDABLE_LOTTO_PURCHASE_AMOUNT = 100000;
@@ -11,8 +13,8 @@ public interface InputValidator {
     int MIN_LOTTO_NUMBER = 1;
     int MAX_LOTTO_NUMBER = 45;
 
-    boolean isValidPurchaseAmount(int purchaseAmount);
-    boolean isValidWinningLotto(int lottoLength, String[] winningLotto);
-    boolean isValidLottoNumber(int num);
-    boolean isValidBonusNumber(int bonusNo);
+    boolean isValidPurchaseAmount(int purchaseAmount) throws InputMismatchException;
+    boolean isValidWinningLotto(int lottoLength, String[] winningLotto) throws IllegalArgumentException;
+    void isValidLottoNumber(int num)throws InputMismatchException;
+    boolean isValidBonusNumber(int bonusNo) throws InputMismatchException;
 }

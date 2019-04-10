@@ -16,10 +16,6 @@ public class Lotto {
         return numbers;
     }
 
-    public void hi(){
-        System.out.println(numbers);
-    }
-
     @Override
     public String toString(){
         return numbers.toString();

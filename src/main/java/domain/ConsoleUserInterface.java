@@ -19,8 +19,7 @@ public class ConsoleUserInterface implements UserInterface {
     public void printLottoList(List<Lotto> lottos, int validLottoCount) {
         System.out.println(validLottoCount + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.hashCode());
-            System.out.println(lotto);
+            System.out.println(lotto.toString());
         }
     }
 
@@ -40,25 +39,26 @@ public class ConsoleUserInterface implements UserInterface {
 
     @Override
     public void notifyInvalidPurchaseAmount() {
-        System.out.println("잘못된 입력입니다.");
+        System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
     }
 
     @Override
-    public void notifyInvalidWinningLotto() { System.out.println("잘못된 입력입니다."); }
+    public void notifyInvalidWinningLotto() { System.out.println("잘못된 입력입니다. 다시 입력해주세요."); }
 
     @Override
-    public void notifyInvalidBonusNumber() { System.out.println("잘못된 입력입니다."); }
+    public void notifyInvalidBonusNumber() { System.out.println("잘못된 입력입니다. 다시 입력해주세요."); }
 
     @Override
-    public void printStatistics(){
-        StringBuilder sb = new StringBuilder();
-        //List<Integer> rankValueForPrint = Arrays.asList(Rank.THIRD.getCountOfMatch())
-        sb.append(Rank.FIFTH.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() + "원)-" + Player.count_FIFTH + "개\n"
-                + Rank.FOURTH.getCountOfMatch() + "개 일치 (" + Rank.FOURTH.getWinningMoney() + "원)-" + Player.count_FOURTH + "개\n"
-                + Rank.THIRD.getCountOfMatch() + "개 일치 (" + Rank.THIRD.getWinningMoney() + "원)-" + Player.count_THIRD + "개\n"
-                + Rank.SECOND.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + Rank.THIRD.getWinningMoney() + "원)-" + Player.count_SECOND + "개\n"
-                + Rank.FIRST.getCountOfMatch() + "개 일치 (" + Rank.FIRST.getWinningMoney() + "원)-" + Player.count_FIRST + "개");
-        System.out.println(sb);
-        System.out.println("총 수익률은 " + Player.profitRate +"입니다.");
+    public void printStatistics(Rank rankValueForPrint, int wins){
+        System.out.println(String.format("%d개 일치%s(%d원)- %d개",
+                rankValueForPrint.getCountOfMatch(),
+                rankValueForPrint == Rank.SECOND ? ", 보너스 볼 일치" : " ",
+                rankValueForPrint.getWinningMoney(),
+                wins));
+    }
+
+    @Override
+    public void printProfitRate(){
+        System.out.println(String.format("총 수익률은 %.1f", Player.profitRate) + "%입니다.");
     }
 }
