@@ -35,10 +35,11 @@ public class DataReceiver {
     public static int getBonusNumberFromUser(ArrayList<Integer> winningNumberList, Scanner sc) {
         System.out.println(UserView.COMMENT_WHEN_GET_BONUS_NUMBER_FROM_USER);
         String bonusNumberFromUser = sc.nextLine();
-        while (!Validator.checkBonusLottoNumberValid(winningNumberList, bonusNumberFromUser)) {
+        while (!Validator.checkIsInteger(bonusNumberFromUser) ||
+                !Validator.checkIsLottoNumberInRange(Integer.parseInt(bonusNumberFromUser)) ||
+                Validator.checkIsAlreadyInLottoNumbers(winningNumberList, Integer.parseInt(bonusNumberFromUser))) {
             bonusNumberFromUser = sc.nextLine();
         }
-
         return Integer.parseInt(bonusNumberFromUser);
     }
 }

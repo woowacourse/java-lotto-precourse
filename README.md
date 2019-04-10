@@ -130,13 +130,11 @@ WARNING: 로또넘버는 6개 이어야 합니다. 다시 입력해주세요.
 |Validator|값이 에러를 갖는지 확인하는 로직을 담당|
 |---|---|
 |checkIsInteger|해당값이 정수로 변환가능한지 확인|
+|checkIsLottoNumberInRange|로또번호가 범위안에 있는 값인지 확인|
 |checkNumbersLengthIsValid|당첨로또입력의 갯수 확인|
 |checkEachStringIsInteger|당첨로또입력의 모든숫자가 정수로 변환가능한지 확인|
 |checkEachStringInRange|당첨로또입력의 모든숫자가 1~45인지 확인|
-|checkNumbersDontOverlap|당첨로또입력이 중복 없는지 확인|
-|checkIsLottoNumberInRange|로또번호가 범위안에 있는 값인지 확인|
-|checkIsLottoNumberValid|로또번호가 유효한지 확인|
-|checkBonusLottoNumberValid|보너스로또넘버가 유효한지 확인|
+|checkEachStringDontOverlap|당첨로또입력이 중복 없는지 확인|
 |checkIsAlreadyInLottoNumbers|입력이 이미 로또번호에 포함된 번호인지 확인해 반환|
 |checkInputLottoMoneyIsUnderMinvalue|인풋 금액이 로또1장금액보다 낮은지 체크|
 |checkWinningLottoNumbers|당첨로또번호 입력에 오류가있는지 종합 체크|

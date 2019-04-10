@@ -16,12 +16,6 @@ import java.util.Set;
 
 public class Validator {
 
-    /**
-     * 입력금액 문자열 유효성 검사
-     *
-     * @param lottoCountInput
-     * @return
-     */
     public static boolean checkInputLottoMoney(String lottoCountInput) {
         if (!checkIsInteger(lottoCountInput)) {
             return false;
@@ -41,18 +35,12 @@ public class Validator {
         return false;
     }
 
-    /**
-     * 당첨로또 문자열 유효성 검사
-     *
-     * @param winningLottoInput
-     * @return
-     */
     public static boolean checkWinningLottoNumbers(String winningLottoInput) {
         String[] numbers = winningLottoInput.split(",");
 
         if (!checkNumbersLengthIsValid(numbers) ||
                 !checkEachStringIsInteger(numbers) ||
-                !checkNumbersDontOverlap(numbers) ||
+                !checkEachStringDontOverlap(numbers) ||
                 !checkEachStringInRange(numbers)) {
             return false;
         }
@@ -83,7 +71,7 @@ public class Validator {
         return invalidValueNotFound;
     }
 
-    private static boolean checkNumbersDontOverlap(String[] numbers) {
+    private static boolean checkEachStringDontOverlap(String[] numbers) {
         Set<String> tempAddedLottoNumbers = new HashSet<String>();
         for (int i = 0; (i < numbers.length); i++) {
             tempAddedLottoNumbers.add(numbers[i]);
@@ -95,25 +83,7 @@ public class Validator {
         return true;
     }
 
-    /**
-     * 보너스번호 문자열 유효성 검사
-     *
-     * @param winningLottoNumbers
-     * @param bonusNumberStringInput
-     * @return
-     */
-    public static boolean checkBonusLottoNumberValid(List<Integer> winningLottoNumbers, String bonusNumberStringInput) {
-        if (!checkIsLottoNumberValid(bonusNumberStringInput)) {
-            return false;
-        }
-        int bonusNumber = Integer.parseInt(bonusNumberStringInput);
-        if (checkIsAlreadyInLottoNumbers(winningLottoNumbers, bonusNumber)) {
-            return false;
-        }
-        return true;
-    }
-
-    private static boolean checkIsAlreadyInLottoNumbers(List<Integer> winningNumberList, int lottoInput) {
+    public static boolean checkIsAlreadyInLottoNumbers(List<Integer> winningNumberList, int lottoInput) {
         if (winningNumberList.contains(lottoInput)) {
             System.out.println(UserView.WARNING_WHEN_WINNING_LOTTO_NUMBER_HAS_DUPLICATION);
             return true;
@@ -121,24 +91,7 @@ public class Validator {
         return false;
     }
 
-    /**
-     * 단일 로또넘버 문자열 유효성 검사
-     *
-     * @param inputLottoNumber
-     * @return
-     */
-    public static boolean checkIsLottoNumberValid(String inputLottoNumber) {
-        if (!checkIsInteger(inputLottoNumber)) {
-            return false;
-        }
-        int inputNumberInt = Integer.parseInt(inputLottoNumber);
-        if (!checkIsLottoNumberInRange(inputNumberInt)) {
-            return false;
-        }
-        return true;
-    }
-
-    private static boolean checkIsInteger(String inputNumber) {
+    public static boolean checkIsInteger(String inputNumber) {
         try {
             Integer.parseInt(inputNumber);
             return true;
@@ -148,7 +101,7 @@ public class Validator {
         }
     }
 
-    private static boolean checkIsLottoNumberInRange(int lottoInput) {
+    public static boolean checkIsLottoNumberInRange(int lottoInput) {
         if ((lottoInput < GameSetting.MIN_LOTTO_NUMBER) ||
                 (lottoInput > GameSetting.MAX_LOTTO_NUMBER)) {
             System.out.println(UserView.WARNING_WHEN_LOTTO_NUMBER_NOT_IN_RANGE);
