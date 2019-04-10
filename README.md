@@ -58,6 +58,23 @@
     - 1~45를 벗어나는 숫자: 49,-500
     - 당첨번호와 중복된 숫자인 경우
 
+## 폴더 구조
+```
+|-- main
+|   -- java
+|       -- controller
+|           |-- DataReceiver.java       유저로부터 데이터를 받는 로직 담당
+|           |-- LottoGame.java          게임 전체 진행 담당
+|           |-- Validator.java          데이터의 유효성 체크 담당
+|       -- database
+|           |-- GameSetting.java        게임 세팅데이터 담당
+|           |-- UserViewData.java       게임 출력데이터 담당
+|       -- lottodata
+|           |-- Lotto.java              로또 1장 객체
+|           |-- Rank.java               로또 1장 당첨결과 객체
+|           |-- WinningLotto.java       당첨로또 객체
+|       -- Main.java
+```
 ## 구현로직 분류
 - [x] 메인로직 1: 사용자로부터 로또 구입 금액 입력받기
     - [x] 서브로직 1-1: 입력이 정수로 변환가능한지 확인
@@ -128,10 +145,10 @@
 |checkInputLottoMoneyIsUnderMinvalue|인풋 금액이 로또1장금액보다 낮은지 체크|
 |checkWinningLottoNumbers|당첨로또번호 입력에 오류가있는지 종합 체크|
 
-|GameSetting|게임의 세팅값을 담당|
+|GameSetting|게임의 세팅데이터 담당|
 |---|---|
 
-|UserView|게임의 출력을 담당|
+|UserViewData|게임의 출력데이터 담당|
 |---|---|
 
 |DataReceiver|유저로부터 데이터 입력받는 로직 담당|
