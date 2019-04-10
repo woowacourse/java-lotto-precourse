@@ -8,5 +8,6 @@ public class Main {
         LottoGame lottoGame = new LottoGame();
 
         lottoGame.issueLottos();
+        lottoGame.setWinningLotto();
     }
 }

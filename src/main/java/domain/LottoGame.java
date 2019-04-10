@@ -1,12 +1,14 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 로또 게임을 진행하는 객체
  */
 public class LottoGame {
     private List<Lotto> lottos = new ArrayList<>();
+    private List<WinningLotto> winningLotto = new ArrayList<>();
     private static final int GAME_PRICE = 1_000;
     private static final int UPPER_LIMIT = 100_000;
 
@@ -14,11 +16,20 @@ public class LottoGame {
         int userMoney = 0;
 
         while (userMoney == 0) {
-            userMoney = validateNumber(getUserMoney(getUserInput()));
+            userMoney = validateUserMoney(getUserMoney(getUserInput()));
         }
 
         buyLottos(userMoney);
         printLottos();
+    }
+
+    public void setWinningLotto() {
+        Lotto winningNumbers = new Lotto(getWinningNumbers());
+        int bonusNumber = 46;
+
+        winningLotto.add(new WinningLotto(winningNumbers, bonusNumber));
+
+        winningLotto.get(0).showNumbers();
     }
 
     private String getUserInput() {
@@ -41,7 +52,7 @@ public class LottoGame {
         }
     }
 
-    private int validateNumber(int userMoney) {
+    private int validateUserMoney(int userMoney) {
         if ((userMoney <= 0) || ((userMoney % GAME_PRICE) != 0) || (userMoney > UPPER_LIMIT)) {
             System.out.println("구입 금액은 1,000원 단위 0 이상 100,000 이하의 정수로 입력해 주세요.");
             return 0;
@@ -76,4 +87,45 @@ public class LottoGame {
             lotto.showNumbers();
         }
     }
+
+    private List<Integer> getWinningNumbers() {
+        Scanner scan = new Scanner(System.in);
+        String userInput = "";
+
+        do {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            userInput = scan.nextLine();
+        } while (!validateWinningNumbers(userInput));
+
+        return new ArrayList<>(parseWinningNumbers(userInput));
+    }
+
+    private boolean validateWinningNumbers(String userInput) {
+        Set<Integer> winningNumbers = parseWinningNumbers(userInput);
+
+        if ((winningNumbers.size() != 6) || (Collections.max(winningNumbers) > 45) || (Collections.min(winningNumbers) < 1)) {
+            System.out.println("당첨 번호는 1~45 사이의 숫자 6개를 중복되지 않게 쉼표(,)로 구분하여 입력해주세요.");
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private Set<Integer> parseWinningNumbers(String userInput) {
+        Set<String> parsedStringNumber = new HashSet<>(Arrays.asList(userInput.split(",")));
+
+        try {
+            Set<Integer> parsedIntNumber = parsedStringNumber.stream()
+                    .map(s -> Integer.parseInt(s)).collect(Collectors.toSet());
+
+            return parsedIntNumber;
+        } catch (Exception e) {
+            return new HashSet<>();
+        }
+    }
+
+//    private int getBonusNumber() {
+//
+//    }
 }
