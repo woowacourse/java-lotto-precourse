@@ -23,4 +23,11 @@ public class LottoGame {
         int money = input.checkMoney(sc.nextLine());
         return money;
     }
+    private Lotto checkWinningNumbers(InputValid input, Scanner sc) {
+        System.out.print(Message.INPUT_WIN_MESSAGE);
+        Lotto lotto = input.checkWinningNumbers(sc.nextLine());
+        return lotto;
+
+    }
+
 }
