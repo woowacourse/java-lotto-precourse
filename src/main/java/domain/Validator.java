@@ -13,9 +13,8 @@ package domain;
 /**
  * 데이터에 대한 유효성을 검사해주는 클래스
  *
- * @version 1.00 2019년 4월 10일
  * @author 홍휘진
- *
+ * @version 1.00 2019년 4월 10일
  */
 public class Validator {
 

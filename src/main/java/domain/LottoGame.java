@@ -25,29 +25,18 @@ import java.util.Scanner;
 public class LottoGame {
 
     private static final String MONEY_MSG = "0원 이상의 정수로 구입금액을 입력해 주세요.";
-
     private static final String MONEY_ERROR = "반드시 0원 이상의 정수로 입력해주세요!(최대 : 400만원)";
-
     private static final String MATCH_RESULT = "당첨 통계\n--------";
-
     private static final String HYPHEN = "- ";
-
     private static final String COUNT = "개";
-
     private static final String YIELD = "총 수익률은 ";
-
     private static final String YIELD_RESULT = "입니다.";
-
     private static final int MONEY_MIN_BOUND = 0;
-
     private static final int MONEY_MAX_BOUND = 4000000;
 
     private MyLottoManager myLottoManager;
-
     private WinningLottoMaker winningLottoMaker;
-
     private Scanner scanner;
-
     private int money;
 
     public LottoGame() {
@@ -56,7 +45,7 @@ public class LottoGame {
         winningLottoMaker = new WinningLottoMaker(scanner);
     }
 
-    public void lottoGame() {
+    public void lottoGameStart() {
         moneyInput();
         myLottoManager.buyLotto(money);
         matchLottoNumbers(winningLottoMaker.makeWinningLotto());

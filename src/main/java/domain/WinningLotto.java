@@ -8,7 +8,6 @@ import java.util.List;
 public class WinningLotto {
 
     public static final int MATCH = 1;
-
     public static final int NOT_MATCH = 0;
 
     private final Lotto lotto;

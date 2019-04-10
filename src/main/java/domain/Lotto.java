@@ -8,33 +8,31 @@ import java.util.List;
  */
 public class Lotto {
 
-	public static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int MAX_LOTTO_NUM = 45;
+    public static final int MIN_LOTTO_NUM = 1;
 
-	public static final int MAX_LOTTO_NUM = 45;
+    private final List<Integer> numbers;
 
-	public static final int MIN_LOTTO_NUM = 1;
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
 
-	private final List<Integer> numbers;
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 
-	public Lotto(List<Integer> numbers) {
-		this.numbers = numbers;
-	}
+    public static boolean duplicateNumberInLotto(List<Integer> numbers) {
+        HashSet<Integer> recordLotto = new HashSet<>();
+        for (Integer number : numbers) {
+            recordLotto.add(number);
+        }
+        return (recordLotto.size() != Lotto.LOTTO_NUMBER_SIZE);
+    }
 
-	public List<Integer> getNumbers() {
-		return numbers;
-	}
-
-	public static boolean duplicateNumberInLotto(List<Integer> numbers) {
-		HashSet<Integer> recordLotto = new HashSet<>();
-		for (Integer number : numbers) {
-			recordLotto.add(number);
-		}
-		return (recordLotto.size() != Lotto.LOTTO_NUMBER_SIZE);
-	}
-
-	@Override
-	public String toString() {
-		return numbers.toString();
-	}
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 
 }

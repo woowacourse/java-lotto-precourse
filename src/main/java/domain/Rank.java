@@ -12,11 +12,8 @@ public enum Rank {
     MISS(0, 0);
 
     private static final String MATCH_COUNT = "개 일치";
-
     private static final String LEFT = "(";
-
     private static final String RIGHT = "원)";
-
     private static final int WINNING_MIN_COUNT = 3;
 
     private int countOfMatch;
@@ -24,12 +21,12 @@ public enum Rank {
     private String rankString;
 
     private Rank(int countOfMatch, int winningMoney) {
-        this.countOfMatch = countOfMatch;
-        this.winningMoney = winningMoney;
+        this(countOfMatch, winningMoney, null);
     }
 
-    private Rank(int countOfMatch, int winningMoney, String rankString){
-        this(countOfMatch, winningMoney);
+    private Rank(int countOfMatch, int winningMoney, String rankString) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
         this.rankString = rankString;
     }
 
@@ -64,10 +61,10 @@ public enum Rank {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder rankStatus = new StringBuilder();
         rankStatus.append(countOfMatch).append(MATCH_COUNT);
-        if (this.equals(Rank.SECOND)){
+        if (this.equals(Rank.SECOND)) {
             rankStatus.append(rankString);
         }
         rankStatus.append(LEFT).append(winningMoney).append(RIGHT);
