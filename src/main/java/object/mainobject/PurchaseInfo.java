@@ -29,13 +29,13 @@ public class PurchaseInfo {
                 PrintUtil.printPurchasedLottoList(this.lottos);
         }
 
-        public Map<Rank, Integer> makeWinningStats(Map<Rank, Integer> map, WinningLotto winningLotto) {
-                map = new HashMap<Rank, Integer>();
+        public Map<Rank, Integer> makeWinningStats(Map<Rank, Integer> stats, WinningLotto winningLotto) {
+                stats = new HashMap<Rank, Integer>();
                 for (Lotto lotto : this.lottos) {
                         Rank rank = winningLotto.match(lotto);
-                        map.put(rank,map.get(rank)+1);
+                        stats.put(rank, stats.get(rank) + 1);
                 }
-                return map;
+                return stats;
         }
 
         private List<Lotto> purchaseLottos() {
