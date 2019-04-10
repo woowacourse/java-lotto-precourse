@@ -5,9 +5,9 @@ import org.junit.Test;
 
 public class LottoMakerTest {
 
-    @Test
+    /*@Test
     public void getLottoTest() {
         Lotto lotto = LottoMaker.getLotto();
         System.out.println(lotto.getNumbers());
-    }
+    }*/
 }
