@@ -1,11 +1,16 @@
 package domain;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Util {
     private static Scanner sc = new Scanner(System.in);
 
     public static void printConsole(String message) {
+        System.out.println(message);
+    }
+
+    public static void printConsole(List<Integer> message){
         System.out.println(message);
     }
 

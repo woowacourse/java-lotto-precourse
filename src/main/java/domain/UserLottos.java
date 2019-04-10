@@ -7,30 +7,45 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class UserLottos {
-    private List<Lotto> userLottos = new ArrayList<>();
-    private List<Integer> basicLottoNumbers = IntStream.rangeClosed(1,45).boxed().collect(Collectors.toList());
+    private List<Lotto> userLottos;
+    private List<Integer> basicLottoNumbers;
 
-    public UserLottos(String moneyString){
+    private final int MIN_LOTTO_NUMBER = 1;
+    private final int MAX_LOTTO_NUMBER = 45;
+
+    public UserLottos(String moneyString) {
         int buyToLottoCount = Util.divideThousand(Util.fromStringToInteger(moneyString));
-
-        if (buyToLottoCount <= 0){
+        if (buyToLottoCount <= 0) {
             throw new IllegalArgumentException(moneyString + "는 유효하지 않은 값입니다.");
         }
-
         Util.printConsole(buyToLottoCount + "개를 구매했습니다.");
+        makeLottos(buyToLottoCount);
+    }
+
+    private void makeLottos(int buyToLottoCount) {
+        userLottos = new ArrayList<>();
+        basicLottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
         for (int i = 1; i <= buyToLottoCount; i++) {
-            Collections.shuffle(basicLottoNumbers);
-            List<Integer> selectedLottoNumbers = new ArrayList<>(basicLottoNumbers.subList(0, 6));
-            Collections.sort(selectedLottoNumbers);
-            System.out.println(selectedLottoNumbers);
+            List<Integer> selectedLottoNumbers = generateLottoNumber();
+            Util.printConsole(selectedLottoNumbers);
             userLottos.add(new Lotto(selectedLottoNumbers));
         }
-
     }
-    public void checkWinningLotto(WinningLotto winningLotto){
-        for (Lotto lotto : userLottos){
-            System.out.println(winningLotto.match(lotto).getCountOfMatch());
 
+    private List<Integer> generateLottoNumber() {
+        Collections.shuffle(basicLottoNumbers);
+        List<Integer> selectedLottoNumbers = new ArrayList<>(basicLottoNumbers.subList(0, 6));
+        Collections.sort(selectedLottoNumbers);
+        return selectedLottoNumbers;
+    }
+
+    public void checkWinningLotto(WinningLotto winningLotto) {
+        for (Lotto lotto : userLottos) {
+            System.out.println(winningLotto.match(lotto).getCountOfMatch());
         }
+    }
+
+    public int getUserLottosCount() {
+        return userLottos.size();
     }
 }
