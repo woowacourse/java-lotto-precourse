@@ -44,7 +44,6 @@ public class WinningLotto {
             intListForWinningLotto.add(Integer.parseInt(stringList.get(i)));
         }
         return intListForWinningLotto;
-
     }
 
     public static String askUserWinningNumbers() {
