@@ -15,5 +15,11 @@ public class Valid {
     public static boolean isMinusInput(String input) {
         return Integer.parseInt(input) < 0;
     }
+    public static boolean isOneMoreInput(String input) {
+        if (input.contains(Message.SPOT) || input.contains(Message.SPACE) || input.contains(Message.TAB)) {
+            return true;
+        }
+        return false;
+    }
       
 }
