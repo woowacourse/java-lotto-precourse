@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class LottoGame {
         purchase.printLottoListOfUser();                  // 로또 출력
         return purchase.getLottoList();
     }
-    
+
     private int checkMoney(InputValid input, Scanner sc) {
         System.out.print(Message.INPUT_MONEY_MESSAGE);
         int money = input.checkMoney(sc.nextLine());
@@ -39,6 +40,15 @@ public class LottoGame {
         int bonus = input.checkBonusNumber(sc.nextLine(), winningLotto);
         return bonus;
 
+    }
+    private List<Rank> matchWinningLottoAndLottoList(List<Lotto> lottoList, Lotto winLotto, int bonusNo) {
+        List<Rank> ranks = new ArrayList<>();
+        WinningLotto winningLotto = new WinningLotto(winLotto, bonusNo);
+        for (Lotto lotto : lottoList) {
+            Rank rank = winningLotto.match(lotto);                        
+            ranks.add(rank);
+        }
+        return ranks;
     }
 
 }
