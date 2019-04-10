@@ -16,14 +16,14 @@ import lottodata.WinningLotto;
 import java.util.*;
 
 public class LottoGame {
-    private int getLottoCountFromUser(Scanner sc) {
+    private static int getLottoCountFromUser(Scanner sc) {
         System.out.println(UserView.COMMENT_WHEN_RECEIVE_INPUT_MONEY);
         int lottoCount = DataReceiver.getInputMoneyFromUser(sc) / GameSetting.PRICE_PER_1LOTTO;
 
         return lottoCount;
     }
 
-    private List<Lotto> createLottos(int lottoCount) {
+    private static List<Lotto> createLottos(int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
         List<Lotto> createdLottoList = new LinkedList<Lotto>();
         for (int i = 0; i < lottoCount; i++) {
@@ -33,13 +33,13 @@ public class LottoGame {
         return createdLottoList;
     }
 
-    private void printLottos(List<Lotto> lottoList) {
+    private static void printLottos(List<Lotto> lottoList) {
         for (int i = 0; i < lottoList.size(); i++) {
             lottoList.get(i).printLottoNumbers();
         }
     }
 
-    private WinningLotto createWinningLotto(Scanner sc) {
+    private static WinningLotto createWinningLotto(Scanner sc) {
         String winningLottoNumbers = DataReceiver.getWinningLottoNumbersFromUser(sc);
         ArrayList<Integer> winNumberList = transformWinningNumberInputToIntegerList(winningLottoNumbers);
         int bonusNumber = DataReceiver.getBonusNumberFromUser(winNumberList, sc);
@@ -56,7 +56,7 @@ public class LottoGame {
         return winningNumbers;
     }
 
-    private Map<Rank, Integer> calculateLottoMatch(List<Lotto> lottoList, WinningLotto winningLotto) {
+    private static Map<Rank, Integer> calculateLottoMatch(List<Lotto> lottoList, WinningLotto winningLotto) {
         Map<Rank, Integer> rankCounter = createInitializedRankCounter();
 
         for (int i = 0; i < lottoList.size(); i++) {
@@ -66,7 +66,7 @@ public class LottoGame {
         return rankCounter;
     }
 
-    private Map<Rank, Integer> createInitializedRankCounter() {
+    private static Map<Rank, Integer> createInitializedRankCounter() {
         Map<Rank, Integer> rankCounter = new HashMap<Rank, Integer>();
 
         for (Rank rank : Rank.values()) {
@@ -75,7 +75,7 @@ public class LottoGame {
         return rankCounter;
     }
 
-    private double calculateProfitRate(Map<Rank, Integer> rankCounter, int lottoCount) {
+    private static double calculateProfitRate(Map<Rank, Integer> rankCounter, int lottoCount) {
         double profitPercent = 0;
         double totalLottoMoney = (double) (lottoCount * GameSetting.PRICE_PER_1LOTTO);
 
@@ -86,7 +86,7 @@ public class LottoGame {
         return profitPercent;
     }
 
-    private void printLottoResult(Map<Rank, Integer> rankCounter, double profitPercent) {
+    private static void printLottoResult(Map<Rank, Integer> rankCounter, double profitPercent) {
         final Rank[] rankDisplayOrder = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
 
         for (Rank displayRank : rankDisplayOrder) {
