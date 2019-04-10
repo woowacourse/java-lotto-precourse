@@ -13,6 +13,7 @@ public class Lotto {
     private static final int ENDING_INDEX_OF_LOTTO_NUMBERS = 5;
     public static final int LOTTO_NUMBERS_LENGTH = 6;
     public static final int FIRST_ELEMENT_INDEX = 0;
+    private static final int LOTTO_MONEY_AMOUNT_MiNIMUM = 0;
 
     private final List<Integer> numbers;
 
@@ -32,8 +33,7 @@ public class Lotto {
         boolean isUserInputRight = false;
         String userInputMoneyAmount = "ERROR:askUSerMoneyAmount()";
         while (!isUserInputRight) {
-            userInputMoneyAmount = askAndReceiveInput("구입금액을 입력해 주세요.");
-            userInputMoneyAmount = userInputMoneyAmount.replaceAll("\\s+", "");
+            userInputMoneyAmount = askAndReceiveInput("구입금액을 입력해 주세요.").replaceAll("\\s+", "");
             isUserInputRight = checkUserInput(userInputMoneyAmount);
         }
         return userInputMoneyAmount;
@@ -103,7 +103,7 @@ public class Lotto {
 
     private static boolean isSameAsOrSmallerThanZero(String userInput) {
         int intUserInput = Integer.parseInt(userInput);
-        if (intUserInput <= 0) {
+        if (intUserInput <= LOTTO_MONEY_AMOUNT_MiNIMUM) {
             System.out.println("금액은 0보다 큰 금액으로 입력해주세요!");
             return true;
         }
