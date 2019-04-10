@@ -31,4 +31,19 @@ public class LottoResult {
         int updateNumber = lottoResults.get(rank) + UPDATE_AMOUNT;
         lottoResults.put(rank, updateNumber);
     }
+
+    String calculateEarningRate(int money) {
+        long totalMoney = getTotalMoney();
+        return String.format("%.4f", (float) totalMoney / money);
+    }
+
+    private long getTotalMoney() {
+        long totalMoney = 0;
+        for (Rank rank : lottoResults.keySet()) {
+            int rankMoney = rank.getWinningMoney();
+            int rankCount = lottoResults.get(rank);
+            totalMoney += (long) rankMoney * rankCount;
+        }
+        return totalMoney;
+    }
 }

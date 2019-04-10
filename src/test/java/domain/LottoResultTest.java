@@ -40,4 +40,17 @@ public class LottoResultTest {
         assertThat(lottoResultMap.get(Rank.FIRST)).isEqualTo(1);
         assertThat(lottoResultMap.get(Rank.MISS)).isEqualTo(4);
     }
+
+    @Test
+    public void 일등한개_네개탈락_수익률계산() {
+        //given
+        int money = 5_000;
+
+        //when
+        String earningRate = lottoResult.calculateEarningRate(money);
+        String expectedEarningRate = "400000.0000";
+
+        //then
+        assertThat(earningRate).isEqualTo(expectedEarningRate);
+    }
 }
