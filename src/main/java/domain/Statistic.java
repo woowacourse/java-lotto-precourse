@@ -14,4 +14,17 @@ public class Statistic {
         this.rankList = rankList;
         this.money = money;
     }
+
+    private void statistic() {
+        for (Rank rank : rankList) {
+            CountOfRank(rank);
+        }
+    }
+    private void CountOfRank(Rank rank) {
+        if (Rank.SECOND == rank || Rank.FIRST == rank) {
+            resultOfRank[rank.getCountOfMatch() + 1]++;
+            return;
+        }
+        resultOfRank[rank.getCountOfMatch()]++;
+    }
 }

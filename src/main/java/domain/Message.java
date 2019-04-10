@@ -14,6 +14,7 @@ public class Message {
     public static final String OVERLAP_BONUS = "보너스볼은 당첨번호에 없는 수여야 합니다.";
     public static final String INPUT_BONUS_MESSAGE = "보너스 번호를 입력해 주세요:";
     public static final String MAKE_MESSAGE = "%d 개 를 구매 했습니다.\n";
+    public static final String STATISTIC_MESSAGE = "당첨통계\n--------------";
     public static final String SPOT=",";
     public static final String SPACE =" ";
     public static final String TAB="\t";
