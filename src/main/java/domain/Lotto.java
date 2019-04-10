@@ -13,4 +13,17 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    @Override
+    public String toString() {
+        String result = "[";
+        for(int i=0; i<numbers.size(); i++){
+            if(i!=0) result+=", ";
+            result += String.valueOf(numbers.get(i));
+        }
+        return result+"]";
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
