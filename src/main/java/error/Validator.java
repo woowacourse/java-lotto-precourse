@@ -51,7 +51,7 @@ public class Validator {
     }
 
     private boolean isInteger(String[] inputs) {
-        int lengthOfFiltered = Arrays.stream(inputs).filter(i->isInteger(i)).toArray().length;
+        int lengthOfFiltered = Arrays.stream(inputs).filter(this::isInteger).toArray().length;
         return (lengthOfFiltered == inputs.length);
     }
 

@@ -13,6 +13,7 @@ public class LottoGame {
 
         Lotto winningNumbers = new WinningNumbersInput().getWinningNumbers();
         int bonusNo = new BonusBallInput(winningNumbers).getBonusNo();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNo);
 
     }
 }

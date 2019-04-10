@@ -69,4 +69,8 @@ public class LottoTickets {
             e.printStackTrace();
         }
     }
+
+    public List<Lotto> getTickets() {
+        return tickets;
+    }
 }
