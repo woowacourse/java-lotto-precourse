@@ -4,14 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class UserInterface extends CheckValidity {
     private Scanner sc = new Scanner(System.in);
 
-    private static String STR1 = "개 일치";
-    private static String STR2 = " (";
-    private static String STR3 = ")- ";
-    private static String STR4 = "개";
-    private static String STR5 = ", 보너스 볼 일치";
+    private static String RANK_STATE_1 = "개 일치";
+    private static String RANK_STATE_2 = " (";
+    private static String RANK_STATE_3 = ")- ";
+    private static String RANK_STATE_4 = "개";
+    private static String RANK_STATE_5 = ", 보너스 볼 일치";
 
 
     public int inputPurchaseAmount() {
@@ -103,11 +104,11 @@ public class UserInterface extends CheckValidity {
     private String printRankState(Rank type, ResultInformation resultInformation) {
         String str;
 
-        str = type.getCountOfMatch() + STR1;
+        str = type.getCountOfMatch() + RANK_STATE_1;
         if (type.equals(Rank.SECOND)) {
-            str += STR5;
+            str += RANK_STATE_5;
         }
-        str += STR2 + type.getWinningMoney() + STR3 + resultInformation.getRankCount(type) + STR4;
+        str += RANK_STATE_2 + type.getWinningMoney() + RANK_STATE_3 + resultInformation.getRankCount(type) + RANK_STATE_4;
 
         return str;
     }
