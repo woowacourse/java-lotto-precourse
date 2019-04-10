@@ -15,7 +15,15 @@ public class WinningLotto implements LottoNumber {
         }
 
         public Rank match(Lotto userLotto) {
-                // TODO 로직 구현
                 return null;
         }
+
+        private int matchOfNumber(Lotto userLotto){
+                for(int i=0;userLotto.)
+        }
+
+        private int matchOfBonusBall(){
+
+        }
+
 }

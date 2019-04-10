@@ -17,7 +17,13 @@ public class Lotto implements LottoNumber {
                 System.out.println(numbers);
         }
 
-        public boolean hasBonusBall(int bonusBall) {
-                return this.numbers.contains(bonusBall);
+        public List<Integer> getNumbers(){
+                return this.numbers;
+        }
+
+        @Override
+        public boolean equals(Object obj){
+                Lotto lotto = (Lotto)obj;
+                return this.numbers.equals(lotto.getNumbers());
         }
 }

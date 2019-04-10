@@ -11,6 +11,6 @@ public class Matcher {
         }
 
         public int bonusBallMatch(Lotto lotto){
-                lotto.
+                lotto.hasBonusBall(winningLotto.)
         }
 }
