@@ -22,6 +22,15 @@ public class LottoGame {
         int lottoGameMoney = inputLottoMoney();
         int lottoRound = calculateLottoRound(lottoGameMoney);
         List<Lotto> lottoList = getLottoList(lottoRound);
+        printLottoNumbers(lottoList);
+    }
+
+    private void printLottoNumbers(List<Lotto> lottoList) {
+        for (Lotto lotto : lottoList) {
+            System.out.println(lotto.toString());
+        }
+
+        System.out.println();
     }
 
     private List<Lotto> getLottoList(int round) {
