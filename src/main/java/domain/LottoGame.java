@@ -11,14 +11,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGame {
-
+  final int PRICE_PER_GAME = 1000;
   public void run() {
-    int num = getThePriceOfLotto() / 1000;
+    int num = getThePriceOfLotto() / PRICE_PER_GAME;
     System.out.println(num + "개를 구매했습니다.");
     ArrayList<Lotto> lottoArrayList = initLottoArrayList(num);
     WinningLotto winningLotto = getWinLotto();
     ArrayList<Rank> lottoRanks = getRanks(lottoArrayList, winningLotto);
     printRanks(lottoRanks);
+    printEarningRate(lottoRanks, num);
   }
 
   private ArrayList<Rank> getRanks(ArrayList<Lotto> lottoArrayList, WinningLotto winningLotto) {
@@ -29,13 +30,13 @@ public class LottoGame {
     return lottoRanks;
   }
 
-  public int getThePriceOfLotto() {
+  private int getThePriceOfLotto() {
     System.out.println("구입금액을 입력해 주세요.");
     Scanner scan = new Scanner(System.in);
     return scan.nextInt();
   }
 
-  public ArrayList<Lotto> initLottoArrayList(int num) {
+  private ArrayList<Lotto> initLottoArrayList(int num) {
     ArrayList<Lotto> lottoArrayList = new ArrayList<Lotto>();
     for (int i = 0; i < num; i++) {
       lottoArrayList.add(initLotto());
@@ -44,17 +45,17 @@ public class LottoGame {
     return lottoArrayList;
   }
 
-  public Lotto initLotto() {
+  private Lotto initLotto() {
     List<Integer> lottoNumbers = IntStream.range(1, 46).boxed().collect(Collectors.toList());
     Collections.shuffle(lottoNumbers);
     return new Lotto(lottoNumbers.subList(0, 6));
   }
 
-  public void showLottoNum(Lotto oneLotto) {
+  private void showLottoNum(Lotto oneLotto) {
     System.out.println(oneLotto.showNumbers());
   }
 
-  public WinningLotto getWinLotto() {
+  private WinningLotto getWinLotto() {
     Lotto winner = setWinLotto();
     System.out.println("보너스 볼을 입력해 주세요.");
     Scanner scan2 = new Scanner(System.in);
@@ -62,7 +63,7 @@ public class LottoGame {
     return winLotto;
   }
 
-  public Lotto setWinLotto() {
+  private Lotto setWinLotto() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     Scanner scan = new Scanner(System.in);
     int[] intNum = Arrays.asList(scan.next().split(",")).stream().mapToInt(Integer::parseInt)
@@ -72,17 +73,17 @@ public class LottoGame {
     return winner;
   }
 
-  public void printRanks(ArrayList<Rank> lottoRanks) {
+  private void printRanks(ArrayList<Rank> lottoRanks) {
     Map<Rank, Integer> rankIntegerMap = countRank(lottoRanks);
     System.out.println("당첨 통계\n---------");
-    System.out.println("3개 일치 (5000원)-" + rankIntegerMap.get(Rank.FIFTH) + "개");
-    System.out.println("4개 일치 (50000원)-" + rankIntegerMap.get(Rank.FOURTH) + "개");
-    System.out.println("5개 일치 (1500000원)-" + rankIntegerMap.get(Rank.THIRD) + "개");
-    System.out.println("5개 일치, 보너스 볼 일치 (30000000원)-" + rankIntegerMap.get(Rank.SECOND) + "개");
-    System.out.println("6개 일치 (2000000000원)-" + rankIntegerMap.get(Rank.FIRST) + "개");
+    System.out.println("3개 일치 ("+Rank.FIFTH.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.FIFTH) + "개");
+    System.out.println("4개 일치 ("+Rank.FOURTH.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.FOURTH) + "개");
+    System.out.println("5개 일치 ("+Rank.THIRD.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.THIRD) + "개");
+    System.out.println("5개 일치, 보너스 볼 일치 ("+Rank.SECOND.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.SECOND) + "개");
+    System.out.println("6개 일치 ("+Rank.FIRST.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.FIRST) + "개");
   }
 
-  public Map<Rank, Integer> countRank(ArrayList<Rank> listOfRank) {
+  private Map<Rank, Integer> countRank(ArrayList<Rank> listOfRank) {
     Map<Rank, Integer> rankMap = setMap();
     for (Rank rank : listOfRank) {
       rankMap.replace(rank, rankMap.get(rank) + 1);
@@ -90,7 +91,7 @@ public class LottoGame {
     return rankMap;
   }
 
-  public Map<Rank, Integer> setMap() {
+  private Map<Rank, Integer> setMap() {
     Map<Rank, Integer> rankMap = new HashMap<Rank, Integer>();
     rankMap.put(Rank.FIRST, 0);
     rankMap.put(Rank.SECOND, 0);
@@ -99,5 +100,12 @@ public class LottoGame {
     rankMap.put(Rank.FIFTH, 0);
     rankMap.put(Rank.MISS, 0);
     return rankMap;
+  }
+  private void printEarningRate(ArrayList<Rank> rankArrayList, int num){
+    int sum = 0;
+    for(Rank rank : rankArrayList){
+      sum+=rank.getWinningMoney();
+    }
+    System.out.println("총 수익률은 "+ (double)sum/(num*PRICE_PER_GAME)+"입니다.");
   }
 }
