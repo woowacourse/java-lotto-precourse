@@ -15,7 +15,7 @@ public class LottoShop {
 
 	public LottoShop() {
 		userLottos = new ArrayList<Lotto>();
-		sc = new Scanner(System.in);
+			sc = new Scanner(System.in);
 	}
 
 	public void setNumOfLotto() {
@@ -50,5 +50,12 @@ public class LottoShop {
 			userLottos.add(new Lotto(pickedNumbers));
 		}
 		printLottos();
+	}
+	
+	private void printLottos() {
+		System.out.println(numOfLotto + RequestMsg.Result.getMsg());
+		for (Lotto lotto : userLottos) {
+			lotto.printLotto();
+		}
 	}
 }
