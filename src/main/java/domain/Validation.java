@@ -1,3 +1,12 @@
+/*
+ * 이 클래스는 입력에 대한 검증을 하기 위한 클래스입니다.
+ *
+ * 클래스 이름    Validation
+ * 버전 정보     1.0
+ * 날짜    2019/04/11
+ * 저작권   권유상
+ */
+
 package domain;
 
 import java.util.regex.Pattern;
@@ -11,7 +20,8 @@ public class Validation {
     private static final String MESSAGE_ERROR_INPUT_WINNING_LOTTO = "Error: (,)를 기준으로 올바른 숫자를 입력해 주세요";
 
     public static boolean isValidInputMoney(String money) {
-        if (!Pattern.matches(PATTERN_NUMBER, money) || Integer.parseInt(money) < LottoGame.LOTTO_PRICE) {
+        if (!Pattern.matches(PATTERN_NUMBER, money)
+                || Integer.parseInt(money) < LottoGame.LOTTO_PRICE) {
             System.out.println(MESSAGE_ERROR_INPUT_MONEY);
             return false;
         }

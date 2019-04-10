@@ -1,3 +1,12 @@
+/*
+ * 이 클래스는 로또 게임을 실행하기 위한 클래스로 게임 진행을 위한 메소드와 인스턴스가 있습니다
+ *
+ * 클래스 이름    LottoGame
+ * 버전 정보     1.0
+ * 날짜    2019/04/11
+ * 저작권   권유상
+ */
+
 package domain;
 
 import java.util.Scanner;
@@ -58,6 +67,9 @@ public class LottoGame {
         return randomList;
     }
 
+    /*
+     * 이 메소드는 random number 생성시 중복된 값이 있으면 지워주는 역할을 합니다
+     */
     private void removeDuplication(List<Integer> list, int num) {
         if (list.contains(num)) {
             int idx = list.indexOf(num);
@@ -103,6 +115,7 @@ public class LottoGame {
         return Integer.parseInt(inputBonus);
     }
 
+    //reverseOrder는 Rank를 내림차순으로 정렬하여 5등부터 출력하기 위함
     private TreeMap makeResultMap() {
         TreeMap<Rank, Integer> resultMap = new TreeMap<>(Collections.reverseOrder());
         initMap(resultMap);
@@ -119,6 +132,7 @@ public class LottoGame {
         }
     }
 
+    // 결과를 출력할 때 TreeMap을 사용하여 각 Rank당 개수를 저장
     private void printResult(int lottoMoney) {
         TreeMap<Rank, Integer> result = makeResultMap();
         double profit;
