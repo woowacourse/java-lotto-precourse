@@ -17,13 +17,15 @@ public class Lotto implements LottoNumber {
                 System.out.println(numbers);
         }
 
-        public List<Integer> getNumbers(){
-                return this.numbers;
+        public int requestCountMatchNumber(Lotto otherLotto){
+                return otherLotto.countMatchNumber(this.numbers);
         }
 
-        @Override
-        public boolean equals(Object obj){
-                Lotto lotto = (Lotto)obj;
-                return this.numbers.equals(lotto.getNumbers());
+        private int countMatchNumber(List<Integer> otherLottoNumbers){
+                int matchCount=0;
+                for(int otherNumber : otherLottoNumbers){
+                        matchCount += this.numbers.contains(otherNumber) ? 1 : 0 ;
+                }
+                return matchCount;
         }
 }
