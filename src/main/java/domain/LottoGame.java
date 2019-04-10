@@ -97,23 +97,29 @@ public class LottoGame {
     }
     
     private List<String> splitStringByComma(String winningNumber) {
-    	List<String> splitedNumber = new ArrayList<>(Arrays.asList(winningNumber.split(",")));
-
+    	String[] winningNumberArray = winningNumber.split(",");
+    	List<String> splitedNumber = new ArrayList<>();
+    	
+    	for (int i = 0; i < winningNumberArray.length; i++) {
+    		splitedNumber.add(winningNumberArray[i].trim());
+    	}
+    	
     	return splitedNumber;
-    }
-    
-    private boolean checkLength(List<String> splitedNumberList) {
-    	return (splitedNumberList.size() == 6) ? true : false;
     }
     
     private boolean checkContainNotNumber(List<String> splitedNumberList) {
     	boolean containNotNumber = true;
     	
     	for (int i = 0; i < splitedNumberList.size(); i++) {
-    		containNotNumber = (Pattern.matches(NUMBER_CHECK_REGEX, splitedNumberList.get(i).trim()) && containNotNumber == true) ? true : false;
+    		containNotNumber = (Pattern.matches(NUMBER_CHECK_REGEX, splitedNumberList.get(i)) && containNotNumber == true) ? true : false;
+    		System.out.println(containNotNumber);
     	}
 
     	return containNotNumber;
+    }
+    
+    private boolean checkLength(List<String> splitedNumberList) {
+    	return (splitedNumberList.size() == 6) ? true : false;
     }
     
     
