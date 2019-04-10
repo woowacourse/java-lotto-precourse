@@ -117,14 +117,25 @@ public class LottoGame {
         }
     }
 
-    private void printResult() {
+    private void printResult(int lottoMoney) {
         TreeMap<Rank, Integer> result = makeResultMap();
+        double profit;
         for (Map.Entry<Rank, Integer> entry : result.entrySet()) {
             Rank rank = entry.getKey();
             int count = entry.getValue();
             rank.printRank(count);
         }
+        profit = getProfit(result, lottoMoney);
+        System.out.println("총 수익률은 " + profit + "입니다");
+    }
 
+    private static double getProfit(Map<Rank, Integer> rankList, int lottoMoney) {
+        int totalMoney = 0;
+        for (Map.Entry<Rank, Integer> entry : rankList.entrySet()) {
+            int winCount = entry.getValue();
+            totalMoney += entry.getKey().getWinningMoney() * winCount;
+        }
+        return (double) totalMoney / (double) lottoMoney;
     }
 
     public void run() {
@@ -135,6 +146,6 @@ public class LottoGame {
         printLottoList(countOfLotto);
         Lotto lotto = new Lotto(inputWinNumber());
         winLotto = new WinningLotto(lotto, inputBonusNumber());
-        printResult();
+        printResult(money);
     }
 }
