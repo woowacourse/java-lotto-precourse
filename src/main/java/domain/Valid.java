@@ -21,5 +21,8 @@ public class Valid {
         }
         return false;
     }
-      
+    public static boolean isRemainder(int money) {
+        return (money % Const.ONE_LOTTO_MONEY) != 0;
+    }
+
 }
