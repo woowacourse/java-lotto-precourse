@@ -19,31 +19,20 @@ public class Input {
         String inputMoney;
         System.out.println("구입 금액을 입력해주세요.");
         inputMoney = scanner.nextLine();
+        // 공백 처리
         inputMoney = inputMoney.replaceAll("\\s", "");
         // 입력 오류 처리
-        String errorMsg = InputError.handleMoneyInputError(inputMoney);
-        if (errorMsg.equals(""))
+        String errorMessage = InputError.handleMoneyInputError(inputMoney);
+        if (errorMessage.equals("")) {
             return Integer.parseInt(inputMoney);
-        System.out.println(errorMsg);
+        }
+        System.out.println(errorMessage);
         return -1;
     }
 
     public static WinningLotto inputWinningAndBonusNumber() {
         return new WinningLotto(new Lotto(returnWinningNumber()),
                 returnBonusNumber());
-    }
-
-    private static String inputWinningNumber() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String inputWinningNumber = scanner.nextLine();
-        inputWinningNumber = inputWinningNumber.replaceAll("\\s", "");
-        String errorMsg = InputError.handleWinningLottoInputError(inputWinningNumber);
-        if (errorMsg == "") {
-            return inputWinningNumber;
-        }
-        System.out.println(errorMsg);
-        return "";
     }
 
     private static List<Integer> returnWinningNumber() {
@@ -59,6 +48,21 @@ public class Input {
         return splitWinningNumber;
     }
 
+    private static String inputWinningNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String inputWinningNumber = scanner.nextLine();
+        // 공백 처리
+        inputWinningNumber = inputWinningNumber.replaceAll("\\s", "");
+        // 입력 오류 처리
+        String errorMessage = InputError.handleWinningLottoInputError(inputWinningNumber);
+        if (errorMessage == "") {
+            return inputWinningNumber;
+        }
+        System.out.println(errorMessage);
+        return "";
+    }
+
     public static int returnBonusNumber() {
         int rightInput = -1;
         while (rightInput < 0) {
@@ -72,12 +76,14 @@ public class Input {
         String inputBonusNumber;
         System.out.println("보너스 볼을 입력해 주세요.");
         inputBonusNumber = scanner.nextLine();
+        // 공백 처리
         inputBonusNumber = inputBonusNumber.replaceAll("\\s", "");
         // 입력 오류 처리
-        String errorMsg = InputError.handleBonusNumberInputError(inputBonusNumber);
-        if (errorMsg.equals(""))
+        String errorMessage = InputError.handleBonusNumberInputError(inputBonusNumber);
+        if (errorMessage.equals("")) {
             return Integer.parseInt(inputBonusNumber);
-        System.out.println(errorMsg);
+        }
+        System.out.println(errorMessage);
         return -1;
     }
 }

@@ -65,17 +65,19 @@ public class InputError {
         String[] number = input.split(",");
         int countOfRightNumber = 0;
         for (int i = 0; i < number.length; ++i) {
-            countOfRightNumber += (isNumeric(number[i])
+            countOfRightNumber +=
+                    (isNumeric(number[i])
                     && isNaturalNumber(number[i])
                     && isRightNumberOfRange(number[i]))
-                    ? 1 : 0;
+                    ? 1
+                    : 0;
         }
         return (countOfRightNumber == COUNT_OF_NUMBER);
     }
 
     private static boolean isRightNumberOfRange(String input) {
         int number = Integer.parseInt(input);
-        return (number >= 1 && number <= 45);
+        return ((number >= 1) && (number <= 45));
     }
 
     private static boolean isOverlapNumber(String input) {
@@ -84,9 +86,11 @@ public class InputError {
         for (int i = 0; i < number.length; ++i) {
             countOfNotOverlapNumber +=
                     (checkOverlapNumberOne(number, number[i]))
-                            ? 1 : 0;
+                            ? 1
+                            : 0;
         }
-        return (countOfNotOverlapNumber == COUNT_OF_NUMBER);
+        // 중복되지 않은 숫자가 6개인 경우가 올바른 입력이다.
+        return (countOfNotOverlapNumber != COUNT_OF_NUMBER);
     }
 
     private static boolean checkOverlapNumberOne(String[] numbers, String checkNumber) {
