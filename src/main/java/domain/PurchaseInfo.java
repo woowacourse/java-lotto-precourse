@@ -1,12 +1,14 @@
 package domain;
 
 import util.InputUtil;
+import util.PrintUtil;
 
 public class PurchaseInfo {
 
-        private InputUtil inputer;
         private int purchaseAmount;
 
-
-        public PurchaseInfo(){this.purchaseAmount = inputer.inputPurchaseAmount();}
+        public PurchaseInfo(){
+                PrintUtil.printPurchaseAmountInputMessage();
+                this.purchaseAmount = InputUtil.inputPurchaseAmount();
+        }
 }
