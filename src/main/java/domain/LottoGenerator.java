@@ -45,7 +45,9 @@ public class LottoGenerator {
 		List<Integer> lottoNumbers = new ArrayList<Integer>();
 		while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
 			int randomNumber = random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER;
+			if (!lottoNumbers.contains(randomNumber)) {
 				lottoNumbers.add(randomNumber);
+			}
 		}
 		return lottoNumbers;
 	}
