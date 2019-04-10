@@ -5,7 +5,7 @@
  * Author: Kibaek Yoo
  */
 
-package domain;
+package lottodata;
 
 /**
  * 당첨 번호를 담당하는 객체

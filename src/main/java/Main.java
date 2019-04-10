@@ -5,7 +5,7 @@
  * Author: Kibaek Yoo
  */
 
-import domain.LottoGame;
+import Controller.LottoGame;
 
 public class Main {
     public static void main(String[] args) {

@@ -5,17 +5,20 @@
  * Author: Kibaek Yoo
  */
 
-package domain;
+package Controller;
+
+import database.GameSetting;
+import database.UserView;
+import lottodata.Lotto;
+import lottodata.Rank;
+import lottodata.WinningLotto;
 
 import java.util.*;
 
 public class LottoGame {
 
-    final String COMMENT_WHEN_RECEIVE_INPUT_MONEY = "구입금액을 입력해 주세요.";
-    final Rank[] rankDisplayOrder = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
-
     private int getLottoCountFromUser(Scanner sc) {
-        System.out.println(COMMENT_WHEN_RECEIVE_INPUT_MONEY);
+        System.out.println(UserView.COMMENT_WHEN_RECEIVE_INPUT_MONEY);
         int lottoCount = DataReceiver.getInputMoneyFromUser(sc) / GameSetting.PRICE_PER_1LOTTO;
 
         return lottoCount;
@@ -54,11 +57,11 @@ public class LottoGame {
         return rankCounter;
     }
 
-    private Map<Rank, Integer> createInitializedRankCounter(){
+    private Map<Rank, Integer> createInitializedRankCounter() {
         Map<Rank, Integer> rankCounter = new HashMap<Rank, Integer>();
 
-        for (Rank rank: Rank.values()){
-            rankCounter.put(rank,0);
+        for (Rank rank : Rank.values()) {
+            rankCounter.put(rank, 0);
         }
         return rankCounter;
     }
@@ -75,8 +78,9 @@ public class LottoGame {
     }
 
     private void printLottoResult(Map<Rank, Integer> rankCounter, double profitPercent) {
+        final Rank[] rankDisplayOrder = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
 
-        for (Rank displayRank: rankDisplayOrder){
+        for (Rank displayRank : rankDisplayOrder) {
             int count = rankCounter.get(displayRank);
             displayRank.printRank(count);   // 당첨통계 출력
         }

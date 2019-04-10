@@ -5,7 +5,7 @@
  * Author: Kibaek Yoo
  */
 
-package domain;
+package database;
 
 public class GameSetting {
     public static final int MIN_LOTTO_NUMBER = 1;

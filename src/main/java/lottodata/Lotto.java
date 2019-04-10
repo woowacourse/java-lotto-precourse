@@ -5,7 +5,9 @@
  * Author: Kibaek Yoo
  */
 
-package domain;
+package lottodata;
+
+import database.GameSetting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,6 @@ public class Lotto {
                 countOfMatch++;
             }
         }
-
         return countOfMatch;
     }
 

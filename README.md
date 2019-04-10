@@ -141,8 +141,10 @@ WARNING: 로또넘버는 6개 이어야 합니다. 다시 입력해주세요.
 |checkInputLottoMoneyIsUnderMinvalue|인풋 금액이 로또1장금액보다 낮은지 체크|
 |checkWinningLottoNumbers|당첨로또번호 입력에 오류가있는지 종합 체크|
 
-
 |GameSetting|게임의 세팅값을 담당|
+|---|---|
+
+|UserView|게임의 출력을 담당|
 |---|---|
 
 |DataReceiver|유저로부터 데이터 입력받는 로직 담당|

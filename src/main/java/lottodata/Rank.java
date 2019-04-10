@@ -5,7 +5,7 @@
  * Author: Kibaek Yoo
  */
 
-package domain;
+package lottodata;
 
 /**
  * 로또 등수를 의미하는 enum

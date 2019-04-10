@@ -5,15 +5,14 @@
  * Author: Kibaek Yoo
  */
 
-package domain;
+package Controller;
+
+import database.UserView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataReceiver {
-
-    static final String COMMENT_WHEN_GET_WINNING_LOTTO_NUMBERS_FROM_USER = "지난 주 당첨 번호를 입력해주세요.";
-    static final String COMMENT_WHEN_GET_BONUS_NUMBER_FROM_USER = "보너스 볼을 입력해 주세요.";
 
     public static int getInputMoneyFromUser(Scanner sc) {
         String inputMoneyFromUser = sc.nextLine();
@@ -26,7 +25,7 @@ public class DataReceiver {
     }
 
     public static ArrayList<Integer> getWinningLottoNumbersFromUser(Scanner sc) {
-        System.out.println(COMMENT_WHEN_GET_WINNING_LOTTO_NUMBERS_FROM_USER);
+        System.out.println(UserView.COMMENT_WHEN_GET_WINNING_LOTTO_NUMBERS_FROM_USER);
         String winningNumbersFromUser = sc.nextLine();
         while (!Validator.checkWinningLottoNumbers(winningNumbersFromUser)) {
             winningNumbersFromUser = sc.nextLine();
@@ -45,7 +44,7 @@ public class DataReceiver {
     }
 
     public static int getBonusNumberFromUser(ArrayList<Integer> winningNumberList, Scanner sc) {
-        System.out.println(COMMENT_WHEN_GET_BONUS_NUMBER_FROM_USER);
+        System.out.println(UserView.COMMENT_WHEN_GET_BONUS_NUMBER_FROM_USER);
         String bonusNumberFromUser = sc.nextLine();
         while (!Validator.checkBonusLottoNumberValid(winningNumberList, bonusNumberFromUser)) {
             bonusNumberFromUser = sc.nextLine();
