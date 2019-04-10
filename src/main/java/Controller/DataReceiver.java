@@ -24,23 +24,13 @@ public class DataReceiver {
         return inputMoney;
     }
 
-    public static ArrayList<Integer> getWinningLottoNumbersFromUser(Scanner sc) {
+    public static String getWinningLottoNumbersFromUser(Scanner sc) {
         System.out.println(UserView.COMMENT_WHEN_GET_WINNING_LOTTO_NUMBERS_FROM_USER);
         String winningNumbersFromUser = sc.nextLine();
         while (!Validator.checkWinningLottoNumbers(winningNumbersFromUser)) {
             winningNumbersFromUser = sc.nextLine();
         }
-        ArrayList<Integer> winningNumbers = transformWinningNumberInputToIntegerList(winningNumbersFromUser);
-        return winningNumbers;
-    }
-
-    private static ArrayList<Integer> transformWinningNumberInputToIntegerList(String winningNumbersInput) {
-        String[] correctNumbers = winningNumbersInput.split(",");
-        ArrayList<Integer> winningNumbers = new ArrayList<Integer>();
-        for (int i = 0; i < correctNumbers.length; i++) {
-            winningNumbers.add(Integer.parseInt(correctNumbers[i]));
-        }
-        return winningNumbers;
+        return winningNumbersFromUser;
     }
 
     public static int getBonusNumberFromUser(ArrayList<Integer> winningNumberList, Scanner sc) {

@@ -41,10 +41,20 @@ public class LottoGame {
     }
 
     private WinningLotto createWinningLotto(Scanner sc) {
-        ArrayList<Integer> winNumberList = DataReceiver.getWinningLottoNumbersFromUser(sc);
+        String winningLottoNumbers = DataReceiver.getWinningLottoNumbersFromUser(sc);
+        ArrayList<Integer> winNumberList = transformWinningNumberInputToIntegerList(winningLottoNumbers);
         int bonusNumber = DataReceiver.getBonusNumberFromUser(winNumberList, sc);
 
         return new WinningLotto(new Lotto(winNumberList), bonusNumber);
+    }
+
+    private static ArrayList<Integer> transformWinningNumberInputToIntegerList(String winningNumbersInput) {
+        String[] correctNumbers = winningNumbersInput.split(",");
+        ArrayList<Integer> winningNumbers = new ArrayList<Integer>();
+        for (int i = 0; i < correctNumbers.length; i++) {
+            winningNumbers.add(Integer.parseInt(correctNumbers[i]));
+        }
+        return winningNumbers;
     }
 
     private Map<Rank, Integer> calculateLottoMatch(List<Lotto> lottoList, WinningLotto winningLotto) {

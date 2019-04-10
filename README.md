@@ -102,11 +102,12 @@ WARNING: 로또넘버는 6개 이어야 합니다. 다시 입력해주세요.
 |getLottoCountFromUser|유저로부터 로또갯수 입력받기|
 |createLottos| 특정갯수의 로또객체를 생성해 반환|
 |printLottos|특정갯수의 로또객체정보를 출력|
+|createWinningLotto|당첨로또 생성|
+|transformWinningNumberInputToIntegerList|유저로부터 받은 로또넘버6개 입력을 리스트로 변환해서 반환|
 |createInitializedRankCounter|로또 당첨결과 계산하기위한 자료구조(Map)생성 후 반환|
 |calculateLottoMatch|로또 당첨결과를 계산|
 |calculateProfitRate|수익률 계산|
 |printLottoResult|로또 당첨 결과를 출력(당첨로또 현황, 수익률)|
-|createWinningLotto|당첨로또 생성|
 |playGame|게임 실행 함수|
 
 |Lotto|로또 1장 객체|
@@ -151,5 +152,4 @@ WARNING: 로또넘버는 6개 이어야 합니다. 다시 입력해주세요.
 |---|---|
 |getLottoMoneyFromUser|유저로부터 로또구입금액을 입력받음|
 |getWinningLottoNumbersFromUser|유저로부터 유효한 로또넘버 6개를 받음|
-|transformWinningNumberInputToIntegerList|유저로부터 받은 로또넘버6개 입력을 리스트로 변환해서 반환|
 |getBonusNumberFromUser|유저로부터 보너스넘버를 입력받음|
