@@ -12,7 +12,6 @@ public class Const {
     public static final int MAX_NUM_OF_LOTTO_TO_SELECT = 45;
 
     public static final int LOTTO_NUM_CNT = 6;
-    public static final int BONUS_NUM_CNT = 1;
 
     public static final String STR_ENTER_PAYMENT_TO_USER = "구매 금액을 입력해 주세요.\n(예 : 8000)";
     public static final String STR_NOTI_PAYMENTLOTTO_AMT = "개를 구매했습니다.";
