@@ -4,7 +4,7 @@ import domain.LottoEvent;
 
 public class PurchaseAmountValidator implements Validator {
 
-    String purchaseAmount;
+    private String purchaseAmount;
 
     public PurchaseAmountValidator(String purchaseAmount) {
         this.purchaseAmount = purchaseAmount;

@@ -1,6 +1,9 @@
 package domain.handler;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -60,7 +63,7 @@ public class LottoInputHandler {
         String purchaseAmount = null;
         do {
             LottoOutputHandler.printMessage("구입금액을 입력해 주세요.");
-            purchaseAmount = getUserInputString();
+            purchaseAmount = convertMoneyToIntegerString(getUserInputString());
             validator = new PurchaseAmountValidator(purchaseAmount);
         } while (!validator.doesValid());
 
@@ -81,6 +84,15 @@ public class LottoInputHandler {
     private void eraseCharacterExcludingDigits(String[] inputs) {
         for (int i = 0; i < inputs.length; i++) {
             inputs[i] = inputs[i].replaceAll("\\s", "");
+        }
+    }
+
+    private String convertMoneyToIntegerString(String money) {
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.KOREA);
+        try {
+            return numberFormat.parse(money).toString();
+        } catch (ParseException e) {
+            return money;       // LottoInputValidator가 잘못된 입력을 감지하는데 사용
         }
     }
 
