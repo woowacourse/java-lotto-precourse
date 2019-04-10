@@ -20,7 +20,7 @@ public class Input {
             CheckException.checkValueInRange(insertedMoney, Constant.MIN_INPUT_MONEY, Constant.MAX_INPUT_MONEY);
             return insertedMoney;
         } catch (InputMismatchException | IllegalArgumentException e) {
-            PrintScan.printOutofRangeNotice();
+            PrintScan.printOutofRangeNotice(Constant.MIN_INPUT_MONEY, Constant.MAX_INPUT_MONEY);
             return insertMoney();
         }
     }
@@ -48,5 +48,16 @@ public class Input {
         return winningNumsList;
     }
 
+    public static int inputBonusNum(List<Integer> alreadyEnteredNumbers){
+        try {
+            int bonusNum = PrintScan.requestBonusNum();
+            CheckException.checkValueInRange(bonusNum, Constant.MIN_LOTTO_NUM, Constant.MAX_LOTTO_NUM);
+            CheckException.checkAleadyEnteredNumber(bonusNum, alreadyEnteredNumbers);
+            return bonusNum;
+        } catch (InputMismatchException | IllegalArgumentException e) {
+            PrintScan.printOutofRangeNotice(Constant.MIN_LOTTO_NUM, Constant.MAX_LOTTO_NUM);
+            return inputBonusNum(alreadyEnteredNumbers);
+        }
+    }
 
 }

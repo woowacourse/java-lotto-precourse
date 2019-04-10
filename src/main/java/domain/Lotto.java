@@ -2,8 +2,10 @@ package domain;
 
 import domain.util.Constant;
 import domain.util.GenarateNumber;
+import domain.util.Input;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -21,8 +23,15 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
+    public static String lottoListToString(Lotto lotto){
+        String lottoNumString = lotto.numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(" "));
+        return lottoNumString;
+    }
 
-    public List<Integer> getLottoNum() {
-        return numbers;
+    public static int getBonusNumber(Lotto lotto) {
+        int bonusNum = Input.inputBonusNum(lotto.numbers);
+        return bonusNum;
     }
 }

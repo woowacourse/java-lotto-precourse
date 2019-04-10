@@ -20,7 +20,7 @@ public class WinningLotto {
 
     public static WinningLotto createWinningLotto() {
         Lotto fiveNumberlLotto = new Lotto(Input.inputWiningNum());
-        int bonumsNum = Input.inputBonusNum(fiveNumberlLotto.getLottoNum());
+        int bonumsNum = fiveNumberlLotto.getBonusNumber(fiveNumberlLotto);
         return new WinningLotto(fiveNumberlLotto, bonumsNum);
     }
 

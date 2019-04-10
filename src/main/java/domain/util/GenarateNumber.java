@@ -22,8 +22,6 @@ public class GenarateNumber {
         }
     }
 
-
-
     public static int getRandomNum() {
         int randomNum = (int) (Math.random() * Constant.MAX_LOTTO_NUM + Constant.MIN_LOTTO_NUM);
         return randomNum;
