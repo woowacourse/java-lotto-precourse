@@ -154,6 +154,14 @@ public class LottoGame {
     	return rightRange;
     }
     
+    private String inputBonusBall() {
+    	String bonusBall = "0";
+    	
+    	bonusBall = sc.nextLine();
+    
+    	return bonusBall;
+    }
+    
     public static void main(String[] args) {
     	// test용 main 함수
 		LottoGame lg = new LottoGame();
