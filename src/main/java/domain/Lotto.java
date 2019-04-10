@@ -23,10 +23,7 @@ public class Lotto {
     }
 
     public static boolean duplicateNumberInLotto(List<Integer> numbers) {
-        HashSet<Integer> recordLotto = new HashSet<>();
-        for (Integer number : numbers) {
-            recordLotto.add(number);
-        }
+        HashSet<Integer> recordLotto = new HashSet<>(numbers);
         return (recordLotto.size() != Lotto.LOTTO_NUMBER_SIZE);
     }
 

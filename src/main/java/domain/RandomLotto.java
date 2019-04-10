@@ -1,5 +1,5 @@
 /*
- * @RandomLotto.java	1.01 2019/04/10
+ * @RandomLotto.java	1.02 2019/04/11
  * 
  * Copyright(c)2019		HwiJin Hong.
  * All right reserved.
@@ -17,13 +17,13 @@ import java.util.List;
  * 로또 객체를 생성시켜주는 클래스
  * 1 ~ 45 까지의 6자리 숫자를 랜덤으로 뽑아서 객체를 생성한다.
  * 
- * @version 1.01 2019년 4월 10일
+ * @version 1.02 2019년 4월 11일
  * @author 홍휘진
  *
  */
 public class RandomLotto {
 
-	public Lotto makeRandomLotto() {
+	public static Lotto makeRandomLotto() {
 		List<Integer> numbers;
 		do {
 			numbers = makeLottoNumber();
@@ -31,7 +31,7 @@ public class RandomLotto {
 		return new Lotto(numbers);
 	}
 
-	public List<Integer> makeLottoNumber() {
+	private static List<Integer> makeLottoNumber() {
 		List<Integer> numbers = new LinkedList<>();
 		for (int i = 0; i < Lotto.LOTTO_NUMBER_SIZE; i++) {
 			numbers.add(makeRandomNumber());
@@ -39,7 +39,7 @@ public class RandomLotto {
 		return numbers;
 	}
 
-	private int makeRandomNumber() {
+	private static int makeRandomNumber() {
 		return (int) (Math.random() * Lotto.MAX_LOTTO_NUM) + Lotto.MIN_LOTTO_NUM;
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * @LottoGame.java      1.02 2019/04/10
+ * @LottoGame.java      1.03 2019/04/11
  *
  * Copyright(c)2019     HwiJin Hong.
  * All right reserved.
@@ -20,7 +20,7 @@ import java.util.Scanner;
  * 로또게임이 진행되는 클래스
  *
  * @author 홍휘진
- * @version 1.02 2019년 4월 10일
+ * @version 1.03 2019년 4월 11일
  */
 public class LottoGame {
 
@@ -66,10 +66,10 @@ public class LottoGame {
         return ((money < MONEY_MIN_BOUND) || (money > MONEY_MAX_BOUND));
     }
 
-    public void matchLottoNumbers(WinningLotto winningLotto) {
+    private void matchLottoNumbers(WinningLotto winningLotto) {
         HashMap<Rank, Integer> rankList = myLottoManager.matchWithWinningLotto(winningLotto);
         List<Rank> ranks = Arrays.asList(Rank.values());
-        Collections.reverse(ranks);
+        Collections.reverse(ranks); // ENUM 역순 순회
         int totalPrice = Rank.MISS.getWinningMoney();
         System.out.println(MATCH_RESULT);
         for (Rank rank : ranks) {
@@ -91,10 +91,10 @@ public class LottoGame {
     }
 
     private void printLottoResult(int totalPrice) {
-        System.out.println(YIELD + String.format("%.3f", caculateYield(totalPrice)) + YIELD_RESULT);
+        System.out.println(YIELD + String.format("%.3f", calculateYield(totalPrice)) + YIELD_RESULT);
     }
 
-    private double caculateYield(int totalPrice) {
+    private double calculateYield(int totalPrice) {
         return (double) (totalPrice) / money;
     }
 }

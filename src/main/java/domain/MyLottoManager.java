@@ -1,5 +1,5 @@
 /*
- * @MyLottoManager.java	1.01 2019/04/10
+ * @MyLottoManager.java	1.02 2019/04/11
  *
  * Copyright(c)2019		HwiJin Hong.
  * All right reserved.
@@ -18,7 +18,7 @@ import java.util.List;
  * 내 로또를 매니지먼트 하는 클래스
  *
  * @author 홍휘진
- * @version 1.01 2019년 4월 10일
+ * @version 1.02 2019년 4월 11일
  */
 public class MyLottoManager {
 
@@ -27,13 +27,11 @@ public class MyLottoManager {
     private static final int EXIT_CODE = 0;
     private static final int LOTTO_PRICE = 1000;
 
-    private RandomLotto randomLotto;
     private List<Lotto> lottoList;
     private int lottoListSize;
 
     public MyLottoManager() {
         lottoList = new LinkedList<>();
-        randomLotto = new RandomLotto();
     }
 
     public void buyLotto(int money) {
@@ -48,7 +46,7 @@ public class MyLottoManager {
 
     private void addLottoToList() {
         for (int i = 0; i < lottoListSize; i++) {
-            Lotto lotto = randomLotto.makeRandomLotto();
+            Lotto lotto = RandomLotto.makeRandomLotto();
             lottoList.add(lotto);
             System.out.println(lotto);
         }
