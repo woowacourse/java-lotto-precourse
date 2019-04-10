@@ -14,9 +14,15 @@ public class LottoGame {
 		int lottoCount = price / 1000;
 		System.out.println(lottoCount + "개를 구매했습니다.");
 		List<Lotto> lottoList = makeLottoList(lottoCount);
+		List<Rank> rankList = new ArrayList<Rank>();
 		Lotto winningNumber; 
 		scan.nextLine();
+		int totalReward=0;
 		WinningLotto winLotto = new WinningLotto(winningNumber = new Lotto(scanWinningNumber()), scanBonusNumber(winningNumber));
+		for(int i=0; i<lottoCount; ++i) {
+			rankList.add(winLotto.match(lottoList.get(i)));
+		}
+		printResult(rankList, price);
 
 	}
 
@@ -168,5 +174,20 @@ public class LottoGame {
 			return;
 		}
 		System.out.print(" ");
+	}
+	
+	public static void printResult(List<Rank> rankList, int myPrice) {
+		int count = 0;
+		int totalReward = 0;
+		Rank[] rankTypes = Rank.values();
+		for (int i = 4; i>=0; --i) {
+			Rank rank = rankTypes[i];
+			count = matchCount(rankList, rank);
+			System.out.print(rank.getCountOfMatch() +"개 일치");
+			printBonus(rank);
+			System.out.println("("+rank.getWinningMoney() + "원) - " +count+"개");
+			totalReward += count *rank.getWinningMoney();
+		}
+		System.out.println("총 수익률은" +(double) totalReward/myPrice + "입니다.");
 	}
 }
