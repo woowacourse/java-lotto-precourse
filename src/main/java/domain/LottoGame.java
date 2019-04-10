@@ -1,6 +1,7 @@
 /*
- * @(#)LottoGame.java        0.2 2019/04/09
- *
+ * @(#)LottoGame.java        1.0 2019/04/11
+ * Copyright(c)2019     SunHo Van.
+ * All right reserved.
  *
  */
 
@@ -20,7 +21,7 @@ import java.util.LinkedHashMap;
  * LottoGame을 담당하는 객체입니다.
  *
  * @author 반선호
- * @version 0.2 2019년 4월 09일
+ * @version 1.0 2019년 4월 11일
  */
 public class LottoGame {
     private static final int TICKET_PRICE = 1000;

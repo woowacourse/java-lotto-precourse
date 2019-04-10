@@ -1,6 +1,7 @@
 /*
- * @(#)Main.java        0.1 2019/04/09
- *
+ * @(#)Main.java        1.0 2019/04/11
+ * Copyright(c)2019     SunHo Van.
+ * All right reserved.
  *
  */
 
@@ -10,7 +11,7 @@ import domain.LottoGame;
  * Lotto 실행을 위한 Main클래스 입니다.
  *
  * @author 반선호
- * @version 0.1 2019년 4월 09일
+ * @version 1.0 2019년 4월 11일
  */
 public class Main {
     public static void main(String[] args) {
