@@ -79,4 +79,69 @@ public class WinningLotto {
         }
         return earnMoney;
     }
+
+    private void printLottoRank(List<Integer> rankList,int earnMoney, int spendMoney) {
+
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        System.out.println("3개 일치 (5000원) -" + checkFifthRank(rankList));
+        System.out.println("4개 일치 (50000원) -" + checkFourthRank(rankList));
+        System.out.println("5개 일치 (1500000원) -" + checkThirdRank(rankList));
+        System.out.println("5개 일치 보너스 번호 일치(30000000원) -" + checkSecondRank(rankList));
+        System.out.println("6개 일치 (2000000000원) -" + checkFirstRank(rankList));
+        System.out.println("총 수익률은 "+ (double) earnMoney / spendMoney +" 입니다.");
+    }
+
+    private int checkFifthRank(List<Integer> matchValueList){
+        int count = 0;
+        Rank fifthRank = Rank.FIFTH;
+        for(int i=0;i<matchValueList.size();i++){
+            count += checkRankPosition(matchValueList,fifthRank,i);
+        }
+        return count;
+    }
+
+    private int checkFourthRank(List<Integer> matchValueList){
+        int count = 0;
+        Rank fourthRank = Rank.FOURTH;
+        for(int i=0;i<matchValueList.size();i++){
+            count += checkRankPosition(matchValueList,fourthRank,i);
+        }
+        return count;
+    }
+
+    private int checkThirdRank(List<Integer> matchValueList){
+        int count = 0;
+        Rank thirdRank = Rank.THIRD;
+        for(int i=0;i<matchValueList.size();i++){
+            count += checkRankPosition(matchValueList,thirdRank,i);
+        }
+        return count;
+    }
+
+    private int checkSecondRank(List<Integer> matchValueList){
+        int count = 0;
+        Rank SecondRank = Rank.SECOND;
+        for(int i=0;i<matchValueList.size();i++){
+            count += checkRankPosition(matchValueList,SecondRank,i);
+        }
+        return count;
+    }
+
+    private int checkFirstRank(List<Integer> matchValueList){
+        int count = 0;
+        Rank FisrtRank = Rank.FIRST;
+        for(int i=0;i<matchValueList.size();i++){
+            count += checkRankPosition(matchValueList,FisrtRank,i);
+        }
+        return count;
+    }
+
+    private int checkRankPosition(List<Integer> matchValueList,Rank temp,int location){
+        int count = 0;
+        if(matchValueList.get(location) == temp.getCountOfMatch()){
+            count++;
+        }
+        return count;
+    }
 }
