@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class LottoGame {
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
@@ -11,6 +8,12 @@ public class LottoGame {
     private static final String MONEY_UNIT_ERROR_MESSAGE = "천단위의 숫자가 아닙니다. 다시 입력해주세요: ";
     private static final String SPLIT_STANDARD = ",";
     private static final String PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String OVERLAP_ERROR_MESSAGE = "중복입니다. 다시 입력해주세요: ";
+    private static final String LENGTH_ERROR_MESSAGE = "6개의 값을 입력해주세요. 다시 입력해주세요: ";
+    private static final String SPLIT_ERROR_MESSAGE = ",가 존재하지않습니다. 다시 입력해주세요: ";
+    private static final String NUMBER_BOUND_ERROR_MESSAGE = "1-45까지의 범위에서만 입력해주세요. 다시 입력해주세요: ";
+    private static final String INPUT_LAST_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final int MONEY_UNIT = 1000;
     private static final int ZERO = 0;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -23,6 +26,109 @@ public class LottoGame {
         int lottoRound = calculateLottoRound(lottoGameMoney);
         List<Lotto> lottoList = getLottoList(lottoRound);
         printLottoNumbers(lottoList);
+        System.out.println(INPUT_LAST_NUMBER);
+        WinningLotto winningLotto = getWinningLotto();
+    }
+
+    private WinningLotto getWinningLotto() {
+        Lotto lotto = new Lotto(getLastWinningNumberList());
+        System.out.println(INPUT_BONUS_MESSAGE);
+        int bonusBall = inputBonusBall(lotto);
+        return new WinningLotto(lotto, bonusBall);
+    }
+
+    private int inputBonusBall(Lotto lotto) {
+        String stringBonusNumber = inputMethod(true);
+        int bonusNumber = Integer.parseInt(stringBonusNumber);
+        if (isInRange(stringBonusNumber)) {
+            return inputBonusBall(lotto);
+        }
+        if (lotto.getNumbers().contains(bonusNumber)) {
+            System.err.println(OVERLAP_ERROR_MESSAGE);
+            return inputBonusBall(lotto);
+        }
+        return bonusNumber;
+    }
+
+    private List<Integer> getLastWinningNumberList() {
+        List<Integer> winningNumberList = new ArrayList<>();
+        String[] winningNumberArr = inputLastNumber();
+
+        getAdd(winningNumberList, winningNumberArr);
+        winningNumberList = checkOverlap(winningNumberList);
+
+        return winningNumberList;
+    }
+
+    private void getAdd(List<Integer> winningNumberList, String[] winningNumber) {
+        for (String number : winningNumber) {
+            winningNumberList.add(Integer.parseInt(number));
+        }
+    }
+
+    private String[] inputLastNumber() {
+        String winningNumbers = inputMethod(false);
+        String[] winningNumberArr = winningNumbers.split(SPLIT_STANDARD);
+
+        if (isNotInComma(winningNumbers) || isInRange(winningNumbers)) {
+            return inputLastNumber();
+        }
+
+        return inputSixNumberJudge(winningNumberArr);
+    }
+
+    private boolean isInRange(String str) {
+        String[] winningNumbersArr = str.split(SPLIT_STANDARD);
+        int index = 0;
+        int winningNumbers;
+        boolean check;
+
+        do {
+            winningNumbers = Integer.parseInt(winningNumbersArr[index++]);
+        } while (!(check = numberBoundCheck(winningNumbers)) && index < winningNumbersArr.length);
+
+        return check;
+    }
+
+    private boolean numberBoundCheck(int numbers) {
+        if (numbers < MIN_LOTTO_NUMBER || numbers > MAX_LOTTO_NUMBER) {
+            System.err.println(NUMBER_BOUND_ERROR_MESSAGE);
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isNotInComma(String winningNumber) {
+        String[] winningNumbersArr = winningNumber.split("");
+        List<String> list = new ArrayList<>(Arrays.asList(winningNumbersArr));
+
+        if (!list.contains(SPLIT_STANDARD)) {
+            System.err.println(SPLIT_ERROR_MESSAGE);
+            return true;
+        }
+
+        return false;
+    }
+
+    private String[] inputSixNumberJudge(String[] lastWinningNumber) {
+        if (lastWinningNumber.length != NUMBER_OF_LOTTO) {
+            System.err.println(LENGTH_ERROR_MESSAGE);
+            return inputLastNumber();
+        }
+
+        return lastWinningNumber;
+    }
+
+    private List<Integer> checkOverlap(List<Integer> winningNumber) {
+        Set<Integer> set = new HashSet<>(winningNumber);
+
+        if (set.size() != winningNumber.size()) {
+            System.err.println(OVERLAP_ERROR_MESSAGE);
+            return getLastWinningNumberList();
+        }
+
+        return winningNumber;
     }
 
     private void printLottoNumbers(List<Lotto> lottoList) {
