@@ -18,6 +18,12 @@ public class InputUtil {
                 return ConvertToListWinningNumberInput(winningNumberInput);
         }
 
+        public int inputBonusBall(){
+                Scanner scan = new Scanner(System.in);
+                int bonusball = scan.nextInt();
+                return bonusball;
+        }
+
         private List<Integer> ConvertToListWinningNumberInput(String winningNumberInput){
                 List<Integer> winningNumber = new ArrayList<Integer>();
                 String[] winningNumberString = winningNumberInput.split(",");
@@ -26,4 +32,6 @@ public class InputUtil {
                 }
                 return winningNumber;
         }
+
+
 }

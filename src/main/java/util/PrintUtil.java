@@ -1,6 +1,6 @@
 package util;
 
-import domain.*;
+import domain.Lotto;
 
 public class PrintUtil {
         public void printPurchaseAmountInputMessage(){
