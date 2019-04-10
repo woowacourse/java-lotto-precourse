@@ -24,7 +24,7 @@ public class WinningLotto {
 
     public static List<Rank> createListOfUserLottosRanks(WinningLotto winningLotto, List<Lotto> listOfUserLottos) {
         List<Rank> listOfUserLottosRanks = new ArrayList<>();
-        for (int i=0, n=listOfUserLottos.size(); i<n; i++) {
+        for (int i = 0, n = listOfUserLottos.size(); i < n; i++) {
             listOfUserLottosRanks.add(winningLotto.match(listOfUserLottos.get(i)));
         }
         return listOfUserLottosRanks;
@@ -40,7 +40,7 @@ public class WinningLotto {
 
     private static List<Integer> createIntListForWinningLotto(List<String> stringList) {
         List<Integer> intListForWinningLotto = new ArrayList<>();
-        for (int i=0, n=stringList.size(); i<n; i++) {
+        for (int i = 0, n = stringList.size(); i < n; i++) {
             intListForWinningLotto.add(Integer.parseInt(stringList.get(i)));
         }
         return intListForWinningLotto;
@@ -49,9 +49,9 @@ public class WinningLotto {
     public static String askUserWinningNumbers() {
         boolean isUserInputRight = false;
         String userInput = "E @ askUserWinningNumbers";
-        while(!isUserInputRight) {
+        while (!isUserInputRight) {
             userInput = Lotto.askAndReceiveInput("지난 주 당첨 번호를 입력해주세요.");
-            userInput = userInput.replaceAll("\\s+","");
+            userInput = userInput.replaceAll("\\s+", "");
             isUserInputRight = checkUserInputWinningNumbers(userInput);
         }
         return userInput;
@@ -67,17 +67,17 @@ public class WinningLotto {
 
     private static boolean isThereEmptyString(String userInput) {
         List<String> listToCheckEmptyString = Lotto.makeListToCheck(userInput);
-        boolean isEmptyString =false;
-        while(!isEmptyString && !listToCheckEmptyString.isEmpty()) {
-            isEmptyString = checkStr(listToCheckEmptyString.get(0));
-            listToCheckEmptyString.remove(0);
+        boolean isEmptyString = false;
+        while (!isEmptyString && !listToCheckEmptyString.isEmpty()) {
+            isEmptyString = checkStr(listToCheckEmptyString.get(Lotto.FIRST_ELEMENT_INDEX));
+            listToCheckEmptyString.remove(Lotto.FIRST_ELEMENT_INDEX);
         }
         return isEmptyString;
     }
 
 
     private static boolean checkStr(String currentStr) {
-        if(currentStr.isEmpty()) {
+        if (currentStr.isEmpty()) {
             System.out.println("빈칸이 있습니다. 6개의 숫자를 입력해 주세요!");
             return true;
         }
@@ -88,8 +88,8 @@ public class WinningLotto {
         List<String> listToCheckDuplicate = Lotto.makeListToCheck(userInput);
         boolean isDuplicating = false;
         while (!isDuplicating && !listToCheckDuplicate.isEmpty()) {
-            String current = listToCheckDuplicate.get(0);
-            listToCheckDuplicate.remove(0);
+            String current = listToCheckDuplicate.get(Lotto.FIRST_ELEMENT_INDEX);
+            listToCheckDuplicate.remove(Lotto.FIRST_ELEMENT_INDEX);
             isDuplicating = checkDuplicate(current, listToCheckDuplicate);
         }
         return isDuplicating;
@@ -97,7 +97,7 @@ public class WinningLotto {
 
 
     private static boolean checkDuplicate(String current, List<String> list) {
-        if(list.contains(current)) {
+        if (list.contains(current)) {
             System.out.println("당첨번호에 중복되는 숫자가 있습니다.");
             return true;
         }
@@ -108,23 +108,23 @@ public class WinningLotto {
         List<Integer> intListToCheckBetween1And45 = createListToCheckBetween1And45(userInput);
         boolean overLimit = false;
         while (!overLimit && !intListToCheckBetween1And45.isEmpty()) {
-            overLimit = checkLimit(intListToCheckBetween1And45.get(0));
-            intListToCheckBetween1And45.remove(0);
+            overLimit = checkLimit(intListToCheckBetween1And45.get(Lotto.FIRST_ELEMENT_INDEX));
+            intListToCheckBetween1And45.remove(Lotto.FIRST_ELEMENT_INDEX);
         }
         return overLimit;
     }
 
-    private static List<Integer> createListToCheckBetween1And45 (String userInput) {
+    private static List<Integer> createListToCheckBetween1And45(String userInput) {
         List<String> list = Arrays.asList(userInput.split(","));
         List<Integer> listToCheckBetween1And45 = new ArrayList<>();
-        for (int i=0, n=list.size(); i<n; i++) {
+        for (int i = 0, n = list.size(); i < n; i++) {
             listToCheckBetween1And45.add(Integer.parseInt(list.get(i)));
         }
         return listToCheckBetween1And45;
     }
 
     private static boolean checkLimit(int currentNumber) {
-        if(currentNumber < 1 || currentNumber > 45) {
+        if (currentNumber < Lotto.LOTTO_MIN_NUMBER || currentNumber > Lotto.LOTTO_MAX_NUMBER) {
             System.out.println("당첨번호는 1~45사이에 넣어주세요!");
             return true;
         }
@@ -134,7 +134,7 @@ public class WinningLotto {
     private static boolean isLengthNot6(String userInput) {
         List<String> list = Arrays.asList(userInput.split(","));
         int n = list.size();
-        if (n != 6) {
+        if (n != Lotto.LOTTO_NUMBERS_LENGTH) {
             System.out.println("당첨번호는 6개를 입력해주세요");
             return true;
         }

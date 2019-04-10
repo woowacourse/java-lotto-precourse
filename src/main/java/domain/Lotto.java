@@ -7,10 +7,12 @@ import java.util.*;
  */
 public class Lotto {
     private static final int PRICE_OF_ONE_LOTTO = 1000;
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
     private static final int STARTING_INDEX_OF_LOTTO_NUMBERS = 0;
     private static final int ENDING_INDEX_OF_LOTTO_NUMBERS = 5;
+    public static final int LOTTO_NUMBERS_LENGTH = 6;
+    public static final int FIRST_ELEMENT_INDEX = 0;
 
     private final List<Integer> numbers;
 
@@ -31,7 +33,7 @@ public class Lotto {
         String userInputMoneyAmount = "ERROR:askUSerMoneyAmount()";
         while (!isUserInputRight) {
             userInputMoneyAmount = askAndReceiveInput("구입금액을 입력해 주세요.");
-            userInputMoneyAmount = userInputMoneyAmount.replaceAll("\\s+","");
+            userInputMoneyAmount = userInputMoneyAmount.replaceAll("\\s+", "");
             isUserInputRight = checkUserInput(userInputMoneyAmount);
         }
         return userInputMoneyAmount;
@@ -76,7 +78,7 @@ public class Lotto {
     public static List<String> makeListToCheck(String userInput) {
         List<String> list = Arrays.asList(userInput.split(","));
         List<String> listToCheck = new ArrayList<>();
-        for (int i=0, n=list.size(); i<n; i++) {
+        for (int i = 0, n = list.size(); i < n; i++) {
             listToCheck.add(list.get(i));
         }
         return listToCheck;
@@ -84,7 +86,7 @@ public class Lotto {
 
     private static boolean isItNotMultipleOf1000(String userInput) {
         int intUserInput = Integer.parseInt(userInput);
-        if (intUserInput%PRICE_OF_ONE_LOTTO == 0) {
+        if (intUserInput % PRICE_OF_ONE_LOTTO == 0) {
             return false;
         }
         System.out.println("입력금액은 1000원 단위로만 입력해주세요!");
@@ -102,9 +104,9 @@ public class Lotto {
 
     public static List<Lotto> makeListOfUserLottos(String userInput) {
         int intUserInput = Integer.parseInt(userInput);
-        int quantitiesOfLottos = intUserInput/PRICE_OF_ONE_LOTTO;
+        int quantitiesOfLottos = intUserInput / PRICE_OF_ONE_LOTTO;
         List<Lotto> listOfUserLottos = new ArrayList<>();
-        for (int i=0; i<quantitiesOfLottos; i++) {
+        for (int i = 0; i < quantitiesOfLottos; i++) {
             Lotto currentLotto = new Lotto(makeListOfRandomNumbers());
             listOfUserLottos.add(currentLotto);
         }
@@ -119,8 +121,8 @@ public class Lotto {
 
     private static List<Integer> makeListOf6RandomNumbers(List<Integer> listOf45) {
         List<Integer> listOf6RandomNumbers = new ArrayList<>();
-        for (int i = STARTING_INDEX_OF_LOTTO_NUMBERS; i < ENDING_INDEX_OF_LOTTO_NUMBERS+1; i++) {
-            int randomNumberIndex = (int) (Math.random()*listOf45.size());
+        for (int i = STARTING_INDEX_OF_LOTTO_NUMBERS; i < ENDING_INDEX_OF_LOTTO_NUMBERS + 1; i++) {
+            int randomNumberIndex = (int) (Math.random() * listOf45.size());
             listOf6RandomNumbers.add(listOf45.get(randomNumberIndex));
             listOf45.remove(randomNumberIndex);
         }
@@ -128,8 +130,8 @@ public class Lotto {
     }
 
     private static List<Integer> makeListOf45() {
-        List<Integer>  listOf45 = new ArrayList<>();
-        for (int i=LOTTO_MIN_NUMBER; i<LOTTO_MAX_NUMBER+1; i++) {
+        List<Integer> listOf45 = new ArrayList<>();
+        for (int i = LOTTO_MIN_NUMBER; i < LOTTO_MAX_NUMBER + 1; i++) {
             listOf45.add(i);
         }
         return listOf45;
@@ -139,7 +141,7 @@ public class Lotto {
         System.out.println();
         int n = listOfUserLottos.size();
         System.out.println(n + "개를 구매했습니다.");
-        for(int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             System.out.println(listOfUserLottos.get(i).numbers);
         }
         System.out.println();
@@ -147,7 +149,7 @@ public class Lotto {
 
     public static int compareNumbers(Lotto winningLotto, Lotto userLotto) {
         int count = 0;
-        for (int i=0, n= userLotto.numbers.size(); i<n; i++) {
+        for (int i = 0, n = userLotto.numbers.size(); i < n; i++) {
             count += checkMatch(winningLotto.numbers, userLotto.numbers.get(i));
         }
         return count;
@@ -171,7 +173,7 @@ public class Lotto {
     public static List<Rank> makeListOfRanksInOrder() {
         List<Rank> rankList = Arrays.asList(Rank.values());
         List<Rank> rankListReversed = new ArrayList<>();
-        for (int i=rankList.size()-2; i>=0; i--) {
+        for (int i = rankList.size() - 2; i >= 0; i--) {
             rankListReversed.add(rankList.get(i));
         }
         return rankListReversed;
@@ -179,7 +181,7 @@ public class Lotto {
 
     public static List<Integer> makeListOfRankOccurences(List<Rank> listOfRanksInOrder, List<Rank> listOfUserLottosRanks) {
         List<Integer> listOfRankOccurences = new ArrayList<>();
-        for (int i=0, n= listOfRanksInOrder.size(); i<n; i++) {
+        for (int i = 0, n = listOfRanksInOrder.size(); i < n; i++) {
             listOfRankOccurences.add(Collections.frequency(listOfUserLottosRanks, listOfRanksInOrder.get(i)));
         }
         return listOfRankOccurences;
@@ -194,7 +196,7 @@ public class Lotto {
     }
 
     private static void printFirstThree(List<Rank> listOfRanksInOrder, List<Integer> listOfRankOccurences) {
-        for (int i=0, n=listOfRanksInOrder.size()-2; i<n; i++) {
+        for (int i = 0, n = listOfRanksInOrder.size() - 2; i < n; i++) {
             System.out.print(listOfRanksInOrder.get(i).getCountOfMatch() + "개 일치 (");
             System.out.print(listOfRanksInOrder.get(i).getWinningMoney() + "원)-");
             System.out.println(listOfRankOccurences.get(i) + "개");
@@ -213,10 +215,10 @@ public class Lotto {
     public static void printProfitRate(String userInput, List<Rank> listOfUserLottoRanks) {
         double doubleUserInput = Double.parseDouble(userInput);
         double total = 0;
-        for (int i=0, n=listOfUserLottoRanks.size(); i<n; i++) {
+        for (int i = 0, n = listOfUserLottoRanks.size(); i < n; i++) {
             total += listOfUserLottoRanks.get(i).getWinningMoney();
         }
-        double profitRate = total/doubleUserInput;
-        System.out.println("총 수익률은 " +profitRate+"입니다.");
+        double profitRate = total / doubleUserInput;
+        System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
 }
