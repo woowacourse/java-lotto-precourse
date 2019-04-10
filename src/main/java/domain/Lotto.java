@@ -12,5 +12,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public boolean isOverlapToBonusNumber(String BonusNumber) {
+        return numbers.contains(Integer.parseInt(BonusNumber));
+    }
 }
