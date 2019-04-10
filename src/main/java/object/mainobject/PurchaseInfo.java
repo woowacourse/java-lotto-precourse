@@ -26,14 +26,16 @@ public class PurchaseInfo {
 
         public void printPurchasedLottosNumber() {
                 PrintUtil.printPurchaseConfirmMessage(this.purchaseAmount);
-                PrintUtil.printPurchasedLottoList(lottos);
+                PrintUtil.printPurchasedLottoList(this.lottos);
         }
 
-        public Map<Rank,Integer> makeWinningStats(WinningLotto winningLotto){
-                Map<Rank,Integer> map = new HashMap<Rank,Integer>();
-                for(Lotto lotto : lottos){
-                        map.putwinningLotto.match(lotto);
+        public Map<Rank, Integer> makeWinningStats(Map<Rank, Integer> map, WinningLotto winningLotto) {
+                map = new HashMap<Rank, Integer>();
+                for (Lotto lotto : this.lottos) {
+                        Rank rank = winningLotto.match(lotto);
+                        map.put(rank,map.get(rank)+1);
                 }
+                return map;
         }
 
         private List<Lotto> purchaseLottos() {

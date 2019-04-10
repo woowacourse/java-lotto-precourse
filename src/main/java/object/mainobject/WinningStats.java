@@ -1,16 +1,19 @@
 package object.mainobject;
 
 import domain.Rank;
+import object.WinningLotto;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class WinningStats {
         private final PurchaseInfo purchaseInfo;
+        private final WinningLotto winningLotto;
         private final Map<Rank,Integer> stats;
 
-        public WinningStats(PurchaseInfo purchaseInfo){
+        public WinningStats(PurchaseInfo purchaseInfo, WinningLotto winningLotto){
                 this.purchaseInfo = purchaseInfo;
+                this.winningLotto = winningLotto;
                 stats = new HashMap<Rank,Integer>()
                 stats.put(Rank.FIRST,0);
                 stats.put(Rank.SECOND,0);
@@ -21,6 +24,6 @@ public class WinningStats {
         }
 
         public void makeWinningStats(){
-                purchaseInfo.makeWinningStats(this.stats);
+                purchaseInfo
         }
 }
