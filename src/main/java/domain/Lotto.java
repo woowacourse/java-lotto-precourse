@@ -1,5 +1,7 @@
 package domain;
 
+import domain.util.GenarateNumber;
+
 import java.util.List;
 
 /**
@@ -13,4 +15,12 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    public static Lotto creatLotto(){
+        List <Integer>lottoNumbers = GenarateNumber.genarateUserNumber();
+        return new Lotto(lottoNumbers);
+    }
+
+    public List <Integer> getLottoNum(){
+        return numbers;
+    }
 }
