@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -70,6 +71,19 @@ public class LottoGame {
 		}
 		
 		return result;
+	}
+	
+	private List<Iterator<Integer>> makeIterator(HashMap<Integer, Integer> result) {
+		List<Iterator<Integer>> iterators = new ArrayList<Iterator<Integer>>();
+		Iterator<Integer> valueIter = result.values().iterator();
+		Iterator<Integer> keyIter = result.keySet().iterator();
+		valueIter.next();
+		keyIter.next();
+		
+		iterators.add(keyIter);
+		iterators.add(valueIter);
+
+		return iterators;
 	}
 
 	
