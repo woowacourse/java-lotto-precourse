@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PurchsedLottoCreator implements Creator {
+public class PurchsedLottoNumberCreator implements Creator {
         @Override
-        public LottoNumber create() {
+        public Lotto create() {
                 List<Integer> numbers = new ArrayList<Integer>();
                 Random random = new Random();
                 while(numbers.size()<numberOfLotto){

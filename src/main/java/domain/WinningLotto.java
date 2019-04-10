@@ -3,7 +3,7 @@ package domain;
 /**
  * 당첨 번호를 담당하는 객체
  */
-public class WinningLotto {
+public class WinningLotto implements LottoNumber{
     private final Lotto lotto;
     private final int bonusNo;
 

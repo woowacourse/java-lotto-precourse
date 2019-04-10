@@ -1,7 +1,7 @@
 package domain;
 
 public class BonusBall implements LottoNumber {
-        private final int bonusBallNumber;
+        public final int number;
 
-        public BonusBall(int bonusBallNumber){this.bonusBallNumber = bonusBallNumber;}
+        public BonusBall(int bonusBallNumber){this.number = bonusBallNumber;}
 }

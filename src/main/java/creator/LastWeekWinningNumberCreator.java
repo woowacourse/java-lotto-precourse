@@ -7,7 +7,7 @@ import util.PrintUtil;
 
 public class LastWeekWinningNumberCreator implements Creator{
         @Override
-        public LottoNumber create() {
+        public Lotto create() {
                 PrintUtil.printLastWeekWinningNumberInputMessage();
                 Lotto lotto = new Lotto(InputUtil.inputLastWeekWinningNumber());
                 return lotto;
