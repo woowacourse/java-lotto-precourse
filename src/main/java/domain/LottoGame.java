@@ -45,10 +45,14 @@ public class LottoGame {
         List<Rank> ranks = new ArrayList<>();
         WinningLotto winningLotto = new WinningLotto(winLotto, bonusNo);
         for (Lotto lotto : lottoList) {
-            Rank rank = winningLotto.match(lotto);                        
+            Rank rank = winningLotto.match(lotto);
             ranks.add(rank);
         }
         return ranks;
+    }
+    private void statistic(List<Rank> ranks,int money){
+        Statistic statistic=new Statistic(ranks,money);
+        statistic.print();
     }
 
 }
