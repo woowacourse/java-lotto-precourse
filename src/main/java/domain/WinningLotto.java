@@ -48,7 +48,7 @@ public class WinningLotto {
         }
         return correctAmount;
     }
-    
+
     private boolean findSecondCorrect(List<Integer> amountList, int bonusNumber){
 
         boolean findSecondState = false;
@@ -58,9 +58,13 @@ public class WinningLotto {
         return findSecondState;
     }
 
+    private List<Integer> saveRank(WinningLotto winLotto,List<Lotto> lottoList){
 
+        List<Integer> rankList = new ArrayList<Integer>();;
 
-
-
-
+        for(int i=0;i<lottoList.size();i++){
+            rankList.add(match(winLotto.matchAmount(lottoList).get(i),findSecondCorrect(lottoList.get(i).findLotto(),winLotto.bonusNo)).getCountOfMatch());
+        }
+        return rankList;
+    }
 }
