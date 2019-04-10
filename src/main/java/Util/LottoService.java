@@ -39,4 +39,13 @@ public class LottoService {
             return null;
         }
     }
+
+    public static WinningLotto getWinningLotto(Lotto lotto, int bonusNumber) {
+        try {
+            return LottoMaker.getWinningLotto(lotto, bonusNumber);
+        } catch (RuntimeException exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
 }

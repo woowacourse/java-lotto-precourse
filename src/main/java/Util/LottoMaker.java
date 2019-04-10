@@ -104,4 +104,17 @@ public class LottoMaker {
             throw new IllegalArgumentException("로또 번호의 범위가 유효하지 않습니다.");
         }
     }
+
+    public static WinningLotto getWinningLotto(Lotto lotto, int bonusNumber)
+            throws IllegalArgumentException {
+        checkNumberRange(bonusNumber);
+        checkUniqueNumber(lotto.getNumbers(), bonusNumber);
+        return new WinningLotto(lotto, bonusNumber);
+    }
+
+    private static void checkUniqueNumber(List<Integer> lottoNumberList, int bonusNumber) {
+        Set<Integer> lottoNumberSet = new HashSet<>(lottoNumberList);
+        if (lottoNumberSet.contains(bonusNumber))
+            throw new IllegalArgumentException(lottoNumberList + "에 중복된 숫자가 존재합니다.");
+    }
 }
