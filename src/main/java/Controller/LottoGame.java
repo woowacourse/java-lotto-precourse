@@ -16,7 +16,6 @@ import lottodata.WinningLotto;
 import java.util.*;
 
 public class LottoGame {
-
     private int getLottoCountFromUser(Scanner sc) {
         System.out.println(UserView.COMMENT_WHEN_RECEIVE_INPUT_MONEY);
         int lottoCount = DataReceiver.getInputMoneyFromUser(sc) / GameSetting.PRICE_PER_1LOTTO;

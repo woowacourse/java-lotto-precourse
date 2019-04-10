@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataReceiver {
-
     public static int getInputMoneyFromUser(Scanner sc) {
         String inputMoneyFromUser = sc.nextLine();
         while (!Validator.checkInputLottoMoney(inputMoneyFromUser)) {
