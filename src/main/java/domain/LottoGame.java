@@ -13,10 +13,11 @@ public class LottoGame {
 	static private final int LOTTO_PRICE = 1000;
 	static private final int LOTTO_BUY_LIMIT = 100000;
     static private final double LOTTO_TOTAL_NUMBER = 45;
-	static private String money = "0";
 	static private final int LOTTO_MAXIMUM_COUNT = 6;
 	
 	private int inputMoney() {
+		String money = "0";
+		
 		do {
 			System.out.println("구매금액을 입력해 주세요.");
 			money = sc.nextLine();
@@ -26,7 +27,7 @@ public class LottoGame {
 	}
 	
 	private boolean checkNumberOrNot(String money) {
-		if (Pattern.matches(NUMBER_CHECK_REGEX, money) && !money.equals("0")) {
+		if (Pattern.matches(NUMBER_CHECK_REGEX, money) && Integer.parseInt(money) != 0) {
 			return true;
 		}
 		
@@ -73,7 +74,10 @@ public class LottoGame {
     		lottoList.add(new Lotto(makeLottoNumberList()));
     	}
 
+    	System.out.println("\n" + lottoList.size() + "개를 구매했습니다.");
+    	
     	return lottoList;
     }
+  
     
 }
