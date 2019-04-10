@@ -12,6 +12,7 @@ public class LottoBank {
 	private LottoShop lottoShop;
 	private Scanner sc;
 	private List<Integer> winnerLottoNumbers;
+	private int bonusNo;
 	
 	public LottoBank(LottoShop lottoShop) {
 		sc = new Scanner(System.in);
@@ -55,5 +56,11 @@ public class LottoBank {
 	private void printAndfixErr(String ErrMsg) {
 		System.out.println(ErrMsg);
 		setWinningLotto();
+	}
+	
+	private void parseWinnerLottoNums(String winnerNums) {
+		for (String winnerNum : winnerNums.split(",")) {
+			winnerLottoNumbers.add(Integer.parseInt(winnerNum));
+		}
 	}
 }
