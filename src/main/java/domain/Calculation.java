@@ -30,11 +30,11 @@ public class Calculation {
      */
     public static double calcYield(List<Rank> rankList, int lottoCount) {
         int totalWinning = 0;
-        totalWinning += calcYieldOneRank(rankList, Rank.FIFTH.getCountOfMatch(), false);
-        totalWinning += calcYieldOneRank(rankList, Rank.FOURTH.getCountOfMatch(), false);
-        totalWinning += calcYieldOneRank(rankList, Rank.THIRD.getCountOfMatch(), false);
+        Rank[] rank = Rank.values();
+        for (int i = 0; i < LottoConstant.LOTTO_PRINT_RANK_LIMIT; i++) {
+            totalWinning += calcYieldOneRank(rankList, rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i].getCountOfMatch(), false);
+        }
         totalWinning += calcYieldOneRank(rankList, Rank.SECOND.getCountOfMatch(), true);
-        totalWinning += calcYieldOneRank(rankList, Rank.FIRST.getCountOfMatch(), false);
         return ((double)totalWinning / (lottoCount * LottoConstant.LOTTO_PRICE));
     }
 

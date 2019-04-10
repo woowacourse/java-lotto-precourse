@@ -138,7 +138,7 @@ public class LottoIO {
         }
         printRankAll(rankList);
         yield = Calculation.calcYield(rankList, lottoList.size());
-        System.out.println("총 수익률은 " + yield + "입니다.");
+        System.out.printf("총 수익률은 %.3f 입니다.\n", yield);
     }
 
     public static void printRankCount(List<Rank> rankList, int countOfMatch, boolean matchBonus) {
@@ -152,10 +152,13 @@ public class LottoIO {
     }
 
     public static void printRankAll(List<Rank> rankList) {
-        printRankCount(rankList, Rank.FIFTH.getCountOfMatch(), false);
-        printRankCount(rankList, Rank.FOURTH.getCountOfMatch(), false);
-        printRankCount(rankList, Rank.THIRD.getCountOfMatch(), false);
-        printRankCount(rankList, Rank.SECOND.getCountOfMatch(), true);
-        printRankCount(rankList, Rank.FIRST.getCountOfMatch(), false);
+        Rank[] rank = Rank.values();
+        for (int i = 0; i < LottoConstant.LOTTO_PRINT_RANK_LIMIT; i++) {
+            if (rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i] == Rank.SECOND) {
+                printRankCount(rankList, Rank.SECOND.getCountOfMatch(), true);
+                continue;
+            }
+            printRankCount(rankList, rank[LottoConstant.LOTTO_PRINT_RANK_LIMIT-1-i].getCountOfMatch(), false);
+        }
     }
 }
