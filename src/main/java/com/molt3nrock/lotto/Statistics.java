@@ -14,6 +14,12 @@ import java.util.Map.Entry;
  */
 class Statistics {
 
+    /**
+     * rankState : {@code Map<Rank, Integer>} 타입의 Lotto 당첨 현황을 저장하는 변수.
+     *
+     * - Rank    : Lotto 의 Rank
+     * - Integer : Rank 에 당첨된 Lotto 의 갯수.
+     */
     private Map<Rank, Integer> rankState;
 
     private Statistics(Map<Rank, Integer> rankState) {
@@ -51,10 +57,6 @@ class Statistics {
 
     /**
      * 로또 수익률 계산 메쏘드.
-     *
-     * rankState: {@code Map<Rank, Integer>}
-     * - Rank: Lotto 의 Rank
-     * - Integer: Rank 에 해당하는 Lotto 의 갯수.
      *
      * 총 이득 = rankState 의 각 entry.getKey().getWinningMoney() x entry.getValue() 의 합
      * 총 투자 = PRICE_PER_LOTTO x 모든 rankState.values() 의 합
