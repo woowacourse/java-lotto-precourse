@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,6 +17,7 @@ public class Inputter {
     private static final String MSG_INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.(6자리)"
                                                                 + "\n입력 예시 : 5,10,14,32,40,45";
     private static final String MSG_INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
+    private static final String MSG_PURCHASE_AMOUNT = "개를 구매했습니다.";
     private static Scanner scan = new Scanner(System.in);
     private static Validator validator = new Validator();
 
@@ -27,8 +26,10 @@ public class Inputter {
         do{
             System.out.println(MSG_INPUT_PURCHASE_AMOUNT);
             amount = scan.nextLine();
-        }while (!validator.isNumeric(amount) && !validator.isPossibleAmountUnit(amount));
-        return Integer.parseInt(amount) / AMOUNT_UNIT;
+        }while (!validator.isNumeric(amount) || !validator.isPossibleAmountUnit(amount));
+        int changeToIntAmount = Integer.parseInt(amount) / AMOUNT_UNIT;
+        System.out.println(changeToIntAmount + MSG_PURCHASE_AMOUNT);
+        return changeToIntAmount;
     }
 
     public String inputWinningNumber(){
@@ -40,39 +41,15 @@ public class Inputter {
         return winningNum;
     }
 
-    public List<Integer> winningNumberSplit(String winningNum){
-        List<Integer> splittedWinningNum;
-        boolean isDuplicateAndOverNum;
-        do{
-            splittedWinningNum = changeStrListToIntList(Arrays.asList(winningNum.split(",")));
-            isDuplicateAndOverNum = validator.isDuplicateAndNumOverValue(splittedWinningNum);
-            winningNum = reInputWinningNumbers(isDuplicateAndOverNum, winningNum);
-        }while (isDuplicateAndOverNum);
-
-        return splittedWinningNum;
-    }
-
-    private List<Integer> changeStrListToIntList(List<String> strList){
-        List<Integer> intList = new ArrayList<>();
-        for(String str : strList){
-            intList.add(Integer.parseInt(str));
-        }
-        return intList;
-    }
-
-    private String reInputWinningNumbers(boolean isRestart, String origin){
-        if(isRestart){
-            return inputWinningNumber();
-        }
-        return origin;
-    }
-
     public int inputBonusNumber(List<Integer> splittedWinningNum){
-        int bonusNum;
+        String bonusNum;
         do {
             System.out.println(MSG_INPUT_BONUS_BALL);
-            bonusNum = scan.nextInt();
-        }while(validator.isDuplicateAndNumOverValue(bonusNum, splittedWinningNum));
-        return bonusNum;
+            bonusNum = scan.nextLine();
+        }while( ! validator.isNumeric(bonusNum)
+                || validator.isBonusDuplicateAndNumOverValue(Integer.parseInt(bonusNum),
+                                                                splittedWinningNum));
+        return Integer.parseInt(bonusNum);
     }
+
 }
