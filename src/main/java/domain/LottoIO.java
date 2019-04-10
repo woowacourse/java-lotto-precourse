@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 import java.io.IOException;
 
 /**
@@ -99,5 +96,38 @@ public class LottoIO {
         if (bonusNumber < 1 || bonusNumber > LottoConstant.RANDOM_NUMBER_LIMIT) {
             throw new IOException();
         }
+    }
+
+    /*
+     * 로또 게임 결과 출력
+     */
+    public static void printLottoResult(List<Lotto> lottoList, WinningLotto winningLotto) {
+        List<Rank> rankList = new ArrayList<Rank>();
+        System.out.println("당첨 통계\n----------");
+        double yield;
+        for (int i = 0; i < lottoList.size(); i++) {
+            rankList.add(winningLotto.match(lottoList.get(i)));
+        }
+        printRankAll(rankList);
+        yield = Calculation.calcYield(rankList, lottoList.size());
+        System.out.println("총 수익률은 " + yield + "입니다.");
+    }
+
+    public static void printRankCount(List<Rank> rankList, int countOfMatch, boolean matchBonus) {
+        Rank currentRank = Rank.valueOf(countOfMatch, matchBonus);
+        int rankCount = Collections.frequency(rankList, currentRank);
+        if (!matchBonus) {  // Bonus 볼 불일치
+            System.out.println(currentRank.getCountOfMatch() + "개 일치(" + currentRank.getWinningMoney() + "원)- " + rankCount + "개");
+            return;
+        }
+        System.out.println(currentRank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + currentRank.getWinningMoney() + "원)- " + rankCount + "개");
+    }
+
+    public static void printRankAll(List<Rank> rankList) {
+        printRankCount(rankList, Rank.FIFTH.getCountOfMatch(), false);
+        printRankCount(rankList, Rank.FOURTH.getCountOfMatch(), false);
+        printRankCount(rankList, Rank.THIRD.getCountOfMatch(), false);
+        printRankCount(rankList, Rank.SECOND.getCountOfMatch(), true);
+        printRankCount(rankList, Rank.FIRST.getCountOfMatch(), false);
     }
 }

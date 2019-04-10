@@ -19,7 +19,7 @@ public class LottoGame {
             int price = LottoIO.receivePrice();
             int lottoCount = Calculation.calcLottoCount(price);
             LottoIO.printLottoCount(lottoCount);
-            buyLotto(lottoCount);
+            lottoList = buyLotto(lottoCount);
         } catch (IOException e) {
             System.err.println("입력이 잘못 되었습니다. 게임을 종료합니다.");
             return null;
@@ -50,6 +50,7 @@ public class LottoGame {
             LottoIO.checkInvalidInput(bonusNumber);
             Lotto lotto = new Lotto(winningLottoNumberList);
             WinningLotto winningLotto = new WinningLotto(lotto,bonusNumber);
+            LottoIO.printLottoResult(lottoList, winningLotto);
         } catch(IOException e){
             System.err.println("입력이 잘못 되었습니다. 게임을 종료합니다.");
             return;

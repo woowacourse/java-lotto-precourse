@@ -28,4 +28,11 @@ public class Lotto {
         return this.numbers;
     }
 
+    public int isContainNumber(Lotto winningLotto, int index) {
+        return (numbers.contains(winningLotto.getLotto().get(index))) ? 1 : 0;
+    }
+
+    public boolean isContainBonus(int bonusNum) {
+        return (numbers.contains(bonusNum));
+    }
 }
