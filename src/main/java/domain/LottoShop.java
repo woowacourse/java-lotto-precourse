@@ -30,4 +30,11 @@ public class LottoShop {
 		}
 		return userMoney;
 	}
+	
+	private void printAndfixErr(String errMsg) {
+		System.out.println(errMsg);
+		if (errMsg.equals(ErrMsg.InputMismatchErr.getMsg()))
+			sc.next();
+		setNumOfLotto();
+	}
 }
