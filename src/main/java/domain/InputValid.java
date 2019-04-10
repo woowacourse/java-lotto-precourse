@@ -71,4 +71,16 @@ public class InputValid {
         }
         return Result.ok();
     }
+
+    public int checkBonusNumber(String bonusNumber, Lotto winningLotto) {
+        Result result = isValidBonusNumber(bonusNumber, winningLotto);
+
+        while (!result.isValid()) {
+            result.printErrorMessage(Message.INPUT_BONUS_MESSAGE);
+            bonusNumber = sc.nextLine();
+            result = isValidBonusNumber(bonusNumber, winningLotto);
+        }
+
+        return Integer.parseInt(bonusNumber);
+    }
 }
