@@ -8,10 +8,12 @@ import java.util.List;
 public class LottoGame {
 	public static Scanner scan = new Scanner(System.in);
 	public static final int LOTTO_NUM_LENGTH = 6;
+	public static final int LOTTO_PRICE = 1000;
+	public static final int LOTTO_WINNING_MIN_COUNT = 3;
 
 	public static void main(String[] args) {
 		int price = getPrice();
-		int lottoCount = price / 1000;
+		int lottoCount = price / LOTTO_PRICE;
 		System.out.println(lottoCount + "개를 구매했습니다.");
 		List<Lotto> lottoList = makeLottoList(lottoCount);
 		List<Rank> rankList = new ArrayList<Rank>();
@@ -32,14 +34,14 @@ public class LottoGame {
 		if(isValidPrice(price)) {
 			price = scan.nextInt();
 		}
-		if(price%1000!=0) {
+		if(price%LOTTO_PRICE!=0) {
 			System.out.println("거스름돈은 "+price%1000+"원 입니다.");
 		}
 		return price;
 	}
 	
 	public static boolean isValidPrice(int price) {
-		if(price<1000) {
+		if(price<LOTTO_PRICE) {
 			System.out.println("최소 구입 금액은 1000원입니다.");
 			System.out.println("다시 입력해주십시오.");
 			return true;
@@ -180,7 +182,7 @@ public class LottoGame {
 		int count = 0;
 		int totalReward = 0;
 		Rank[] rankTypes = Rank.values();
-		for (int i = 4; i>=0; --i) {
+		for (int i = LOTTO_WINNING_MIN_COUNT+1; i>=0; --i) {
 			Rank rank = rankTypes[i];
 			count = matchCount(rankList, rank);
 			System.out.print(rank.getCountOfMatch() +"개 일치");
