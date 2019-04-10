@@ -11,6 +11,6 @@ public class InvalidLottoException extends IllegalArgumentException {
         super("로또 형식에 맞는 숫자들을 입력해 주세요.("
                 + Lotto.FIRST_NUMBER + " ~ "
                 + Lotto.LAST_NUMBER + " 숫자 중 중복되지 않는 "
-                + Lotto.SIZE_OF_LOTTO + "개의 숫자)");
+                + Lotto.SIZE + "개의 숫자)");
     }
 }

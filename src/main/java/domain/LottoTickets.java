@@ -22,7 +22,7 @@ public class LottoTickets {
 
     private List<Integer> generateLottoNumbers() {
         Set<Integer> numbers = new TreeSet<>();
-        while (numbers.size() != Lotto.SIZE_OF_LOTTO) {
+        while (numbers.size() != Lotto.SIZE) {
             numbers.add((int) (Math.random() * Lotto.LAST_NUMBER) + Lotto.FIRST_NUMBER);
         }
 

@@ -61,7 +61,7 @@ public class Validator {
     }
 
     private boolean areValidNumbersForLotto(String[] inputs) {
-        return (inputs.length == Lotto.SIZE_OF_LOTTO)
+        return (inputs.length == Lotto.SIZE)
                 && (!haveDuplicate(inputs))
                 && (isCorrectRange(inputs));
     }
