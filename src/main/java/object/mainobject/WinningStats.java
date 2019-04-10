@@ -32,6 +32,6 @@ public class WinningStats {
                 for(Rank rank : Rank.values()){
                         this.revenue += this.stats.get(rank) * rank.getWinningMoney();
                 }
-                this.yield = purchaseInfo.makeYield(this.revenue);
+                this.yield = purchaseInfo.makeYiend(this.revenue);
         }
 }

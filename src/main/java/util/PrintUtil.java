@@ -41,6 +41,10 @@ public class PrintUtil {
                 }
         }
 
+        public static void printYiend(double yield){
+               System.out.printf("총 수익률은 %.3lf입니다.",yield);
+        }
+
         private static void printPurchasedLotto(Lotto lotto) {
                 lotto.printNumbers();
         }
