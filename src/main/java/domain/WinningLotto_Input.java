@@ -22,6 +22,11 @@ public class WinningLotto_Input {
         Winning_Number = new Lotto(change_List);
     }
 
+    static void bonus_Number_Create() {
+        System.out.println(Info.BONUS_BALL_INPUT_PRINT);
+        bonus_Ball = Info.SCAN.nextInt();
+    }
+
     static void winningLotto_Object_Create() {
         winningLotto = new WinningLotto(Winning_Number, bonus_Ball);
     }
