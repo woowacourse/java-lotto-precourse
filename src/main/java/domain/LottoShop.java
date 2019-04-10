@@ -21,4 +21,13 @@ public class LottoShop {
 			printAndfixErr(ErrMsg.InputMismatchErr.getMsg());
 		}
 	}
+	
+	private int checkValid(int userMoney) {
+		if (userMoney < 0) {
+			printAndfixErr(ErrMsg.InputTooSmallErr.getMsg());
+		} else if (userMoney < LottoRule.PRICE.getNum()) {
+			printAndfixErr(ErrMsg.NotEnoughMoneyErr.getMsg());
+		}
+		return userMoney;
+	}
 }
