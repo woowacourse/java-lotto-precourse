@@ -18,5 +18,11 @@ public class LottoStatistics {
             System.out.println(getlotto.getNumbers());
         }
         List<Integer> getwinLotto = user.getWinningLotto();
+        setWinningLotto(getwinLotto);
+    }
+
+    private void setWinningLotto(List<Integer> getwinLotto) {
+        int bonusno = user.getBonusNo();
+        Lotto winlotto = new Lotto(getwinLotto);
     }
 }

@@ -123,4 +123,24 @@ public class User {
         }
         return false;
     }
+
+    public int getBonusNo() {
+        int no = 0;
+        do {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            Input = new Scanner(System.in);
+            no = Input.nextInt();
+        } while(checkBonusNo(no));
+        return no;
+    }
+
+    private boolean checkBonusNo(int no) {
+        if (no < MinNumber || no > MaxNumber) {
+            return true;
+        }
+        if (overlap.containsKey(no)) {
+            return true;
+        }
+        return false;
+    }
 }
