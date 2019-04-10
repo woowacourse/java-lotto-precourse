@@ -13,11 +13,13 @@ public class InfoString {
     public static final String INFO_TWO_RANK = "5개 일치, 보너스 볼 일치 (30000000원) -";
     public static final String INFO_ONE_RANK = "6개 일치 (2000000000원) -";
     public static final String INFO_MIN_BUY = "구입액은 최소 1000원 이상이어야 합니다.";
+    public static final String ERROR_LOTTO = "ERROR : 로또 번호는 각기 다른 숫자 6개로 이루어져 있습니다.";
+    public static final String ERROR_NUMBER = "ERROR : 로또 번호는 1~45사이의 숫자로 이루어져 있습니다.";
     public static final String INFO_NUM = "개";
     public static final String INFO_LOSS_RATE = "수익률은 ";
     public static final String INFO_IT_IS = "입니다.";
     public static final int MIN_COUNT = 1;
     public static final int NUM_OF_LOTTO = 6;
-    public static final int MAX_OF_NUM = 44;
+    public static final int MAX_OF_NUM = 45;
     public static final int MIN_MONEY = 1000;
 }

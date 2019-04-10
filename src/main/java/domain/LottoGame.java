@@ -6,6 +6,12 @@ import java.util.Scanner;
 
 import static domain.InfoString.*;
 
+/**
+ * 우아한 테크코스 3주차 MISSION
+ * LOTTO 구현하기.
+ * 2019.04.09
+ * 최유성
+ */
 public class LottoGame {
     private static int INPUT_MONEY;
     private static List<Integer> lottoList = new ArrayList<>();
@@ -38,6 +44,7 @@ public class LottoGame {
 
         if(count < MIN_COUNT) {
             System.out.println(INFO_MIN_BUY);
+            System.exit(1);
         }
 
         return count;
@@ -51,14 +58,32 @@ public class LottoGame {
         for(int i=0; i< str.length;i++) {
             lottoList.add(Integer.parseInt(str[i]));
         }
+        checkWinNumber(lottoList);
 
         winLotto = new Lotto(lottoList);
         return winLotto;
     }
 
+    private static void checkWinNumber(List<Integer> lotto) {
+        boolean check = true;
+
+        if(lottoList.size() > NUM_OF_LOTTO) {
+            System.out.println(ERROR_LOTTO);
+            System.exit(1);
+        }
+        for(int i = 0 ; i<lottoList.size() ; i++){
+            check = ((lotto.get(i) > MAX_OF_NUM) || (lotto.get(i) < MIN_COUNT)) ? false : true;
+        }
+
+        if(check == false) {
+            System.out.println(ERROR_NUMBER);
+            System.exit(1);
+        }
+
+    }
+
     private static void setBonusNum() {
         Scanner scan = new Scanner(System.in);
-
         bonus = scan.nextInt();
     }
 
@@ -80,11 +105,11 @@ public class LottoGame {
     public static void printOutPut(int INPUT_MONEY) {
         System.out.println(INFO_RESULT_LOTTO);
         System.out.println(INFO_UNDER_LINE);
-        System.out.println(INFO_FIVE_RANK + five);
-        System.out.println(INFO_FOUR_RANK + four);
-        System.out.println(INFO_THREE_RANK + three);
-        System.out.println(INFO_TWO_RANK + two);
-        System.out.println(INFO_ONE_RANK + one);
-        System.out.println(INFO_LOSS_RATE + (totalMoney / INPUT_MONEY) +"입니다.");
+        System.out.println(INFO_FIVE_RANK + five +INFO_NUM);
+        System.out.println(INFO_FOUR_RANK + four+INFO_NUM);
+        System.out.println(INFO_THREE_RANK + three+INFO_NUM);
+        System.out.println(INFO_TWO_RANK + two+INFO_NUM);
+        System.out.println(INFO_ONE_RANK + one+INFO_NUM);
+        System.out.println(INFO_LOSS_RATE + (totalMoney / INPUT_MONEY) + INFO_IT_IS);
     }
 }

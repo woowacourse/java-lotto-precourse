@@ -1,16 +1,13 @@
 package domain;
 
 
-
-import java.util.List;
-
 /**
  * 당첨 번호를 담당하는 객체
  */
 public class WinningLotto {
     private final Lotto lotto;
     private final int bonusNo;
-    private int countOfMatch = 0;
+    private int countOfMatch;
     private Boolean matchBonus = false;
 
     public WinningLotto(Lotto lotto, int bonusNo) {
