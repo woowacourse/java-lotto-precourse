@@ -19,7 +19,7 @@ public class LottoMachine {
         int lottoCount = purchasePrice / PRICE;
 
         return IntStream.rangeClosed(1, lottoCount)
-                .mapToObj(x -> purchaseLotto())
+                .mapToObj(x -> makeLotto())
                 .collect(Collectors.toList());
     }
 
@@ -29,8 +29,8 @@ public class LottoMachine {
         }
     }
 
-    private Lotto purchaseLotto() {
-        List<Integer> numbers = lottoNumberGenerator.makeLotto();
+    private Lotto makeLotto() {
+        List<Integer> numbers = lottoNumberGenerator.makeLottoNumbers();
         return new Lotto(numbers);
     }
 }

@@ -18,7 +18,7 @@ public class LottoNumberGenerator {
                 .collect(Collectors.toList());
     }
 
-    List<Integer> makeLotto() {
+    List<Integer> makeLottoNumbers() {
         shuffleNumbers();
         return numbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
