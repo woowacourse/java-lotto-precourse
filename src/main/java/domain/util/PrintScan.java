@@ -5,7 +5,7 @@ import domain.Game;
 
 import java.util.Scanner;
 import java.util.List;
-
+import java.util.stream.Collectors;
 public class PrintScan {
     private static Scanner scan = new Scanner(System.in);
 
@@ -26,7 +26,10 @@ public class PrintScan {
         System.out.format("%d장의 로또를 구입했습니다.%n",numberOfLotto);
         System.out.println("----------------------");
         for (int i = 0; i < numberOfLotto; i++){
-
+            String lottoNumberString = lottos.get(i).getLottoNum().stream()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(" "));
+            System.out.println(lottoNumberString);
         }
     }
 }
