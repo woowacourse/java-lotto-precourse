@@ -31,12 +31,11 @@ public class LottoService {
         return lottos;
     }
 
-    public static WinningLotto getWinningLotto(String winningNumber,
-                                               int bonusNumber) {
+    public static Lotto getLotto(String stringNumber) {
         try {
-            return LottoMaker.getWinningLotto(winningNumber, bonusNumber);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return LottoMaker.getLotto(stringNumber);
+        } catch (RuntimeException exception) {
+            System.out.println(exception.getMessage());
             return null;
         }
     }

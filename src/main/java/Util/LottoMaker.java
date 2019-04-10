@@ -56,46 +56,52 @@ public class LottoMaker {
         return ((int) (Math.random() * LOTTO_MAX_NUMBER) + LOTTO_MIN_NUMBER);
     }
 
-    public static WinningLotto getWinningLotto(String winningNumber, int bonusNumber) {
-        try {
-            List<Integer> numberList = stringToIntegerList(winningNumber);
-            checkUniqueNumber(numberList);
-            checkValidNumberRange(numberList);
-            return new WinningLotto(getLotto(numberList), bonusNumber);
-        } catch (Exception e) {
-            throw new IllegalArgumentException(winningNumber + "는 유효하지 않은 값입니다.");
-        }
-    }
-
-    private static List<Integer> stringToIntegerList(String stringBasedNumber)
-            throws NumberFormatException {
-        return Arrays.stream(stringBasedNumber.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-    private static void checkUniqueNumber(List<Integer> winningNumber) {
-        Set<Integer> winningNumberSet = new HashSet<>(winningNumber);
-        if (winningNumberSet.size() != LOTTO_NUMBER_MAX_LENGTH)
-            throw new IllegalArgumentException();
-    }
-
-    private static void checkValidNumberRange(List<Integer> winningNumber) {
-        for (int number : winningNumber) {
-            if ((number < LOTTO_MIN_NUMBER) || (number > LOTTO_MAX_NUMBER)) {
-                throw new IllegalArgumentException();
-            }
-        }
-    }
-
     /**
      * 정해진 번호를 가진 로또 생성
      *
-     * @param lottoNumber
+     * @param stringNumbers
      * @return
      */
-    private static Lotto getLotto(List<Integer> lottoNumber) {
-        return new Lotto(lottoNumber);
+    public static Lotto getLotto(String stringNumbers) throws RuntimeException {
+        List<Integer> lottoNumberList = stringToIntegerList(stringNumbers);
+        checkNumberCount(lottoNumberList.size());
+        checkUniqueNumber(lottoNumberList);
+        checkNumberListRange(lottoNumberList);
+        return new Lotto(lottoNumberList);
+    }
+
+    private static List<Integer> stringToIntegerList(String stringNumbers) {
+        try {
+            return Arrays.stream(stringNumbers.split(","))
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException exception) {
+            throw new NumberFormatException(stringNumbers + "에 숫자가 아닌 값이 포함되어 있습니다.");
+        }
+    }
+
+    private static void checkNumberCount(int size) {
+        if (size != LOTTO_NUMBER_MAX_LENGTH)
+            throw new IllegalArgumentException("로또 번호의 개수가 올바르지 않습니다.");
+    }
+
+    private static void checkUniqueNumber(List<Integer> lottoNumberList) {
+        Set<Integer> lottoNumberSet = new HashSet<>(lottoNumberList);
+        if (lottoNumberSet.size() != LOTTO_NUMBER_MAX_LENGTH)
+            throw new IllegalArgumentException(lottoNumberList + "에 중복된 숫자가 존재합니다.");
+    }
+
+    private static void checkNumberListRange(List<Integer> lottoNumberList)
+            throws IllegalArgumentException {
+        for (int number : lottoNumberList) {
+            checkNumberRange(number);
+        }
+    }
+
+    private static void checkNumberRange(int number) {
+        if ((number < LOTTO_MIN_NUMBER) || (number > LOTTO_MAX_NUMBER)) {
+            throw new IllegalArgumentException("로또 번호의 범위가 유효하지 않습니다.");
+        }
     }
 }

@@ -17,9 +17,8 @@ public class LottoServiceTest {
     }
 
     @Test
-    public void getWinningLottoTest() {
-        WinningLotto winningLotto =
-                LottoService.getWinningLotto("47, 24, 3, 5, 35, 1", 3);
-        assertNull(winningLotto);
+    public void getLottoTest() {
+        Lotto lotto = LottoService.getLotto("8, 3, 5, 35, 1");
+        assertNull(lotto);
     }
 }
