@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Console {
     private final static int LOTTO_NUMBER_COUNT = 6;
@@ -38,10 +35,8 @@ public class Console {
     }
 
     public static void printResult(Map<Rank,Integer> results){
-        for(Map.Entry<Rank, Integer> entry : results.entrySet()){
-            Rank rank = entry.getKey();
-            Integer count = entry.getValue();
-            Util.printConsole(rank.getCountOfMatch() + "개 일치("+rank.getWinningMoney()+"원) - " + count + "개");
+        for(Rank rank : results.keySet()){
+            Util.printConsole(rank.getCountOfMatch() + "개 일치("+rank.getWinningMoney()+"원) - " + results.get(rank) + "개");
         }
 
     }

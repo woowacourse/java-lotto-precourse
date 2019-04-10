@@ -16,5 +16,7 @@ public class Lotto {
     public List<Integer> getLottoNumbers(){
         return numbers;
     }
-
+    public Rank getResultRank(WinningLotto winningLotto){
+        return winningLotto.match(this);
+    }
 }
