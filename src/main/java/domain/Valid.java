@@ -1,5 +1,9 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Valid {
 
     public static boolean isInputHasChar(String[] input) {
@@ -49,4 +53,8 @@ public class Valid {
         return !(number >= Const.MIN_LIMIT_LOTTO_NUMBER && number <= Const.MAX_LIMIT_LOTTO_NUMBER);
     }
 
+    public static boolean isOverlapNumber(String[] winningNumbers) {
+        Set<String> setWinningNumbers = new HashSet(Arrays.asList(winningNumbers));
+        return setWinningNumbers.size() != Const.CREATE_LOTTO_NUMBER_TIME;
+    }
 }
