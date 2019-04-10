@@ -1,11 +1,10 @@
 package creator;
 
-import domain.Lotto;
-import domain.LottoNumber;
+import object.Lotto;
 import util.InputUtil;
 import util.PrintUtil;
 
-public class LastWeekWinningNumberCreator implements Creator{
+public class LastWeekWinningNumberCreator implements Creator {
         @Override
         public Lotto create() {
                 PrintUtil.printLastWeekWinningNumberInputMessage();

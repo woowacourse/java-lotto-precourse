@@ -18,13 +18,13 @@ public class InputUtil {
                 return ConvertToListWinningNumberInput(winningNumberInput);
         }
 
-        public static int inputBonusBall(){
+        public static int inputBonusBall() {
                 Scanner scan = new Scanner(System.in);
                 int bonusball = scan.nextInt();
                 return bonusball;
         }
 
-        private static List<Integer> ConvertToListWinningNumberInput(String winningNumberInput){
+        private static List<Integer> ConvertToListWinningNumberInput(String winningNumberInput) {
                 List<Integer> winningNumber = new ArrayList<Integer>();
                 String[] winningNumberString = winningNumberInput.split(",");
                 for (String OneOfWinningNumber : winningNumberString) {

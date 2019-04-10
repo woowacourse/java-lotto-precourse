@@ -1,9 +1,9 @@
 package creator;
 
-import domain.BonusBall;
-import domain.Lotto;
+import object.BonusBall;
+import object.Lotto;
 import domain.LottoNumber;
-import domain.WinningLotto;
+import object.WinningLotto;
 
 public class WinningLottoCreator implements Creator {
         @Override
