@@ -40,17 +40,25 @@ public class Lotto {
     }
 
     private static boolean checkUserInput(String userInput) {
-        if (isMoreThanOne(userInput) || isItNonNumeric(userInput) || isItNotMultipleOf1000(userInput)
-                || isSameAsOrSmallerThanZero(userInput)) {
+        if (isMoreThanOne(userInput) || isThereComma(userInput) || isItNonNumeric(userInput)
+                || isItNotMultipleOf1000(userInput) || isSameAsOrSmallerThanZero(userInput)) {
             return false;
         }
         return true;
     }
 
+    private static boolean isThereComma(String userInput) {
+        if (userInput.contains(",")) {
+            System.out.println("금액은 쉼표없이 입력해주세요");
+            return true;
+        }
+        return false;
+    }
+
     private static boolean isMoreThanOne(String userInput) {
         List<String> listToCheckMoreThanOne = makeListToCheck(userInput);
         if (listToCheckMoreThanOne.size() > 1) {
-            System.out.println("금액은 하나만 입력해 주세요");
+            System.out.println("금액은 하나만 입력해 주세요. 쉼표없이 입력해 주세요");
             return true;
         }
         return false;
