@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -14,6 +16,13 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
+        List<Integer> userNumbers = userLotto.getNumbers();
+        List<Integer> winningNumbers = lotto.getNumbers();
+
+        System.out.println(userNumbers.get(0));
+        System.out.println(winningNumbers.get(0));
+
         return null;
     }
+
 }
