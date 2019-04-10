@@ -13,4 +13,6 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+
+
 }

@@ -6,4 +6,5 @@ public class Main {
         GameController gameController = new GameController();
         gameController.startGame();
     }
+
 }
