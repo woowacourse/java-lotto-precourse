@@ -123,16 +123,4 @@
 
 - NumberException
 
- ## 함수형 프로그래밍
 
- >for (int i = FIFTH_INDEX; i < rankList.size(); i++) {    
-&nbsp;&nbsp;System.out.println(rankList.get(i).getCountOfMatch() + "개 일치 (" + rankList.get(i).getWinningMoney() + "원)- " + COUNT_RANKS.get(rankList.get(i)) + "개");  
- >       }  
-
- >rankList.stream().filter(rank -> rank != Rank.MISS).forEach(  
- >&nbsp;&nbsp;               rank -> {  
- >&nbsp;&nbsp;&nbsp;&nbsp;                   System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- " + COUNT_RANKS.get(rank) + "개");  
- >&nbsp;&nbsp;               }  
- >       );
- 
- - 함수형 프로그래밍을 부분적으로 도입했다. 아쉬운 부분은 2번의 코드를 indent의 depth가 2 이어서 이 코드에서는 쓰지 못했다.
