@@ -43,7 +43,7 @@ public class Lotto {
 		List<Integer> list = new ArrayList<Integer>();
 		System.out.println(massage);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), ",");
+		StringTokenizer st = new StringTokenizer(br.readLine(), ", []");
 		while (st.hasMoreTokens()) {
 			list.add(Integer.parseInt(st.nextToken()));
 		}
@@ -57,6 +57,7 @@ public class Lotto {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
 			inputCost();
 		}
+		System.out.println();
 	}
 
 	private static List<Integer> generateNumbers() {
@@ -70,12 +71,13 @@ public class Lotto {
 	}
 
 	private static void generateMyLottos() {
-		System.out.println("\n" + numLotto + "개를 구매하였습니다.");
+		System.out.println(numLotto + "개를 구매하였습니다.");
 		for (int i = 0; i < numLotto; i++) {
 			List<Integer> numbers = generateNumbers();
 			myLottos.add(new Lotto(numbers));
 			System.out.println(numbers.toString());
 		}
+		System.out.println();
 	}
 
 	private static int isValidIntForLotto(int num) {
@@ -83,7 +85,7 @@ public class Lotto {
 	}
 
 	private static boolean isValidLengthForLotto(List<Integer> list) {
-		Set set = new LinkedHashSet<Integer>(list);
+		Set<Integer> set = new LinkedHashSet<Integer>(list);
 		return (set.size() == NUM_BALL);
 	}
 
@@ -101,7 +103,7 @@ public class Lotto {
 	private static List<Integer> recurInputIntList() {
 		List<Integer> list = new ArrayList<Integer>();
 		try {
-			list = inputIntList("\n지난 주 당첨 번호를 입력해주세요. (,로 구분한 6자리 숫자)");
+			list = inputIntList("지난 주 당첨 번호를 입력해주세요. (,로 구분한 6자리 숫자)");
 		} catch (Exception e) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
 			recurInputIntList();
@@ -121,7 +123,7 @@ public class Lotto {
 	private static int recurInputBonusBall() {
 		int ball = 0;
 		try {
-			ball = inputInt("\n보너스 볼을 입력해 주세요.");
+			ball = inputInt("보너스 볼을 입력해 주세요.");
 		} catch (Exception e) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
 			recurInputBonusBall();
@@ -129,25 +131,69 @@ public class Lotto {
 		return ball;
 	}
 
-	private static int inputBonusBall() {
+	private static int inputBonusBall(Lotto winLotto) {
 		int ball = recurInputBonusBall();
-		if (isValidIntForLotto(ball) == 0) {
+		if (isValidIntForLotto(ball) == 0 || winLotto.contains(ball)) {
 			System.out.println("유효하지 않은 입력입니다. 다시 입력해주세요.");
-			inputBonusBall();
+			inputBonusBall(winLotto);
 		}
 		return ball;
 	}
 
 	private static void inputWinningLotto() {
 		Lotto lotto = customLotto();
-		int bonusNo = inputBonusBall();
+		int bonusNo = inputBonusBall(lotto);
 		winningLotto = new WinningLotto(lotto, bonusNo);
+		System.out.println();
+	}
+
+	private static void initResult() {
+		result.clear();
+		Rank[] values = Rank.values();
+		for (Rank r : values) {
+			result.put(r, 0);
+		}
+	}
+
+	private static void checkMyLottos() {
+		for (Lotto lotto : myLottos) {
+			Rank rank = winningLotto.match(lotto);
+			result.replace(rank, result.get(rank) + 1);
+		}
+	}
+
+	private static String rankToString(Rank rank) {
+		if (rank == Rank.SECOND)
+			return rank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney() + "원) - " + result.get(rank)
+					+ "개";
+		return rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원) - " + result.get(rank) + "개";
+	}
+
+	private static double rateReturn() {
+		int ret = 0;
+		for (Rank rank : result.keySet()) {
+			ret += rank.getWinningMoney() * result.get(rank);
+		}
+		return (double) ret / (numLotto * PRICE);
+	}
+
+	private static void printResult() {
+		System.out.println("당첨통계\n---------");
+		System.out.println(rankToString(Rank.FIFTH));
+		System.out.println(rankToString(Rank.FOURTH));
+		System.out.println(rankToString(Rank.THIRD));
+		System.out.println(rankToString(Rank.SECOND));
+		System.out.println(rankToString(Rank.FIRST));
+		System.out.println("총 수익률은 " + String.format("%.2f", rateReturn()) + "입니다.");
 	}
 
 	public static void main(String[] args) { // 객체로 불러 실행하고자 한다면 shell()로 대체한다.
 		inputCost();
 		generateMyLottos();
 		inputWinningLotto();
+		initResult();
+		checkMyLottos();
+		printResult();
 
 	}
 
