@@ -12,7 +12,9 @@ public class PurchaseAmountValidator implements Validator {
 
     @Override
     public boolean doesValid() {
-        return doesPurchaseAmountInputIsValid() && doesChangeNotExist();
+        return doesPurchaseAmountInputIsValid()
+                && doesChangeNotExist()
+                && doesPurchaseAmountCanBuyAtLeastOneLotto();
     }
 
     boolean doesPurchaseAmountInputIsValid() {
@@ -21,6 +23,10 @@ public class PurchaseAmountValidator implements Validator {
 
     boolean doesChangeNotExist() {
         return (convertStringToInt(purchaseAmount) % LottoEvent.LOTTO_PRICE) == 0;
+    }
+
+    boolean doesPurchaseAmountCanBuyAtLeastOneLotto() {
+        return (convertStringToInt(purchaseAmount) / LottoEvent.LOTTO_PRICE) > 0;
     }
 
     private int convertStringToInt(String str) {
