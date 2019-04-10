@@ -82,7 +82,25 @@ public class WinningLottoGenerator {
 	}
 
 	private int inputBonusNumberFromUser() {
-		System.out.println("보너스 볼을 입력해 주세요.");
-		return changeTypeStringToInt(scanner.next());
+		int bonusNumberFromUser;
+		do {
+			System.out.println("보너스 볼을 입력해 주세요.");
+			bonusNumberFromUser = changeTypeStringToInt(scanner.next());
+		} while (!validateBonusNumber(bonusNumberFromUser));
+		return bonusNumberFromUser;
+	}
+
+	private boolean validateBonusNumber(int bonusNumber) {
+		if (!validateBonusNumberRange(bonusNumber)) {
+			System.out.println("보너스 볼 번호가 잘못 되었습니다.");
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validateBonusNumberRange(int bonusNumber) {
+		if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER)
+			return false;
+		return true;
 	}
 }
