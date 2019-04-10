@@ -19,12 +19,14 @@ import com.woowacourse.lotto.domain.LottoFactory;
 import com.woowacourse.lotto.domain.Rank;
 import com.woowacourse.lotto.domain.WinningLotto;
 
+import static com.woowacourse.lotto.domain.LottoFactory.LOTTO_PRICE;
+
 public class LottoGame {
 	static final String PRINT_USER_LOTTO_COUNT = "%s개를 구매하셨습니다.\n";
 	static final String PRINT_RANK_RESULT =
-			"당첨 통계\n-------\n\n3개 일치 (5000원)- %d개\n4개 일치 (50000원)- %d개\n" +
+			"당첨 통계\n-------\n3개 일치 (5000원)- %d개\n4개 일치 (50000원)- %d개\n" +
 					"5개 일치 (1500000원)-%d개\n5개 일치, 보너스 볼 일치 (30000000원)-%d개\n" +
-					"6개 일치 (2000000000원)-%d개";
+					"6개 일치 (2000000000원)-%d개\n총 수익률은 %.3f입니다.";
 
 	private List<Lotto> lottoList;
 	private LottoFactory lottoFactory;
@@ -74,12 +76,18 @@ public class LottoGame {
 
 	private void printRankResult(List<Rank> rankResult) {
 		Map<Rank, Integer> rankCountMap = getRankMap();
+		int profit = 0;
 
 		for (Rank rank : rankResult) {
 			countRank(rank, rankCountMap);
+			profit += rank.getWinningMoney();
 		}
 		System.out.printf(PRINT_RANK_RESULT, rankCountMap.get(Rank.FIFTH), rankCountMap.get(Rank.FOURTH), rankCountMap.get(Rank.THIRD),
-				rankCountMap.get(Rank.SECOND), rankCountMap.get(Rank.FIRST));
+				rankCountMap.get(Rank.SECOND), rankCountMap.get(Rank.FIRST), getProfitRate(profit));
+	}
+
+	private double getProfitRate(int profit) {
+		return profit / (double) (lottoList.size() * LOTTO_PRICE);
 	}
 
 	private void countRank(Rank rank, Map<Rank, Integer> rankCountMap) {
