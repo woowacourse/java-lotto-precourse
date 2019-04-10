@@ -13,7 +13,7 @@ public class Lotto {
     }
 
     // 추가 기능 구현
-    public void lotto_Number_Print(){
+    public void lotto_Number_Print() {
         System.out.print("[");
         for (int i = Info.ZERO; i < numbers.size(); i++) {
             System.out.print(numbers.get(i));
@@ -23,8 +23,8 @@ public class Lotto {
         System.out.println();
     }
 
-    private void Comma(int i){
-        if (i < numbers.size()-1){
+    private void Comma(int i) {
+        if (i < numbers.size() - 1) {
             System.out.print(", ");
         }
     }

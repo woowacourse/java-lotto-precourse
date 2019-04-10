@@ -15,14 +15,14 @@ public class RandomNumberCreate {
         return random_Number_Create_Set;
     }
 
-    static List<Integer> set_Change_List(){
+    static List<Integer> set_Change_List() {
         lotto_Rand_Numbers = new ArrayList<>();
         lotto_Rand_Numbers.addAll(randNumber_Create());
         return lotto_Rand_Numbers;
     }
 
-    static void random_Set_Number_Reset(){
-        for (Iterator<Integer> iter = random_Number_Create_Set.iterator();iter.hasNext();){
+    static void random_Set_Number_Reset() {
+        for (Iterator<Integer> iter = random_Number_Create_Set.iterator(); iter.hasNext(); ) {
             iter.next();
             iter.remove();
         }
