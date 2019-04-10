@@ -6,6 +6,8 @@ import java.util.List;
 public class LottoGame {
 	
 	LottoGenerator lottoGenerator = new LottoGenerator();
+	WinningLottoGenerator winLottoGenerator = new WinningLottoGenerator();
+	
 
     private List<Lotto> makeLotto() {
     	ArrayList<Lotto> lottos = lottoGenerator.makeLotto();
@@ -15,6 +17,16 @@ public class LottoGame {
     	}
     	
     	return lottos;
+    }
+    
+    private WinningLotto makeWinningLotto() {
+        List<Integer> winningNumber = winLottoGenerator.makeWinningNumber();
+
+    	Lotto winLotto = new Lotto(winningNumber);
+    	
+    	WinningLotto winLottoWithBonus = new WinningLotto(winLotto, winLottoGenerator.makeBonusNumber(winningNumber));
+    	
+    	return winLottoWithBonus;
     }
 	
 }
