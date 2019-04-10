@@ -1,21 +1,20 @@
 import domain.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         UserInterface ui = new UserInterface();
-        List<Lotto> lottos = new ArrayList<>();
+        Buyer buyer;
         List<Integer> lottoNumbers = new ArrayList<>();
         List<Rank> ranks = new ArrayList<>();
-        Lotto lotto;
         WinningLotto winnerLotto;
         String[] winnerNumbers = new String[6];
         String purchaseAmountStr = "";
         String bonusBallStr = "";
 
-        int lottoCnt = 0;
         boolean flag = false;
 
         while (!flag) {
@@ -23,13 +22,9 @@ public class Main {
             flag = ui.validatePurchaseAmount(purchaseAmountStr);
         }
 
-        lottoCnt = (int) Integer.parseInt(purchaseAmountStr) / 1000;
-        for (int i = 0; i < lottoCnt; i++) {
-            lotto = new Lotto(Lotto.generateLottoNumber());
-            lottos.add(lotto);
-        }
+        buyer = new Buyer(Integer.parseInt(purchaseAmountStr));
 
-        ui.printBuyLotto(lottos);
+        ui.printBuyLotto(buyer.getLottos());
 
         flag = false;
         while (!flag) {
@@ -49,8 +44,8 @@ public class Main {
 
         winnerLotto = new WinningLotto(new Lotto(lottoNumbers), Integer.parseInt(bonusBallStr));
 
-        for (Lotto l : lottos) {
-            ranks.add(winnerLotto.match(l));
+        for (Lotto buyerLotto : buyer.getLottos()) {
+            ranks.add(winnerLotto.match(buyerLotto));
         }
 
         ResultInformation resultInformation = new ResultInformation(ranks);
