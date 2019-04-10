@@ -7,7 +7,10 @@ public class Message {
     public static final String ONE_MORE_INPUT = "하나만 입력해야 합니다.";
     public static final String MONEY_HAS_REMAINDER = "금액은 100,10,1원 자리의 값이 0이외에는 존재하지 않습니다.";
     public static final String INPUT_WIN_MESSAGE ="지난주 당첨번호를 입력해 주세요:";
-
+    public static final String SPLIT_EXCEPTION = "당첨번호는 쉼표로 구분해주세요.";
+    public static final String IMPROPER_PRIZE = "당첨번호는 6개 여야 합니다.";
+    public static final String OUT_OF_SCOPE_NUMBER = "당첨번호는 1~45사이의 숫자만 가능합니다.";
+    public static final String OVERLAP_NUMBERS = "당첨번호는 서로다른 수여야 합니다.";
     public static final String SPOT=",";
     public static final String SPACE =" ";
     public static final String TAB="\t";
