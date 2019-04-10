@@ -15,7 +15,7 @@ import java.util.List;
 import com.woowacourse.lotto.util.RandomNumber;
 
 public class LottoFactory {
-	static final int LOTTO_PRICE = 1000;
+	public static final int LOTTO_PRICE = 1000;
 
 	public List<Lotto> createLottoList(int amount) {
 		int lottoCount = amount / LOTTO_PRICE;
