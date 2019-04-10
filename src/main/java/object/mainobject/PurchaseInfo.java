@@ -1,7 +1,8 @@
-package object;
+package object.mainobject;
 
 import creator.Creator;
 import creator.PurchsedLottoNumberCreator;
+import object.Lotto;
 import util.InputUtil;
 import util.PrintUtil;
 

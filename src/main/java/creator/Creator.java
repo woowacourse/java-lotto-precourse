@@ -1,6 +1,6 @@
 package creator;
 
-import domain.LottoNumber;
+import object.LottoNumber;
 
 public interface Creator extends LottoNumber {
         public LottoNumber create();

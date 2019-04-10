@@ -1,7 +1,5 @@
 package object;
 
-import domain.LottoNumber;
-
 import java.util.List;
 
 /**

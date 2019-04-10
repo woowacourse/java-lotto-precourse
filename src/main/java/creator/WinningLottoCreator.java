@@ -2,12 +2,11 @@ package creator;
 
 import object.BonusBall;
 import object.Lotto;
-import domain.LottoNumber;
 import object.WinningLotto;
 
 public class WinningLottoCreator implements Creator {
         @Override
-        public LottoNumber create() {
+        public WinningLotto create() {
                 LastWeekWinningNumberCreator lastWeekWinningNumberCreator = new LastWeekWinningNumberCreator();
                 BonusBallCreator bonusBallCreator = new BonusBallCreator();
                 Lotto lotto = lastWeekWinningNumberCreator.create();

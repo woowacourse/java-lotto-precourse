@@ -1,7 +1,5 @@
 package object;
 
-import domain.LottoNumber;
-
 public class BonusBall implements LottoNumber {
         public final int number;
 

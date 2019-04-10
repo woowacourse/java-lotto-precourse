@@ -1,4 +1,4 @@
-package domain;
+package object;
 
 public interface LottoNumber {
         static final int maxLottoNumber = 45;
