@@ -1,3 +1,13 @@
+/*
+ * Class : LottoMachine	(로또를 구매하여 자동으로 로또 번호를 출력하는 클래스)
+ * 
+ * Version : 1.0.0
+ * 
+ * 2019-4-10
+ * 
+ * Jeongho Park
+ */
+
 package domain;
 
 import java.util.ArrayList;

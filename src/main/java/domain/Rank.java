@@ -1,8 +1,15 @@
+/*
+ * Class : Rank	(로또 등수를 의미하는 enum)
+ * 
+ * Version : 1.0.0
+ * 
+ * 2019-4-10
+ * 
+ * Jeongho Park
+ */
+
 package domain;
 
-/**
- * 로또 등수를 의미하는 enum
- */
 public enum Rank {
 	FIRST(6, 2_000_000_000), // 1등
 	SECOND(5, 30_000_000), // 2등

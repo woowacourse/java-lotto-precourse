@@ -1,3 +1,13 @@
+/*
+ * Class : CompareNums	(당첨 번호를 입력받아 비교하고 통계를 출력하는 클래스)
+ * 
+ * Version : 1.0.0
+ * 
+ * 2019-4-10
+ * 
+ * Jeongho Park
+ */
+
 package domain;
 
 import java.util.ArrayList;

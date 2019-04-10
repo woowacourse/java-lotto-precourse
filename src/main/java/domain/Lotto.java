@@ -1,10 +1,17 @@
+/*
+ * Class : Lotto	(로또 한장을 의미하는 객체)
+ * 
+ * Version : 1.0.0
+ * 
+ * 2019-4-10
+ * 
+ * Jeongho Park
+ */
+
 package domain;
 
 import java.util.List;
 
-/**
- * 로또 한장을 의미하는 객체
- */
 public class Lotto {
 	private final List<Integer> numbers;
 

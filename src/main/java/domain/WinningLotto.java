@@ -1,10 +1,16 @@
+/*
+ * Class : WinningLotto	(당첨 번호를 담당하는 클래스)
+ * 
+ * Version : 1.0.0
+ * 
+ * 2019-4-10
+ * 
+ * Jeongho Park
+ */
 package domain;
 
 import java.util.List;
 
-/**
- * 당첨 번호를 담당하는 객체
- */
 public class WinningLotto {
 	private final Lotto lotto;
 	private final int bonusNo;
