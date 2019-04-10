@@ -14,7 +14,9 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
     private void addNumber(int number) {
         numbers.add(number);
     }
@@ -33,5 +35,19 @@ public class Lotto {
     }
     public boolean isOverlapToBonusNumber(String BonusNumber) {
         return numbers.contains(Integer.parseInt(BonusNumber));
+    }
+    public int matchNumber(Lotto winningLotto) {
+        int countOfMatch = 0;
+
+        for (int number : numbers) {
+            countOfMatch += isContainWinningLotto(winningLotto, number);
+        }
+        return countOfMatch;
+    }
+    public int isContainWinningLotto(Lotto winningLotto, int userNumber) {
+        if (winningLotto.getNumbers().contains(userNumber)) {
+            return 1;
+        }
+        return 0;
     }
 }
