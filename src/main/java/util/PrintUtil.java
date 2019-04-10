@@ -1,8 +1,10 @@
 package util;
 
+import domain.Rank;
 import object.Lotto;
 
 import java.util.List;
+import java.util.Map;
 
 public class PrintUtil {
         public static void printPurchaseAmountInputMessage() {
@@ -30,6 +32,13 @@ public class PrintUtil {
         public static void printWinStatsMessage() {
                 System.out.println("\n당첨통계");
                 System.out.println("---------");
+        }
+
+        public static void printWinningStats(Map<Rank, Integer> stats) {
+                for (Rank rank : Rank.values()) {
+                        System.out.println(rank.getCountOfMatch() + "개 일치 ("
+                                + rank.getWinningMoney() + "원)- " + stats.get(rank));
+                }
         }
 
         private static void printPurchasedLotto(Lotto lotto) {
