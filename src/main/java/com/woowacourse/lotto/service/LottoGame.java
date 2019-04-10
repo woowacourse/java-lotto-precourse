@@ -16,6 +16,8 @@ import com.woowacourse.lotto.domain.LottoFactory;
 import com.woowacourse.lotto.domain.WinningLotto;
 
 public class LottoGame {
+	static final String PRINT_USER_LOTTO_COUNT = "%s개를 구매하셨습니다.\n";
+
 	private List<Lotto> lottoList;
 	private LottoFactory lottoFactory;
 	private UserInput userInput;
@@ -30,6 +32,13 @@ public class LottoGame {
 		this.lottoList = lottoFactory.createLottoList(lottoAmount);
 	}
 
+	private void printLottoList() {
+		System.out.printf(PRINT_USER_LOTTO_COUNT, lottoList.size());
+		for (Lotto lotto : lottoList) {
+			System.out.println(lotto);
+		}
+	}
+
 	private WinningLotto getWinningLotto() {
 		Lotto lotto = new Lotto(userInput.getWinningNumber());
 		WinningLotto winningLotto = new WinningLotto(lotto, userInput.getBonusBall(lotto));
@@ -38,12 +47,7 @@ public class LottoGame {
 
 	public void start() {
 		getLottoList();
-
-		/* 테스트를 위한 출력 */
-		for (Lotto lotto : lottoList) {
-			System.out.println(lotto);
-		}
-
+		printLottoList();
 		getWinningLotto();
 	}
 }
