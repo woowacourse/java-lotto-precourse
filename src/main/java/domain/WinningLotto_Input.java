@@ -5,7 +5,7 @@ import java.util.*;
 public class WinningLotto_Input {
 
     private static String[] number_Input;
-    static List<Integer> change_List;
+    static List<Integer> change_List = new ArrayList<>();
     static Lotto Winning_Number;
     static WinningLotto winningLotto;
     private static int bonus_Ball;
@@ -18,7 +18,7 @@ public class WinningLotto_Input {
         }
     }
 
-    static void ListInput_Lotto_Create() {
+    static void last_Week_Winning_Lotto_Create() {
         Winning_Number = new Lotto(change_List);
     }
 

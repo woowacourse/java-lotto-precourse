@@ -12,9 +12,10 @@ public class LottoBuy {
     static int lotto_Buy_Input() {
         try {
             lotto_money = Info.SCAN.nextInt();
+            Info.SCAN.nextLine();
         } catch (Exception e) {
             System.out.println(Info.MONEY_TYPE_ERROR_PRINT);
-            System.exit(0);
+            System.exit(Info.ZERO);
         }
         lotto_Money_ValuesCheck();
         return lotto_money;
@@ -35,7 +36,7 @@ public class LottoBuy {
     }
 
     private static void lotto_Money_ValuesCheck() {
-        if ((lotto_money < Info.DIVISION) || lotto_money % Info.DIVISION != 0) {
+        if ((lotto_money < Info.DIVISION) || (lotto_money % Info.DIVISION != 0)) {
             System.out.println(Info.MONEY_VALUE_ERROR_PRINT);
             lotto_Buy_Input();
         }
