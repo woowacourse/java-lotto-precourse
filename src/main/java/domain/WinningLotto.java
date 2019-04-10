@@ -11,6 +11,14 @@ public class WinningLotto {
         this.lotto = lotto;
         this.bonusNo = bonusNo;
     }
+    
+    public String toString() {
+    	String result = "";
+    	
+    	result = this.lotto.toString() + " bonus : " + bonusNo;
+    	
+    	return result;
+    }
 
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
