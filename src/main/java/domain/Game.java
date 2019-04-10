@@ -16,6 +16,7 @@ public class Game {
         int insertedMoney = Input.insertMoney();
         buyingLotto(insertedMoney);
         winningLotto = WinningLotto.createWinningLotto();
+        RankResult rankResult = new RankResult(userLottoList, winningLotto);
     }
 
     private void buyingLotto(int money) {
@@ -32,5 +33,4 @@ public class Game {
         if (rest > 0) PrintScan.printRestMoney(rest);
         return quotient;
     }
-
 }

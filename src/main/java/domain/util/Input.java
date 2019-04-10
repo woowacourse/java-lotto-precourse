@@ -4,11 +4,13 @@ import domain.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 import domain.Game;
 import org.omg.CORBA.INTERNAL;
 
 import java.util.InputMismatchException;
+import java.util.stream.Collectors;
 
 public class Input {
 
@@ -30,6 +32,7 @@ public class Input {
             String winningLottoNumsString = PrintScan.requestWinningNum();
             List<Integer> winningLottoNum = winningNumsToInt(winningLottoNumsString);
             CheckException.checkWinNumberLength(winningLottoNum.size(), Constant.WIN_LOTTO_NUM_LENGTH);
+            Collections.sort(winningLottoNum);
             return winningLottoNum;
         } catch (InputMismatchException | IllegalArgumentException e) {
             PrintScan.printInvalidNumber();

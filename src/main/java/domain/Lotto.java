@@ -34,4 +34,18 @@ public class Lotto {
         int bonusNum = Input.inputBonusNum(lotto.numbers);
         return bonusNum;
     }
+
+    public int countMatchNumber(Lotto otherLotto){
+        int count = 0 ;
+        for (int number : otherLotto.numbers){
+            count += this.numbers.contains(number) ? 1 : 0;
+        }
+        return count;
+    }
+    public boolean hasBonusNumber(int bonusNum){
+            if(this.numbers.contains(bonusNum)){
+                return true;
+            }
+            return false;
+    }
 }

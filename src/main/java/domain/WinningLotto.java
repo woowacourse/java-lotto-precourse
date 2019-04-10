@@ -17,16 +17,15 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
-
     public static WinningLotto createWinningLotto() {
-        Lotto fiveNumberlLotto = new Lotto(Input.inputWiningNum());
-        int bonumsNum = fiveNumberlLotto.getBonusNumber(fiveNumberlLotto);
-        return new WinningLotto(fiveNumberlLotto, bonumsNum);
+        Lotto lotto = new Lotto(Input.inputWiningNum());
+        int bonumsNum = lotto.getBonusNumber(lotto);
+        return new WinningLotto(lotto, bonumsNum);
     }
 
-
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countMatch = userLotto.countMatchNumber(this.lotto);
+        boolean bonusMatch = userLotto.hasBonusNumber(this.bonusNo);
+        return Rank.valueOf(countMatch,bonusMatch);
     }
 }
