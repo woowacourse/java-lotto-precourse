@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,17 +14,22 @@ public class UserInterface extends CheckValidity {
     private static String STR5 = ", 보너스 볼 일치";
 
 
-    public String inputPurchaseAmount() {
-        System.out.println("구입금액을 입력하세요.");
-        return sc.nextLine();
-    }
+    public int inputPurchaseAmount() {
+        String purchaseAmountStr = "";
+        boolean flag = false;
 
-    public boolean validatePurchaseAmount(String purchaseAmountStr) {
-        if (!checkIntegerFormat(purchaseAmountStr)) {
-            return false;
+        while (!flag) {
+            System.out.println("구입금액을 입력하세요.");
+            purchaseAmountStr = sc.nextLine();
+            flag = validatePurchaseAmount(purchaseAmountStr);
         }
 
-        return checkMinimumPurchaseAmount(Integer.parseInt(purchaseAmountStr));
+        return Integer.parseInt(purchaseAmountStr);
+    }
+
+    private boolean validatePurchaseAmount(String purchaseAmountStr) {
+        return (checkIntegerFormat(purchaseAmountStr)
+                && checkMinimumPurchaseAmount(Integer.parseInt(purchaseAmountStr)));
     }
 
     public void printBuyLotto(List<Lotto> lottos) {
@@ -34,12 +38,20 @@ public class UserInterface extends CheckValidity {
         }
     }
 
-    public String[] inputWinnerNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return sc.nextLine().split(",");
+    public int[] inputWinnerNumbers() {
+        String[] winnerNumbers = new String[0];
+        boolean flag = false;
+
+        while (!flag) {
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            winnerNumbers = sc.nextLine().split(",");
+            flag = validateWinnerNumbers(winnerNumbers);
+        }
+
+        return Arrays.stream(winnerNumbers).mapToInt(Integer::parseInt).toArray();
     }
 
-    public boolean validateWinnerNumbers(String[] winnerNumbers) {
+    private boolean validateWinnerNumbers(String[] winnerNumbers) {
         if (!checkLottoNumberLength(winnerNumbers) || !checkDoubleNumbers(winnerNumbers)) {
             return false;
         }
@@ -54,29 +66,27 @@ public class UserInterface extends CheckValidity {
     }
 
     private boolean checkWinnerNumber(String winnerNumberStr) {
-        if (!checkIntegerFormat(winnerNumberStr)) {
-            return false;
-        }
-
-        return checkLottoNumberScope(Integer.parseInt(winnerNumberStr));
+        return (checkIntegerFormat(winnerNumberStr)
+                && checkLottoNumberScope(Integer.parseInt(winnerNumberStr)));
     }
 
-    public String inputBonusBall() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return sc.next();
+    public int inputBonusBall(int[] winnerNumbers) {
+        String bonusBallStr = "";
+        boolean flag = false;
+
+        while (!flag) {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            bonusBallStr = sc.nextLine();
+            flag = validateBonusBall(winnerNumbers, bonusBallStr);
+        }
+
+        return Integer.parseInt(bonusBallStr);
     }
 
-    public boolean validateBonusBall(List<Integer> winnerNumbers, String bonusBallStr) {
-        if (!(checkIntegerFormat(bonusBallStr))) {
-            return false;
-        }
-
-        int bonusBall = Integer.parseInt(bonusBallStr);
-        if (checkDoubleBonus(winnerNumbers, bonusBall)) {
-            return false;
-        }
-
-        return checkLottoNumberScope(bonusBall);
+    private boolean validateBonusBall(int[] winnerNumbers, String bonusBallStr) {
+        return (checkIntegerFormat(bonusBallStr)
+                && !checkDoubleBonus(winnerNumbers, Integer.parseInt(bonusBallStr))
+                && checkLottoNumberScope(Integer.parseInt(bonusBallStr)));
     }
 
     public void printWinStats(ResultInformation resultInformation) {

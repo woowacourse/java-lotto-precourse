@@ -2,7 +2,6 @@ package domain;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 class CheckValidity {
@@ -25,8 +24,8 @@ class CheckValidity {
         return !((number < MIN_NUMBER) || (MAX_NUMBER < number));
     }
 
-    boolean checkDoubleBonus(List<Integer> numArr, int number) {
-        return numArr.contains(number);
+    boolean checkDoubleBonus(int[] numArr, int number) {
+        return Arrays.asList(numArr).contains(number);
     }
 
     boolean checkMinimumPurchaseAmount(int purchaseAmount) {
