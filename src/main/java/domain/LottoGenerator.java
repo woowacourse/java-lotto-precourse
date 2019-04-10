@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
 /*
  * 구입 금액을 입력 받아 로또를 생성하는 객체
  */
@@ -14,6 +15,10 @@ public class LottoGenerator {
 	static final int LOTTO_NUMBER_COUNT = 6;
 	Scanner scanner = new Scanner(System.in);
 	Random random = new Random();
+
+	public int get_LOTTO_NUMBER_COUNT() {
+		return LOTTO_NUMBER_COUNT;
+	}
 
 	private int inputLottoPriceFromUser() {
 		int lottoPrice;
@@ -34,7 +39,7 @@ public class LottoGenerator {
 		}
 		return lottoPrice;
 	}
-	
+
 	private boolean validateLottoPrice(int lottoPrice) {
 		if (lottoPrice < EACH_LOTTO_PRICE || lottoPrice % EACH_LOTTO_PRICE != 0) {
 			System.out.println("구입금액이 잘못 되었습니다.");
@@ -42,7 +47,7 @@ public class LottoGenerator {
 		}
 		return true;
 	}
-	
+
 	private List<Integer> makeLottoNumbers() {
 		List<Integer> lottoNumbers = new ArrayList<Integer>();
 		while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
@@ -53,7 +58,7 @@ public class LottoGenerator {
 		}
 		return lottoNumbers;
 	}
-	
+
 	private List<Lotto> generateLotto(int lottoCount) {
 		List<Lotto> userLottos = new ArrayList<Lotto>();
 		while (userLottos.size() < lottoCount) {
@@ -62,11 +67,11 @@ public class LottoGenerator {
 		}
 		return userLottos;
 	}
-	
+
 	private void printLottos(int lottoCount, List<Lotto> userLottos) {
 		System.out.println();
-		System.out.println(lottoCount+"개를 구매했습니다.");
-		for(int i = 0; i < lottoCount; i++) {
+		System.out.println(lottoCount + "개를 구매했습니다.");
+		for (int i = 0; i < lottoCount; i++) {
 			System.out.println(userLottos.get(i).getNumbers());
 		}
 	}

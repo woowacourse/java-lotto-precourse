@@ -8,11 +8,16 @@ import java.util.Scanner;
  * 지난 주 당첨 번호와 보너스 볼을 입력받아 당첨 로또를 생성하는 객체
  */
 public class WinningLottoGenerator {
+	static final int LOTTO_NUMBER_COUNT = new LottoGenerator().get_LOTTO_NUMBER_COUNT();
 	Scanner scanner = new Scanner(System.in);
 
 	private List<Integer> inputWinningNumbersFromUser() {
-		System.out.println("지난 주 당첨 번호를 입력해주세요.");
-		return getSplitedWinningNumbers(scanner.next());
+		List<Integer> winningNumbers;
+		do {
+			System.out.println("지난 주 당첨 번호를 입력해주세요.");
+			winningNumbers = getSplitedWinningNumbers(scanner.next());
+		} while (!validateWinningNumbers(winningNumbers));
+		return winningNumbers;
 	}
 
 	private List<Integer> getSplitedWinningNumbers(String winningNumbers) {
@@ -34,5 +39,20 @@ public class WinningLottoGenerator {
 			return -1;
 		}
 		return winningNumber;
+	}
+
+	private boolean validateWinningNumbers(List<Integer> winningNumbers) {
+		if (!validateWinningNumbersCount(winningNumbers)) {
+			System.out.println("당첨 번호가 잘못되었습니다.");
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validateWinningNumbersCount(List<Integer> winningNumbers) {
+		if (winningNumbers.size() != LOTTO_NUMBER_COUNT) {
+			return false;
+		}
+		return true;
 	}
 }
