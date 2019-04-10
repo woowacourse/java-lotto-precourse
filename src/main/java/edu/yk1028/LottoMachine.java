@@ -34,14 +34,14 @@ public class LottoMachine {
 			System.out.println(REQUEST_MONEY_OVER_MINIMUM);
 			throw new Exception();
 		}
-		return generateLotto(maximumNumberOfLotto(money));
+		return generateLottos(maximumNumberOfLotto(money));
 	}
 
 	private int maximumNumberOfLotto(int money) {
 		return money / LOTTO_PRICE;
 	}
 
-	private List<Lotto> generateLotto(int count) {
+	private List<Lotto> generateLottos(int count) {
 		List<Lotto> lottoList = new ArrayList<Lotto>();
 
 		for (int i = 0; i < count; i++) {
