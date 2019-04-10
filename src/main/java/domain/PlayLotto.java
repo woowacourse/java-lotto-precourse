@@ -9,6 +9,27 @@ public class PlayLotto {
     private WinningLotto masterLotto;
     private int money;
 
+    private void getWinningNo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("지난 주 담청 번호를 입력해 주세요.");
+        String winningNo = sc.nextLine();
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNo = sc.nextInt();
+        getMasterLottoNo(winningNo, bonusNo);
+    }
+
+    private void getMasterLottoNo(String winningNo, int bonusNo) {
+        tempNumbers = new ArrayList<Integer>();
+        String[] arr;
+        arr = winningNo.split(",");
+        for (String num : arr) {
+            int tempInt = Integer.parseInt(num);
+            tempNumbers.add(tempInt);
+        }
+        Lotto masterTemp = new Lotto(tempNumbers);
+        masterLotto = new WinningLotto(masterTemp, bonusNo);
+    }
+
     private void getUserLottos() {
         Scanner sc = new Scanner(System.in);
         System.out.println("구입 금액을 입력해 주세요");
