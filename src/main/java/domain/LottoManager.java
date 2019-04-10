@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class LottoManager {
@@ -11,39 +12,49 @@ public class LottoManager {
 
     private UserLotto userLotto;
     private LottoMatch lottoMatch;
+    private HashMap<Integer, Integer> map = new HashMap<>();
 
-    public LottoManager(){
+
+    public LottoManager() {
         userLotto = new UserLotto();
         lottoMatch = new LottoMatch();
     }
 
-    public void startLotto(){
+    public void startLotto() {
         userLotto.buyUserLotto();
         lottoMatch.startLottoMatch();
+        map.put(2000000000, 0);
+        map.put(30000000, 0);
+        map.put(1500000, 0);
+        map.put(50000, 0);
+        map.put(5000, 0);
+        map.put(0,0);
         makeRankList();
     }
 
-    public void makeRankList(){
+    public void makeRankList() {
         List<Lotto> lottoList = userLotto.getLotto();
         WinningLotto winningLotto = new WinningLotto(lottoMatch.getWinLottoNum(), lottoMatch.getBonusNum());
-        int[] winLottoCountArray = new int[8];
+        int tmp;
 
         for (Lotto lotto : lottoList) {
-            winLottoCountArray[winningLotto.match(lotto).getCountOfMatch()]++;
+
+            tmp = map.get(winningLotto.match(lotto).getWinningMoney());
+            map.put(winningLotto.match(lotto).getWinningMoney(), ++tmp);
         }
         System.out.println();
-        printResult(winLottoCountArray);
+        printResult(map);
     }
 
-    private void printResult(int[] rankingArray){
+    private void printResult(HashMap<Integer,Integer> map) {
 
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(RANK_THIRD +"- "+rankingArray[3]+"개");
-        System.out.println(RANK_FOURTH +"- "+ rankingArray[4]+"개");
-        System.out.println(RANK_FIFTH +"- "+ rankingArray[5]+"개");
-        System.out.println(RANK_FIFTHBONUS +"- "+ rankingArray[6]+"개");
-        System.out.println(RANK_SIX +"- "+ rankingArray[6]+"개");
+        System.out.println(RANK_THIRD + "- " + map.get(5000) + "개");
+        System.out.println(RANK_FOURTH + "- " +  map.get(50000) + "개");
+        System.out.println(RANK_FIFTH + "- " + map.get(1500000) + "개");
+        System.out.println(RANK_FIFTHBONUS + "- " + map.get(30000000) + "개");
+        System.out.println(RANK_SIX + "- " + map.get(2000000000) + "개");
 
     }
 
