@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class LottoGame {
@@ -9,11 +12,45 @@ public class LottoGame {
     private static final String SPLIT_STANDARD = ",";
     private static final int MONEY_UNIT = 1000;
     private static final int ZERO = 0;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int NUMBER_OF_LOTTO = 6;
 
     public void run() {
         System.out.println(INPUT_MONEY_MESSAGE);
         int lottoGameMoney = inputLottoMoney();
+        int lottoRound = calculateLottoRound(lottoGameMoney);
 
+        for (int num : getLottoNumberList()) {
+            System.out.println(num);
+        }
+    }
+
+    private List<Integer> getLottoNumberList() {
+        int randomNumber;
+        List<Integer> lottoNumberList = new ArrayList<>();
+
+        while (lottoNumberList.size() != NUMBER_OF_LOTTO) {
+            randomNumber = getRandomNumber();
+            addLottoNumber(lottoNumberList, randomNumber);
+        }
+
+        return lottoNumberList;
+    }
+
+    private void addLottoNumber(List<Integer> numberList, int randomNumber) {
+        if (!numberList.contains(randomNumber)) {
+            numberList.add(randomNumber);
+        }
+    }
+
+    private int calculateLottoRound(int money) {
+        return money / MONEY_UNIT;
+    }
+
+    private int getRandomNumber() {
+        Random random = new Random();
+        return random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER;
     }
 
     private int inputLottoMoney() {
