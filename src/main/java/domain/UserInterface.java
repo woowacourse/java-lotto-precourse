@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,13 +80,13 @@ public class UserInterface extends CheckValidity {
     }
 
     public void printWinStats(ResultInformation resultInformation) {
+        Rank[] rankArr = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
+
         System.out.println("당첨통계\n-------------");
 
-        System.out.println(printRankState(Rank.FIFTH, resultInformation));
-        System.out.println(printRankState(Rank.FOURTH, resultInformation));
-        System.out.println(printRankState(Rank.THIRD, resultInformation));
-        System.out.println(printRankState(Rank.SECOND, resultInformation));
-        System.out.println(printRankState(Rank.FIRST, resultInformation));
+        for (Rank rank : rankArr) {
+            System.out.println(printRankState(rank, resultInformation));
+        }
         System.out.println("총 수익률은 " + resultInformation.getProfitRate() + "입니다.");
     }
 
