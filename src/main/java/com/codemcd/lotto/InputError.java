@@ -53,7 +53,7 @@ public class InputError {
         return "";
     }
 
-    private static boolean isRightNumberOfComma(String input) {
+    public static boolean isRightNumberOfComma(String input) {
         int countOfComma = 0;
         for (int i = 0; i < input.length(); ++i) {
             countOfComma += (input.charAt(i) == ',') ? 1 : 0;
@@ -61,7 +61,7 @@ public class InputError {
         return (countOfComma == COUNT_OF_COMMA);
     }
 
-    private static boolean isRightNumber(String input) {
+    public static boolean isRightNumber(String input) {
         String[] number = input.split(",");
         int countOfRightNumber = 0;
         for (int i = 0; i < number.length; ++i) {
@@ -75,12 +75,12 @@ public class InputError {
         return (countOfRightNumber == COUNT_OF_NUMBER);
     }
 
-    private static boolean isRightNumberOfRange(String input) {
+    public static boolean isRightNumberOfRange(String input) {
         int number = Integer.parseInt(input);
         return ((number >= 1) && (number <= 45));
     }
 
-    private static boolean isOverlapNumber(String input) {
+    public static boolean isOverlapNumber(String input) {
         String[] number = input.split(",");
         int countOfNotOverlapNumber = 0;
         for (int i = 0; i < number.length; ++i) {
@@ -93,7 +93,7 @@ public class InputError {
         return (countOfNotOverlapNumber == COUNT_OF_NUMBER);
     }
 
-    private static boolean checkOverlapNumberOne(String[] numbers, String checkNumber) {
+    public static boolean checkOverlapNumberOne(String[] numbers, String checkNumber) {
         int countOfOverlap = 0;
         for (int i = 0; i < numbers.length; ++i) {
             countOfOverlap += (numbers[i].equals(checkNumber)) ? 1 : 0;
@@ -101,7 +101,7 @@ public class InputError {
         return (countOfOverlap == ONE);
     }
 
-    private static boolean checkOverlapNumberZero(String checkNumber) {
+    public static boolean checkOverlapNumberZero(String checkNumber) {
         int countOfOverlap = 0;
         for (int i = 0; i < winningLottoNumber.length; ++i) {
             countOfOverlap += (winningLottoNumber[i].equals(checkNumber)) ? 1 : 0;
@@ -109,13 +109,13 @@ public class InputError {
         return (countOfOverlap == ZERO);
     }
 
-    private static boolean isMinimumPrice(String input) {
+    public static boolean isMinimumPrice(String input) {
         if (Integer.parseInt(input) < MIN_LOTTO_PRICE)
             return false;
         return true;
     }
 
-    private static boolean isNaturalNumber(String input) {
+    public static boolean isNaturalNumber(String input) {
         // 소수점이 있는 경우
         if (input.contains("."))
             return false;
@@ -128,7 +128,7 @@ public class InputError {
         return true;
     }
 
-    private static boolean isNumeric(String input) {
+    public static boolean isNumeric(String input) {
         try {
             Double.parseDouble(input);
             return true;
