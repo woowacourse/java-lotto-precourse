@@ -58,6 +58,19 @@ public class LottoGame {
   		
   		return result;
       }
+    
+	private HashMap<Integer, Integer> setRankInResultMap(List<Rank> rank, HashMap<Integer, Integer> result) {
+		int key = 0;
+		int value = 0;
+		
+		for (int i = 0; i < rank.size(); i++) {
+			key = rank.get(i).getWinningMoney();
+			value = result.get(key) + 1;
+			result.put(key, value);
+		}
+		
+		return result;
+	}
 
 	
 }
