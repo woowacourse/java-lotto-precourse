@@ -10,12 +10,11 @@ import java.util.stream.Collectors;
  */
 public class Validator {
     private final int ZERO = 0;
-    public boolean isNemericInt(String str) {
+    public boolean isNumericInt(String str) {
         try {
             Integer.parseInt(str);
             return true;
         } catch (NumberFormatException e) {
-            System.out.println("입력이 올바르지 않습니다. 정수인지, 수가 너무 크지는 않은지 확인해주세요.");
             return false;
         }
     }
@@ -47,7 +46,8 @@ public class Validator {
     public boolean isValidPurchase(String str) {
         int purchaseAmount;
 
-        if (!isNemericInt(str)) {
+        if (!isNumericInt(str)) {
+            System.out.println("입력이 올바르지 않습니다. 정수인지, 수가 너무 크지는 않은지 확인해주세요.");
             return false;
         }
 
@@ -58,14 +58,14 @@ public class Validator {
 
     public boolean isNumericIntList(List<String> userInput) {
         List<String> numerics = userInput.stream()
-                .filter(str -> isNemericInt(str))
+                .filter(str -> isNumericInt(str))
                 .collect(Collectors.toList());
 
         return numerics.size() == userInput.size();
     }
 
-    public boolean isInBounds(List<String> userInput) {
-        List<Integer> outbounds = userInput.stream().map(Integer::parseInt)
+    public boolean isInBounds(List<Integer> winningNumbers) {
+        List<Integer> outbounds = winningNumbers.stream()
                 .filter(number -> (number > LottoManager.WINNING_NUMBER_BOUND)
                         || (number < LottoManager.WINNING_NUMBER_ORIGIN))
                 .collect(Collectors.toList());
@@ -77,18 +77,18 @@ public class Validator {
         return true;
     }
 
-    public boolean isValidSize(List<String> userInput) {
-        if (userInput.size() != LottoManager.NUM_OF_WINNING_NUMBERS) {
+    public boolean isValidSize(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != LottoManager.NUM_OF_WINNING_NUMBERS) {
             System.out.println(LottoManager.NUM_OF_WINNING_NUMBERS + "개의 숫자를 쉼표로 구분해 입력해주세요.");
             return false;
         }
         return true;
     }
 
-    public boolean hasDuplicateNumbers(List<String> userInput) {
-        Set<String> numerics = new HashSet<String>(userInput);
+    public boolean hasDuplicateNumbers(List<Integer> winningNumbers) {
+        Set<Integer> winningNumberSet = new HashSet<Integer>(winningNumbers);
 
-        if (numerics.size() != userInput.size()) {
+        if (winningNumberSet.size() != winningNumbers.size()) {
             System.out.println("중복되는 숫자는 포함할 수 없습니다.");
             return true;
         }
@@ -96,8 +96,16 @@ public class Validator {
     }
 
     public boolean isValidWinningNumbers(List<String> userInput) {
-        return isNumericIntList(userInput) && isInBounds(userInput) && isValidSize(userInput)
-                && !hasDuplicateNumbers(userInput);
+        List<Integer> winningNumbers;
+
+        if (!isNumericIntList(userInput)) {
+            System.out.println("입력이 올바르지 않습니다. 정수인지, 숫자가 너무 크지는 않은지 확인해주세요.");
+            return false;
+        }
+
+        winningNumbers = userInput.stream().map(Integer::parseInt).collect(Collectors.toList());
+        return isInBounds(winningNumbers) && isValidSize(winningNumbers)
+                && !hasDuplicateNumbers(winningNumbers);
     }
 
     public boolean isValidBonus(String Bonus) {
