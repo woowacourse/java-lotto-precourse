@@ -15,15 +15,15 @@ public class WinningLotto implements LottoNumber {
         }
 
         public Rank match(Lotto userLotto) {
-                return null;
+                return Rank.valueOf(matchOfNumber(userLotto),matchOfBonusBall(userLotto));
         }
 
-        private int matchOfNumber(Lotto userLotto){
+        private int matchOfNumber(Lotto userLotto) {
                 return userLotto.requestCountMatchNumber(this.lotto);
         }
 
-        private boolean matchOfBonusBall(Lotto userLotto){
-                return userLotto.hasBonusBall(this bonusNo);
+        private boolean matchOfBonusBall(Lotto userLotto) {
+                return userLotto.hasBonusBall(this.bonusNo);
         }
 
 }
