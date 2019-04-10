@@ -8,6 +8,7 @@ public class LottoMatch {
     private Scanner scanner;
     private Lotto winLotto;
     private WinningLotto winningLotto;
+    private int bonusNumber;
 
     public LottoMatch(){
         scanner = new Scanner(System.in);
@@ -33,13 +34,17 @@ public class LottoMatch {
         return winNumList;
     }
 
+    private void inputBonusNumber(){
+        System.out.println("보너스 볼을 입력해 주세요.");
+        bonusNumber = scanner.nextInt();
+        winningLotto = new WinningLotto(winLotto, bonusNumber);
+    }
+
     public Lotto getWinLottoNum(){
         return winLotto;
     }
 
-    private void inputBonusNumber(){
-        System.out.println("보너스 볼을 입력해 주세요.");
-        int bonusNumber = scanner.nextInt();
-        winningLotto = new WinningLotto(winLotto, bonusNumber);
+    public int getBonusNum(){
+        return bonusNumber;
     }
 }

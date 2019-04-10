@@ -48,7 +48,7 @@ public class UserLotto {
         }
         Collections.shuffle(lottoNumber);
 
-        return lottoNumber.subList(0, 5);
+        return lottoNumber.subList(0, 6);
 
     }
 }

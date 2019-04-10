@@ -17,12 +17,22 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
         List<Integer> userNumbers = userLotto.getNumbers();
-        List<Integer> winningNumbers = lotto.getNumbers();
+        int count = 0;
+        boolean checkBonusNum;
 
-        System.out.println(userNumbers.get(0));
-        System.out.println(winningNumbers.get(0));
+        for (Integer userNumber : userNumbers) {
+            count = countLottoNumber(userNumber, count);
+        }
+        checkBonusNum = userNumbers.contains(bonusNo);
 
-        return null;
+        return Rank.valueOf(count, checkBonusNum);
+    }
+
+    private int countLottoNumber(int number, int countOfMatch) {
+        if (lotto.getNumbers().contains(number)) {
+            countOfMatch++;
+        }
+        return countOfMatch;
     }
 
 }

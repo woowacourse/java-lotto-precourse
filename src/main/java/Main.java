@@ -1,9 +1,9 @@
-import domain.UserLotto;
+import domain.LottoManager;
 
 public class Main {
 
     public static void main(String[] args) {
-        UserLotto userLotto = new UserLotto();
-        userLotto.buyUserLotto();
+        LottoManager lottoManager = new LottoManager();
+        lottoManager.startLotto();
     }
 }
