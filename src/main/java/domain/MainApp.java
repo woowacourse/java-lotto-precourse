@@ -1,7 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class MainApp {
     static final int MIN_VALID_MONEY_TO_BUY_LOTTO = 1000;
@@ -9,7 +11,6 @@ public class MainApp {
     static final String MESSAGE_WRONG_MONEY_TO_BUY_LOTTO = "잘못된 입력입니다. 1000으로 나누어 떨어지는 양의 정수를 입력해 주세요.";
 
     public static void main(String[] args) {
-        getMoneyToBuyLotto();
     }
 
 
@@ -45,6 +46,22 @@ public class MainApp {
             System.out.println(MESSAGE_WRONG_MONEY_TO_BUY_LOTTO);
         }
         return money;
+    }
+
+    /**
+     * 로또 한개를 무작위로 발급하는 메소드
+     */
+    public static Lotto createRandomLotto() {
+        TreeSet<Integer> lottoNumbers = new TreeSet<Integer>();                     // 중복을 허용하지 않는 TreeSet 컬렉션을 사용한다.
+        int randomNumber;
+
+        while (lottoNumbers.size() <= 6) {
+            randomNumber = (int)(Math.random() * 45) + 1;                           // 1~45 사이의 정수 하나를 무작위로 생성한다.
+            lottoNumbers.add(randomNumber);
+        }
+
+        ArrayList<Integer> arrLottoNumbers = new ArrayList<Integer>(lottoNumbers);  // TreeSet 을 ArrayList 로 변환한다.
+        return new Lotto(arrLottoNumbers);
     }
 
 
