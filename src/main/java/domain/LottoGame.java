@@ -14,6 +14,11 @@ public class LottoGame {
     private static final String NUMBER_BOUND_ERROR_MESSAGE = "1-45까지의 범위에서만 입력해주세요. 다시 입력해주세요: ";
     private static final String INPUT_LAST_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.3f입니다.\n";
+    private static final String SAME_MESSAGE = "%s개 일치, 보너스 볼 일치(%s원) - %s개\n";
+    private static final String SAME_BALL_MESSAGE = "%s개 일치 (%s원)- %s개 \n";
+    private static final String WINNER_STATUS_MESSAGE = "당첨 통계";
+    private static final String HYPHEN = "---------";
     private static final int MONEY_UNIT = 1000;
     private static final int ZERO = 0;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -29,6 +34,67 @@ public class LottoGame {
         System.out.println(INPUT_LAST_NUMBER);
         WinningLotto winningLotto = getWinningLotto();
         HashMap<Rank, Integer> rankMap = getMatch(lottoList, winningLotto);
+        printResult(rankMap);
+        calculateRate(rankMap, lottoRound);
+    }
+
+    private void printResult(HashMap<Rank, Integer> map) {
+        System.out.println();
+        System.out.println(WINNER_STATUS_MESSAGE);
+        System.out.println(HYPHEN);
+        Rank[] rankArr = turnArray();
+
+        for (Rank rank : rankArr) {
+            changeNull(map, rank);
+            isContainBonusBall(rank, map);
+        }
+    }
+
+    private void changeNull(HashMap<Rank, Integer> rankMap, Rank rank) {
+        if (Objects.isNull(rankMap.get(rank))) {
+            rankMap.put(rank, ZERO);
+        }
+    }
+
+    private void isContainBonusBall(Rank rank, HashMap<Rank, Integer> rankMap) {
+        if (rank == Rank.SECOND) {
+            System.out.printf(SAME_MESSAGE, rank.getCountOfMatch(), rank.getWinningMoney(), rankMap.get(rank));
+            return;
+        }
+
+        System.out.printf(SAME_BALL_MESSAGE, rank.getCountOfMatch(), rank.getWinningMoney(), rankMap.get(rank));
+    }
+
+    private Rank[] turnArray() {
+        int arrSize;
+        Rank[] ranks = Rank.values();
+        List<Rank> rankList = new ArrayList<>(Arrays.asList(ranks));
+
+        rankList.remove(Rank.MISS);
+        Collections.reverse(rankList);
+        arrSize = rankList.size();
+
+        return rankList.toArray(new Rank[arrSize]);
+    }
+
+    private void calculateRate(HashMap<Rank, Integer> rateMap, int lottoMoney) {
+        float sum = 0;
+        float rate;
+
+        for (Rank key : rateMap.keySet()) {
+            sum += findUserWinMoney(rateMap, key);
+        }
+        rate = sum / lottoMoney;
+
+        System.out.printf(RATE_OF_RETURN_MESSAGE, rate);
+    }
+
+    private int findUserWinMoney(HashMap<Rank, Integer> rankMap, Rank rank) {
+        if (rankMap.get(rank) != ZERO) {
+            return rank.getWinningMoney();
+        }
+
+        return 0;
     }
 
     private HashMap<Rank, Integer> getMatch(List<Lotto> lottoList, WinningLotto winningLotto) {
