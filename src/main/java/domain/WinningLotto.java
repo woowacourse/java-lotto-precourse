@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * 당첨 번호를 담당하는 객체

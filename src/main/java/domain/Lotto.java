@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Collections;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -24,6 +25,7 @@ public class Lotto {
                 }
                 List lottoList = new ArrayList();
                 lottoList.addAll(hs);
+                Collections.sort(lottoList);
                 return new Lotto(lottoList);
         }
 
