@@ -1,5 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
