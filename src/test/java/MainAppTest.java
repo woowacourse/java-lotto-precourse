@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MainAppTest extends TestCase {
@@ -66,5 +67,11 @@ public class MainAppTest extends TestCase {
         int testMoney = VALID_MONEY_TO_BUY_LOTTO;
         ArrayList<Lotto> lottos = MainApp.createLottosWorth(VALID_MONEY_TO_BUY_LOTTO);
         assertEquals(1, lottos.size());
+    }
+
+    @Test
+    public void testPrintLotto() throws Exception {
+        Lotto testLotto = new Lotto(Arrays.asList(new Integer[] {1, 15, 22, 33, 35, 42}));
+        assertEquals("[1, 15, 22, 33, 35, 42]", testLotto.toString());
     }
 }
