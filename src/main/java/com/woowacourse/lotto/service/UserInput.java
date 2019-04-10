@@ -55,15 +55,16 @@ public class UserInput {
 		boolean result;
 		List<String> winnigNumberList;
 		System.out.println(DEMAND_WINNING_NUMBER);
-		do{
+		do {
 			winnigNumberList = Arrays.asList(inputValue().split(","));
 			result = getWinningNumberValidResult(winnigNumberList);
-		}while(!result);
+		}
+		while (!result);
 		return winnigNumberList.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
 	}
 
-	private boolean getWinningNumberValidResult(List<String> winnigNumberList){
-		if(!Validator.checkWinningNumberListValid(winnigNumberList)){
+	private boolean getWinningNumberValidResult(List<String> winnigNumberList) {
+		if (!Validator.checkWinningNumberListValid(winnigNumberList)) {
 			printUserInputAgain();
 			return false;
 		}
