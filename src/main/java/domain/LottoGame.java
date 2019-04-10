@@ -90,6 +90,18 @@ public class LottoGame {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 	}
+	
+	private void printResult(List<Iterator<Integer>> iterators) {
+		int j = 0;
+		
+		for(int i = 3; i < 8; i++) {
+			String printResult = "";
+			j = (i >= 6) ? i-1 : i;
+			printResult += ((j == 6) ? j + "개 일치," : j + "개 일치, 보너스 볼 일치") +;
+			printResult += " ("+ iterators.get(0).next() + "원 ) - " + iterators.get(1).next() + "개";
+			System.out.println(printResult);
+		}
+	}
 
 	
 }
