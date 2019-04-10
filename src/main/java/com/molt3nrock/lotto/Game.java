@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * java-lotto 의 메인 클래스
+ */
 public class Game {
 
     public static void main(String[] args) {
