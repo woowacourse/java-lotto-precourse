@@ -28,6 +28,10 @@ public class LottoGenerator {
 		return MAX_LOTTO_NUMBER;
 	}
 
+	public int get_EACH_LOTTO_PRICE() {
+		return EACH_LOTTO_PRICE;
+	}
+
 	public int getLottoCount(int lottoPrice) {
 		return (lottoPrice / EACH_LOTTO_PRICE);
 	}

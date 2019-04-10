@@ -1,7 +1,9 @@
 package domain;
 
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
  * 당첨 통계와 수익률을 찾는 객체
@@ -17,6 +19,17 @@ public class LottoGameManager {
 		lottoResult.put(Rank.SECOND, 0);
 		lottoResult.put(Rank.FIRST, 0);
 		return lottoResult;
+	}
+
+	public static double getYield(LinkedHashMap<Rank, Integer> lottoResult) {
+		double lottoPrice = lottoResult.size() * (new LottoGenerator().get_EACH_LOTTO_PRICE());
+		double lottoReward = 0;
+		for (Map.Entry<Rank, Integer> entry : lottoResult.entrySet()) {
+			lottoReward += entry.getKey().getWinningMoney() * entry.getValue();
+		}
+		lottoResult.remove(Rank.MISS);
+		DecimalFormat df = new DecimalFormat("0.000");
+		return Double.parseDouble(df.format(lottoReward / lottoPrice));
 	}
 
 	public static void main(String[] args) {
