@@ -3,6 +3,7 @@ package domain;
 import constnum.Const;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoResult {
@@ -33,6 +34,7 @@ public class LottoResult {
     }
 
     public void printRankResultList(){
+        Collections.sort(rankResultList);                   // rankResultList가 5등부터 역순으로 출력되게 바꿈.
         for(RankResult rankResult : rankResultList){
             printRankResult(rankResult);
         }
