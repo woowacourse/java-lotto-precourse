@@ -29,7 +29,7 @@ public class WinningLottoMaker {
 
 	private static final String BONUS_LOTTO = "보너스 볼을 입력해 주세요.";
 
-	private static final String BONUS_LOTTO_ERROR = "제대로 보너스 볼(1~45숫자)을 입력해 주세요.";
+	private static final String BONUS_LOTTO_ERROR = "중복되지 않는 보너스 볼(1~45숫자)을 입력해 주세요.";
 
 	private Scanner scanner;
 
@@ -73,6 +73,9 @@ public class WinningLottoMaker {
 			return true;
 		}
 		bonusNo = Integer.parseInt(lottoScan);
+		if (lastWeekLotto.getNumbers().contains(bonusNo)) {
+			return true;
+		}
 		return ((bonusNo < Lotto.MIN_LOTTO_NUM) || (bonusNo > Lotto.MAX_LOTTO_NUM));
 	}
 
@@ -108,6 +111,6 @@ public class WinningLottoMaker {
 			numbers.add(number);
 		}
 		lastWeekLotto = new Lotto(numbers);
-		return Lotto.duplicateNumberInLotto(numbers);
+		return !Lotto.duplicateNumberInLotto(numbers);
 	}
 }

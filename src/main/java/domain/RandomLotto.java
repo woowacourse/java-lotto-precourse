@@ -23,14 +23,14 @@ import java.util.List;
  */
 public class RandomLotto {
 
-	public Lotto makeRandomLotto() {		
+	public Lotto makeRandomLotto() {
 		List<Integer> numbers;
 		do {
 			numbers = makeLottoNumber();
-		} while(!Lotto.duplicateNumberInLotto(numbers));
+		} while (Lotto.duplicateNumberInLotto(numbers));
 		return new Lotto(numbers);
 	}
-	
+
 	public List<Integer> makeLottoNumber() {
 		List<Integer> numbers = new LinkedList<>();
 		for (int i = 0; i < Lotto.LOTTO_NUMBER_SIZE; i++) {
@@ -38,7 +38,7 @@ public class RandomLotto {
 		}
 		return numbers;
 	}
-	
+
 	private int makeRandomNumber() {
 		return (int) (Math.random() * Lotto.MAX_LOTTO_NUM) + Lotto.MIN_LOTTO_NUM;
 	}

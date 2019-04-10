@@ -36,23 +36,17 @@ public class LottoGame {
 
     private static final String YIELD = "총 수익률은 ";
 
-    private static final String YIELD_RESULT = "%입니다.";
+    private static final String YIELD_RESULT = "입니다.";
 
     private static final int MONEY_MIN_BOUND = 0;
 
     private static final int MONEY_MAX_BOUND = 4000000;
 
-    private static final int PERCENT = 100;
-
     private MyLottoManager myLottoManager;
 
     private WinningLottoMaker winningLottoMaker;
 
-    private WinningLotto winningLotto;
-
     private Scanner scanner;
-
-    private int totalPrice;
 
     private int money;
 
@@ -60,7 +54,19 @@ public class LottoGame {
         scanner = new Scanner(System.in);
         myLottoManager = new MyLottoManager();
         winningLottoMaker = new WinningLottoMaker(scanner);
-        totalPrice = Rank.MISS.getWinningMoney();
+    }
+
+    public void lottoGame() {
+        moneyInput();
+        myLottoManager.buyLotto(money);
+        matchLottoNumbers(winningLottoMaker.makeWinninglotto());
+    }
+
+    private void moneyInput() {
+        System.out.println(MONEY_MSG);
+        while (notValidMoney(scanner.nextLine())) {
+            System.out.println(MONEY_ERROR);
+        }
     }
 
     public static boolean isValidNumber(String numberScan) {
@@ -72,21 +78,6 @@ public class LottoGame {
         }
     }
 
-    public void lottoGame() {
-        moneyInput();
-        myLottoManager.buyLotto(money);
-        winningLotto = winningLottoMaker.makeWinninglotto();
-        matchLottoNumbers();
-        printLottoResult();
-    }
-
-    private void moneyInput() {
-        System.out.println(MONEY_MSG);
-        while (notValidMoney(scanner.nextLine())) {
-            System.out.println(MONEY_ERROR);
-        }
-    }
-
     private boolean notValidMoney(String moneyScan) {
         if (!isValidNumber(moneyScan)) {
             return true;
@@ -95,33 +86,35 @@ public class LottoGame {
         return ((money < MONEY_MIN_BOUND) || (money > MONEY_MAX_BOUND));
     }
 
-    public void matchLottoNumbers() {
+    public void matchLottoNumbers(WinningLotto winningLotto) {
         HashMap<Rank, Integer> rankList = myLottoManager.matchWithWinningLotto(winningLotto);
-        System.out.println(MATCH_RESULT);
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
+        int totalPrice = Rank.MISS.getWinningMoney();
+        System.out.println(MATCH_RESULT);
         for (Rank rank : ranks) {
-            printMatchResult(rankList, rank);
+            totalPrice += printMatchResult(rankList, rank);
         }
+        printLottoResult(totalPrice);
     }
 
-    private void printMatchResult(HashMap<Rank, Integer> rankList, Rank rank) {
+    private int printMatchResult(HashMap<Rank, Integer> rankList, Rank rank) {
         if (rank.equals(Rank.MISS)) {
-            return;
+            return Rank.MISS.getWinningMoney();
         }
         System.out.println(rank + HYPHEN + rankList.get(rank) + COUNT);
-        saveMatchResult(rankList.get(rank), rank);
+        return saveMatchResult(rankList.get(rank), rank);
     }
 
-    private void saveMatchResult(Integer count, Rank rank) {
-        totalPrice += (count * rank.getWinningMoney());
+    private int saveMatchResult(Integer count, Rank rank) {
+        return (count * rank.getWinningMoney());
     }
 
-    private void printLottoResult() {
-        System.out.println(YIELD + caculateYield() + YIELD_RESULT);
+    private void printLottoResult(int totalPrice) {
+        System.out.println(YIELD + caculateYield(totalPrice) + YIELD_RESULT);
     }
 
-    private double caculateYield() {
-        return (double) (totalPrice) / money * PERCENT;
+    private double caculateYield(int totalPrice) {
+        return (double) (totalPrice) / money;
     }
 }

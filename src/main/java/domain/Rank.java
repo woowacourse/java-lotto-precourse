@@ -74,4 +74,3 @@ public enum Rank {
         return rankStatus.toString();
     }
 }
-
