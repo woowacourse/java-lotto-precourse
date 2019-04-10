@@ -13,13 +13,9 @@ public class UserLottos {
     private final int MIN_LOTTO_NUMBER = 1;
     private final int MAX_LOTTO_NUMBER = 45;
 
-    public UserLottos(String moneyString) {
-        int buyToLottoCount = Util.divideThousand(Util.fromStringToInteger(moneyString));
-        if (buyToLottoCount <= 0) {
-            throw new IllegalArgumentException(moneyString + "는 유효하지 않은 값입니다.");
-        }
-        Util.printConsole(buyToLottoCount + "개를 구매했습니다.");
-        makeLottos(buyToLottoCount);
+    public UserLottos(int lottoCount) {
+        Util.printConsole(lottoCount + "개를 구매했습니다.");
+        makeLottos(lottoCount);
     }
 
     private void makeLottos(int buyToLottoCount) {

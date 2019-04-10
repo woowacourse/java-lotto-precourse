@@ -8,18 +8,23 @@ public class UserLottosTest {
 
     @Test(expected = NumberFormatException.class)
     public void constructorExceptionTest() {
-        UserLottos userLottosInvalidArgs = new UserLottos("만원");
+        int count = Util.divideThousand(Util.fromStringToInteger("만원"));
+        UserLottos userLottos = new UserLottos(count);
     }
 
     @Test
     public void constructorTest() {
-        UserLottos userLottos = new UserLottos("3000");
+        int count = Util.divideThousand(Util.fromStringToInteger("3000"));
+        UserLottos userLottos = new UserLottos(count);
         assertEquals(3,userLottos.getUserLottosCount());
 
-        UserLottos userLottos1 = new UserLottos("1000000");
-        assertEquals(1000, userLottos1.getUserLottosCount());
+        count = Util.divideThousand(Util.fromStringToInteger("10000"));
+        UserLottos userLottos1 = new UserLottos(count);
+        assertEquals(10, userLottos1.getUserLottosCount());
 
-        UserLottos userLottos2 = new UserLottos("1100");
+        count = Util.divideThousand(Util.fromStringToInteger("1100"));
+        UserLottos userLottos2 = new UserLottos(count);
         assertEquals(1, userLottos2.getUserLottosCount());
     }
+
 }

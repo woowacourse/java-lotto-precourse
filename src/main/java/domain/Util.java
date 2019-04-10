@@ -33,4 +33,12 @@ public class Util {
     public static int divideThousand(int number){
         return number /1000;
     }
+
+    public static boolean isGreaterThanZero(int input){
+        return (input > 0);
+    }
+
+    public static String[] splitStringbyComma(String string){
+        return string.split(",");
+    }
 }
