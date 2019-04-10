@@ -3,24 +3,28 @@ package core;
 import domain.Lotto;
 import domain.Person;
 import domain.Store;
+import domain.Studio;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class LottoGame {
+class LottoGame {
     private Person player;
     private Store lottoStore;
+    private Studio lottoStudio;
     private Scanner scanner;
 
-    public LottoGame() {
+    LottoGame() {
         player = new Person();
         lottoStore = new Store();
+        lottoStudio = new Studio();
         scanner = new Scanner(System.in);
     }
 
-    public void init() {
+    void init() {
         enterBudget();
         sellLotto();
+        enterWinningInfo();
     }
 
     private boolean enterBudget() {
@@ -51,6 +55,44 @@ public class LottoGame {
         for (Lotto lotto : lottoList)
             lotto.printNums();
 
+        return true;
+    }
+
+    private boolean enterWinningInfo() {
+        enterWinningNums();
+        enterWinningBonus();
+
+        if (lottoStudio.containBonusNum())
+            enterWinningInfo();
+
+        return true;
+    }
+
+    private boolean enterWinningNums() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        try {
+            while (!lottoStudio.enterWinningNums(scanner.nextLine())) ;
+        } catch (NumberFormatException nfe) {
+            System.out.println("문자를 입력하셨습니다.");
+            enterWinningNums();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            enterWinningNums();
+        }
+        return true;
+    }
+
+    private boolean enterWinningBonus() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        try {
+            while (!lottoStudio.enterWinningBonus(scanner.nextLine())) ;
+        } catch (NumberFormatException nfe) {
+            System.out.println("문자를 입력하셨습니다.");
+            enterWinningBonus();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            enterWinningBonus();
+        }
         return true;
     }
 }

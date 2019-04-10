@@ -6,10 +6,10 @@ import java.util.Random;
 import java.util.TreeSet;
 
 public class Store {
-    private final int MIN_NUM = 1;
-    private final int MAX_NUM = 45;               /* 로또 번호의 최댓값 */
-    private final int COUNT_NUMS = 6;              /* 로또 한 장의 번호 갯수 */
-    private final int LOTTO_PRICE = 1000;        /* 로또 한 장의 가격 */
+    private final int MIN_NUM = 1;                  /* 로또 번호의 최솟값 */
+    private final int MAX_NUM = 45;                 /* 로또 번호의 최댓값 */
+    private final int COUNT_NUMS = 6;               /* 로또 한 장의 번호 갯수 */
+    private final int LOTTO_PRICE = 1000;           /* 로또 한 장의 가격 */
 
     private Random random;
 
@@ -37,6 +37,5 @@ public class Store {
 
         return new Lotto(new ArrayList<>(lottoNumTree));
     }
-
 
 }

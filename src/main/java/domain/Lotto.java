@@ -9,7 +9,7 @@ import java.util.StringJoiner;
 public class Lotto {
     private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
@@ -19,5 +19,9 @@ public class Lotto {
         for (Integer i : numbers)
             joiner.add(String.valueOf(i));
         System.out.println(joiner.toString());
+    }
+
+    boolean contains(int inputBonusNum) {
+        return numbers.contains(inputBonusNum);
     }
 }
