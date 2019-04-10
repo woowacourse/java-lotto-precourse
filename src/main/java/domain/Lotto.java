@@ -190,7 +190,8 @@ public class Lotto {
 		System.out.println(rankToString(Rank.THIRD));
 		System.out.println(rankToString(Rank.SECOND));
 		System.out.println(rankToString(Rank.FIRST));
-		System.out.println("총 수익률은 " + String.format("%.2f", rateReturn()) + "입니다.");
+		if(numMyLottos() != 0)
+			System.out.println("총 수익률은 " + String.format("%.2f", rateReturn()) + "입니다.");
 	}
 
 	public static void main(String[] args) { // 객체로 불러 실행하고자 한다면 shell()로 대체한다.
