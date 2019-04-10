@@ -91,14 +91,15 @@ public class LottoGame {
         return number;
     }
 
-    private int inputBonusNumber() {
-        System.out.println(MESSAGE_INPUT_BONUS);
+    private int inputBonusNumber(List<Integer> lottoNumbers) {
         Scanner scan = new Scanner(System.in);
         String inputBonus;
         do {
+            System.out.println(MESSAGE_INPUT_BONUS);
             inputBonus = scan.nextLine();
         }
-        while (!Validation.isNumber(inputBonus));
+        while (!Validation.isNumber(inputBonus)
+                || lottoNumbers.contains(Integer.parseInt(inputBonus)));
         return Integer.parseInt(inputBonus);
     }
 
@@ -146,7 +147,7 @@ public class LottoGame {
         createLotto(countOfLotto);
         printLottoList(countOfLotto);
         Lotto lotto = new Lotto(inputWinNumber());
-        winLotto = new WinningLotto(lotto, inputBonusNumber());
+        winLotto = new WinningLotto(lotto, inputBonusNumber(lotto.getLottoList()));
         printResult(money);
     }
 }
