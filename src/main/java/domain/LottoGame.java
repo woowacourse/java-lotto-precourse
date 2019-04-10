@@ -28,14 +28,15 @@ public class LottoGame {
 
     public void run() {
         System.out.println(INPUT_MONEY_MESSAGE);
-        int lottoRound = calculateLottoRound(inputLottoMoney());
+        int lottoMoney = inputLottoMoney();
+        int lottoRound = calculateLottoRound(lottoMoney);
         List<Lotto> lottoList = getLottoList(lottoRound);
         printLottoNumbers(lottoList);
         System.out.println(INPUT_LAST_NUMBER);
         WinningLotto winningLotto = getWinningLotto();
         HashMap<Rank, Integer> rankMap = getMatch(lottoList, winningLotto);
         printResult(rankMap);
-        calculateRate(rankMap, lottoRound);
+        calculateRate(rankMap, lottoMoney);
     }
 
     private void printResult(HashMap<Rank, Integer> map) {
