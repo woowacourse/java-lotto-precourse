@@ -67,4 +67,16 @@ public class WinningLotto {
         }
         return rankList;
     }
+
+    private int takeLottoMoney(List<Integer> rankList,List<Lotto> lottoList){
+
+        int earnMoney = 0;
+
+        for(int i=0;i<rankList.size();i++){
+            Rank matchMoney = Rank.valueOf(rankList.get(i),findSecondCorrect(lottoList.get(i).findLotto(),
+                    this.bonusNo));
+            earnMoney += matchMoney.getWinningMoney();
+        }
+        return earnMoney;
+    }
 }
