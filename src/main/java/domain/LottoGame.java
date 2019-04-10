@@ -2,7 +2,10 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -82,6 +85,21 @@ public class LottoGame {
     }
 
     
+
+    // 당첨 번호 생성 함수
+    private List<Integer> makeWinningNumber() {
+    	List<String> splitedNumber = new ArrayList<>();
+      	List<Integer> intWinningNumberList = new ArrayList<Integer>();
+      	
+    	do {
+    		splitedNumber = inputWinningNumber();
+    		intWinningNumberList = convertToIntList(splitedNumber);
+    	} while (!(checkDuplicate(intWinningNumberList) && checkRange(intWinningNumberList)));
+ 
+    	return intWinningNumberList;
+    }
+    
+    // 당첨 번호 입력 함수
     private List<String> inputWinningNumber() {
     	String winningNumber = "";
     	List<String> splitedNumber = new ArrayList<>();
@@ -95,19 +113,7 @@ public class LottoGame {
     	return splitedNumber;
     }
     
-    
-    private List<Integer> checkValidation() {
-    	List<String> splitedNumber = new ArrayList<>();
-      	List<Integer> intWinningNumberList = new ArrayList<Integer>();
-      	
-    	do {
-    		splitedNumber = inputWinningNumber();
-    		intWinningNumberList = convertToIntList(splitedNumber);
-    	} while (!(checkDuplicate(intWinningNumberList) && checkRange(intWinningNumberList)));
- 
-    	return intWinningNumberList;
-    }
-    
+    // split 함수
     private List<String> splitStringByComma(String winningNumber) {
     	String[] winningNumberArray = winningNumber.split(",");
     	List<String> splitedNumber = new ArrayList<String>();
@@ -118,6 +124,7 @@ public class LottoGame {
     	
     	return splitedNumber;
     }
+    
     
     private boolean checkContainNotNumber(List<String> splitedNumberList) {
     	boolean containNotNumber = true;
@@ -156,65 +163,8 @@ public class LottoGame {
     	return rightRange;
     }
     
-    
-    private int setBonusBall(List<Integer> winningNumber) {
-    	String bonusBall = "";
-    	
-    	do {
-    		System.out.println("보너스 볼을 입력해 주세요.");
-    		bonusBall = sc.nextLine().trim();
-    	} while (!validateBonusBall(bonusBall, winningNumber));
-
-    	return Integer.parseInt(bonusBall);
-    }
-    
-    private boolean validateBonusBall(String bonusBall, List<Integer> winningNumber) {
-    	int intBonusBall = 0;
-    	
-    	if (checkNumberOrNot(bonusBall)) {
-    		intBonusBall = Integer.parseInt(bonusBall);
-    		return (checkRange(intBonusBall) && !checkContained(winningNumber, intBonusBall)) ? true : false;
-    	}
-    	
-    	return false;
-    }
-    
-    private boolean checkRange(int bonusBall) {
-    	boolean inRange = (bonusBall > 0 && bonusBall < 46) ? true : false;
-    	
-    	if (!inRange) {
-    		System.out.println("1부터 45까지의 숫자를 입력하세요.");
-    		return inRange;
-    	}
-
-    	return inRange;
-    }
-    
-    private boolean checkContained(List<Integer> winningNumber, int bonusBall) {
-    	boolean isContained = winningNumber.contains(bonusBall);
-
-    	if (isContained) {
-    		System.out.println("당첨 번호와 중복되지 않는 값을 입력하세요.");
-    		return isContained;
-    	}
-    	
-    	return isContained;
-    }
-    
-   
-    
     public static void main(String[] args) {
-    	// test용 main 함수
 		LottoGame lg = new LottoGame();
-		ArrayList<Lotto> lottos = lg.makeLotto();
-		for (int i = 0; i < lottos.size(); i++) {
-			System.out.println(lottos.get(i).toString());
-		}
-		
-		List<Integer> winNum = lg.checkValidation();
-		
-		System.out.println(winNum.toString());
-		System.out.println(lg.setBonusBall(winNum));
+		System.out.println(lg.makeWinningNumber());
 	}
-    
 }
