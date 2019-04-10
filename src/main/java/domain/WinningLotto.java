@@ -17,6 +17,9 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         final int NUMBER_A_PLUS_B = App.LOTTO_NUMBER_OF_PICKS * 2;
 
-        return Rank.valueOf(NUMBER_A_PLUS_B - lotto.union(userLotto).size(), userLotto.contains(bonusNo));
+        return Rank.valueOf(
+            NUMBER_A_PLUS_B - lotto.unionSet(userLotto).size(),
+            userLotto.contains(bonusNo)
+        );
     }
 }

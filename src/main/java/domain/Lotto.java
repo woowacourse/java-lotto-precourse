@@ -22,7 +22,7 @@ public class Lotto {
         return this;
     }
 
-    public HashSet<Integer> union(Lotto rhs) {
+    public HashSet<Integer> unionSet(Lotto rhs) {
         final List<Integer> appendedList = new Vector<>(numbers);
 
         appendedList.addAll(rhs.numbers);
