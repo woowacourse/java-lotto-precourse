@@ -8,7 +8,7 @@ public class LottoSeller {
 
     public static int giveLottos(int money, List<Lotto> list){
         int numOfLotto = Integer.valueOf(money)/lottoPrice;
-        System.out.println(numOfLotto+"개를 구매했습니다.");
+        System.out.println("\n"+numOfLotto+"개를 구매했습니다.");
         for(int i=0; i<numOfLotto; i++) {
             Lotto lotto = LottoCreator.createLotto();
             list.add(lotto);
