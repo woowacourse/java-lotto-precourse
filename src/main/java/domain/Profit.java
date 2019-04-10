@@ -4,50 +4,45 @@ import java.util.*;
 
 public class Profit {
 
-    private static final Rank[] ranks = Rank.values();
-    private static final List<Rank> userRanks = new ArrayList<>();
-    private static final Map<Rank, Integer> countRanks = new HashMap<>();
+    private static final int FIFTH_INDEX = 1;
+    private static final Rank[] RANKS = Rank.values();
+    private static final List<Rank> USER_RANKS = new ArrayList<>();
+    private static final Map<Rank, Integer> COUNT_RANKS = new HashMap<>();
 
     private static double profitRate = 0;
 
     public static void initMap() {
-        for (int i = 0; i < ranks.length; i++) {
-            countRanks.put(ranks[i], new Integer(0));
+        for (int i = 0; i < RANKS.length; i++) {
+            COUNT_RANKS.put(RANKS[i], new Integer(0));
         }
     }
 
     public static void addUserRanks(Rank rank) {
-        userRanks.add(rank);
+        USER_RANKS.add(rank);
     }
 
     public static void calculateRank() {
-        userRanks.forEach((rank -> {
-            int count = countRanks.get(rank) + 1;
-            countRanks.replace(rank, count);
+        USER_RANKS.forEach((rank -> {
+            int count = COUNT_RANKS.get(rank) + 1;
+            COUNT_RANKS.replace(rank, count);
         }));
-    }
-
-    public static void printCountRanks() {
-        System.out.println(countRanks);
     }
 
     public static void calculateProfitRate(int money) {
         final Long[] sum = new Long[1];
         sum[0] = (long) 0;
-        countRanks.forEach((rank, count) -> {
+        COUNT_RANKS.forEach((rank, count) -> {
             sum[0] = sum[0] + rank.getWinningMoney() * count;
         });
         profitRate = sum[0] / (double) money;
     }
 
     public static void showStatistics() {
-        List<Rank> rankList = Arrays.asList(ranks);
+        List<Rank> rankList = Arrays.asList(RANKS);
         Collections.reverse(rankList);
-        rankList.stream().filter(rank -> rank != Rank.MISS).forEach(
-                rank -> {
-                    System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- " + countRanks.get(rank) + "개");
-                }
-        );
+        for (int i = FIFTH_INDEX; i < rankList.size(); i++) {
+            System.out.println(rankList.get(i).getCountOfMatch() + "개 일치 (" + rankList.get(i).getWinningMoney() + "원)- " + COUNT_RANKS.get(rankList.get(i)) + "개");
+        }
     }
 
     public static void showProfitRate(int money) {

@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
+
+    private static final int LOTTO_PRICE = 1000;
+
     private List<Lotto> userLottoTickets;
     private WinningLotto winningLotto;
     private int money;
-
-    private static final int lottoPrice = 1000;
-    private static final int numberOfRanks = 6;
-
 
     public Game() {
         userLottoTickets = new ArrayList<>();
@@ -19,7 +18,7 @@ public class Game {
 
     public void inputUserLotto() {
         this.money = Display.inputMoney();
-        int sizeOfLottoTickets = money / lottoPrice;
+        int sizeOfLottoTickets = money / LOTTO_PRICE;
         makeUserLotto(sizeOfLottoTickets);
         Display.showBoughtLotto(userLottoTickets);
     }
@@ -61,7 +60,6 @@ public class Game {
         inputUserLotto();
         inputWinningLotto();
         calculateRank();
-        Profit.printCountRanks();
         displayResults();
     }
 }

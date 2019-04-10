@@ -10,6 +10,7 @@ public class Check {
         if (userInputNumbers.contains(bonusNo)) {
             throw new NumberException("같은 숫자가 중복됩니다.");
         }
+        limitValidity(bonusNo);
     }
 
     private static void isSixNumbers() throws Exception {

@@ -50,7 +50,6 @@ public class Display {
             String tmp = sc.next();
             continueFlagLottoNumber = processString(tmp);
         }
-
         return winningLotto;
     }
 
@@ -59,7 +58,6 @@ public class Display {
             winningLotto = Check.splitUserInput(tmp);
             return false;
         } catch (Exception e) {
-
             System.out.println("다시 입력해주세요 예) 1,2,3,4,5,6");
             return true;
         }
@@ -68,12 +66,12 @@ public class Display {
     public static int inputBonusNumber() {
         while (continueFlagBonusNum) {
             System.out.println("보너스 볼을 입력해 주세요.");
-            continueFlagBonusNum = processBonuseNo();
+            continueFlagBonusNum = processBonusNo();
         }
         return bonusNo;
     }
 
-    public static boolean processBonuseNo() {
+    public static boolean processBonusNo() {
         try {
             bonusNo = sc.nextInt();
             Check.isBonusNoValid(bonusNo);
@@ -86,6 +84,7 @@ public class Display {
     }
 
     public static void showStatistics() {
+        System.out.println();
         System.out.println("당첨통계");
         System.out.println("-------");
         Profit.showStatistics();
