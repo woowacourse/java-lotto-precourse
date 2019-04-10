@@ -90,13 +90,13 @@ public class InputError {
                             : 0;
         }
         // 중복되지 않은 숫자가 6개인 경우가 올바른 입력이다.
-        return (countOfNotOverlapNumber != COUNT_OF_NUMBER);
+        return (countOfNotOverlapNumber == COUNT_OF_NUMBER);
     }
 
     private static boolean checkOverlapNumberOne(String[] numbers, String checkNumber) {
         int countOfOverlap = 0;
         for (int i = 0; i < numbers.length; ++i) {
-            countOfOverlap += (numbers[i].contains(checkNumber)) ? 1 : 0;
+            countOfOverlap += (numbers[i].equals(checkNumber)) ? 1 : 0;
         }
         return (countOfOverlap == ONE);
     }
@@ -104,7 +104,7 @@ public class InputError {
     private static boolean checkOverlapNumberZero(String checkNumber) {
         int countOfOverlap = 0;
         for (int i = 0; i < winningLottoNumber.length; ++i) {
-            countOfOverlap += (winningLottoNumber[i].contains(checkNumber)) ? 1 : 0;
+            countOfOverlap += (winningLottoNumber[i].equals(checkNumber)) ? 1 : 0;
         }
         return (countOfOverlap == ZERO);
     }

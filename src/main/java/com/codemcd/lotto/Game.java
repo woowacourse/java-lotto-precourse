@@ -46,6 +46,6 @@ public class Game {
     }
 
     private double calculateEarningsRate(int money) {
-        return totalPrizeMoney / money;
+        return totalPrizeMoney / (double) money;
     }
 }
