@@ -1,6 +1,7 @@
 /*
  * SizeValidator.java
  */
+
 package util;
 
 import java.util.List;
@@ -13,9 +14,6 @@ public class SizeValidator {
 	}
 
 	public boolean isValidSize(List<Integer> intList) {
-		if (intList.size() == this.lottoSize) {
-			return true;
-		}
-		return false;
+		return (this.lottoSize == intList.size());
 	}
 }

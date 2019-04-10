@@ -38,7 +38,7 @@ class InputView {
 	}
 
 	public static WinningLotto getWinningLotto() {
-		List<Integer> numbers = getWinningLottoList();
+		List<Integer> numbers = getWinningLottoNumbers();
 		int bonusNum;
 		do {
 			bonusNum = getBonusNumber();
@@ -47,14 +47,15 @@ class InputView {
 		return new WinningLotto(new Lotto(numbers), bonusNum);
 	}
 
-	private static List<Integer> getWinningLottoList() {
-		List<Integer> temp = null;
+	private static List<Integer> getWinningLottoNumbers() {
+		List<Integer> lottoNumbers;
 		do {
 			System.out.println("지난 주 당첨번호를 입력해 주세요.");
-			temp = InputUtil.getIntegerList();
-		} while (!NUMBER_VALIDATOR.isValidNumbers(temp) || !SIZE_VALIDATOR.isValidSize(temp)
-				|| DUPLICATE_VALIDATOR.isDuplicate(temp));
-		return temp;
+			lottoNumbers = InputUtil.getIntegerList();
+		} while (!NUMBER_VALIDATOR.isValidNumbers(lottoNumbers)
+				|| !SIZE_VALIDATOR.isValidSize(lottoNumbers)
+				|| DUPLICATE_VALIDATOR.isDuplicate(lottoNumbers));
+		return lottoNumbers;
 	}
 
 	private static int getBonusNumber() {

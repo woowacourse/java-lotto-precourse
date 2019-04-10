@@ -1,12 +1,15 @@
 /*
  * OutputView.java
  */
+
 package logic;
 
 import domain.Lotto;
 import domain.LottoResult;
 import domain.Rank;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +20,7 @@ public class OutputView {
 	}
 
 	public static void printLottoList(List<Lotto> lottoList) {
-		for (Lotto lotto : lottoList) {
-			System.out.println(lotto);
-		}
+		lottoList.forEach(lotto -> System.out.println(lotto));
 	}
 
 	public static void printResult(LottoResult lottoResult) {
@@ -31,9 +32,13 @@ public class OutputView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		Map<Rank, Integer> map = lottoResult.getMap();
-		for (Rank rank : Rank.reverseValues()) {
-			printLottoRank(rank, map.get(rank));
-		}
+		reverseRankValues().forEach(rank -> printLottoRank(rank, map.get(rank)));
+	}
+
+	private static List<Rank> reverseRankValues() {
+		List<Rank> rankList = Arrays.asList(Rank.values());
+		Collections.reverse(rankList);
+		return rankList;
 	}
 
 	private static void printLottoRank(Rank rank, Integer value) {

@@ -15,16 +15,10 @@ public class NumberValidator {
 	}
 
 	public boolean isValidNumbers(List<Integer> intList) {
-		if (intList.stream().allMatch(this::isValidNumber)) {
-			return true;
-		}
-		return false;
+		return intList.stream().allMatch(this::isValidNumber);
 	}
 
 	public boolean isValidNumber(int number) {
-		if ((lottoMinNum <= number) && (number <= lottoMaxNum)) {
-			return true;
-		}
-		return false;
+		return ((lottoMinNum <= number) && (number <= lottoMaxNum));
 	}
 }

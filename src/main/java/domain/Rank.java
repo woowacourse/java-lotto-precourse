@@ -1,9 +1,5 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * 로또 등수를 의미하는 enum
  */
@@ -49,12 +45,6 @@ public enum Rank {
 		}
 
 		throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
-	}
-
-	public static List<Rank> reverseValues() {
-		List<Rank> rankList = Arrays.asList(Rank.values());
-		Collections.reverse(rankList);
-		return rankList;
 	}
 
 	private boolean matchCount(int countOfMatch) {

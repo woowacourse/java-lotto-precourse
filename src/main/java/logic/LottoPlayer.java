@@ -1,6 +1,7 @@
 /*
  * LottoPlayer.java
  */
+
 package logic;
 
 import domain.Lotto;
@@ -10,9 +11,8 @@ import domain.WinningLotto;
 import java.util.List;
 
 class LottoPlayer {
-	int gameCount;
-	List<Lotto> lottoList;
-	WinningLotto winningLotto;
+	private int gameCount;
+	private List<Lotto> lottoList;
 
 	public LottoPlayer() {
 		init();
@@ -21,12 +21,12 @@ class LottoPlayer {
 	private void init() {
 		gameCount = InputView.getLottoCount();
 		lottoList = LottoMaker.getRandomLottoList(gameCount);
-		OutputView.printGameCount(gameCount);
-		OutputView.printLottoList(lottoList);
 	}
 
-	public void proceedLotto() {
-		winningLotto = InputView.getWinningLotto();
+	public void proceedLottoGame() {
+		OutputView.printGameCount(gameCount);
+		OutputView.printLottoList(lottoList);
+		WinningLotto winningLotto = InputView.getWinningLotto();
 		LottoResult lottoResult = new LottoResult(lottoList, winningLotto);
 		OutputView.printResult(lottoResult);
 	}

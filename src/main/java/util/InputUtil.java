@@ -10,10 +10,11 @@ import java.util.stream.Collectors;
 public class InputUtil {
 	private static final String BLANK_REGEX = "(^\\s*$)";
 	private static final String NUMBER_REGEX = "(^[0-9]+$)";
+	private static final String COMMA = ",";
 	private static final Scanner SCANNER = new Scanner(System.in);
 
 	public static int getInt() {
-		String input = null;
+		String input;
 		do {
 			input = SCANNER.nextLine();
 		} while (!isNumber(input));
@@ -29,17 +30,26 @@ public class InputUtil {
 	}
 
 	public static List<Integer> getIntegerList() {
-		List<String> strList = null;
+		List<String> strList;
 		do {
-			strList = Arrays.asList(getString().split(","));
-		} while (!strList.stream().allMatch(InputUtil::isNumber));
-		return strList.stream().map(String::trim)
+			strList = Arrays.asList(getString().split(COMMA));
+		} while (!isNumberList(strList));
+		return makeIntegerList(strList);
+	}
+
+	private static boolean isNumberList(List<String> strList) {
+		return strList.stream().allMatch(InputUtil::isNumber);
+	}
+
+	private static List<Integer> makeIntegerList(List<String> strList) {
+		return strList.stream()
+				.map(String::trim)
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 	}
 
-	public static String getString() {
-		String input = null;
+	private static String getString() {
+		String input;
 		do {
 			input = SCANNER.nextLine();
 		} while (isBlank(input));

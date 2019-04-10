@@ -1,6 +1,7 @@
 /*
  * LottoMaker.java
  */
+
 package logic;
 
 import domain.Lotto;
@@ -18,12 +19,12 @@ public class LottoMaker {
 	public static List<Lotto> getRandomLottoList(int gameCount) {
 		List<Lotto> lottoList = new ArrayList<>();
 		for (int i = 0; i < gameCount; i++) {
-			lottoList.add(makeRandomLotto());
+			lottoList.add(makeLotto());
 		}
 		return lottoList;
 	}
 
-	private static Lotto makeRandomLotto() {
+	private static Lotto makeLotto() {
 		List<Integer> intList;
 		do {
 			intList = makeRandomIntList();

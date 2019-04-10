@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -18,11 +17,10 @@ public class Lotto {
 		return numbers.toString();
 	}
 
-	public int getCount(Lotto lotto) {
-		return numbers.stream()
-				.filter(number -> lotto.contains(number))
-				.collect(Collectors.toList())
-				.size();
+	public int getCount(Lotto compareLotto) {
+		return (int) numbers.stream()
+				.filter(number -> compareLotto.contains(number))
+				.count();
 	}
 
 	public boolean contains(int number) {
