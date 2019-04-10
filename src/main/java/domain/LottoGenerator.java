@@ -3,11 +3,16 @@ package domain;
 import java.util.Scanner;
 
 public class LottoGenerator {
+	static final int EACH_LOTTO_PRICE = 1000;
 	Scanner scanner = new Scanner(System.in);
 
 	private int inputLottoPriceFromUser() {
-		System.out.println("구입금액을 입력해 주세요.");
-		return changeTypeStringToInt(scanner.next());
+		int lottoPrice;
+		do {
+			System.out.println("구입금액을 입력해 주세요.");
+			lottoPrice = changeTypeStringToInt(scanner.next());
+		} while (!validateLottoPrice(lottoPrice));
+		return lottoPrice;
 	}
 
 	private int changeTypeStringToInt(String inputLottoPrice) {
@@ -19,5 +24,13 @@ public class LottoGenerator {
 			return -1;
 		}
 		return lottoPrice;
+	}
+	
+	private boolean validateLottoPrice(int lottoPrice) {
+		if (lottoPrice < EACH_LOTTO_PRICE || lottoPrice % EACH_LOTTO_PRICE != 0) {
+			System.out.println("구입금액이 잘못 되었습니다.");
+			return false;
+		}
+		return true;
 	}
 }
