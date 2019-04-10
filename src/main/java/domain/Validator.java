@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 사용자 입력에 대한 유효성 검사를 담당하는 객체
@@ -12,8 +13,7 @@ public class Validator {
             Integer.parseInt(str);
             return true;
         } catch (NumberFormatException e) {
-            System.out.println("정수를 입력해주세요");
-            System.out.println("(혹은 너무 큰 금액일 수도 있습니다. 적당한 숫자를 입력해주세요.)");
+            System.out.println("입력이 올바르지 않습니다. 정수인지, 수가 너무 크지는 않은지 확인해주세요.");
             return false;
         }
     }
@@ -54,8 +54,27 @@ public class Validator {
                 && isMultipleOfLottoPrice(purchaseAmount);
     }
 
-    public boolean isValidWinningNumbers(List<Integer> winningNumbers) {
+    public boolean isInBounds(List<String> userInput) {
+        List<Integer> outbounds = userInput.stream().map(Integer::parseInt)
+                .filter(number -> (number > LottoManager.WINNING_NUMBER_BOUND)
+                        || (number < LottoManager.WINNING_NUMBER_ORIGIN))
+                .collect(Collectors.toList());
+
+        if (outbounds.size() > 0) {
+            System.out.println("1부터 45까지의 숫자들만 입력할 수 있습니다.");
+            return false;
+        }
         return true;
+    }
+
+    public boolean isValidWinningNumbers(List<String> userInput) {
+        boolean validNumerics = true;
+
+        for (String str: userInput) {
+            validNumerics = validNumerics && isNemericInt(str);
+        }
+
+        return validNumerics && isInBounds(userInput);
     }
 
     public boolean isValidBonus(String Bonus) {
