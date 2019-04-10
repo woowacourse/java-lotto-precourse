@@ -130,6 +130,16 @@ public class LottoGame {
     	return intWinningNumberList;
     }
     
+    private boolean checkRange(List<Integer> numberList) {
+    	boolean rightRange = true;
+    	
+    	for (int i = 0; i < numberList.size(); i++) {
+    		rightRange = (numberList.get(i) >= 1 && numberList.get(i) <= 45 && rightRange == true) ? true : false;
+    	}
+    	
+    	return rightRange;
+    }
+    
     public static void main(String[] args) {
     	// test용 main 함수
 		LottoGame lg = new LottoGame();
