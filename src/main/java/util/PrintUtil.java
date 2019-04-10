@@ -17,11 +17,6 @@ public class PrintUtil {
                 }
         }
 
-        public void printPurchasedLotto(Lotto lotto){
-                String message = lotto.getNumbers().toString();
-                System.out.println(message);
-        }
-
         public void printLastWeekWinningNumberInputMessage(){
                 System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         }
@@ -33,5 +28,10 @@ public class PrintUtil {
         public void printWinStatsMessage(){
                 System.out.println("\n당첨통계");
                 System.out.println("---------");
+        }
+
+        private void printPurchasedLotto(Lotto lotto){
+                String message = lotto.getNumbers().toString();
+                System.out.println(message);
         }
 }
