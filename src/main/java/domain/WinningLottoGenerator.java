@@ -83,6 +83,6 @@ public class WinningLottoGenerator {
 
 	private int inputBonusNumberFromUser() {
 		System.out.println("보너스 볼을 입력해 주세요.");
-		return scanner.nextInt();
+		return changeTypeStringToInt(scanner.next());
 	}
 }
