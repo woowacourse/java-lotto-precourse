@@ -9,7 +9,7 @@ public class Main {
         var game = new LottoGame(
                 new MoneyReaderFromUser(),
                 new MyLottoFactory(new NumberPickerByShuffling(new Random())),
-                new FakeLottoReader(),
+                new LottoReaderFromUser(),
                 new FakeLottoAnalyzer()
         );
         game.run();

@@ -12,6 +12,11 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    @Override
+    public String toString() {
+        return lotto.toString() + String.format(" + [%d]", bonusNo);
+    }
+
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
         return null;
