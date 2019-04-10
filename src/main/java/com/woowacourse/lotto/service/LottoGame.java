@@ -31,9 +31,9 @@ public class LottoGame {
 
 	private void getWinningLotto() {
 		Lotto winningLotto = new Lotto(userInput.getWinningNumber());
-
+		int bonusBall = userInput.getBonusBall();
 		/* 테스트를 위한 출력 */
-		System.out.println(winningLotto);
+		System.out.println(winningLotto + " 보너스볼 : " + bonusBall);
 	}
 
 	public void start() {

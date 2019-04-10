@@ -20,6 +20,7 @@ public class UserInput {
 	static final String DEMAND_PURCHASING_AMOUNT = "구입금액을 입력해주세요.";
 	static final String DEMAND_USER_INPUT_AGAIN = "올바르지 않은 값입니다. 다시 입력해주세요.";
 	static final String DEMAND_WINNING_NUMBER = "지난 주 당첨 번호를 입력해주세요.";
+	static final String DEMAND_WINNING_BONUS_BALL = "보너스 볼을 입력해주세요.";
 
 	private String inputValue() {
 		Scanner sc = new Scanner(System.in);
@@ -71,4 +72,9 @@ public class UserInput {
 		return true;
 	}
 
+	public int getBonusBall() {
+		System.out.println(DEMAND_WINNING_BONUS_BALL);
+		int bonusBall = Integer.parseInt(inputValue());
+		return bonusBall;
+	}
 }
