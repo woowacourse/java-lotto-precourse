@@ -111,8 +111,7 @@ public class Lotto {
     }
 
     public static List<Lotto> makeListOfUserLottos(String userInput) {
-        int intUserInput = Integer.parseInt(userInput);
-        int quantitiesOfLottos = intUserInput / PRICE_OF_ONE_LOTTO;
+        int quantitiesOfLottos = Integer.parseInt(userInput) / PRICE_OF_ONE_LOTTO;
         List<Lotto> listOfUserLottos = new ArrayList<>();
         for (int i = 0; i < quantitiesOfLottos; i++) {
             Lotto currentLotto = new Lotto(makeListOfRandomNumbers());

@@ -50,8 +50,7 @@ public class WinningLotto {
         boolean isUserInputRight = false;
         String userInput = "E @ askUserWinningNumbers";
         while (!isUserInputRight) {
-            userInput = Lotto.askAndReceiveInput("지난 주 당첨 번호를 입력해주세요.");
-            userInput = userInput.replaceAll("\\s+", "");
+            userInput = Lotto.askAndReceiveInput("지난 주 당첨 번호를 입력해주세요.").replaceAll("\\s+","");
             isUserInputRight = checkUserInputWinningNumbers(userInput);
         }
         return userInput;
