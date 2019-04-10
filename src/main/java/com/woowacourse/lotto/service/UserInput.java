@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.util.Validator;
 
 public class UserInput {
@@ -72,9 +73,26 @@ public class UserInput {
 		return true;
 	}
 
-	public int getBonusBall() {
+	public int getBonusBall(Lotto winningLotto) {
+		boolean result;
 		System.out.println(DEMAND_WINNING_BONUS_BALL);
-		int bonusBall = Integer.parseInt(inputValue());
-		return bonusBall;
+		String bonusBall;
+
+		do {
+			bonusBall = inputValue();
+			result = getWinningBonusBallValidResult(bonusBall, winningLotto);
+		}
+		while (!result);
+		return Integer.parseInt(bonusBall);
 	}
+
+	private boolean getWinningBonusBallValidResult(String bonusBall, Lotto winningLotto) {
+		if (!Validator.checkWinningBonusBallValid(bonusBall, winningLotto)) {
+			printUserInputAgain();
+			return false;
+		}
+		return true;
+	}
+
+
 }

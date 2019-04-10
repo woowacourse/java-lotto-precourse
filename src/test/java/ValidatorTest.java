@@ -11,6 +11,7 @@
 import java.util.Arrays;
 import java.util.List;
 
+import com.woowacourse.lotto.domain.Lotto;
 import com.woowacourse.lotto.util.Validator;
 import org.junit.Assert;
 import org.junit.Test;
@@ -71,36 +72,6 @@ public class ValidatorTest {
 	}
 
 	@Test
-	public void checkRangeWinningNumberList_문자입력() {
-		List<String> list = Arrays.asList("1,2,3,4,5,abc".split(","));
-		Assert.assertFalse(Validator.checkRangeWinningNumberList(list));
-	}
-
-	@Test
-	public void checkRangeWinningNumberList_빈문자입력() {
-		List<String> list = Arrays.asList("1,2,,4,5,6".split(","));
-		Assert.assertFalse(Validator.checkRangeWinningNumberList(list));
-	}
-
-	@Test
-	public void checkRangeWinningNumberList_공백입력() {
-		List<String> list = Arrays.asList("1,2,3,4,5, ".split(","));
-		Assert.assertFalse(Validator.checkRangeWinningNumberList(list));
-	}
-
-	@Test
-	public void checkRangeWinningNumberList_범위에서벗어난숫자입력() {
-		List<String> list = Arrays.asList("1,2,3,4,5,46".split(","));
-		Assert.assertFalse(Validator.checkRangeWinningNumberList(list));
-	}
-
-	@Test
-	public void checkRangeWinningNumberList_정상작동() {
-		List<String> list = Arrays.asList("1,2,3,4,5,45".split(","));
-		Assert.assertTrue(Validator.checkRangeWinningNumberList(list));
-	}
-
-	@Test
 	public void checkOverlapNumberList_중복존재() {
 		List<String> list = Arrays.asList("1,2,3,4,5,5".split(","));
 		Assert.assertFalse(Validator.checkOverlapNumberList(list));
@@ -112,4 +83,42 @@ public class ValidatorTest {
 		Assert.assertTrue(Validator.checkOverlapNumberList(list));
 	}
 
+	@Test
+	public void checkRangeLottoNumber_문자입력() {
+		Assert.assertFalse(Validator.checkRangeLottoNumber("a"));
+	}
+
+	@Test
+	public void checkRangeLottoNumber_빈문자입력() {
+		Assert.assertFalse(Validator.checkRangeLottoNumber(""));
+	}
+
+	@Test
+	public void checkRangeLottoNumber_공백입력() {
+		Assert.assertFalse(Validator.checkRangeLottoNumber(" "));
+	}
+
+	@Test
+	public void checkRangeLottoNumber_범위에서벗어난숫자입력() {
+		Assert.assertFalse(Validator.checkRangeLottoNumber("0"));
+		Assert.assertFalse(Validator.checkRangeLottoNumber("46"));
+	}
+
+	@Test
+	public void checkRangeLottoNumber_정상작동() {
+		Assert.assertTrue(Validator.checkRangeLottoNumber("1"));
+		Assert.assertTrue(Validator.checkRangeLottoNumber("45"));
+	}
+
+	@Test
+	public void checkWinningBonusBallValid_당첨번호와중복되는숫자입력() {
+		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
+		Assert.assertFalse(Validator.checkWinningBonusBallValid("5", new Lotto(list)));
+	}
+
+	@Test
+	public void checkWinningBonusBallValid_정상작동() {
+		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
+		Assert.assertTrue(Validator.checkWinningBonusBallValid("45", new Lotto(list)));
+	}
 }

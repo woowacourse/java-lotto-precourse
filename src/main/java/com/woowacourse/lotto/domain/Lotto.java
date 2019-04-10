@@ -13,6 +13,12 @@ public class Lotto {
 	}
 
 	// 추가 기능 구현
+	public boolean existsNumber(int number) {
+		if (numbers.contains(number)) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public String toString() {

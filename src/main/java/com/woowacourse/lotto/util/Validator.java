@@ -12,6 +12,8 @@ package com.woowacourse.lotto.util;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.woowacourse.lotto.domain.Lotto;
+
 import static com.woowacourse.lotto.domain.LottoFactory.LOTTO_PRICE;
 import static com.woowacourse.lotto.util.RandomNumber.LOTTO_NUMBER_COUNT;
 
@@ -58,9 +60,25 @@ public class Validator {
 	}
 
 	public static boolean checkRangeWinningNumberList(List<String> numberList) {
-		boolean result = numberList.stream().allMatch(s -> s.matches("[1-9]|[1-3][0-9]|[4][0-5]"));
+		boolean result = numberList.stream().allMatch(number -> checkRangeLottoNumber(number));
 		return result;
 	}
 
+	public static boolean checkRangeLottoNumber(String number) {
+		if (!number.matches("[1-9]|[1-3][0-9]|[4][0-5]")) {
+			return false;
+		}
+		return true;
+	}
+
+	public static boolean checkWinningBonusBallValid(String bonusBall, Lotto winningLotto) {
+		if (!checkRangeLottoNumber(bonusBall)) {
+			return false;
+		}
+		if (winningLotto.existsNumber(Integer.parseInt(bonusBall))) {
+			return false;
+		}
+		return true;
+	}
 
 }
