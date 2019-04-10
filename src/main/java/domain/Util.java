@@ -14,6 +14,10 @@ public class Util {
         System.out.println(message);
     }
 
+    public static void printConsole(int message){
+        System.out.println(message);
+    }
+
     public static String getConsoleInput() {
         return removeBlank(sc.nextLine());
     }

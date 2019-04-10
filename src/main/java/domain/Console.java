@@ -1,10 +1,13 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class Console {
     private final static int LOTTO_NUMBER_COUNT = 6;
+
 
     public static int getInputLottoMoney(){
         Util.printConsole("구입금액을 입력해 주세요.");
@@ -32,5 +35,14 @@ public class Console {
     public static int getWinngLottoBonus(){
         Util.printConsole("보너스볼을 입력해 주세요.");
         return Util.fromStringToInteger(Util.removeBlank(Util.getConsoleInput()));
+    }
+
+    public static void printResult(Map<Rank,Integer> results){
+        for(Map.Entry<Rank, Integer> entry : results.entrySet()){
+            Rank rank = entry.getKey();
+            Integer count = entry.getValue();
+            Util.printConsole(rank.getCountOfMatch() + "개 일치("+rank.getWinningMoney()+"원) - " + count + "개");
+        }
+
     }
 }

@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,6 +10,7 @@ public class UserLottos {
 
     private final int MIN_LOTTO_NUMBER = 1;
     private final int MAX_LOTTO_NUMBER = 45;
+    private Map<Rank, Integer> RANK_MAP = new HashMap<>();
 
     public UserLottos(int lottoCount) {
         Util.printConsole(lottoCount + "개를 구매했습니다.");
@@ -35,10 +34,20 @@ public class UserLottos {
         return selectedLottoNumbers;
     }
 
-    public void checkWinningLotto(WinningLotto winningLotto) {
-        for (Lotto lotto : userLottos) {
-            System.out.println(winningLotto.match(lotto).getCountOfMatch());
+    public void getResultLottos(WinningLotto winningLotto){
+        for (Rank rank : Rank.values()){
+            RANK_MAP.put(rank,0);
         }
+
+        int getLottoMoney = 0;
+        for (Lotto lotto : userLottos){
+            Rank rank = winningLotto.match(lotto);
+            getLottoMoney += rank.getWinningMoney();
+            RANK_MAP.put(rank, RANK_MAP.get(rank)+1);
+        }
+
+        Console.printResult(RANK_MAP);
+        Util.printConsole("총 수익률은 " + (float)getLottoMoney/1000/userLottos.size() );
     }
 
     public int getUserLottosCount() {

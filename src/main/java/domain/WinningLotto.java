@@ -16,8 +16,6 @@ public class WinningLotto {
         // TODO 로직 구현
         boolean bonus =  userLotto.getLottoNumbers().contains(bonusNo);
         userLotto.getLottoNumbers().retainAll(lotto.getLottoNumbers());
-        Rank rank = Rank.valueOf(userLotto.getLottoNumbers().size(),bonus);
-
-        return rank;
+        return Rank.valueOf(userLotto.getLottoNumbers().size(),bonus);
     }
 }

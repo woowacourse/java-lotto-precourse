@@ -14,8 +14,6 @@ public class LottoMain {
         System.out.println("당첨통계");
         System.out.println("-----");
 
-        userLottos.checkWinningLotto(winningLotto);
-
-
+        userLottos.getResultLottos(winningLotto);
     }
 }
