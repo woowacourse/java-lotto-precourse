@@ -22,8 +22,23 @@ public class LottoGame {
 
 	public static int getPrice() {
 		System.out.println("구입 금액을 입력해 주세요.");
-		int price = scan.nextInt();
+		int price = scan.nextInt();;
+		if(isValidPrice(price)) {
+			price = scan.nextInt();
+		}
+		if(price%1000!=0) {
+			System.out.println("거스름돈은 "+price%1000+"원 입니다.");
+		}
 		return price;
+	}
+	
+	public static boolean isValidPrice(int price) {
+		if(price<1000) {
+			System.out.println("최소 구입 금액은 1000원입니다.");
+			System.out.println("다시 입력해주십시오.");
+			return true;
+		}
+		return false;
 	}
 
 	public static List<Integer> getRandomNumber() {
