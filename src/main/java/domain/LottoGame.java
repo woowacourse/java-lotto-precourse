@@ -7,8 +7,9 @@ import userInput.WinningNumbersInput;
 public class LottoGame {
     public static void main(String[] args) {
         int purchasePrice = new PurchasePriceInput().getPrice();
-        LottoTickets lottoTickets = new LottoTickets(purchasePrice);
-        lottoTickets.showNumberOfTicketsAndChanges();
+        Cashier cashier = new Cashier(purchasePrice);
+        LottoTickets lottoTickets = new LottoTickets(cashier.getNumberOfTickets());
+        cashier.showInfo();
         lottoTickets.showAll();
 
         Lotto winningNumbers = new WinningNumbersInput().getWinningNumbers();

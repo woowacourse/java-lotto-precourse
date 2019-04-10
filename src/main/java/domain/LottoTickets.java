@@ -1,33 +1,16 @@
 package domain;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LottoTickets {
-    private static final int PRICE_OF_LOTTO = 1000;
-    private static final int LOWER_BOUND_OF_CHANGE = 0;
     private static final int TIME_TO_BREAK = 300;
     private List<Lotto> tickets = new ArrayList<>();
-    private int purchasePrice;
 
-    public LottoTickets(int purchasePrice) {
-        this.purchasePrice = purchasePrice;
-        int numberOfTickets = calculateNumberOfTickets();
+    public LottoTickets(int numberOfTickets) {
         generateTickets(numberOfTickets);
-    }
-
-    private int calculateNumberOfTickets() {
-        return (purchasePrice / PRICE_OF_LOTTO);
-    }
-
-    public void showNumberOfTicketsAndChanges() {
-        System.out.print(tickets.size() + "개를 구매했습니다. ");
-        int change = purchasePrice % PRICE_OF_LOTTO;
-        if (change > LOWER_BOUND_OF_CHANGE) {
-            System.out.print("잔돈은 " + change + "원입니다.");
-        }
-        pause();
-        System.out.println();
     }
 
     private void generateTickets(int numberOfTickets) {
@@ -52,14 +35,6 @@ public class LottoTickets {
             sleep(TIME_TO_BREAK);
         }
         System.out.println();
-    }
-
-    private void pause() {
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void sleep(int timeToBreak) {
