@@ -17,7 +17,7 @@ public class LottoGame {
 	WinningLottoGenerator winLottoGenerator = new WinningLottoGenerator();
 	
 
-    private List<Lotto> makeLotto() {
+    public List<Lotto> makeLotto() {
     	ArrayList<Lotto> lottos = lottoGenerator.makeLotto();
     	
     	for (int i = 0; i < lottos.size(); i++) {
@@ -27,7 +27,7 @@ public class LottoGame {
     	return lottos;
     }
     
-    private WinningLotto makeWinningLotto() {
+    public WinningLotto makeWinningLotto() {
         List<Integer> winningNumber = winLottoGenerator.makeWinningNumber();
 
     	Lotto winLotto = new Lotto(winningNumber);
@@ -37,7 +37,7 @@ public class LottoGame {
     	return winLottoWithBonus;
     }
     
-    private List<Rank> getRankResult(WinningLotto winningLotto, List<Lotto> userLotto) {
+    public List<Rank> getRankResult(WinningLotto winningLotto, List<Lotto> userLotto) {
         List<Rank> rank = new ArrayList<Rank>();
 
 		for (Lotto lotto : userLotto) {
@@ -47,7 +47,7 @@ public class LottoGame {
 		return rank;
     }
     
-    private HashMap<Integer, Integer> initHashMap() {
+    public HashMap<Integer, Integer> initHashMap() {
   		LinkedHashMap<Integer, Integer> result = new LinkedHashMap<Integer, Integer>();
   		
   		result.put(0, 0);
@@ -60,7 +60,7 @@ public class LottoGame {
   		return result;
       }
     
-	private HashMap<Integer, Integer> setRankInResultMap(List<Rank> rank, HashMap<Integer, Integer> result) {
+    public HashMap<Integer, Integer> setRankInResultMap(List<Rank> rank, HashMap<Integer, Integer> result) {
 		int key = 0;
 		int value = 0;
 		
@@ -73,7 +73,7 @@ public class LottoGame {
 		return result;
 	}
 	
-	private List<Iterator<Integer>> makeIterator(HashMap<Integer, Integer> result) {
+    public List<Iterator<Integer>> makeIterator(HashMap<Integer, Integer> result) {
 		List<Iterator<Integer>> iterators = new ArrayList<Iterator<Integer>>();
 		Iterator<Integer> valueIter = result.values().iterator();
 		Iterator<Integer> keyIter = result.keySet().iterator();
@@ -86,12 +86,12 @@ public class LottoGame {
 		return iterators;
 	}
 	
-	private void printNotice() {
+    public void printNotice() {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 	}
 	
-	private void printResult(List<Iterator<Integer>> iterators) {
+    public void printResult(List<Iterator<Integer>> iterators) {
 		int j = 0;
 		
 		for(int i = 3; i < 8; i++) {
@@ -103,7 +103,7 @@ public class LottoGame {
 		}
 	}
 
-	private void printProfitRate(List<Iterator<Integer>> iterators, HashMap<Integer, Integer> result) {
+    public void printProfitRate(List<Iterator<Integer>> iterators, HashMap<Integer, Integer> result) {
 		int totalIncome = 0;
 		int purchaseCost = result.size() * 1000;
 		
