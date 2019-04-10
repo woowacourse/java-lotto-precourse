@@ -21,7 +21,6 @@ public class LottoGame {
 	private final String NUMBER_SEPARATOR = ",";
 	private final String REQUEST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
 	private final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-	private final String WRONG_INPUT = "1~45사이의 중복되지 않은 6개의 수를 입력해 주세요. 콤마(,)로 구분";
 	private final String FAIL_GENERATEING_WINNING_LOTTO = "잘못된 당첨 번호입니다.";
 
 	private WinningLotto winningLotto;
