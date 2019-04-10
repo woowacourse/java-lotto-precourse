@@ -15,6 +15,7 @@ public class Game {
 
         createLottoObjectArray();
         createLottoInstance();
+        repeatOutputLottoNumbers();
     }
 
     private void buyLotto() {
@@ -83,5 +84,11 @@ public class Game {
         for (int i = 0; i < purchaseCount; i++) {
             lottos[i] = new Lotto(createLottoNumbers());
         }
+    }
+
+    private void outputLottoNumbers(Lotto lotto) {
+        String numbers = lotto.getNumbers().toString();
+
+        System.out.println(numbers);
     }
 }
