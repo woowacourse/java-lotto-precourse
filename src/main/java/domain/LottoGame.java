@@ -291,10 +291,18 @@ public class LottoGame {
         return totalWinningMoney;
     }
 
+    public static void announceEarningRate(int paidMoney, int winningMoney) {
+        double earningRate = winningMoney / paidMoney;
+
+        System.out.println(String.format("총 수익률은 %.3f 입니다.", earningRate));
+    }
+
     public static void main(String[] args) {
         int paidMoney = payMoney();
         List<Lotto> purchasedLotto = purchaseLotto(paidMoney);
         WinningLotto winningLotto = generateWinningLotto();
-        System.out.println(getWinningMoney(purchasedLotto, winningLotto));
+        int winningMoney = getWinningMoney(purchasedLotto, winningLotto);
+
+        announceEarningRate(paidMoney, winningMoney);
     }
 }
