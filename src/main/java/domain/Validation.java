@@ -7,10 +7,11 @@ import java.util.ArrayList;
 public class Validation {
 
     private static final String PATTERN_NUMBER = "^[0-9]*$";
-    private static final String MESSAGE_ERROR_INPUT_MONEY = "Error: 0보다 큰 숫자로 입력해 주세요";
+    private static final String MESSAGE_ERROR_INPUT_MONEY = "Error: " + LottoGame.LOTTO_PRICE + "보다 큰 숫자로 입력해 주세요";
+    private static final String MESSAGE_ERROR_INPUT_WINNING_LOTTO = "Error: (,)를 기준으로 올바른 숫자를 입력해 주세요";
 
     public static boolean isValidInputMoney(String money) {
-        if (!Pattern.matches(PATTERN_NUMBER, money) || Integer.parseInt(money) < 0) {
+        if (!Pattern.matches(PATTERN_NUMBER, money) || Integer.parseInt(money) < LottoGame.LOTTO_PRICE) {
             System.out.println(MESSAGE_ERROR_INPUT_MONEY);
             return false;
         }
@@ -18,24 +19,13 @@ public class Validation {
     }
 
     public static boolean isValidWinLottoInput(String str) {
-        String[] winNum = str.split(",");
-        List<String> temp = new ArrayList<>();
-        if (!isValidWinNumberLength(winNum)) {
-            System.out.println("길이 오류");
+        String[] winNumbers = str.split(",");
+        if (!isValidWinNumberLength(winNumbers)
+                || !isValidWinLottoNumber(winNumbers)
+                || !isValidWinLottoDuplication(winNumbers)) {
+            System.out.println(MESSAGE_ERROR_INPUT_WINNING_LOTTO);
             return false;
         }
-        if (!isValidWinLottoNumber(winNum)) {
-            System.out.println("숫자 오류");
-            return false;
-        }
-        for (String num : winNum) {
-            if (temp.contains(num)) {
-                System.out.println("중복오류");
-                return false;
-            }
-            temp.add(num);
-        }
-
         return true;
     }
 
@@ -44,25 +34,38 @@ public class Validation {
     }
 
     private static boolean isValidWinLottoNumber(String[] str) {
-        boolean finish = true;
+        boolean valid = true;
         int idx = 0;
-        while (finish && (idx < str.length)) {
-            finish = isNumber(str[idx]);
+        while (valid && (idx < str.length)) {
+            valid = isNumber(str[idx]);
             idx++;
         }
-
-        return finish;
+        return valid;
     }
 
-    public static boolean isNumber(String str) {
+    private static boolean isValidWinLottoDuplication(String[] str) {
+        boolean valid = true;
+        int idx = 0;
+        List<String> check = new ArrayList<>();
+        while (valid && (idx < str.length)) {
+            valid = !check.contains(str[idx]);
+            check.add(str[idx]);
+            idx++;
+        }
+        return valid;
+    }
+
+    public static boolean isNumber(String number) {
+        boolean correctNumber;
         try {
-            int num = Integer.parseInt(str);
-            if (num < 1 || num > 45) {
-                return false;
-            }
+            correctNumber = isLottoNumber(Integer.parseInt(number));
         } catch (NumberFormatException e) {
             return false;
         }
-        return true;
+        return correctNumber;
+    }
+
+    private static boolean isLottoNumber(int number) {
+        return (number >= LottoGame.MIN_LOTTO_NUMBER) && (number <= LottoGame.MAX_LOTTO_NUMBER);
     }
 }

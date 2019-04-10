@@ -14,8 +14,9 @@ public class LottoGame {
     private static final String MESSAGE_GET_LOTTO = "개를 구매했습니다.";
     private static final String MESSAGE_INPUT_WIN_LOTTO = "지난 주 당첨번호를 입력해 주세요.";
     private static final String MESSAGE_INPUT_BONUS = "보너스 볼을 입력해주세요.";
-    private static final int LOTTO_PRICE = 1000;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int LOTTO_PRICE = 1000;
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
     public static final int LOTTO_NUMBER_COUNT = 6;
 
     private List<Lotto> purchasedLottoList;
@@ -50,7 +51,7 @@ public class LottoGame {
         int randomNum;
         Random random = new Random();
         while (randomList.size() < LOTTO_NUMBER_COUNT) {
-            randomNum = random.nextInt(MAX_LOTTO_NUMBER) + 1;
+            randomNum = random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER;
             removeDuplication(randomList, randomNum);
             randomList.add(randomNum);
         }
