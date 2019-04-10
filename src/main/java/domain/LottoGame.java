@@ -84,21 +84,31 @@ public class LottoGame {
     
     private List<Integer> inputWinningNumber() {
     	String winningNumber = "";
+    	List<String> winningNumberList = new ArrayList<String>();
     	
     	do {
     		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     		winningNumber = sc.nextLine();
+    		winningNumberList = splitStringByComma(winningNumber);
     	} while(winningNumber.length() == 0);
 
     	return null;
     }
     
-    private List<String> splitStringByComma(String winningNumberList) {
+    private List<String> splitStringByComma(String winningNumber) {
     	List<String> splitedNumber = new ArrayList<>(Arrays.asList(winningNumberList.split(",")));
 
     	return splitedNumber;
     }
+    
+    private boolean checkLength(List<String> splitedNumber) {
+    	return (splitedNumber.size() == 6) ? true : false;
+    }
+    
+    
 
+   
+    
     public static void main(String[] args) {
     	// test용 main 함수
 		LottoGame lg = new LottoGame();
