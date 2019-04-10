@@ -44,4 +44,11 @@ public class LottoBank {
 		}
 		return winnerNums;
 	}
+	
+	private int checkValid(int bonusNo) {
+		if((bonusNo < LottoRule.BEGINNUM.getNum()) || (bonusNo > LottoRule.ENDNUM.getNum())) {
+			printAndfixErr(ErrMsg.OutOfRangeErr.getMsg());
+		}
+		return bonusNo;
+	}
 }
