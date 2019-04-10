@@ -9,14 +9,14 @@ public class UserOutput {
     public void PrintPurchaseResults() {
 
         lottoList = LottoGenerator.getLottoList();
-        PrintPurchaseCounts();
+        PrintPurchaseCount();
 
         for (int lottoOrder = 0; lottoOrder < lottoList.size(); lottoOrder++) {
             PrintLottoNumbers(lottoOrder);
         }
     }
 
-    private void PrintPurchaseCounts() {
+    private void PrintPurchaseCount() {
         int lottoCount = this.lottoList.size();
         System.out.println(lottoCount + "개를 구입하였습니다.");
     }
@@ -32,14 +32,25 @@ public class UserOutput {
 
     }
 
-    public void PrintWinStatistics() {
+    public void PrintWinStatistics(List<Rank> userRanks) {
         System.out.println("당첨통계");
         System.out.println("---------");
-        for (int i = 0; i < lottoList.size(); i++) {
-
-        }
 
     }
+
+    private void PrintWinResult(Rank rank, List<Rank> userRanks) {
+        int matchCountperRank = (int) userRanks.stream().filter(r -> r == rank).count();
+
+        if (rank == Rank.SECOND) {
+            System.out.println(rank.getCountOfMatch() + "개 일치, 보너스 볼 일치 (" + rank.getWinningMoney() + "원)-"
+                    + matchCountperRank + "개");
+        }
+
+        System.out.println(rank.getCountOfMatch() + "개 일치, (" + rank.getWinningMoney() + "원)-"
+                + matchCountperRank+"개");
+
+    }
+
 
     private void PrintEarningRate() {
         System.out.println("이후 구현 예정");

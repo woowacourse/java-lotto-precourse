@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -22,17 +23,22 @@ public class LottoGame {
         List<Integer> winningNumbers = userInput.RecieveWinningNumber();
         int bonusNumber = userInput.RecieveBonusNumber();
         lottoGenerator.GenerateWinningLotto(winningNumbers, bonusNumber);
+        List<Rank> ranks =  MatchLottoNumbers();
 
-        userOutput.PrintWinStatistics();
+        userOutput.PrintWinStatistics(ranks);
     }
 
-    private void MatchLottoNumbers() {
+    private List<Rank> MatchLottoNumbers() {
         WinningLotto winningLotto = LottoGenerator.getWinningLotto();
         List<Lotto> lottoes = LottoGenerator.getLottoList();
+        List<Rank> ranks = new ArrayList<>();
 
         for (int i = 0; i < lottoes.size(); i++) {
             Rank rank = winningLotto.match(lottoes.get(i));
+            ranks.add(rank);
         }
+
+        return ranks;
     }
 
     public static void main(String[] args) {
