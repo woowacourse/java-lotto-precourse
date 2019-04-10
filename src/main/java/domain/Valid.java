@@ -33,5 +33,8 @@ public class Valid {
         }
         return false;
     }
+    public static boolean isWrongSizeOfWinningNumbers(String winningNumbers) {
+        return winningNumbers.split(Message.SPOT).length != Const.CREATE_LOTTO_NUMBER_TIME;
+    }
 
 }
