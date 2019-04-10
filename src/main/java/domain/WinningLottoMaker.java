@@ -1,7 +1,7 @@
 /*
- * @WinningLottoMaker.java		1.01 2019/04/10
+ * @WinningLottoMaker.java		1.02 2019/04/10
  * 
- * Copyright(c)2019				HwiJin Hong.
+ * Copyright(c)2019			HwiJin Hong.
  * All right reserved.
  * 
  * [ 우아한 테크코스 3주차 미션 ]
@@ -17,7 +17,7 @@ import java.util.Scanner;
 /**
  * 당첨 로또 번호를 만들어주는 클래스
  * 
- * @version 1.01 2019년 4월 10일
+ * @version 1.02 2019년 4월 10일
  * @author 홍휘진
  *
  */
@@ -108,6 +108,6 @@ public class WinningLottoMaker {
 			numbers.add(number);
 		}
 		lastWeekLotto = new Lotto(numbers);
-		return true;
+		return Lotto.duplicateNumberInLotto(numbers);
 	}
 }

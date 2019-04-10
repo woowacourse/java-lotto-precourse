@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -21,6 +22,14 @@ public class Lotto {
 
 	public List<Integer> getNumbers() {
 		return numbers;
+	}
+	
+	public static boolean duplicateNumberInLotto(List <Integer> numbers) {
+		HashSet<Integer> recordLotto = new HashSet<>();
+		for (Integer number : numbers) {
+			recordLotto.add(number);
+		}
+		return (recordLotto.size() == numbers.size());
 	}
 
 	@Override
