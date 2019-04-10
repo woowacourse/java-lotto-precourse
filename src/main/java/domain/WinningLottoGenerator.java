@@ -8,12 +8,14 @@ import java.util.regex.Pattern;
 
 public class WinningLottoGenerator {
 	static private final String NUMBER_CHECK_REGEX = "^[0-9]+$";
+	static private final int LOTTO_MINIMUM_NUMBER = 0;
+	static private final int LOTTO_MAXIMUM_NUMBER = 45;
 	
-	LottoGame lottoGame = new LottoGame();
+	LottoGenerator lg = new LottoGenerator();
 	Scanner sc = new Scanner(System.in);
 	
 	// 당첨 번호 생성 함수
-    private List<Integer> makeWinningNumber() {
+    public List<Integer> makeWinningNumber() {
     	List<String> splitedNumber = new ArrayList<>();
       	List<Integer> intWinningNumberList = new ArrayList<Integer>();
       	
@@ -83,14 +85,14 @@ public class WinningLottoGenerator {
     	boolean rightRange = true;
     	
     	for (int i = 0; i < numberList.size(); i++) {
-    		rightRange = (numberList.get(i) >= 1 && numberList.get(i) <= 45 && rightRange == true) ? true : false;
+    		rightRange = (numberList.get(i) >= LOTTO_MINIMUM_NUMBER && numberList.get(i) <= LOTTO_MAXIMUM_NUMBER && rightRange == true) ? true : false;
     	}
 
     	return rightRange;
     }
     
     // 보너스 번호 생성 함수
-    private int makeBonusNumber(List<Integer> winningNumber) {
+    public int makeBonusNumber(List<Integer> winningNumber) {
     	String bonusNumber = "";
     	
     	do {
@@ -104,7 +106,7 @@ public class WinningLottoGenerator {
     private boolean validateBonusBall(String bonusNumber, List<Integer> winningNumber) {
     	int intBonusNumber = 0;
 
-    	if (lottoGame.checkNumberOrNot(bonusNumber)) {
+    	if (lg.checkNumberOrNot(bonusNumber)) {
     		intBonusNumber = Integer.parseInt(bonusNumber);
     		return (checkRange(intBonusNumber) && !checkContained(winningNumber, intBonusNumber)) ? true : false;
     	}
@@ -113,7 +115,7 @@ public class WinningLottoGenerator {
     }
     
     private boolean checkRange(int bonusNumber) {
-    	boolean inRange = (bonusNumber > 0 && bonusNumber < 46) ? true : false;
+    	boolean inRange = (bonusNumber >= LOTTO_MINIMUM_NUMBER && bonusNumber <= LOTTO_MAXIMUM_NUMBER) ? true : false;
     	
     	if (!inRange) {
     		System.out.println("1부터 45까지의 숫자를 입력하세요.");
@@ -133,5 +135,4 @@ public class WinningLottoGenerator {
     	
     	return isContained;
     }
-
 }

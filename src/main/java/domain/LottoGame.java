@@ -12,6 +12,7 @@ public class LottoGame {
 	static private final int THIRD = 1500000;
 	static private final int FOURTH = 50000;
 	static private final int FIFTH = 5000;
+	static private final int LOTTO_PRICE = 1000;
 	
 	LottoGenerator lottoGenerator = new LottoGenerator();
 	WinningLottoGenerator winLottoGenerator = new WinningLottoGenerator();
@@ -87,7 +88,7 @@ public class LottoGame {
 	}
 	
     public void printNotice() {
-		System.out.println("당첨 통계");
+		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 	}
 	
@@ -103,15 +104,17 @@ public class LottoGame {
 		}
 	}
 
-    public void printProfitRate(List<Iterator<Integer>> iterators, HashMap<Integer, Integer> result) {
-		int totalIncome = 0;
-		int purchaseCost = result.size() * 1000;
+    public void printProfitRate(List<Iterator<Integer>> iterators, List<Rank> rank) {
+		int totalIncome = 0;		
+		int purchaseCost = rank.size() * LOTTO_PRICE;
 		
 		while (iterators.get(0).hasNext()) {
 			totalIncome += iterators.get(0).next() * iterators.get(1).next();
 		}
 		
-		System.out.println("총 수익률은 " + (double) totalIncome / (double) purchaseCost + "입니다.");
+		double profitRate = (double) totalIncome / (double) purchaseCost ;
+
+		System.out.println("총 수익률은 " + Math.round(profitRate * 1000) / 1000.0 + "입니다.");
 	}
 	
 }

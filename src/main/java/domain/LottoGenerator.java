@@ -46,7 +46,7 @@ public class LottoGenerator {
 	}
 	
 	private int purchaseLottoAmount(int money) {
-		return money / 1000;
+		return money / LOTTO_PRICE;
 	}
 	
 	private int makeRandomNumber() {
@@ -68,7 +68,7 @@ public class LottoGenerator {
     }
     
     // 로또 생성 함수
-    private ArrayList<Lotto> makeLotto() {
+    public ArrayList<Lotto> makeLotto() {
     	ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
     	int money = inputMoney();
     	
