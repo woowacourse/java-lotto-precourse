@@ -146,6 +146,27 @@ public class LottoGame {
 		}
 		return bonusNumber;
 	}
-
-
+	
+	public static int matchCondition(Rank userNum, Rank lottoNum) {
+		if (userNum.equals(lottoNum)) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	public static int matchCount(List<Rank> rankList, Rank rank) {
+		int count = 0;
+		for (int i=0; i<rankList.size(); ++i) {
+			count += matchCondition(rankList.get(i), rank);
+		}
+		return count;
+	}
+	
+	public static void printBonus(Rank rank) {
+		if(rank == Rank.SECOND) {
+			System.out.print(", 보너스 볼 일치");
+			return;
+		}
+		System.out.print(" ");
+	}
 }
