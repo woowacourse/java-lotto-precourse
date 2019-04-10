@@ -18,6 +18,8 @@ Lotto 클래스
 
 - GetLottoNumber : 로또 숫자 반환
 
+- PrintLottoNumber : 로또 숫자 출력
+
 LottoGameStart 클래스
 
 - GetMoney : 금액 입력
@@ -29,3 +31,5 @@ LottoGameStart 클래스
 - InputLottoNum : 로또 번호 입력
 
 - RandomCreateNum : 랜덤으로 번호 생성
+
+- PrintNumber : 로또 숫자 전체 출력

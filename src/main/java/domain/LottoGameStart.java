@@ -16,6 +16,7 @@ public class LottoGameStart {
         int Money = GetMoney();
         int NumOfLotto = GetNumOfLotto(Money);
         Lotto[] lotto=CreateLotto(NumOfLotto);
+        PrintNumber(NumOfLotto, lotto);
     }
 
     public static int GetMoney()
@@ -30,7 +31,7 @@ public class LottoGameStart {
     public static int GetNumOfLotto(int money)
     {
         int NumLotto = money/LOTTO_PRICE;
-        System.out.printf("%d개를 구매했습니다.", NumLotto);
+        System.out.printf("%d개를 구매했습니다.\n", NumLotto);
         return NumLotto;
     }
 
@@ -72,6 +73,9 @@ public class LottoGameStart {
 
     public static void PrintNumber(int num , Lotto[] PrintLotto)
     {
-
+        for(int i=0; i<num; i++)
+        {
+            PrintLotto[i].PrintLottoNumber();
+        }
     }
 }
