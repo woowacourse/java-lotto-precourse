@@ -2,6 +2,7 @@ package domain.Elements;
 
 import domain.Program.Config.Constant;
 import domain.Program.Input;
+import domain.Program.Print;
 import domain.Program.Random;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class LottoPaper {
             setRandomLottoNumber();
             return;
         }
+        Print.getLottoSetter();
         setSelfLottoNumber();
     }
 
@@ -55,7 +57,7 @@ public class LottoPaper {
     }
 
     private List<Integer> makeSelfLottoNumber(){
-        String selfLottoString = Input.setSelfLottoNumber();
+        String selfLottoString = Input.setLottoNumber();
         String[] selfLottoArray = selfLottoString.split(",");
         return Arrays.stream(selfLottoArray).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
     }

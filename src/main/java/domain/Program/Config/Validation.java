@@ -2,6 +2,8 @@ package domain.Program.Config;
 
 import domain.Program.Print;
 
+import java.util.List;
+
 public class Validation {
     public static void checkNumberRange(long value, int min, int max)throws Exception{
         if((value > min) && (value <= max)){
@@ -25,5 +27,13 @@ public class Validation {
         }
         Print.getLottoInputValidation();
         throw new Exception("형식에 어긋났습니다.");
+    }
+
+    public static void checkBonusNumberDuplication(List<Integer> lottoPaper, int bonusNumber)throws Exception{
+        if(!lottoPaper.contains(bonusNumber)){
+            return;
+        }
+        Print.getBonusDuplication();
+        throw new Exception("보너스가 당첨번호와 중복입니다.");
     }
 }
