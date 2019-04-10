@@ -12,12 +12,14 @@ public class LottoBank {
 	private LottoShop lottoShop;
 	private Scanner sc;
 	private List<Integer> winnerLottoNumbers;
+	private HashMap<Integer, Integer> matchResults;
 	private int bonusNo;
 	
 	public LottoBank(LottoShop lottoShop) {
 		sc = new Scanner(System.in);
 		this.lottoShop = lottoShop;
 		winnerLottoNumbers = new ArrayList<Integer>();
+		matchResults = new HashMap<Integer, Integer>();
 	}
 
 	public void setWinningLotto() {
@@ -63,4 +65,15 @@ public class LottoBank {
 			winnerLottoNumbers.add(Integer.parseInt(winnerNum));
 		}
 	}
+	
+	public void matchUserLotto() {
+		for (Lotto userLotto : lottoShop.getUserLottos()) {
+			int matchReward = winLotto.match(userLotto).getWinningMoney();
+			if (!matchResults.containsKey(matchReward))
+				matchResults.put(matchReward, 1);
+			else if (matchResults.containsKey(matchReward))
+				matchResults.replace(matchReward, matchResults.get(matchReward) + 1);
+		}
+		showMatchResult();
+	}	
 }
