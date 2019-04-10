@@ -14,6 +14,12 @@ public class WinningLottoGenerator {
 	static final int MAX_LOTTO_NUMBER = new LottoGenerator().get_MAX_LOTTO_NUMBER();
 	Scanner scanner = new Scanner(System.in);
 
+	public WinningLotto generateWinningLotto() {
+		List<Integer> winningNumbers = inputWinningNumbersFromUser();
+		int bonusNumber = inputBonusNumberFromUser(winningNumbers);
+		return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
+	}
+
 	private List<Integer> inputWinningNumbersFromUser() {
 		List<Integer> winningNumbers;
 		do {

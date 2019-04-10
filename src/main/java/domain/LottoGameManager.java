@@ -9,6 +9,7 @@ public class LottoGameManager {
 
 	public static void main(String[] args) {
 		List<Lotto> userLottos = new LottoGenerator().generateUserLottos();
+		WinningLotto winningLotto = new WinningLottoGenerator().generateWinningLotto();
 	}
 
 }
