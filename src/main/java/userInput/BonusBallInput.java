@@ -11,9 +11,9 @@ public class BonusBallInput {
     public BonusBallInput(Lotto winningNumbers) {
         Scanner scan = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
-        String input = scan.next();
+        String input = scan.nextLine().trim();
         while (!validate(input, winningNumbers)) {
-            input = scan.next();
+            input = scan.nextLine().trim();
         }
         bonusNo = Integer.parseInt(input);
     }

@@ -13,9 +13,9 @@ public class WinningNumbersInput {
     public WinningNumbersInput() {
         Scanner scan = new Scanner(System.in);
         System.out.println("지난주 당첨 번호를 입력해 주세요. (','로 숫자 구분)");
-        String[] inputs = scan.next().split(",");
+        String[] inputs = scan.nextLine().replace(" ", "").split(",");
         while (!validate(inputs)) {
-            inputs = scan.next().split(",");
+            inputs = scan.nextLine().replace(" ", "").split(",");
         }
         winningNumbers = new Lotto(Arrays.stream(inputs).mapToInt(Integer::parseInt)
                 .sorted().boxed().collect(Collectors.toList()));
