@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Input {
     public static long setPrice(){
+        Print.getInputPrice();
         try{
             long price = numberInput();
             Validation.checkNumberRange(price, Constant.PRICE_MIN,Constant.PRICE_MAX);
@@ -33,7 +34,7 @@ public class Input {
         try {
             return new Scanner(System.in).nextLong();
         }catch(Exception e){
-            System.out.println("유효하지 않는 값입니다.");
+            Print.getValidation();
             return numberInput();
         }
     }
@@ -42,7 +43,7 @@ public class Input {
         try {
             return new Scanner(System.in).next();
         }catch(Exception e){
-            System.out.println("유효하지 않는 값입니다.");
+            Print.getValidation();
             return stringInput();
         }
     }

@@ -16,6 +16,7 @@ public class LottoPaper {
     public LottoPaper(int type){
         if(type==1){
             setRandomLottoNumber();
+            return;
         }
         setSelfLottoNumber();
     }
