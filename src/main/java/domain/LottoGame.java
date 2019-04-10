@@ -28,5 +28,15 @@ public class LottoGame {
     	
     	return winLottoWithBonus;
     }
+    
+    private List<Rank> getRankResult(WinningLotto winningLotto, List<Lotto> userLotto) {
+        List<Rank> rank = new ArrayList<Rank>();
+
+		for (Lotto lotto : userLotto) {
+			rank.add(winningLotto.match(lotto));
+		}
+		
+		return rank;
+    }
 	
 }
