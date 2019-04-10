@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,6 +10,8 @@ import java.util.Scanner;
  */
 public class WinningLottoGenerator {
 	static final int LOTTO_NUMBER_COUNT = new LottoGenerator().get_LOTTO_NUMBER_COUNT();
+	static final int MIN_LOTTO_NUMBER = new LottoGenerator().get_MIN_LOTTO_NUMBER();
+	static final int MAX_LOTTO_NUMBER = new LottoGenerator().get_MAX_LOTTO_NUMBER();
 	Scanner scanner = new Scanner(System.in);
 
 	private List<Integer> inputWinningNumbersFromUser() {
@@ -42,7 +45,8 @@ public class WinningLottoGenerator {
 	}
 
 	private boolean validateWinningNumbers(List<Integer> winningNumbers) {
-		if (!validateWinningNumbersCount(winningNumbers)) {
+		Collections.sort(winningNumbers);
+		if (!validateWinningNumbersCount(winningNumbers) || !validateWinningNumbersRange(winningNumbers)) {
 			System.out.println("당첨 번호가 잘못되었습니다.");
 			return false;
 		}
@@ -51,6 +55,14 @@ public class WinningLottoGenerator {
 
 	private boolean validateWinningNumbersCount(List<Integer> winningNumbers) {
 		if (winningNumbers.size() != LOTTO_NUMBER_COUNT) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validateWinningNumbersRange(List<Integer> winningNumbers) {
+		if ((winningNumbers.get(0) < MIN_LOTTO_NUMBER)
+				|| (winningNumbers.get(winningNumbers.size() - 1) > MAX_LOTTO_NUMBER)) {
 			return false;
 		}
 		return true;

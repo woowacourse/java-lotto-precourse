@@ -20,6 +20,14 @@ public class LottoGenerator {
 		return LOTTO_NUMBER_COUNT;
 	}
 
+	public int get_MIN_LOTTO_NUMBER() {
+		return MIN_LOTTO_NUMBER;
+	}
+
+	public int get_MAX_LOTTO_NUMBER() {
+		return MAX_LOTTO_NUMBER;
+	}
+
 	private int inputLottoPriceFromUser() {
 		int lottoPrice;
 		do {
