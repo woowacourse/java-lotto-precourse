@@ -27,7 +27,6 @@ public class LottoService {
         }
 
         int numberOfLotto = money / LOTTO_PRICE;
-
         List<Lotto> lottos = LottoMaker.getLottos(numberOfLotto);
         return lottos;
     }
