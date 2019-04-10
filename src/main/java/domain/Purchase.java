@@ -24,4 +24,12 @@ public class Purchase {
             lottoList.add(lotto);
         }
     }
+
+    public void printLottoListOfUser() {
+        System.out.format(Message.MAKE_MESSAGE, lottoList.size());
+
+        for (Lotto lotto : lottoList) {
+            System.out.println(lotto);
+        }
+    }
 }
