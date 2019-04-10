@@ -12,5 +12,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public String toString() {
+        return numbers.toString();
+    }
+
 }

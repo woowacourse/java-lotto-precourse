@@ -10,6 +10,7 @@ public class LottoGame {
     private static final String INPUT_INTEGER_ERROR_MESSAGE = "숫자가 아닙니다. 다시 입력해주세요: ";
     private static final String MONEY_UNIT_ERROR_MESSAGE = "천단위의 숫자가 아닙니다. 다시 입력해주세요: ";
     private static final String SPLIT_STANDARD = ",";
+    private static final String PURCHASE_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final int MONEY_UNIT = 1000;
     private static final int ZERO = 0;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -20,10 +21,19 @@ public class LottoGame {
         System.out.println(INPUT_MONEY_MESSAGE);
         int lottoGameMoney = inputLottoMoney();
         int lottoRound = calculateLottoRound(lottoGameMoney);
+        List<Lotto> lottoList = getLottoList(lottoRound);
+    }
 
-        for (int num : getLottoNumberList()) {
-            System.out.println(num);
+    private List<Lotto> getLottoList(int round) {
+        List<Lotto> lottoList = new ArrayList<>();
+        System.out.println();
+        System.out.println(round + PURCHASE_COUNT_MESSAGE);
+
+        for (int i = 0; i < round; i++) {
+            lottoList.add(new Lotto(getLottoNumberList()));
         }
+
+        return lottoList;
     }
 
     private List<Integer> getLottoNumberList() {
