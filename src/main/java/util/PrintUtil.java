@@ -11,6 +11,12 @@ public class PrintUtil {
                 System.out.println(numberOfLotto+"개를 구매했습니다.");
         }
 
+        public void printPurchasedLottoList(Lotto[] lottos){
+                for(Lotto lotto : lottos){
+                        printPurchasedLotto(lotto);
+                }
+        }
+
         public void printPurchasedLotto(Lotto lotto){
                 String message = lotto.getNumbers().toString();
                 System.out.println(message);
