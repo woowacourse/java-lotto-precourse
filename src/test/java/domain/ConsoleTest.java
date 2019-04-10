@@ -78,4 +78,29 @@ public class ConsoleTest {
         System.setIn(inputStream);
         Console.getWinningLottoNumber();
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getWinningLottoNumberTest4() {
+        String input = "55,1,2,3,4,5";
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+        Console.getWinningLottoNumber();
+    }
+
+    @Test
+    public void getWinningLottoNumberTest5() {
+        String input = "6,5,4,3,2,1";
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+        List<Integer> numbers = getNumberOfList(new int[]{1,2,3,4,5,6});
+        assertEquals(numbers,Console.getWinningLottoNumber());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getWinningLottoNumberTest6() {
+        String input = "0,1,2,3,4,5";
+        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+        Console.getWinningLottoNumber();
+    }
 }

@@ -1,16 +1,12 @@
 package domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * 유저가 구매한 로또들을 관리하는 객체.
  */
 public class UserLottos {
-    private final int MIN_LOTTO_NUMBER = 1;
-    private final int MAX_LOTTO_NUMBER = 45;
-    private final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private List<Lotto> userLottos;
     private List<Integer> lottoNumberPool;
@@ -24,7 +20,7 @@ public class UserLottos {
     private void makeLottos(int lottoCount) {
         userLottos = new ArrayList<>();
         //1부터 45까지 숫자를 풀에 담아놓는다.
-        lottoNumberPool = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).boxed().collect(Collectors.toList());
+        lottoNumberPool = Console.makeLottoNumberPool();
         for (int i = 0; i < lottoCount; i++) {
             List<Integer> selectedLottoNumbers = generateLottoNumber();
             Util.printConsole(selectedLottoNumbers);
