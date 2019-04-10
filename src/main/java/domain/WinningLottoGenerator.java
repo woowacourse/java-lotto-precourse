@@ -46,7 +46,8 @@ public class WinningLottoGenerator {
 
 	private boolean validateWinningNumbers(List<Integer> winningNumbers) {
 		Collections.sort(winningNumbers);
-		if (!validateWinningNumbersCount(winningNumbers) || !validateWinningNumbersRange(winningNumbers)) {
+		if (!validateWinningNumbersCount(winningNumbers) || !validateWinningNumbersRange(winningNumbers)
+				|| !validateWinningNumbersOverlap(winningNumbers)) {
 			System.out.println("당첨 번호가 잘못되었습니다.");
 			return false;
 		}
@@ -67,4 +68,17 @@ public class WinningLottoGenerator {
 		}
 		return true;
 	}
+
+	private boolean validateWinningNumbersOverlap(List<Integer> winningNumbers) {
+		List<Integer> tmpWinningNumbers = new ArrayList<Integer>();
+		tmpWinningNumbers.addAll(winningNumbers);
+		boolean overlap = false;
+		while (!tmpWinningNumbers.isEmpty() && overlap == false) {
+			int winningNumber = tmpWinningNumbers.get(0);
+			tmpWinningNumbers.remove(0);
+			overlap = tmpWinningNumbers.contains(winningNumber);
+		}
+		return !overlap; // overlap이 True일 때: 중복이 존재(유효하지 않음), overlap이 False일 때: 중복이 존재하지 않음(유효함)
+	}
+
 }
