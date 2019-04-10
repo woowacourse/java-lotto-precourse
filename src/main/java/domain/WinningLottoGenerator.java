@@ -81,4 +81,8 @@ public class WinningLottoGenerator {
 		return !overlap; // overlap이 True일 때: 중복이 존재(유효하지 않음), overlap이 False일 때: 중복이 존재하지 않음(유효함)
 	}
 
+	private int inputBonusNumberFromUser() {
+		System.out.println("보너스 볼을 입력해 주세요.");
+		return scanner.nextInt();
+	}
 }
