@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,9 +31,15 @@ public class LottoGame {
         var lottos = Stream.generate(() -> lottoFactory.newLotto())
                 .limit(numLottos)
                 .collect(Collectors.toCollection(ArrayList::new));
+        _printLottos(lottos);
 
         var winningLotto = lottoReader.readWinningLotto();
-
         lottoAnalyzer.analyze(winningLotto, lottos);
+    }
+
+    private void _printLottos(List<Lotto> lottos) {
+        System.out.println();
+        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+        lottos.forEach((lotto) -> System.out.println(lotto.toString()));
     }
 }
