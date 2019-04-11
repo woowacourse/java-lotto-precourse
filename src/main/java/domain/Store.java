@@ -36,7 +36,7 @@ public class Store {
         return new Lotto(lotto);
     }
 
-    static public Lotto buyBylist(List<Integer> lotto) {
+    static public Lotto buy(List<Integer> lotto) {
         return new Lotto(lotto);
     }
 }

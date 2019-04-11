@@ -41,6 +41,6 @@ public class Match {
         final int bo = scan.nextInt();
         scan.nextLine();
 
-        return new WinningLotto(Store.buyBylist(win), bo);
+        return new WinningLotto(Store.buy(win), bo);
     }
 }

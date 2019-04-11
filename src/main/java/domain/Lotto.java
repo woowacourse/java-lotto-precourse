@@ -6,14 +6,20 @@ import java.util.List;
  * 로또 한장을 의미하는 객체
  */
 public class Lotto {
+    public static int LOTTO_NUM_CNT = 6;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public boolean isContainNumber(int x) {
+        return numbers.contains(x);
+    }
+
+    public int getEleNumber(int idx) {
+        return numbers.get(idx);
     }
 
     public void numbersPrint() {
