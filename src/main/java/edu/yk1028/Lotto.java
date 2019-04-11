@@ -10,7 +10,9 @@
 
 package edu.yk1028;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -25,6 +27,11 @@ public class Lotto {
 
 	public boolean hasNumber(int number) {
 		return numbers.contains(number);
+	}
+	
+	public boolean hasDuplicate() {
+		Set<Integer> set = new HashSet<Integer>(numbers);
+		return numbers.size() != set.size();
 	}
 
 	public int matchCount(Lotto anotherLotto) {
