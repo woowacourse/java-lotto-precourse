@@ -33,7 +33,11 @@ public class Manager {
 
         return winningList;
     }
-    
+
+    public void makeWinningLotto(int bonus){
+        Lotto lotto = new Lotto(makeWinningList());
+        winningLotto = new WinningLotto(lotto, bonus);
+    }
 
     public boolean thirdQuery(){
         System.out.println("보너스 볼을 입력해 주세요.");
