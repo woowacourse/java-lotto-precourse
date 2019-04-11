@@ -25,6 +25,7 @@ public class Output {
     }
 
     public static void printLottoResult(List<Integer> countOfRank, double earningsRate) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println(String.format("%-36s", "3개 일치 (5,000원)") + "- " + countOfRank.get(5) + "개");
