@@ -14,7 +14,13 @@ public class BonusNoValidation implements Validation<Integer> {
 
 	@Override
 	public boolean check(String value) {
-		return false;
+		if (!checkInteger(value)) {
+			return false;
+		}
+
+		this.bonusNo = convert(value);
+
+		return checkRange() && checkContains();
 	}
 
 	private boolean checkInteger(String value) {
