@@ -14,7 +14,7 @@ public class WinningLotto {
 
 	public Rank match(Lotto userLotto) {
 		int countOfMatch = getCountOfMatch(userLotto);
-		boolean matchBonus = getMatchBonus(userLotto);
+		boolean matchBonus = getMatchBonusNo(userLotto);
 
 		return Rank.valueOf(countOfMatch, matchBonus);
 	}
@@ -23,5 +23,9 @@ public class WinningLotto {
 		return (int) (userLotto.getNumbers().stream()
 				.filter(n -> lotto.contains(n))
 				.count());
+	}
+
+	private boolean getMatchBonusNo(Lotto userLotto) {
+		return userLotto.contains(bonusNo);
 	}
 }
