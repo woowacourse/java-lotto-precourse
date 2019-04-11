@@ -54,6 +54,15 @@ public class Main {
         return new Lotto(numSeq.subList(0, 5));
     }
 
+    private void buyMultipleLotto(int trials) {
+        System.out.println(String.format("%d 개를 구매했습니다.", trials));
+        for (int i = 0; i < trials; i++) {
+            Lotto tmp = buyLotto();
+            System.out.println(tmp.toString());
+            lottoList.add(tmp);
+        }
+    }
+
 
     public static void main(String[] args) {
 
