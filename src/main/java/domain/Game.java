@@ -20,7 +20,7 @@ public class Game {
         userInWinningNumbers();
         winningLotto.match(lottoList.get(0));
         matchingLottoLoop();
-        lottoStatistics();
+//        lottoStatistics();
     }
 
     private void purchaseLotto() {
@@ -47,5 +47,33 @@ public class Game {
 
     private void userInWinningNumbers() {
         winningLotto = new WinningLotto(new Lotto(io.inputWinningNumber()), io.inputBonusNumber());
+    }
+
+    private void matchingLottoLoop() {
+        for (int i = 0; i < lottoList.size(); ++i) {
+            matchingLotto(i);
+        }
+    }
+
+    /*
+     *  10Line 초과
+     */
+    private void matchingLotto(int idx) {
+        rank = winningLotto.match(lottoList.get(idx));
+        if (rank == Rank.FIRST) {
+            winningArray[0]++;
+        }
+        if (rank == Rank.SECOND) {
+            winningArray[1]++;
+        }
+        if (rank == Rank.THIRD) {
+            winningArray[2]++;
+        }
+        if (rank == Rank.FOURTH) {
+            winningArray[3]++;
+        }
+        if (rank == Rank.FIFTH) {
+            winningArray[4]++;
+        }
     }
 }
