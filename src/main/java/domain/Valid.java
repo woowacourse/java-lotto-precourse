@@ -30,9 +30,7 @@ public class Valid {
     }
 
     public static boolean isSplitException(String winningNumbers) {
-        try {
-            winningNumbers.split(Message.SPOT);
-        } catch (Exception e) {
+        if (winningNumbers.contains(Message.SPACE) || winningNumbers.contains(Message.TAB)) {
             return true;
         }
         return false;
