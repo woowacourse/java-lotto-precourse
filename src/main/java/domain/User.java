@@ -13,6 +13,10 @@ public class User {
         lottoList = new ArrayList<>();
     }
 
+    public List<Lotto> getLottoList(){
+        return lottoList;
+    }
+    
     public int getPay(){
         return Integer.parseInt(pay);
     }
