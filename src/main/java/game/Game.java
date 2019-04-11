@@ -14,4 +14,16 @@ public class Game {
     private static Buyer buyer;
     private static Analyzer analyzer;
     private static LottoMachine lottoMachine;
+
+    public static void main(String[] args) {
+        buyer = new Buyer();
+        int lottoBuyingCount = buyer.buyMoney() / LOTTO_PRICE;          // 로또 구입 개수
+        lottos = buyer.purchaseLottos(lottoBuyingCount);
+        buyer.showPurchasedLottos(lottos, lottoBuyingCount);
+        lottoMachine = new LottoMachine();
+        Lotto winnerLotto = lottoMachine.makeWinningLotto();
+        WinningLotto winningLotto = new WinningLotto(winnerLotto, lottoMachine.makeBonusNum(winnerLotto));
+        analyzer = new Analyzer();
+        analyzer.showResult(lottos, winningLotto);
+    }
 }
