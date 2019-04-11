@@ -126,4 +126,5 @@ public class MainAppTest extends TestCase {
         Lotto winningLotto = new Lotto(winningNumbers);
         assertEquals("[1, 15, 22, 33, 35, 42]", winningLotto.toString());
     }
+
 }

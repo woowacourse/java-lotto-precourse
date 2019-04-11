@@ -178,4 +178,12 @@ public class MainApp {
         }
         return true;
     }
+
+    /**
+     * 당첨 로또를 만드는 메소드
+     */
+    public static WinningLotto createWinningLotto(List<Integer> winningNumbers, int bonusNo) {
+        Lotto winningLotto = new Lotto(winningNumbers);
+        return new WinningLotto(winningLotto, bonusNo);
+    }
 }
