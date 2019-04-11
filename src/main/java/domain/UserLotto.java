@@ -13,14 +13,25 @@ public class UserLotto {
         lotto = new ArrayList<>();
     }
 
-    void buyUserLotto(){
+    void buyUserLotto() {
         inputLottoPrice();
         printLottoAmount();
     }
 
     private void inputLottoPrice() {
-        System.out.println("구입금액을 입력해주세요");
-        price = scanner.nextInt();
+        boolean inputChecker = false;
+
+        while (!inputChecker) {
+            System.out.println("구입금액을 입력해주세요!");
+            try {
+                price = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("숫자만 입력하세요");
+                scanner.nextLine();
+                continue;
+            }
+            inputChecker = checkInputLottoPrice(price);
+        }
         System.out.println();
     }
 
@@ -51,4 +62,13 @@ public class UserLotto {
 
         return lottoNumber.subList(0, 6);
     }
+
+    private boolean checkInputLottoPrice(int price) {
+        if (price < LOTTO_PRICE || price % 1000 != 0) {
+            System.out.println("로또는 한장에 1000원 입니다.");
+            return false;
+        }
+        return true;
+    }
+
 }
