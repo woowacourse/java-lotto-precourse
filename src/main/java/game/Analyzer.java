@@ -24,4 +24,18 @@ public class Analyzer {
         }
         System.out.println("총 수익률은 " + benefitRate + "입니다.");
     }
+
+    /*
+     * 출력할 문장을 랭크 오름차순으로 문자열에 담는다
+     */
+    public String[] putCorrectCount(List<Lotto> lottos, WinningLotto winningLotto) {
+        int index = 0;
+        setHashMap(lottos, winningLotto);
+        String[] result = new String[map.size()];
+        int[] order = {3, 2, 4, 0, 1};
+        for (Rank rank : map.keySet()) {
+            result[order[index++]] = tellCorrectCountAndMoney(rank);
+        }
+        return result;
+    }
 }
