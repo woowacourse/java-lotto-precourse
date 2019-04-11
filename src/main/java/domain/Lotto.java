@@ -12,5 +12,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public List<Integer> getLottoNumbers() {
+        return this.numbers;
+    }
+
 }
