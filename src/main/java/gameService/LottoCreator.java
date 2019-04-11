@@ -1,9 +1,14 @@
-package domain;
+package gameService;
+
+import domain.Lotto;
+import domain.WinningLotto;
+import input.Inputter;
+import validate.Validator;
 
 import java.util.*;
 
-import static domain.Validator.LOTTO_MAXIMUM_NUMBER_COUNT;
-import static domain.Validator.LOTTO_MAXIMUM_NUMBER_VALUE;
+import static validate.Validator.LOTTO_MAXIMUM_NUMBER_COUNT;
+import static validate.Validator.LOTTO_MAXIMUM_NUMBER_VALUE;
 
 /**
  * 로또들을 생성하는 객체

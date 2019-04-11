@@ -1,5 +1,7 @@
 package domain;
 
+import validate.Validator;
+
 import java.util.List;
 
 /**

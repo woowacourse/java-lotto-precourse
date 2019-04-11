@@ -1,4 +1,8 @@
-package domain;
+package gameService;
+
+import domain.Lotto;
+import domain.WinningLotto;
+import input.Inputter;
 
 import java.util.ArrayList;
 import java.util.List;

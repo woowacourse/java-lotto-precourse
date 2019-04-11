@@ -1,4 +1,6 @@
-package domain;
+package runner;
+
+import gameService.LottoGame;
 
 /**
  * 로또 게임을 실행하는 객체

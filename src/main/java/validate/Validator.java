@@ -1,4 +1,4 @@
-package domain;
+package validate;
 
 import java.util.ArrayList;
 import java.util.List;

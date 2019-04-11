@@ -1,9 +1,11 @@
-package domain;
+package input;
+
+import validate.Validator;
 
 import java.util.List;
 import java.util.Scanner;
 
-import static domain.Validator.AMOUNT_UNIT;
+import static validate.Validator.AMOUNT_UNIT;
 
 /**
  * 사용자 입력을 받는 객체

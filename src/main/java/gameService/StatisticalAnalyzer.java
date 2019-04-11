@@ -1,4 +1,8 @@
-package domain;
+package gameService;
+
+import domain.Lotto;
+import domain.Rank;
+import domain.WinningLotto;
 
 import java.util.*;
 
