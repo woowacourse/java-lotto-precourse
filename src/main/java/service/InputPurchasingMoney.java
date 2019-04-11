@@ -18,6 +18,7 @@ public class InputPurchasingMoney {
 			System.out.println(INPUT_GUIDE_MESSAGE);
 			inputNumber = getUserInput();
 		} while (!isInputValid(inputNumber));
+		System.out.println();
 		return new Money(inputNumber, inputNumber / LOTTO_PRICE);
 	}
 

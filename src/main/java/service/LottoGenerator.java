@@ -9,7 +9,7 @@ import domain.Lotto;
 import utils.AscendingInteger;
 
 public class LottoGenerator {
-
+	private static final String PURCHASED_COUNT = "%d개를 구매했습니다.";
 	private List<Lotto> soldLottos;
 	private Random random;
 
@@ -20,6 +20,7 @@ public class LottoGenerator {
 	}
 
 	private void makeLottos(int count) {
+		System.out.println(String.format(PURCHASED_COUNT, count));
 		Lotto generatedLotto;
 		while (count > 0) {
 			generatedLotto = new Lotto(generatingLotto());

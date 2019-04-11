@@ -14,7 +14,7 @@ import utils.Util;
  * @author 조재훈
  */
 public class InputWinningNumber {
-	private static final String REQ_WINNER_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+	private static final String REQ_WINNER_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
 	private static final String REQ_WINNER_BONUS = "보너스 볼을 입력해 주세요.";
 	public static final int LOTTO_NUMBER_COUNT = 6;
 	public static final int LOTTO_NUMBER_LIMIT = 45;
@@ -51,7 +51,7 @@ public class InputWinningNumber {
 	private boolean isValidString(String[] winningInputString) {
 		for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
 			int convertedInt = isValidInteger(winningInputString[i].trim());
-			if ( convertedInt < 0 ) {
+			if (convertedInt < 0) {
 				return false;
 			}
 			winningNumber.add(convertedInt);
