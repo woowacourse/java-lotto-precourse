@@ -19,5 +19,9 @@ public class WinningLotto {
 		return Rank.valueOf(countOfMatch, matchBonus);
 	}
 
-	
+	private int getCountOfMatch(Lotto userLotto) {
+		return (int) (userLotto.getNumbers().stream()
+				.filter(n -> lotto.contains(n))
+				.count());
+	}
 }
