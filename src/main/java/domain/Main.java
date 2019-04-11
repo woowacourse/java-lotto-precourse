@@ -1,10 +1,13 @@
 package domain;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     final static int LOTTO_PRICE = 1000;
     static private Scanner staticSc;
+    static private List<Lotto> lottoList;
+    static private int[] numSeq;
 
     private Scanner getScanner() {
         if (staticSc == null) {
@@ -23,6 +26,13 @@ public class Main {
         trials = (int)Math.floor(value / LOTTO_PRICE);
 
         return trials;
+    }
+
+    private void initNumSeq() {
+        numSeq = new int[45];
+        for (int i = 0; i < 45; i++) {
+            numSeq[i] = i + 1;
+        }
     }
 
     public static void main(String[] args) {
