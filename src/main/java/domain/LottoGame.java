@@ -55,6 +55,19 @@ public class LottoGame {
         return resultRankAndCount;
     }
 
+    /* 최종적으로 획득한 금액을 반환하는 함수 */
+    public Double getTotalWinningMoney() {
+        double totalWinningMondey = 0;
+
+        for (Map.Entry<Rank, Integer> entry : this.getResultRankAndCount().entrySet()) {
+            int winningMoneey = entry.getKey().getWinningMoney();
+            int rankCount = entry.getValue();
+            totalWinningMondey += (winningMoneey * rankCount);
+        }
+
+        return totalWinningMondey;
+    }
+
     public void showLottos(){
         this.showMessage("\n총 "+this.userLottos.size()+"개를 구매했습니다.");
         Iterator<Lotto> it = this.userLottos.iterator();
@@ -64,7 +77,7 @@ public class LottoGame {
             this.showMessage(String.valueOf(lotto.getLottoNumbers()));
         }
     }
-    
+
     public void showMessage(String msg) {
         System.out.println(msg);
     }
