@@ -11,7 +11,8 @@ public class Manager {
 
     public void startGame(){
         while(!firstQuery());
-
+        user.makeLottoList();
+        user.printLottoList();
     }
 
     public boolean firstQuery(){
