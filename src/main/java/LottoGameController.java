@@ -20,9 +20,15 @@ public class LottoGameController {
         lottoGameOutputView.printGeneratedLottos(lottoGenerator);
 
         lottoGameInputView.askWinnningLottoNumbers();
+        String[] lotto = scanner.next().split(",");
+        for(int i = 0; i < lotto.length; i++) {
+            inputLotto.add(Integer.parseInt(lotto[i]));
+        }
+        Collections.sort(inputLotto);
 
         lottoGameInputView.askBonusLottoNumber();
         int bonusNo = scanner.nextInt();
 
+        WinningLotto winningLotto = new WinningLotto(new Lotto(inputLotto), bonusNo);
     }
 } 
