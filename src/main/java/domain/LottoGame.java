@@ -88,10 +88,11 @@ public class LottoGame {
 
     public static void main(String[] args) {
         int gameCount, bonusNum;
-        ArrayList<Lotto> userLotto_list = new ArrayList<>();
-        Lotto lastWinningLotto;
         int[] winStates;
-        
+        ArrayList<Lotto> userLotto_list;
+        Lotto lastWinningLotto;
+
+
         gameCount = printInitialLines();
         userLotto_list = generateLottoList(gameCount);
         lastWinningLotto = getLastWinningNum();
