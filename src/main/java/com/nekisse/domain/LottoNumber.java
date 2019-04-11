@@ -35,9 +35,6 @@ public class LottoNumber {
             .orElseThrow(() -> new IllegalArgumentException("1~45의 숫자만 가능합니다."));
     }
 
-
-
-
     @Override
     public String toString() {
         return String.valueOf(number);
