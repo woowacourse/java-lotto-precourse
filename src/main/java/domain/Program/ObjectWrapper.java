@@ -1,13 +1,12 @@
 package domain.Program;
 
-import domain.Elements.*;
-
-import java.util.List;
+import domain.Elements.Lotto;
+import domain.Elements.LottoPaper;
 
 public class ObjectWrapper {
-    public static Lotto[] createLottoBundle(int type, int amount){
+    public static Lotto[] createLottoBundle(int type, int amount) {
         Lotto[] lottoBundle = new Lotto[amount];
-        for(int i=0; i<amount; i++){
+        for (int i = 0; i < amount; i++) {
             lottoBundle[i] = new Lotto(new LottoPaper(type).getLottoNumber());
         }
         return lottoBundle;

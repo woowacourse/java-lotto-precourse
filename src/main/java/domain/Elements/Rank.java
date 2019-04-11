@@ -33,12 +33,12 @@ public enum Rank {
             return MISS;
         }
 
-        if (SECOND.matchCount(countOfMatch) && !matchBonus) {
-            return THIRD;
+        if (SECOND.matchCount(countOfMatch) && matchBonus) {
+            return SECOND;
         }
 
         for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
+            if (rank.matchCount(countOfMatch) && rank != SECOND) {
                 return rank;
             }
         }

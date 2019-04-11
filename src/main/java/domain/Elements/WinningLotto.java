@@ -14,23 +14,23 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
-    public Lotto getWinningLotto(){
+    public Lotto getWinningLotto() {
         return this.lotto;
     }
 
-    public int getBonusNumber(){
+    public int getBonusNumber() {
         return this.bonusNo;
     }
 
     public Rank match(Lotto userLotto) {
         int countOfMatch = setCountOfMatch(userLotto.getLottoNumber());
         Boolean matchBonus = userLotto.getLottoNumber().contains(this.bonusNo);
-        return  Rank.valueOf(countOfMatch,matchBonus);
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
 
-    private int setCountOfMatch(List<Integer> lottoNumber){
+    private int setCountOfMatch(List<Integer> lottoNumber) {
         int countOfMatch = 0;
-        for(int i =0; i<lottoNumber.size();i++){
+        for (int i = 0; i < lottoNumber.size(); i++) {
             countOfMatch = (lottoNumber.contains(this.lotto.getLottoNumber().get(i))) ? countOfMatch + 1 : countOfMatch;
         }
         return countOfMatch;
