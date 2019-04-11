@@ -46,4 +46,16 @@ public class LottoMachine {
         }
         return sample;
     }
+
+    /*
+     * 입력받은 문장을 번호로 변환하여 리스트에 담음
+     */
+    public List<Integer> translator (String input) {
+        String[] num = input.split(",");
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < num.length; i++) {
+            list.add(Integer.parseInt(num[i]));
+        }
+        return list;
+    }
 }
