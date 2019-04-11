@@ -42,7 +42,7 @@ public class LottoManager {
         }
     }
 
-    private void validateWinningLottoSize(ArrayList<Integer> winningLotto) throws Exception {
+    private void validateWinningLottoSize(List<Integer> winningLotto) throws Exception {
         if (winningLotto.size() != NUMBER_OF_LOTTO_NUMBER) {
             throw new Exception(String.format("%d개의 당첨번호를 ,로 구분하여 입력하세요", NUMBER_OF_LOTTO_NUMBER));
         }
@@ -54,9 +54,14 @@ public class LottoManager {
         }
     }
 
-    private void validateUniqueLottoNum(int num, ArrayList<Integer> winningLotto) throws Exception {
+    private void validateUniqueLottoNum(int num, List<Integer> winningLotto) throws Exception {
         if (winningLotto.contains(num)) {
             throw new Exception("중복되지 않는 번호를 입력하세요.");
         }
+    }
+
+    public void validateBonusNum(int bonus, List<Integer> winningNums) throws Exception {
+        validateLottoNumRange(bonus);
+        validateUniqueLottoNum(bonus, winningNums);
     }
 }

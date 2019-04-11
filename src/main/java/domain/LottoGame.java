@@ -17,6 +17,7 @@ public class LottoGame {
     public void start() {
         setLottoList(getNumOfLottos());
         setWinningLotto();
+
     }
 
     private int getNumOfLottos() {
@@ -58,6 +59,8 @@ public class LottoGame {
         List<Integer> winningNums = new ArrayList<>();
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         winningNums.addAll(getWinningNums());
+        System.out.println("보너스 볼을 입력해 주세요.");
+        winningLotto = new WinningLotto(new Lotto(winningNums), getBonusNumber(winningNums));
     }
 
     private List<Integer> getWinningNums() {
@@ -98,6 +101,17 @@ public class LottoGame {
             return Integer.valueOf(string);
         } catch (Exception e) {
             throw new Exception("정수값이 아닙니다");
+        }
+    }
+
+    private int getBonusNumber(List<Integer> winningNums) {
+        int bonus = UserInput.getInteger();
+        try {
+            lottoManager.validateBonusNum(bonus, winningNums);
+            return bonus;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getBonusNumber(winningNums);
         }
     }
 }
