@@ -37,6 +37,10 @@ numSeq을 무작위로 섞어주는 메소드.
 
 입력된 횟수만큼 로또 구매를 반복하는 메소드.
 
+### Main -> separateToList()
+
+입력받은 String을 ,로 분리하여 Integer의 List로 반환하는 메소드.
+
 ### Main -> getWinningLotto()
 
 인자를 입력받아 당첨에 해당하는 Lotto를 생성하는 메소드.
