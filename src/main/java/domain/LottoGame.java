@@ -3,7 +3,7 @@ package domain;
 import java.util.*;
 
 /**
- * 로또게임의 진행을 담당하는 객체
+ * 로또게임 진행을 담당하는 객체
  */
 public class LottoGame {
     static final int THE_NUMBER_OF_LOTTO_NUMBERS = 6;
@@ -20,8 +20,12 @@ public class LottoGame {
     }
 
     public void run() {
+        lottoVendingMachine.inputLottoPurchaseMoney();
         registerLottoList();
         printPurchasedLottoList();
+
+        lottoVendingMachine.inputWinningLottoNumbers();
+        lottoVendingMachine.inputBonusNumber();
         registerWinningLotto();
         printResultMessage();
     }
@@ -31,7 +35,7 @@ public class LottoGame {
         lottoList = new ArrayList<>();
 
         for (int i = 0; i < lottoVendingMachine.getPurchasedLottoCount(); i++) {
-            lottoList.add(lottoGenerator.getLotto());
+            lottoList.add(lottoGenerator.createLotto());
         }
     }
 
@@ -45,36 +49,29 @@ public class LottoGame {
     }
 
     private void printPurchasedLottoList() {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoList.size()));
+        lottoVendingMachine.printMessage(String.format("%d개를 구매했습니다.", lottoList.size()));
         for (Lotto lotto : lottoList) {
             lottoVendingMachine.printMessage(lotto.getLottoNumberString());
         }
     }
 
     private void printResultMessage() {
-        System.out.println("당첨 통계\n-------------------------------------------");
+        lottoVendingMachine.printMessage("당첨 통계\n-------------------------------------------");
         lottoVendingMachine.printMessage(getResultByRankMessage());
         lottoVendingMachine.printMessage(getEarningsRateMessage());
     }
 
     private String getResultByRankMessage() {
-        LottoEarningsRateSystem lottoEarningsRateSystem = new LottoEarningsRateSystem();
-
         StringBuilder stringBuilder = new StringBuilder();
+
         for (int i = Rank.FIFTH.ordinal(); i >= 0; i--) {
-            stringBuilder.append(lottoEarningsRateSystem.getResultByRankMessage(lottoList, winningLotto, Rank.values()[i]));
+            stringBuilder.append(LottoEarningsRateUtil.getResultByRankMessage(lottoList, winningLotto, Rank.values()[i]));
         }
 
         return stringBuilder.toString();
     }
 
     private String getEarningsRateMessage() {
-        return String.format("총 수익률은 %.2f%%입니다.", getEarningsRate());
-    }
-
-    private double getEarningsRate() {
-        LottoEarningsRateSystem lottoEarningsRateSystem = new LottoEarningsRateSystem();
-
-        return lottoEarningsRateSystem.getEarningsRate(lottoList, winningLotto);
+        return String.format("총 수익률은 %.2f%%입니다.", LottoEarningsRateUtil.getEarningsRate(lottoList, winningLotto));
     }
 }

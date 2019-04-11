@@ -7,11 +7,7 @@ import java.util.*;
  */
 class LottoGenerator {
 
-    Lotto getLotto() {
-        return createLotto();
-    }
-
-    private Lotto createLotto() {
+    Lotto createLotto() {
         List<Integer> lottoNumbers = createLottoNumbers();
         Collections.sort(lottoNumbers);
 

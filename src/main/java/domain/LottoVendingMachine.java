@@ -7,31 +7,23 @@ import java.util.stream.Collectors;
  * 로또게임의 입력, 출력을 담당하는 객체
  */
 class LottoVendingMachine {
-    private int purchasedLottoCount;
+    private int purchasedLottoMoney;
     private List<Integer> winningLottoNumberList;
-
-    LottoVendingMachine() {
-        purchasedLottoCount = getLottoPurchaseMoney() / LottoGame.LOTTO_PRICE;
-    }
+    private int bonusNumber;
 
     int getPurchasedLottoCount() {
-        return purchasedLottoCount;
+        return purchasedLottoMoney / LottoGame.LOTTO_PRICE;
     }
 
-    private int getLottoPurchaseMoney() {
+    void inputLottoPurchaseMoney() {
         String lottoPurchaseMoney;
 
         do {
-            lottoPurchaseMoney = inputLottoPurchaseMoney();
+            printMessage("구입금액을 입력해 주세요.");
+            lottoPurchaseMoney = input();
         } while (!isValidLottoPurchaseMoney(lottoPurchaseMoney));
 
-        return Integer.parseInt(lottoPurchaseMoney);
-    }
-
-    private String inputLottoPurchaseMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
-
-        return input();
+        purchasedLottoMoney = Integer.parseInt(lottoPurchaseMoney);
     }
 
     private String input() {
@@ -63,20 +55,19 @@ class LottoVendingMachine {
     }
 
     List<Integer> getWinningLottoNumberList() {
+        return winningLottoNumberList;
+    }
+
+    void inputWinningLottoNumbers() {
         String winningLottoNumbers;
 
         do {
-            winningLottoNumbers = inputWinningLottoNumbers();
+            printMessage("지난 주 당첨 번호를 입력해 주세요.");
+            winningLottoNumbers = input();
         } while (!isValidWinningLottoNumbers(winningLottoNumbers));
 
-        return winningLottoNumberList = separateWinningLottoNumbers(winningLottoNumbers)
+        winningLottoNumberList = separateWinningLottoNumbers(winningLottoNumbers)
                 .stream().map(Integer::parseInt).collect(Collectors.toList());
-    }
-
-    private String inputWinningLottoNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
-        return input();
     }
 
     private boolean isValidWinningLottoNumbers(String winningLottoNumbers) {
@@ -129,19 +120,18 @@ class LottoVendingMachine {
     }
 
     int getBonusNumber() {
+        return bonusNumber;
+    }
+
+    void inputBonusNumber() {
         String bonusNumber;
 
         do {
-            bonusNumber = inputBonusNumber();
+            printMessage("보너스 볼을 입력해 주세요.");
+            bonusNumber = input();
         } while (!isValidBonusNumber(bonusNumber));
 
-        return Integer.parseInt(bonusNumber);
-    }
-
-    private String inputBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-
-        return input();
+        this.bonusNumber = Integer.parseInt(bonusNumber);
     }
 
     private boolean isValidBonusNumber(String bonusNumber) {
