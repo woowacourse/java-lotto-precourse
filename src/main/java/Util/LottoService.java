@@ -24,16 +24,14 @@ public class LottoService {
     private static final int LOTTO_PRICE = 1_000;
 
     public static List<Lotto> getOrder(String stringBasedMoney) {
-        int money;
-
         try {
-            money = convertStringToInteger(stringBasedMoney);
+            int money = convertStringToInteger(stringBasedMoney);
             checkMinMoney(money);
+            return LottoMaker.getLottos(money / LOTTO_PRICE);
         } catch (RuntimeException exception) {
             System.out.println(exception.getMessage());
             return null;
         }
-        return LottoMaker.getLottos(money / LOTTO_PRICE);
     }
 
     private static int convertStringToInteger(String stringNumber) {
@@ -62,8 +60,9 @@ public class LottoService {
         }
     }
 
-    public static WinningLotto getWinningLotto(Lotto lotto, int bonusNumber) {
+    public static WinningLotto getWinningLotto(Lotto lotto, String stringNumber) {
         try {
+            int bonusNumber = convertStringToInteger(stringNumber);
             return LottoMaker.getWinningLotto(lotto, bonusNumber);
         } catch (RuntimeException exception) {
             System.out.println(exception.getMessage());
