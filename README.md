@@ -60,7 +60,7 @@ rank를 보기 쉬운 string 형태로 변환하는 메소드.
 
 ### Main -> calculateBenefit()
 
-초기 구매금과 실제 당첨금을 비교하여 이익 계산하는 메소드
+로또로 얻은 금액을 계산하는 메소드.
 
 ### Main -> printResult()
 
