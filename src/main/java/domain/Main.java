@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class Main {
     final static int LOTTO_PRICE = 1000;
     final static Rank[] displayRankOrder = { Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST };
+
     static private WinningLotto winningLotto;
     static private Scanner staticSc;
     static private List<Lotto> lottoList;
@@ -96,6 +97,15 @@ public class Main {
             rankMap.put(r, rankMap.get(r) + 1);
         }
         rankMap.remove(Rank.MISS);
+    }
+
+    private int calculateBenefit() {
+        int result = 0;
+        for (Rank r : rankMap.keySet()) {
+            result += r.getWinningMoney() * rankMap.get(r);
+        }
+
+        return result;
     }
 
     private String formatRank(Rank r) {
