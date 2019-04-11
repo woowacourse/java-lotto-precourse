@@ -23,6 +23,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public boolean isBonusNoDuplicate(int bonusNo) {
+        if (numbers.contains(bonusNo))
+            return true;
+        return false;
+    }
+
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE)
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_SIZE + "개만 가능합니다.");

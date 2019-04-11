@@ -27,7 +27,7 @@ public class LottoGame {
         OutputConsoleView.printLottos(purchasedLottos);
 
         WinningLotto winningLotto = getWinningLotto();
-        
+
     }
 
     private WinningLotto getWinningLotto() {
