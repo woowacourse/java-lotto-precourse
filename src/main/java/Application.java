@@ -9,12 +9,12 @@ public class Application {
 
     public static void main(String[] args) {
         int purchasePrice = userInterface.getPurchasePrice();
-        List<Lotto> lottos  = lottoMachine.createLottos(purchasePrice);
-        userInterface.printLottos(lottos);
+        List<Lotto> purchasedLottos  = lottoMachine.createLottos(purchasePrice);
+        userInterface.printLottos(purchasedLottos);
 
         WinningLotto winningLotto = userInterface.getWinningLotto();
         LottoRankAnalyzer lottoRankAnalyzer = new LottoRankAnalyzer(winningLotto);
-        userInterface.printRankCount(lottoRankAnalyzer.getLottoRankCount(lottos));
-        userInterface.printEarningRate(lottoRankAnalyzer.getEarningRate(lottos));
+        userInterface.printRankCount(lottoRankAnalyzer.getLottoRankCount(purchasedLottos));
+        userInterface.printEarningRate(lottoRankAnalyzer.getEarningRate(purchasedLottos));
     }
 }
