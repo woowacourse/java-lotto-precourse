@@ -22,7 +22,8 @@ public class Console {
 
     public int[] readWinningNumbers() throws IOException {
         System.out.println(WINNING_NUMBERS_MESSAGE);
-        return Arrays.stream(bufferedReader.readLine().split(REGEX))
+        String readMassage = bufferedReader.readLine().replaceAll(REGEX,"");
+        return Arrays.stream(readMassage.split(SEPARATOR))
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }
