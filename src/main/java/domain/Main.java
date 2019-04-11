@@ -117,17 +117,22 @@ public class Main {
         return String.format("%d개 일치 (%d원)", r.getCountOfMatch(), r.getWinningMoney());
     }
 
-    private static void printResult() {
+    private static void printResult(int money, int lottoMoney) {
         System.out.println("당첨 통계\n--------");
         for (Rank r : displayRankOrder) {
             System.out.println(formatRank(r) + String.format("- %d개", rankMap.get(r)));
         }
+
+        System.out.println(String.format("총 수익률은 %3f입니다.", money / (float)lottoMoney));
+
     }
 
     public static void main(String[] args) {
-        buyMultipleLotto(getTrials());
+        int money = getMoney();
+        buyMultipleLotto((int)(money / LOTTO_PRICE));
         getWinningLotto();
-
-
+        matchLottos();
+        int lottoMoney = calculateBenefit();
+        printResult();
     }
 }
