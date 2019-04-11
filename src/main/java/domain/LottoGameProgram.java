@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 로또게임 진행을 담당하는 객체
  */
-public class LottoGame {
+class LottoGameProgram {
     static final int THE_NUMBER_OF_LOTTO_NUMBERS = 6;
     static final int MAX_LOTTO_NUMBER = 45;
     static final int MIN_LOTTO_NUMBER = 1;
@@ -15,11 +15,11 @@ public class LottoGame {
     private WinningLotto winningLotto;
     private LottoVendingMachine lottoVendingMachine;
 
-    public LottoGame() {
+    LottoGameProgram() {
         lottoVendingMachine = new LottoVendingMachine();
     }
 
-    public void run() {
+    void run() {
         lottoVendingMachine.inputLottoPurchaseMoney();
         registerLottoList();
         printPurchasedLottoList();
@@ -31,21 +31,18 @@ public class LottoGame {
     }
 
     private void registerLottoList() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
         lottoList = new ArrayList<>();
 
         for (int i = 0; i < lottoVendingMachine.getPurchasedLottoCount(); i++) {
-            lottoList.add(lottoGenerator.createLotto());
+            lottoList.add(LottoGeneratorUtil.createLotto());
         }
     }
 
     private void registerWinningLotto() {
-        WinningLottoGenerator winningLottoGenerator = new WinningLottoGenerator();
-
         List<Integer> winningLottoNumber = lottoVendingMachine.getWinningLottoNumberList();
         int bonusNumber = lottoVendingMachine.getBonusNumber();
 
-        winningLotto = winningLottoGenerator.createWinningLotto(winningLottoNumber, bonusNumber);
+        winningLotto = LottoGeneratorUtil.createWinningLotto(winningLottoNumber, bonusNumber);
     }
 
     private void printPurchasedLottoList() {

@@ -6,13 +6,18 @@ import java.util.stream.Collectors;
 /**
  * 로또게임의 입력, 출력을 담당하는 객체
  */
-class LottoVendingMachine {
+public class LottoVendingMachine {
     private int purchasedLottoMoney;
     private List<Integer> winningLottoNumberList;
     private int bonusNumber;
 
+    public static void turnOn() {
+        LottoGameProgram lottoGameProgram = new LottoGameProgram();
+        lottoGameProgram.run();
+    }
+
     int getPurchasedLottoCount() {
-        return purchasedLottoMoney / LottoGame.LOTTO_PRICE;
+        return purchasedLottoMoney / LottoGameProgram.LOTTO_PRICE;
     }
 
     void inputLottoPurchaseMoney() {
@@ -85,7 +90,7 @@ class LottoVendingMachine {
 
     /* 쉼표로 구분한 당첨번호의 길이가 6인지 판단하는 메소드 */
     private boolean isExactLength(List<String> segregatedWinningLottoNumbers) {
-        return segregatedWinningLottoNumbers.size() == LottoGame.THE_NUMBER_OF_LOTTO_NUMBERS;
+        return segregatedWinningLottoNumbers.size() == LottoGameProgram.THE_NUMBER_OF_LOTTO_NUMBERS;
     }
 
     private boolean isInteger(List<String> segregatedWinningLottoNumbers) {
@@ -102,8 +107,8 @@ class LottoVendingMachine {
         boolean result = true;
 
         for (String winningLottoNumber : segregatedWinningLottoNumbers) {
-            result = result && (Integer.parseInt(winningLottoNumber) >= LottoGame.MIN_LOTTO_NUMBER
-                    && Integer.parseInt(winningLottoNumber) <= LottoGame.MAX_LOTTO_NUMBER);
+            result = result && (Integer.parseInt(winningLottoNumber) >= LottoGameProgram.MIN_LOTTO_NUMBER
+                    && Integer.parseInt(winningLottoNumber) <= LottoGameProgram.MAX_LOTTO_NUMBER);
         }
 
         return result;
@@ -116,7 +121,7 @@ class LottoVendingMachine {
             set.add(Integer.parseInt(winningLottoNumber));
         }
 
-        return set.size() != LottoGame.THE_NUMBER_OF_LOTTO_NUMBERS;
+        return set.size() != LottoGameProgram.THE_NUMBER_OF_LOTTO_NUMBERS;
     }
 
     int getBonusNumber() {
@@ -139,8 +144,8 @@ class LottoVendingMachine {
             return false;
         }
 
-        return Integer.parseInt(bonusNumber) >= LottoGame.MIN_LOTTO_NUMBER
-                && Integer.parseInt(bonusNumber) <= LottoGame.MAX_LOTTO_NUMBER;
+        return Integer.parseInt(bonusNumber) >= LottoGameProgram.MIN_LOTTO_NUMBER
+                && Integer.parseInt(bonusNumber) <= LottoGameProgram.MAX_LOTTO_NUMBER;
     }
 
     void printMessage(String message) {

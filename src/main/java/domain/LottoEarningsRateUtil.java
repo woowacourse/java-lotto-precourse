@@ -16,7 +16,7 @@ class LottoEarningsRateUtil {
         }
 
         /* 당첨금액 / (로또개수 * 로또가격) * 100 */
-        return (double) winningMoneyTotal / (lottoList.size() * LottoGame.LOTTO_PRICE) * PERCENT;
+        return (double) winningMoneyTotal / (lottoList.size() * LottoGameProgram.LOTTO_PRICE) * PERCENT;
     }
 
     private static int getLottoCountByRank(List<Lotto> lottoList, WinningLotto winningLotto, Rank rank) {
