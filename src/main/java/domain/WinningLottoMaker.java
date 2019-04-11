@@ -7,7 +7,8 @@ import java.lang.Integer;
 
 public class WinningLottoMaker {
 
-	private static final Scanner SCANNER = new Scanner(System.in);
+	private static final Scanner WINNING_SCANNER = new Scanner(System.in);
+	private static final Scanner BONUS_SCANNER = new Scanner(System.in);
 	private static final String WINNIG_NUMBERS_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
 	private static final String OVERLAP_ERROR = "Err: 중복값을 입력하셨습니다. 다시 입력해주세요";
 	private static final String SIZE_ERROR = "Err: 입력하신 숫자가 6개가 아닙니다. 다시 입력해주세요";
@@ -20,7 +21,7 @@ public class WinningLottoMaker {
 
 	private ArrayList<Integer> inputWinningNumbers() {
 		System.out.println(WINNIG_NUMBERS_MESSAGE);
-		String winningNumbersString = SCANNER.nextLine();
+		String winningNumbersString = WINNING_SCANNER.nextLine();
 		String[] winningNumbersArray = winningNumbersString.split(SPLIT_STRING);
 		ArrayList<Integer> winningNumbers = convertIntegerArrayList(winningNumbersArray);
 		tryInputWinningNumbers(winningNumbers);
@@ -62,7 +63,7 @@ public class WinningLottoMaker {
 
 	private int inputBonusNumber() {
 		System.out.println(BONUS_NUMBER_MESSAGE);
-		int bonusNumber = SCANNER.nextInt();
+		int bonusNumber = BONUS_SCANNER.nextInt();
 		return bonusNumber;
 	}
 
