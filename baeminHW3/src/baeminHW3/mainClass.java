@@ -2,6 +2,8 @@ package baeminHW3;
 
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class mainClass {
 	
@@ -55,6 +57,7 @@ public class mainClass {
 	}
 	
 	public static void main(String[] args) {
+		List<Lotto> lotto;
 		int buyMoney = getMoney();
 
 	}
@@ -64,5 +67,14 @@ public class mainClass {
 		System.out.println("구입금액을 입력해 주세요.");
 		int money = scan.nextInt();
 		return money;
+	}
+	
+	public static List<Integer> getLottoNumber(int count){
+		List <Integer> number = new ArrayList <Integer>();
+		Random generator = new Random();
+		for(int i=0; i<count; i++) {
+			number.add(new Integer(generator.nextInt(45)+1));
+		}
+		return number;
 	}
 }
