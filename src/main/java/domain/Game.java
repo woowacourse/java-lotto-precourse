@@ -100,8 +100,17 @@ public class Game {
         }
     }
 
-    private List<String> splitWithComma(String inputLottoNumber) {
-        List<String> lottoNumbers = Arrays.asList(inputLottoNumber.split(","));
+    private List<Integer> splitWithComma(String inputLottoNumber) {
+        List<String> inputLotto = Arrays.asList(inputLottoNumber.split(","));
+        List<Integer> lottoNumbers = new ArrayList<>();
+
+        try {
+            for (String number : inputLotto) {
+                lottoNumbers.add(Integer.parseInt(number));
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("올바른 숫자가 아닙니다.");
+        }
 
         return lottoNumbers;
     }
@@ -110,19 +119,17 @@ public class Game {
         return inputLottoNumber.replaceAll(" ", "");
     }
 
-    private List<String> inputLottoNumber() {
+    private List<Integer> inputLottoNumber() {
         Scanner sc = new Scanner(System.in);
 
         String inputLottoNumber = removeBlank(sc.nextLine());
-        List<String> lottoNumbers = splitWithComma(inputLottoNumber);
+        List<Integer> lottoNumbers = splitWithComma(inputLottoNumber);
 
         return lottoNumbers;
     }
 
-    private boolean checkNumberRangeAndFormat(String number) {
+    private boolean checkNumberRangeAndFormat(int lottoNumber) {
         try {
-            int lottoNumber = Integer.valueOf(number);
-
             if (lottoNumber < 1 || lottoNumber > 45) {
                 System.out.println("숫자가 너무 큽니다. 1 ~ 45 사이로 입력해주세요.");
                 return true;
@@ -135,17 +142,17 @@ public class Game {
         return false;
     }
 
-    private boolean checkLottoNumberRangeAndFormat(List<String> lottoNumbers) {
+    private boolean checkLottoNumberRangeAndFormat(List<Integer> lottoNumbers) {
         List<Boolean> checkNumber = new ArrayList<>();
 
-        for (String number : lottoNumbers) {
-            checkNumber.add(checkNumberRangeAndFormat(number));
+        for (int lottoNumber : lottoNumbers) {
+            checkNumber.add(checkNumberRangeAndFormat(lottoNumber));
         }
 
         return checkNumber.contains(true);
     }
 
-    private boolean checkNumberCount(List<String> numbers, int listSize) {
+    private boolean checkNumberCount(List<Integer> numbers, int listSize) {
         if (numbers.size() != listSize) {
             System.out.println("숫자 개수를 " + listSize + "로 맞추세요.");
             return true;
@@ -154,18 +161,22 @@ public class Game {
         return false;
     }
 
-    private void inputLottoSelectSize(int listSize) {
-        List<String> lottoNumbers;
+    private List<Integer> inputLottoSelectSize(int listSize) {
+        List<Integer> lottoNumbers;
 
         do {
             lottoNumbers = inputLottoNumber();
         } while (checkNumberCount(lottoNumbers, listSize)
                 || checkLottoNumberRangeAndFormat(lottoNumbers));
+
+        return lottoNumbers;
     }
 
-    private void inputLastWeekWinningLotto() {
+    private List<Integer> inputLastWeekWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        inputLottoSelectSize(6);
+        List<Integer> winningLottoNumber = inputLottoSelectSize(6);
+
+        return winningLottoNumber;
     }
 
     private void inputBonusBallLotto() {
