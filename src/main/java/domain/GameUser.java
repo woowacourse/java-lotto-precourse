@@ -23,4 +23,8 @@ public class GameUser {
 	public Lotto getLotto(int index) {
 		return lottos.get(index);
 	}
+
+	public int getMoney() {
+		return money;
+	}
 }
