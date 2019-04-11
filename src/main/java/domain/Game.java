@@ -54,17 +54,25 @@ public class Game {
 	}
 
 	private Map<Rank, Integer> initRankCount() {
-		Map<Rank, Integer> rankMap = new TreeMap<>(Collections.reverseOrder());
+		Map<Rank, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
 
 		for (Rank rank : Rank.values()) {
-			rankMap.put(rank, 0);
+			rankCount.put(rank, 0);
 		}
 
-		return rankMap;
+		return rankCount;
 	}
 
 	private Map<Rank, Integer> calRankCount(Map<Rank, Integer> rankCount) {
-		return null;
+		int countOfLotto = gameUser.countOfLottos();
+
+		for (int i = 0; i < countOfLotto; i++) {
+			Lotto userLotto = gameUser.getLotto(i);
+			Rank rank = winningLotto.match(userLotto);
+			rankCount.put(rank, rankCount.get(rank) + 1);
+		}
+
+		return rankCount;
 	}
 
 	private String getMatchResult(Map<Rank, Integer> rankCount) {
