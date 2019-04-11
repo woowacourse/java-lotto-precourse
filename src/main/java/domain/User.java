@@ -10,8 +10,11 @@ public class User {
 		int gameCoin = getPrice();
 		shop.createLotto(gameCoin);
 		shop.printLotto();
-		winNumInput();
-		bonusNumInput();
+		List<Integer> winningLottoNumber = winNumInput();
+		int bonus = bonusNumInput();
+		
+		WinningLotto winLotto = new WinningLotto(new Lotto(winningLottoNumber), bonus);
+		
 	}
 	
 	public int getPrice() {
@@ -27,19 +30,26 @@ public class User {
 		return Integer.parseInt(money) / 1000;
 	}
 	
-	public void winNumInput() {
+	public List<Integer> winNumInput() {
 		Vaild vaild = new Vaild();
 		Scanner sc = new Scanner(System.in);
 		String winNum = "";
 		
 		do {
 			System.out.println("지난 주 로또 당첨 번호를 입력해주세요.");
-			winNum =  sc.nextLine();
+			winNum =  sc.nextLine(); // 1,2,3,4,5,6
 		} while(!vaild.winNumVaild(winNum));
-		this.resultNum = winNum;
+		
+		List<Integer> numbers = new ArrayList<Integer>();
+		String[] tokens = winNum.split(",");
+		for (int i = 0; i < tokens.length ; i++) {
+			numbers.add(Integer.parseInt(tokens[i]));
+		}
+		
+		return numbers;
 	}
 	
-	public void bonusNumInput() {
+	public int bonusNumInput() {
 		Vaild vaild = new Vaild();
 		Scanner sc = new Scanner(System.in);
 		String bonusNum = "";
@@ -48,5 +58,6 @@ public class User {
 			System.out.println("보너스 볼의 번호를 입력해주세요.");
 			bonusNum = sc.nextLine();
 		} while(!vaild.bonusNumVaild(bonusNum, this.resultNum));
+		return Integer.parseInt(bonusNum);
 	}
 }
