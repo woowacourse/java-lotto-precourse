@@ -28,4 +28,9 @@ public class WinningLotto {
 
         return 0;
     }
+
+    private boolean isMatchBonusNumber(int bonusNumber) {
+        return bonusNo == bonusNumber;
+    }
+
 }
