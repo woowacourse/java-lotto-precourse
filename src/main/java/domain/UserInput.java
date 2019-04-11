@@ -127,6 +127,26 @@ public class UserInput {
         return true;
     }
 
+    public String getBonusNumber(){
+        do{
+            this.listen();
+        }while(!this.validateBonusNumber(this.userInput));
+
+        return this.userInput;
+    }
+
+    public boolean validateBonusNumber(String inputBonusNum){
+        if(!isValidIntegerNumber(inputBonusNum)){
+            return false;
+        }
+
+        if(!isValidLottoNumber(Integer.parseInt(inputBonusNum))){
+            return false;
+        }
+
+        return true;
+    }
+
     public void showMessgae(String msg){
         System.out.println(msg);
     }
