@@ -61,6 +61,7 @@ public class mainClass {
 		List<Lotto> lotto = buyLotto(buyMoney);
 		printLotto(lotto);
 		WinningLotto win = new WinningLotto(getWinningLotto(), getBonusNumber());
+		
 	}
 	
 	public static int getMoney() {
