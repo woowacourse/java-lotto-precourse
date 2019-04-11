@@ -20,13 +20,22 @@ Lotto 객체가 해당 int를 가지고 있는지 판별하는 메소드.
 입력받은 로또와 우승 번호를 매칭시키는 메소드.
 매칭된 수로 적절한 Rank를 반환
 
-### Main -> buyMultipleLotto()
+### Main -> initNumSeq()
 
-입력된 횟수만큼 로또 구매를 반복하는 메소드.
+무작위 숫자 생성을 위한 numSeq을 추가했다.
+그러므로 numSeq를 1부터 45의 수를 가지는 배열로 초기화해주는 메소드를 추가함.
+
+### Main -> shuffleNumSeq()
+
+numSeq을 무작위로 섞어주는 메소드.
 
 ### Main -> buyLotto()
 
 로또를 구매하는 메소드. Random 번호를 생성하여 Lotto를 생성한다.
+
+### Main -> buyMultipleLotto()
+
+입력된 횟수만큼 로또 구매를 반복하는 메소드.
 
 ### Main -> getWinningLotto()
 
