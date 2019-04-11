@@ -115,4 +115,20 @@ public class LottoMachine {
         printReInputBonusNum(satisfier);
         return satisfier;
     }
+
+    /*
+     * 보너스 숫자 입력 예외 처리
+     */
+    public boolean inspectInputBonusNum() {
+        Scanner scanner = new Scanner(System.in);
+        boolean satisfier = true;
+
+        try {
+            bonusNumInput = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            satisfier = false;
+        }
+        printReInputBonusNum(satisfier);
+        return satisfier;
+    }
 }
