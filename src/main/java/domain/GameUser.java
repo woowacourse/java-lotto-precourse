@@ -19,4 +19,8 @@ public class GameUser {
 	public int countOfLottos() {
 		return lottos.size();
 	}
+
+	public Lotto getLotto(int index) {
+		return lottos.get(index);
+	}
 }
