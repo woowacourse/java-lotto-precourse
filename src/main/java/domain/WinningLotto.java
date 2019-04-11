@@ -28,5 +28,26 @@ public class WinningLotto {
 	    
 	    public Rank match(Lotto userLotto) {
 		        // TODO 로직 구현
+		        int countOfMatch = 0;
+		        boolean matchBonus;
+		        
+		        for (Integer number : userLotto.getNumbers()) {
+		        		countOfMatch += isMatchingNumber(number);
+		        }
+		        matchBonus = isValidMatchingBonus(userLotto);
+		        
+		        return Rank.valueOf(countOfMatch, matchBonus);
 	    }
+	    
+	    /**
+		 * 구매한 로또의 번호와 당청 로또의 번호를 비교하면서 맞으면 그 수를 세기 위해
+		 * 1을 아니면 0을 반환합니다.
+		 */
+    	private int isMatchingNumber(Integer number) {
+	    		return (lotto.getNumbers().contains(number) ? 1 : 0);
+    	}
+    	
+    	private boolean isValidMatchingBonus(Lotto userLotto) {
+    			return (userLotto.getNumbers().contains(bonusNo) ? true : false);		
+    	}
 }
