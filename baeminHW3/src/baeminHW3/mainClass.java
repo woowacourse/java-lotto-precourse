@@ -59,6 +59,7 @@ public class mainClass {
 	public static void main(String[] args) {
 		int buyMoney = getMoney();
 		List<Lotto> lotto = buyLotto(buyMoney);
+		printLotto(lotto);
 
 	}
 	
@@ -83,10 +84,14 @@ public class mainClass {
 		for(int i=0; i<money/1000; i++) {
 			lotto.add(new Lotto(getLottoNumber(6)));
 		}
+		
+		System.out.println("\n" + money/1000 + "개를 구매했습니다");
 		return lotto;
 	}
 	
-	public static void printLottoNumber(List<Lotto> lotto) {
-		
+	public static void printLotto(List<Lotto> lotto) {
+		for(int i=0; i<lotto.size(); i++) {
+			lotto.get(i).printNumber();
+		}
 	}
 }
