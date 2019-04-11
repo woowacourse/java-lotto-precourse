@@ -58,7 +58,7 @@ public class Lotto {
     private static boolean isMoreThanOne(String userInput) {
         List<String> listToCheckMoreThanOne = makeListToCheck(userInput);
         if (listToCheckMoreThanOne.size() > 1) {
-            System.out.println("금액은 하나만 입력해 주세요. 쉼표없이 입력해 주세요");
+            System.out.println("금액은 하나만 입력해 주세요. 또는, 쉼표없이 입력해 주세요");
             return true;
         }
         return false;
