@@ -25,7 +25,7 @@ public class Lotto {
     /**
      * 로또가 특정한 번호를 포함하고 있는 지 검사하는 메소드
      */
-    public boolean contains(Integer number) {
+    public boolean contains(int number) {
         return numbers.contains(number);
     }
 

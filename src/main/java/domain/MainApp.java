@@ -10,12 +10,21 @@ public class MainApp {
     static final String MESSAGE_WRONG_LOTTO_NUMBER = "잘못된 입력입니다. 1~45 사이의 정수 1개를 입력해 주세요.";
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;
-    static final int NUMBER_OF_KINDS_OF_RANKS = 6;                                 // Rank 의 종류. 1등 ~ 5등 + 꽝
-    static final int NUMBER_OF_BETTING_NUMBERS = 6;                                // 로또는 45개의 숫자 중에서 6개를 고른다.
+    static final int NUMBER_OF_KINDS_OF_RANKS = 6;  // Rank 의 종류. 1등 ~ 5등 + 꽝
+    static final int NUMBER_OF_BETTING_NUMBERS = 6;  // 로또는 45개의 숫자 중에서 6개를 고른다.
 
 
     public static void main(String[] args) {
-
+        int userInputMoney = getMoneyToBuyLotto();
+        List<Lotto> userLottos = createLottosWorth(userInputMoney);
+        printLottos(userLottos);
+        List<Integer> winningNumbers = getWinningNumbers();
+        int bonusNumber = getBonusNumber();
+        WinningLotto winningLotto = createWinningLotto(winningNumbers, bonusNumber);
+        List<Rank> results = rankLottos(winningLotto, userLottos);
+        List<Integer> statistics = makeStatisticsOfRanks(results);
+        printResult(statistics);
+        printInterestRate(userInputMoney, calculateRevenue(statistics));
     }
 
 
@@ -51,6 +60,7 @@ public class MainApp {
         while (!isValidMoneyToBuyLotto(money = getIntegerFromUser())) {
             System.out.println(MESSAGE_WRONG_MONEY_TO_BUY_LOTTO);
         }
+        System.out.println();
         return money;
     }
 
@@ -64,6 +74,7 @@ public class MainApp {
         while (!isValidLottoNumber(bonusNumber = getIntegerFromUser())) {
             System.out.println(MESSAGE_WRONG_LOTTO_NUMBER);
         }
+        System.out.println();
         return bonusNumber;
     }
 
@@ -71,15 +82,15 @@ public class MainApp {
      * 로또 한개를 무작위로 발급하는 메소드
      */
     public static Lotto createRandomLotto() {
-        TreeSet<Integer> lottoNumbers = new TreeSet<Integer>();                     // 중복을 허용하지 않는 TreeSet 컬렉션을 사용한다.
+        TreeSet<Integer> lottoNumbers = new TreeSet<Integer>();  // 중복을 허용하지 않고 정렬된 상태를 유지하는 TreeSet 컬렉션을 사용한다.
         int randomNumber;
 
         while (lottoNumbers.size() < NUMBER_OF_BETTING_NUMBERS) {
-            randomNumber = (int)(Math.random() * MAX_LOTTO_NUMBER) + 1;             // 1~45 사이의 정수 하나를 무작위로 생성한다.
+            randomNumber = (int)(Math.random() * MAX_LOTTO_NUMBER) + 1;  // 1~45 사이의 정수 하나를 무작위로 생성한다.
             lottoNumbers.add(randomNumber);
         }
 
-        List<Integer> arrLottoNumbers = new ArrayList<Integer>(lottoNumbers);       // TreeSet 을 ArrayList 로 변환한다.
+        List<Integer> arrLottoNumbers = new ArrayList<Integer>(lottoNumbers);  // TreeSet 을 ArrayList 로 변환한다.
         return new Lotto(arrLottoNumbers);
     }
 
@@ -106,22 +117,23 @@ public class MainApp {
         while(it.hasNext()) {
             System.out.println(it.next());
         }
+        System.out.println();
     }
 
     /**
-     * 당첨 번호가 적절한 지 검사하는 메소드
+     * 로또 번호가 적절한 지 검사하는 메소드
      */
     public static boolean areValidLottoNumbers(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != 6) {                                            // 숫자는 총 6개 이어야 한다.
+        if (winningNumbers.size() != 6) {  // 로또 숫자는 총 6개 이어야 한다.
             return false;
         }
 
-        Collections.sort(winningNumbers);
+        Collections.sort(winningNumbers);  // 사용자가 정렬하지 않은 상태로 로또 번호를 입력하더라도, 이 단계에서 정렬함.
         if (!isValidLottoNumber(winningNumbers.get(0)) || !isValidLottoNumber(winningNumbers.get(winningNumbers.size()-1))) {
-            return false;                                                            // 리스트의 최솟값과 최댓값이 적절한 로또 번호라면 그 사이에 있는 값은 적절함이 자명하다.
+            return false;  // 리스트의 최솟값과 최댓값이 적절한 로또 번호라면 그 사이에 있는 값은 적절함이 자명하다.
         }
 
-        return isSet(winningNumbers);                                                // 숫자들 간의 중복이 없어야 한다.
+        return isSet(winningNumbers);  // 숫자들 간의 중복이 없어야 한다.
     }
 
     /**
@@ -224,7 +236,7 @@ public class MainApp {
      * 로또들의 당첨 여부를 분석하여 등수별로 몇 개나 일치했는 지 계산하는 메소드
      */
     public static List<Integer> makeStatisticsOfRanks(List<Rank> ranks) {
-        List<Integer> statisticsOfRanks = new ArrayList<Integer>(NUMBER_OF_KINDS_OF_RANKS);  // 1등 ~ 5등, 꽝
+        List<Integer> statisticsOfRanks = new ArrayList<Integer>(Arrays.asList(new Integer[] {0, 0, 0, 0, 0, 0}));  // 1등 ~ 5등, 꽝
         Iterator<Rank> it = ranks.iterator();
         Rank rank;
         int index;
@@ -241,13 +253,12 @@ public class MainApp {
      * 당첨 통계를 출력하는 메소드
      */
     public static void printResult(List<Integer> statisticsOfRanks) {
-        statisticsOfRanks.remove(statisticsOfRanks.size()-1);  // 마지막 요소는 꽝에 해당하므로 제거
         Integer[] statistics = statisticsOfRanks.toArray(new Integer[statisticsOfRanks.size()]);
         Rank[] ranks = Rank.values();
 
         System.out.println("당첨 통계");
         System.out.println("----------");
-        for (int i=statistics.length-1; i>= 0; i--) {  // 출력 순서가 5등에서 1등으로 향하기 때문에 배열을 역순으로 순회함
+        for (int i=statistics.length-2; i>= 0; i--) {  // 출력 순서가 5등에서 1등으로 향하기 때문에 배열을 역순으로 순회함. 배열의 마지막 요소는 꽝에 해당하므로 의도적으로 배제함.
             printSingleResult(ranks[i], statistics[i]);
         }
     }
@@ -257,7 +268,7 @@ public class MainApp {
      */
     public static void printSingleResult(Rank rank, int numberOfRanks) {
         if (rank == Rank.SECOND) {
-            System.out.printf("%d개 일치, 보너스 불 일치(%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), numberOfRanks);
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), numberOfRanks);
         } else {
             System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), numberOfRanks);
         }
@@ -267,12 +278,11 @@ public class MainApp {
      * 수익금을 계산하는 메소드
      */
     public static int calculateRevenue(List<Integer> statisticsOfRanks) {
-        statisticsOfRanks.remove(statisticsOfRanks.size()-1);  // 마지막 요소는 꽝에 해당하므로 제거
         Integer[] statistics = statisticsOfRanks.toArray(new Integer[statisticsOfRanks.size()]);
         Rank[] ranks = Rank.values();
         int revenue = 0;
 
-        for (int i=0; i<statistics.length; i++) {
+        for (int i=0; i<statistics.length-1; i++) {  // 배열의 마지막 요소는 꽝에 해당하므로 의도적으로 배제함.
             revenue += ranks[i].getWinningMoney() * statistics[i];
         }
 
