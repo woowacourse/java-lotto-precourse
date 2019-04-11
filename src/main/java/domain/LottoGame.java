@@ -9,6 +9,7 @@ public class LottoGame {
     private static final String SHORTAGE_WARNING = "구입금액이 부족합니다. ";
     private static final String UNIT_WARNING = "1000원 단위로 구입하실 수 있습니다.";
     private static final String QUANTITY_GUIDE = "개를 구매했습니다.";
+    private static final String WINNING_NUMBER_GUIDE = "지난 주 당첨 번호를 입력해주세요.";
     private static final int LOTTO_PRICE = 1000;
 
     private int purchasingMoney;
@@ -20,6 +21,8 @@ public class LottoGame {
         int purchasingQuantity = game.getPurchasingQuantity();
         System.out.println(purchasingQuantity + QUANTITY_GUIDE);
         game.purchaseLottery();
+        List<Integer> winningNumbers = game.enterWinningNumbers();
+        System.out.println(winningNumbers);
     }
 
     private int enterPurchasingMoney() {
@@ -69,5 +72,17 @@ public class LottoGame {
         for (int i = 0; i < lotteries.size(); i++) {
             System.out.println(this.lotteries.get(i).getNumbers());
         }
+    }
+
+    private List<Integer> enterWinningNumbers() {
+        System.out.println(WINNING_NUMBER_GUIDE);
+        Scanner prompt = new Scanner(System.in);
+        String userInput = prompt.nextLine();
+        List<Integer> winningNumbers = new ArrayList<>();
+        String[] inputNumbers = userInput.split(",");
+        for (int i = 0; i < inputNumbers.length; i++) {
+            winningNumbers.add(Integer.parseInt(inputNumbers[i]));
+        }
+        return winningNumbers;
     }
 }
