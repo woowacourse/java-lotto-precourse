@@ -1,5 +1,7 @@
 import domain.Lotto;
 import domain.MainApp;
+import domain.Rank;
+import domain.WinningLotto;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -127,4 +129,19 @@ public class MainAppTest extends TestCase {
         assertEquals("[1, 15, 22, 33, 35, 42]", winningLotto.toString());
     }
 
+    @Test
+    public void testRankLottos() throws Exception {
+        List<Integer> testList;
+        testList = new ArrayList<Integer>(Arrays.asList(VALID_LOTTO_NUMBERS));
+        Lotto testLotto = new Lotto(testList);
+        WinningLotto testWinningLotto = new WinningLotto(testLotto, 10);
+
+        List<Lotto> testLottos = new ArrayList<Lotto>();
+        testLottos.add(testLotto);
+
+        List<Rank> ranks = MainApp.rankLottos(testWinningLotto, testLottos);
+
+        assertEquals(1, ranks.size());
+        assertEquals(Rank.FIRST, ranks.get(0));
+    }
 }

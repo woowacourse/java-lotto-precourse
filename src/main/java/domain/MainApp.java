@@ -186,4 +186,20 @@ public class MainApp {
         Lotto winningLotto = new Lotto(winningNumbers);
         return new WinningLotto(winningLotto, bonusNo);
     }
+
+    /**
+     * 당첨 로또와 로또들을 입력으로 받아서 로또들의 당첨 여부(Rank)를 반환하는 메소드
+     */
+    public static List<Rank> rankLottos(WinningLotto winningLotto, List<Lotto> lottos) {
+        List<Rank> ranks = new ArrayList<Rank>();
+        Iterator<Lotto> it = lottos.iterator();
+
+        while(it.hasNext()) {
+            ranks.add(winningLotto.match(it.next()));
+        }
+
+        return ranks;
+    }
+
+
 }
