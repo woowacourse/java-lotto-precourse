@@ -67,4 +67,42 @@ public class User {
 
         return checkedLastLotto;
     }
+    private List<Integer> checkLastLotto(String number) {
+        checkedLastLotto = new ArrayList<Integer>();
+        String checkednumber[] =  number.replaceAll(" ", "").split(",");
+        for (int i =0; i<checkednumber.length; i++) {
+            checkLastLottoState(Integer.valueOf(checkednumber[i]));
+        }
+        return checkedLastLotto;
+    }
+
+    private void checkLastLottoState(int no) {
+        if (!checkLastLottoRange(no) && !checkLastLottoOverlap(no)) {
+            checkedLastLotto.add(no);
+        }
+    }
+
+    private boolean checkLastLottoRange(int no) {
+        if (no < MinNumber || no > MaxNumber) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkLastLottoOverlap(int no) {
+        if(overlap.containsKey(no)) {
+            System.out.println("!");
+            return true;
+        }
+        overlap.put(no, 1);
+        return false;
+    }
+
+    private boolean checkLastLottoSize(List<Integer> checkedLastLotto) {
+        if (checkedLastLotto.size() > MaxNumberLength || checkedLastLotto.size() < MaxNumberLength) {
+            checkedLastLotto = new ArrayList<Integer>();
+            return true;
+        }
+        return false;
+    }
 }
