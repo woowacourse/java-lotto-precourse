@@ -28,4 +28,10 @@ public class WinPrice {
         return winPrices.get(rank);
     }
 
+    public long getTotalWinPrice() {
+        long totalWinPrice = 0;
+        for (Rank rank : winPrices.keySet())
+            totalWinPrice += (long)rank.getWinningMoney() * winPrices.get(rank);
+        return totalWinPrice;
+    }
 }

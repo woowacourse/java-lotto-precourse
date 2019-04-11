@@ -18,6 +18,7 @@ public class LottoGame {
     public LottoGame() {
         inputConsoleView = new InputConsoleView();
         lottoMachine = new LottoMachine(new RandomNumberGenerate());
+        winPrice = new WinPrice();
     }
 
     public void run(){
@@ -30,6 +31,12 @@ public class LottoGame {
         List<Rank> purchasedLottosRanks = LottoRankChecker.getRanks(purchasedLottos, winningLotto);
         winPrice.addWinCount(purchasedLottosRanks);
 
+        printResult(purchaseAmount);
+    }
+
+    private void printResult(LottoMoney purchaseAmount) {
+        OutputConsoleView.printResult(winPrice);
+        OutputConsoleView.printRateOfProfit(purchaseAmount, winPrice.getTotalWinPrice());
     }
 
     private WinningLotto getWinningLotto() {
