@@ -23,6 +23,14 @@ class UserLottoSet {
         userLottoSet = new ArrayList<>();
     }
 
+    static Lotto generateLotto(Random rand) {
+        List<Integer> numberSet = rand.ints(LottoShop.NUMBER_LOWER_BOUND,
+                LottoShop.NUMBER_UPPER_BOUND).distinct()
+                .limit(LottoShop.NUMBER_PER_LOTTO).boxed()
+                .sorted().collect(Collectors.toList());
+        return new Lotto(numberSet);
+    }
+
     void saveUserLotto(int numLotto) {
         Random rand = new Random();
         for (int i = 0; i < numLotto; i++) {
@@ -37,13 +45,5 @@ class UserLottoSet {
         for (Lotto userLotto : userLottoSet) {
             matchedRanks.add(winningLotto.match(userLotto));
         }
-    }
-
-    private Lotto generateLotto(Random rand) {
-        List<Integer> numberSet = rand.ints(LottoShop.NUMBER_LOWER_BOUND,
-                LottoShop.NUMBER_UPPER_BOUND).distinct()
-                .limit(LottoShop.NUMBER_PER_LOTTO).boxed()
-                .sorted().collect(Collectors.toList());
-        return new Lotto(numberSet);
     }
 }
