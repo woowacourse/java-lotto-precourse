@@ -3,16 +3,17 @@ package domain;
 import java.util.*;
 
 public class UserLotto {
+    private final static int LOTTO_PRICE = 1000;
     private Scanner scanner;
     private int price;
     private List<Lotto> lotto;
 
-    public UserLotto() {
+    UserLotto() {
         scanner = new Scanner(System.in);
         lotto = new ArrayList<>();
     }
 
-    public void buyUserLotto(){
+    void buyUserLotto(){
         inputLottoPrice();
         printLottoAmount();
     }
@@ -24,7 +25,7 @@ public class UserLotto {
     }
 
     private void printLottoAmount() {
-        int amount = price / 1000;
+        int amount = price / LOTTO_PRICE;
         System.out.println(amount + "개를 구매했습니다.");
         makeLotto(amount);
     }
@@ -36,7 +37,7 @@ public class UserLotto {
         }
     }
 
-    public List<Lotto> getLotto() {
+    List<Lotto> getLotto() {
         return lotto;
     }
 
