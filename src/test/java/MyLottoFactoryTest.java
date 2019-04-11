@@ -1,3 +1,4 @@
+import domain.LottoInfo;
 import domain.NumberPicker;
 
 import static org.junit.Assert.*;
@@ -12,8 +13,8 @@ public class MyLottoFactoryTest {
     @org.junit.Test
     public void newLottoPickValidLength() {
         mockedPicker = mock(NumberPickerByShuffling.class);
-        when(mockedPicker.PickNums(any(Integer[].class), eq(factory.LOTTO_LENGTH)))
-                .thenReturn(new Integer[factory.LOTTO_LENGTH]);
+        when(mockedPicker.PickNums(any(Integer[].class), eq(LottoInfo.LOTTO_LENGTH)))
+                .thenReturn(new Integer[LottoInfo.LOTTO_LENGTH]);
 
         factory = new MyLottoFactory(mockedPicker);
 
@@ -21,6 +22,6 @@ public class MyLottoFactoryTest {
         factory.newLotto();
 
         // Assert
-        verify(mockedPicker).PickNums(any(Integer[].class), eq(factory.LOTTO_LENGTH));
+        verify(mockedPicker).PickNums(any(Integer[].class), eq(LottoInfo.LOTTO_LENGTH));
     }
 }
