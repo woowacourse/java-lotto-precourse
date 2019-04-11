@@ -23,4 +23,20 @@ public class Buyer {
         } while (money < MIN_PAY_MONEY);
         return money;
     }
+
+    /*
+     * 구입금액 입력 예외처리
+     */
+    public int inspectBuyMoneyCondition() {
+        Scanner scanner = new Scanner(System.in);
+        int money;
+
+        try {
+            money = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            money = -1;
+        }
+       printReInputMoney(money);
+        return money;
+    }
 }
