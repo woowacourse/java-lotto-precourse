@@ -19,14 +19,14 @@ public class LottoGame {
 
     public static void main(String args[]) {
         LottoGame lottoGame = new LottoGame();
-        LottoManager lottoManager = new LottoManager();
+        LottoManager manager = new LottoManager();
         StatisticAnalyzer analyzer = new StatisticAnalyzer();
 
-        List<Lotto> userLottos = lottoManager.issueLottoWorthOf(lottoManager.inputPurchaseAmount());
-        WinningLotto winningLotto = new WinningLotto(lottoManager.inputWinningNumbers(), lottoManager.inputBonus());
+        List<Lotto> userLottos = manager.issueLottoWorthOf(manager.inputPurchaseAmount());
+        List<Integer> winningNumbers = manager.inputWinningNumbers();
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), manager.inputBonusOf(winningNumbers));
 
         HashMap<Lotto, Rank> lotteryResults = lottoGame.startLottery(userLottos, winningLotto);
-        HashMap<Rank, Integer> rankDistributionTable = analyzer.analyzeRankDistribution(lotteryResults);
-        analyzer.analyzeEarningRatesBy(rankDistributionTable);
+        analyzer.showStatisticsOf(lotteryResults);
     }
 }

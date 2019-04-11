@@ -13,9 +13,13 @@ public class LottoManager {
     public static final int WINNING_NUMBER_ORIGIN = 1;
     public static final int NUM_OF_WINNING_NUMBERS = 6;
 
-    private Scanner sc = new Scanner(System.in);
-    private Validator validator = new Validator();
-    private List<Integer> winningNumbers;
+    private Scanner sc;
+    private Validator validator;
+
+    public LottoManager() {
+        sc = new Scanner(System.in);
+        validator = new Validator();
+    }
 
     public int inputPurchaseAmount() {
         String purchaseAmount;
@@ -28,7 +32,7 @@ public class LottoManager {
         return Integer.parseInt(purchaseAmount);
     }
 
-    public int randomPop(List<Integer> numberSet) {
+    private int randomPop(List<Integer> numberSet) {
         int randomIdx = (new Random()).nextInt(numberSet.size());
 
         return numberSet.remove(randomIdx);
@@ -46,7 +50,7 @@ public class LottoManager {
         return new Lotto(autoNumbers);
     }
 
-    public List<Lotto> issueLottoOf(int purchasedMoney) {
+    public List<Lotto> issueLottoWorthOf(int purchasedMoney) {
         List<Lotto> lottos = new ArrayList<Lotto>();
         int numberOfLotto = purchasedMoney / PRICE_PER_LOTTO;
 
@@ -66,14 +70,14 @@ public class LottoManager {
         System.out.print("\n");
     }
 
-    public List<String> trimAllElementsOf(String[] splited) {
+    private List<String> trimAllElementsOf(String[] splited) {
         return Arrays.stream(splited)
-                .map(str -> str.trim())
+                .map(String::trim)
                 .filter(str -> !str.equals(""))
                 .collect(Collectors.toList());
     }
 
-    public Lotto inputWinningNumbers() {
+    public List<Integer> inputWinningNumbers() {
         List<String> winningNumbers;
 
         do {
@@ -81,11 +85,10 @@ public class LottoManager {
             winningNumbers = trimAllElementsOf(sc.nextLine().split(","));
         } while (!validator.takesValidWinningNumbers(winningNumbers));
 
-        this.winningNumbers = winningNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
-        return new Lotto(this.winningNumbers);
+        return winningNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
     }
 
-    public int inputBonus() {
+    public int inputBonusOf(List<Integer> winningNumbers) {
         String bonusNo;
 
         do {

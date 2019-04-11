@@ -62,16 +62,11 @@ public class StatisticAnalyzer {
         System.out.println("총 수익률은 " + percentFormatter.format(earningRates) + "입니다");
     }
 
-    public HashMap<Rank, Integer> analyzeRankDistribution(HashMap<Lotto, Rank> lotteryResults) {
+    public void showStatisticsOf(HashMap<Lotto, Rank> lotteryResults) {
         HashMap<Rank, Integer> rankDistributionTable = makeRankDistributionTableOf(lotteryResults);
-
-        show(rankDistributionTable);
-        return rankDistributionTable;
-    }
-
-    public void analyzeEarningRatesBy(HashMap<Rank, Integer> rankDistributionTable) {
         double earningRate = calculateEarningRatesBy(rankDistributionTable);
 
+        show(rankDistributionTable);
         show(earningRate);
     }
 }
