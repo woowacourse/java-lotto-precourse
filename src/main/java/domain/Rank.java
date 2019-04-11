@@ -2,6 +2,9 @@ package domain;
 
 /**
  * 로또 등수를 의미하는 enum
+ *
+ * @author 우아한 테크코스
+ * @version 1.0
  */
 public enum Rank {
     FIRST(6, 2_000_000_000), // 1등

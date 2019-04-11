@@ -24,20 +24,20 @@ public class User {
     public void doLotto() {
         WinningLottoCalculation winningLottoCalculation =
                 new WinningLottoCalculation(
-                        setUserLottoToRank(issueUserLotto(userInput.inputTotalPrice()),
+                        setUserLottoToRank(issueUserLotto(userInput.inputPurchasePrice()),
                                 issueWinningLotto()));
 
         winningLottoCalculation.printStatistics();
     }
 
-    private List<Lotto> issueUserLotto(int lottoCount) {
-        List<Lotto> list = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
+    private List<Lotto> issueUserLotto(int userLottoCount) {
+        List<Lotto> userLottoList = new ArrayList<>();
+        for (int i = 0; i < userLottoCount; i++) {
             Lotto lotto = new Lotto(lottoGenerator.setLottoNumber());
-            list.add(lotto);
+            userLottoList.add(lotto);
             lotto.printLottoNumbers();
         }
-        return list;
+        return userLottoList;
     }
 
     private WinningLotto issueWinningLotto() {
@@ -46,9 +46,9 @@ public class User {
         return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 
-    private List<Rank> setUserLottoToRank(List<Lotto> lottoList, WinningLotto winningLotto) {
+    private List<Rank> setUserLottoToRank(List<Lotto> userLottoList, WinningLotto winningLotto) {
         List<Rank> rankList = new ArrayList<>();
-        for (Lotto lotto : lottoList) {
+        for (Lotto lotto : userLottoList) {
             rankList.add(winningLotto.match(lotto));
         }
         return rankList;

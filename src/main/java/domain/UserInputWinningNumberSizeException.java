@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * 당첨 번호 입력에 대한 갯수 예의 처리 클래스 (6개가 아닌시에)
+ */
 public class UserInputWinningNumberSizeException extends UserInputException {
 
     @Override

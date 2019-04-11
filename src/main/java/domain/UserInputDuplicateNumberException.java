@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * 중복 처리 예외 클래스
+ */
 public class UserInputDuplicateNumberException extends UserInputException {
     @Override
     void printErrorMessage() {

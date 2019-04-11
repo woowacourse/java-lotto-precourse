@@ -1,7 +1,7 @@
 /*
  * UserInput
  *
- * version 1.2
+ * version 1.1
  *
  * 2019/04/10
  */
@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
  * 로또 번호를 발급받기 위해 사용자로부터 구입 금액을 입력받는 클래스
  *
  * @author 김성훈
- * @version 1.1 2019/04/10  사용자의 입력을 받는다. 1000원 단위의 숫자외 경우에 대한 예외처리 구현
- *          1.2 2019/04/11  지난 주 당첨 번호와 보너스 숫자를 입력받는다. 입력 형식, 범위, 갯수, 중복에 대한 예외처리 구현
+ * @version 1.0 2019/04/10  사용자의 입력을 받는다. 1000원 단위의 숫자외 경우에 대한 예외처리 구현
+ *          1.1 2019/04/11  지난 주 당첨 번호와 보너스 숫자를 입력받는다. 입력 형식, 범위, 갯수, 중복에 대한 예외처리 구현
  */
 public class UserInput {
     private static final int PRICE_PER_LOTTO = 1000;
@@ -26,16 +26,16 @@ public class UserInput {
 
     private Scanner sc = new Scanner(System.in);
 
-    public int inputTotalPrice() {
+    public int inputPurchasePrice() {
         try {
-            return checkPriceUnit(inputPrice());
+            return checkPriceUnit(setPrice());
         } catch (UserInputException e) {
             e.printErrorMessage();
-            return inputTotalPrice();
+            return inputPurchasePrice();
         }
     }
 
-    private int inputPrice() {
+    private int setPrice() {
         try {
             System.out.println("구입금액을 입력해 주세요.");
             return Integer.parseInt(sc.nextLine());
@@ -53,7 +53,7 @@ public class UserInput {
 
     public List<Integer> inputWinningNumbers() {
         try {
-            List<Integer> winningNumbers = inputWinningNumber();
+            List<Integer> winningNumbers = setWinningNumber();
             checkIfWinningNumbersInRange(winningNumbers);
             return isUnderSixLength(winningNumbers);
         } catch (UserInputException e) {
@@ -62,14 +62,14 @@ public class UserInput {
         }
     }
 
-    private List<Integer> inputWinningNumber() {
+    private List<Integer> setWinningNumber() {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             String[] inputWinningNumber = sc.nextLine().replaceAll(" ", "").split(",");
             return checkDuplicateWinningNumbers(parseStringArrayToInteger(inputWinningNumber));
         } catch (UserInputException e) {
             e.printErrorMessage();
-            return inputWinningNumber();
+            return setWinningNumber();
         }
     }
 
@@ -83,7 +83,7 @@ public class UserInput {
 
     public int inputBonusNumber(List<Integer> list) {
         try {
-            int bonusNumber = inputBonus();
+            int bonusNumber = setBonus();
             checkIfNumberInRange(bonusNumber);
             return checkDuplicateBonusNumber(list, bonusNumber);
         } catch (UserInputException e) {
@@ -92,7 +92,7 @@ public class UserInput {
         }
     }
 
-    private int inputBonus() {
+    private int setBonus() {
         try {
             System.out.println("보너스 볼을 입력해 주세요.");
             return Integer.parseInt(sc.nextLine());
@@ -108,16 +108,16 @@ public class UserInput {
         return winningNumbers;
     }
 
-    private List<Integer> checkDuplicateWinningNumbers(List<Integer> list) {
-        List<Integer> distinctList = list.parallelStream().distinct().collect(Collectors.toList());
-        if (list.size() != distinctList.size()) {
+    private List<Integer> checkDuplicateWinningNumbers(List<Integer> winningNumbers) {
+        List<Integer> distinctList = winningNumbers.parallelStream().distinct().collect(Collectors.toList());
+        if (winningNumbers.size() != distinctList.size()) {
             throw new UserInputDuplicateNumberException();
         }
-        return list;
+        return winningNumbers;
     }
 
-    private int checkDuplicateBonusNumber(List<Integer> list, int bonusNumber) {
-        if (list.contains(bonusNumber)) {
+    private int checkDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
             throw new UserInputDuplicateNumberException();
         }
         return bonusNumber;

@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * 숫자 범위에 대한 예외 처리 클래스
+ */
 public class UserInputNumberRangeException extends UserInputException {
     @Override
     void printErrorMessage() {

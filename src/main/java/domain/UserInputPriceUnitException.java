@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * 1000원 단위가 아닌 숫자 입력에 대한 예외 처리 클래스
+ */
 public class UserInputPriceUnitException extends UserInputException {
     private int totalPrice;
 

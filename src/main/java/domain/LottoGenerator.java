@@ -15,7 +15,7 @@ import java.util.List;
  * 로또 번호를 발생시키는 클래스
  *
  * @author 김성훈
- * @version 1.0
+ * @version 1.0 2019/04/11  1 ~ 45 사이의 난수 발생 구현. 범위와 중복 사항에 대한 예외 처리.
  */
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = 6;
@@ -23,23 +23,24 @@ public class LottoGenerator {
     private static final int LOTTO_NUMBER_MAX = 45;
 
     public List<Integer> setLottoNumber() {
-        List<Integer> lotto = new ArrayList<>();
-        while (lotto.size() < LOTTO_NUMBER_COUNT) {
-            lotto.add(generateRandomNumber(lotto));
+        List<Integer> lottoNumbers = new ArrayList<>();
+        while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
+            lottoNumbers.add(generateRandomNumber(lottoNumbers));
         }
-        return lotto;
+        return lottoNumbers;
     }
 
-    private int generateRandomNumber(List<Integer> list) {
+    private int generateRandomNumber(List<Integer> lottoNumbers) {
         int randomNumber = -1;
         do {
-            randomNumber = (int) (Math.random() * 45) + 1;
-        } while (checkIfDuplicateNumber(list, randomNumber) && checkIfNumberInRange(randomNumber));
+            randomNumber = (int) (Math.random() * 45) + 1;      // 1 ~ 45
+        } while (checkIfDuplicateNumber(lottoNumbers, randomNumber)
+                && checkIfNumberInRange(randomNumber));
 
         return randomNumber;
     }
 
-    private boolean checkIfNumberInRange(int randomNumber){
+    private boolean checkIfNumberInRange(int randomNumber) {
         return (LOTTO_NUMBER_MIN <= randomNumber && randomNumber <= LOTTO_NUMBER_MAX);
     }
 

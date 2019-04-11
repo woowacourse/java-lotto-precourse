@@ -34,14 +34,14 @@ public class Lotto {
         System.out.println(stringBuilder.toString().substring(0, stringBuilder.length() - 2) + "]");
     }
 
-    public boolean contains(int number) {
+    public boolean contain(int number) {
         return numbers.contains(number);
     }
 
     public int calcCountOfMatch(Lotto winningNumbers) {
         int countOfMatch = 0;
         for (int number : numbers) {
-            countOfMatch += winningNumbers.contains(number) ? 1 : 0;
+            countOfMatch += winningNumbers.contain(number) ? 1 : 0;
         }
         return countOfMatch;
     }

@@ -1,5 +1,5 @@
 /*
- * WinningLotto
+ * WinningLottoCalculation
  *
  * version 1.0
  *
@@ -23,7 +23,7 @@ public class WinningLottoCalculation {
 
     private List<Rank> rankList;
     // Map 자료구조를 이용해서 사용자 로또에 대한 각각의 Rank에 개수를 mapping
-    private Map<Rank, Integer> rankAndCount = new HashMap<>();
+    private Map<Rank, Integer> rankCountMap = new HashMap<>();
 
     public WinningLottoCalculation(List<Rank> ranksList) {
         this.rankList = ranksList;
@@ -33,15 +33,14 @@ public class WinningLottoCalculation {
 
     private void initRankAndCount() {
         for (Rank rank : Rank.values()) {
-            rankAndCount.put(rank, 0);
+            rankCountMap.put(rank, 0);
         }
     }
 
     private void setRankAndCount() {
         for (Rank rank : rankList) {
-            rankAndCount.put(rank, rankAndCount.get(rank) + 1);
+            rankCountMap.put(rank, rankCountMap.get(rank) + 1);
         }
-        System.out.println(rankAndCount.entrySet());
     }
 
     private int calcTotalWinningMoney() {
@@ -61,12 +60,12 @@ public class WinningLottoCalculation {
         for (Rank rank : Rank.values()) {
             System.out.println(rank.getCountOfMatch() + "개 일치 "
                     + (rank.equals(Rank.SECOND) ? ", 보너스볼 일치 " : "")
-                    + "(" + rank.getWinningMoney() + "원) - " + rankAndCount.get(rank) + "개");
+                    + "(" + rank.getWinningMoney() + "원) - " + rankCountMap.get(rank) + "개");
         }
         System.out.println(String.format("총 수익률은 %.3f입니다.", calcProfitRate(calcTotalWinningMoney())));
     }
 
-    private void printStartStatistics(){
+    private void printStartStatistics() {
         System.out.println("당첨 통계");
         System.out.println("---------");
     }
