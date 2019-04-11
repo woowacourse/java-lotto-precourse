@@ -21,6 +21,9 @@ public class GameUI {
 			int money = askMoney(sc);
 			game.setMoney(money);
 			System.out.println(game.getLotto());
+
+			List<Integer> numbers = askNumbers(sc);
+			int bonusNo = askBonusNo(sc, numbers);
 		}
 	}
 
