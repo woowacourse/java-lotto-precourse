@@ -76,8 +76,8 @@ public class WinningLottoGenerator {
     
     private boolean checkDuplicate(List<Integer> splitedNumberList) {
     	HashSet<Integer> setForCheckDuplicate = new HashSet<Integer>(splitedNumberList);
-
-    	return setForCheckDuplicate.size() == 6 ? true : false;
+    	
+    	return (setForCheckDuplicate.size() == 6 && splitedNumberList.size() ==6) ? true : false;
     }
     
     
