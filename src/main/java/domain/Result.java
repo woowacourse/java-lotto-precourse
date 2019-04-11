@@ -21,6 +21,17 @@ public class Result {
         setWinningLotto(getwinLotto);
         System.out.println("총 수익률은 " + setRate() + "입니다.");
     }
+    private void setWinningLotto(List<Integer> getwinLotto) {
+        int bonusno = user.getBonusNo();
+        Lotto winlotto = new Lotto(getwinLotto);
+
+        winninglotto = new WinningLotto(winlotto, bonusno);
+        lottoMap = new HashMap<Rank, Integer>();
+        for (Rank rank : Rank.values()) {
+            lottoMap.put(rank, 0);
+        }
+        checkStatistics();
+    }
 
 }
 
