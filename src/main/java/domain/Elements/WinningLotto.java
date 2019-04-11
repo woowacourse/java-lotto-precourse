@@ -1,5 +1,7 @@
 package domain.Elements;
 
+import java.util.List;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -21,12 +23,16 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        int countOfMatch = 0;
-        for(int i =0; i<userLotto.getLottoNumber().size();i++){
-            countOfMatch = (userLotto.getLottoNumber().contains(this.lotto.getLottoNumber().get(i))) ? countOfMatch + 1 : countOfMatch;
-        }
+        int countOfMatch = setCountOfMatch(userLotto.getLottoNumber());
         Boolean matchBonus = userLotto.getLottoNumber().contains(this.bonusNo);
-        Rank rank = Rank.valueOf(countOfMatch,matchBonus);
-        return rank;
+        return  Rank.valueOf(countOfMatch,matchBonus);
+    }
+
+    private int setCountOfMatch(List<Integer> lottoNumber){
+        int countOfMatch = 0;
+        for(int i =0; i<lottoNumber.size();i++){
+            countOfMatch = (lottoNumber.contains(this.lotto.getLottoNumber().get(i))) ? countOfMatch + 1 : countOfMatch;
+        }
+        return countOfMatch;
     }
 }

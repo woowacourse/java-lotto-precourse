@@ -3,6 +3,7 @@ package domain.Program;
 import domain.Elements.Lotto;
 import domain.Elements.LottoPaper;
 import domain.Elements.WinningLotto;
+import domain.Elements.Winningstatistics;
 import domain.Program.Config.Constant;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class LottoSimulator {
         Print.getWinningLottoSetter();                                                                                                              //5
         Lotto winningLottoPaper = new Lotto(new LottoPaper(2).getLottoNumber());                                                              //6
         WinningLotto winningLotto = new WinningLotto(winningLottoPaper,Input.setBonusNumber(winningLottoPaper.getLottoNumber()));                   //7
+        Winningstatistics winningstatistics = Winningstatistics.createWinningStatistics(lottoBundle,winningLotto);                                  //8
+        Print.getWinningstatisticsResult(winningstatistics);                                                                                        //9
     }
     private Lotto[] buyLottoBundle(long pay, int type){
         int amount = (int)(pay/ Constant.LOTTO_PRICE);

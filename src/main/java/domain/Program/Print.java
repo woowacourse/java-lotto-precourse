@@ -1,14 +1,27 @@
 package domain.Program;
 
 import domain.Elements.Lotto;
+import domain.Elements.Rank;
+import domain.Elements.Winningstatistics;
 
-import java.util.List;
+import java.util.*;
 
 public class Print {
     public static void getLottoBundle(Lotto[] lottoBunbdle){
+        System.out.println(lottoBunbdle.length+"개 구입하셨습니다.");
         for(Lotto lotto: lottoBunbdle) {
             System.out.println(lotto.getLottoNumber());
         }
+    }
+
+    public static void getWinningstatisticsResult(Winningstatistics winningstatistics){
+        System.out.println("당첨 통계 \n -----------");
+            for(Rank rankKey : winningstatistics.getStatisticsMap().keySet()){
+                int countOfMatch = rankKey.getCountOfMatch();
+                int winningMoney = rankKey.getWinningMoney();
+                int userCountOfmatch = winningstatistics.getStatisticsMap().get(rankKey);
+                System.out.println(countOfMatch+"개 일치 ("+winningMoney+"원)- "+userCountOfmatch+" 개");
+            }
     }
 
     public static void getInputPrice(){

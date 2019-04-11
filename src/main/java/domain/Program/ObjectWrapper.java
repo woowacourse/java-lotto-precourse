@@ -1,7 +1,6 @@
 package domain.Program;
 
-import domain.Elements.Lotto;
-import domain.Elements.LottoPaper;
+import domain.Elements.*;
 
 import java.util.List;
 
