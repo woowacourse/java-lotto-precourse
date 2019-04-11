@@ -30,6 +30,17 @@ public class LottoGame {
         }
     }
 
+    public void setWinningLotto(String nums, String bonus) {
+        List<Integer> list = new ArrayList<Integer>();
+        for (String num : nums.split(",")) {
+            list.add(Integer.parseInt(num));
+        }
+
+        int bonusNum = Integer.parseInt(bonus);
+
+        this.winningLotto = new WinningLotto(new Lotto(list), bonusNum);
+    }
+
     public void showLottos(){
         this.showMessage("\n총 "+this.userLottos.size()+"개를 구매했습니다.");
         Iterator<Lotto> it = this.userLottos.iterator();
