@@ -1,7 +1,7 @@
 /*
  * UserInterfaceImpl Class
  *
- * @version 1.5
+ * @version 1.6
  *
  * @date 2019-04-09
  *
@@ -19,6 +19,8 @@ import domain.utility.Utils;
 
 import java.util.List;
 import java.util.Scanner;
+
+import static domain.objects.Rank.*;
 
 public class UserInterfaceImpl implements UserInterface {
     ValidInterface valid;
@@ -110,18 +112,18 @@ public class UserInterfaceImpl implements UserInterface {
 
     @Override
     public void printLottoStatistic(LottoResult lottoResult) {
+        Rank[] ranks = {FIFTH, FOURTH, THIRD, SECOND, FIRST};
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Rank rank : Rank.values()) {
+        for (Rank rank : ranks) {
             printEachRankResult(rank, lottoResult.getRankCount(rank));
         }
-        System.out.println(String.format("총 수익률은 %.3f입니다.", lottoResult.getYieldRate()));
+        System.out.println(String.format("총 수익률은 %.3f%% 입니다.", lottoResult.getYieldRate()));
     }
 
     @Override
     public void printEachRankResult(Rank rank, int count) {
-
-        String string = String.format("%d개 일치%s(%d원)-%d개",
+        String string = String.format("%d개 일치%s(%d원) - %d개",
                 rank.getCountOfMatch(),
                 rank.equals(Rank.SECOND) ? ", 보너스 볼 일치" : "",
                 rank.getWinningMoney(),

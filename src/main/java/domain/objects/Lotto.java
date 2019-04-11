@@ -40,7 +40,6 @@ public class Lotto {
         return count;
     }
 
-
     @Override
     public String toString() {
         return "[" + numbers.stream().map(s -> String.valueOf(s)).collect(Collectors.joining(", ")) + "]";

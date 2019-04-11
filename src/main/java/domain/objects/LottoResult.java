@@ -1,7 +1,7 @@
 /*
  * Lotto Class
  *
- * @version 1
+ * @version 1.1
  *
  * @date 2019-04-11
  *
@@ -42,7 +42,18 @@ public class LottoResult {
         return totalMoney;
     }
 
+    public int getLottoCount(){
+        int count =0;
+        for(Rank rank :Rank.values()){
+            count += content.get(rank);
+        }
+        return count;
+    }
+
     public double getYieldRate() {
-        return (double) getTotalYield() / content.size();
+        long totalMoney = getTotalYield();
+        int lottoCount = getLottoCount();
+
+        return (double) totalMoney / (lottoCount*Lotto.UNIT_PRICE);
     }
 }
