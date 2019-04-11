@@ -35,6 +35,19 @@ public class Main {
         }
     }
 
+    private void shuffleNumSeq() {
+        if (numSeq == null) {
+            initNumSeq();
+        }
+
+        for (int i = 0; i < 45; i++) {
+            int tmp = numSeq[i];
+            int target = (int)(Math.random() * (45 - i)) + i;
+            numSeq[target] = numSeq[i];
+            numSeq[i] = tmp;
+        }
+    }
+
     public static void main(String[] args) {
 
     }
