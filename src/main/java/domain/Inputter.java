@@ -5,22 +5,23 @@ import java.util.Scanner;
 
 import static domain.Validator.AMOUNT_UNIT;
 
-final
 /**
- * 사용자 입력을 받는 입력기
+ * 사용자 입력을 받는 객체
  *
- * @version 1.0(2019.04.09)
+ * @version 1.1(2019.04.11)
  * @author jongyoon Kim
  */
 public class Inputter {
+    /**입력 메세지*/
     private static final String MSG_INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String MSG_INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.(6자리)"
                                                                 + "\n입력 예시 : 5,10,14,32,40,45";
     private static final String MSG_INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String MSG_PURCHASE_AMOUNT = "개를 구매했습니다.";
+
     private static Scanner scan = new Scanner(System.in);
     private static Validator validator = new Validator();
-
+    
     public int inputPurchaseAmount(){
         String amount;
         do{
