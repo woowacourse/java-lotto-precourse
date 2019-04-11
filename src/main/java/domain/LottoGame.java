@@ -6,18 +6,25 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * @author soojin
+ *
+ * 로또 게임을 실행하는 클래스입니다.
+ */
 public class LottoGame {
-	static private final int FIRST = 2000000000;
-	static private final int SECOND = 30000000;
-	static private final int THIRD = 1500000;
-	static private final int FOURTH = 50000;
-	static private final int FIFTH = 5000;
-	static private final int LOTTO_PRICE = 1000;
+	private static final int FIRST = 2000000000;
+	private static final int SECOND = 30000000;
+	private static final int THIRD = 1500000;
+	private static final int FOURTH = 50000;
+	private static final int FIFTH = 5000;
+	private static final int LOTTO_PRICE = 1000;
+	private static final int START_FROM_THIRD = 3;
+	private static final int END_BY_EIGHT = 8;
+	private static final int OVER_SECOND_RANK = 6;
 	
 	LottoGenerator lottoGenerator = new LottoGenerator();
 	WinningLottoGenerator winLottoGenerator = new WinningLottoGenerator();
 	
-
     public List<Lotto> makeLotto() {
     	ArrayList<Lotto> lottos = lottoGenerator.makeLotto();
     	
@@ -33,9 +40,9 @@ public class LottoGame {
 
     	Lotto winLotto = new Lotto(winningNumber);
     	
-    	WinningLotto winLottoWithBonus = new WinningLotto(winLotto, winLottoGenerator.makeBonusNumber(winningNumber));
+    	WinningLotto winningLottoWithBonusNum = new WinningLotto(winLotto, winLottoGenerator.makeBonusNumber(winningNumber));
     	
-    	return winLottoWithBonus;
+    	return winningLottoWithBonusNum;
     }
     
     public List<Rank> getRankResult(WinningLotto winningLotto, List<Lotto> userLotto) {
@@ -78,9 +85,9 @@ public class LottoGame {
 		List<Iterator<Integer>> iterators = new ArrayList<Iterator<Integer>>();
 		Iterator<Integer> valueIter = result.values().iterator();
 		Iterator<Integer> keyIter = result.keySet().iterator();
+		
 		valueIter.next();
 		keyIter.next();
-		
 		iterators.add(keyIter);
 		iterators.add(valueIter);
 
@@ -94,11 +101,11 @@ public class LottoGame {
 	
     public void printResult(List<Iterator<Integer>> iterators) {
 		int j = 0;
+		String printResult = "";
 		
-		for(int i = 3; i < 8; i++) {
-			String printResult = "";
+		for(int i = START_FROM_THIRD; i < END_BY_EIGHT; i++) {
 			j = (i >= 6) ? i-1 : i;
-			printResult += ((j == 6) ? j + "개 일치," : j + "개 일치, 보너스 볼 일치");
+			printResult += ((j == OVER_SECOND_RANK) ? j + "개 일치," : j + "개 일치, 보너스 볼 일치");
 			printResult += " ("+ iterators.get(0).next() + "원 ) - " + iterators.get(1).next() + "개";
 			System.out.println(printResult);
 		}

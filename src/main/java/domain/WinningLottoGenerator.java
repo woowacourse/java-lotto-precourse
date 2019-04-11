@@ -6,15 +6,21 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * @author soojin
+ *
+ * 지난주 당첨 로또를 생성하는 클래스입니다.
+ */
 public class WinningLottoGenerator {
-	static private final String NUMBER_CHECK_REGEX = "^[0-9]+$";
-	static private final int LOTTO_MINIMUM_NUMBER = 0;
-	static private final int LOTTO_MAXIMUM_NUMBER = 45;
+	private static final String NUMBER_CHECK_REGEX = "^[0-9]+$";
+	private static final int LOTTO_MINIMUM_NUMBER = 0;
+	private static final int LOTTO_MAXIMUM_NUMBER = 45;
+	private static final int MAXIMUM_SIZE = 6;
 	
 	LottoGenerator lg = new LottoGenerator();
 	Scanner sc = new Scanner(System.in);
 	
-	// 당첨 번호 생성 함수
+	/** 당첨 번호 생성 함수 */
     public List<Integer> makeWinningNumber() {
     	List<String> splitedNumber = new ArrayList<>();
       	List<Integer> intWinningNumberList = new ArrayList<Integer>();
@@ -77,7 +83,7 @@ public class WinningLottoGenerator {
     private boolean checkDuplicate(List<Integer> splitedNumberList) {
     	HashSet<Integer> setForCheckDuplicate = new HashSet<Integer>(splitedNumberList);
     	
-    	return (setForCheckDuplicate.size() == 6 && splitedNumberList.size() ==6) ? true : false;
+    	return (setForCheckDuplicate.size() == MAXIMUM_SIZE && splitedNumberList.size() == MAXIMUM_SIZE) ? true : false;
     }
     
     
@@ -91,7 +97,7 @@ public class WinningLottoGenerator {
     	return rightRange;
     }
     
-    // 보너스 번호 생성 함수
+    /** 보너스 번호 생성 함수 */
     public int makeBonusNumber(List<Integer> winningNumber) {
     	String bonusNumber = "";
     	

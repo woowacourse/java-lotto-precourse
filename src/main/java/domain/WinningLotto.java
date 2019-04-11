@@ -13,8 +13,7 @@ public class WinningLotto {
     }
     
     public String toString() {
-    	String result = "";
-    	
+    	String result = "";	
     	result = this.lotto.toString() + " bonus : " + bonusNo;
     	
     	return result;

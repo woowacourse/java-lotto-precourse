@@ -9,14 +9,35 @@ import java.util.regex.Pattern;
 
 import org.assertj.core.internal.bytebuddy.implementation.bytecode.Throw;
 
+/**
+ * @author soojin
+ *
+ * 사용자의 로또를 생성하는 클래스입니다.
+ */
 public class LottoGenerator {
 	
-	static private  Scanner sc = new Scanner(System.in);
-	static private final String NUMBER_CHECK_REGEX = "^[0-9]+$";
-	static private final int LOTTO_PRICE = 1000;
-	static private final int LOTTO_BUY_LIMIT = 100000;
-    static private final double LOTTO_TOTAL_NUMBER = 45;
-	static private final int LOTTO_MAXIMUM_COUNT = 6;
+	private static final String NUMBER_CHECK_REGEX = "^[0-9]+$";
+	private static final int LOTTO_PRICE = 1000;
+	private static final int LOTTO_BUY_LIMIT = 100000;
+	private static final double LOTTO_TOTAL_NUMBER = 45;
+	private static final int LOTTO_MAXIMUM_COUNT = 6;
+	private static final int DEVIDED = 0;
+	
+	private static Scanner sc = new Scanner(System.in);
+	
+    /** 로또 생성 함수 */
+    public ArrayList<Lotto> makeLotto() {
+    	ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
+    	int money = inputMoney();
+    	
+    	for (int i = 0; i < purchaseLottoAmount(money); i++) {
+    		lottoList.add(new Lotto(makeLottoNumberList()));
+    	}
+
+    	System.out.println("\n" + lottoList.size() + "개를 구매했습니다.");
+    	
+    	return lottoList;
+    }
 	
 	private int inputMoney() {
 		String money = "0";
@@ -36,14 +57,13 @@ public class LottoGenerator {
 		
 		System.out.println("0 이상의 숫자를 입력해주세요.");
 		return false;
-		
 	}
 	
 	private boolean devideByThousand(String money) {
 		boolean isDevided = false;
 		
 		try {
-			isDevided = Integer.parseInt(money) % LOTTO_PRICE != 0 || Integer.parseInt(money) > LOTTO_BUY_LIMIT ? false : true;	
+			isDevided = Integer.parseInt(money) % LOTTO_PRICE != DEVIDED || Integer.parseInt(money) > LOTTO_BUY_LIMIT ? false : true;	
 			return isDevided;
 		} catch (NumberFormatException e) {
 			System.out.println("100,000이하의 금액을 1,000원 단위로 입력해주세요.");
@@ -73,18 +93,4 @@ public class LottoGenerator {
     	return numbers;
     }
     
-    // 로또 생성 함수
-    public ArrayList<Lotto> makeLotto() {
-    	ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
-    	int money = inputMoney();
-    	
-    	for (int i = 0; i < purchaseLottoAmount(money); i++) {
-    		lottoList.add(new Lotto(makeLottoNumberList()));
-    	}
-
-    	System.out.println("\n" + lottoList.size() + "개를 구매했습니다.");
-    	
-    	return lottoList;
-    }
-
 }

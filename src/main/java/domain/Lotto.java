@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class Lotto {
     private final List<Integer> numbers;
+    private final int LAST_INDEX = 5;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
@@ -19,7 +20,7 @@ public class Lotto {
     		result += this.numbers.get(i) + ", ";
     	}
     	
-    	result += this.numbers.get(5) + "]";
+    	result += this.numbers.get(LAST_INDEX) + "]";
     	
     	return result;
     }
