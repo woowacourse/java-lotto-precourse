@@ -12,15 +12,15 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public void printLotto() {
+    void printLotto() {
         System.out.println(numbers.toString());
     }
 
-    public boolean hasNumber(int num) {
+    boolean hasNumber(int num) {
         return numbers.contains(num);
     }
 
-    public int countMatch(Lotto lotto) {
+    int countMatch(Lotto lotto) {
         int countOfMatch = 0;
         for (int num : numbers) {
             countOfMatch += lotto.hasNumber(num) ? 1 : 0;

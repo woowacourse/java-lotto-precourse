@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * 지불한 금액을 나타내는 객체
  */
-public class Price {
+class Price {
     private static final int NEGATIVE_SYMBOLIC_NUMBER = -1;
     private static final String GET_PRICE_GUIDE =
             "구입금액을 입력해 주세요.";
@@ -26,7 +26,7 @@ public class Price {
     private static final String LOTTO_COUNT_GUIDE =
             "\n%d개를 구매했습니다.\n";
 
-    int totalPrice;
+    private int totalPrice;
 
     void saveTotalPrice(Scanner scan) {
         System.out.println(GET_PRICE_GUIDE);
@@ -38,6 +38,10 @@ public class Price {
                 totalPrice / LottoShop.PRICE_PER_LOTTO);
     }
 
+    int getNumLotto() {
+        return totalPrice / LottoShop.PRICE_PER_LOTTO;
+    }
+
     private int getValidPriceOrError(Scanner scan) {
         int inputPrice;
         try {
@@ -47,7 +51,7 @@ public class Price {
             return NEGATIVE_SYMBOLIC_NUMBER;
         }
         return checkPrice(inputPrice) ? inputPrice
-                    : NEGATIVE_SYMBOLIC_NUMBER;
+                : NEGATIVE_SYMBOLIC_NUMBER;
     }
 
     private boolean checkPrice(int inputPrice) {

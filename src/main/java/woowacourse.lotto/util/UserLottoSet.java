@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * user에게 발급된 로또의 집합을 나타내는 객체
  */
-public class UserLottoSet {
+class UserLottoSet {
     private ArrayList<Lotto> userLottoSet;
 
     UserLottoSet() {
@@ -32,18 +32,18 @@ public class UserLottoSet {
         }
     }
 
+    void saveMatchResult(WinningLotto winningLotto,
+                         ArrayList<Rank> matchedRanks) {
+        for (Lotto userLotto : userLottoSet) {
+            matchedRanks.add(winningLotto.match(userLotto));
+        }
+    }
+
     private Lotto generateLotto(Random rand) {
         List<Integer> numberSet = rand.ints(LottoShop.NUMBER_LOWER_BOUND,
                 LottoShop.NUMBER_UPPER_BOUND).distinct()
                 .limit(LottoShop.NUMBER_PER_LOTTO).boxed()
                 .sorted().collect(Collectors.toList());
         return new Lotto(numberSet);
-    }
-
-    void saveMatchResult(WinningLotto winningLotto,
-                         ArrayList<Rank> matchedRanks) {
-        for (Lotto userLotto : userLottoSet) {
-            matchedRanks.add(winningLotto.match(userLotto));
-        }
     }
 }

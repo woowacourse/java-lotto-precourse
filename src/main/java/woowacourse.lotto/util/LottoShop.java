@@ -51,7 +51,7 @@ public class LottoShop {
 
     public void savePayment(Scanner scan) {
         userPrice.saveTotalPrice(scan);
-        numLotto = userPrice.getNumLotto(PRICE_PER_LOTTO);
+        numLotto = userPrice.getNumLotto();
     }
 
     public void issueLotto() {
@@ -60,9 +60,9 @@ public class LottoShop {
 
     public void saveWinningLotto(Scanner scan) {
         System.out.println(GET_ANSWER_NUMBER_GUIDE);
-        while (!getAnswerNumbers(scan));
+        while (!getAnswerNumbers(scan)) ;
         System.out.println(GET_BONUS_BALL_GUIDE);
-        while (!getBonusBall(scan));
+        while (!getBonusBall(scan)) ;
         winningLotto = new WinningLotto(answerLotto, bonusBall);
     }
 
@@ -92,7 +92,7 @@ public class LottoShop {
             return false;
         }
         if ((numberSet.get(0) < NUMBER_LOWER_BOUND)
-                || (numberSet.get(NUMBER_PER_LOTTO-1) > NUMBER_UPPER_BOUND)) {
+                || (numberSet.get(NUMBER_PER_LOTTO - 1) > NUMBER_UPPER_BOUND)) {
             System.out.println(NUMBER_BOUND_WARNING);
             return false;
         }
