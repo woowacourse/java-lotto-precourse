@@ -42,7 +42,7 @@ public class InputWinningNumber {
 	private boolean isValidStringArray() {
 		boolean checker = false;
 		String[] winningInputString = Util.scanner.nextLine().split(",", -1);
-		if (winningInputString.length == 6) {
+		if (winningInputString.length == LOTTO_NUMBER_COUNT) {
 			checker = isValidString(winningInputString);
 		}
 		return checker;

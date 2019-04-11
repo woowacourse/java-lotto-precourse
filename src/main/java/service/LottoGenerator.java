@@ -21,9 +21,8 @@ public class LottoGenerator {
 
 	private void makeLottos(int count) {
 		System.out.println(String.format(PURCHASED_COUNT, count));
-		Lotto generatedLotto;
 		while (count > 0) {
-			generatedLotto = new Lotto(generatingLotto());
+			Lotto generatedLotto = new Lotto(generatingLotto());
 			soldLottos.add(generatedLotto);
 			printLottos(generatedLotto);
 			count--;
@@ -31,17 +30,20 @@ public class LottoGenerator {
 	}
 
 	private List<Integer> generatingLotto() {
-		List<Integer> lotto = new ArrayList<>();
-		for (int i = 0; i < InputWinningNumber.LOTTO_NUMBER_COUNT; i++) {
+		List<Integer> lottoNumbers = generatingNumber();
+		Collections.sort(lottoNumbers, new AscendingInteger());
+		return lottoNumbers;
+	}
+
+	private List<Integer> generatingNumber() {
+		List<Integer> lottoNumbers = new ArrayList<>();
+		while (lottoNumbers.size() < InputWinningNumber.LOTTO_NUMBER_COUNT) {
 			int number = 1 + random.nextInt(InputWinningNumber.LOTTO_NUMBER_LIMIT);
-			if (lotto.contains(number)) {
-				i--;
-				continue;
+			if (!lottoNumbers.contains(number)) {
+				lottoNumbers.add(number);
 			}
-			lotto.add(number);
 		}
-		Collections.sort(lotto, new AscendingInteger());
-		return lotto;
+		return lottoNumbers;
 	}
 
 	private void printLottos(Lotto generatedLotto) {
