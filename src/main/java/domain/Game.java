@@ -22,4 +22,30 @@ public class Game {
         matchingLottoLoop();
         lottoStatistics();
     }
+
+    private void purchaseLotto() {
+        makePrice();
+        if (price.getTickets() != 0) {
+            makeLotto();
+        }
+        io.printLottoList(lottoList);
+    }
+
+    private void makePrice() {
+        price = io.inputPurchaseAmount();
+        io.printChange(price);
+    }
+
+    private void makeLotto() {
+        for (int lottoIdx = 0; lottoIdx < price.getTickets(); ++lottoIdx) {
+            NumberGenerator generator = new NumberGenerator(LOTTO_NUMBER_SIZE);
+            Lotto lotto = new Lotto(generator.getNumberArrList());
+            lottoList.add(lotto);
+        }
+        io.printPurchaseLotto(price);
+    }
+
+    private void userInWinningNumbers() {
+        winningLotto = new WinningLotto(new Lotto(io.inputWinningNumber()), io.inputBonusNumber());
+    }
 }
