@@ -12,7 +12,7 @@ public class Result {
     private HashMap<Rank,Integer> lottoMap;
     public void buyLotto() {
         user = new User();
-        myMoney = user.getPrice();
+        myMoney = user.getBudget();
         lotto = user.getLotto(myMoney);
         for (Lotto getlotto : lotto) {
             System.out.println(getlotto.getNumbers());

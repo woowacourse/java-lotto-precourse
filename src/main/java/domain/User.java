@@ -10,25 +10,25 @@ import java.util.Scanner;
 public class User {
     private final int MinNumber = 1;
     private final int MaxNumber = 45;
-    private final int MinPrice = 1000;
+    private final int MinBudget = 1000;
     private final int MaxNumberLength = 6;
     private List<Lotto> createdLotto;
-    private List<Integer> checkedLastLotto;
+    private List<Integer> checkedWinNumber;
     private HashMap<Integer, Integer> overlap;
     private Scanner Input;
 
-    public int getPrice() {
+    public int getBudget() {
         Input = new Scanner(System.in);
-        int price = 0;
+        int Budget = 0;
         do {
             System.out.println("구입금액을 입력해 주세요.");
-            price = Input.nextInt();
-        } while (checkPrice(price));
-        return price;
+            Budget = Input.nextInt();
+        } while (checkBudget(Budget));
+        return Budget;
     }
 
-    private boolean checkPrice(int price) {
-        if (price < MinPrice) {
+    private boolean checkBudget(int Budget) {
+        if (Budget < MinBudget) {
             return true;
         }
         return false;
@@ -49,12 +49,12 @@ public class User {
         overlap.put(no, 0);
         return false;
     }
-    private void BuyLotto(int price) {
+    private void BuyLotto(int Budget) {
         createdLotto = new ArrayList<Lotto>();
-        int myMoney = price;
-        while(myMoney >= MinPrice) {
+        int myMoney = Budget;
+        while(myMoney >= MinBudget) {
             createLotto();
-            myMoney -= MinPrice;
+            myMoney -= MinBudget;
         }
     }
 
@@ -67,8 +67,8 @@ public class User {
         }
         createdLotto.add(new Lotto(lotto));
     }
-    public List<Lotto> getLotto(int price) {
-        BuyLotto(price);
+    public List<Lotto> getLotto(int Budget) {
+        BuyLotto(Budget);
         System.out.println(createdLotto.size()+"개를 구매했습니다.");
         return createdLotto;
     }
@@ -79,34 +79,34 @@ public class User {
             overlap = new HashMap<Integer, Integer>();
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             String number = Input.nextLine();
-            checkedLastLotto = checkLastLotto(number);
-        } while (checkLastLottoSize(checkedLastLotto));
+            checkedWinNumber = checkWinNumber(number);
+        } while (checkWinNumberSize(checkedWinNumber));
 
-        return checkedLastLotto;
+        return checkedWinNumber;
     }
-    private List<Integer> checkLastLotto(String number) {
-        checkedLastLotto = new ArrayList<Integer>();
+    private List<Integer> checkWinNumber(String number) {
+        checkedWinNumber = new ArrayList<Integer>();
         String checkednumber[] =  number.replaceAll(" ", "").split(",");
         for (int i =0; i<checkednumber.length; i++) {
-            checkLastLottoState(Integer.valueOf(checkednumber[i]));
+            checkWinNumberState(Integer.valueOf(checkednumber[i]));
         }
-        return checkedLastLotto;
+        return checkedWinNumber;
     }
 
-    private void checkLastLottoState(int no) {
-        if (!checkLastLottoRange(no) && !checkLastLottoOverlap(no)) {
-            checkedLastLotto.add(no);
+    private void checkWinNumberState(int no) {
+        if (!checkWinNumberRange(no) && !checkWinNumberOverlap(no)) {
+            checkedWinNumber.add(no);
         }
     }
 
-    private boolean checkLastLottoRange(int no) {
+    private boolean checkWinNumberRange(int no) {
         if (no < MinNumber || no > MaxNumber) {
             return true;
         }
         return false;
     }
 
-    private boolean checkLastLottoOverlap(int no) {
+    private boolean checkWinNumberOverlap(int no) {
         if(overlap.containsKey(no)) {
             System.out.println("!");
             return true;
@@ -115,9 +115,9 @@ public class User {
         return false;
     }
 
-    private boolean checkLastLottoSize(List<Integer> checkedLastLotto) {
-        if (checkedLastLotto.size() > MaxNumberLength || checkedLastLotto.size() < MaxNumberLength) {
-            checkedLastLotto = new ArrayList<Integer>();
+    private boolean checkWinNumberSize(List<Integer> checkedWinNumber) {
+        if (checkedWinNumber.size() > MaxNumberLength || checkedWinNumber.size() < MaxNumberLength) {
+            checkedWinNumber = new ArrayList<Integer>();
             return true;
         }
         return false;
