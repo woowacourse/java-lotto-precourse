@@ -26,4 +26,19 @@ public class WinningLotto {
 
         return valueOf(matchCount, matchBonus);
     }
+
+    /*
+     * 당첨 로또의 특정 인덱스와 구매한 로또의 번호가 같은지 판단
+     */
+    public int countMoreMatchNum(Lotto userLotto, int index) {
+        int count, answer = 0;
+        List<Integer> lottoNumber = lotto.getNumbers();
+        List<Integer> userLottoNumber = userLotto.getNumbers();
+
+        for (int i = 0; i < userLottoNumber.size(); i++) {
+            count = (userLottoNumber.get(i) == lottoNumber.get(index)) ? EXIST : 0;
+            answer += count;
+        }
+        return answer;
+    }
 }
