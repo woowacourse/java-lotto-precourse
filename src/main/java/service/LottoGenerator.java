@@ -22,7 +22,7 @@ public class LottoGenerator {
 	private void makeLottos(int count) {
 		Lotto generatedLotto;
 		while (count > 0) {
-			generatedLotto = new Lotto(generatingLotto()); 
+			generatedLotto = new Lotto(generatingLotto());
 			soldLottos.add(generatedLotto);
 			printLottos(generatedLotto);
 			count--;
@@ -44,9 +44,9 @@ public class LottoGenerator {
 	}
 
 	private void printLottos(Lotto generatedLotto) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(generatedLotto.getNumbers().toString());
-			System.out.println(sb.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append(generatedLotto.getNumbers().toString());
+		System.out.println(sb.toString());
 	}
 
 	public List<Lotto> getSoldLottos() {

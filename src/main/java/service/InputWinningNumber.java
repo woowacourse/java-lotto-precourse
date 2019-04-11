@@ -33,20 +33,25 @@ public class InputWinningNumber {
 	}
 
 	private void receivingStringArray() {
-		boolean checker = false;
 		do {
+			winningNumber.clear();
 			System.out.println(REQ_WINNER_NUMBER);
-			String[] winningInputString = Util.scanner.nextLine().split(",", -1);
-			if (winningInputString.length == 6) {
-				checker = isValidString(winningInputString);
-			}
-		} while (!checker);
+		} while (!isValidStringArray());
+	}
+
+	private boolean isValidStringArray() {
+		boolean checker = false;
+		String[] winningInputString = Util.scanner.nextLine().split(",", -1);
+		if (winningInputString.length == 6) {
+			checker = isValidString(winningInputString);
+		}
+		return checker;
 	}
 
 	private boolean isValidString(String[] winningInputString) {
 		for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
 			int convertedInt = isValidInteger(winningInputString[i].trim());
-			if (convertedInt < 0) {
+			if ( convertedInt < 0 ) {
 				return false;
 			}
 			winningNumber.add(convertedInt);
@@ -65,11 +70,13 @@ public class InputWinningNumber {
 	}
 
 	public void makeBonusBall() {
-		String bonus;
 		do {
 			System.out.println(REQ_WINNER_BONUS);
-			bonus = Util.scanner.nextLine().trim();
-		} while (!isValidBonus(bonus));
+		} while (!isValidBonusInput());
+	}
+
+	private boolean isValidBonusInput() {
+		return isValidBonus(Util.scanner.nextLine().trim());
 	}
 
 	private boolean isValidBonus(String bonusString) {
@@ -82,7 +89,7 @@ public class InputWinningNumber {
 	}
 
 	private boolean isValidScope(int number) {
-		if (number > 0 && number <= LOTTO_NUMBER_LIMIT) {
+		if (number > 0 && number <= LOTTO_NUMBER_LIMIT && !winningNumber.contains(number)) {
 			return true;
 		}
 		return false;
