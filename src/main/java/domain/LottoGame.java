@@ -14,5 +14,6 @@ public class LottoGame {
         controller.showLottosNumber();
 
         manger.askLastWinningLotto();
+        controller.showResult(manger.getLastLottoList());
     }
 }
