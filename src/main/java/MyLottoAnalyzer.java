@@ -11,12 +11,15 @@ public class MyLottoAnalyzer implements LottoAnalyzer {
 
     @Override
     public void analyze(WinningLotto winningLotto, List<Lotto> lottos, int usedMoney) {
-        System.out.println("당첨 통계");
-        System.out.println("--------");
+        System.out.println("당첨 통계\n--------\n");
 
         var counter = _initCounter(winningLotto, lottos);
         System.out.println(generateMatchStr(counter));
 
+        if (usedMoney == 0) {
+            System.out.println("로또를 구매하지 않았습니다.");
+            return;
+        }
         System.out.printf("총 수익률은 %f입니다.", (double) countTotalWinningMoney(counter) / usedMoney);
     }
 
