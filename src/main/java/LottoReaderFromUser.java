@@ -19,9 +19,9 @@ public class LottoReaderFromUser implements LottoReader {
     public WinningLotto readWinningLotto() {
         System.out.println();
 
-        var nums = _readWinningNums();
+        var nums = _readWinningNumsUntilSucceed();
 
-        var bonusNo = _readBonusNo(nums);
+        var bonusNo = _readBonusNoUntilSucceed(nums);
 
         return new WinningLotto(new Lotto(nums), bonusNo);
     }
@@ -75,7 +75,7 @@ public class LottoReaderFromUser implements LottoReader {
         return nums;
     }
 
-    private List<Integer> _readWinningNums() {
+    private List<Integer> _readWinningNumsUntilSucceed() {
         List<Integer> winningNums = new ArrayList();
         while (winningNums.size() != LottoInfo.LOTTO_LENGTH) {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
@@ -111,7 +111,7 @@ public class LottoReaderFromUser implements LottoReader {
         return bonusNo;
     }
 
-    private int _readBonusNo(List<Integer> nums) {
+    private int _readBonusNoUntilSucceed(List<Integer> nums) {
         var bonusNo = INVALID;
         while (bonusNo == INVALID) {
             bonusNo = _tryReadBonusNo(nums);
