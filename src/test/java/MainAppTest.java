@@ -83,24 +83,24 @@ public class MainAppTest extends TestCase {
     }
 
     @Test
-    public void testIsValidWinningNumber() throws Exception {
+    public void testIsValidLottoNumber() throws Exception {
         List<Integer> testWinningNumbers;
         boolean isValid;
 
         testWinningNumbers = new ArrayList<Integer>(Arrays.asList(VALID_LOTTO_NUMBERS));
-        isValid = MainApp.areValidWinningNumbers(testWinningNumbers);
+        isValid = MainApp.areValidLottoNumbers(testWinningNumbers);
         assertEquals(true, isValid);
 
         testWinningNumbers = new ArrayList<Integer>(Arrays.asList(INVALID_LOTTO_NUMBERS_NOT_SIX));
-        isValid = MainApp.areValidWinningNumbers(testWinningNumbers);
+        isValid = MainApp.areValidLottoNumbers(testWinningNumbers);
         assertEquals(false, isValid);
 
         testWinningNumbers = new ArrayList<Integer>(Arrays.asList(INVALID_LOTTO_NUMBERS_OUT_OF_BOUNDS));
-        isValid = MainApp.areValidWinningNumbers(testWinningNumbers);
+        isValid = MainApp.areValidLottoNumbers(testWinningNumbers);
         assertEquals(false, isValid);
 
         testWinningNumbers = new ArrayList<Integer>(Arrays.asList(INVALID_LOTTO_NUMBERS_DUPLICATION));
-        isValid = MainApp.areValidWinningNumbers(testWinningNumbers);
+        isValid = MainApp.areValidLottoNumbers(testWinningNumbers);
         assertEquals(false, isValid);
     }
 
@@ -113,5 +113,17 @@ public class MainAppTest extends TestCase {
 
         testList = new ArrayList<Integer>(Arrays.asList(INVALID_LOTTO_NUMBERS_DUPLICATION));
         assertEquals(false, MainApp.isSet(testList));
+    }
+
+    @Test
+    public void testGetWinningNumbers() throws Exception {
+        String strTestWinningNumbers;
+
+        strTestWinningNumbers = "1,15,22,33,35,42";
+        InputStream in = new ByteArrayInputStream(strTestWinningNumbers.getBytes());
+        System.setIn(in);
+        List<Integer> winningNumbers = MainApp.getWinningNumbers();
+        Lotto winningLotto = new Lotto(winningNumbers);
+        assertEquals("[1, 15, 22, 33, 35, 42]", winningLotto.toString());
     }
 }
