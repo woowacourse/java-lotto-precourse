@@ -69,7 +69,8 @@ public class LottoGame {
 
 		System.out.println(REQUEST_BONUS_NUMBER);
 		int bonus = scanner.nextInt();
-		if ((bonus < 1) && (45 < bonus)) {
+		if ((bonus < LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER) 
+				&& (LottoConstant.MAXIMUM_RANGE_OF_LOTTO_NUMBER < bonus)) {
 			throw new OutOfRangeException();
 		}
 		return bonus;
