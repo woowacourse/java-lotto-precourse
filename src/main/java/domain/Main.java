@@ -3,6 +3,14 @@ package domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Main class
+ *
+ * ver 1.0
+ *
+ * zerobell-lee
+ */
+
 public class Main {
     final static int LOTTO_PRICE = 1000;
     final static Rank[] displayRankOrder = { Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH };
@@ -12,6 +20,10 @@ public class Main {
     static private List<Lotto> lottoList;
     static private List<Integer> numSeq;
     static private Map<Rank, Integer> rankMap;
+
+    /**
+     * 입력 처리를 위한 메소드
+     */
 
     private static Scanner getScanner() {
         if (staticSc == null) {
@@ -30,6 +42,10 @@ public class Main {
 
         return value;
     }
+
+    /**
+     * 로또 구매를 위한 메소드 묶음. initNumSeq(), shuffleNumSeq(), buyLotto(), buyMultipleLotto()
+     */
 
     private static void initNumSeq() {
         numSeq = new ArrayList<>();
@@ -66,7 +82,15 @@ public class Main {
         }
     }
 
+    /**
+     * 당첨 번호를 얻기 위한 메소드 묶음. seperateToList(), getWinningLotto()
+     */
+
     private static List<Integer> separateToList(String str) {
+        /**
+         * stream과 map을 사용하여 분리시킴. 그러나 delimeter 사이에 공백이 들어가면 scanner에서 에러가 발생하는 현상 있음.
+         */
+
         return Arrays.stream(str.split(",")).map(Integer::parseInt).collect(Collectors.toList());
     }
 
@@ -81,6 +105,10 @@ public class Main {
 
         winningLotto = new WinningLotto(new Lotto(numList), bonus);
     }
+
+    /**
+     * 당첨 조회를 위한 메소드 묶음. initRankMap(), matchLottos()
+     */
 
     private static void initRankMap() {
         rankMap = new HashMap<>();
@@ -97,6 +125,10 @@ public class Main {
         }
         rankMap.remove(Rank.MISS);
     }
+
+    /**
+     * 정산을 위한 메소드 묶음. calculateBenefit(), formatRank(), printResult()
+     */
 
     private static int calculateBenefit() {
         int result = 0;
@@ -129,6 +161,7 @@ public class Main {
 
     public static void main(String[] args) {
         int money = getMoney();
+
         buyMultipleLotto((int)(money / LOTTO_PRICE));
         getWinningLotto();
         matchLottos();
