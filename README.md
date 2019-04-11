@@ -7,6 +7,13 @@
 구매금액을 입력받아 수행횟수를 얻어내는 메소드.
 금액이 모자라거나, 맞지 않을 경우에 대한 예외처리가 필요함.
 
+### Lotto -> getNumbers()
+
+numbers에 대한 getter
+
+### Lotto -> hasNumber()
+
+Lotto 객체가 해당 int를 가지고 있는지 판별하는 메소드.
 
 ### WinningLotto -> Match()
 
