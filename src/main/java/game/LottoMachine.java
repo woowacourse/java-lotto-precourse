@@ -103,4 +103,16 @@ public class LottoMachine {
         printReInputBonusNum(satisfier);
         return satisfier;
     }
+
+    /*
+     * 보너스 숫자 범위 처리
+     */
+    public boolean inspectBoundaryBonusNum(int BonusNum) {
+        boolean satisfier = false;
+        if ((BonusNum >= MIN_BOUNDARY) && (BonusNum <= LOTTO_NUMBER_BOUNDARY)) {
+            satisfier = true;
+        }
+        printReInputBonusNum(satisfier);
+        return satisfier;
+    }
 }
