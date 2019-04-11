@@ -76,7 +76,15 @@ public class Game {
 	}
 
 	private String getMatchResult(Map<Rank, Integer> rankCount) {
-		return null;
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(String.format("%d개 일치(%d원)-%d개\n", Rank.FIFTH.getCountOfMatch(), Rank.FIFTH.getWinningMoney(), rankCount.get(Rank.FIFTH)));
+		sb.append(String.format("%d개 일치(%d원)-%d개\n", Rank.FOURTH.getCountOfMatch(), Rank.FOURTH.getWinningMoney(), rankCount.get(Rank.FOURTH)));
+		sb.append(String.format("%d개 일치(%d원)-%d개\n", Rank.THIRD.getCountOfMatch(), Rank.THIRD.getWinningMoney(), rankCount.get(Rank.THIRD)));
+		sb.append(String.format("%d개 일치, 보너스 볼 일치(%d원)-%d개\n", Rank.SECOND.getCountOfMatch(), Rank.SECOND.getWinningMoney(), rankCount.get(Rank.SECOND)));
+		sb.append(String.format("%d개 일치(%d원)-%d개\n", Rank.FIRST.getCountOfMatch(), Rank.FIRST.getWinningMoney(), rankCount.get(Rank.FIRST)));
+
+		return sb.toString();
 	}
 
 	private double getYeild(Map<Rank, Integer> rankCount) {
