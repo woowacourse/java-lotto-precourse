@@ -64,4 +64,13 @@ public class Validator {
 			return (isValidPurchasePriceRange(purchasePrice)
 					&& isDivisiblePurchasePriceByUnit(purchasePrice));
 		}
+
+		private static boolean isValidPurchasePriceRange(int purchasePrice) {
+				if (MIN_PURCHASE_AMOUNT <= purchasePrice 
+						&& purchasePrice <= MAX_PURCHASE_AMOUNT) {
+					return true;
+				}
+				CommandLineInterface.printPurchasePriceRangeError();
+				return false;
+		}
 }
