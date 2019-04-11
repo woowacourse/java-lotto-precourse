@@ -14,6 +14,7 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         checkNumbersCount(numbers);
         checkOverlap(numbers);
+        checkNumbersRange(numbers);
         this.numbers = numbers;
     }
 
@@ -24,6 +25,18 @@ public class Lotto {
 
     List<Integer> getNumbers() {
         return numbers;
+    }
+
+    private void checkNumbersRange(List<Integer> numbers) {
+        for (int number : numbers){
+            checkRange(number);
+        }
+    }
+
+    private void checkRange(int number){
+        if (!(MIN_LOTTO_NUMBER <= number && number <= MAX_LOTTO_NUMBER)){
+            throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
+        }
     }
 
     private void checkNumbersCount(List<Integer> numbers) {

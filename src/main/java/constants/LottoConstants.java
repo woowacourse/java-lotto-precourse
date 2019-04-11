@@ -9,6 +9,7 @@ public class LottoConstants {
     public static final int COUNT_NUMBERS = 6;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
+    public static final String RANGE_ERROR_MESSAGE = "로또는 "+ MIN_LOTTO_NUMBER + "에서 "+MAX_LOTTO_NUMBER + "사이 값이어야 합니다";
     public static final String BONUS_NUMBER_ERROR = "보너스 넘버는 로또 번호와 중복될 수 없습니다.";
 
     private LottoConstants() {
