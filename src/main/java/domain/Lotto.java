@@ -15,4 +15,14 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
+    public int getCountOfMatch(Lotto targetLotto) {
+        int countOfMatch = (int) targetLotto.getNumbers().stream().
+                filter(num -> this.isContainNumber(num)).count();
+        return countOfMatch;
+    }
+
+    public boolean isContainNumber(int number) {
+        return numbers.contains(number);
+    }
 }

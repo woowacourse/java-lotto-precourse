@@ -82,14 +82,16 @@ public class LottoMaker {
     }
 
     private static void checkNumberCount(int size) {
-        if (size != LOTTO_NUMBER_MAX_LENGTH)
+        if (size != LOTTO_NUMBER_MAX_LENGTH) {
             throw new IllegalArgumentException("로또 번호의 개수가 올바르지 않습니다.");
+        }
     }
 
     private static void checkUniqueNumber(List<Integer> lottoNumberList) {
         Set<Integer> lottoNumberSet = new HashSet<>(lottoNumberList);
-        if (lottoNumberSet.size() != LOTTO_NUMBER_MAX_LENGTH)
+        if (lottoNumberSet.size() != LOTTO_NUMBER_MAX_LENGTH) {
             throw new IllegalArgumentException(lottoNumberList + "에 중복된 숫자가 존재합니다.");
+        }
     }
 
     private static void checkNumberListRange(List<Integer> lottoNumberList)
