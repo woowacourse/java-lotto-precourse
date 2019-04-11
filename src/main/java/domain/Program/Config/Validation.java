@@ -25,6 +25,7 @@ public class Validation {
         if (value.matches(Constant.LOTTO_REGEX_CHECK)) {
             return;
         }
+        Print.getInputFail();
         Print.getLottoInputValidation();
         throw new Exception("형식에 어긋났습니다.");
     }

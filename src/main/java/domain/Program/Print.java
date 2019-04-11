@@ -13,7 +13,7 @@ public class Print {
     }
 
     public static void getWinningstatisticsResult(Winningstatistics winningstatistics, double earningRate) {
-        System.out.println("당첨 통계 \n -----------");
+        System.out.println("당첨 통계\n -----------");
         for (Rank rankKey : winningstatistics.getStatisticsMap().keySet()) {
             int countOfMatch = rankKey.getCountOfMatch();
             int winningMoney = rankKey.getWinningMoney();
@@ -61,6 +61,14 @@ public class Print {
 
     public static void getBonusDuplication() {
         System.out.println("당첨 번호와 중복일 수 없습니다.");
+    }
+
+    public static void getInputSuccess() {
+        System.out.println("입력되었습니다.\n");
+    }
+
+    public static void getInputFail(){
+        System.out.println("입력에 실패했습니다.\n");
     }
 
     private static void getEarningRate(double earningRate) {

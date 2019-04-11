@@ -34,6 +34,7 @@ public class Input {
         try {
             String stringLottoNumber = inputString();
             Validation.checkSelfLottoNumber(stringLottoNumber);
+            Print.getInputSuccess();
             return stringLottoNumber;
         } catch (Exception e) {
             return setLottoNumber();
