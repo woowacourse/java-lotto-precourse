@@ -29,6 +29,6 @@ public class WinningLotto {
     }
 
     private boolean hasMatchBonus(Lotto userLotto) {
-        return false;
+        return userLotto.getLottoNumbers().contains(this.bonusNo);
     }
 }
