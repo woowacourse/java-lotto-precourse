@@ -17,12 +17,13 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    /* 생성 전 매개변수 확인 */
     private void checkArguments(Lotto lotto, int bonusNo) throws IllegalArgumentException {
-        if (bonusNo < Lotto.MIN_NUM || bonusNo > Lotto.MAX_NUM) {
+        if (bonusNo < Lotto.MIN_NUM || bonusNo > Lotto.MAX_NUM) { // 보너스 숫자 범위 확인
             throw new LottoNumberException();
         }
 
-        if (lotto.contains(bonusNo)) {
+        if (lotto.contains(bonusNo)) { // 보너스 숫자 중복 확인
             throw new DuplicatedLottoNumberException();
         }
     }

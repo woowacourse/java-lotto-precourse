@@ -2,11 +2,12 @@ package ui;
 
 import domain.Lotto;
 import domain.Rank;
-import exception.MoneyInputException;
+import exception.NumberFormatException;
 
 import java.util.*;
 
 /**
+ * 각 메서드에 대한 설명은 원본 인터페이스를 참고할 것.
  * @author delf
  */
 public class ConsoleIOInterface implements LottoIOInterface {
@@ -14,7 +15,7 @@ public class ConsoleIOInterface implements LottoIOInterface {
     private static final Scanner scanner = new Scanner(System.in);
     private final static String DELIM = ",";
 
-    private final static String MESSAGE_INPUT_MONEY = "구입금액을 입력헤주세요";
+    private final static String MESSAGE_INPUT_MONEY = "구입금액을 입력해주세요";
     private final static String MESSAGE_INFO_BUY_LOTTO_COUNT = "개를 구매했습니다.";
     private final static String MESSAGE_INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private final static String MESSAGE_INPUT_BONUS_NUMBER = "보너스 볼을 입력해주세요.";
@@ -23,17 +24,19 @@ public class ConsoleIOInterface implements LottoIOInterface {
     private final static Rank[] PRINT_ORDER_RANK = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
 
     @Override
-    public int insertMoney() {
+    public int insertMoney() throws IllegalArgumentException {
         LottoIOInterface.showPlaneText(MESSAGE_INPUT_MONEY);
-
-        return Integer.parseInt(scanner.nextLine());
+        return getInputSingleInteger();
     }
 
     @Override
-    public List<Integer> inputWinningLottoNumbers() {
+    public List<Integer> inputWinningLottoNumbers() throws IllegalArgumentException {
         LottoIOInterface.showPlaneText("\n" + MESSAGE_INPUT_WINNING_NUMBER);
         String input = scanner.nextLine();
         String[] splitted = input.split(DELIM);
+        for (int i = 0; i < splitted.length; i++) {
+            splitted[i] = splitted[i].trim();
+        }
 
         return convertToIntegerList(splitted);
     }
@@ -49,11 +52,9 @@ public class ConsoleIOInterface implements LottoIOInterface {
     }
 
     @Override
-    public int inputBonusNumber(Lotto lotto) {
+    public int inputBonusNumber() {
         LottoIOInterface.showPlaneText(MESSAGE_INPUT_BONUS_NUMBER);
-
-        int n = Integer.parseInt(scanner.nextLine());
-        return n;
+        return getInputSingleInteger();
     }
 
     @Override
@@ -70,6 +71,14 @@ public class ConsoleIOInterface implements LottoIOInterface {
 
         for (Rank rank : PRINT_ORDER_RANK) {
             LottoIOInterface.showPlaneText(rank + " - " + ranks.get(rank) + "개");
+        }
+    }
+
+    private int getInputSingleInteger() {
+        try {
+            return Integer.parseInt(scanner.nextLine().trim());
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException();
         }
     }
 }

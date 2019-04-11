@@ -17,16 +17,21 @@ import java.util.Objects;
  */
 public class LottoSimulator {
     private List<Lotto> lottos;
-    LottoIOInterface lottoIOInterface;
+    private LottoIOInterface lottoIOInterface;
+
+    public LottoSimulator with(LottoIOInterface lottoIOInterface) {
+        this.lottoIOInterface = lottoIOInterface;
+        return this;
+    }
 
     public void run() {
         checkAssertion();
 
         buyAndShowLottos();
-        WinningLotto winningLotto = inputWinningLottoNumbers();
-        matchingAndShowResult(winningLotto);
+        matchingAndShowResult(inputWinningLottoNumbers());
     }
 
+    /* 프로그램이 정상적으로 구동 가능한지 체크한다. */
     private void checkAssertion() {
         // 구현체가 하나뿐이므로 예외를 던지는 대신 기본 구현체 할당
         if (Objects.nonNull(lottoIOInterface)) {
@@ -34,28 +39,12 @@ public class LottoSimulator {
         }
     }
 
-    private WinningLotto inputWinningLottoNumbers() {
-        WinningLotto winningLotto;
-        // (indent depth 1을 구현하기 위한 나름의 방법)
-        while ((winningLotto = getWinningLotto()) == null) ; // 당첨 로또 번호 입력
-        return winningLotto;
-    }
-
-    public LottoSimulator with(LottoIOInterface lottoIOInterface) {
-        this.lottoIOInterface = lottoIOInterface;
-        return this;
-    }
-
+    /* 입력 받은 돈만큼의 로또를 생성하고 필드에 저장한다. */
     private void buyAndShowLottos() {
+        // (indent depth 1의 제한)
         while (!buyLottos()) ; // 로또 번호 입력 및 로또 객체 생성
         lottoIOInterface.showLottos(lottos); // 생성된 로또 객체 출력
     }
-
-    private void matchingAndShowResult(WinningLotto winningLotto) {
-        Map<Rank, Integer> result = getResult(winningLotto); // 번호 비교 후 결과 생성
-        lottoIOInterface.showWinningStatistics(result); // 결과 출력
-    }
-
 
     /* 돈을 입력받고 알맞은 수의 로또를 생산한다 */
     private boolean buyLottos() {
@@ -81,18 +70,32 @@ public class LottoSimulator {
         }
     }
 
+    /* 입력 받은 당첨 번호를 반환한다. */
+    private WinningLotto inputWinningLottoNumbers() {
+        WinningLotto winningLotto;
+        // (indent depth 1의 제한)
+        while ((winningLotto = getWinningLotto()) == null) ; // 당첨 로또 번호 입력
+        return winningLotto;
+    }
+
     /* 당첨 번호와 보너스 번호를 입력하고 당첨로또 객체를 생성한다. */
     private WinningLotto getWinningLotto() {
         try {
             List<Integer> winningNumbers = lottoIOInterface.inputWinningLottoNumbers(); // 당첨 숫자 입력
             Lotto lotto = new Lotto(winningNumbers);
-            int bonusNumber = lottoIOInterface.inputBonusNumber(lotto); // 보너스 숫자 입력
+            int bonusNumber = lottoIOInterface.inputBonusNumber(); // 보너스 숫자 입력
             return new WinningLotto(lotto, bonusNumber);
 
         } catch (IllegalArgumentException e) {
             LottoIOInterface.showPlaneText(e.getMessage());
-            return null;
+            return null; // 입력 예외 발생
         }
+    }
+
+    /* 당첨 로또와 생성된 로또들을 비교하고 결과를 생성하여 보여준다. */
+    private void matchingAndShowResult(WinningLotto winningLotto) {
+        Map<Rank, Integer> result = getResult(winningLotto); // 번호 비교 후 결과 생성
+        lottoIOInterface.showWinningStatistics(result); // 결과 출력
     }
 
     /* 생성된 당첨로또를 비교하여 결과를 리스트에 저장하여 반환한다. */

@@ -8,7 +8,6 @@ import exception.MoneyInputException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -22,10 +21,9 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public static int howManyLotto(int money) throws IllegalArgumentException {
-        if (money >= PRICE && money < Integer.MAX_VALUE) {
+        if (money >= PRICE && money < Integer.MAX_VALUE) { // 가격 예외처리
             return money / PRICE;
         }
-
         throw new MoneyInputException();
     }
 
@@ -51,12 +49,12 @@ public class Lotto {
 
     private void checkBallNumbers(List<Integer> numbers) {
         Set<Integer> set = new HashSet<>();
-        for (int n : numbers) { // 중복과 범위 검사
+        for (int n : numbers) { // 범위 검사
             set.add(n);
             isInBound(n);
         }
 
-        if (set.size() != PICK_NUM) {
+        if (set.size() != PICK_NUM) { // 중복 검사
             throw new DuplicatedLottoNumberException();
         }
     }
