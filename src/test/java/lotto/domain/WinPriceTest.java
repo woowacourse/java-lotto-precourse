@@ -12,6 +12,7 @@ public class WinPriceTest {
     private static final int FIFTH_COUNT = 15;
 
     private WinPrice winPrice;
+    private long expectedTotalPrice;
 
     @Before
     public void setup() {
@@ -32,12 +33,30 @@ public class WinPriceTest {
         for (int i = 0; i < FIFTH_COUNT; i++)
             winPrice.addWinCount(Rank.FIFTH);
 
+        expectedTotalPrice = Rank.FIRST.getWinningMoney() * FIRST_COUNT
+                + Rank.SECOND.getWinningMoney() * SECOND_COUNT
+                + Rank.THIRD.getWinningMoney() * THIRD_COUNT
+                + Rank.FOURTH.getWinningMoney() * FOURTH_COUNT
+                + Rank.FIFTH.getWinningMoney() * FIFTH_COUNT;
     }
 
     @Test
-    public void WinCount_테스트(){
-        Assert.assertTrue(FIFTH_COUNT==winPrice.getWinCount(Rank.FIFTH));
-        Assert.assertTrue(SECOND_COUNT==winPrice.getWinCount(Rank.SECOND));
+    public void WinCount_테스트() {
+        Assert.assertTrue(FIFTH_COUNT == winPrice.getWinCount(Rank.FIFTH));
+        Assert.assertTrue(SECOND_COUNT == winPrice.getWinCount(Rank.SECOND));
     }
 
+    @Test
+    public void 총상금_테스트() {
+        Assert.assertEquals(expectedTotalPrice, winPrice.getTotalWinPrice());
+    }
+
+    @Test
+    public void 총상금_Integer범위_초과_테스트() {
+        winPrice.addWinCount(Rank.FIRST);
+
+        expectedTotalPrice += Rank.FIRST.getWinningMoney();
+
+        Assert.assertEquals(expectedTotalPrice, winPrice.getTotalWinPrice());
+    }
 }
