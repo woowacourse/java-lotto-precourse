@@ -18,12 +18,12 @@ public class GameUI {
 
 	public void run() {
 		try(Scanner sc = new Scanner(System.in)) {
-			int money = askMoney(sc);
-			game.setMoney(money);
+			game.setMoney(askMoney(sc));
 			System.out.println(game.getLotto());
 
 			List<Integer> numbers = askNumbers(sc);
-			int bonusNo = askBonusNo(sc, numbers);
+			game.setWinningLotto(numbers, askBonusNo(sc, numbers));
+			System.out.println(game.getResult());
 		}
 	}
 
