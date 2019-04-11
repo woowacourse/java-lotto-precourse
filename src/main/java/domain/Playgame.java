@@ -1,118 +1,89 @@
+/*
+ * @(#)Playgame.java	1.8.0_191 2019/04/11
+ * 
+ * Copyright (c) 2019 Youngbae Son
+ * ComputerScience, ProgrammingLanguage, Java, Busan, KOREA
+ * All rights reserved.
+ * 
+ * */
 package domain;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.util.List;
+/*
+ * 게임전체를 운영하는 클래스
+ * 
+ * */
 public class Playgame {
 
 	public static void main(String[] args) {
 
-		Scanner scan = new Scanner(System.in);
-		String buyMoney;
-		int lottoCount = 0;
+		/* 사용자의 구입금액,구입금액, 로또번호, 당첨통계 차트표 */
+		Playerinfo player = new Playerinfo();
+		playerInit(player);
 
-		/*구입금액 입력 검사*/
-		while (true) {
+		/* 지난주 당첨번호를 입력 */
+		WinningLotto winningLotto = null;
+		winningLotto = WinngLottoInit(winningLotto);
 
-			System.out.println("구입금액을 입력해 주세요.");
-			buyMoney = scan.nextLine();
-
-			if (checkInputMoney(buyMoney))
-				break;
-		}
-
-		lottoCount = Integer.parseInt(buyMoney) / 1000;
-		System.out.println();
-		System.out.println(lottoCount + "개를 구매했습니다.");
-
-		ArrayList<Integer> list;
-		ArrayList<Lotto> lottoList = new ArrayList<>();
+		gamePlay(player, winningLotto);
 		
-		Lotto lotto;
-
-		for (int i = 0; i < lottoCount; i++) {
-
-			list = new ArrayList<>();
-			lotto = new Lotto(list);
-
-			lotto.createLottoNumber();
-			lotto.printlotto();
-			lottoList.add(lotto);
-		}
-
-		/*당첨 번호 입력 검사*/
-		while (true) {
-
-			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-			String inputWinningLotto = scan.nextLine();
-			String[] str = split(inputWinningLotto);
-			if (checkInputWinningLotto(str)) {
-				break;
-			}
-		}
-
-		/*보너스 볼 입력 검사*/
-		while (true) {
-
-			System.out.println("보너스 볼을 입력해 주세요.");
-			String bonusNo = scan.nextLine();
-			if (checkBonusNo(bonusNo)) {
-				break;
-			}
-		}
+		printWinningchart((double) player.getPrizeMoney() / (double) player.getBuyMoney(), player);
 
 	}
 
-	private static boolean checkBonusNo(String bonusNo) {
+	private static void gamePlay(Playerinfo player, WinningLotto winningLotto) {
 
-		try {		
-			int number = Integer.parseInt(bonusNo);
-			if (number < 0 || number > 45)
-				return false;
+		/*구입금액 만큼 만들어진 로또와 지난 주 당첨번호를 비료*/
+		for (int i = 0; i < player.getBuyMoney() / 1000; i++) {
 
-		} catch (Exception e) {
-
-			return false;
+			Rank rank = winningLotto.match(player.getMyLottoList().get(i));
+			checkWinningNumChart(rank, player);
+			player.setPrizeMoney(rank.getWinningMoney());
 		}
-
-		return true;
 	}
 
-	private static String[] split(String inputWinningLotto) {
+	private static void checkWinningNumChart(Rank rank, Playerinfo player) {
 
-		String[] winningLotto = inputWinningLotto.split(",");
-		return winningLotto;
-		
+		if (rank.getWinningMoney() == 5000)
+			player.setWinningNumChart(4);
+		if (rank.getWinningMoney() == 50000)
+			player.setWinningNumChart(3);
+		if (rank.getWinningMoney() == 1500000)
+			player.setWinningNumChart(2);
+		if (rank.getWinningMoney() == 30000000)
+			player.setWinningNumChart(1);
+		if (rank.getWinningMoney() == 2000000000)
+			player.setWinningNumChart(0);
 	}
 
-	private static boolean checkInputWinningLotto(String[] str) {
+	private static void printWinningchart(double result, Playerinfo player) {
 
-		if (str.length == 5) {
-
-			for (int i = 0; i < str.length; i++) {
-
-				try {
-					Integer.parseInt(str[i]);
-				} catch (Exception e) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-		return false;
+		System.out.println("당첨통계");
+		System.out.println("---------");
+		System.out.println("3개일치 (5000원)- " + player.getWinningNumChart(4) + "개");
+		System.out.println("4개일치 (50000원)- " + player.getWinningNumChart(3) + "개");
+		System.out.println("5개일치 (1500000원)- " + player.getWinningNumChart(2) + "개");
+		System.out.println("5개일치,보너스 볼 일치 (30000000원)- " + player.getWinningNumChart(1) + "개");
+		System.out.println("6개일치 (2000000000원)- " + player.getWinningNumChart(0) + "개");
+		System.out.println("총 수익률은 " + result + "입니다.");
 	}
 
-	private static boolean checkInputMoney(String buyMoney) {
+	private static void playerInit(Playerinfo player) {
 
-		try {
-			int number = Integer.parseInt(buyMoney);
-			if (number < 1000) 
-				return false;
-		} catch (Exception e) {
-			return false; 
-			}
-		return true;
+		while (!player.inputOfBuymoney());
+	}
+
+	private static WinningLotto WinngLottoInit(WinningLotto winningLotto) {
+
+		Winninginput winningInput = new Winninginput();
+
+		while (!winningInput.inputOfLastWeekendLotto());
+
+		while (!winningInput.inputOfBonusNumber());
+
+		return winningLotto = new WinningLotto(new Lotto(winningInput.getNumbers()), winningInput.getBonusNum());
+
 	}
 
 }
