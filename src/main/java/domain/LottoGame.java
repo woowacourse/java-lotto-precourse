@@ -2,13 +2,11 @@ package domain;
 
 import domain.util.UserInput;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class LottoGame {
     private static final int PRICE_OF_LOTTO = 1000;
+    private static final int PRIZE_OF_BONUS = 30000000;
 
     private List<Lotto> lottos;
     private WinningLotto winningLotto;
@@ -17,7 +15,9 @@ public class LottoGame {
     public void start() {
         setLottoList(getNumOfLottos());
         setWinningLotto();
-
+        Map<Rank, Integer> winningStatic = new HashMap<>();
+        setWinningStatic(winningStatic);
+        printWinningStatic(winningStatic);
     }
 
     private int getNumOfLottos() {
@@ -114,4 +114,34 @@ public class LottoGame {
             return getBonusNumber(winningNums);
         }
     }
+
+    private void setWinningStatic(Map<Rank, Integer> winningStatic) {
+        Rank rank;
+        for (Lotto lotto : lottos) {
+            rank = winningLotto.match(lotto);
+            winningStatic.put(rank, winningStatic.getOrDefault(rank, 0) + 1);
+        }
+    }
+
+    private void printWinningStatic(Map<Rank, Integer> winningStatic) {
+        List<Rank> ranks = Arrays.asList(Rank.values());
+        Collections.reverse(ranks);
+
+        System.out.println("\n당첨 통계\n---------");
+        for (Rank rank : ranks) {
+            printRankString(rank, winningStatic.getOrDefault(rank, 0));
+        }
+    }
+
+    private void printRankString(Rank rank, Integer winningNumber) {
+        String bonus = " ";
+        if (rank.getCountOfMatch() == 0) {
+            return;
+        }
+        if (rank.getWinningMoney() == PRIZE_OF_BONUS) {
+            bonus = ", 보너스 볼 일치";
+        }
+        System.out.println(String.format("%d개 일치%s(%d원)- %d개", rank.getCountOfMatch(), bonus, rank.getWinningMoney(), winningNumber));
+    }
+
 }
