@@ -1,11 +1,14 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     final static int LOTTO_PRICE = 1000;
+    final static WinningLotto winningLotto;
     static private Scanner staticSc;
     static private List<Lotto> lottoList;
     static private List<Integer> numSeq;
@@ -62,6 +65,10 @@ public class Main {
             System.out.println(tmp.toString());
             lottoList.add(tmp);
         }
+    }
+
+    private List<Integer> separateToList(String str) {
+        return Arrays.stream(str.split(",")).map(Integer::parseInt).collect(Collectors.toList());
     }
 
 
