@@ -117,4 +117,20 @@ public class Game {
 
         return lottoNumbers;
     }
+
+    private boolean checkNumberRangeAndFormat(String number) {
+        try {
+            int lottoNumber = Integer.valueOf(number);
+
+            if (lottoNumber < 1 || lottoNumber > 45) {
+                System.out.println("숫자가 너무 큽니다. 1 ~ 45 사이로 입력해주세요.");
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("숫자가 아닙니다. 다시 입력해주세요.");
+            return true;
+        }
+
+        return false;
+    }
 }
