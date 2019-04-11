@@ -29,4 +29,21 @@ public class LottoMachine {
         } while (!inspectLottoCondition(list));
         return new Lotto(list);
     }
+
+    /*
+     * 당첨번호 입력에서의 문자, 공백 예외 처리
+     * (에러를 catch할 경우 아무것도 하지 않고 list를 리턴함으로써
+     *          makeWinningLotto()에서 반복문을 돌도록 함)
+     */
+    public List<Integer> inspector(String input) {
+        List<Integer> sample = new ArrayList<>();
+        try {
+            sample = translator(input);
+        } catch (NumberFormatException e) {
+
+        } catch (InputMismatchException e) {
+
+        }
+        return sample;
+    }
 }
