@@ -46,8 +46,8 @@ public class Main {
         for (int i = 0; i < 45; i++) {
             int tmp = numSeq.get(i);
             int target = (int)(Math.random() * (45 - i)) + i;
-            numSeq.set(target, numSeq.get(i));
-            numSeq.set(i, tmp);
+            numSeq.set(i, numSeq.get(target));
+            numSeq.set(target, tmp);
         }
     }
 
