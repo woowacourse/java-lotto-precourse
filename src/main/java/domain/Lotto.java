@@ -13,17 +13,16 @@ public class Lotto {
     }
 
     // 추가 기능 구현
-    public List<Integer> getLotto(){
+    public List<Integer> getLotto() {
         return numbers;
     }
 
     public void printLotto(){
-        System.out.print('[');
+        System.out.print("[ ");
         for(int i=0; i<numbers.size(); i++){
             System.out.print(numbers.get(i));
             if(i != numbers.size() - 1) System.out.print(", ");
         }
-        System.out.println(']');
-
+        System.out.println(" ]");
     }
 }
