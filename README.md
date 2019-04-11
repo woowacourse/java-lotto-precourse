@@ -38,11 +38,15 @@ LottoGameStart 클래스
 
 -ThisWeekBonusNumber : 이번주 보너스 숫자 번호
 
+-ResultCount : 당첨된 횟수 구하는 함수
+
+-ResultMoney : 최종 당첨금액 구하는 함수 
+
+-ResultPrint : 결과 출력
+
 WinningLotto 클래스
 
 -Match : 로또 번호 숫자 매칭
 
--ResultCount : 당첨된 횟수 구하는 함수
 
--ResultMoney : 최종 당첨금액 구하는 함수 
 

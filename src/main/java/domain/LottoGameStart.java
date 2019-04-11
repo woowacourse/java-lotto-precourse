@@ -20,16 +20,11 @@ public class LottoGameStart {
         Lotto ThisWeekLottoList = ThisWeekNumber();
         int ThisWeekBonusNumber = ThisWeekBonusNumber();
         WinningLotto WinLotto = new WinningLotto(ThisWeekLottoList,ThisWeekBonusNumber);
-        //ArrayList <Rank> RankLotto = new ArrayList<Rank>();
         int[] LuckyCount = new int[6];
         LuckyCount = ResultCount(WinLotto, PurchaseLotto);
         int FinalGetMoney =ResultMoney(WinLotto, PurchaseLotto);
-        for(int i=0; i<6; i++)
-        {
-            System.out.printf("%d ", LuckyCount[i]);
-        }
-        System.out.printf("%d", FinalGetMoney);
-        double Rate =0;
+        ResultPrint(LuckyCount);
+        ResultRate(Money, FinalGetMoney);
     }
 
     public static int GetMoney()
@@ -134,5 +129,20 @@ public class LottoGameStart {
             money += rank.getWinningMoney();
         }
         return money;
+    }
+    public static void ResultPrint(int[] result)
+    {
+        System.out.println("당첨 통계");
+        System.out.println("----------");
+        System.out.printf("3개 일치(5000원)- %d개 \n", result[4]);
+        System.out.printf("4개 일치(50000원)- %d개 \n", result[3]);
+        System.out.printf("5개 일치(150000원)- %d개 \n", result[2]);
+        System.out.printf("5개 일치, 보너스 볼 일치(30000000원)- %d개 \n", result[1]);
+        System.out.printf("6개 일치(2000000000원)- %d개 \n", result[0]);
+    }
+    public static void ResultRate(int purchase, int profit)
+    {
+        double resultrate= (double)profit/purchase;
+        System.out.printf("총 수익률은%f입니다.\n",resultrate);
     }
 }
