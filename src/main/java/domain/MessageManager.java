@@ -34,7 +34,7 @@ public class MessageManager {
     /* 지난주 당첨 번호와 보너스 볼을 lastLotto에 add 하는 기능 */
     public boolean makeLastLotto(String[] winningNumbers, String inputValue) {
         try {
-            lastLotto = Arrays.stream(winningNumbers).map(Integer::parseInt)    
+            lastLotto = Arrays.stream(winningNumbers).map(Integer::parseInt)
                     .collect(Collectors.toList());
 
             lastLotto.add(Integer.parseInt(inputValue));
