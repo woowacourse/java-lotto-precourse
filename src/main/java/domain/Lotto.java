@@ -20,12 +20,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> generateLottoNumbers() {
-        List<Integer> range = IntStream.rangeClosed(1, 45)
-                .boxed().collect(Collectors.toList());
-        Collections.shuffle(range);
-        return range.subList(0, 6);
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
-
+    public void printLotto() {
+        String result = numbers.stream().map(Objects::toString)
+                .collect(Collectors.joining(", "));
+        System.out.println("[" + result + "]");
+    }
 }

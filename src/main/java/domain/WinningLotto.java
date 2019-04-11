@@ -18,8 +18,23 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    /* userLotto의 6개 번호 중 특정 당첨번호가 있는지*/
+    private int isMatchNumbers(Lotto userLotto, int num) {
+        if (userLotto.getNumbers().contains(num)) {
+            return 1;
+        }
+        return 0;
+    }
+
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
-        return null;
+        int countOfMatch = 0;
+        boolean matchBonus;
+
+        for (int num : lotto.getNumbers()) {
+            countOfMatch += isMatchNumbers(userLotto, num);
+        }
+        matchBonus = userLotto.getNumbers().contains(bonusNo);
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
 }
