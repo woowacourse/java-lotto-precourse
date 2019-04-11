@@ -9,11 +9,12 @@ public class WinningLottoMaker {
 	private static final Scanner SCANNER = new Scanner(System.in);
 	private static final String WINNIG_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 	private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+	private static final String SPLIT_STRING = ",";
 
 	private String[] inputWinningNumbers() {
 		System.out.println(WINNIG_NUMBERS_MESSAGE);
 		String winningNumbersString = SCANNER.nextLine();
-		String[] winningNumbersArray = winningNumbersString.split(",");
+		String[] winningNumbersArray = winningNumbersString.split(SPLIT_STRING);
 		return winningNumbersArray;
 	}
 
@@ -36,11 +37,5 @@ public class WinningLottoMaker {
 		int bonusNumber = inputBonusNumber();
 		WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusNumber);
 		return winningLotto;
-	}
-
-	/* 테스트 코드 */
-	public static void main(String[] args) {
-		WinningLottoMaker maker = new WinningLottoMaker();
-		maker.makeWinningLotto();
 	}
 }

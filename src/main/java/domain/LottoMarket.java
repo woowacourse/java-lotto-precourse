@@ -16,12 +16,15 @@ public class LottoMarket {
 	private static final int LOTTO_PAY = 1000;
 	private static final int MAX_LOTTO_NUM = 45;
 	private static final int MAX_LOTTO_SIZE = 6;
-
+	private ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
 	private int purchasePrice;
-	public ArrayList<Lotto> lottoList = new ArrayList<Lotto>();
+	
+	public ArrayList<Lotto> getLottoList() {
+		return this.lottoList;
+	}
 
 	public int getPurchasePrice() {
-		return this.purchasePrice; //나중에 수익률을 계산하기 위해 getter 생성
+		return this.purchasePrice;
 	}
 
 	private void inputPurchasePrice() {
@@ -63,11 +66,5 @@ public class LottoMarket {
 		for (Lotto lotto : lottoList) {
 			lotto.printNumbers();
 		}
-	}
-	
-	/* 테스트 코드 */
-	public static void main(String[] args) {
-		LottoMarket lottoMarket = new LottoMarket();
-		lottoMarket.purchaseLotto();
 	}
 }
