@@ -2,6 +2,7 @@ package domain;
 
 import validation.LottoValidation;
 
+import java.util.Collections;
 import java.util.Stack;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,5 +17,9 @@ public class LottoCombinator {
 		lottoNumbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
 				.boxed()
 				.collect(Collectors.toCollection(Stack::new));
+	}
+
+	private void shuffle() {
+		Collections.shuffle(lottoNumbers);
 	}
 }
