@@ -41,4 +41,16 @@ public class WinningLotto {
         }
         return answer;
     }
+
+    /*
+     * 당첨 로또와 구매한 로또의 번호가 얼마나 같은지 판단
+     */
+    public int countMatchNum(Lotto userLotto) {
+        int count = 0;
+        List<Integer> userLottoNumber = userLotto.getNumbers();
+        for (int i = 0; i < userLottoNumber.size(); i++) {
+            count += countMoreMatchNum(userLotto, i);
+        }
+        return count;
+    }
 }
