@@ -46,6 +46,19 @@ public class LottoValidation implements Validation<List<Integer>> {
 		return true;
 	}
 
+	private boolean checkRangeNumber() {
+		long numbersCount = numbers.stream()
+				.filter(n -> (MIN_NUMBER <= n && n <= MAX_NUMBER))
+				.count();
+
+		if (numbersCount != NUMBER_CNT) {
+			System.out.println("숫자의 범위는 최소 1, 최대 45 입니다.");
+			return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public List<Integer> convert(String value) {
 		return null;
