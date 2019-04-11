@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.assertj.core.internal.bytebuddy.implementation.bytecode.Throw;
+
 public class LottoGenerator {
 	
 	static private  Scanner sc = new Scanner(System.in);
@@ -38,11 +40,15 @@ public class LottoGenerator {
 	}
 	
 	private boolean devideByThousand(String money) {
-		if (Integer.parseInt(money) % LOTTO_PRICE != 0 || Integer.parseInt(money) > LOTTO_BUY_LIMIT) {
+		boolean isDevided = false;
+		
+		try {
+			isDevided = Integer.parseInt(money) % LOTTO_PRICE != 0 || Integer.parseInt(money) > LOTTO_BUY_LIMIT ? false : true;	
+			return isDevided;
+		} catch (NumberFormatException e) {
 			System.out.println("100,000이하의 금액을 1,000원 단위로 입력해주세요.");
-			return false;
+			return isDevided;
 		}
-		return true; 
 	}
 	
 	private int purchaseLottoAmount(int money) {
