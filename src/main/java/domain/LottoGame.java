@@ -18,6 +18,7 @@ public class LottoGame {
         Map<Rank, Integer> winningStatic = new HashMap<>();
         setWinningStatic(winningStatic);
         printWinningStatic(winningStatic);
+        printEarningRate(winningStatic);
     }
 
     private int getNumOfLottos() {
@@ -142,6 +143,16 @@ public class LottoGame {
             bonus = ", 보너스 볼 일치";
         }
         System.out.println(String.format("%d개 일치%s(%d원)- %d개", rank.getCountOfMatch(), bonus, rank.getWinningMoney(), winningNumber));
+    }
+
+    private void printEarningRate(Map<Rank, Integer> winningStatic) {
+        float expenses = 0;
+        float earnings = 0;
+        for (Rank rank : winningStatic.keySet()) {
+            expenses += PRICE_OF_LOTTO * winningStatic.get(rank);
+            earnings += rank.getWinningMoney() * winningStatic.get(rank);
+        }
+        System.out.println(String.format("총 수익률은 %f입니다.", (earnings / expenses)));
     }
 
 }
