@@ -19,7 +19,11 @@ public class LottoCombinator {
 				.collect(Collectors.toCollection(Stack::new));
 	}
 
-	private void shuffle() {
-		Collections.shuffle(lottoNumbers);
+		private void shuffle() {
+			Collections.shuffle(lottoNumbers);
+	}
+
+	private int pop() {
+		return lottoNumbers.pop();
 	}
 }
