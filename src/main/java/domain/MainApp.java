@@ -221,7 +221,6 @@ public class MainApp {
         Iterator<Rank> it = ranks.iterator();
         Rank rank;
         int index;
-
         while (it.hasNext()) {
             rank = it.next();
             index = rank.ordinal();
