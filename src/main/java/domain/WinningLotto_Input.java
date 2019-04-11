@@ -9,7 +9,7 @@ public class WinningLotto_Input {
     private static List<Integer> change_List = new ArrayList<>();
     private static Set<Integer> overlap_Number_CheckSet = new TreeSet<>();
     static WinningLotto winningLotto;
-    private static int bonus_Ball;
+    static int bonus_Ball;
 
     static void last_Week_Winning_Number_Create() {
         System.out.println(Info.LAST_WEEK_WINNING_NUMBER_PRINT);
@@ -27,7 +27,7 @@ public class WinningLotto_Input {
         last_Week_Winning_Number_Overlap_Check();
     }
 
-    static void bonus_Number_Create() {
+    static int bonus_Number_Create() {
         System.out.println(Info.BONUS_BALL_INPUT_PRINT);
         try {
             bonus_Ball = Info.SCAN.nextInt();
@@ -36,6 +36,7 @@ public class WinningLotto_Input {
         }catch (Exception e){
             System.out.println(Info.TYPE_ERROR_PRINT);
         }
+        return bonus_Ball;
     }
 
     static void winningLotto_Object_Create() {

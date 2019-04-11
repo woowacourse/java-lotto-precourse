@@ -10,5 +10,7 @@ public class Process {
         WinningLotto_Input.last_Week_Winning_Number_Create();
         WinningLotto_Input.bonus_Number_Create();
         WinningLotto_Input.winningLotto_Object_Create();
+
+        WinningResult.resultProcess();
     }
 }
