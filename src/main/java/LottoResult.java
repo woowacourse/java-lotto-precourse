@@ -24,6 +24,15 @@ public class LottoResult {
         return matchSumCount;
     }
 
+    public long getTotalWinningMoney() {
+        long totalWinningMoney = 0;
+        for(Rank rank : lottoRanks) {
+            totalWinningMoney+=rank.getWinningMoney();
+        }
+
+        return totalWinningMoney;
+    }
+
     public List<Rank> getLottoRanks() {
         return lottoRanks;
     }
