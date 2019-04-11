@@ -20,9 +20,16 @@ public class LottoGameStart {
         Lotto ThisWeekLottoList = ThisWeekNumber();
         int ThisWeekBonusNumber = ThisWeekBonusNumber();
         WinningLotto WinLotto = new WinningLotto(ThisWeekLottoList,ThisWeekBonusNumber);
-        ArrayList <Rank> RankLotto = new ArrayList<Rank>();
-        ResultLotto(RankLotto, WinLotto, PurchaseLotto);
-
+        //ArrayList <Rank> RankLotto = new ArrayList<Rank>();
+        int[] LuckyCount = new int[6];
+        LuckyCount = ResultCount(WinLotto, PurchaseLotto);
+        int FinalGetMoney =ResultMoney(WinLotto, PurchaseLotto);
+        for(int i=0; i<6; i++)
+        {
+            System.out.printf("%d ", LuckyCount[i]);
+        }
+        System.out.printf("%d", FinalGetMoney);
+        double Rate =0;
     }
 
     public static int GetMoney()
@@ -108,11 +115,24 @@ public class LottoGameStart {
         BonusNum = sc.nextInt();
         return BonusNum;
     }
-    public static void ResultLotto(ArrayList<Rank> RankLottos, WinningLotto WinLottos, Lotto[] Lottos)
+    public static int[] ResultCount(WinningLotto WinLottos, Lotto[] Lottos)
     {
+        int [] resultcount = new int[6];
         for(int i=0; i<Lottos.length; i++)
         {
-            RankLottos.add(WinLottos.match(Lottos[i]));
+            Rank rank = WinLottos.match(Lottos[i]);
+            resultcount[rank.ordinal()]++;
         }
+        return resultcount;
+    }
+    public static int ResultMoney(WinningLotto WinLottos, Lotto[] Lottos)
+    {
+        int money = 0;
+        for(int i=0; i<Lottos.length; i++)
+        {
+            Rank rank = WinLottos.match(Lottos[i]);
+            money += rank.getWinningMoney();
+        }
+        return money;
     }
 }

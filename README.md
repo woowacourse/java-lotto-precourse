@@ -42,5 +42,7 @@ WinningLotto 클래스
 
 -Match : 로또 번호 숫자 매칭
 
--ResultLotto : 구입한 로또와 정답 로또 매칭 함수 
+-ResultCount : 당첨된 횟수 구하는 함수
+
+-ResultMoney : 최종 당첨금액 구하는 함수 
 
