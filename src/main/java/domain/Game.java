@@ -3,6 +3,7 @@ package domain;
 import validation.MoneyValidation;
 
 import java.util.List;
+import java.util.Map;
 
 public class Game {
 	GameUser gameUser;
@@ -35,5 +36,34 @@ public class Game {
 	public void setWinningLotto(List<Integer> numbers, int bonusNo) {
 		Lotto lotto = new Lotto(numbers);
 		winningLotto = new WinningLotto(lotto, bonusNo);
+	}
+
+	public String getResult() {
+		StringBuilder sb = new StringBuilder();
+		Map<Rank, Integer> rankCount = calRankCount(initRankCount());
+
+		sb.append("당첨 통계").append("\n")
+				.append("---------").append("\n")
+				.append(getMatchResult(rankCount))
+				.append(String.format("총 수익률은 %.3f 입니다.", getYeild(rankCount)))
+				.append("\n");
+
+		return sb.toString();
+	}
+
+	private Map<Rank, Integer> initRankCount() {
+		return null;
+	}
+
+	private Map<Rank, Integer> calRankCount(Map<Rank, Integer> rankCount) {
+		return null;
+	}
+
+	private String getMatchResult(Map<Rank, Integer> rankCount) {
+		return null;
+	}
+
+	private double getYeild(Map<Rank, Integer> rankCount) {
+		return 0.0;
 	}
 }
