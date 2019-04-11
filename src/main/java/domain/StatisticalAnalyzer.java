@@ -5,46 +5,46 @@ import java.util.*;
 /**
  * 생성된 로또들의 당첨 통계와 수익성을 계산하는 객체
  *
- * @version 1.0(2019.04.10)
+ * @version 1.1(2019.04.11)
  * @author jongyoon Kim
  */
 public class StatisticalAnalyzer {
-    private Map<Rank, Integer> winningRankMap = new LinkedHashMap<>();
-    private int totalWinningPrice = 0;
-    private int usedMoney;
-    private static Inputter inputter = new Inputter();
-    private static LottoCreator lottoCreator = new LottoCreator();
-
-    public static void main(String[] args) {
-        StatisticalAnalyzer statisticalAnalyzer = new StatisticalAnalyzer();
-        statisticalAnalyzer.winningStatistical();
-    }
-
-    public void winningStatistical(){
-        ArrayList<Lotto> lottoList = inputLottoAmountAndCreateLottoList();
-        WinningLotto winningLotto = inputWinningNumAndCreateWinningLotto();
-        initWinningRankMap();
+    
+    /**
+     * 당첨 통계 계산
+     *
+     * @param lottoList 유저가 랜덤으로 뽑은 로또 리스트
+     * @param winningLotto 당첨 번호 로또
+     */
+    public void calcWinningStatistical(ArrayList<Lotto> lottoList, WinningLotto winningLotto){
+        Map<Rank, Integer> winningRankMap = initWinningRankMap();
         for(Lotto lotto : lottoList){
-            Rank rank = winningLotto.match(lotto);
-            checkingRankAndCalcTotalPrice(rank);
+            Rank rank = winningLotto.match(lotto);                  //유저 로또와 당첨 번호 로또와 비교
+            winningRankMap = checkingRank(rank, winningRankMap);    //비교하여 나온 값으로 rank 저장소 갱신
         }
-        printWinningStatistical();
-        printEarningRate();
+        printWinningStatistical(winningRankMap);
+        long totalEarning = calcTotalEarning(winningRankMap);
+        printEarningRate(totalEarning,lottoList.size() * 1000);
     }
 
-    private void checkingRankAndCalcTotalPrice(Rank rank){
+    /**
+     * 유저 로또와 당첨 번호 로또들을 비교하여 나온 rank를 가지고 당첨 정보 갱신
+     *
+     * @param rank 유저 로또와 당첨 로또를 비교하여 나온 rank
+     * @param winningRankMap 당첨 정보
+     * @return 당첨 정보
+     */
+    private Map<Rank, Integer> checkingRank(Rank rank, Map<Rank, Integer> winningRankMap){
         if(rank != Rank.MISS){
             winningRankMap.put(rank, winningRankMap.get(rank) + 1);
-            totalWinningPrice += rank.getWinningMoney();
         }
+        return winningRankMap;
     }
 
-    private void printWinningStatistical(){
+    private void printWinningStatistical(Map<Rank, Integer> winningRankMap){
         winningStatisticalMessageIntro();
-        Iterator<Rank> iterator = winningRankMap.keySet().iterator();
-        while(iterator.hasNext()){
-            Rank curRank = iterator.next();
-            System.out.println(winningStatisticalMessage(curRank));
+        for(Rank curRank : winningRankMap.keySet()){
+            System.out.println(winningStatisticalMessage(curRank, winningRankMap));
         }
     }
 
@@ -53,7 +53,15 @@ public class StatisticalAnalyzer {
         System.out.println("----------------------------");
     }
 
-    private String winningStatisticalMessage(Rank rank){
+    /**
+     * 당첨 정보를 가지고 당첨 통계 메세지 생성
+     * 2등의 경우 보너스 볼이 맞아야 하므로 추가 메세지 삽입
+     *
+     * @param rank 현재 랭크
+     * @param winningRankMap 당첨 정보
+     * @return 해당 rank에 대한 메세지 생성
+     */
+    private String winningStatisticalMessage(Rank rank, Map<Rank, Integer> winningRankMap){
         String msg = rank.getCountOfMatch() + "개 일치";
         if(rank.equals(Rank.SECOND)){
             msg += ", 보너스 볼 일치";
@@ -63,30 +71,38 @@ public class StatisticalAnalyzer {
         return msg;
     }
 
-    private void printEarningRate(){
-        double earningRate = (double) totalWinningPrice / usedMoney;
-        System.out.println("총 수익률은 " + earningRate
+    private void printEarningRate(long totalEarning, int usedMoney){
+        double earningRate = ((double) (totalEarning - usedMoney) / usedMoney) * 100;
+        System.out.println("총 수익률은 " + String.format("%.1f", earningRate)
                             + "% 입니다.");
     }
 
-    private ArrayList<Lotto> inputLottoAmountAndCreateLottoList(){
-        int lottoAmount = inputter.inputPurchaseAmount();
-        usedMoney = lottoAmount * 1000;
-        return lottoCreator.purchaseLottoForAmount(lottoAmount);
-    }
-
-    private WinningLotto inputWinningNumAndCreateWinningLotto(){
-        String inputtedWinningNum = inputter.inputWinningNumber();
-        List<Integer> splittedWinningNum = lottoCreator.splitWinningNumAndCheckingReInput(inputtedWinningNum);
-        int bonusNum = inputter.inputBonusNumber(splittedWinningNum);
-        return lottoCreator.createWinningLotto(splittedWinningNum, bonusNum);
-    }
-
-    private void initWinningRankMap(){
+    /**
+     * 당첨 정보를 저장할 저장소(LinkedHashMap) 초기화
+     *
+     * @return 당첨 정보 저장할 맵 객체
+     */
+    private Map<Rank, Integer> initWinningRankMap(){
+        Map<Rank, Integer> winningRankMap = new LinkedHashMap<>();
         winningRankMap.put(Rank.FIFTH,0);
         winningRankMap.put(Rank.FOURTH,0);
         winningRankMap.put(Rank.THIRD,0);
         winningRankMap.put(Rank.SECOND,0);
         winningRankMap.put(Rank.FIRST,0);
+        return winningRankMap;
+    }
+
+    /**
+     * 당첨 정보를 가지고 수입 계산
+     *
+     * @param winningRankMap 당첨 정보
+     * @return 총 수입
+     */
+    private long calcTotalEarning(Map<Rank, Integer> winningRankMap){
+        long totalEarning = 0;
+        for(Rank rank : winningRankMap.keySet()){
+            totalEarning += ((long)rank.getWinningMoney() * winningRankMap.get(rank));
+        }
+        return totalEarning;
     }
 }
