@@ -21,6 +21,8 @@ public class Game {
 
         inputLastWeekWinningLotto();
         inputBonusBallLotto();
+
+        outputWinStats(matchLottoNumber());
     }
 
     private void buyLotto() {
@@ -206,5 +208,45 @@ public class Game {
         WinningLotto winningLotto = new WinningLotto(lotto, bonusLottoNumber);
 
         return winningLotto;
+    }
+
+    private Map<Rank, Integer> initMap() {
+        Map<Rank, Integer> rankMap = new LinkedHashMap<>();
+        Rank[] ranks = Rank.values();
+
+        for (int i = 5; i >= 0; i--) {
+            rankMap.put(ranks[i], 0);
+        }
+
+        return rankMap;
+    }
+
+    private Map<Rank, Integer> matchLottoNumber() {
+        Map<Rank, Integer> LinkedHashMap = initMap();
+
+        for (Lotto lotto : lottos) {
+            Rank rank = createWinningLotto().match(lotto);
+            LinkedHashMap.put(rank, LinkedHashMap.get(rank) + 1);
+        }
+
+        return LinkedHashMap;
+    }
+
+    private void outputRankMessage(Rank rank, int count) {
+        if (rank == Rank.MISS) {
+            return;
+        }
+        System.out.print(rank.getCountOfMatch() + "개 일치");
+        if (rank == Rank.SECOND) {
+            System.out.print(", 보너스 볼 일치");
+        }
+        System.out.print("(" + rank.getWinningMoney() + "원)- ");
+        System.out.println(count + "개");
+    }
+
+    private void outputWinStats(Map<Rank, Integer> hash) {
+        for (Map.Entry<Rank, Integer> rankEntry : hash.entrySet()) {
+            outputRankMessage(rankEntry.getKey(), rankEntry.getValue());
+        }
     }
 }
