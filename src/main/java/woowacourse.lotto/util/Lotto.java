@@ -27,4 +27,9 @@ public class Lotto {
         }
         return countOfMatch;
     }
+
+    /* Only for test */
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
