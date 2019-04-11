@@ -5,15 +5,24 @@ package com.nekisse.domain;
  */
 public class WinningLotto {
     private final Lotto lotto;
-    private final int bonusNo;
+    private final LottoNumber bonusNo;
 
-    public WinningLotto(Lotto lotto, int bonusNo) {
+    public WinningLotto(Lotto lotto, LottoNumber bonusNo) {
         this.lotto = lotto;
+        if (lotto.isContainsNumber(bonusNo)) {
+            throw new IllegalArgumentException("보너스숫자 중복");
+        }
         this.bonusNo = bonusNo;
     }
+
 
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lotto);
     }
 }

@@ -1,8 +1,8 @@
 package com.nekisse.view;
 
-import com.nekisse.UserLottos;
 import com.nekisse.domain.Lotto;
 import com.nekisse.domain.Money;
+import com.nekisse.domain.UserLottos;
 
 public class OutputView {
     public static void PrintUserBuyLottos(UserLottos userLottos, Money money) {

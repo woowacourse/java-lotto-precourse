@@ -2,6 +2,7 @@ package com.nekisse;
 
 import com.nekisse.domain.Lotto;
 import com.nekisse.domain.Money;
+import com.nekisse.domain.UserLottos;
 
 public class LottoMachine {
 

@@ -1,6 +1,4 @@
-package com.nekisse;
-
-import com.nekisse.domain.Lotto;
+package com.nekisse.domain;
 
 import java.util.ArrayList;
 import java.util.List;
