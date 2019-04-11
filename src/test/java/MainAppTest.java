@@ -144,4 +144,11 @@ public class MainAppTest extends TestCase {
         assertEquals(1, ranks.size());
         assertEquals(Rank.FIRST, ranks.get(0));
     }
+
+    @Test
+    public void testCalculateRevenue() throws Exception {
+        List<Integer> statisticsOfRanks = new ArrayList<Integer>(Arrays.asList(new Integer[] {1, 0, 0, 0, 0, 0}));
+        int revenue = MainApp.calculateRevenue(statisticsOfRanks);
+        assertEquals(Rank.FIRST.getWinningMoney(), revenue);
+    }
 }

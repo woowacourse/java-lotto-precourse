@@ -9,8 +9,8 @@ public class MainApp {
     static final String MESSAGE_WRONG_LOTTO_NUMBERS = "잘못된 입력입니다. 1~45 사이의 서로 다른 정수 6개를 콤마(,)로 구분하여 입력해 주세요. (e.g., \"1,2,3,4,5,6\")";
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;
-    static final int NUMBER_OF_KINDS_OF_RANKS = 6;  // Rank 의 종류. 1등 ~ 5등 + 꽝
-    static final int NUMBER_OF_BETTING_NUMBERS = 6;  // 로또는 45개의 숫자 중에서 6개를 고른다.
+    static final int NUMBER_OF_KINDS_OF_RANKS = 6;                                 // Rank 의 종류. 1등 ~ 5등 + 꽝
+    static final int NUMBER_OF_BETTING_NUMBERS = 6;                                // 로또는 45개의 숫자 중에서 6개를 고른다.
 
 
     public static void main(String[] args) {
@@ -60,7 +60,7 @@ public class MainApp {
         int randomNumber;
 
         while (lottoNumbers.size() < NUMBER_OF_BETTING_NUMBERS) {
-            randomNumber = (int)(Math.random() * MAX_LOTTO_NUMBER) + 1;                           // 1~45 사이의 정수 하나를 무작위로 생성한다.
+            randomNumber = (int)(Math.random() * MAX_LOTTO_NUMBER) + 1;             // 1~45 사이의 정수 하나를 무작위로 생성한다.
             lottoNumbers.add(randomNumber);
         }
 
@@ -224,13 +224,13 @@ public class MainApp {
      * 당첨 통계를 출력하는 메소드
      */
     public static void printResult(List<Integer> statisticsOfRanks) {
-        statisticsOfRanks.remove(statisticsOfRanks.size()-1);  // 마지막 요소는 Missing 에 해당하므로 제거합니다.
+        statisticsOfRanks.remove(statisticsOfRanks.size()-1);  // 마지막 요소는 꽝에 해당하므로 제거
         Integer[] statistics = statisticsOfRanks.toArray(new Integer[statisticsOfRanks.size()]);
         Rank[] ranks = Rank.values();
 
         System.out.println("당첨 통계");
         System.out.println("----------");
-        for (int i=statistics.length-1; i>= 0; i--) {
+        for (int i=statistics.length-1; i>= 0; i--) {  // 출력 순서가 5등에서 1등으로 향하기 때문에 배열을 역순으로 순회함
             printSingleResult(ranks[i], statistics[i]);
         }
     }
@@ -244,6 +244,29 @@ public class MainApp {
         } else {
             System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), numberOfRanks);
         }
+    }
+
+    /**
+     * 수익금을 계산하는 메소드
+     */
+    public static int calculateRevenue(List<Integer> statisticsOfRanks) {
+        statisticsOfRanks.remove(statisticsOfRanks.size()-1);  // 마지막 요소는 꽝에 해당하므로 제거
+        Integer[] statistics = statisticsOfRanks.toArray(new Integer[statisticsOfRanks.size()]);
+        Rank[] ranks = Rank.values();
+        int revenue = 0;
+
+        for (int i=0; i<statistics.length; i++) {
+            revenue += ranks[i].getWinningMoney() * statistics[i];
+        }
+
+        return revenue;
+    }
+
+    /**
+     * 수익률을 출력하는 메소드
+     */
+    public static void printInterestRate(int inputMoney, int revenue) {
+        System.out.printf("총 수익률은 %.3f입니다.\n", (double)revenue / inputMoney);
     }
 
 }
