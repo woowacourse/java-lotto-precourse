@@ -38,4 +38,19 @@ public class Analyzer {
         }
         return result;
     }
+
+    /*
+     * 당첨 로또와 구매한 로또들의 매칭 결과를 담음
+     */
+    public void setHashMap(List<Lotto> lottos, WinningLotto winningLotto) {
+        map = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            map.put(rank, 0);
+        }
+        for (int i = 0; i < lottos.size(); i++) {
+            Rank rank = winningLotto.match(lottos.get(i));
+            map.replace(rank, map.get(rank) + 1);
+        }
+        map.remove(Rank.MISS);
+    }
 }
