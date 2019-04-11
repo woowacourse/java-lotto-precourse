@@ -152,4 +152,13 @@ public class Game {
 
         return false;
     }
+
+    private void inputLottoSelectSize(int listSize) {
+        List<String> lottoNumbers;
+
+        do {
+            lottoNumbers = inputLottoNumber();
+        } while (checkNumberCount(lottoNumbers, listSize)
+                || checkLottoNumberRangeAndFormat(lottoNumbers));
+    }
 }
