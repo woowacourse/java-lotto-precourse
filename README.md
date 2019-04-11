@@ -1,5 +1,11 @@
 # java-lotto
-로또 미션 진행을 위한 저장소
+Show me the money!!<br>
+과연 당신의 수익률은?
+
+## 프로젝트 목표
+- 여러 개의 클래스를 분리하고, 관계를 맺어 프로그램을 완성한다.
+- indent를 줄이기 위해서 map, filter 등 stream과 관련된 기능을 활용한다.
+- enum 클래스에 대해 공부하고 익힌다.
 
 ## 기능 목록
 
@@ -26,3 +32,7 @@
 - Rank별 집계 결과를 보여주어야 한다.
 - Rank별 집계 결과를 통해 총 당첨 금액을 구해야 한다.
 - 수익률을 계산하고 보여주어야 한다.
+
+## Reference
+- Java steam 관련 참고 링크 : https://futurecreator.github.io/2018/08/26/java-8-streams/
+- enum 클래스의 사용과 이해 : https://opentutorials.org/module/1226/8025
