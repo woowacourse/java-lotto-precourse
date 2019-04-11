@@ -73,6 +73,60 @@ public class UserInput {
         return true;
     }
 
+    public String getWinningLottoNumbers(){
+        do{
+            this.listen();
+        }while(!this.validateWinningLottoNumbers(this.userInput));
+
+        return this.userInput;
+    }
+
+    public boolean validateWinningLottoNumbers(String inputLottoNums){
+        if(!isValidLottoNumberCount(inputLottoNums)){
+            return false;
+        }
+
+        if(!isValidLottoNumbers(inputLottoNums)){
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean isValidLottoNumberCount(String inputLottoNums){
+        if(inputLottoNums.split(",").length != 6){
+            this.showMessgae(REQUEST_SIX_NUMBERS);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidLottoNumbers(String inputLottoNums){
+        boolean result = true;
+        for(String numStr : inputLottoNums.split(",")){
+            if(!isValidIntegerNumber(numStr)){
+                result = false;
+                break;
+            }
+
+            if(!isValidLottoNumber(Integer.parseInt(numStr))){
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    public boolean isValidLottoNumber(int num){
+        if(num < 1 || num > 45){
+            this.showMessgae(REQUEST_CORRECT_LOTTO_NUMBERS);
+            return false;
+        }
+
+        return true;
+    }
+
     public void showMessgae(String msg){
         System.out.println(msg);
     }
