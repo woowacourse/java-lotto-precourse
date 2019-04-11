@@ -17,6 +17,9 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    /*
+     * 구매한 로또와 당첨 로또와의 매칭 정도 판단
+     */
     public Rank match(Lotto userLotto) {
         // TODO 로직 구현
         return null;
