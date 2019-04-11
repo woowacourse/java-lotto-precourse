@@ -21,7 +21,7 @@ import java.util.TreeMap;
  */
 public class Result {
 	private final String WINNING_RESULT = "\n당첨 통계\n---------";
-	private final String TOTAL_YIELD = "총 수익률은 %.1f입니다.";
+	private final String TOTAL_YIELD = "총 수익률은 %.3f입니다.";
 
 	private long totalCount;
 	private Map<Rank, Long> count = new TreeMap<Rank, Long>(Comparator.reverseOrder());
