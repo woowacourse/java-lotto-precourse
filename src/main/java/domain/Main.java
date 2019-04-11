@@ -96,6 +96,16 @@ public class Main {
         }
     }
 
+    private String formatRank(Rank r) {
+        if (r == Rank.SECOND) {
+            return String.format("%d개 일치, 보너스 볼 일치(%d원)", r.getCountOfMatch(), r.getWinningMoney());
+        }
+        if (r == Rank.MISS) {
+            return "꽝";
+        }
+        return String.format("%d개 일치 (%d원)", r.getCountOfMatch(), r.getWinningMoney());
+    }
+
 
     public static void main(String[] args) {
 
