@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,7 +8,7 @@ public class Main {
     final static int LOTTO_PRICE = 1000;
     static private Scanner staticSc;
     static private List<Lotto> lottoList;
-    static private int[] numSeq;
+    static private List<Integer> numSeq;
 
     private Scanner getScanner() {
         if (staticSc == null) {
@@ -29,9 +30,9 @@ public class Main {
     }
 
     private void initNumSeq() {
-        numSeq = new int[45];
+        numSeq = new ArrayList<>();
         for (int i = 0; i < 45; i++) {
-            numSeq[i] = i + 1;
+            numSeq.add(i + 1);
         }
     }
 
@@ -41,12 +42,13 @@ public class Main {
         }
 
         for (int i = 0; i < 45; i++) {
-            int tmp = numSeq[i];
+            int tmp = numSeq.get(i);
             int target = (int)(Math.random() * (45 - i)) + i;
-            numSeq[target] = numSeq[i];
-            numSeq[i] = tmp;
+            numSeq.set(target, numSeq.get(i));
+            numSeq.set(i, tmp);
         }
     }
+
 
     public static void main(String[] args) {
 
