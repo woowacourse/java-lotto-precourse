@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Manager {
     private User user;
     private ArrayList<Integer> winningNumbesrs;
-    boolean[] checkNumbers;
+    private boolean[] checkNumbers;
 
     Manager(){
         user = new User();
@@ -48,19 +48,25 @@ public class Manager {
         }
     }
 
+    public boolean checkDuplicateNumber(int number){
+        if(checkNumbers[number]){
+            System.out.println(InputError.DUPLICATE_ERROR);
+            return false;
+        }
+        return true;
+    }
+
     public boolean checkWinningNumbers(List<String> list){
         initCheckNumbers();
 
         int cnt = 0;
 
         for(int i=0; i<list.size(); i++){
+            int number = Integer.parseInt(list.get(i));
             if(!CheckFormatError(list.get(i))) return false;
 
-            int number = Integer.parseInt(list.get(i));
-            if(checkNumbers[number]){
-                System.out.println(InputError.DUPLICATE_ERROR);
-                return false;
-            }
+            if(!checkDuplicateNumber(number)) return false;
+
 
             if(number<1 || number>45){
                 System.out.println(InputError.NUMBER_RANGE_ERROR);
