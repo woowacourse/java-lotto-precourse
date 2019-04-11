@@ -1,14 +1,17 @@
 package domain;
 
 import lotto.Lotto;
+import lotto.Rank;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeMap;
 
 import static constants.ConsoleConstants.*;
+import static constants.LottoConstants.LOTTO_PRICE;
 
 public class Console {
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -31,7 +34,28 @@ public class Console {
     }
 
     public void writeLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + BUYING_MESSAGE);
+        System.out.println(ENTER + lottos.size() + BUYING_MESSAGE);
         lottos.forEach(lotto -> System.out.println(lotto.toString()));
+    }
+
+    public void writeResult(TreeMap<Rank, Long> stats) {
+        System.out.println(RESULT_MASSAGE);
+
+        stats.forEach((rank, count) -> System.out.println(resultForm(rank, count)));
+
+        System.out.println(stats.values().stream().mapToInt(Long::intValue).sum() * LOTTO_PRICE);
+    }
+
+    private String resultForm(Rank rank, long count) {
+        if (rank == Rank.MISS) {
+            return "";
+        }
+        StringBuilder form = new StringBuilder(rank.getCountOfMatch() + RESULT_MATCH_COUNT);
+
+        if (rank == Rank.SECOND) {
+            form.append(RESULT_BONUS);
+        }
+        form.append(RESULT_OPEN_BRACKET + rank.getWinningMoney() + RESULT_WON + RESULT_CLOSE_BRACKET + count + RESULT_COUNT);
+        return form.toString();
     }
 }
