@@ -6,11 +6,15 @@ public class LottoGame {
     private static final String PURCHASE_GUIDE = "구입금액을 입력해주세요.";
     private static final String SHORTAGE_WARNING = "구입금액이 부족합니다. ";
     private static final String UNIT_WARNING = "1000원 단위로 구입하실 수 있습니다.";
+    private static final String QUANTITY_GUIDE = "개를 구매했습니다.";
     private static final int LOTTO_PRICE = 1000;
 
     public static void main(String[] args) {
         LottoGame game = new LottoGame();
         int purchasingMoney = game.enterPurchasingMoney();
+        int purchasingQuantity = game.getPurchasingQuantity(purchasingMoney,
+            game.LOTTO_PRICE);
+        System.out.println(purchasingQuantity + game.QUANTITY_GUIDE);
     }
 
     private int enterPurchasingMoney() {
@@ -42,5 +46,10 @@ public class LottoGame {
             return false;
         }
         return true;
+    }
+
+    private int getPurchasingQuantity(int purchasingMoney, int lottoPrice) {
+        int quantity = purchasingMoney / lottoPrice;
+        return quantity;
     }
 }
