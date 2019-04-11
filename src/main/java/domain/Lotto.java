@@ -16,7 +16,15 @@ public class Lotto {
         return String.join(",", numbers.toString());
     }
 
-    public String toString() {
-        return String.join(",", numbers.toString());
+    public int countOfMatch(Lotto lotto) {
+        int count = 0;
+        for (int num : numbers) {
+            count += lotto.contains(num) ? 1 : 0;
+        }
+        return count;
+    }
+
+    public boolean contains(int num) {
+        return numbers.contains(num);
     }
 }
