@@ -57,6 +57,6 @@ public class PrintScan {
     }
 
     public static void printEarnRate(float earnRate) {
-        System.out.format("총 수익률은 %.3f", earnRate);
+        System.out.format("총 수익률은 %.3f입니다.", earnRate);
     }
 }
