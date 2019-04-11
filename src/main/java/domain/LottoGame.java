@@ -14,11 +14,18 @@
 
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
 		private static final String BLANK = "";	
+		private static int theNumberOfLottoTicket;
+		
+		private List<Lotto> lottoTicket = new ArrayList<Lotto>();
 		
 		public void runGame() {
 				getLottoPurchasePrice();
+				notifyUserTheNumberOfLottoTicketAndNumbers();
 		}
 		
 		private void getLottoPurchasePrice() {
@@ -26,5 +33,18 @@ public class LottoGame {
 				
 				CommandLineInterface.printInputPurchasePrice();
 				while (!Validator.isValidPrice(userPrice));
+		}
+
+		private void notifyUserTheNumberOfLottoTicketAndNumbers() {
+				theNumberOfLottoTicket = Validator.purchasePrice 
+										/ Validator.UNIT_PRICE_OF_LOTTO;
+				
+				LottoNumberGenerator.makeLottoNumbers();
+				for (int i = 0; i < theNumberOfLottoTicket; i++) {
+						List<Integer> lottoNumbers = LottoNumberGenerator.makeLottoNumbers();
+						lottoTicket.add(new Lotto(lottoNumbers));
+				}
+				CommandLineInterface.printTheNumberOfLottoPurchase(theNumberOfLottoTicket);
+				CommandLineInterface.printLottoTicket(lottoTicket);
 		}
 }

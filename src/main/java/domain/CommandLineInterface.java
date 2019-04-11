@@ -14,6 +14,8 @@
 
 package domain;
 
+import java.util.List;
+
 public class CommandLineInterface {
 		private static final String INPUT_PURCHASE_PRICE = "구입금액을 입력해 주세요.";
 		private static final String NUMBER_ERROR = "숫자로 이루어진 값을 하나만 입력해 주세요.(','를 제거해주세요.)";
@@ -24,6 +26,8 @@ public class CommandLineInterface {
 		private static final String INDIVISIBLE_PRICE_ERROR 
 												= Validator.UNIT_PRICE_OF_LOTTO
 												+ " 단위의 값을 입력해 주세요.";
+		private static final String PREDICATE_OF_LOTTO_PURCHASE = "개를 구매했습니다.";
+		private static final String SPACING_ONE_LINE = "\n";
 		
 		public static void printInputPurchasePrice() {
 				System.out.println(INPUT_PURCHASE_PRICE);			
@@ -39,5 +43,17 @@ public class CommandLineInterface {
 
 		public static void printIndivisiblePurchasePriceError() {
 				System.out.println(INDIVISIBLE_PRICE_ERROR);
+		}
+
+		public static void printTheNumberOfLottoPurchase(int theNumberOfLottoTicket) {
+				System.out.println(SPACING_ONE_LINE + theNumberOfLottoTicket 
+									+ PREDICATE_OF_LOTTO_PURCHASE);
+		}
+		
+		public static void printLottoTicket(List<Lotto> lottoTicket) { 
+				for (Lotto lottoLine : lottoTicket) {
+						System.out.println(lottoLine.getNumbers());
+				}
+				System.out.println(SPACING_ONE_LINE);
 		}
 }
