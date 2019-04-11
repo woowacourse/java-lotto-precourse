@@ -15,7 +15,7 @@ public class LottoResult {
         }
     }
 
-    Map<Rank, Integer> getLottoResults() {
+    public Map<Rank, Integer> getLottoResults() {
         return lottoResults;
     }
 
