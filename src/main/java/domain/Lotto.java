@@ -12,5 +12,14 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public void printLottoNumbers() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for(int number : numbers){
+            stringBuilder.append(number);
+            stringBuilder.append(", ");
+        }
+        System.out.println(stringBuilder.toString().substring(0, stringBuilder.length()-2) + "]");
+    }
+
 }
