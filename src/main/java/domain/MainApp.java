@@ -9,6 +9,8 @@ public class MainApp {
     static final String MESSAGE_WRONG_LOTTO_NUMBERS = "잘못된 입력입니다. 1~45 사이의 서로 다른 정수 6개를 콤마(,)로 구분하여 입력해 주세요. (e.g., \"1,2,3,4,5,6\")";
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;
+    static final int NUMBER_OF_KINDS_OF_RANKS = 6;  // Rank 의 종류. 1등 ~ 5등 + 꽝
+    static final int NUMBER_OF_BETTING_NUMBERS = 6;  // 로또는 45개의 숫자 중에서 6개를 고른다.
 
 
     public static void main(String[] args) {
@@ -57,8 +59,8 @@ public class MainApp {
         TreeSet<Integer> lottoNumbers = new TreeSet<Integer>();                     // 중복을 허용하지 않는 TreeSet 컬렉션을 사용한다.
         int randomNumber;
 
-        while (lottoNumbers.size() < 6) {
-            randomNumber = (int)(Math.random() * 45) + 1;                           // 1~45 사이의 정수 하나를 무작위로 생성한다.
+        while (lottoNumbers.size() < NUMBER_OF_BETTING_NUMBERS) {
+            randomNumber = (int)(Math.random() * MAX_LOTTO_NUMBER) + 1;                           // 1~45 사이의 정수 하나를 무작위로 생성한다.
             lottoNumbers.add(randomNumber);
         }
 
@@ -201,5 +203,47 @@ public class MainApp {
         return ranks;
     }
 
+    /**
+     * 로또들의 당첨 여부를 분석하여 등수별로 몇 개나 일치했는 지 계산하는 메소드
+     */
+    public static List<Integer> makeStatisticsOfRanks(List<Rank> ranks) {
+        List<Integer> statisticsOfRanks = new ArrayList<Integer>(NUMBER_OF_KINDS_OF_RANKS);  // 1등 ~ 5등, 꽝
+        Iterator<Rank> it = ranks.iterator();
+        Rank rank;
+        int index;
+
+        while(it.hasNext()) {
+            rank = it.next();
+            index = rank.ordinal();
+            statisticsOfRanks.set(index, statisticsOfRanks.get(index) + 1);
+        }
+        return statisticsOfRanks;
+    }
+
+    /**
+     * 당첨 통계를 출력하는 메소드
+     */
+    public static void printResult(List<Integer> statisticsOfRanks) {
+        statisticsOfRanks.remove(statisticsOfRanks.size()-1);  // 마지막 요소는 Missing 에 해당하므로 제거합니다.
+        Integer[] statistics = statisticsOfRanks.toArray(new Integer[statisticsOfRanks.size()]);
+        Rank[] ranks = Rank.values();
+
+        System.out.println("당첨 통계");
+        System.out.println("----------");
+        for (int i=statistics.length-1; i>= 0; i--) {
+            printSingleResult(ranks[i], statistics[i]);
+        }
+    }
+
+    /**
+     * Rank 와 그에 해당하는 개수를 받아 단일 통계를 출력하는 메소드
+     */
+    public static void printSingleResult(Rank rank, int numberOfRanks) {
+        if (rank == Rank.SECOND) {
+            System.out.printf("%d개 일치, 보너스 불 일치(%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), numberOfRanks);
+        } else {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCountOfMatch(), rank.getWinningMoney(), numberOfRanks);
+        }
+    }
 
 }
