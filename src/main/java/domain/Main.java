@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * 게임을 실행하는 클래스
+ */
 public class Main {
 
 	/* 게임이 실행되는 공간 */

@@ -34,8 +34,8 @@ public class WinningLotto {
     	for (int userLottoNumber : userLottoNumbers) {
     		countOfMatch = countPlusOneIfListContainsNumber(countOfMatch, winningLottoNumbers, userLottoNumber);
     	}
-    	return countOfMatch;
-    }
+		return countOfMatch;
+	}
 
 	public Rank match(Lotto userLotto) {
 		return Rank.valueOf(countMatch(userLotto), matchBonus(userLotto));

@@ -6,16 +6,16 @@ import java.util.List;
  * 로또 한장을 의미하는 객체
  */
 public class Lotto {
-    private final List<Integer> numbers;
+	private final List<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
-    }
-    
-    public List<Integer> getNumbers() {
-    	return this.numbers;
-    }
-    
+	public Lotto(List<Integer> numbers) {
+		this.numbers = numbers;
+	}
+
+	public List<Integer> getNumbers() {
+		return this.numbers;
+	}
+
 	public void printNumbers() {
 		String numbersString = numbers.toString();
 		System.out.println(numbersString);

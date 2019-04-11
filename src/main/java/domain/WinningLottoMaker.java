@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.lang.Integer;
 
+/**
+ * 당첨 번호를 생성하는 클래스
+ */
 public class WinningLottoMaker {
-
 	private static final Scanner WINNING_SCANNER = new Scanner(System.in);
 	private static final Scanner BONUS_SCANNER = new Scanner(System.in);
 	private static final String WINNIG_NUMBERS_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
@@ -78,26 +80,26 @@ public class WinningLottoMaker {
 	public WinningLotto makeWinningLotto() {
 		ArrayList<Integer> winningNumbers = inputWinningNumbers();
 		int bonusNumber = inputBonusNumber();
-		
+
 		tryMakeWinningLotto(winningNumbers, bonusNumber);
 		WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusNumber);
 		return winningLotto;
 	}
-	
+
 	private void tryMakeWinningLotto(ArrayList<Integer> winningNumbers, int bonusNumber) {
 		checkNumberError(bonusNumber);
 		checkBonusNumberOverlapError(winningNumbers, bonusNumber);
 	}
-	
+
 	private void checkNumberError(int bonusNumber) {
-		if(bonusNumber < MIN_LOTTO_NUM || bonusNumber > MAX_LOTTO_NUM) {
+		if (bonusNumber < MIN_LOTTO_NUM || bonusNumber > MAX_LOTTO_NUM) {
 			System.out.println(NUMBER_ERROR);
 			makeWinningLotto();
 		}
 	}
-	
+
 	private void checkBonusNumberOverlapError(ArrayList<Integer> winningNumbers, int bonusNumber) {
-		if(winningNumbers.contains(bonusNumber)) {
+		if (winningNumbers.contains(bonusNumber)) {
 			System.out.println(BONUS_NUMBER_OVERLAP_ERROR);
 			makeWinningLotto();
 		}

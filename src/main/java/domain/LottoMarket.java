@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * 로또 구매, 발급을 담당하는 클래스
+ */
 public class LottoMarket {
-
 	private static final Scanner SCANNER = new Scanner(System.in);
 	private static final Random RANDOM = new Random();
 	private static final String PURCHASE_PRICE_MESSAGE = "구입 금액을 입력해 주세요.";

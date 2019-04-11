@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import domain.Rank;
 
+/**
+ * 당첨 통계, 수익률을 구하는 클래스
+ */
 public class LottoOffice {
 	private static final String STATS_MESSAGE = "\n당첨 통계\n---------";
 	private static final String RANK_MESSAGE = "%d개 일치%s(%d원)- %d개\n";
