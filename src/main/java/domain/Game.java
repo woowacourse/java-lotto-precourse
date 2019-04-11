@@ -8,7 +8,7 @@ public class Game {
     private int purchaseCount;
     private Lotto[] lottos;
     private List<Integer> winningLottoNumber;
-    private List<Integer> bonusLottoNumber;
+    private int bonusLottoNumber;
 
     public void run() {
         do {
@@ -182,11 +182,11 @@ public class Game {
 
     private void inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        bonusLottoNumber = inputLottoSelectSize(1);
+        bonusLottoNumber = inputLottoSelectSize(1).get(0);
     }
 
     private boolean checkBonusBall() {
-        if (winningLottoNumber.contains(bonusLottoNumber.get(0))) {
+        if (winningLottoNumber.contains(bonusLottoNumber)) {
             System.out.println("보너스 번호는 지난 주 당첨 번호와 달라야 합니다.");
             return true;
         }
