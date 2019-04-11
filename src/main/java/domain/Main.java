@@ -3,6 +3,7 @@ package domain;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Main {
 	static final String AMOUNT_QUESTION = "구입금액을 입력해 주세요.";
@@ -18,7 +19,23 @@ public class Main {
 		
 		System.out.printf(BOUGHT_STATEMENT, numberOfLottoToBuy);
 		
-		Lotto[] lottoNumbers = new Lotto[numberOfLottoToBuy];
+		Lotto[] userLottos = new Lotto[numberOfLottoToBuy];
+		
+		initializeLottos(userLottos);
+		printLottos(userLottos);
+	}
+	
+	private static void printLottos(Lotto[] userLottos) {
+		for(int i = 0; i < userLottos.length; i++) {
+			userLottos[i].printLotto();
+		}
+	}
+	
+	private static void initializeLottos(Lotto[] userLottos) {
+		for(int i = 0; i < userLottos.length; i++) {
+			userLottos[i] = new Lotto(new ArrayList<Integer>());
+			userLottos[i].setWinningNumbers();
+		}
 	}
 	
 	private static int numberOfLotto(int inputMoney) {
