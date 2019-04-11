@@ -4,8 +4,8 @@ import java.util.*;
 
 import static constants.LottoConstants.*;
 
-public class RandomNumber {
-    public List<Integer> getNumbers() {
+class RandomNumber {
+    List<Integer> getNumbers() {
         HashSet<Integer> temp = new HashSet<>();
 
         while (temp.size() != COUNT_NUMBERS) {

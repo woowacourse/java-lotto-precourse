@@ -11,14 +11,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Gambling {
+class Gambling {
     private Console console;
 
     Gambling() {
         console = new Console();
     }
 
-    public void start() throws IOException {
+    void start() throws IOException {
         List<Lotto> lottos = makeLottos();
         WinningLotto winningLotto = makeWinningLotto();
         List<Rank> resultRanks = makeMatchResult(lottos, winningLotto);

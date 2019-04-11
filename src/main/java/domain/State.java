@@ -18,7 +18,7 @@ public class State {
         return stats;
     }
 
-    public double returnOfRate(TreeMap<Rank, Long> stats) {
+    double returnOfRate(TreeMap<Rank, Long> stats) {
         double totalMoney = stats.values().stream().mapToInt(Long::intValue).sum() * LOTTO_PRICE;
         double returnMoney = 0;
 
