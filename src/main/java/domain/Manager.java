@@ -18,10 +18,9 @@ public class Manager {
         System.out.println("구입금액을 입력해 주세요.");
         String ret = user.inputMoney();
 
-        CheckFormatError(ret);
-        CheckMinusError(Integer.parseInt(ret));
-        CheckRestError(Integer.parseInt(ret));
-        
+        if(!CheckFormatError(ret) || !CheckMinusError(Integer.parseInt(ret))
+                || !CheckRestError(Integer.parseInt(ret))) return false;
+
         return true;
     }
 
