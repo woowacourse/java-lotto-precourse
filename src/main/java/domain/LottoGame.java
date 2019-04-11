@@ -46,7 +46,7 @@ public class LottoGame {
 				CommandLineInterface.printInputPurchasePrice();
 				while (!Validator.isValidPrice(userPrice));
 		}
-
+		
 		private void notifyUserTheNumberOfLottoTicketAndNumbers() {
 				theNumberOfLottoTicket = Validator.purchasePrice 
 										/ Validator.UNIT_PRICE_OF_LOTTO;
@@ -59,14 +59,14 @@ public class LottoGame {
 				CommandLineInterface.printTheNumberOfLottoPurchase(theNumberOfLottoTicket);
 				CommandLineInterface.printLottoTicket(lottoTicket);
 		}
-
+		
 		private void prepareWinningNumbers() {
 				List<Integer> winningNumbers = getWinningNumbers();
 				int bonusBall = getBonusBall();
 				Lotto luckyLotto = new Lotto(winningNumbers);
 				winningLotto = new WinningLotto(luckyLotto, bonusBall);
 		}
-
+		
 		private List<Integer> getWinningNumbers() {
 				String userWinningNums = BLANK;
 				
@@ -85,11 +85,12 @@ public class LottoGame {
 				
 				return Validator.bonusBall;
 		}
-
+		
 		private void notifyUserWinningStatics() {
 				checkWinningInformation();
+				calculateRatesOfProfit();
 		}
-
+		
 		/**
 		 * LinkedHasMap을 이용해서 등수별로 Map을 만들고 로또의 개수만큼 업데이트합니다.
 		 */
@@ -103,5 +104,18 @@ public class LottoGame {
 						Rank rank = winningLotto.match(lotto);
 						winningInformation.put(rank, winningInformation.get(rank) + INCREASE_ONE);
 				}
+		}
+		
+		private void calculateRatesOfProfit() {
+				double totalProfit = DEFAULT_VALUE;
+				int i = THE_NUMBER_OF_WINNING_TYPE;
+				
+				while (i > 0) {
+					Rank rank = Rank.values()[i];
+					totalProfit += rank.getWinningMoney() 
+								* LottoGame.winningInformation.get(rank);
+					i--;
+				}
+				ratesOfProfit = totalProfit / Validator.purchasePrice;
 		}
 }
