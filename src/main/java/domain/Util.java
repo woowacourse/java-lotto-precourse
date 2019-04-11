@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -65,6 +66,25 @@ public class Util {
 			return true;
 		}
 		System.out.println("6개의 숫자를 입력해주세요.");
+		return false;
+	}
+	
+	public static boolean checkValidRangeForBonus(String userInput) {
+		boolean validNumber = true;
+		validNumber = (StringToInteger(userInput) >= MIN_LOTTO_NUMBER && StringToInteger(userInput) <= MAX_LOTTO_NUMBER && validNumber == true)
+				? true
+				: false;
+		if (!validNumber) {
+			System.out.println("로또 번호는 1 ~ 45 사이의 수 중에서 입력해주세요.");
+		}
+		return validNumber;
+	}
+	
+	public static boolean checkDuplicatedBonusNumber(String userInput, List<Integer> lastweekNumberList) {
+		if (lastweekNumberList.contains(StringToInteger(userInput))) {
+			System.out.println("중복된 숫자가 있습니다.");
+			return true;
+		}
 		return false;
 	}
 

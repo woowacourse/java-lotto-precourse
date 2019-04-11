@@ -12,6 +12,7 @@ import java.util.Set;
 public class User {
 	static private Scanner scanner = new Scanner(System.in);
 	private static ArrayList<Lotto> userLottoList = new ArrayList<Lotto>();
+	private static WinningLotto winningLotto;
 	private static final int LOTTO_NUMBER_COUNT = 6;
 	private static final int MAX_LOTTO_NUMBER = 45;
 	private static final int PRICE_OF_ONE_LOTTO = 1000;
@@ -53,6 +54,10 @@ public class User {
 	}
 
 	public static void makeNumberListOfLastWeek() {
+		List<Integer> lastweekNumberList = inputNumberOfLastweek();
+		Lotto lastweekLotto = new Lotto(lastweekNumberList);
+		int bonusNumber = inputBonusNumber(lastweekNumberList);
+		winningLotto = new WinningLotto(lastweekLotto, bonusNumber);
 	}
 
 	public static List<Integer> inputNumberOfLastweek() {
@@ -83,6 +88,17 @@ public class User {
 			set.add(Util.StringToInteger(userInputWithoutComma[i].replaceAll("\\p{Z}", "")));
 		}
 		return set;
+	}
+	
+	public static int inputBonusNumber(List<Integer> lastweekNumberList) {
+		String userInput = "";
+		do {
+			System.out.println("보너스 볼을 입력해주세요.");
+			userInput = scanner.nextLine();
+		} while (!Util.isValidNumber(userInput) || !Util.checkValidRangeForBonus(userInput)
+				|| Util.checkDuplicatedBonusNumber(userInput, lastweekNumberList));
+		int inputMoney = Util.StringToInteger(userInput);
+		return inputMoney;
 	}
 
 	public static int compareWithWinningLotto() {
