@@ -42,4 +42,34 @@ public class WinningLottoTest {
         //then
         assertThat(resultRank).isEqualTo(Rank.SECOND);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 당첨번호_보너스번호_중복() {
+        //given
+        List<Integer> winningLottoNumbersList = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(winningLottoNumbersList);
+        int bonusBall = 1;
+        //when
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 보너스번호_1이하(){
+        //given
+        List<Integer> winningLottoNumbersList = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(winningLottoNumbersList);
+        int bonusBall = 0;
+        //when
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 보너스번호_46이상(){
+        //given
+        List<Integer> winningLottoNumbersList = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(winningLottoNumbersList);
+        int bonusBall = 50;
+        //when
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
+    }
 }
