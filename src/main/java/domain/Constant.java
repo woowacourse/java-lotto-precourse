@@ -1,6 +1,6 @@
 package domain;
 
-public final class Constant {
+final class Constant {
     static final String RANK_MISS = "당첨금 없습니다.";
     static final String RANK_THIRD = "3개 일치 (5000원)";
     static final String RANK_FOURTH = "4개 일치 (50000원)";

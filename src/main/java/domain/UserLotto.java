@@ -31,10 +31,10 @@ public class UserLotto {
             }
             inputChecker = checkInputLottoPrice(price);
         }
-        System.out.println();
     }
 
     private void printLottoAmount() {
+        System.out.println();
         int amount = price / Constant.LOTTO_PRICE;
         System.out.println(amount + "개를 구매했습니다.");
         makeLotto(amount);
