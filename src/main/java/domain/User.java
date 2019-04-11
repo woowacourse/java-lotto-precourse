@@ -2,6 +2,7 @@ package domain;
 import java.util.Scanner;
 
 
+
 public class User {
 	static private Scanner scanner = new Scanner(System.in);
 	private static final int LOTTO_NUMBER_COUNT = 6;
@@ -9,6 +10,13 @@ public class User {
 	private static final int PRICE_OF_ONE_LOTTO = 1000;
 	
 	public static int inputUserMoney() {
+		String userInput = "";
+		do {
+			System.out.println("구입금액을 입력해주세요.");
+			userInput = scanner.nextLine().trim();
+		} while (!Util.isValidNumber(userInput) || !Util.isDividedByOneThousand(userInput));
+		int inputMoney = Util.StringToInteger(userInput);
+		return inputMoney;
 	}
 
 	public static void buyLotto(int inputMoney) {
