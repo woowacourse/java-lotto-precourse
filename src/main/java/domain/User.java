@@ -33,7 +33,14 @@ public class User {
             lottoList.add(makeLotto());
         }
     }
-    
+
+    public void printLottoList(){
+        System.out.print(lottoCnt);
+        System.out.println("개를 구매했습니다.");
+        for(int i=0; i<lottoCnt; i++){
+            lottoList.get(i).printLotto();
+        }
+    }
 
     public Lotto makeLotto(){
         // 초기화가 되나?
