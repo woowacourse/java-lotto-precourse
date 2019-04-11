@@ -38,13 +38,14 @@ class LottoGame {
         }
         enterWinningInfo();
         checkRank();
-
+        reset();
         return true;
     }
 
     private void reset() {
-        System.out.println("게임을 다시 시작하려면 Y를 입력해주세요.");
+        System.out.println("\n게임을 다시 시작하려면 Y를 입력해주세요.");
         String inputStr = scanner.nextLine();
+        System.out.println();
         if (inputStr.equals(END_CODE))
             init();
     }
@@ -58,7 +59,7 @@ class LottoGame {
         try {
             budget = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException nfe) {
-            System.out.println("잘못된 입력입니다.");                       /* 문자를 입력값으로 받았을 때 */
+            System.out.println("잘못된 입력입니다.\n");                       /* 문자를 입력값으로 받았을 때 */
             enterBudget();
         }
 
@@ -104,10 +105,10 @@ class LottoGame {
         try {
             while (!lottoStudio.enterWinningNums(scanner.nextLine())) ;
         } catch (NumberFormatException nfe) {                               /* 문자를 입력했을 때 */
-            System.out.println("문자를 입력하셨습니다.");
+            System.out.println("문자를 입력하셨습니다.\n");
             enterWinningNums();
         } catch (Exception e) {                                             /* 번호의 갯수, 범위가 로또 규칙과 다를 때 */
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()+"\n");
             enterWinningNums();
         }
         return true;
@@ -118,10 +119,10 @@ class LottoGame {
         try {
             while (!lottoStudio.enterWinningBonus(scanner.nextLine())) ;
         } catch (NumberFormatException nfe) {                               /* 문자를 입력했을 때 */
-            System.out.println("문자를 입력하셨습니다.");
+            System.out.println("문자를 입력하셨습니다.\n");
             enterWinningBonus();
         } catch (Exception e) {                                             /* 번호의 범위가 로또 규칙과 다를 때 */
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()+"\n");
             enterWinningBonus();
         }
         return true;
