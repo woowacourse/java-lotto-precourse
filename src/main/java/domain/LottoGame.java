@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGame {
+
   final int PRICE_PER_GAME = 1000;
+
   public void run() {
     int num = getThePriceOfLotto() / PRICE_PER_GAME;
     System.out.println(num + "개를 구매했습니다.");
@@ -33,7 +35,12 @@ public class LottoGame {
   private int getThePriceOfLotto() {
     System.out.println("구입금액을 입력해 주세요.");
     Scanner scan = new Scanner(System.in);
-    return scan.nextInt();
+    try {
+      return scan.nextInt();
+    } catch (Exception e) {
+      System.out.println("구매 금액은 숫자로 입력해주세요");
+      return getThePriceOfLotto();
+    }
   }
 
   private ArrayList<Lotto> initLottoArrayList(int num) {
@@ -58,29 +65,43 @@ public class LottoGame {
   private WinningLotto getWinLotto() {
     Lotto winner = setWinLotto();
     System.out.println("보너스 볼을 입력해 주세요.");
-    Scanner scan2 = new Scanner(System.in);
-    WinningLotto winLotto = new WinningLotto(winner, scan2.nextInt());
-    return winLotto;
+    try {
+      Scanner scan2 = new Scanner(System.in);
+      WinningLotto winLotto = new WinningLotto(winner, scan2.nextInt());
+      return winLotto;
+    } catch (Exception e) {
+      System.out.println("보너스 볼은 숫자로 입력해 주세요.");
+      return getWinLotto();
+    }
   }
 
   private Lotto setWinLotto() {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    Scanner scan = new Scanner(System.in);
-    int[] intNum = Arrays.asList(scan.next().split(",")).stream().mapToInt(Integer::parseInt)
-        .toArray();
-    List<Integer> win = Arrays.stream(intNum).boxed().collect(Collectors.toList());
-    Lotto winner = new Lotto(win);
-    return winner;
+    try {
+      int[] intNum = Arrays.asList(new Scanner(System.in).next().split(",")).stream()
+          .mapToInt(Integer::parseInt).toArray(); //10줄...
+      List<Integer> win = Arrays.stream(intNum).boxed().collect(Collectors.toList());
+      Lotto winner = new Lotto(win);
+      return winner;
+    } catch (Exception e) {
+      System.out.println("당첨 번호는 숫자로 입력해 주세요.");
+      return setWinLotto();
+    }
   }
 
   private void printRanks(ArrayList<Rank> lottoRanks) {
     Map<Rank, Integer> rankIntegerMap = countRank(lottoRanks);
     System.out.println("당첨 통계\n---------");
-    System.out.println("3개 일치 ("+Rank.FIFTH.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.FIFTH) + "개");
-    System.out.println("4개 일치 ("+Rank.FOURTH.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.FOURTH) + "개");
-    System.out.println("5개 일치 ("+Rank.THIRD.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.THIRD) + "개");
-    System.out.println("5개 일치, 보너스 볼 일치 ("+Rank.SECOND.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.SECOND) + "개");
-    System.out.println("6개 일치 ("+Rank.FIRST.getWinningMoney()+"원)-" + rankIntegerMap.get(Rank.FIRST) + "개");
+    System.out.println(
+        "3개 일치 (" + Rank.FIFTH.getWinningMoney() + "원)-" + rankIntegerMap.get(Rank.FIFTH) + "개");
+    System.out.println(
+        "4개 일치 (" + Rank.FOURTH.getWinningMoney() + "원)-" + rankIntegerMap.get(Rank.FOURTH) + "개");
+    System.out.println(
+        "5개 일치 (" + Rank.THIRD.getWinningMoney() + "원)-" + rankIntegerMap.get(Rank.THIRD) + "개");
+    System.out.println("5개 일치, 보너스 볼 일치 (" + Rank.SECOND.getWinningMoney() + "원)-" + rankIntegerMap
+        .get(Rank.SECOND) + "개");
+    System.out.println(
+        "6개 일치 (" + Rank.FIRST.getWinningMoney() + "원)-" + rankIntegerMap.get(Rank.FIRST) + "개");
   }
 
   private Map<Rank, Integer> countRank(ArrayList<Rank> listOfRank) {
@@ -101,11 +122,12 @@ public class LottoGame {
     rankMap.put(Rank.MISS, 0);
     return rankMap;
   }
-  private void printEarningRate(ArrayList<Rank> rankArrayList, int num){
+
+  private void printEarningRate(ArrayList<Rank> rankArrayList, int num) {
     int sum = 0;
-    for(Rank rank : rankArrayList){
-      sum+=rank.getWinningMoney();
+    for (Rank rank : rankArrayList) {
+      sum += rank.getWinningMoney();
     }
-    System.out.println("총 수익률은 "+ (double)sum/(num*PRICE_PER_GAME)+"입니다.");
+    System.out.println("총 수익률은 " + (double) sum / (num * PRICE_PER_GAME) + "입니다.");
   }
 }
