@@ -29,7 +29,13 @@ public class WinningLotto_Input {
 
     static void bonus_Number_Create() {
         System.out.println(Info.BONUS_BALL_INPUT_PRINT);
-        bonus_Ball = Info.SCAN.nextInt();
+        try {
+            bonus_Ball = Info.SCAN.nextInt();
+            bonus_Ball_Overlap_Check();
+            bonus_Ball_Range_Check();
+        }catch (Exception e){
+            System.out.println(Info.TYPE_ERROR_PRINT);
+        }
     }
 
     static void winningLotto_Object_Create() {
@@ -37,10 +43,24 @@ public class WinningLotto_Input {
         winningLotto = new WinningLotto(new Lotto(change_List), bonus_Ball);
     }
 
+    private static void bonus_Ball_Overlap_Check() {
+        if (overlap_Number_CheckSet.contains(bonus_Ball)) {
+            System.out.println(Info.OVERLAP_ERROR_PRINT);
+            bonus_Number_Create();
+        }
+    }
+
+    private static void bonus_Ball_Range_Check() {
+        if ((bonus_Ball > Info.LOTTO_NUMBER_MAX_VALUE) || (bonus_Ball < Info.LOTTO_NUMBER_MIN_VALUE)) {
+            System.out.println(Info.RANGE_ERROR_PRINT);
+            bonus_Number_Create();
+        }
+    }
+
     private static void last_Week_Winning_NumberRange_Check(int i) {
         if ((Integer.parseInt(number_Input[i]) > Info.LOTTO_NUMBER_MAX_VALUE) ||
                 (Integer.parseInt(number_Input[i]) < Info.LOTTO_NUMBER_MIN_VALUE)) {
-            System.out.println(Info.WINNING_LOTTO_RANGE_ERROR_PRINT);
+            System.out.println(Info.RANGE_ERROR_PRINT);
             RandomNumberCreate.set_Number_Delete(overlap_Number_CheckSet);
             last_Week_Winning_Number_Create();
         }
@@ -48,7 +68,7 @@ public class WinningLotto_Input {
 
     private static void last_Week_Winning_NumberType_Check(int i) {
         if (!(Pattern.matches(Info.NUMBER_PATTERN, number_Input[i]))) {
-            System.out.println(Info.WINNING_LOTTO_TYPE_ERROR_PRINT);
+            System.out.println(Info.TYPE_ERROR_PRINT);
             RandomNumberCreate.set_Number_Delete(overlap_Number_CheckSet);
             last_Week_Winning_Number_Create();
         }
@@ -63,7 +83,7 @@ public class WinningLotto_Input {
 
     private static void last_Week_Winning_Number_Overlap_Check() {
         if (overlap_Number_CheckSet.size() != Info.LOTTO_NUMBER_MAX_LENGTH) {
-            System.out.println(Info.WINNING_LOTTO_OVERLAP_ERROR_PRINT);
+            System.out.println(Info.OVERLAP_ERROR_PRINT);
             RandomNumberCreate.set_Number_Delete(overlap_Number_CheckSet);
             last_Week_Winning_Number_Create();
         }

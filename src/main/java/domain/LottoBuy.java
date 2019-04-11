@@ -14,7 +14,7 @@ public class LottoBuy {
             lotto_money = Info.SCAN.nextInt();
             Info.SCAN.nextLine();
         } catch (Exception e) {
-            System.out.println(Info.MONEY_TYPE_ERROR_PRINT);
+            System.out.println(Info.TYPE_ERROR_PRINT);
             System.exit(Info.ZERO);
         }
         lotto_Money_ValuesCheck();
