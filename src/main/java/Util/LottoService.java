@@ -11,9 +11,11 @@
 package Util;
 
 import domain.Lotto;
+import domain.Rank;
 import domain.WinningLotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 사용자의 로또 서비스를 담당하는 객체
@@ -44,6 +46,18 @@ public class LottoService {
         try {
             return LottoMaker.getWinningLotto(lotto, bonusNumber);
         } catch (RuntimeException exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
+
+    public static List<Rank> getMatchOfLotto(WinningLotto winningLotto,
+                                             List<Lotto> userLottos) {
+        try {
+            return userLottos.stream()
+                    .map(lotto -> winningLotto.match(lotto))
+                    .collect(Collectors.toList());
+        } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             return null;
         }

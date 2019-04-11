@@ -12,7 +12,7 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
-    public Rank match(Lotto userLotto) {
+    public Rank match(Lotto userLotto) throws IllegalArgumentException {
         int countOfMatch = lotto.getCountOfMatch(userLotto);
         boolean matchBonus = userLotto.isContainNumber(bonusNo);
         return Rank.valueOf(countOfMatch, matchBonus);
