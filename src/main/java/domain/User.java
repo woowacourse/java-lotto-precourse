@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class User {
     private ArrayList<Lotto> lottoList;
@@ -14,6 +11,21 @@ public class User {
     User(){
         scanner = new Scanner(System.in);
         lottoList = new ArrayList<>();
+    }
+
+    public List<String> inputNumbers(){
+        String input;
+        input = scanner.nextLine();
+        return tokenize(input);
+    }
+
+    public List<String> tokenize(String input){
+        List<String> winningNumbers = new ArrayList<>();
+        StringTokenizer token = new StringTokenizer(input, ",");
+        while(token.hasMoreTokens()){
+            winningNumbers.add(token.nextToken());
+        }
+        return winningNumbers;
     }
 
     public String inputMoney(){
@@ -40,10 +52,10 @@ public class User {
         for(int i=0; i<lottoCnt; i++){
             lottoList.get(i).printLotto();
         }
+        System.out.println();
     }
 
     public Lotto makeLotto(){
-        // 초기화가 되나?
         boolean[] checkNumber = new boolean[46];
         ArrayList<Integer> numbers = new ArrayList<>();
         Lotto lotto;
