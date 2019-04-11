@@ -22,5 +22,7 @@ public class Main {
         WinningLotto winningLotto = new WinningLotto(lotto, inputBonusNumber);
         LottoResult lottoResult = new LottoResult(winningLotto, userLottos);
         OutputView.printResult(lottoResult);
+        double profits = money.getProfits(lottoResult);
+        OutputView.printProfits(profits);
     }
 }
