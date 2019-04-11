@@ -18,7 +18,7 @@ public class Game {
 		}
 	}
 
-	public String getLottos() {
+	public String getLotto() {
 		StringBuilder sb = new StringBuilder();
 		int countOfLotto = gameUser.countOfLottos();
 

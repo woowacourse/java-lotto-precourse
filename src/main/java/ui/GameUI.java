@@ -1,14 +1,22 @@
 package ui;
 
+import domain.Game;
 import validation.MoneyValidation;
 import validation.Validation;
 
 import java.util.Scanner;
 
 public class GameUI {
+	private Game game;
+
+	public GameUI() {
+		game = new Game();
+	}
+
 	public void run() {
 		try(Scanner sc = new Scanner(System.in)) {
 			int money = askMoney(sc);
+			game.setMoney(money);
 		}
 	}
 
