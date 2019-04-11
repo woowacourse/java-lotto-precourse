@@ -85,4 +85,8 @@ public class mainClass {
 		}
 		return lotto;
 	}
+	
+	public static void printLottoNumber(List<Lotto> lotto) {
+		
+	}
 }

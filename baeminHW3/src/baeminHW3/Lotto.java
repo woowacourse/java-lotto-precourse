@@ -20,4 +20,12 @@ public class Lotto {
     public int isEqualNumber(Integer a, Integer b) {
     	return a.intValue() == b.intValue() ? 1 : 0 ;
     }
+    
+    public void printNumber() {
+    	System.out.print('[');
+    	for(int i=0; i<this.numbers.size(); i++) {
+    		System.out.print(this.numbers.get(i) + ',');
+    	}
+    	System.out.println("\b]");
+    }
 }
