@@ -12,5 +12,11 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public void print() {
+    	System.out.println(numbers);
+    }
+    
+    public List<Integer> getNumbers() {
+		return numbers;
+    }
 }

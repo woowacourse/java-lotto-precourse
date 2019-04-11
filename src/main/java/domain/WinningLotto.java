@@ -6,6 +6,7 @@ package domain;
 public class WinningLotto {
     private final Lotto lotto;
     private final int bonusNo;
+    
 
     public WinningLotto(Lotto lotto, int bonusNo) {
         this.lotto = lotto;
@@ -13,7 +14,18 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+    	int countOfMatch = 0;
+    	boolean matchBonus = false;
+    	for (int i = 0; i < 6; i++) {
+    		int number = userLotto.getNumbers().get(i);
+    		if (lotto.getNumbers().contains(number)) {
+    			countOfMatch++;
+			}
+		}
+    	if (userLotto.getNumbers().contains(bonusNo)) {
+    		matchBonus = true;
+		}
+    	
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
 }
