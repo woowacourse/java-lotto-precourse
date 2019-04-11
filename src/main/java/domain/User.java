@@ -3,8 +3,10 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class User {
 	static private Scanner scanner = new Scanner(System.in);
 	private static ArrayList<Lotto> userLottoList = new ArrayList<Lotto>();
 	private static WinningLotto winningLotto;
+	private static Map<Rank, Integer> compareResultMap = new LinkedHashMap<>();
 	private static final int LOTTO_NUMBER_COUNT = 6;
 	private static final int MAX_LOTTO_NUMBER = 45;
 	private static final int PRICE_OF_ONE_LOTTO = 1000;
@@ -89,7 +92,7 @@ public class User {
 		}
 		return set;
 	}
-	
+
 	public static int inputBonusNumber(List<Integer> lastweekNumberList) {
 		String userInput = "";
 		do {
@@ -101,7 +104,26 @@ public class User {
 		return inputMoney;
 	}
 
+	public static void initData(Map<Rank, Integer> map) {
+		map.put(Rank.FIFTH, 0);
+		map.put(Rank.FOURTH, 0);
+		map.put(Rank.THIRD, 0);
+		map.put(Rank.SECOND, 0);
+		map.put(Rank.FIRST, 0);
+		map.put(Rank.MISS, 0);
+	}
+
 	public static int compareWithWinningLotto() {
+		int sumOfWinningMoney = 0;
+		initData(compareResultMap);
+		for (int i = 0; i < userLottoList.size(); i++) {
+			Rank rank = winningLotto.match(userLottoList.get(i));
+			Integer value = compareResultMap.get(rank);
+			sumOfWinningMoney += rank.getWinningMoney();
+			compareResultMap.put(rank, value + 1);
+		}
+		compareResultMap.remove(Rank.MISS);
+		return sumOfWinningMoney;
 	}
 
 	public static void printTotalResult(int gameMoney) {
