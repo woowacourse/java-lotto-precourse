@@ -17,12 +17,13 @@ public class Console {
 
     public int readMoney() throws IOException {
         System.out.println(START_MESSAGE);
-        return Integer.parseInt(bufferedReader.readLine());
+        String readMassage = bufferedReader.readLine().replaceAll(REGEX_FOR_MONEY,"");
+        return Integer.parseInt(readMassage);
     }
 
     public int[] readWinningNumbers() throws IOException {
         System.out.println(WINNING_NUMBERS_MESSAGE);
-        String readMassage = bufferedReader.readLine().replaceAll(REGEX,"");
+        String readMassage = bufferedReader.readLine().replaceAll(REGEX_FOR_WINNING_NUMBER,"");
         return Arrays.stream(readMassage.split(SEPARATOR))
                 .mapToInt(Integer::parseInt)
                 .toArray();
