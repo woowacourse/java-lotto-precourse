@@ -10,8 +10,15 @@
  */
 package domain;
 
-public class Main {
-    public static void main(String[] args){
+import domain.impl.UserInterfaceImpl;
+import domain.impl.ValidInterfaceImpl;
+import domain.interfaces.UserInterface;
 
+public class Main {
+    public static void main(String[] args) {
+        UserInterface userInterface = new UserInterfaceImpl(new ValidInterfaceImpl());
+        Game game = new Game(userInterface);
+
+        game.run();
     }
 }

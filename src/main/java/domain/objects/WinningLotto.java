@@ -1,7 +1,7 @@
 /*
  * WinningLotto Class
  *
- * @version 1.1
+ * @version 1.3
  *
  * @date 2019-04-09
  *
@@ -24,7 +24,9 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countOfMatch = userLotto.countMatch(lotto);
+        boolean matchBonus = userLotto.contains(bonusNo);
+
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
 }

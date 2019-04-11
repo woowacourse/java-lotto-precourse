@@ -1,7 +1,7 @@
 /*
  * Lotto Class
  *
- * @version 1.3
+ * @version 1.5
  *
  * @date 2019-04-09
  *
@@ -27,12 +27,22 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public boolean contains(int num){
+    public boolean contains(int num) {
         return numbers.contains(num);
     }
 
+    public int countMatch(Lotto otherLot) {
+        int count = 0;
+
+        for (int innerNum : numbers) {
+            count += otherLot.contains(innerNum) ? 1 : 0;
+        }
+        return count;
+    }
+
+
     @Override
     public String toString() {
-        return "[" +numbers.stream().map(s->String.valueOf(s)).collect(Collectors.joining(", ")) + "]";
+        return "[" + numbers.stream().map(s -> String.valueOf(s)).collect(Collectors.joining(", ")) + "]";
     }
 }

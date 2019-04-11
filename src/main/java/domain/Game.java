@@ -1,7 +1,7 @@
 /*
  * Game Class
  *
- * @version 1.1
+ * @version 1.2
  *
  * @date 2019-04-11
  *
@@ -13,6 +13,7 @@ package domain;
 import domain.interfaces.UserInterface;
 import domain.objects.Lotto;
 import domain.objects.LottoFactory;
+import domain.objects.LottoResult;
 import domain.objects.WinningLotto;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Game {
     private UserInterface ui;
     private List<Lotto> lottos;
     private WinningLotto winLotto;
+    private LottoResult lottoResult;
 
     public Game(UserInterface ui) {
         this.ui = ui;
@@ -32,6 +34,8 @@ public class Game {
         lottos = createLottos(purchasePrice / Lotto.UNIT_PRICE);
         ui.printBoughtLottos(lottos);
         winLotto = createWinLotto();
+        lottoResult = createLottoResult(winLotto, lottos);
+        ui.printLottoStatistic(lottoResult);
     }
 
     private WinningLotto createWinLotto() {
@@ -39,6 +43,14 @@ public class Game {
         int bonusNum = ui.inputBonusNum(preWinLotto);
 
         return new WinningLotto(preWinLotto, bonusNum);
+    }
+
+    private LottoResult createLottoResult(WinningLotto winLotto, List<Lotto> lottos) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : lottos) {
+            lottoResult.put(winLotto.match(lotto));
+        }
+        return lottoResult;
     }
 
     private List<Lotto> createLottos(int quantity) {

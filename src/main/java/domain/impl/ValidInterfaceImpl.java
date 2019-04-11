@@ -10,9 +10,9 @@
  */
 package domain.impl;
 
+import domain.interfaces.ValidInterface;
 import domain.objects.Lotto;
 import domain.objects.WinningLotto;
-import domain.interfaces.ValidInterface;
 
 import java.util.Arrays;
 import java.util.HashSet;

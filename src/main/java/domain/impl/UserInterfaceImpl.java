@@ -1,7 +1,7 @@
 /*
  * UserInterfaceImpl Class
  *
- * @version 1.4
+ * @version 1.5
  *
  * @date 2019-04-09
  *
@@ -10,9 +10,11 @@
  */
 package domain.impl;
 
-import domain.objects.Lotto;
 import domain.interfaces.UserInterface;
 import domain.interfaces.ValidInterface;
+import domain.objects.Lotto;
+import domain.objects.LottoResult;
+import domain.objects.Rank;
 import domain.utility.Utils;
 
 import java.util.List;
@@ -104,5 +106,27 @@ public class UserInterfaceImpl implements UserInterface {
     @Override
     public void printLottoNums(Lotto lotto) {
         System.out.println(lotto.toString());
+    }
+
+    @Override
+    public void printLottoStatistic(LottoResult lottoResult) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (Rank rank : Rank.values()) {
+            printEachRankResult(rank, lottoResult.getRankCount(rank));
+        }
+        System.out.println(String.format("총 수익률은 %.3f입니다.", lottoResult.getYieldRate()));
+    }
+
+    @Override
+    public void printEachRankResult(Rank rank, int count) {
+
+        String string = String.format("%d개 일치%s(%d원)-%d개",
+                rank.getCountOfMatch(),
+                rank.equals(Rank.SECOND) ? ", 보너스 볼 일치" : "",
+                rank.getWinningMoney(),
+                count);
+
+        System.out.println(string);
     }
 }
