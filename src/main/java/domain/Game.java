@@ -16,6 +16,8 @@ public class Game {
         createLottoObjectArray();
         createLottoInstance();
         repeatOutputLottoNumbers();
+        inputLastWeekWinningLotto();
+        inputBonusBallLotto();
     }
 
     private void buyLotto() {
@@ -164,5 +166,10 @@ public class Game {
     private void inputLastWeekWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         inputLottoSelectSize(6);
+    }
+
+    private void inputBonusBallLotto() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        inputLottoSelectSize(1);
     }
 }
