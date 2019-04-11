@@ -12,8 +12,8 @@ class UserLotto {
         while(true){
             System.out.println("구입 금액을 입력해 주세요.");
             String input = scanner.nextLine();
-            if(InputPriceException.getInstance().hasBlankException(input) || InputPriceException.getInstance().isNumberFormatException(input)
-                || InputPriceException.getInstance().isMinusNumberException(input) || InputPriceException.getInstance().hasNumberOfChiperException(input)){
+            if(InputException.getInstance().hasBlankException(input) || InputException.getInstance().isNumberFormatException(input)
+                || InputException.getInstance().isMinusNumberException(input) || InputException.getInstance().hasNumberOfChiperException(input)){
                 continue;
             }
             return Integer.parseInt(input);

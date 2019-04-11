@@ -14,18 +14,32 @@ public class ProcessWinningLotto {
     }
 
     private Lotto winningLottoNumber(Scanner scanner) {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
         Lotto winningNumber = new Lotto(new ArrayList<>());
-        String[] winningLottoArray = scanner.nextLine().split(",");
-        winningNumber.assignWinningLotto(winningLottoArray);
-
-        return winningNumber;
+        while(true){
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            String inputNumber = scanner.nextLine();
+            String[] winningLottoArray = inputNumber.split(",");
+            if(InputException.getInstance().blankWinningLotto(winningLottoArray) || InputException.getInstance().checkSizeWinningNumber(winningLottoArray)
+                    || InputException.getInstance().assignOverlapNumber(winningLottoArray) || InputException.getInstance().checkNonNumber(inputNumber)
+                    || InputException.getInstance().checkRangeNumber(winningLottoArray)){
+                continue;
+            }
+            winningNumber.assignWinningLotto(winningLottoArray);
+            return winningNumber;
+        }
     }
 
     private int bonusNumber(Scanner scanner) {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        while(true){
+            System.out.println("보너스 볼을 입력해 주세요.");
+            String bonusNumber = scanner.nextLine();
+            if(InputException.getInstance().hasBlankException(bonusNumber) || InputException.getInstance().isNumberFormatException(bonusNumber)
+                    || InputException.getInstance().isMinusNumberException(bonusNumber) || InputException.getInstance().hasCheckLottoNumberException(bonusNumber)
+                    || InputException.getInstance().overlapBonusNumber(bonusNumber)){
+                continue;
+            }
+            return Integer.parseInt(bonusNumber);
+        }
     }
 
     public void statsWinningLotto(List<Lotto> purchaseLottoList, Scanner scanner, int purchasePrice) {

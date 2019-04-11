@@ -9,7 +9,6 @@ public class Lotto {
 
     private static final int LOTTO_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUM = 45;
-    private static final int LOTTO_SIZE = 6;
 
     private final List<Integer> numbers;
 
