@@ -18,8 +18,8 @@ class ProcessWinningLotto {
         scanner.nextLine();
 
         Lotto winningNumber = new Lotto(new ArrayList<>());
-        String[] result = scanner.nextLine().split(",");
-        winningNumber.assignWinningLotto(result);
+        String[] winningLottoArray = scanner.nextLine().split(",");
+        winningNumber.assignWinningLotto(winningLottoArray);
 
         return winningNumber;
     }
