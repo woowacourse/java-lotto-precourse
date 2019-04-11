@@ -36,6 +36,15 @@ public class BonusNoValidation implements Validation<Integer> {
 		return true;
 	}
 
+	private boolean checkContains() {
+		if (numbers.contains(bonusNo)) {
+			System.out.println("당첨번호에 존재하는 숫자입니다.");
+			return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public Integer convert(String value) {
 		return null;
