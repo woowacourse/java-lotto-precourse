@@ -14,6 +14,8 @@ public class Main {
 	public static int[] winningNumbers = new int[46];
 	public static int bonusWinningNumber = 0;
 	
+	private int[] winningCount = new int[6];
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println(AMOUNT_QUESTION);
@@ -36,6 +38,8 @@ public class Main {
 		System.out.println(BONUS_NUMBER_QUESTION);
 		bonusWinningNumber = Integer.parseInt(in.readLine());
 		
+		Rank r = Rank.valueOf(3, true);
+		System.out.println();
 	}
 	
 	private static void setWinningNumber(String winningNumbersInput) {
