@@ -131,4 +131,10 @@ public class LottoMachine {
         printReInputBonusNum(satisfier);
         return satisfier;
     }
+
+    public void printReInputBonusNum(boolean satisfier) {
+        if (!satisfier) {
+            System.out.println("로또 규칙에 맞게 보너스 번호를 다시 입력해주세요.");
+        }
+    }
 }
