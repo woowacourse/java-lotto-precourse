@@ -28,7 +28,7 @@ public class User {
 
 	public boolean buyLottos(LottoMachine lottoMachine) {
 		try {
-			int money = insertMoney();
+			long money = insertMoney();
 			
 			this.lottos = lottoMachine.cellLottos(money);
 			System.out.println(lottos.size() + PURCHASE_LOTTO_TAIL_MESSAGE);
@@ -39,11 +39,11 @@ public class User {
 		return true;
 	}
 
-	private int insertMoney() throws Exception {
+	private long insertMoney() throws Exception {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println(REQUEST_MONEY);
-		return scanner.nextInt();
+		return scanner.nextLong();
 	}
 
 	public void printLottos() {

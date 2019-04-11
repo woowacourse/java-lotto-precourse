@@ -23,16 +23,16 @@ public class Result {
 	private final String WINNING_RESULT = "\n당첨 통계\n---------";
 	private final String TOTAL_YIELD = "총 수익률은 %.1f입니다.";
 
-	private int totalCount;
-	private Map<Rank, Integer> count = new TreeMap<Rank, Integer>(Comparator.reverseOrder());
+	public long totalCount;
+	public Map<Rank, Long> count = new TreeMap<Rank, Long>(Comparator.reverseOrder());
 
 	public Result() {
-		totalCount = 0;
-		count.put(Rank.FIRST, 0);
-		count.put(Rank.SECOND, 0);
-		count.put(Rank.THIRD, 0);
-		count.put(Rank.FOURTH, 0);
-		count.put(Rank.FIFTH, 0);
+		totalCount = 0L;
+		count.put(Rank.FIRST, 0L);
+		count.put(Rank.SECOND, 0L);
+		count.put(Rank.THIRD, 0L);
+		count.put(Rank.FOURTH, 0L);
+		count.put(Rank.FIFTH, 0L);
 	}
 
 	public void add(Rank rank) {
@@ -43,18 +43,14 @@ public class Result {
 	}
 
 	public double calculateYield() {
-		return (double) calculateTotalMoney() / (double) (totalCount * LottoConstant.LOTTO_PRICE);
+		double yield = 0;
+		for (Rank rank : count.keySet()) {
+			yield += rank.getWinningMoney() * (count.get(rank) / (double) totalCount) 
+					/ LottoConstant.LOTTO_PRICE;
+		}
+		return yield;
 	}
 
-	private long calculateTotalMoney() {
-		long money = 0;
-		
-		for (Rank rank : count.keySet()) {
-			money += count.get(rank) * rank.getWinningMoney();
-		}
-		return money;
-	}
-	
 	public void print() {
 		System.out.println(WINNING_RESULT);
 		for (Rank rank : count.keySet()) {

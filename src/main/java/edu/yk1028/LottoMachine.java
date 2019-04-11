@@ -25,21 +25,21 @@ import edu.yk1028.Exception.MoneyLackException;
  *
  */
 public class LottoMachine {
-	public List<Lotto> cellLottos(int money) throws Exception {
+	public List<Lotto> cellLottos(long money) throws Exception {
 		if (money < LottoConstant.MIN_MONEY) {
 			throw new MoneyLackException();
 		}
 		return generateLottos(maximumNumberOfLotto(money));
 	}
 
-	private int maximumNumberOfLotto(int money) {
+	private long maximumNumberOfLotto(long money) {
 		return money / LottoConstant.LOTTO_PRICE;
 	}
 
-	private List<Lotto> generateLottos(int count) {
+	private List<Lotto> generateLottos(long count) {
 		List<Lotto> lottoList = new ArrayList<Lotto>();
 
-		for (int i = 0; i < count; i++) {
+		for (long i = 0; i < count; i++) {
 			lottoList.add(new Lotto(generateLottoNumbers()));
 		}
 		return lottoList;
