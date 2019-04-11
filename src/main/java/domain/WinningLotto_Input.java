@@ -33,7 +33,7 @@ public class WinningLotto_Input {
             bonus_Ball = Info.SCAN.nextInt();
             bonus_Ball_Overlap_Check();
             bonus_Ball_Range_Check();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(Info.TYPE_ERROR_PRINT);
         }
         return bonus_Ball;
