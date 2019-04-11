@@ -2,6 +2,8 @@ package domain;
 
 import validation.MoneyValidation;
 
+import java.util.List;
+
 public class Game {
 	GameUser gameUser;
 	WinningLotto winningLotto;
@@ -28,5 +30,10 @@ public class Game {
 		}
 
 		return sb.toString();
+	}
+
+	public void setWinningLotto(List<Integer> numbers, int bonusNo) {
+		Lotto lotto = new Lotto(numbers);
+		winningLotto = new WinningLotto(lotto, bonusNo);
 	}
 }
