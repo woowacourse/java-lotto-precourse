@@ -1,7 +1,17 @@
+/*
+ * 클래스 이름: ProcessWinningLotto.java
+ * 버전 정보: 1.0.0
+ * 날짜: 2019/04/11
+ * Copyright 2019 Inkwon Lee
+ */
 package domain;
 
 import java.util.*;
 
+/*
+ * 당첨번호가 몇개 인지 결과를 보여주는 클래스
+ * hashMap 으로 당첨결과 구현
+ */
 public class ProcessWinningLotto {
 
     private Map<Integer, Integer> matchMap;
@@ -15,13 +25,13 @@ public class ProcessWinningLotto {
 
     private Lotto winningLottoNumber(Scanner scanner) {
         Lotto winningNumber = new Lotto(new ArrayList<>());
-        while(true){
+        while (true) {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             String inputNumber = scanner.nextLine();
             String[] winningLottoArray = inputNumber.split(",");
-            if(InputException.getInstance().blankWinningLotto(winningLottoArray) || InputException.getInstance().checkSizeWinningNumber(winningLottoArray)
+            if (InputException.getInstance().blankWinningLotto(winningLottoArray) || InputException.getInstance().checkSizeWinningNumber(winningLottoArray)
                     || InputException.getInstance().assignOverlapNumber(winningLottoArray) || InputException.getInstance().checkNonNumber(inputNumber)
-                    || InputException.getInstance().checkRangeNumber(winningLottoArray)){
+                    || InputException.getInstance().checkRangeNumber(winningLottoArray)) {
                 continue;
             }
             winningNumber.assignWinningLotto(winningLottoArray);
@@ -30,12 +40,12 @@ public class ProcessWinningLotto {
     }
 
     private int bonusNumber(Scanner scanner) {
-        while(true){
+        while (true) {
             System.out.println("보너스 볼을 입력해 주세요.");
             String bonusNumber = scanner.nextLine();
-            if(InputException.getInstance().hasBlankException(bonusNumber) || InputException.getInstance().isNumberFormatException(bonusNumber)
+            if (InputException.getInstance().hasBlankException(bonusNumber) || InputException.getInstance().isNumberFormatException(bonusNumber)
                     || InputException.getInstance().isMinusNumberException(bonusNumber) || InputException.getInstance().hasCheckLottoNumberException(bonusNumber)
-                    || InputException.getInstance().overlapBonusNumber(bonusNumber)){
+                    || InputException.getInstance().overlapBonusNumber(bonusNumber)) {
                 continue;
             }
             return Integer.parseInt(bonusNumber);

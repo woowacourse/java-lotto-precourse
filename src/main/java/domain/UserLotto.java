@@ -1,19 +1,26 @@
+/*
+ * 클래스 이름: UserLotto.java
+ * 버전 정보: 1.0.0
+ * 날짜: 2019/04/11
+ * Copyright 2019 Inkwon Lee
+ */
 package domain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class UserLotto {
+
+public class UserLotto {
 
     private static final int LOTTO_PRICE = 1000;
 
     public int inputPrice(Scanner scanner) {
-        while(true){
+        while (true) {
             System.out.println("구입 금액을 입력해 주세요.");
             String input = scanner.nextLine();
-            if(InputException.getInstance().hasBlankException(input) || InputException.getInstance().isNumberFormatException(input)
-                || InputException.getInstance().isMinusNumberException(input) || InputException.getInstance().hasNumberOfChiperException(input)){
+            if (InputException.getInstance().hasBlankException(input) || InputException.getInstance().isNumberFormatException(input)
+                    || InputException.getInstance().isMinusNumberException(input) || InputException.getInstance().hasNumberOfChiperException(input)) {
                 continue;
             }
             return Integer.parseInt(input);

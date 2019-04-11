@@ -1,5 +1,14 @@
+/*
+ * 클래스 이름: ErrorMessage.java
+ * 버전 정보: 1.0.0
+ * 날짜: 2019/04/11
+ * Copyright 2019 Inkwon Lee
+ */
 package domain;
 
+/*
+ * 에러 메세지를 출력해주는 클래스
+ */
 public enum ErrorMessage {
 
     INPUT_MISS_MATCH_EXCEPTION_MESSAGE("잘못 입력하셨습니다. 양의 정수만 입력해 주세요."),

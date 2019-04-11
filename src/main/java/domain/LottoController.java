@@ -1,3 +1,9 @@
+/*
+ * 클래스 이름: LottoController.java
+ * 버전 정보: 1.0.0
+ * 날짜: 2019/04/11
+ * Copyright 2019 Inkwon Lee
+ */
 package domain;
 
 import java.util.*;
