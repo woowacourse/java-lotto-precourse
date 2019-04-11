@@ -22,3 +22,6 @@
 * use appropriate public/protected/private/package declaration
 * method arguments < 4
 
+## 테스트 항목
+1. 로또 생성 시 random generator가 올바르게 동작하는지 체크
+2. 당첨금과 수익률 계산이 올바른지 체크
