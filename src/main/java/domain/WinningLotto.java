@@ -16,4 +16,16 @@ public class WinningLotto {
         // TODO 로직 구현
         return null;
     }
+
+    private int checkMatchLottoNumber(int number) {
+        if (lotto.getNumbers().contains(number)) {
+            return 1;
+        }
+
+        if (bonusNo == number) {
+            return 1;
+        }
+
+        return 0;
+    }
 }
