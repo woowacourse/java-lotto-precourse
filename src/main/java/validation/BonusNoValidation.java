@@ -44,7 +44,7 @@ public class BonusNoValidation implements Validation<Integer> {
 
 	private boolean checkContains() {
 		if (numbers.contains(bonusNo)) {
-			System.out.println("당첨번호에 존재하는 숫자입니다.");
+			System.out.println("당첨번호에 존재하는 숫자입니다.\n");
 			return false;
 		}
 

@@ -25,7 +25,7 @@ public class LottoValidation implements Validation<List<Integer>> {
 
 	private boolean checkList(String value) {
 		if (!value.matches(REGULAR_EXPRESSION)) {
-			System.out.println("입력 형식을 맞춰주세요.");
+			System.out.println("입력 형식을 맞춰주세요.\n");
 			return false;
 		}
 
@@ -34,7 +34,7 @@ public class LottoValidation implements Validation<List<Integer>> {
 
 	private boolean checkCountNumbers() {
 		if (numbers.size() != NUMBER_CNT) {
-			System.out.println("6개 숫자를 입력해야 합니다.");
+			System.out.println("6개 숫자를 입력해야 합니다.\n");
 			return false;
 		}
 
@@ -47,7 +47,7 @@ public class LottoValidation implements Validation<List<Integer>> {
 				.count();
 
 		if (numbersCount != numbers.size()) {
-			System.out.println("중복된 숫자가 존재합니다.");
+			System.out.println("중복된 숫자가 존재합니다.\n");
 			return false;
 		}
 
@@ -60,7 +60,7 @@ public class LottoValidation implements Validation<List<Integer>> {
 				.count();
 
 		if (numbersCount != NUMBER_CNT) {
-			System.out.println("숫자의 범위는 최소 1, 최대 45 입니다.");
+			System.out.println("숫자의 범위는 최소 1, 최대 45 입니다.\n");
 			return false;
 		}
 

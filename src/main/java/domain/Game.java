@@ -29,7 +29,8 @@ public class Game {
 		StringBuilder sb = new StringBuilder();
 		int countOfLotto = gameUser.countOfLottos();
 
-		sb.append(String.format("%d개를 구매했습니다.\n", countOfLotto));
+		sb.append("\n")
+				.append(String.format("%d개를 구매했습니다.\n", countOfLotto));
 		for (int i = 0; i < countOfLotto; i++) {
 			sb.append(gameUser.getLotto(i).toString()).append("\n");
 		}
@@ -46,7 +47,7 @@ public class Game {
 		StringBuilder sb = new StringBuilder();
 		Map<Rank, Integer> rankCount = calRankCount(initRankCount());
 
-		sb.append("당첨 통계").append("\n")
+		sb.append("\n당첨 통계").append("\n")
 				.append("---------").append("\n")
 				.append(getMatchResult(rankCount))
 				.append(String.format("총 수익률은 %.3f 입니다.", getYield(rankCount)))
