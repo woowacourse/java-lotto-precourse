@@ -7,6 +7,7 @@ public class MainApp {
     static final int LOTTO_PRICE = 1000;
     static final String MESSAGE_WRONG_MONEY_TO_BUY_LOTTO = "잘못된 입력입니다. 1000으로 나누어 떨어지는 양의 정수를 입력해 주세요.";
     static final String MESSAGE_WRONG_LOTTO_NUMBERS = "잘못된 입력입니다. 1~45 사이의 서로 다른 정수 6개를 콤마(,)로 구분하여 입력해 주세요. (e.g., \"1,2,3,4,5,6\")";
+    static final String MESSAGE_WRONG_LOTTO_NUMBER = "잘못된 입력입니다. 1~45 사이의 정수 1개를 입력해 주세요.";
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;
     static final int NUMBER_OF_KINDS_OF_RANKS = 6;                                 // Rank 의 종류. 1등 ~ 5등 + 꽝
@@ -14,7 +15,7 @@ public class MainApp {
 
 
     public static void main(String[] args) {
-        getWinningNumbers();
+
     }
 
 
@@ -46,10 +47,24 @@ public class MainApp {
     public static int getMoneyToBuyLotto() {
         int money;
 
+        System.out.println("구입금액을 입력해 주세요.");
         while (!isValidMoneyToBuyLotto(money = getIntegerFromUser())) {
             System.out.println(MESSAGE_WRONG_MONEY_TO_BUY_LOTTO);
         }
         return money;
+    }
+
+    /**
+     * 사용자에게 보너스 번호를 입력받는 메소드
+     */
+    public static int getBonusNumber() {
+        int bonusNumber;
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        while (!isValidLottoNumber(bonusNumber = getIntegerFromUser())) {
+            System.out.println(MESSAGE_WRONG_LOTTO_NUMBER);
+        }
+        return bonusNumber;
     }
 
     /**
@@ -87,6 +102,7 @@ public class MainApp {
     public static void printLottos(List<Lotto> lottoList) {
         Iterator<Lotto> it = lottoList.iterator();
 
+        System.out.println(lottoList.size() + "개를 구매했습니다.");
         while(it.hasNext()) {
             System.out.println(it.next());
         }
@@ -130,6 +146,7 @@ public class MainApp {
     public static List<Integer> getWinningNumbers() {
         List<Integer> winningNumbers;
 
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         while (!areValidLottoNumbers(winningNumbers = getNumbersFromUser())) {
             System.out.println(MESSAGE_WRONG_LOTTO_NUMBERS);
         }
