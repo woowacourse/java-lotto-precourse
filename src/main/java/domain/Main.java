@@ -49,6 +49,11 @@ public class Main {
         }
     }
 
+    private Lotto buyLotto() {
+        shuffleNumSeq();
+        return new Lotto(numSeq.subList(0, 5));
+    }
+
 
     public static void main(String[] args) {
 
