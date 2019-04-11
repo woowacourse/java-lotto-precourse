@@ -15,6 +15,9 @@ public class LottoGameController {
 
         lottoGameInputView.askBuyingMoney();
         int buyingMoney = scanner.nextInt();
+        LottoGenerator lottoGenerator = new LottoGenerator(buyingMoney);
+        lottoGameOutputView.printBuyingLottosCount(lottoGenerator);
+        lottoGameOutputView.printGeneratedLottos(lottoGenerator);
 
         lottoGameInputView.askWinnningLottoNumbers();
 
