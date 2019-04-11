@@ -17,13 +17,13 @@ public class Console {
 
     public int readMoney() throws IOException {
         System.out.println(START_MESSAGE);
-        String readMassage = bufferedReader.readLine().replaceAll(REGEX_FOR_MONEY,"");
+        String readMassage = removeLeavingInt(bufferedReader.readLine());
         return Integer.parseInt(readMassage);
     }
 
     public int[] readWinningNumbers() throws IOException {
         System.out.println(WINNING_NUMBERS_MESSAGE);
-        String readMassage = bufferedReader.readLine().replaceAll(REGEX_FOR_WINNING_NUMBER,"");
+        String readMassage = bufferedReader.readLine().replaceAll(REGEX_FOR_WINNING_NUMBER, "");
         return Arrays.stream(readMassage.split(SEPARATOR))
                 .mapToInt(Integer::parseInt)
                 .toArray();
@@ -31,7 +31,11 @@ public class Console {
 
     public int readBonusNumber() throws IOException {
         System.out.println(BONUS_NUMBERS_MESSAGE);
-        return Integer.parseInt(bufferedReader.readLine());
+        return Integer.parseInt(removeLeavingInt(bufferedReader.readLine()));
+    }
+
+    private String removeLeavingInt(String message) {
+        return message.replaceAll(REGEX_FOR_INT, "");
     }
 
     public void writeLottos(List<Lotto> lottos) {

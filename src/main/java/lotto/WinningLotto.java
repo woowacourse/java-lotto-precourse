@@ -1,6 +1,7 @@
 package lotto;
 
 import static constants.LottoConstants.BONUS_NUMBER_ERROR;
+import static lotto.Lotto.checkRange;
 
 /**
  * 당첨 번호를 담당하는 객체
@@ -32,6 +33,7 @@ public class WinningLotto {
     }
 
     private void checkBonusNumber(Lotto lotto, int bonusNo) {
+        checkRange(bonusNo);
         if (lotto.getNumbers().contains(bonusNo)) {
             throw new IllegalArgumentException(BONUS_NUMBER_ERROR);
         }

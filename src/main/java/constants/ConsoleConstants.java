@@ -7,7 +7,7 @@ public class ConsoleConstants {
     public static final String BONUS_NUMBERS_MESSAGE = "보너스 볼을 입력해 주세요.";
     public static final String BUYING_MESSAGE = "개를 구매했습니다.";
     public static final String ENTER = "\n";
-    public static final String REGEX_FOR_MONEY = "\\D";
+    public static final String REGEX_FOR_INT = "\\D";
     public static final String REGEX_FOR_WINNING_NUMBER= "[^\\d^,]";
     public static final String SEPARATOR = ",";
     public static final String RESULT_MASSAGE = "\n당첨통계\n----------";

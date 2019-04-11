@@ -33,7 +33,7 @@ public class Lotto {
         }
     }
 
-    private void checkRange(int number){
+    static public void checkRange(int number){
         if (!(MIN_LOTTO_NUMBER <= number && number <= MAX_LOTTO_NUMBER)){
             throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
         }
