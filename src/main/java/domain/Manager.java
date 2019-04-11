@@ -1,19 +1,19 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Manager {
     private User user;
     private ArrayList<Integer> winningNumbesrs;
     private boolean[] checkNumbers;
     private WinningLotto winningLotto;
+    private Map<Rank, Integer> winningMap;
 
     Manager(){
         user = new User();
         winningNumbesrs = new ArrayList<>();
         checkNumbers = new boolean[46];
+        winningMap = new LinkedHashMap<>();
     }
 
     public void startGame(){
@@ -22,6 +22,58 @@ public class Manager {
         user.printLottoList();
         while(!secondQuery());
         while(!thirdQuery());
+        printResult();
+    }
+
+    public void initWinningMap(){
+        winningMap.put(Rank.FIFTH, 0);
+        winningMap.put(Rank.FOURTH, 0);
+        winningMap.put(Rank.THIRD, 0);
+        winningMap.put(Rank.SECOND, 0);
+        winningMap.put(Rank.FIRST, 0);
+    }
+
+    public int makeWinningMap(){
+        initWinningMap();
+        int totalMoney = 0;
+        for(int i=0; i<user.getLottoList().size(); i++){
+            Rank rank = winningLotto.match(user.getLottoList().get(i));
+            if(rank == Rank.MISS) continue;
+            totalMoney += rank.getWinningMoney();
+            int count = winningMap.get(rank);
+            winningMap.put(rank, count+1);
+        }
+        return totalMoney;
+    }
+
+    public void printRank(Rank rank, int count){
+        if (rank != Rank.SECOND){
+            System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- " + count + "개");
+            return;
+        }
+        System.out.println(rank.getCountOfMatch() + "개 일치, 보너스볼 일치 (" + rank.getWinningMoney() + "원)- " + count + "개");
+    }
+
+    public void searchWinningMap(){
+        for(Map.Entry<Rank, Integer> factor : winningMap.entrySet()){
+            Rank rank = factor.getKey();
+            int count = factor.getValue();
+            printRank(rank, count);
+        }
+    }
+
+    public void printEarningRate(int earningAmount, int pay){
+        System.out.print("총 수익률은 ");
+        System.out.print((double)earningAmount / (double)pay);
+        System.out.println("입니다.");
+    }
+
+    public void printResult(){
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        int earningAmount = makeWinningMap();
+        searchWinningMap();
+        printEarningRate(earningAmount, user.getPay());
     }
 
     public List<Integer> makeWinningList(){
