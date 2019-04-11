@@ -18,14 +18,14 @@ public class LottoGame {
         LottoGame game = new LottoGame();
         game.purchasingMoney = game.enterPurchasingMoney();
         int purchasingQuantity = game.getPurchasingQuantity();
-        System.out.println(purchasingQuantity + game.QUANTITY_GUIDE);
+        System.out.println(purchasingQuantity + QUANTITY_GUIDE);
         game.purchaseLottery();
     }
 
     private int enterPurchasingMoney() {
         int purchasingMoney;
         do {
-            System.out.println(this.PURCHASE_GUIDE);
+            System.out.println(PURCHASE_GUIDE);
             Scanner prompt = new Scanner(System.in);
             purchasingMoney = prompt.nextInt();
         } while (!this.validatePurchasingMoney(purchasingMoney, this.LOTTO_PRICE));
@@ -43,11 +43,11 @@ public class LottoGame {
     private boolean validatePurchasingMoney(int purchasingMoney,
                                             int lottoPrice) {
         if (!this.isMoreThan(purchasingMoney, lottoPrice)) {
-            System.out.println(this.SHORTAGE_WARNING);
+            System.out.println(SHORTAGE_WARNING);
             return false;
         }
         if (!this.isMultipleOf(purchasingMoney, lottoPrice)) {
-            System.out.println(this.UNIT_WARNING);
+            System.out.println(UNIT_WARNING);
             return false;
         }
         return true;
