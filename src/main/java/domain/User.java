@@ -3,13 +3,13 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-
 
 public class User {
 	static private Scanner scanner = new Scanner(System.in);
@@ -127,6 +127,22 @@ public class User {
 	}
 
 	public static void printTotalResult(int gameMoney) {
+		int totalWinningMoney = compareWithWinningLotto();
+		printWinningResult(compareResultMap);
+		System.out.println("총 수익률은 " + (double) totalWinningMoney / gameMoney + "입니다.");
+
+	}
+
+	public static void printWinningResult(Map<Rank, Integer> map) {
+		System.out.println("당첨 통계\n----------");
+		Set<Rank> set = map.keySet();
+		Iterator<Rank> iter = set.iterator();
+		while (iter.hasNext()) {
+			Rank key = ((Rank) iter.next());
+			Integer value = map.get(key);
+			System.out.println(key.getCountOfMatch() + " 개 일치(" + key.getWinningMoney() + ")원-" + value + "개");
+		}
+
 	}
 
 }
