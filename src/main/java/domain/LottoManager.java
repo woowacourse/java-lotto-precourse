@@ -72,7 +72,7 @@ public class LottoManager {
     }
 
     private void printWinRating(double totalPrice, double userLottoAmount){
-        double winRate = Double.parseDouble(String.format("%.3f", totalPrice/(userLottoAmount*1000)));
+        double winRate = Double.parseDouble(String.format("%.3f", totalPrice/(userLottoAmount*Constant.LOTTO_PRICE)));
         System.out.println("총 수익률은 "+winRate+"입니다.");
     }
 

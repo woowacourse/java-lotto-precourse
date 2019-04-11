@@ -3,7 +3,6 @@ package domain;
 import java.util.*;
 
 public class UserLotto {
-    private final static int LOTTO_PRICE = 1000;
     private Scanner scanner;
     private int price;
     private List<Lotto> lotto;
@@ -36,7 +35,7 @@ public class UserLotto {
     }
 
     private void printLottoAmount() {
-        int amount = price / LOTTO_PRICE;
+        int amount = price / Constant.LOTTO_PRICE;
         System.out.println(amount + "개를 구매했습니다.");
         makeLotto(amount);
     }
@@ -64,7 +63,7 @@ public class UserLotto {
     }
 
     private boolean checkInputLottoPrice(int price) {
-        if (price < LOTTO_PRICE || price % 1000 != 0) {
+        if (price < Constant.LOTTO_PRICE || price % Constant.LOTTO_PRICE != 0) {
             System.out.println("로또는 한장에 1000원 입니다.");
             return false;
         }

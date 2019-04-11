@@ -68,7 +68,7 @@ public class LottoMatch {
     }
 
     private boolean checkInputLength(String[] inputArray) {
-        if (inputArray.length != 6) {
+        if (inputArray.length != Constant.LOTTO_NUM_LENGTH) {
             System.out.println("당첨 번호는 6개 입니다.");
             return false;
         }
@@ -101,7 +101,7 @@ public class LottoMatch {
     }
 
     private boolean checkBonusNum(int bonusNumber){
-        if (bonusNumber < 1 || bonusNumber > 45){
+        if (bonusNumber < Constant.LOTTO_MIN_VALUE || bonusNumber > Constant.LOTTO_MAX_VALUE){
             System.out.println("로또는 1~45 숫자만 존재합니다.");
             return false;
         }
