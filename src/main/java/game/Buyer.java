@@ -45,4 +45,19 @@ public class Buyer {
             System.out.println("로또 규칙에 맞게 구입 금액을 다시 입력해주세요.");
         }
     }
+
+    /*
+     * 1 ~ 45 사이의 수로 중복없이 랜덤으로 6개의 숫자를 만들고 리스트에 담음
+     */
+    public List<Integer> makeLottoNumber() {
+        Random random = new Random();
+        int number;
+        Set<Integer> set = new HashSet<>();
+
+        while (set.size() != NUMBER_PER_LOTTO) {
+            number = random.nextInt(LOTTO_NUMBER_BOUNDARY) + 1;
+            set.add(number);
+        }
+        return new ArrayList(set);
+    }
 }
