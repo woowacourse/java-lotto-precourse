@@ -42,8 +42,22 @@
 
 ### 3. 주요 변수
 
-- 
+**LottoGame Class**
+- `lottos` - `List<Lotto>`, 사용자가 구입한 로또를 담는 ArrayList.
+- `winningLotto` - `List<WinningLotto>`, 당첨 번호를 담는 ArrayList, 실제로는 하나의 객체만 담긴다.
+- `resultStatic` - `ResultStatic`, 당첨 통계를 담는 ResultStatic 클래스의 객체.
 
-### 4. 메서드
+**ResultStatic**
+- `result` - `Map<Rank, Integer>`, 당첨 순위별 당첨 로또의 수를 담는 객체. 출력 순서를 위해 LinkedHashMap 객체로 구현하였다.
+- `earningRate` - `double`, 수익률을 담는 double 형 변수.
 
-- 
+### 4. 주요 메서드
+
+**WinningLotto Class**
+- `match` - `Rank`, 사용자의 로또 객체를 받아 순위를 반환한다.
+
+**LottoGame Class**
+- `play` - `void`, 로또 게임의 전반적인 과정이 진행된다.
+- `IssueLottos` - `void`, 사용자에게 구입 금액을 입력 받아 해당 금액 만큼의 무작위 로또를 발행한다.
+- `setWinningLotto` - `void`, 사용자에게 지난 주 당첨 번호와 보너스 볼 번호를 입력 받아 WinningLotto 객체를 생성한다.
+- `getResult` - `void`, 사용자의 로또와 당첨 번호 및 보너스 번호를 비교하여 당첨 여부 및 당첨금을 확인하고, 당첨 통계와 수익률을 계산하여 화면에 출력한다.
