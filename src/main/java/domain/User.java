@@ -4,6 +4,10 @@ import java.util.*;
 public class User {
 	public void playgame() {
 		int gameCoin = getPrice();
+		LottoShop shop = new LottoShop();
+		shop.createLotto(gameCoin);
+		shop.printLotto();
+		
 	}
 	
 	public int getPrice() {
@@ -16,6 +20,6 @@ public class User {
 			money = sc.nextLine();
 		} while(!vaild.priceVaild(money));
 		
-		return Integer.parseInt(money) % 1000;
+		return Integer.parseInt(money) / 1000;
 	}
 }
