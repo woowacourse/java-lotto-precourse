@@ -19,7 +19,7 @@ public class WinningLotto {
 
         for (int number : userLotto.getNumbers()) {
             countOfMatch += checkMatchLottoNumber(number);
-            matchBonus = isMatchBonusNumber(number);
+            matchBonus |= isMatchBonusNumber(number);
         }
 
         if (matchBonus) {
