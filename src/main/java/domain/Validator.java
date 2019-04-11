@@ -50,8 +50,8 @@ public class Validator {
     /**
      * 당첨 번호끼리의 중복 확인 및 최대값 넘김 확인
      *
-     * @param List<Integer> numbers 중복을 확인할 숫자들
-     * @return boolean 중복이거나 최대값이 넘어가면 true, 아니면 false
+     * @param numbers 중복을 확인할 숫자들
+     * @return 중복이거나 최대값이 넘어가면 true, 아니면 false
      */
     public boolean isDuplicateAndNumOverValue(List<Integer> numbers){
         List<Integer> checkedNums = new ArrayList<>();
@@ -72,9 +72,9 @@ public class Validator {
     /**
      * 보너스 번호와 당첨 번호들과의 중복 확인 및 최대값 넘김 확인
      *
-     * @param  int num 보너스 번호
-     * @param  List<Integer> numbers 당첨 번호들
-     * @return boolean 중복이거나 최대값이 넘어가면 true, 아니면 false
+     * @param  num 보너스 번호
+     * @param  numbers 당첨 번호들
+     * @return 중복이거나 최대값이 넘어가면 true, 아니면 false
      */
     public boolean isBonusDuplicateAndNumOverValue(int num, List<Integer> numbers){
         if(numbers.contains(num)){
@@ -91,9 +91,9 @@ public class Validator {
     /**
      * 유저가 뽑은 로또 번호에 당첨 번호가 하나 있는지 확인
      *
-     * @param  Integer num 당첨 번호 한개
-     * @param  List<Integer> list 유저가 뽑은 로또 번호들
-     * @return int 존재하면 MatchingNumber 를 증가시키기 위해 1을 반환
+     * @param  num 당첨 번호 한개
+     * @param  list 유저가 뽑은 로또 번호들
+     * @return 존재하면 MatchingNumber 를 증가시키기 위해 1을 반환
      */
     public int isExistNumInList(Integer num, List<Integer> list){
         if(list.contains(num)){

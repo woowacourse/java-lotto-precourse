@@ -21,7 +21,7 @@ public class Inputter {
 
     private static Scanner scan = new Scanner(System.in);
     private static Validator validator = new Validator();
-    
+
     public int inputPurchaseAmount(){
         String amount;
         do{
