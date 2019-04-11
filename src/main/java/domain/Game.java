@@ -1,5 +1,7 @@
 package domain;
 
+import exception.LottoConditionException;
+
 import java.util.*;
 
 public class Game {
@@ -58,41 +60,29 @@ public class Game {
 
     private WinningLotto generateWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
-        // 임시로 당첨 번호 받기
         List<Integer> list = new LinkedList<>();
         String[] input = sc.nextLine().split(",");
-        for (String str : input) {
+        for (String str : input)
             list.add(Integer.parseInt(str));
-        }
 
         System.out.println("보너스 볼을 입력해 주세요.");
-        int bonus = sc.nextInt();
-
-        Lotto lotto = new Lotto(list);
-
+        int bonus = putBonusNumber();
         System.out.println();
-        return new WinningLotto(lotto, bonus);
+        return new WinningLotto(new Lotto(list), bonus);
     }
 
-    /*private void putValidNumber(List<Integer> list) {
-        StringBuilder input = new StringBuilder(sc.nextLine());
-        while (input.length() > 2) {
-            // 한 자리 수일 때
-            if (input.charAt(1) == ',') {
+    private int putBonusNumber()  {
+        int bonus = sc.nextInt();
+        sc.nextLine();
 
-            }
-            // 두 자리 수일 때
-            else if (input.charAt(1) >= '0' && input.charAt(1) <= '9') {
-
-            }
+        if (bonus >= 1 && bonus <= 46) return bonus;
+        try {
+            throw new LottoConditionException();
+        } catch (LottoConditionException e) {
+            e.printStackTrace();
         }
-
+        return 0;
     }
-
-    private boolean isValidNumber(StringBuilder input, List<Integer> list) {
-
-    }*/
 
     private Lotto generateLotto() {
         Set<Integer> set = new HashSet<>();
