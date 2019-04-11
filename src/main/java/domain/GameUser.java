@@ -15,4 +15,8 @@ public class GameUser {
 	public void addLotto(Lotto lotto) {
 		lottos.add(lotto);
 	}
+
+	public int countOfLottos() {
+		return lottos.size();
+	}
 }
