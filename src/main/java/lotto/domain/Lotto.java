@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -13,8 +16,32 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        Collections.sort(numbers);
+        validateSize(numbers);
+        validateRange(numbers);
+        validateDuplication(numbers);
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE)
+            throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_SIZE + "개만 가능합니다.");
+    }
+
+    private void validateRange(List<Integer> numbers) {
+        for (int number : numbers)
+            validateRange(number);
+    }
+
+    private void validateRange(int number) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER)
+            throw new IllegalArgumentException("로또 번호는 " + LOTTO_MIN_NUMBER + "~" + LOTTO_MAX_NUMBER + "만 입력 가능합니다.");
+    }
+
+    private void validateDuplication(List<Integer> numbers) {
+        Set<Integer> nonDuplicateNumbers = new HashSet<>(numbers);
+        if (nonDuplicateNumbers.size() != LOTTO_NUMBER_SIZE)
+            throw new IllegalArgumentException("로또 번호들 중복이 불가능합니다.");
+    }
+
 }
