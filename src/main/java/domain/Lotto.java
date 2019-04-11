@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,4 +16,9 @@ public class Lotto {
     public List<Integer> getNumbers() { return this.numbers; }
 
     public boolean hasNumber(int num) { return this.numbers.contains(num); }
+
+    public String toString() {
+        Collections.sort(this.numbers);
+        return this.numbers.toString();
+    }
 }
