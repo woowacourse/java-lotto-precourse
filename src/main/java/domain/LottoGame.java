@@ -277,6 +277,16 @@ public class LottoGame {
         return totalWinningMoney;
     }
 
+    public static List<Rank> reverseEnum(Rank[] initEnum) {
+        List<Rank> reverseEnum = new ArrayList<>();
+
+        for (int i = initEnum.length - 1; i >= 0; i--) {
+            reverseEnum.add(initEnum[i]);
+        }
+
+        return reverseEnum;
+    }
+
     public static int getWinningMoney(List<Lotto> userLottos,
                                       WinningLotto winningLotto) {
         int totalWinningMoney = 0;
@@ -284,7 +294,7 @@ public class LottoGame {
 
         System.out.println("\n당첨통계\n--------");
 
-       for (Rank rank : Rank.values()) {
+       for (Rank rank : reverseEnum(Rank.values())) {
             totalWinningMoney += getRankResult(result, rank);
         }
 
