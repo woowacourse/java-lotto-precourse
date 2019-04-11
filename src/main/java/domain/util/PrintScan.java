@@ -1,13 +1,10 @@
 package domain.util;
 
 import domain.Lotto;
-import domain.Game;
 import domain.Rank;
 
-import java.util.Map;
 import java.util.Scanner;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PrintScan {
     private static Scanner scan = new Scanner(System.in);
@@ -18,7 +15,7 @@ public class PrintScan {
     }
 
     public static void printOutofRangeNotice(int min, int max) {
-        System.out.format("%d이상 %d이하의 올바른 숫자를 입력해 주세요.%n",min, max);
+        System.out.format("%d이상 %d이하의 올바른 숫자를 입력해 주세요.%n", min, max);
     }
 
     public static void printRestMoney(int restMoney) {
@@ -43,17 +40,23 @@ public class PrintScan {
         System.out.println("형식에 맞는 유효한 숫자를 입력해주세요");
     }
 
-    public static int requestBonusNum(){
+    public static int requestBonusNum() {
         System.out.println("보너스 번호를 입력해주세요.");
         return Integer.parseInt(scan.nextLine().trim());
     }
-    public static void printResult(){
+
+    public static void printResult() {
         System.out.println("당첨통계");
         System.out.println("------------");
     }
-    public static void printWinning(Rank rank, int num){
-        String secondString= rank.equals(Rank.SECOND) ? ". 보너스 볼 일치" : "";
-        String winningString = rank.getCountOfMatch()+ "개 일치"+secondString+" (" +rank.getWinningMoney()+"원) - "+ num +"개";
+
+    public static void printWinning(Rank rank, int num) {
+        String secondString = rank.equals(Rank.SECOND) ? ". 보너스 볼 일치" : "";
+        String winningString = rank.getCountOfMatch() + "개 일치" + secondString + " (" + rank.getWinningMoney() + "원) - " + num + "개";
         System.out.println(winningString);
+    }
+
+    public static void printEarnRate(float earnRate){
+        System.out.format("총 수익률은 %.3f",earnRate);
     }
 }

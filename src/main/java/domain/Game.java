@@ -11,6 +11,7 @@ import java.util.List;
 public class Game {
     public List<Lotto> userLottoList = new ArrayList();
     public WinningLotto winningLotto;
+    private int numberOfLotto = 0;
 
     public void startGame() {
         int insertedMoney = Input.insertMoney();
@@ -18,10 +19,11 @@ public class Game {
         winningLotto = WinningLotto.createWinningLotto();
         RankResult rankResult = new RankResult(userLottoList, winningLotto);
         rankResult.getRankResult();
+        rankResult.setEarnRate(numberOfLotto);
     }
 
     private void buyingLotto(int money) {
-        int numberOfLotto = getNumberOfLotto(money);
+        numberOfLotto = getNumberOfLotto(money);
         for (int i = 0; i < numberOfLotto; i++) {
             userLottoList.add(Lotto.creatLotto());
         }

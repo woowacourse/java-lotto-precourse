@@ -9,7 +9,7 @@ import java.util.List;
 public class RankResult {
     private static Map<Rank, Integer> rankHash = new HashMap<>();
     private static Rank[] rankStrings = Rank.values();
-
+    private static int winningMoney = 0;
     List<Lotto> userLottoList;
     WinningLotto winningLotto;
 
@@ -21,6 +21,8 @@ public class RankResult {
     public void getRankResult() {
         getRankMap();
         printResultInformation(rankHash);
+        setWinningMoney();
+
     }
 
     public void getRankMap() {
@@ -40,15 +42,16 @@ public class RankResult {
 
     public static void printResultInformation(Map<Rank, Integer> resultMap) {
         PrintScan.printResult();
-        Rank[] rankArray = {Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
+        Rank[] rankArray = {Rank.FIFTH,Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
         for (Rank rank : rankArray) {
             PrintScan.printWinning(rank, resultMap.get(rank));
         }
     }
 
-    public void getWinningMoney() {
-
+    public void setWinningMoney() {
+        for ( Rank hashKey : rankHash.keySet() ) {
+            int winningPrice = hashKey.getWinningMoney();
+            winningMoney += winningPrice * rankHash.get(hashKey);
+        }
     }
-
-
 }

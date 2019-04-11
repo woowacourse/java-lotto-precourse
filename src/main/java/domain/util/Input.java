@@ -31,7 +31,7 @@ public class Input {
         try {
             String winningLottoNumsString = PrintScan.requestWinningNum();
             List<Integer> winningLottoNum = winningNumsToInt(winningLottoNumsString);
-            CheckException.checkWinNumberLength(winningLottoNum.size(), Constant.WIN_LOTTO_NUM_LENGTH);
+            CheckException.checkWinNumberLength(winningLottoNum.size(), Constant.NUMBER_OF_LOTTO_NUMBERS);
             Collections.sort(winningLottoNum);
             return winningLottoNum;
         } catch (InputMismatchException | IllegalArgumentException e) {
