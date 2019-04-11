@@ -45,6 +45,11 @@ numSeq을 무작위로 섞어주는 메소드.
 
 인자를 입력받아 당첨에 해당하는 Lotto를 생성하는 메소드.
 
+### Main -> matchLottos()
+
+winningLotto와 lottoList를 반복하면서 매칭해보는 함수.
+각 랭크를 추가한다.
+
 ### Main -> printResult()
 
 매칭결과를 계산하여 그것을 출력해주는 메소드.
