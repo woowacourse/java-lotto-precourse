@@ -1,10 +1,12 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Game {
 	static final int LOTTO_MIN = 1;
@@ -33,8 +35,97 @@ public class Game {
 	}
 
 	private WinningLotto checkLastLotto() {
+		Lotto rightLotto = inputRightLotto();
+		int bonusNo = inputBonusNo(rightLotto);
+		WinningLotto res = new WinningLotto(rightLotto, bonusNo);
+		
+		return res;
+	}
+
+	private int inputBonusNo(Lotto rightLotto) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
+	}
+
+	private Lotto inputRightLotto() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("지난주 당첨 번호를 입력해 주세요.");
+		String numbers = sc.nextLine();
+
+		if (!checkEffectiveLotto(numbers)) {
+			return inputRightLotto();
+		}
+		Lotto lotto = new Lotto(convertStrToInt(numbers));
+		return lotto;
+	}
+
+	private List<Integer> convertStrToInt(String numbers) {
+		List<Integer> numList;
+		try {
+			numList = Arrays.stream(numbers.split(",")).
+			mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+		} catch (Exception e) {
+			numList = null;
+		}
+		return numList;
+	}
+
+	private boolean checkEffectiveLotto(String numbers) {
+		List<Integer> numbersInt = convertStrToInt(numbers);
+		if (numbers.charAt(numbers.length()-1) == ',' || numbersInt == null) {
+			System.out.println("값과 구분자 ',' 사이 공백없이 제대로 입력해주세요.");
+			return false;
+		}
+		if (!checkEffectivenumber(numbersInt)) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean checkEffectivenumber(List<Integer> numbersInt) {
+		if (numbersInt.size() != LOTTO_SIZE) {
+			System.out.println("6개의 값을 제대로 입력해주세요.");
+			return false;
+		}
+		if (!hasEffectiveValues(numbersInt) || 
+				!hasDistinctValues(numbersInt)) {			
+			return false;
+		}
+		return true;
+	}
+
+	private boolean hasDistinctValues(List<Integer> numbersInt) {
+		int[] numsOfNumber = new int[LOTTO_MAX+1];
+		int max = -1;
+		
+		for (int i = 0; i < numbersInt.size(); i++) {
+			numsOfNumber[numbersInt.get(i)] ++;
+		}
+		for (int i = 1; i < numsOfNumber.length; i++) {
+			max = Math.max(max, numsOfNumber[i]);
+		}
+		return isValue1(max);
+	}
+
+	private boolean isValue1(int max) {
+		boolean result = (max ==1);
+		if (!result) {
+			System.out.println("입력한 값 중, 중복 된 값이 존재합니다.");
+		}
+		return result;
+	}
+
+	private boolean hasEffectiveValues(List<Integer> numbersInt) {
+		int max = -1;
+		int min = 99;
+		for (int i = 0; i < numbersInt.size(); i++) {
+			max = Math.max(max, numbersInt.get(i));
+			min = Math.min(min, numbersInt.get(i));
+		}
+		if (max > LOTTO_MAX || min < LOTTO_MIN) {
+			System.out.println("입력한 값 중, 유효하지 않은 값이 있습니다.");
+		}
+		return (max <= LOTTO_MAX) && (min >= LOTTO_MIN); 
 	}
 
 	private List<Lotto> makeLotto() {
