@@ -4,11 +4,17 @@ import object.Lotto;
 import util.InputUtil;
 import util.PrintUtil;
 
+import java.util.List;
+
 public class LastWeekWinningNumberCreator implements Creator {
         @Override
         public Lotto create() {
-                PrintUtil.printLastWeekWinningNumberInputMessage();
-                Lotto lotto = new Lotto(InputUtil.inputLastWeekWinningNumber());
+                List<Integer> numbers=null;
+                do{
+                        PrintUtil.printLastWeekWinningNumberInputMessage();
+                        InputUtil.inputLastWeekWinningNumber();
+                }while(numbers==null);
+                Lotto lotto = new Lotto(numbers);
                 return lotto;
         }
 }
