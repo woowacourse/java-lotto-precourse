@@ -15,4 +15,8 @@ public class Lotto {
     public List<Integer> getNumbersList() {
         return numbers;
     }
+
+    public int getBonusNumber(){
+        return numbers.get(Controller.LOTTOS_NUMBER -1);
+    }
 }
