@@ -59,7 +59,7 @@ public class mainClass {
 	public static void main(String[] args) {
 		int buyMoney = getMoney();
 		int getMoney =0;
-		int[] rankCount = {0,0,0,0,0}; 
+		int[] rankCount = {0,0,0,0,0,0}; 
 		List<Lotto> lotto = buyLotto(buyMoney);
 		printLotto(lotto);
 		WinningLotto win = new WinningLotto(getWinningLotto(), getBonusNumber());
@@ -70,7 +70,7 @@ public class mainClass {
 		for(int i=4; i>=0; i--) {
      		getMoney += printRank(rankCount[i], r[i]);
 		}
-	    System.out.println("ÃÑ ¼öÀÍ·üÀº "+ (float)buyMoney/getMoney +"ÀÔ´Ï´Ù.");
+	    System.out.println("ÃÑ ¼öÀÍ·üÀº "+ getMoney/(float)buyMoney*100 +"%ÀÔ´Ï´Ù.");
 	}
 	
 	public static int getMoney() {
