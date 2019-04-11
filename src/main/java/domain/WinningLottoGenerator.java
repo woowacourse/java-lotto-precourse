@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class WinningLottoGenerator {
 	private static final String NUMBER_CHECK_REGEX = "^[0-9]+$";
-	private static final int LOTTO_MINIMUM_NUMBER = 0;
+	private static final int LOTTO_MINIMUM_NUMBER = 1;
 	private static final int LOTTO_MAXIMUM_NUMBER = 45;
 	private static final int MAXIMUM_SIZE = 6;
 	
