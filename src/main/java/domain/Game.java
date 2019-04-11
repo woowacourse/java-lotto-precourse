@@ -16,6 +16,7 @@ public class Game {
         createLottoObjectArray();
         createLottoInstance();
         repeatOutputLottoNumbers();
+        
     }
 
     private void buyLotto() {
@@ -96,5 +97,11 @@ public class Game {
         for (int i = 0; i < lottos.length; i++) {
             outputLottoNumbers(lottos[i]);
         }
+    }
+
+    private List<String> splitWithComma(String inputLottoNumber) {
+        List<String> lottoNumbers = Arrays.asList(inputLottoNumber.split(","));
+
+        return lottoNumbers;
     }
 }
