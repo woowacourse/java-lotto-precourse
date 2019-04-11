@@ -26,7 +26,7 @@ public class PrintScan {
         System.out.format("%d장의 로또를 구입했습니다.%n", numberOfLotto);
         System.out.println("----------------------");
         for (int i = 0; i < numberOfLotto; i++) {
-            String lottoNumberString = "["+lottos.get(i).lottoListToString(lottos.get(i))+"]";
+            String lottoNumberString = "[" + lottos.get(i).lottoListToString(lottos.get(i)) + "]";
             System.out.println(lottoNumberString);
         }
     }

@@ -1,6 +1,5 @@
 package domain.util;
 
-
 public class Constant {
     public final static int PRICE_OF_LOTTO = 1_000;
     public static final int MIN_INPUT_MONEY = PRICE_OF_LOTTO;

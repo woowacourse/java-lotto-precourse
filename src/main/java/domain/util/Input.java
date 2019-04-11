@@ -35,14 +35,15 @@ public class Input {
         String[] winningStringArray = winningInputString.split(",\\s*");
         List<Integer> winningNumsList = new ArrayList<>();
         for (String s : winningStringArray) {
-            int winningNum=Integer.valueOf(s);
+            int winningNum = Integer.valueOf(s);
             CheckException.checkValueInRange(winningNum, Constant.MIN_LOTTO_NUM, Constant.MAX_LOTTO_NUM);
-            GenarateNumber.addingNumberToList(winningNumsList,winningNum);
-        };
+            GenarateNumber.addingNumberToList(winningNumsList, winningNum);
+        }
+        ;
         return winningNumsList;
     }
 
-    public static int inputBonusNum(List<Integer> alreadyEnteredNumbers){
+    public static int inputBonusNum(List<Integer> alreadyEnteredNumbers) {
         try {
             int bonusNum = PrintScan.requestBonusNum();
             CheckException.checkValueInRange(bonusNum, Constant.MIN_LOTTO_NUM, Constant.MAX_LOTTO_NUM);

@@ -22,6 +22,7 @@ public class WinningLotto {
 
     /**
      * 두 로또를 비교해 등수를 반환
+     *
      * @param userLotto
      * @return 비교완료한 rank값
      */
