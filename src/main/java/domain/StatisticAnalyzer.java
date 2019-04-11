@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class StatisticalAnalyzer {
+public class StatisticAnalyzer {
     private static final int COUNT_SCALE = 1;
     private static final int MINIMUM_FRACTION_DIGIT = 1;
 
@@ -15,7 +15,7 @@ public class StatisticalAnalyzer {
         }
     }
 
-    public HashMap<Rank, Integer> makeRankCountsTableOf(HashMap<Lotto, Rank> lotteryResults) {
+    public HashMap<Rank, Integer> makeRankDistributionTableOf(HashMap<Lotto, Rank> lotteryResults) {
         HashMap<Rank, Integer> rankCounts = new LinkedHashMap<Rank, Integer>();
 
         initialize(rankCounts, Rank.values());
@@ -25,7 +25,7 @@ public class StatisticalAnalyzer {
         return rankCounts;
     }
 
-    public double calculateEarningRateBy(HashMap<Rank, Integer> rankCounts) {
+    public double calculateEarningRatesBy(HashMap<Rank, Integer> rankCounts) {
         int totalPurchase = rankCounts.values().stream().mapToInt(Integer::intValue).sum()
                 * LottoManager.PRICE_PER_LOTTO;
         int totalEarning = 0;
@@ -55,18 +55,23 @@ public class StatisticalAnalyzer {
         }
     }
 
-    public void show(double earningRate) {
+    public void show(double earningRates) {
         NumberFormat percentFormatter = NumberFormat.getPercentInstance();
 
         percentFormatter.setMinimumFractionDigits(MINIMUM_FRACTION_DIGIT);
-        System.out.println("총 수익률은 " + percentFormatter.format(earningRate) + "입니다");
+        System.out.println("총 수익률은 " + percentFormatter.format(earningRates) + "입니다");
     }
 
-    public void analyzeEarningsOf(HashMap<Lotto, Rank> lotteryResults) {
-        HashMap<Rank, Integer> rankCounts = makeRankCountsTableOf(lotteryResults);
-        double earningRate = calculateEarningRateBy(rankCounts);
+    public HashMap<Rank, Integer> analyzeRankDistribution(HashMap<Lotto, Rank> lotteryResults) {
+        HashMap<Rank, Integer> rankDistributionTable = makeRankDistributionTableOf(lotteryResults);
 
-        show(rankCounts);
+        show(rankDistributionTable);
+        return rankDistributionTable;
+    }
+
+    public void analyzeEarningRatesBy(HashMap<Rank, Integer> rankDistributionTable) {
+        double earningRate = calculateEarningRatesBy(rankDistributionTable);
+
         show(earningRate);
     }
 }

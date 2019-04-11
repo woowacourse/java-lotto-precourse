@@ -20,13 +20,13 @@ public class LottoGame {
     public static void main(String args[]) {
         LottoGame lottoGame = new LottoGame();
         LottoManager lottoManager = new LottoManager();
-        StatisticalAnalyzer statisticalAnalyzer = new StatisticalAnalyzer();
+        StatisticAnalyzer analyzer = new StatisticAnalyzer();
 
-        int purchaseAmount = lottoManager.inputPurchaseAmount();
-        List<Lotto> userLottos = lottoManager.issueLottoOf(purchaseAmount);
+        List<Lotto> userLottos = lottoManager.issueLottoWorthOf(lottoManager.inputPurchaseAmount());
         WinningLotto winningLotto = new WinningLotto(lottoManager.inputWinningNumbers(), lottoManager.inputBonus());
 
         HashMap<Lotto, Rank> lotteryResults = lottoGame.startLottery(userLottos, winningLotto);
-        statisticalAnalyzer.analyzeEarningsOf(lotteryResults);
+        HashMap<Rank, Integer> rankDistributionTable = analyzer.analyzeRankDistribution(lotteryResults);
+        analyzer.analyzeEarningRatesBy(rankDistributionTable);
     }
 }
