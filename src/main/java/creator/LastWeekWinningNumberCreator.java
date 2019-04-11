@@ -12,7 +12,7 @@ public class LastWeekWinningNumberCreator implements Creator {
                 List<Integer> numbers=null;
                 do{
                         PrintUtil.printLastWeekWinningNumberInputMessage();
-                        InputUtil.inputLastWeekWinningNumber();
+                        numbers = InputUtil.inputLastWeekWinningNumber();
                 }while(numbers==null);
                 Lotto lotto = new Lotto(numbers);
                 return lotto;

@@ -17,18 +17,18 @@ public class Lotto implements LottoNumber {
                 System.out.println(numbers);
         }
 
-        public int requestCountMatchNumber(Lotto otherLotto){
+        public int requestCountMatchNumber(Lotto otherLotto) {
                 return otherLotto.countMatchNumber(this.numbers);
         }
 
-        public boolean hasBonusBall(int bonusBall){
+        public boolean hasBonusBall(int bonusBall) {
                 return this.numbers.contains(bonusBall);
         }
 
-        private int countMatchNumber(List<Integer> otherLottoNumbers){
-                int matchCount=0;
-                for(int otherNumber : otherLottoNumbers){
-                        matchCount += this.numbers.contains(otherNumber) ? 1 : 0 ;
+        private int countMatchNumber(List<Integer> otherLottoNumbers) {
+                int matchCount = 0;
+                for (int otherNumber : otherLottoNumbers) {
+                        matchCount += this.numbers.contains(otherNumber) ? 1 : 0;
                 }
                 return matchCount;
         }

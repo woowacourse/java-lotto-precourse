@@ -3,6 +3,10 @@ package util;
 import java.util.*;
 
 public class InputUtil {
+
+        private static final long inputPurchaseAmountFormatError = -999_999_999_999l;
+        private static final int inputBonusBallFormatError = -999_999_999;
+
         public static long inputPurchaseAmount() {
                 Scanner scan = new Scanner(System.in);
                 long input;
@@ -10,7 +14,7 @@ public class InputUtil {
                         input = scan.nextLong();
                 } catch (InputMismatchException e) {
                         System.err.println("입력 형식 오류");
-                        return -999_999_999_999l;
+                        return inputPurchaseAmountFormatError;
                 }
                 return input;
         }
@@ -23,7 +27,13 @@ public class InputUtil {
 
         public static int inputBonusBall() {
                 Scanner scan = new Scanner(System.in);
-                int bonusball = scan.nextInt();
+                int bonusball;
+                try {
+                        bonusball = scan.nextInt();
+                }catch(InputMismatchException e){
+                        System.err.println("입력 형식 오류");
+                        return inputBonusBallFormatError;
+                }
                 return bonusball;
         }
 
