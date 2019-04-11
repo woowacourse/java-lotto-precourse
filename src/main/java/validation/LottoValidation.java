@@ -14,7 +14,13 @@ public class LottoValidation implements Validation<List<Integer>> {
 
 	@Override
 	public boolean check(String value) {
-		return false;
+		if (!checkList(value)) {
+			return false;
+		}
+
+		numbers = convert(value);
+
+		return checkCountNumbers() && checkReduplicationNumbers() && checkRangeNumber();
 	}
 
 	private boolean checkList(String value) {
