@@ -20,6 +20,7 @@ import java.util.Scanner;
  * 게임의 진행을 담당하는 객체
  */
 public class LottoGame {
+    private final int LOTTO_PRICE = 1_000;
     private Scanner scanner;
     private List<Lotto> userLottos; //유저가 구매한 로또 리스트
     private Lotto lastWinninNumber; //지난 주 당첨 번호
@@ -37,6 +38,8 @@ public class LottoGame {
         lastWinninNumber = createLastWinningLotto();
         bonusNumber = createBonusNumber();
         winningLotto = LottoService.getWinningLotto(lastWinninNumber, bonusNumber);
+        rankList = LottoService.getMatchOfLotto(winningLotto, userLottos);
+        printStatistic();
     }
 
     private List<Lotto> getOrder() {
@@ -79,7 +82,28 @@ public class LottoGame {
         return number;
     }
 
+    private void printStatistic() {
+        int sum = 0;
+        double earningsRate;
 
+        System.out.println("당첨 통계");
+        System.out.println("-----------");
+        for (Rank rank : Rank.values()) {
+            sum += countRank(rank);
+        }
+        earningsRate = (double) sum / (userLottos.size() * LOTTO_PRICE);
+        System.out.printf("총 수익률은 %.3f 입니다.", earningsRate);
+    }
+
+    private int countRank(Rank targetRank) {
+        if (targetRank.equals(Rank.MISS)) {
+            return 0;
+        }
+
+        int count = (int) rankList.stream().filter(rank -> rank.equals(targetRank)).count();
+        System.out.println(targetRank.getCountOfMatch() + "개 일치 (" + targetRank.getWinningMoney() + ")-" + count + "개");
+        return targetRank.getWinningMoney() * count;
+    }
 
     public void closeGame() {
         scanner.close();
