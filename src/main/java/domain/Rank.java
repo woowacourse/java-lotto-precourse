@@ -61,7 +61,7 @@ public enum Rank {
         if (this == Rank.SECOND) {
             note = ", 보너스볼 일치";
         }
-        return String.format("%d개 일치%s (%,10d원)", countOfMatch, note, winningMoney);//
+        return String.format("%d개 일치%s (%d원)", countOfMatch, note, winningMoney);//
     }
 
     public static Map<Rank, Integer> RANK_COUNTER() {

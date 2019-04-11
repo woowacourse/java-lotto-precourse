@@ -2,14 +2,14 @@ package ui;
 
 import domain.Lotto;
 import domain.Rank;
-import javafx.scene.control.RadioMenuItem;
+import exception.MoneyInputException;
 
 import java.util.*;
 
 /**
  * @author delf
  */
-public class ConsoleIOIneterface implements LottoIOInterface {
+public class ConsoleIOInterface implements LottoIOInterface {
 
     private static final Scanner scanner = new Scanner(System.in);
     private final static String DELIM = ",";
@@ -26,7 +26,7 @@ public class ConsoleIOIneterface implements LottoIOInterface {
     public int insertMoney() {
         LottoIOInterface.showPlaneText(MESSAGE_INPUT_MONEY);
 
-        return inputInteger();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     @Override
@@ -49,10 +49,11 @@ public class ConsoleIOIneterface implements LottoIOInterface {
     }
 
     @Override
-    public int inputBounusNumber(Lotto lotto) {
+    public int inputBonusNumber(Lotto lotto) {
         LottoIOInterface.showPlaneText(MESSAGE_INPUT_BONUS_NUMBER);
 
-        return inputInteger();
+        int n = Integer.parseInt(scanner.nextLine());
+        return n;
     }
 
     @Override
@@ -68,14 +69,7 @@ public class ConsoleIOIneterface implements LottoIOInterface {
         LottoIOInterface.showPlaneText(TITLE_WINNING_STATISTICS);
 
         for (Rank rank : PRINT_ORDER_RANK) {
-            String result = rank + " - " + ranks.get(rank) + "개";
-            LottoIOInterface.showPlaneText(result);
+            LottoIOInterface.showPlaneText(rank + " - " + ranks.get(rank) + "개");
         }
-    }
-
-    private int inputInteger() {
-        int n = scanner.nextInt();
-        scanner.nextLine(); // 버퍼에 남아 있는 개행 제거
-        return n;
     }
 }
