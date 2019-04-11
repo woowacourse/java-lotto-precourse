@@ -10,6 +10,7 @@ public class LottoGame {
     private static final String UNIT_WARNING = "1000원 단위로 구입하실 수 있습니다.";
     private static final String QUANTITY_GUIDE = "개를 구매했습니다.";
     private static final String WINNING_NUMBER_GUIDE = "지난 주 당첨 번호를 입력해주세요.";
+    private static final String BONUSBALL_GUIDE = "보너스 볼을 입력해주세요.";
     private static final int LOTTO_PRICE = 1000;
 
     private int purchasingMoney;
@@ -22,6 +23,7 @@ public class LottoGame {
         System.out.println(purchasingQuantity + QUANTITY_GUIDE);
         game.purchaseLottery();
         game.getWinningNumbers();
+        game.enterBonusBallNumber();
     }
 
     private int enterPurchasingMoney() {
@@ -95,5 +97,11 @@ public class LottoGame {
             isValid = winningLottery.validateWinningNumbers();
         } while (!isValid);
         return winningNumbers;
+    }
+
+    private int enterBonusBallNumber() {
+        System.out.println(BONUSBALL_GUIDE);
+        Scanner prompt = new Scanner(System.in);
+        return prompt.nextInt();
     }
 }
