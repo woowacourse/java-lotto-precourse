@@ -30,6 +30,16 @@ public class LottoGame {
         }
     }
 
+    public void showLottos(){
+        this.showMessage("\n총 "+this.userLottos.size()+"개를 구매했습니다.");
+        Iterator<Lotto> it = this.userLottos.iterator();
+
+        while(it.hasNext()){
+            Lotto lotto = it.next();
+            this.showMessage(String.valueOf(lotto.getLottoNumbers()));
+        }
+    }
+
     public void showMessage(String msg) {
         System.out.println(msg);
     }
