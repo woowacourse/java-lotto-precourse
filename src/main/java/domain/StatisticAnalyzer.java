@@ -9,9 +9,9 @@ public class StatisticAnalyzer {
     private static final int COUNT_SCALE = 1;
     private static final int MINIMUM_FRACTION_DIGIT = 1;
 
-    public void initialize(HashMap<Rank, Integer> rankCounts, Rank[] typeOfranks) {
-        for (Rank rank : typeOfranks) {
-            rankCounts.put(rank, 0);
+    private void initialize(HashMap<Rank, Integer> rankDistributionTable, Rank[] typeOfRanks) {
+        for (Rank rank : typeOfRanks) {
+            rankDistributionTable.put(rank, 0);
         }
     }
 
@@ -25,18 +25,18 @@ public class StatisticAnalyzer {
         return rankCounts;
     }
 
-    public double calculateEarningRatesBy(HashMap<Rank, Integer> rankCounts) {
-        int totalPurchase = rankCounts.values().stream().mapToInt(Integer::intValue).sum()
+    public double calculateEarningRatesBy(HashMap<Rank, Integer> rankDistributionTable) {
+        int totalPurchase = rankDistributionTable.values().stream().mapToInt(Integer::intValue).sum()
                 * LottoManager.PRICE_PER_LOTTO;
         int totalEarning = 0;
 
-        for (Rank rank : rankCounts.keySet()) {
-            totalEarning += rank.getWinningMoney() * rankCounts.get(rank);
+        for (Rank rank : rankDistributionTable.keySet()) {
+            totalEarning += rank.getWinningMoney() * rankDistributionTable.get(rank);
         }
         return (double) totalEarning / (double) totalPurchase;
     }
 
-    public String getCouningMessageOf(HashMap<Rank, Integer> rankCounts, Rank rank) {
+    public String getCouningMessageOf(HashMap<Rank, Integer> rankDistributionTable, Rank rank) {
         StringBuilder message = new StringBuilder();
 
         message.append(rank.getCountOfMatch()).append("개 일치");
@@ -44,14 +44,14 @@ public class StatisticAnalyzer {
             message.append(", 보너스 볼 일치 ");
         }
         message.append(" (").append(rank.getWinningMoney()).append("원) - ");
-        message.append(rankCounts.get(rank)).append("개");
+        message.append(rankDistributionTable.get(rank)).append("개");
         return message.toString();
     }
 
-    public void show(HashMap<Rank, Integer> rankCounts) {
+    public void show(HashMap<Rank, Integer> rankDistributionTable) {
         System.out.println("당첨 통계\n------");
-        for (Rank rank : rankCounts.keySet()) {
-            System.out.println(getCouningMessageOf(rankCounts, rank));
+        for (Rank rank : rankDistributionTable.keySet()) {
+            System.out.println(getCouningMessageOf(rankDistributionTable, rank));
         }
     }
 
