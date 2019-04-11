@@ -29,7 +29,7 @@ public class MoneyValidation implements Validation<Integer> {
 
 	private boolean checkRange() {
 		if ((money < MIN_MONEY) || (money > MAX_MONEY)) {
-			System.out.println(String.format("금액의 범위는 최소 %,d원, 최대 %,d원 입니다.\n", MIN_MONEY, MAX_MONEY);
+			System.out.println(String.format("금액의 범위는 최소 %,d원, 최대 %,d원 입니다.\n", MIN_MONEY, MAX_MONEY));
 			return false;
 		}
 
@@ -38,7 +38,7 @@ public class MoneyValidation implements Validation<Integer> {
 
 	private boolean checkUnit() {
 		if (money % MONEY_UNIT != 0) {
-			System.out.println(String.format("금액의 단위는 %,d원 입니다.\n", MONEY_UNIT);
+			System.out.println(String.format("금액의 단위는 %,d원 입니다.\n", MONEY_UNIT));
 			return false;
 		}
 
