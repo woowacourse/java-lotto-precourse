@@ -24,6 +24,14 @@ public class LottoResult {
         return matchSumCount;
     }
 
+    private long getInvestMoney() {
+        return lottoRanks.size() * LottoGenerator.UNIT_PRICE;
+    }
+
+    public double getRateOfProfit() {
+        return (double)getTotalWinningMoney() / getInvestMoney();
+    }
+
     public long getTotalWinningMoney() {
         long totalWinningMoney = 0;
         for(Rank rank : lottoRanks) {
