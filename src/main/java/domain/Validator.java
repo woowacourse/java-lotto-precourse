@@ -73,10 +73,6 @@ public class Validator {
         return false;
     }
 
-    public boolean isExistLottoInLottoList(ArrayList<Lotto> lottoList, Lotto lotto){
-        return lottoList.contains(lotto);
-    }
-
     public int isExistNumInList(Integer num, List<Integer> list){
         if(list.contains(num)){
             return 1;

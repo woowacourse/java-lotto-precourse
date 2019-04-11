@@ -21,19 +21,11 @@ public class LottoCreator {
     public ArrayList<Lotto> purchaseLottoForAmount(int amount){
         ArrayList<Lotto> lottoList = new ArrayList<>();
         for(int i = 0; i < amount; i++){
-            Lotto createdLotto = createNonDuplicatedLotto(lottoList);
+            Lotto createdLotto = createLotto(createRandomNumbers(LOTTO_MAXIMUM_NUMBER_COUNT));
             System.out.println(createdLotto.getLottoNumbers());
             lottoList.add(createdLotto);
         }
         return lottoList;
-    }
-
-    private Lotto createNonDuplicatedLotto(ArrayList<Lotto> lottoList){
-        Lotto lotto;
-        do{
-            lotto = createLotto(createRandomNumbers(LOTTO_MAXIMUM_NUMBER_COUNT));
-        }while (validator.isExistLottoInLottoList(lottoList, lotto));
-        return lotto;
     }
 
     private Lotto createLotto(List<Integer> numbers){
