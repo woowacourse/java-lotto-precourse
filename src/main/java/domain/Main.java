@@ -94,6 +94,7 @@ public class Main {
             Rank r = winningLotto.match(lottoList.get(i));
             rankMap.put(r, rankMap.get(r) + 1);
         }
+        rankMap.remove(Rank.MISS);
     }
 
     private String formatRank(Rank r) {
@@ -106,6 +107,9 @@ public class Main {
         return String.format("%d개 일치 (%d원)", r.getCountOfMatch(), r.getWinningMoney());
     }
 
+    private void printResult() {
+
+    }
 
     public static void main(String[] args) {
 
