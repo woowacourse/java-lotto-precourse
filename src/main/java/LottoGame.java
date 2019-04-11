@@ -10,7 +10,7 @@ public class LottoGame {
     public HashMap<Lotto, Rank> startLottery(List<Lotto> userLottos, WinningLotto winningLotto) {
         HashMap<Lotto, Rank> lotteryResults = new HashMap<Lotto, Rank>();
 
-        for (Lotto lotto: userLottos) {
+        for (Lotto lotto : userLottos) {
             lotteryResults.put(lotto, winningLotto.match(lotto));
         }
 

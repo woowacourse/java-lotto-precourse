@@ -15,6 +15,4 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
-
-    // 추가 기능 구현
 }

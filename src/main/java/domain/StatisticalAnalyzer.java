@@ -10,7 +10,7 @@ public class StatisticalAnalyzer {
     private static final int MINIMUM_FRACTION_DIGIT = 1;
 
     public void initialize(HashMap<Rank, Integer> rankCounts, Rank[] typeOfranks) {
-        for (Rank rank: typeOfranks) {
+        for (Rank rank : typeOfranks) {
             rankCounts.put(rank, 0);
         }
     }
@@ -19,7 +19,7 @@ public class StatisticalAnalyzer {
         HashMap<Rank, Integer> rankCounts = new LinkedHashMap<Rank, Integer>();
 
         initialize(rankCounts, Rank.values());
-        for (Rank rank: lotteryResults.values()) {
+        for (Rank rank : lotteryResults.values()) {
             rankCounts.put(rank, rankCounts.get(rank) + COUNT_SCALE);
         }
         return rankCounts;
@@ -30,7 +30,7 @@ public class StatisticalAnalyzer {
                 * LottoManager.PRICE_PER_LOTTO;
         int totalEarning = 0;
 
-        for (Rank rank: rankCounts.keySet()) {
+        for (Rank rank : rankCounts.keySet()) {
             totalEarning += rank.getWinningMoney() * rankCounts.get(rank);
         }
         return (double) totalEarning / (double) totalPurchase;
@@ -41,7 +41,7 @@ public class StatisticalAnalyzer {
 
         message.append(rank.getCountOfMatch()).append("개 일치");
         if (rank == Rank.SECOND) {
-            message.append(" , 보너스 볼 일치 ");
+            message.append(", 보너스 볼 일치 ");
         }
         message.append(" (").append(rank.getWinningMoney()).append("원) - ");
         message.append(rankCounts.get(rank)).append("개");
@@ -50,7 +50,7 @@ public class StatisticalAnalyzer {
 
     public void show(HashMap<Rank, Integer> rankCounts) {
         System.out.println("당첨 통계\n------");
-        for (Rank rank: rankCounts.keySet()) {
+        for (Rank rank : rankCounts.keySet()) {
             System.out.println(getCouningMessageOf(rankCounts, rank));
         }
     }
