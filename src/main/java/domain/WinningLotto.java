@@ -10,7 +10,7 @@ public class WinningLotto {
     private final int bonusNo;
 
     WinningLotto(Lotto lotto, int bonusNo) {
-        if(lotto.hasBall(bonusNo) || isBonusBallOutRange(bonusNo)){
+        if (lotto.hasBall(bonusNo) || isBonusBallOutRange(bonusNo)) {
             throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER_MENT);
         }
         this.lotto = lotto;

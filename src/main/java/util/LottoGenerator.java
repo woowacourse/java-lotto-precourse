@@ -26,7 +26,7 @@ public class LottoGenerator {
     }
 
     public static List<Lotto> generateLottoList(int money) {
-        if(money % LOTTO_UNIT_AMOUNT != 0){
+        if (money % LOTTO_UNIT_AMOUNT != 0) {
             throw new IllegalArgumentException(MONEY_ERROR_MENT);
         }
         List<Lotto> lottoList = new ArrayList<>();
