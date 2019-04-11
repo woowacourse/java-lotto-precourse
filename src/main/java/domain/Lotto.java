@@ -13,12 +13,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public void showBuyLotto(Lotto lottoNumber){
+    public void printBuyLotto(Lotto lottoNumber){
 
         System.out.println(lottoNumber.numbers);
     }
 
-    public List<Integer> findLotto(){
+    public List<Integer> catchLotto(){
         return this.numbers;
     }
 

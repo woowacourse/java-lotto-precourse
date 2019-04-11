@@ -16,130 +16,164 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    /* 보너스 번호 와 당첨된 번호의 갯수에 맞는 등수와, 돈을 반환하는 메소드 */
     public Rank match(int matchValue,boolean includeSecond) {
 
-        Rank lottoRank = Rank.valueOf(matchValue,includeSecond);
-        return lottoRank;
+        return Rank.valueOf(matchValue,includeSecond);
     }
 
+    /* 맞은 번호의 갯수를 반환하는 메소드 */
     private List<Integer> matchAmount(List<Lotto> userLottoList){
 
-        int correctNumber = 0;
-        List<Integer> correctAmountList = new ArrayList<Integer>();
+        int correctNumber = 0;                                          // 맞은 갯수 저장
+        List<Integer> correctAmountList = new ArrayList<>();
 
-        for(int i=0;i<userLottoList.size();i++){
-           correctNumber = matchAmountIncrease(userLottoList.get(i).findLotto(), correctNumber);
-           correctAmountList.add(correctNumber);
-           correctNumber = 0;
+        for (Lotto lotto1 : userLottoList) {
+
+            correctNumber = calculateMatchAmount(lotto1.catchLotto(), correctNumber);
+            correctAmountList.add(correctNumber);
+            correctNumber = 0;
         }
         return correctAmountList;
     }
 
-    private int matchAmountIncrease(List<Integer> amountList, int correctNumber){
-        for(int i=0; i<amountList.size(); i++){
-            correctNumber = checkmatchValue(amountList.get(i),correctNumber);
+    /* 로또 번호 갯수만큼 반복 하는 메소드 */
+    private int calculateMatchAmount(List<Integer> lottoNumberList, int correctNumber){
+
+        for (Integer integer : lottoNumberList) {
+
+            correctNumber = checkMatchRight(integer, correctNumber);
         }
         return correctNumber;
     }
 
-    private int checkmatchValue(int value,int correctAmount){
-        if(lotto.findLotto().contains(value)){
+    /* 맞으면 갯수를 증가 시키는 메소드 */
+    private int checkMatchRight(int value,int correctAmount){
+
+        if(lotto.catchLotto().contains(value)){
+
+            /* 맞으면 맞은 갯수 증가 */
             correctAmount++;
         }
         return correctAmount;
     }
 
-    private boolean findSecondCorrect(List<Integer> amountList, int bonusNumber){
+    /* 보너스 번호가 맞는지 확인 하는 메소드 */
+    private boolean checkCoincideBonusNumber(List<Integer> lottoNumberList, int bonusNumber){
 
         boolean findSecondState = false;
-        if(amountList.contains(bonusNumber)){
+        if(lottoNumberList.contains(bonusNumber)){
+
+            /* 보너스 번호가 맞으면 */
             findSecondState = true;
         }
         return findSecondState;
     }
 
-    private List<Integer> saveRank(WinningLotto winLotto,List<Lotto> lottoList){
+    /* 로또 한장 마다 맞은 갯수를 리스트에 저장 하는 메소드 */
+    private List<Integer> saveCoincideLotto(WinningLotto winnerLotto, List<Lotto> lottoList){
 
-        List<Integer> rankList = new ArrayList<Integer>();;
-
+        List<Integer> rankList = new ArrayList<>();
         for(int i=0;i<lottoList.size();i++){
-            rankList.add(match(winLotto.matchAmount(lottoList).get(i),findSecondCorrect(lottoList.get(i).findLotto(),winLotto.bonusNo)).getCountOfMatch());
+
+            rankList.add(match(winnerLotto.matchAmount(lottoList).get(i),checkCoincideBonusNumber(lottoList.get(i).catchLotto(),winnerLotto.bonusNo)).getCountOfMatch());
         }
         return rankList;
     }
 
-    private int takeLottoMoney(List<Integer> rankList,List<Lotto> lottoList){
+    /* 총 번돈을 계산하는 메소드 */
+    private int calculateEarnMoney(List<Integer> rankList, List<Lotto> lottoList){
 
         int earnMoney = 0;
-
         for(int i=0;i<rankList.size();i++){
-            Rank matchMoney = Rank.valueOf(rankList.get(i),findSecondCorrect(lottoList.get(i).findLotto(),
-                    this.bonusNo));
-            earnMoney += matchMoney.getWinningMoney();
+
+            Rank rankMoney = Rank.valueOf(rankList.get(i),checkCoincideBonusNumber(lottoList.get(i).catchLotto(),this.bonusNo));
+            earnMoney += rankMoney.getWinningMoney();
         }
         return earnMoney;
     }
 
+    /* 등수별 당첨 갯수 및 수익률을 출력하는 메소드 */
     private void printLottoRank(List<Integer> rankList,int earnMoney, int spendMoney) {
 
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원) -" + checkFifthRank(rankList));
-        System.out.println("4개 일치 (50000원) -" + checkFourthRank(rankList));
-        System.out.println("5개 일치 (1500000원) -" + checkThirdRank(rankList));
-        System.out.println("5개 일치 보너스 번호 일치(30000000원) -" + checkSecondRank(rankList));
-        System.out.println("6개 일치 (2000000000원) -" + checkFirstRank(rankList));
+        System.out.println("3개 일치 (5000원) -" + calculateFifthRank(rankList));
+        System.out.println("4개 일치 (50000원) -" + calculateFourthRank(rankList));
+        System.out.println("5개 일치 (1500000원) -" + calculateThirdRank(rankList));
+        System.out.println("5개 일치 보너스 번호 일치(30000000원) -" + calculateSecondRank(rankList));
+        System.out.println("6개 일치 (2000000000원) -" + calculateFirstRank(rankList));
         System.out.println("총 수익률은 "+ (double) earnMoney / spendMoney +" 입니다.");
     }
 
-    private int checkFifthRank(List<Integer> matchValueList){
-        int count = 0;
+    /* 5등 당첨 갯수 계산 하는 메소드 */
+    private int calculateFifthRank(List<Integer> matchValueList){
+
+        int fifthCount = 0;
         Rank fifthRank = Rank.FIFTH;
+
         for(int i=0;i<matchValueList.size();i++){
-            count += checkRankPosition(matchValueList,fifthRank,i);
+
+            fifthCount += calculateRankPosition(matchValueList,fifthRank,i);
         }
-        return count;
+        return fifthCount;
     }
 
-    private int checkFourthRank(List<Integer> matchValueList){
-        int count = 0;
+    /* 4등 당첨 갯수 계산 하는 메소드 */
+    private int calculateFourthRank(List<Integer> matchValueList){
+
+        int fourthCount = 0;
         Rank fourthRank = Rank.FOURTH;
+
         for(int i=0;i<matchValueList.size();i++){
-            count += checkRankPosition(matchValueList,fourthRank,i);
+            fourthCount += calculateRankPosition(matchValueList,fourthRank,i);
         }
-        return count;
+        return fourthCount;
     }
 
-    private int checkThirdRank(List<Integer> matchValueList){
-        int count = 0;
+    /* 3등 당첨 갯수 계산 하는 메소드 */
+    private int calculateThirdRank(List<Integer> matchValueList){
+
+        int thirdCount = 0;
         Rank thirdRank = Rank.THIRD;
+
         for(int i=0;i<matchValueList.size();i++){
-            count += checkRankPosition(matchValueList,thirdRank,i);
+            thirdCount += calculateRankPosition(matchValueList,thirdRank,i);
         }
-        return count;
+        return thirdCount;
     }
 
-    private int checkSecondRank(List<Integer> matchValueList){
-        int count = 0;
-        Rank SecondRank = Rank.SECOND;
+    /* 2등 당첨 갯수 계산 하는 메소드 */
+    private int calculateSecondRank(List<Integer> matchValueList){
+
+        int secondCount = 0;
+        Rank secondRank = Rank.SECOND;
+
         for(int i=0;i<matchValueList.size();i++){
-            count += checkRankPosition(matchValueList,SecondRank,i);
+
+            secondCount += calculateRankPosition(matchValueList,secondRank,i);
         }
-        return count;
+        return secondCount;
     }
 
-    private int checkFirstRank(List<Integer> matchValueList){
-        int count = 0;
-        Rank FisrtRank = Rank.FIRST;
+    /* 1등 당첨 갯수 계산 하는 메소드 */
+    private int calculateFirstRank(List<Integer> matchValueList){
+        int firstCount = 0;
+        Rank fisrtRank = Rank.FIRST;
+
         for(int i=0;i<matchValueList.size();i++){
-            count += checkRankPosition(matchValueList,FisrtRank,i);
+
+            firstCount += calculateRankPosition(matchValueList,fisrtRank,i);
         }
-        return count;
+        return firstCount;
     }
 
-    private int checkRankPosition(List<Integer> matchValueList,Rank temp,int location){
+    /* 각각 등수의 갯수를 계산해주는 메소드 */
+    private int calculateRankPosition(List<Integer> matchValueList,Rank rankPosition ,int location){
         int count = 0;
-        if(matchValueList.get(location) == temp.getCountOfMatch()){
+        if(matchValueList.get(location) == rankPosition.getCountOfMatch()){
+
+            /* 맞은 갯수와 등수에 필요한 갯수가 같을경우 */
             count++;
         }
         return count;
@@ -148,10 +182,10 @@ public class WinningLotto {
     public static void main(String[] args){
 
         int money = LottoMoney.getLottoMoney();
-        LottoGame nowLotto = new LottoGame();
-        List<Lotto> lottoList = nowLotto.makeTotalLotto(money);
-        WinningLotto winLotto = new WinningLotto(nowLotto.getLastWinNumber(),nowLotto.addBonusLottoNumber());
-        int takeMoney = winLotto.takeLottoMoney(winLotto.saveRank(winLotto,lottoList),lottoList);
-        winLotto.printLottoRank(winLotto.matchAmount(lottoList),takeMoney,money);
+        LottoGame launchLotto = new LottoGame();
+        List<Lotto> lottoList = launchLotto.buyLotto(money);
+        WinningLotto winnerLotto = new WinningLotto(launchLotto.getLastWinnerNumber(),launchLotto.inputBonusNumber());
+        int earnMoney = winnerLotto.calculateEarnMoney(winnerLotto.saveCoincideLotto(winnerLotto,lottoList),lottoList);
+        winnerLotto.printLottoRank(winnerLotto.matchAmount(lottoList),earnMoney,money);
     }
 }
