@@ -11,4 +11,8 @@ public class GameUser {
 		this.money = money;
 		lottos = new ArrayList<>();
 	}
+
+	public void addLotto(Lotto lotto) {
+		lottos.add(lotto);
+	}
 }
