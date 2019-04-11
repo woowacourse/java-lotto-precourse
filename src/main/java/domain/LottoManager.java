@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 public class LottoManager {
     private static final String RANK_THIRD = "3개 일치 (5000원)";
@@ -12,8 +12,10 @@ public class LottoManager {
 
     private UserLotto userLotto;
     private LottoMatch lottoMatch;
-    private HashMap<Integer, Integer> map = new HashMap<>();
-
+    private WinningLotto winningLotto;
+    private TreeMap<Integer, Integer> map = new TreeMap<>();
+    private String[] resultStrArray = new String[6];
+    private List<Lotto> lottoList;
 
     public LottoManager() {
         userLotto = new UserLotto();
@@ -23,38 +25,58 @@ public class LottoManager {
     public void startLotto() {
         userLotto.buyUserLotto();
         lottoMatch.startLottoMatch();
-        map.put(2000000000, 0);
-        map.put(30000000, 0);
-        map.put(1500000, 0);
-        map.put(50000, 0);
-        map.put(5000, 0);
-        map.put(0,0);
+        settingMap();
+        settingResultArray();
         makeRankList();
     }
 
+    public void settingMap(){
+        map.put(Rank.FIRST.getWinningMoney(), 0);
+        map.put(Rank.SECOND.getWinningMoney(), 0);
+        map.put(Rank.THIRD.getWinningMoney(), 0);
+        map.put(Rank.FOURTH.getWinningMoney(), 0);
+        map.put(Rank.FIFTH.getWinningMoney(), 0);
+        map.put(Rank.MISS.getWinningMoney(),0);
+    }
+
+    private void settingResultArray(){
+        resultStrArray[0] = "MISS";
+        resultStrArray[1] = RANK_THIRD;
+        resultStrArray[2] = RANK_FOURTH;
+        resultStrArray[3] = RANK_FIFTH;
+        resultStrArray[4] = RANK_FIFTHBONUS;
+        resultStrArray[5] = RANK_SIX;
+    }
+
     public void makeRankList() {
-        List<Lotto> lottoList = userLotto.getLotto();
-        WinningLotto winningLotto = new WinningLotto(lottoMatch.getWinLottoNum(), lottoMatch.getBonusNum());
+        lottoList = userLotto.getLotto();
+        winningLotto = new WinningLotto(lottoMatch.getWinLottoNum(), lottoMatch.getBonusNum());
         int tmp;
 
         for (Lotto lotto : lottoList) {
-
             tmp = map.get(winningLotto.match(lotto).getWinningMoney());
             map.put(winningLotto.match(lotto).getWinningMoney(), ++tmp);
         }
-        System.out.println();
-        printResult(map);
+
+        int[] rank = new int[6];
+        int i = 0;
+        for (int key: map.keySet()) {
+            rank[i++] = map.get(key);
+        }
+        printResult(rank);
     }
 
-    private void printResult(HashMap<Integer,Integer> map) {
 
+    private void printResult(int[] rankArray) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(RANK_THIRD + "- " + map.get(5000) + "개");
-        System.out.println(RANK_FOURTH + "- " +  map.get(50000) + "개");
-        System.out.println(RANK_FIFTH + "- " + map.get(1500000) + "개");
-        System.out.println(RANK_FIFTHBONUS + "- " + map.get(30000000) + "개");
-        System.out.println(RANK_SIX + "- " + map.get(2000000000) + "개");
+        for (int i = 1; i < rankArray.length; i++) {
+            System.out.println(resultStrArray[i]+"- "+rankArray[i]+"개");
+        }
+    }
+
+    private void printWinRating(){
 
     }
 
