@@ -25,6 +25,8 @@ import edu.yk1028.Exception.MoneyLackException;
  *
  */
 public class LottoMachine {
+	private Random random = new Random();
+	
 	public List<Lotto> cellLottos(long money) throws Exception {
 		if (money < LottoConstant.MIN_MONEY) {
 			throw new MoneyLackException();
@@ -57,7 +59,6 @@ public class LottoMachine {
 	}
 
 	private int makeRandomLottoNumber() {
-		Random random = new Random();
 		return random.nextInt((LottoConstant.SIZE_OF_RANGE)) + LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER;
 	}
 }
