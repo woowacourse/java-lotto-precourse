@@ -22,7 +22,7 @@ public class User {
 		do {
 			System.out.println("구매금액을 입력해주세요.");
 			money = sc.nextLine();
-		} while(vaild.priceVaild(money));
+		} while(!vaild.priceVaild(money));
 		
 		return Integer.parseInt(money) / 1000;
 	}
@@ -35,7 +35,7 @@ public class User {
 		do {
 			System.out.println("지난 주 로또 당첨 번호를 입력해주세요.");
 			winNum =  sc.nextLine();
-		} while(vaild.winNumVaild(winNum));
+		} while(!vaild.winNumVaild(winNum));
 		this.resultNum = winNum;
 	}
 	
@@ -47,7 +47,6 @@ public class User {
 		do {
 			System.out.println("보너스 볼의 번호를 입력해주세요.");
 			bonusNum = sc.nextLine();
-		} while(vaild.bonusNumVaild(bonusNum, this.resultNum));
-		System.out.println(this.resultNum);
+		} while(!vaild.bonusNumVaild(bonusNum, this.resultNum));
 	}
 }
