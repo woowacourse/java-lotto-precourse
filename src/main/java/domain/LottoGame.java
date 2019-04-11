@@ -21,8 +21,7 @@ public class LottoGame {
         int purchasingQuantity = game.getPurchasingQuantity();
         System.out.println(purchasingQuantity + QUANTITY_GUIDE);
         game.purchaseLottery();
-        List<Integer> winningNumbers = game.enterWinningNumbers();
-        System.out.println(winningNumbers);
+        game.getWinningNumbers();
     }
 
     private int enterPurchasingMoney() {
@@ -83,6 +82,18 @@ public class LottoGame {
         for (int i = 0; i < inputNumbers.length; i++) {
             winningNumbers.add(Integer.parseInt(inputNumbers[i]));
         }
+        return winningNumbers;
+    }
+
+    private List<Integer> getWinningNumbers() {
+        List<Integer> winningNumbers;
+        boolean isValid = false;
+        do {
+            winningNumbers = this.enterWinningNumbers();
+            System.out.println(winningNumbers);
+            Lotto winningLottery = new Lotto(winningNumbers);
+            isValid = winningLottery.validateWinningNumbers();
+        } while (!isValid);
         return winningNumbers;
     }
 }
