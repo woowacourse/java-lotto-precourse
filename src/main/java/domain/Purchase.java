@@ -7,7 +7,6 @@ public class Purchase {
     private List<Lotto> lottoList;
 
     Purchase(int money) {
-
         lottoList = new ArrayList<>();
         run((money / Const.ONE_LOTTO_MONEY));
     }

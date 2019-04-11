@@ -6,7 +6,7 @@ public class Message {
     public static final String MINUS_INPUT = "입력은 마이너스가 될 수 없습니다.";
     public static final String ONE_MORE_INPUT = "하나만 입력해야 합니다.";
     public static final String MONEY_HAS_REMAINDER = "금액은 100,10,1원 자리의 값이 0이외에는 존재하지 않습니다.";
-    public static final String INPUT_WIN_MESSAGE ="지난주 당첨번호를 입력해 주세요:";
+    public static final String INPUT_WIN_MESSAGE = "지난주 당첨번호를 입력해 주세요:";
     public static final String SPLIT_EXCEPTION = "당첨번호는 쉼표로 구분해주세요.";
     public static final String IMPROPER_PRIZE = "당첨번호는 6개 여야 합니다.";
     public static final String OUT_OF_SCOPE_NUMBER = "당첨번호는 1~45사이의 숫자만 가능합니다.";
@@ -18,8 +18,8 @@ public class Message {
     public static final String MATCH_MESSAGE_BONUS = "%d개 일치,보너스볼 일치 (%d원)- %d개 \n";
     public static final String MATCH_MESSAGE = "%d개 일치 (%d원)- %d개 \n";
     public static final String GAIN_RATE_MESSAGE = "총 수익률은 %.3f 입니다.";
-    public static final String SPOT=",";
-    public static final String SPACE =" ";
-    public static final String TAB="\t";
+    public static final String SPOT = ",";
+    public static final String SPACE = " ";
+    public static final String TAB = "\t";
 
 }

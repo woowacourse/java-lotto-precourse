@@ -21,10 +21,11 @@ public class Result {
         return errorMessage;
     }
 
-    public void printErrorMessage(String inputMessage){
+    public void printErrorMessage(String inputMessage) {
         System.out.println(getErrorMessage());
         System.out.println(inputMessage);
     }
+
     public static Result ok() {
         return new Result();
     }

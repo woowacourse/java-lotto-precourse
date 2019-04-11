@@ -13,12 +13,12 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        int countOfMatch=userLotto.matchNumber(lotto);
-        boolean matchBonus=false;
+        int countOfMatch = userLotto.matchNumber(lotto);
+        boolean matchBonus = false;
 
-        if(userLotto.isContainWinningLotto(lotto,bonusNo)==1){
-            matchBonus=true;
+        if (userLotto.isContainWinningLotto(lotto, bonusNo) == 1) {
+            matchBonus = true;
         }
-        return Rank.valueOf(countOfMatch,matchBonus);
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
 }

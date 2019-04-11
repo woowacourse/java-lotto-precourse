@@ -17,6 +17,7 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
     private void addNumber(int number) {
         numbers.add(number);
     }
@@ -30,12 +31,15 @@ public class Lotto {
 
         set.stream().forEach(r -> addNumber(r));
     }
+
     private int createRandomNumber() {
         return (int) (Math.random() * Const.MAX_LIMIT_LOTTO_NUMBER) + Const.MIN_LIMIT_LOTTO_NUMBER;
     }
+
     public boolean isOverlapToBonusNumber(String BonusNumber) {
         return numbers.contains(Integer.parseInt(BonusNumber));
     }
+
     public int matchNumber(Lotto winningLotto) {
         int countOfMatch = 0;
 
@@ -44,6 +48,7 @@ public class Lotto {
         }
         return countOfMatch;
     }
+
     public int isContainWinningLotto(Lotto winningLotto, int userNumber) {
         if (winningLotto.getNumbers().contains(userNumber)) {
             return 1;

@@ -15,13 +15,13 @@ public class LottoGame {
 
         Lotto winLotto = checkWinningNumbers(input, sc);
         int bonusNo = checkBonusNumber(input, sc, winLotto);
-        List<Rank> ranks = matchWinningLottoAndLottoList(lottoList, winLotto, bonusNo);    
-        statistic(ranks,money);
+        List<Rank> ranks = matchWinningLottoAndLottoList(lottoList, winLotto, bonusNo);
+        statistic(ranks, money);
     }
 
     private List<Lotto> purchase(int money) {
-        Purchase purchase = new Purchase(money);            // 로또산다
-        purchase.printLottoListOfUser();                  // 로또 출력
+        Purchase purchase = new Purchase(money);
+        purchase.printLottoListOfUser();
         return purchase.getLottoList();
     }
 
@@ -30,17 +30,20 @@ public class LottoGame {
         int money = input.checkMoney(sc.nextLine());
         return money;
     }
+
     private Lotto checkWinningNumbers(InputValid input, Scanner sc) {
         System.out.print(Message.INPUT_WIN_MESSAGE);
         Lotto lotto = input.checkWinningNumbers(sc.nextLine());
         return lotto;
     }
+
     private int checkBonusNumber(InputValid input, Scanner sc, Lotto winningLotto) {
         System.out.print(Message.INPUT_BONUS_MESSAGE);
         int bonus = input.checkBonusNumber(sc.nextLine(), winningLotto);
         return bonus;
 
     }
+
     private List<Rank> matchWinningLottoAndLottoList(List<Lotto> lottoList, Lotto winLotto, int bonusNo) {
         List<Rank> ranks = new ArrayList<>();
         WinningLotto winningLotto = new WinningLotto(winLotto, bonusNo);
@@ -50,8 +53,9 @@ public class LottoGame {
         }
         return ranks;
     }
-    private void statistic(List<Rank> ranks,int money){
-        Statistic statistic=new Statistic(ranks,money);
+
+    private void statistic(List<Rank> ranks, int money) {
+        Statistic statistic = new Statistic(ranks, money);
         statistic.print();
     }
 
