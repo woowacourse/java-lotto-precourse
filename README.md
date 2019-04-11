@@ -54,6 +54,10 @@ winningLotto와 lottoList를 반복하면서 매칭해보는 메소드.
 
 rankMap을 각자 rank,0의 pair로 초기화시켜주는 메소드.
 
+### Main -> formatRank()
+
+rank를 보기 쉬운 string 형태로 변환하는 메소드.
+
 ### Main -> printResult()
 
 매칭결과를 계산하여 그것을 출력해주는 메소드.
