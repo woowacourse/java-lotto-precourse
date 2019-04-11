@@ -15,5 +15,22 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	// 추가 기능 구현
+	public boolean isContainBonus(int bonus) {
+		return numbers.contains(bonus);
+	}
+
+	public int getCountOfMatch(Lotto wonLotto) {
+		List<Integer> winningLotto = wonLotto.getNumbers();
+		int count = 0;
+		for (int i = 0; i < numbers.size(); i++) {
+			if (numbers.contains(winningLotto.get(i))) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public List<Integer> getNumbers() {
+		return this.numbers;
+	}
 }
