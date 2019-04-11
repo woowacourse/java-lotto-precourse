@@ -57,8 +57,8 @@ public class mainClass {
 	}
 	
 	public static void main(String[] args) {
-		List<Lotto> lotto;
 		int buyMoney = getMoney();
+		List<Lotto> lotto = buyLotto(buyMoney);
 
 	}
 	
@@ -76,5 +76,13 @@ public class mainClass {
 			number.add(new Integer(generator.nextInt(45)+1));
 		}
 		return number;
+	}
+	
+	public static List<Lotto> buyLotto(int money){
+		List<Lotto> lotto = new ArrayList<Lotto>();
+		for(int i=0; i<money/1000; i++) {
+			lotto.add(new Lotto(getLottoNumber(6)));
+		}
+		return lotto;
 	}
 }
