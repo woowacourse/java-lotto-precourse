@@ -47,8 +47,12 @@ numSeq을 무작위로 섞어주는 메소드.
 
 ### Main -> matchLottos()
 
-winningLotto와 lottoList를 반복하면서 매칭해보는 함수.
+winningLotto와 lottoList를 반복하면서 매칭해보는 메소드.
 각 랭크를 추가한다.
+
+### Main -> initRankMap()
+
+rankMap을 각자 rank,0의 pair로 초기화시켜주는 메소드.
 
 ### Main -> printResult()
 
