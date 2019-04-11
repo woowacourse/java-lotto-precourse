@@ -28,8 +28,7 @@ public class UserInput {
 
     public int inputTotalPrice() {
         try {
-            int totalPrice = inputPrice();
-            return checkPriceUnit(totalPrice);
+            return checkPriceUnit(inputPrice());
         } catch (UserInputException e) {
             e.printErrorMessage();
             return inputTotalPrice();

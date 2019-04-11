@@ -13,7 +13,7 @@ package domain;
  *
  * @author 우아한 테크코스, 김성훈
  * @version 1.0 2019/04/10
- *          1.1 2019/04/11
+ *          1.1 2019/04/11  당첨번호와 사용자의 로또 번호를 비교하는 메소드(match) 구현
  */
 public class WinningLotto {
     private final Lotto lotto;

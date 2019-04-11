@@ -35,7 +35,7 @@ public class Lotto {
     }
 
     public boolean contains(int number) {
-        return this.numbers.contains(number);
+        return numbers.contains(number);
     }
 
     public int calcCountOfMatch(Lotto winningNumbers) {
