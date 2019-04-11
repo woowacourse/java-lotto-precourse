@@ -9,6 +9,10 @@ public class Lotto {
         this.numbers = numbers;
     }
     
+    public List<Integer> getNumbers(){
+    	return this.numbers;
+    }
+    
     public int getMatchCount(Lotto lotto) {
     	int cnt =0;
     	for(int i=0; i<lotto.numbers.size(); i++) {
@@ -20,7 +24,7 @@ public class Lotto {
     public int isEqualNumber(Integer a, Integer b) {
     	return a.intValue() == b.intValue() ? 1 : 0 ;
     }
-    
+       
     public void printNumber() {
     	System.out.print('[');
     	for(int i=0; i<this.numbers.size(); i++) {
