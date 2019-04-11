@@ -60,6 +60,7 @@ public class mainClass {
 		int buyMoney = getMoney();
 		List<Lotto> lotto = buyLotto(buyMoney);
 		printLotto(lotto);
+		WinningLotto win = new WinningLotto(getWinningLotto(), getBonusNumber());
 	}
 	
 	public static int getMoney() {
@@ -94,7 +95,7 @@ public class mainClass {
 		}
 	}
 	
-	public static List<Integer> getWinNumber(){
+	public static Lotto getWinningLotto(){
 		Scanner scan = new Scanner(System.in);
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		List<Integer> number = new ArrayList<Integer>();
@@ -103,7 +104,8 @@ public class mainClass {
 		for(int i=0; i<numberByString.length; i++) {
 			number.add(Integer.valueOf(numberByString[i]));
 		}
-		return number;
+		Lotto win = new Lotto(number);
+		return win;
 	}
 	
 	public static int getBonusNumber() {
