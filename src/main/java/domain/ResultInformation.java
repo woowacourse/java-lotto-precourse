@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
+/**
+ * 구매한 로또와 당첨로또를 통해 결과의 상태와 행위를 하는 클래스
+ *
+ * @author 송윤재
+ * @version 1.0
+ */
 public class ResultInformation {
     private List<Rank> ranks;
     private EnumMap<Rank, Integer> enumMap;

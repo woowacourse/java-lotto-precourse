@@ -4,7 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * 사용자에게 보여지는 행위에 대한 책임을 가지고 있는 클래스
+ *
+ * @author 송윤재
+ * @version 1.0
+ */
 public class UserInterface extends CheckValidity {
     private Scanner sc = new Scanner(System.in);
 
@@ -90,6 +95,11 @@ public class UserInterface extends CheckValidity {
                 && checkLottoNumberScope(Integer.parseInt(bonusBallStr)));
     }
 
+    /**
+     * 결과 정볼르 통해 몇등인지 수익률이 몇인지 출력하는 행위
+     *
+     * @param resultInformation 구매한 로또와 당첨로또 비교 결과정보
+     */
     public void printWinStats(ResultInformation resultInformation) {
         Rank[] rankArr = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
 

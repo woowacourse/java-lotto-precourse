@@ -15,7 +15,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static List<Integer> generateLottoNumber() {
+    static List<Integer> generateLottoNumber() {
         List<Integer> numList = new ArrayList<>();
         int number;
 

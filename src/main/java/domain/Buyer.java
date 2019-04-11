@@ -3,6 +3,11 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author 송윤재
+ * @version 1.0
+ */
 public class Buyer {
     private List<Lotto> lottos;
     private int money;
