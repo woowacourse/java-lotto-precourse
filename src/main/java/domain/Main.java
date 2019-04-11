@@ -81,6 +81,21 @@ public class Main {
         winningLotto = new WinningLotto(new Lotto(numList), bonus);
     }
 
+    private void initRankMap() {
+        rankMap = new HashMap<>();
+        for (Rank r : Rank.values()) {
+            rankMap.put(r, 0);
+        }
+    }
+
+    private void matchLottos() {
+        initRankMap();
+        for (int i = 0; i < lottoList.size(); i++) {
+            Rank r = winningLotto.match(lottoList.get(i));
+            rankMap.put(r, rankMap.get(r) + 1);
+        }
+    }
+
 
     public static void main(String[] args) {
 
