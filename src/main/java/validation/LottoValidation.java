@@ -1,6 +1,8 @@
 package validation;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoValidation implements Validation<List<Integer>> {
 	public static final int MIN_NUMBER = 1;
@@ -61,6 +63,8 @@ public class LottoValidation implements Validation<List<Integer>> {
 
 	@Override
 	public List<Integer> convert(String value) {
-		return null;
+		return Arrays.stream(value.split(SEPARATOR))
+				.map(n -> Integer.valueOf(n))
+				.collect(Collectors.toList());
 	}
 }
