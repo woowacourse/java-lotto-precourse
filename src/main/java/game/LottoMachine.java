@@ -89,4 +89,18 @@ public class LottoMachine {
         System.out.println();
         return bonusNumInput;
     }
+
+    /*
+     * 보너스 숫자 중복 처리
+     */
+    public boolean inspectDuplicateBonusNum(Lotto winnerLotto, int bonusNum) {
+        HashSet<Integer> set = new HashSet(winnerLotto.getNumbers());
+        boolean satisfier = true;
+        set.add(bonusNum);
+        if (set.size() == winnerLotto.getNumbers().size()) {
+            satisfier = false;
+        }
+        printReInputBonusNum(satisfier);
+        return satisfier;
+    }
 }
