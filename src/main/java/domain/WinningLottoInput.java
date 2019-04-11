@@ -8,7 +8,7 @@ public class WinningLottoInput {
     private TreeSet<Integer> winningNumbers;
     private int bonusNumber;
 
-    public WinningLotto decideWinningLotto(){
+    public WinningLotto decideWinningLotto() {
         inputWinningLotto();
         return createWinningLotto();
     }
@@ -25,23 +25,23 @@ public class WinningLottoInput {
         do {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             winningLottoInput = sc.nextLine().replace(" ", "");
-        } while (!checkValidWinningLottoInput(winningLottoInput));
+        } while (checkValidWinningLottoInput(winningLottoInput) == false);
     }
 
     private boolean checkValidWinningLottoInput(String winningLotto) {
         winningNumbers = new TreeSet<>();
 
-        if (!isDividedComma(winningLotto)) {
+        if (isDividedComma(winningLotto) == false) {
             System.out.println("쉼표(,)로 구분하여 6자리를 입력해 주세요.");
             return false;
         }
         addElementIntoSet(winningLotto, winningNumbers);
 
-        return isValidElement(winningNumbers);
+        return isValidAllElement(winningNumbers);
     }
 
     private boolean isDividedComma(String numbers) {
-        String pattern = ConstValue.SIX_NUMBERS_DIVIDED_COMMA;
+        String pattern = Constant.SIX_NUMBERS_DIVIDED_COMMA_PATTERNS;
         return Pattern.matches(pattern, numbers);
     }
 
@@ -53,21 +53,21 @@ public class WinningLottoInput {
         }
     }
 
-    private boolean isValidElement(TreeSet<Integer> box) {
-        boolean validElement = true;
+    private boolean isValidAllElement(TreeSet<Integer> box) {
+        boolean isUniqueAndValidRange = true;
 
         if (hasDuplicatedElement(box)) {
             System.out.println("중복된 숫자가 존재합니다.");
-            validElement = !validElement;
+            isUniqueAndValidRange = false;
         } else if (hasOutRangeElement(box)) {
             System.out.println("1부터 45 사이의 숫자만 입력해 주세요.");
-            validElement = !validElement;
+            isUniqueAndValidRange = false;
         }
-        return validElement;
+        return isUniqueAndValidRange;
     }
 
     private boolean hasDuplicatedElement(TreeSet<Integer> box) {
-        return box.size() != ConstValue.LOTTO_COUNT_SIZE;
+        return box.size() != Constant.LOTTO_NUMBER_SIZE;
     }
 
     /* 유효한 범위의 원소 개수를 카운트하여 판별 */
@@ -76,19 +76,19 @@ public class WinningLottoInput {
 
         Iterator<Integer> iter = box.iterator();
         while (iter.hasNext()) {
-            validRangeNumCount += isElementInRange(iter.next());
+            validRangeNumCount += plusIfElementInRange(iter.next());
         }
-        return validRangeNumCount != ConstValue.LOTTO_COUNT_SIZE;
+        return validRangeNumCount != Constant.LOTTO_NUMBER_SIZE;
     }
 
-    private int isElementInRange(int boxElement) {
-        int isInRangeElement = 0;
+    private int plusIfElementInRange(int boxElement) {
+        int valueIfElementInRange = 0;
 
-        if (boxElement >= ConstValue.MINIMUM_LOTTO_NUMBER
-                && boxElement <= ConstValue.MAXIMUM_LOTTO_NUMBER) {
-            isInRangeElement = 1;
+        if (boxElement >= Constant.MINIMUM_LOTTO_NUMBER
+                && boxElement <= Constant.MAXIMUM_LOTTO_NUMBER) {
+            valueIfElementInRange = 1;
         }
-        return isInRangeElement;
+        return valueIfElementInRange;
     }
 
     private void inputBonusNumber() {
@@ -98,55 +98,54 @@ public class WinningLottoInput {
         do {
             System.out.println("보너스 볼을 입력해 주세요.");
             bonusNumberInput = sc.nextLine();
-        } while (!checkValidBonusNumberInput(bonusNumberInput));
+        } while (checkValidBonusNumberInput(bonusNumberInput) == false);
 
         bonusNumber = Integer.parseInt(bonusNumberInput);
     }
 
     private boolean checkValidBonusNumberInput(String number) {
-        return isValidNumber(number)
-                && noContainBonusNumber(number);
+        return isValidBonusNumber(number)
+                && isUniqueWinningNumber(number);
     }
 
-    private boolean isValidNumber(String number){
-        boolean validNumber = true;
+    private boolean isValidBonusNumber(String number) {
+        boolean isValidNumberAndInRange = true;
 
-        if (!isNumber(number)) {
+        if (isBonusNumberPattern(number) == false) {
             System.out.println("숫자를 입력해주세요.");
-            validNumber = !validNumber;
+            isValidNumberAndInRange = false;
         } else if (isOutRangeNumber(Integer.parseInt(number))) {
             System.out.println("1부터 45 사이의 숫자만 입력해 주세요.");
-            validNumber = !validNumber;
+            isValidNumberAndInRange = false;
         }
-        return validNumber;
+        return isValidNumberAndInRange;
     }
 
-    private boolean isNumber(String number) {
-        String pattern = ConstValue.NUMBER_PATTERNS;
+    private boolean isBonusNumberPattern(String number) {
+        String pattern = Constant.BONUS_NUMBER_PATTERNS;
         return Pattern.matches(pattern, number);
     }
 
     private boolean isOutRangeNumber(int number) {
-        return number < ConstValue.MINIMUM_LOTTO_NUMBER
-                || number > ConstValue.MAXIMUM_LOTTO_NUMBER;
+        return number < Constant.MINIMUM_LOTTO_NUMBER
+                || number > Constant.MAXIMUM_LOTTO_NUMBER;
     }
 
-    private boolean noContainBonusNumber(String number){
+    private boolean isUniqueWinningNumber(String number) {
         boolean isUniqueNumber = true;
 
-        if(winningNumbers.contains(Integer.parseInt(number))){
+        if (winningNumbers.contains(Integer.parseInt(number))) {
             System.out.println("당첨 번호에 중복된 수가 존재합니다.");
-            isUniqueNumber = !isUniqueNumber;
-        };
+            isUniqueNumber = false;
+        }
         return isUniqueNumber;
     }
 
-    private WinningLotto createWinningLotto(){
+    private WinningLotto createWinningLotto() {
         List<Integer> winningNumberList = new ArrayList<>(winningNumbers);
 
         Lotto lotto = new Lotto(winningNumberList);
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
-        return winningLotto;
+        return new WinningLotto(lotto, bonusNumber);
     }
 }
