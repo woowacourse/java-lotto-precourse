@@ -2,11 +2,22 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+class RankComparator implements Comparator<Rank> {
+
+	@Override
+	public int compare(Rank r1, Rank r2) {
+		return r1.getWinningMoney() - r2.getWinningMoney();
+	}
+	
+}
 
 public class Game {
 	static final int LOTTO_MIN = 1;
@@ -25,8 +36,55 @@ public class Game {
 	}
 
 	private void showResult(HashMap<Rank, Integer> result) {
-		// TODO Auto-generated method stub
+		long prize = 0;
+		Iterator<Rank> it = sortByRank(result).iterator();
+		System.out.println("\n당첨 통계\n---------");
+		while (it.hasNext()) {
+			Rank rank = it.next();
+			int size = result.get(rank);
+			prize += rank.getWinningMoney()*size;
+			printRankResult(rank,size);
+		}
+		printRate(prize);
+	}
+
+	private void printRate(long prize) {
+		int totalPrice = getTotalPrice();
+		double result = prize/((double)totalPrice);
 		
+		result = Math.round(result*1000)/1000.0;
+		
+		System.out.println("총 수익률은 "+result+"입니다.");
+	}
+
+	private int getTotalPrice() {
+		int res = 0;
+		int size = lottoList.size();
+		
+		res = size*LOTTO_PRICE;
+		return res;
+	}
+
+	private void printRankResult(Rank rank, int size) {
+		if (rank.getWinningMoney() == 0) {
+			return;
+		}
+		int match = rank.getCountOfMatch();
+		
+		System.out.print(match+"개 일치");
+		if (rank.getWinningMoney()==30_000_000) {
+			System.out.print(", 보너스 볼 일치");
+		}
+		System.out.println("("+rank.getWinningMoney()+"원)- "+size+"개");
+	}
+
+	private List<Rank> sortByRank(HashMap<Rank, Integer> result) {
+		RankComparator rc = new RankComparator();
+		List<Rank> list = new ArrayList<Rank>();
+		list.addAll(result.keySet());
+		list.sort(rc);
+		
+		return list;
 	}
 
 	private HashMap<Rank, Integer> collectLottoResult(List<Lotto> myLotto, 
