@@ -2,21 +2,20 @@ package domain;
 
 import domain.interfaces.UserInterface;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUserInterface implements UserInterface {
 
     @Override
-    public int promptPurchaseAmount() {
+    public long promptPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        return sc.nextInt();
+        return sc.nextLong();
     }
 
     @Override
-    public void printLottoList(List<Lotto> lottos, int validLottoCount) {
+    public void printLottoList(List<Lotto> lottos, long validLottoCount) {
         System.out.println(validLottoCount + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             System.out.println(lotto.toString());
@@ -38,15 +37,9 @@ public class ConsoleUserInterface implements UserInterface {
     }
 
     @Override
-    public void notifyInvalidPurchaseAmount() {
-        System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+    public void notifyInvalidInput() {
+        System.out.println("예외적인 입력입니다. 다시 입력해주세요.");
     }
-
-    @Override
-    public void notifyInvalidWinningLotto() { System.out.println("잘못된 입력입니다. 다시 입력해주세요."); }
-
-    @Override
-    public void notifyInvalidBonusNumber() { System.out.println("잘못된 입력입니다. 다시 입력해주세요."); }
 
     @Override
     public void printStatistics(Rank rankValueForPrint, int wins){
@@ -59,6 +52,6 @@ public class ConsoleUserInterface implements UserInterface {
 
     @Override
     public void printProfitRate(){
-        System.out.println(String.format("총 수익률은 %.1f", Player.profitRate) + "%입니다.");
+        System.out.println(String.format("총 수익률은 %.1f", StatisticsCalculator.profitRate) + "%입니다.");
     }
 }

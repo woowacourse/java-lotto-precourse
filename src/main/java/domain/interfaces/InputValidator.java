@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 
 public interface InputValidator {
 
-    int MAX_AFFORDABLE_LOTTO_PURCHASE_AMOUNT = 100000;
     int MINIMUM_PURCHASE_AMOUNT = 0;
     int LOTTO_LENGTH = 6;
     int PRICE_PER_LOTTO = 1000;
@@ -13,8 +12,11 @@ public interface InputValidator {
     int MIN_LOTTO_NUMBER = 1;
     int MAX_LOTTO_NUMBER = 45;
 
-    boolean isValidPurchaseAmount(int purchaseAmount) throws InputMismatchException;
+    boolean isValidPurchaseAmount(long purchaseAmount) throws InputMismatchException;
+
     boolean isValidWinningLotto(int lottoLength, String[] winningLotto) throws IllegalArgumentException;
-    void isValidLottoNumber(int num)throws InputMismatchException;
+
+    void isValidLottoNumber(int num) throws InputMismatchException;
+
     boolean isValidBonusNumber(int bonusNo) throws InputMismatchException;
 }

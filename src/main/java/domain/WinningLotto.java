@@ -17,15 +17,15 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         boolean matchBonus = false;
         List<Integer> numbers = userLotto.getNumbers();
-        int cnt=0;
+        int countOfMatch =0;
         for (int userNumber : numbers){
-            if (lotto.getNumbers().contains(userNumber)){
-                cnt++;
+            if (lotto.contains(userNumber)){
+                countOfMatch++;
             }
             if (userNumber == bonusNo){
                 matchBonus = true;
             }
         }
-        return Rank.valueOf(cnt,matchBonus);
+        return Rank.valueOf(countOfMatch,matchBonus);
     }
 }

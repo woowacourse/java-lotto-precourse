@@ -26,7 +26,7 @@ public class LottoGenerator {
 
     private void fillNumbers() {
         while (numbers.size() != numberGenerator.LOTTO_LENGTH) {
-            int num = numberGenerator.getNumber();
+            int num = numberGenerator.generateRandomNumber();
             checkIfPicked(num);
         }
     }

@@ -9,7 +9,7 @@ public class LottoNumberGenerator implements NumberGenerator {
     Random random = new Random();
 
     @Override
-    public int getNumber() {
+    public int generateRandomNumber() {
         return random.nextInt(MAX_NUMBER) + MIN_NUMBER;
     }
 }

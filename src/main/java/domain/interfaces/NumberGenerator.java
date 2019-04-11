@@ -9,5 +9,5 @@ public interface NumberGenerator {
     int LOTTO_LENGTH = 6;
     int LOTTO_BOUND_SIZE = 46;
 
-    int getNumber();
+    int generateRandomNumber();
 }

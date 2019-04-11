@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Player {
 
-    private static final int RANK_ARRAY_SIZE = 8;
 
     private NumberGenerator numberGenerator;
     private InputValidator inputValidator;
@@ -19,14 +18,10 @@ public class Player {
     private List<Lotto> lottos;
     public static WinningLotto winningLotto;
 
-    public Rank[] rankArray = new Rank[]{Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
-    public static int[] countWins;
-    public static double profitRate;
-
-    private int validLottoCount;
+    private long validLottoCount;
     private String[] validWinningLotto;
     private int validBonusNo;
-    public int validAmount;
+    public long validAmount;
 
     public Player(NumberGenerator numberGenerator, InputValidator inputValidator, UserInterface ui) {
         this.numberGenerator = numberGenerator;
@@ -40,19 +35,18 @@ public class Player {
         ui.printLottoList(lottos, validLottoCount);
 
         generateWinningLotto();
-        calculateStatistics();
         printStatistics();
     }
 
     private void checkPurchaseAmountValidity() {
         try {
-            int amount = ui.promptPurchaseAmount();
+            long amount = ui.promptPurchaseAmount();
             while (!inputValidator.isValidPurchaseAmount(amount)) {
                 amount = ui.promptPurchaseAmount();
             }
             validAmount = amount;
         } catch (InputMismatchException e) {
-            ui.notifyInvalidPurchaseAmount();
+            ui.notifyInvalidInput();
             checkPurchaseAmountValidity();
         }
     }
@@ -74,7 +68,7 @@ public class Player {
             }
             validWinningLotto = winningLotto;
         } catch (NumberFormatException e) {
-            ui.notifyInvalidWinningLotto();
+            ui.notifyInvalidInput();
             checkWinningLottoValidity();
         }
     }
@@ -87,7 +81,7 @@ public class Player {
             }
             validBonusNo = bonusNo;
         } catch (InputMismatchException e) {
-            ui.notifyInvalidBonusNumber();
+            ui.notifyInvalidInput();
             checkBonusNumberValidity();
         }
 
@@ -104,36 +98,12 @@ public class Player {
         winningLotto = new WinningLotto(new Lotto(numbers), validBonusNo);
     }
 
-    public void calculateStatistics() {
-        long totalWinningMoney = 0;
-        int fifthToFirst = 3;
-        countWins = new int[RANK_ARRAY_SIZE];  /*5등은 3개를 맞추었으니 3번 인덱스에 wins를 기록 -> 1등은 7번 인덱스*/
-        for (Lotto userLotto : lottos) {
-            calculateHowManyWins(userLotto);
-        }
-        for (Rank r : rankArray) {
-            totalWinningMoney += countWins[fifthToFirst++] * r.getWinningMoney();
-        }
-        profitRate = ((double) totalWinningMoney / validAmount) * 100;
-    }
-
-    public void calculateHowManyWins(Lotto userLotto) {
-        for (Rank r : rankArray) {
-            fillCountWins(r, userLotto);
-        }
-    }
-
-    public void fillCountWins(Rank r, Lotto userLotto) {
-        if (winningLotto.match(userLotto) == r) {
-            countWins[r.getCountOfMatch()]++;
-            return;
-        }
-    }
-
     public void printStatistics() {
+        StatisticsCalculator calculator = new StatisticsCalculator();
+        calculator.calculateStatistics(lottos,winningLotto,validAmount);
         int fifthToFirst = 3;
-        for (Rank r : rankArray) {
-            ui.printStatistics(r, countWins[fifthToFirst++]);
+        for (Rank r : calculator.rankArray) {
+            ui.printStatistics(r, calculator.countWins[fifthToFirst++]);
         }
         ui.printProfitRate();
     }

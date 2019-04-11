@@ -2,8 +2,6 @@ package domain;
 
 import domain.interfaces.InputValidator;
 
-import java.util.Arrays;
-
 public class InputValidatorImpl implements InputValidator {
 
     private final static int LOTTO_BOUND_SIZE = 46;
@@ -11,8 +9,8 @@ public class InputValidatorImpl implements InputValidator {
     private static boolean isValid;
 
     @Override
-    public boolean isValidPurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount < MINIMUM_PURCHASE_AMOUNT) {
+    public boolean isValidPurchaseAmount(long purchaseAmount) {
+        if (purchaseAmount <= MINIMUM_PURCHASE_AMOUNT) {
             System.out.println("올바른 금액을 입력해 주세요.");
             return false;
         }
@@ -29,7 +27,7 @@ public class InputValidatorImpl implements InputValidator {
     public boolean isValidWinningLotto(int lottoLength, String[] winningLotto) {
         isValid = true;
         isPicked = new boolean[LOTTO_BOUND_SIZE];
-        checkInput(lottoLength);
+        checkNullInput(lottoLength);
         for (String s : winningLotto) {
             checkInput(lottoLength, s);
             isValidLottoNumber(Integer.parseInt(s));
@@ -41,7 +39,7 @@ public class InputValidatorImpl implements InputValidator {
         return true;
     }
 
-    public void checkInput(int lottoLength){
+    public void checkNullInput(int lottoLength){
         if (lottoLength == 0) {
             isValid = false;
         }
@@ -55,7 +53,7 @@ public class InputValidatorImpl implements InputValidator {
 
     @Override
     public void isValidLottoNumber(int num) {
-        if (num >= MIN_LOTTO_NUMBER && num <= MAX_LOTTO_NUMBER && isPicked[num] == false) {
+        if (num >= MIN_LOTTO_NUMBER && num <= MAX_LOTTO_NUMBER && !isPicked[num]) {
             isPicked[num] = true;
             return;
         }
