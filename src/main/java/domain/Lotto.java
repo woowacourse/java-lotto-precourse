@@ -21,7 +21,11 @@ public class Lotto {
         System.out.println(joiner.toString());
     }
 
-    boolean contains(int inputBonusNum) {
-        return numbers.contains(inputBonusNum);
+    boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    List<Integer> getNumbersList() {
+        return numbers;
     }
 }

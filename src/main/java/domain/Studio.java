@@ -18,6 +18,10 @@ public class Studio {
 
     }
 
+    public WinningLotto getWinningLotto() {
+        return winningLotto;
+    }
+
     public boolean enterWinningNums(String strNums) throws Exception {
         List<String> winningNumStrList = new ArrayList<>(Arrays.asList(strNums.replaceAll(" ", "").split(",")));
         TreeSet<Integer> winningNumIntSet = new TreeSet<>();
@@ -48,4 +52,3 @@ public class Studio {
         return false;
     }
 }
-

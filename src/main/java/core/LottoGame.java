@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 class LottoGame {
+
     private Person player;
     private Store lottoStore;
     private Studio lottoStudio;
@@ -25,6 +26,7 @@ class LottoGame {
         enterBudget();
         sellLotto();
         enterWinningInfo();
+        checkRank();
     }
 
     private boolean enterBudget() {
@@ -54,6 +56,7 @@ class LottoGame {
         System.out.println("\n" + lottoList.size() + "개를 구매하셨습니다.");
         for (Lotto lotto : lottoList)
             lotto.printNums();
+        System.out.println();
 
         return true;
     }
@@ -94,5 +97,21 @@ class LottoGame {
             enterWinningBonus();
         }
         return true;
+    }
+
+    private void checkRank() {
+        int[] myLottoRank = player.checkRank(lottoStudio.getWinningLotto());
+        printResult(myLottoRank, player.getPrizeMoney());
+    }
+
+    private void printResult(int[] rankArray, int prizeMoney) {
+        System.out.println("\n당첨 통계\n---------------\n");
+        System.out.println("3개 일치 (5000원) - " + rankArray[1] + "개");
+        System.out.println("4개 일치 (50000원) - " + rankArray[2] + "개");
+        System.out.println("5개 일치 (1500000원) - " + rankArray[3] + "개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + rankArray[4] + "개");
+        System.out.println("6개 일치 (2000000000원) - " + rankArray[5] + "개");
+        System.out.println("총 수익률은 " +
+                String.format("%.2f", Float.parseFloat(String.valueOf(prizeMoney * 1.0 / player.getMoneySpent()))) + "입니다.");
     }
 }
