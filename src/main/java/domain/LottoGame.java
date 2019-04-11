@@ -11,6 +11,7 @@ public class LottoGame {
     private List<WinningLotto> winningLotto = new ArrayList<>();
     private static final int GAME_PRICE = 1_000;
     private static final int UPPER_LIMIT = 100_000;
+    private static final int WINNING_LOTTO_INDEX = 0;       // winningLotto ArrayList에서 실제 winningLotto 객체가 저장된 인덱스
 
     public void issueLottos() {
         int userMoney = 0;
@@ -25,11 +26,9 @@ public class LottoGame {
 
     public void setWinningLotto() {
         Lotto winningNumbers = new Lotto(getWinningNumbers());
-        int bonusNumber = 46;
+        int bonusNumber = getBonusNumber(winningNumbers);
 
         winningLotto.add(new WinningLotto(winningNumbers, bonusNumber));
-
-        winningLotto.get(0).showNumbers();
     }
 
     private String getUserInput() {
@@ -125,7 +124,38 @@ public class LottoGame {
         }
     }
 
-//    private int getBonusNumber() {
-//
-//    }
+    private int getBonusNumber(Lotto winningNumbers) {
+        Scanner scan = new Scanner(System.in);
+        int bonusNumber = 0;
+
+        while (bonusNumber == 0) {
+            System.out.println("보너스 볼을 입력해 주세요.");
+            bonusNumber = validateBonusNumber(
+                    changeBonusNumberToInt(scan.nextLine()), winningNumbers);
+        }
+
+        return bonusNumber;
+    }
+
+    private int changeBonusNumberToInt(String userInput) {
+        try {
+            int bonusNumber = Integer.parseInt(userInput);
+
+            return bonusNumber;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private int validateBonusNumber(int userInput, Lotto winningNumbers) {
+        if ((winningNumbers.hasNumber(userInput)) ||
+                (userInput < 1) ||
+                (userInput > 45)) {
+            System.out.println("보너스 볼 번호는 1~45 사이의 당첨 번호와 겹치지 않는 정수로 입력해주세요.");
+
+            return 0;
+        }
+
+        return userInput;
+    }
 }

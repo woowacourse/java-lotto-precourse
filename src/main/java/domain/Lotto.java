@@ -17,4 +17,8 @@ public class Lotto {
     public void showNumbers() {
         System.out.println(Arrays.toString(numbers.toArray()));
     }
+
+    public boolean hasNumber(int number) {
+        return numbers.contains(number);
+    }
 }
