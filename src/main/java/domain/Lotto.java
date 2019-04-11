@@ -26,8 +26,8 @@ public class Lotto {
 
     public void print() {
         StringBuilder sb = new StringBuilder("[");
-        for (int i: numbers)
-            sb.append(numbers.get(i) +", ");
+        for (int number: numbers)
+            sb.append(number +", ");
         sb.delete(sb.length() - 2, sb.length());
         sb.append("]");
 

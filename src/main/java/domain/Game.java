@@ -18,20 +18,45 @@ public class Game {
 
     private List<Lotto> lottos = new ArrayList<>();
     private WinningLotto winningLotto;
-    private int gameNum;
+    private int gameNum, prize = 0;
+    private int[] result = new int[6];
 
     protected void execute() {
         setGameNum();
         buyLotto();
         printLottos();
-
-        // 지난 주 당첨 번호
         winningLotto = generateWinningLotto();
-        for (int i = 0; i < gameNum; i++)
-            winningLotto.match(lottos.get(i));
-
+        getResult();
+        printResult();
     }
 
+    private void getResult() {
+        for (Lotto lotto : lottos) {
+            Rank rank = winningLotto.match(lotto);
+            prize += rank.getWinningMoney();
+            count(rank.getCountOfMatch(), rank.getWinningMoney());
+        }
+    }
+
+    private void count(int countOfMatch, int winningMoney) {
+        if (countOfMatch == 6) result[5]++;
+        if (countOfMatch == 5 && winningMoney == 30000000) result[4]++;
+        if (countOfMatch == 5 && winningMoney == 1500000) result[3]++;
+        if (countOfMatch == 4) result[2]++;
+        if (countOfMatch == 3) result[1]++;
+    }
+
+    private void printResult() {
+        System.out.println(SENTENCE[4]);
+
+        StringBuilder result = new StringBuilder();
+        Rank[] rank = Rank.values();
+        for (int i = 4; i >= 0; i--) {
+            result.append(rank[i].getCountOfMatch() + "개 일치 (" + rank[i].getWinningMoney() + "원)-");
+            result.append(this.result[i] + "개\n");
+        }
+        System.out.println(result.toString());
+    }
     private void printLottos() {
         for (int i = 0; i < gameNum; i++) {
             lottos.get(i).print();
@@ -44,11 +69,10 @@ public class Game {
 
         // 임시로 당첨 번호 받기
         List<Integer> list = new LinkedList<>();
-        String input[] = sc.nextLine().split(",");
+        String[] input = sc.nextLine().split(",");
         for (String str : input) {
             list.add(Integer.parseInt(str));
         }
-
 
         System.out.println(SENTENCE[3]);
         int bonus = sc.nextInt();
