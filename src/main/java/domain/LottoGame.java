@@ -39,7 +39,7 @@ public class LottoGame {
             System.out.println(PURCHASE_GUIDE);
             Scanner prompt = new Scanner(System.in);
             purchasingMoney = prompt.nextInt();
-        } while (!this.validatePurchasingMoney(purchasingMoney, this.LOTTO_PRICE));
+        } while (!this.validatePurchasingMoney(purchasingMoney, LOTTO_PRICE));
         return purchasingMoney;
     }
 
@@ -96,7 +96,7 @@ public class LottoGame {
 
     private List<Integer> getWinningNumbers() {
         List<Integer> winningNumbers;
-        boolean isValid = false;
+        boolean isValid;
         do {
             winningNumbers = this.enterWinningNumbers();
             System.out.println(winningNumbers);
@@ -127,7 +127,8 @@ public class LottoGame {
         List<Integer> winningNumbers = this.getWinningNumbers();
         Lotto lottery = new Lotto(winningNumbers);
         int bonusBallNumber = this.getBonusBallNumber(winningNumbers);
-        winningLottery = new WinningLotto(lottery, bonusBallNumber);
+        WinningLotto winningLottery = new WinningLotto(lottery,
+            bonusBallNumber);
         return winningLottery;
     }
 
