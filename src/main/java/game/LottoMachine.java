@@ -12,5 +12,6 @@ import static game.Buyer.LOTTO_NUMBER_BOUNDARY;
  */
 public class LottoMachine {
     private static final int MIN_BOUNDARY = 1;
+    private static int bonusNumInput;            // 입력받은 보너스 숫자
 
 }
