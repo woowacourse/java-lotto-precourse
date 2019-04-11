@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,11 +44,32 @@ public class Game {
 		System.out.println("\n"+size+"개를 구매했습니다.");
 		
 		for (int i = 0; i < size; i++) {
-			//res.add(genLottoNumber());
+			res.add(genLottoNumber());
 			//res.get(i).printNumbers();
 		}
 		
 		return res;
+	}
+
+	private Lotto genLottoNumber() {
+		List<Integer> lottoNumbers = new ArrayList<Integer>();
+		LinkedList<Integer> numberList = generateNumList();
+		for (int i = 0; i < LOTTO_SIZE; i++) {
+			int randIdx = (int) (Math.random()*numberList.size());
+			int value = numberList.remove(randIdx);
+			lottoNumbers.add(value);
+		}
+		lottoNumbers.sort(null);
+		Lotto lotto = new Lotto(lottoNumbers);
+		return lotto;
+	}
+
+	private LinkedList<Integer> generateNumList() {
+		LinkedList<Integer> numList = new LinkedList<Integer>();
+		for (int i = LOTTO_MIN; i <= LOTTO_MAX; i++) {
+			numList.add(i);
+		}
+		return numList;
 	}
 
 	private int inputPrice() {
