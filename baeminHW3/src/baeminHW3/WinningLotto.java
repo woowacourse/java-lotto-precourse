@@ -1,5 +1,7 @@
 package baeminHW3;
 
+import baeminHW3.mainClass.Rank;
+
 public class WinningLotto {
     private final Lotto lotto;
     private final int bonusNo;
