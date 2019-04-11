@@ -45,6 +45,9 @@ public class LottoShop {
             System.out.println("구입금액을 입력해 주세요.");
             purchaseMoney = scan.nextInt();
         }
+        if (purchaseMoney % PRICE != 0) {
+            System.out.println("거스름돈은 " + purchaseMoney % PRICE + "원입니다.");
+        }
         return purchaseMoney;
     }
 
