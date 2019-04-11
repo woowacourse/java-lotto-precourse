@@ -21,6 +21,9 @@ public class CommandLineInterface {
 													  + " 이상 "
 													  + Validator.MAX_PURCHASE_AMOUNT
 													  + " 이하의 값을 입력해 주세요.";
+		private static final String INDIVISIBLE_PRICE_ERROR 
+												= Validator.UNIT_PRICE_OF_LOTTO
+												+ " 단위의 값을 입력해 주세요.";
 		
 		public static void printInputPurchasePrice() {
 				System.out.println(INPUT_PURCHASE_PRICE);			
@@ -32,5 +35,9 @@ public class CommandLineInterface {
 		
 		public static void printPurchasePriceRangeError() {
 				System.out.println(PRICE_RANGE_ERROR);
+		}
+
+		public static void printIndivisiblePurchasePriceError() {
+				System.out.println(INDIVISIBLE_PRICE_ERROR);
 		}
 }

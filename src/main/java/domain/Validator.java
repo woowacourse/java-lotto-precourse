@@ -73,4 +73,12 @@ public class Validator {
 				CommandLineInterface.printPurchasePriceRangeError();
 				return false;
 		}
+
+		private static boolean isDivisiblePurchasePriceByUnit(int purchasePrice) {
+				if (purchasePrice % UNIT_PRICE_OF_LOTTO == DIVISIBLE) {
+						return true;
+				}
+				CommandLineInterface.printIndivisiblePurchasePriceError();
+				return false;
+		}
 }
