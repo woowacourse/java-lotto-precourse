@@ -22,9 +22,18 @@ public class BonusNoValidation implements Validation<Integer> {
 			Integer.parseInt(value);
 			return true;
 		} catch (NumberFormatException e) {
-			System.out.println("정수가 아닙니다.");
+			System.out.println("정수가 아닙니다.\n");
 			return false;
 		}
+	}
+
+	private boolean checkRange() {
+		if ((bonusNo < MIN_NUMBER) || (bonusNo > MAX_NUMBER)) {
+			System.out.println("보너스 볼의 범위는 최소 1, 최대 45 입니다.\n");
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
