@@ -1,7 +1,5 @@
 package baeminHW3;
 
-
-
 public class mainClass {
 	
 	public enum Rank {
