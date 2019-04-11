@@ -1,3 +1,11 @@
+/**
+ * 우아한테크코스 프리코스 3주차 미션
+ * 로또 게임
+ *
+ * @author JiHoon Kim
+ * @version 1.0
+ */
+
 package core;
 
 import domain.Lotto;
@@ -29,19 +37,27 @@ class LottoGame {
         checkRank();
     }
 
+    /**
+     * @return 입력한 수가 마이너스면 False를 리턴
+     */
     private boolean enterBudget() {
         int budget = 0;
         System.out.println("구입 금액을 입력해 주세요.");
         try {
             budget = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException nfe) {
-            System.out.println("잘못된 입력입니다.");
+            System.out.println("잘못된 입력입니다.");                       /* 문자를 입력값으로 받았을 때 */
             enterBudget();
         }
 
         return player.setBudget(budget);
     }
 
+    /**
+     * 사용자의 구매 금액을 입력받아 로또 객체들을 생성하고 출력하는 클래스
+     *
+     * @return 로또를 살 돈이 부족하면 False를 리턴
+     */
     private boolean sellLotto() {
         List<Lotto> lottoList = lottoStore.sellLotto(player.payBudget());
         if (lottoList.size() == 0)
@@ -65,7 +81,7 @@ class LottoGame {
         enterWinningNums();
         enterWinningBonus();
 
-        if (lottoStudio.containBonusNum())
+        if (lottoStudio.containBonusNum())                      /* 보너스 번호가 당첨 번호에 포함 됬을 때 다시 입력 받음 */
             enterWinningInfo();
 
         return true;
@@ -75,10 +91,10 @@ class LottoGame {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         try {
             while (!lottoStudio.enterWinningNums(scanner.nextLine())) ;
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {                               /* 문자를 입력했을 때 */
             System.out.println("문자를 입력하셨습니다.");
             enterWinningNums();
-        } catch (Exception e) {
+        } catch (Exception e) {                                             /* 번호의 갯수, 범위가 로또 규칙과 다를 때 */
             System.out.println(e.getMessage());
             enterWinningNums();
         }
@@ -89,10 +105,10 @@ class LottoGame {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
             while (!lottoStudio.enterWinningBonus(scanner.nextLine())) ;
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {                               /* 문자를 입력했을 때 */
             System.out.println("문자를 입력하셨습니다.");
             enterWinningBonus();
-        } catch (Exception e) {
+        } catch (Exception e) {                                             /* 번호의 범위가 로또 규칙과 다를 때 */
             System.out.println(e.getMessage());
             enterWinningBonus();
         }

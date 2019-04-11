@@ -1,3 +1,11 @@
+/**
+ * 우아한테크코스 프리코스 3주차 미션
+ * 로또 게임
+ *
+ * @author JiHoon Kim
+ * @version 1.0
+ */
+
 package domain;
 
 /**
@@ -15,14 +23,14 @@ public class WinningLotto {
     public Rank match(Lotto userLotto) {
         int countOfMatch = 0;
 
-        for (int userNum : userLotto.getNumbersList())
+        for (int userNum : userLotto.getNumbersList())          /* 입력 받은 로또의 번호마다 당첨번호에 포함되는지 확인 */
             if (lotto.contains(userNum))
                 countOfMatch++;
 
         return Rank.valueOf(countOfMatch, compareBonus(userLotto));
     }
 
-    public boolean compareBonus(Lotto userLotto) {
+    private boolean compareBonus(Lotto userLotto) {
         return userLotto.contains(bonusNo);
     }
 }
