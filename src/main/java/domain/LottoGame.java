@@ -7,9 +7,12 @@ public class LottoGame {
 
     public static void main(String[] arg) {
         Controller controller = new Controller();
+        MessageManager manger = new MessageManager();
 
         controller.askHowMany();
         controller.buyLotto();
         controller.showLottosNumber();
+
+        manger.askLastWinningLotto();
     }
 }
