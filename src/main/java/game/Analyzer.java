@@ -53,4 +53,18 @@ public class Analyzer {
         }
         map.remove(Rank.MISS);
     }
+
+    /*
+     * 랭크에 따라 출력할 문장
+     */
+    public String tellCorrectCountAndMoney(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return rank.getCountOfMatch() + "개 일치, 보너스 볼 일치("
+                    + rank.getWinningMoney() + "원)- "
+                    + map.get(Rank.SECOND) + "개";
+        }
+        return rank.getCountOfMatch() + "개 일치 ("
+                + rank.getWinningMoney() +"원)- "
+                + map.get(rank) + "개";
+    }
 }
