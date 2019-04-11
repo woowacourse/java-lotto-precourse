@@ -13,18 +13,17 @@ public class LottoManager {
     public static final int WINNING_NUMBER_ORIGIN = 1;
     public static final int NUM_OF_WINNING_NUMBERS = 6;
 
-    private List<Integer> winningNumbers;
-
     private Scanner sc = new Scanner(System.in);
     private Validator validator = new Validator();
+    private List<Integer> winningNumbers;
 
     public int inputPurchaseAmount() {
         String purchaseAmount;
 
         do {
             System.out.println("구매 금액을 입력해주세요.");
-            purchaseAmount = sc.nextLine();
-        } while(!validator.isValidPurchase(purchaseAmount));
+            purchaseAmount = sc.nextLine().trim();
+        } while (!validator.takesValidPurchase(purchaseAmount));
 
         return Integer.parseInt(purchaseAmount);
     }
@@ -38,7 +37,7 @@ public class LottoManager {
     public Lotto autoIssue() {
         List<Integer> autoNumbers = new ArrayList<Integer>();
         List<Integer> lottoNumberSet = IntStream.rangeClosed(WINNING_NUMBER_ORIGIN, WINNING_NUMBER_BOUND)
-                                                .boxed().collect(Collectors.toList());
+                .boxed().collect(Collectors.toList());
 
         for (int i = 0; i < NUM_OF_WINNING_NUMBERS; i++) {
             autoNumbers.add(randomPop(lottoNumberSet));
@@ -61,13 +60,13 @@ public class LottoManager {
     }
 
     public void showLottos(List<Lotto> lottos) {
-        for (Lotto lotto: lottos) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
         System.out.print("\n");
     }
 
-    public List<String> trim(String[] splited) {
+    public List<String> trimAllElementsOf(String[] splited) {
         return Arrays.stream(splited)
                 .map(str -> str.trim())
                 .filter(str -> !str.equals(""))
@@ -79,21 +78,21 @@ public class LottoManager {
 
         do {
             System.out.println("지난 주 당첨 번호를 입력해주세요.");
-            winningNumbers = trim(sc.nextLine().split(","));
-        } while(!validator.isValidWinningNumbers(winningNumbers));
+            winningNumbers = trimAllElementsOf(sc.nextLine().split(","));
+        } while (!validator.takesValidWinningNumbers(winningNumbers));
 
         this.winningNumbers = winningNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
         return new Lotto(this.winningNumbers);
     }
 
     public int inputBonus() {
-        String bonus;
+        String bonusNo;
 
         do {
             System.out.println("보너스 볼을 입력해주세요");
-            bonus = sc.nextLine();
-        } while(!validator.isValidBonus(bonus, winningNumbers));
+            bonusNo = sc.nextLine().trim();
+        } while (!validator.takesValidBonusNo(bonusNo, winningNumbers));
 
-        return Integer.parseInt(bonus);
+        return Integer.parseInt(bonusNo);
     }
 }
