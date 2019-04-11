@@ -47,6 +47,6 @@ public class BonusNoValidation implements Validation<Integer> {
 
 	@Override
 	public Integer convert(String value) {
-		return null;
+		return Integer.parseInt(value);
 	}
 }
