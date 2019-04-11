@@ -133,4 +133,14 @@ public class Game {
 
         return false;
     }
+
+    private boolean checkLottoNumberRangeAndFormat(List<String> lottoNumbers) {
+        List<Boolean> checkNumber = new ArrayList<>();
+
+        for (String number : lottoNumbers) {
+            checkNumber.add(checkNumberRangeAndFormat(number));
+        }
+
+        return checkNumber.contains(true);
+    }
 }
