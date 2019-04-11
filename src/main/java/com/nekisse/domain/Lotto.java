@@ -1,8 +1,9 @@
 package com.nekisse.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.nekisse.LottoRandomNumberGenerator.LIMIT_LOTTO_NUMBER;
+import static com.nekisse.generator.LottoRandomNumberGenerator.LIMIT_LOTTO_NUMBER;
 
 /**
  * 로또 한장을 의미하는 객체
@@ -21,6 +22,22 @@ public class Lotto {
         return numbers.contains(bonusNumber);
     }
 
+    public int matchGetSameNumberCount(Lotto userLotto) {
+        int sameNumberCount = 0;
+        for (LottoNumber number : userLotto.getNumbers()) {
+            sameNumberCount += count(number);
+        }
+        return sameNumberCount;
+    }
+
+    private int count(LottoNumber number) {
+        return this.isContainsNum(number) ? 1 : 0;
+    }
+
+    public boolean isContainsNum(LottoNumber number) {
+        return this.numbers.contains(number);
+    }
+
     private boolean validNumbersSize(List<LottoNumber> numbers) {
         return numbers.size() != LIMIT_LOTTO_NUMBER;
     }
@@ -33,6 +50,14 @@ public class Lotto {
 
     public List<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public static Lotto of(int... testNumbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int testNumber : testNumbers) {
+            lottoNumbers.add(LottoNumber.getBasicNumber(testNumber));
+        }
+        return new Lotto(lottoNumbers);
     }
 
 }

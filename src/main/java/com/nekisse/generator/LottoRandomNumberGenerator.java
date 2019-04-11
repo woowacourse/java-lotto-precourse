@@ -1,4 +1,4 @@
-package com.nekisse;
+package com.nekisse.generator;
 
 import com.nekisse.domain.LottoNumber;
 

@@ -3,6 +3,7 @@ package com.nekisse;
 import com.nekisse.domain.Lotto;
 import com.nekisse.domain.Money;
 import com.nekisse.domain.UserLottos;
+import com.nekisse.generator.RandomNumberGenerator;
 
 public class LottoMachine {
 

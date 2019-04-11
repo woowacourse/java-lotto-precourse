@@ -1,4 +1,4 @@
-package com.nekisse;
+package com.nekisse.generator;
 
 import com.nekisse.domain.Lotto;
 import com.nekisse.domain.LottoNumber;
@@ -6,12 +6,10 @@ import com.nekisse.domain.LottoNumber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WininngLottoGenerator {
-
+public class WinningLottoGenerator {
 
     public static Lotto createLotto(String inputWinningLottoNumbers) {
         List<LottoNumber> winingNumbers = getLottoNumbers(inputWinningLottoNumbers);
-
         return new Lotto(winingNumbers);
     }
 
@@ -23,7 +21,5 @@ public class WininngLottoGenerator {
         }
         return winingNumbers;
     }
-
-
 
 }

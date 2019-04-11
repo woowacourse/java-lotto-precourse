@@ -1,6 +1,7 @@
 package com.nekisse;
 
 import com.nekisse.domain.LottoNumber;
+import com.nekisse.generator.LottoRandomNumberGenerator;
 import org.junit.Test;
 
 import java.util.List;
