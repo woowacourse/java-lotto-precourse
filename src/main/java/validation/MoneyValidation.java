@@ -16,9 +16,18 @@ public class MoneyValidation implements Validation<Integer> {
 			Integer.parseInt(value);
 			return true;
 		} catch (NumberFormatException e) {
-			System.out.println( "정수가 아닙니다.\n");
+			System.out.println("정수가 아닙니다.\n");
 			return false;
 		}
+	}
+
+	private boolean checkRange() {
+		if ((money < MIN_MONEY) || (money > MAX_MONEY)) {
+			System.out.println(String.format("금액의 범위는 최소 %,d원, 최대 %,d원 입니다.\n", MIN_MONEY, MAX_MONEY);
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
