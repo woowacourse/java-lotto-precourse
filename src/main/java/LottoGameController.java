@@ -30,5 +30,7 @@ public class LottoGameController {
         int bonusNo = scanner.nextInt();
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(inputLotto), bonusNo);
+
+        lottoGameOutputView.printResult(new LottoResult(lottoGenerator.getGenerateLottos(), winningLotto));
     }
 } 
