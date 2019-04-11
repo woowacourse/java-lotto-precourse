@@ -22,21 +22,52 @@ public class Game {
 
     protected void execute() {
         setGameNum();
-
-        for (int i = 0; i < gameNum; i++) {
-            lottos.add(generateLotto());
-        }
+        buyLotto();
         printLottos();
+
+        // 지난 주 당첨 번호
+        winningLotto = generateWinningLotto();
 
     }
 
     private void printLottos() {
-        System.out.println(gameNum + SENTENCE[1]);
-
         for (int i = 0; i < gameNum; i++) {
             lottos.get(i).print();
         }
     }
+
+    private WinningLotto generateWinningLotto() {
+        // 임시로 당첨 번호 받기
+        List<Integer> list = new LinkedList<>();
+        String input[] = sc.nextLine().split(",");
+        for (int i = 0; i < input.length; i++)
+            list.add(Integer.parseInt(input[i]));
+
+        int bonus = sc.nextInt();
+
+        Lotto lotto = new Lotto(list);
+
+        return new WinningLotto(lotto, bonus);
+    }
+
+    /*private void putValidNumber(List<Integer> list) {
+        StringBuilder input = new StringBuilder(sc.nextLine());
+        while (input.length() > 2) {
+            // 한 자리 수일 때
+            if (input.charAt(1) == ',') {
+
+            }
+            // 두 자리 수일 때
+            else if (input.charAt(1) >= '0' && input.charAt(1) <= '9') {
+
+            }
+        }
+
+    }
+
+    private boolean isValidNumber(StringBuilder input, List<Integer> list) {
+
+    }*/
 
     private Lotto generateLotto() {
         Set<Integer> set = new HashSet<>();
@@ -48,6 +79,13 @@ public class Game {
         Collections.sort(list);
 
         return new Lotto(list);
+    }
+
+    private void buyLotto() {
+        System.out.println(gameNum + SENTENCE[1]);
+
+        for (int i = 0; i < gameNum; i++)
+            lottos.add(generateLotto());
     }
 
     private void setGameNum() {
