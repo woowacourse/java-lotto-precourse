@@ -12,6 +12,10 @@ public class Lotto {
         this.numbers = numbers;
     }
     
+    public List<Integer> getNumbers() {
+    	return this.numbers;
+    }
+    
 	public void printNumbers() {
 		String numbersString = numbers.toString();
 		System.out.println(numbersString);
