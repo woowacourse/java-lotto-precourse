@@ -13,6 +13,12 @@ public class User {
         lottoList = new ArrayList<>();
     }
 
+    public String inputBonus(){
+        String input;
+        input = scanner.nextLine();
+        return input;
+    }
+
     public List<String> inputNumbers(){
         String input;
         input = scanner.nextLine();
