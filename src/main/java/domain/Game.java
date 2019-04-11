@@ -15,6 +15,8 @@ public class Game {
             buyLotto();
         } while (printPurchaseCount());
 
+        Map<Rank, Integer> has;
+
         createLottoObjectArray();
         createLottoInstance();
         repeatOutputLottoNumbers();
@@ -22,7 +24,10 @@ public class Game {
         inputLastWeekWinningLotto();
         inputBonusBallLotto();
 
-        outputWinStats(matchLottoNumber());
+        has = matchLottoNumber();
+
+        outputWinStats(has);
+        outputRevenueCalculation(revenueCalculation(has));
     }
 
     private void buyLotto() {
@@ -211,25 +216,25 @@ public class Game {
     }
 
     private Map<Rank, Integer> initMap() {
-        Map<Rank, Integer> rankMap = new LinkedHashMap<>();
+        Map<Rank, Integer> rankLinkedHashMap = new LinkedHashMap<>();
         Rank[] ranks = Rank.values();
 
         for (int i = 5; i >= 0; i--) {
-            rankMap.put(ranks[i], 0);
+            rankLinkedHashMap.put(ranks[i], 0);
         }
 
-        return rankMap;
+        return rankLinkedHashMap;
     }
 
     private Map<Rank, Integer> matchLottoNumber() {
-        Map<Rank, Integer> LinkedHashMap = initMap();
+        Map<Rank, Integer> rankLinkedHashMap = initMap();
 
         for (Lotto lotto : lottos) {
             Rank rank = createWinningLotto().match(lotto);
-            LinkedHashMap.put(rank, LinkedHashMap.get(rank) + 1);
+            rankLinkedHashMap.put(rank, rankLinkedHashMap.get(rank) + 1);
         }
 
-        return LinkedHashMap;
+        return rankLinkedHashMap;
     }
 
     private void outputRankMessage(Rank rank, int count) {
@@ -244,9 +249,23 @@ public class Game {
         System.out.println(count + "개");
     }
 
-    private void outputWinStats(Map<Rank, Integer> hash) {
-        for (Map.Entry<Rank, Integer> rankEntry : hash.entrySet()) {
+    private void outputWinStats(Map<Rank, Integer> rankLinkedHashMap) {
+        for (Map.Entry<Rank, Integer> rankEntry : rankLinkedHashMap.entrySet()) {
             outputRankMessage(rankEntry.getKey(), rankEntry.getValue());
         }
+    }
+
+    private double revenueCalculation(Map<Rank, Integer> rankLinkedHashMap) {
+        double totalPrice = 0;
+
+        for (Map.Entry<Rank, Integer> rankEntry : rankLinkedHashMap.entrySet()) {
+            totalPrice += rankEntry.getKey().getWinningMoney() * rankEntry.getValue();
+        }
+
+        return totalPrice / inputPrice;
+    }
+
+    private void outputRevenueCalculation(double revenuePrice) {
+        System.out.println("총 수익률은 " + revenuePrice + "입니다.");
     }
 }
