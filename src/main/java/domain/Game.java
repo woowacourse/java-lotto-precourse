@@ -16,7 +16,7 @@ public class Game {
         createLottoObjectArray();
         createLottoInstance();
         repeatOutputLottoNumbers();
-        
+
     }
 
     private void buyLotto() {
@@ -103,5 +103,9 @@ public class Game {
         List<String> lottoNumbers = Arrays.asList(inputLottoNumber.split(","));
 
         return lottoNumbers;
+    }
+
+    private String removeBlank(String inputLottoNumber) {
+        return inputLottoNumber.replaceAll(" ", "");
     }
 }
