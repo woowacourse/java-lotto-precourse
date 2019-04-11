@@ -41,6 +41,6 @@ public class MoneyValidation implements Validation<Integer> {
 
 	@Override
 	public Integer convert(String value) {
-		return null;
+		return Integer.parseInt(value);
 	}
 }
