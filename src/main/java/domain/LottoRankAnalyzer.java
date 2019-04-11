@@ -29,12 +29,12 @@ public class LottoRankAnalyzer {
 
     public EarningRate getEarningRate(List<Lotto> lottos) {
         List<Rank> ranks = calculateRank(lottos);
-        long winningMoney = getWinningMoney(ranks);
+        long earningMoney = getEarningMoney(ranks);
         int purchaseMoney = LOTTO_PRICE * lottos.size();
-        return new EarningRate(winningMoney / (double) purchaseMoney);
+        return new EarningRate(earningMoney / (double) purchaseMoney);
     }
 
-    private long getWinningMoney(List<Rank> ranks) {
+    private long getEarningMoney(List<Rank> ranks) {
         return ranks.stream()
                 .mapToInt(Rank::getWinningMoney)
                 .sum();
