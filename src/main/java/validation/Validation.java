@@ -1,7 +1,9 @@
 package validation;
 
 /**
- * 입력값의 유효성을 검사하고 원하는 값으로 변환하는 인터페이스
+ * Validation 객체는 입력받은 데이터를 검증하고 변환을 해준다.
+ *
+ * @author 조남균
  */
 public interface Validation<T> {
 	boolean check(String value);

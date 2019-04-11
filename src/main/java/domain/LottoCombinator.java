@@ -9,6 +9,11 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * LottoCombinator 객체는 랜덤숫자로 구성된 로또를 생성해준다.
+ *
+ * @author 조남균
+ */
 public class LottoCombinator {
 	private static final int MIN_NUMBER = LottoValidation.MIN_NUMBER;
 	private static final int MAX_NUMBER = LottoValidation.MAX_NUMBER;

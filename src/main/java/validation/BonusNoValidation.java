@@ -2,6 +2,11 @@ package validation;
 
 import java.util.List;
 
+/**
+ * BonusNoValidation 객체는 보너스 볼 데이터 검증을 담당한다.
+ *
+ * @author 조남균
+ */
 public class BonusNoValidation implements Validation<Integer> {
 	public static final int MIN_NUMBER = LottoValidation.MIN_NUMBER;
 	public static final int MAX_NUMBER = LottoValidation.MAX_NUMBER;

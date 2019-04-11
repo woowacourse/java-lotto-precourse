@@ -9,6 +9,11 @@ import validation.Validation;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * GameUI 객체는 로또 게임의 사용자 인터페이스를 담당한다.
+ *
+ * @author 조남균
+ */
 public class GameUI {
 	private Game game;
 

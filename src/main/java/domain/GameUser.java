@@ -3,6 +3,11 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * GameUser 객체는 돈과 구매한 로또를 소유한다.
+ *
+ * @author 조남균
+ */
 public class GameUser {
 	private final int money;
 	private List<Lotto> lottos;
@@ -16,7 +21,7 @@ public class GameUser {
 		lottos.add(lotto);
 	}
 
-	public int countOfLottos() {
+	public int countOfLotto() {
 		return lottos.size();
 	}
 

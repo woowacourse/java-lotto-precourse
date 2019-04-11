@@ -1,5 +1,10 @@
 package validation;
 
+/**
+ * MoneyValidation 객체는 돈 데이터 검증을 담당한다.
+ *
+ * @author 조남균
+ */
 public class MoneyValidation implements Validation<Integer> {
 	public static final int MONEY_UNIT = 1_000;
 	public static final int MIN_MONEY = 1_000;

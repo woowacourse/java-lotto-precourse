@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * LottoValidation 객체는 로또번호 데이터 검증을 담당한다.
+ *
+ * @author 조남균
+ */
 public class LottoValidation implements Validation<List<Integer>> {
 	public static final int MIN_NUMBER = 1;
 	public static final int MAX_NUMBER = 45;

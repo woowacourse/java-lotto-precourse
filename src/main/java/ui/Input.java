@@ -5,7 +5,9 @@ import validation.Validation;
 import java.util.Scanner;
 
 /**
- * 게임 사용자 인터페이스의 입력을 담당하는 객체
+ * Input 객체는 사용자로부터 데이터를 받는다.
+ *
+ * @author 조남균
  */
 public class Input<T> {
 	private final Scanner sc;
