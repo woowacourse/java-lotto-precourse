@@ -58,6 +58,10 @@ rankMap을 각자 rank,0의 pair로 초기화시켜주는 메소드.
 
 rank를 보기 쉬운 string 형태로 변환하는 메소드.
 
+### Main -> calculateBenefit()
+
+초기 구매금과 실제 당첨금을 비교하여 이익 계산하는 메소드
+
 ### Main -> printResult()
 
 매칭결과를 계산하여 그것을 출력해주는 메소드.
