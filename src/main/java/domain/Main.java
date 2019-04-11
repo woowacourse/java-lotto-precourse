@@ -21,15 +21,14 @@ public class Main {
         return staticSc;
     }
 
-    private static int getTrials() {
+    private static int getMoney() {
         int value, trials;
         Scanner sc = getScanner();
         System.out.println("구입금액을 입력해주세요.");
 
         value = sc.nextInt();
-        trials = (int)Math.floor(value / LOTTO_PRICE);
 
-        return trials;
+        return value;
     }
 
     private static void initNumSeq() {
@@ -127,6 +126,8 @@ public class Main {
 
     public static void main(String[] args) {
         buyMultipleLotto(getTrials());
+        getWinningLotto();
+
 
     }
 }
