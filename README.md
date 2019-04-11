@@ -9,6 +9,7 @@ baemin HW3 로또
 + 로또 번호 저장
 + 로또 끼리 몇개 일치하는지 확인
 + Integer가 같은지 비교
++ 로또 번허 출력
 
 ### class WinningLotto
 
