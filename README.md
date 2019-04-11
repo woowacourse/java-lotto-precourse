@@ -40,4 +40,7 @@ LottoGameStart 클래스
 
 WinningLotto 클래스
 
--Match : 숫자 매칭 
+-Match : 로또 번호 숫자 매칭
+
+-ResultLotto : 구입한 로또와 정답 로또 매칭 함수 
+

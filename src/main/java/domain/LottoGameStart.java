@@ -19,6 +19,10 @@ public class LottoGameStart {
         PrintNumber(NumOfLotto, PurchaseLotto);
         Lotto ThisWeekLottoList = ThisWeekNumber();
         int ThisWeekBonusNumber = ThisWeekBonusNumber();
+        WinningLotto WinLotto = new WinningLotto(ThisWeekLottoList,ThisWeekBonusNumber);
+        ArrayList <Rank> RankLotto = new ArrayList<Rank>();
+        ResultLotto(RankLotto, WinLotto, PurchaseLotto);
+
     }
 
     public static int GetMoney()
@@ -104,5 +108,11 @@ public class LottoGameStart {
         BonusNum = sc.nextInt();
         return BonusNum;
     }
-
+    public static void ResultLotto(ArrayList<Rank> RankLottos, WinningLotto WinLottos, Lotto[] Lottos)
+    {
+        for(int i=0; i<Lottos.length; i++)
+        {
+            RankLottos.add(WinLottos.match(Lottos[i]));
+        }
+    }
 }
