@@ -141,4 +141,25 @@ public class Validator {
 				CommandLineInterface.printWinningNumberDuplicationError();
 				return false;
 		}
+
+		public static boolean isValidBonusBall(String userBonusBall) {
+				try {
+						userBonusBall = SCANNER.nextLine().trim();
+						bonusBall = Integer.parseInt(userBonusBall);
+						return isValidBonusBallNumberRange(bonusBall) 
+								&& isThereBonusBallDuplication(bonusBall);
+						
+				} catch (NumberFormatException e) {
+						CommandLineInterface.printBonusBallNumberError();
+						return false;
+				}
+		}
+
+		private static boolean isValidBonusBallNumberRange(int bonusBall) {
+				if (bonusBall >= MIN_RANDOM_NUMBER && bonusBall <= MAX_RANDOM_NUMBER) {
+						return true;
+				}
+				CommandLineInterface.printBonusBallNumberRangeError();
+				return false;
+		}
 }

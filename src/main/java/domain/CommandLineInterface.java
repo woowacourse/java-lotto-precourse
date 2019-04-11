@@ -91,4 +91,12 @@ public class CommandLineInterface {
 		public static void printInputBonusBall() {
 				System.out.println(INPUT_BONUS_BALL);
 		}
+
+		public static void printBonusBallNumberError() {
+				System.out.println(NUMBER_ERROR);
+		}
+		
+		public static void printBonusBallNumberRangeError() {
+				System.out.println(NUMBER_RANGE_ERROR);
+		}
 }
