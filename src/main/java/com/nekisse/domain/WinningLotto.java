@@ -9,12 +9,11 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNo) {
         this.winningLotto = winningLotto;
-        if (winningLotto.isContainsNumber(bonusNo)) {
+        if (winningLotto.isContainsNum(bonusNo)) {
             throw new IllegalArgumentException("보너스 숫자가 중복입니다.");
         }
         this.bonusNo = bonusNo;
     }
-
 
     public Rank match(Lotto userLotto) {
         return Rank.valueOf(winningLotto.matchGetSameNumberCount(userLotto), userLotto.isContainsNum(bonusNo));

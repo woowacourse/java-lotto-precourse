@@ -10,6 +10,10 @@ public class OutputView {
         }
     }
 
+    public static void printProfits(double profits) {
+        System.out.printf("총 수익률은 %.3f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)",profits);
+    }
+
     public static void printResult(LottoResult lottoResult) {
         String format = "%d개 일치 (%d원)-  %d개\n";
         System.out.println("당첨통계\n------");

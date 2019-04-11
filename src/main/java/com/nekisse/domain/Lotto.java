@@ -18,9 +18,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public boolean isContainsNumber(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
-    }
 
     public int matchGetSameNumberCount(Lotto userLotto) {
         int sameNumberCount = 0;
