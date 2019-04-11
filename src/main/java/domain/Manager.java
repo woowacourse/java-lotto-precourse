@@ -26,9 +26,12 @@ public class Manager {
     public boolean thirdQuery(){
         System.out.println("보너스 볼을 입력해 주세요.");
         String ret = user.inputBonus();
-        if(!CheckFormatError(ret)){
+
+        if(!CheckFormatError(ret) || !checkRangeNumber(Integer.parseInt(ret))
+                || !checkDuplicateNumber(Integer.parseInt(ret))){
             return false;
         }
+
         return true;
     }
 
