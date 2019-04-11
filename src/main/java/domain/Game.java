@@ -143,4 +143,13 @@ public class Game {
 
         return checkNumber.contains(true);
     }
+
+    private boolean checkNumberCount(List<String> numbers, int listSize) {
+        if (numbers.size() != listSize) {
+            System.out.println("숫자 개수를 " + listSize + "로 맞추세요.");
+            return true;
+        }
+
+        return false;
+    }
 }
