@@ -55,6 +55,7 @@ public class Main {
     }
 
     private void buyMultipleLotto(int trials) {
+        lottoList = new ArrayList<>();
         System.out.println(String.format("%d 개를 구매했습니다.", trials));
         for (int i = 0; i < trials; i++) {
             Lotto tmp = buyLotto();
