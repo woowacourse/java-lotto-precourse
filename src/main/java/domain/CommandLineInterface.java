@@ -30,6 +30,12 @@ public class CommandLineInterface {
 		private static final String SPACING_ONE_LINE = "\n";
 		private static final String INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
 		private static final String WINNING_NUMBER_ERROR = "올바른 당첨 번호를 입력해 주세요.";
+		private static final String WINNING_NUMBER_COUNT_ERROR = "6개의 당첨 번호를 입력해 주세요.";
+		private static final String NUMBER_RANGE_ERROR 
+												= LottoNumberGenerator.MIN_RANDOM_NUMBER 
+												+ " 이상 "
+												+ LottoNumberGenerator.MAX_RANDOM_NUMBER
+												+ " 이하의 번호를 입력해 주세요.";
 		
 		public static void printInputPurchasePrice() {
 				System.out.println(INPUT_PURCHASE_PRICE);			
@@ -65,6 +71,14 @@ public class CommandLineInterface {
 
 		public static void printWinningNumberError() {
 				System.out.println(WINNING_NUMBER_ERROR);
+		}
+
+		public static void printWinningNumberCountError() {
+				System.out.println(WINNING_NUMBER_COUNT_ERROR);
+		}
+		
+		public static void printWinningNumberRangeError() {
+				System.out.println(NUMBER_RANGE_ERROR);
 		}
 
 }

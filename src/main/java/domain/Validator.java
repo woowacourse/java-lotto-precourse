@@ -112,4 +112,21 @@ public class Validator {
 						&& isValidWinningNumRange(winningNums)
 						&& isThereWinningNumDuplication(winningNums);
 		}
+
+		private static boolean isValidWinningNumCount(List<Integer> winningNums) {
+				if (winningNums.size() == LottoNumberGenerator.THE_NUM_OF_LOTTO_NUMS) {
+						return true;
+				}
+				CommandLineInterface.printWinningNumberCountError();
+				return false;
+		}
+		
+		private static boolean isValidWinningNumRange(List<Integer> winningNums) {
+				if (winningNums.get(LIST_FIRST_ELEMENT) >= MIN_RANDOM_NUMBER 
+						&& winningNums.get(LIST_LAST_ELEMENT) <= MAX_RANDOM_NUMBER) {
+					return true;
+				}
+				CommandLineInterface.printWinningNumberRangeError();
+				return false;
+		}
 }
