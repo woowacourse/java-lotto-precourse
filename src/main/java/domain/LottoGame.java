@@ -102,9 +102,10 @@ public class LottoGame {
     public void printResult(List<Iterator<Integer>> iterators) {
 		int j = 0;
 		String printResult = "";
-		
+	
 		for(int i = START_FROM_THIRD; i < END_BY_EIGHT; i++) {
-			j = (i >= 6) ? i-1 : i;
+			printResult = "";
+			j = (i >= OVER_SECOND_RANK) ? i-1 : i;
 			printResult += ((j == OVER_SECOND_RANK) ? j + "개 일치," : j + "개 일치, 보너스 볼 일치");
 			printResult += " ("+ iterators.get(0).next() + "원 ) - " + iterators.get(1).next() + "개";
 			System.out.println(printResult);
