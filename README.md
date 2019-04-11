@@ -52,9 +52,6 @@
 
 - Controller
     - Controller : 생성자
-    - askHowMuch : 로또 구입을 얼마나 할지 물어보는 기능
-    - isNumber : 구입으로 적은 금액이 숫자인지 판단하는 기능
-    - checkInputRangeRight : 입력받은 금액이 한도 금액에 맞는지 판단하는 기능
     - buyLotto : 입력된 금액 만큼 로또를 구매
     - calculateLottoAmount : 몇개의 로또와 거스름돈이 생기는지 출력하는 기능
     - makeRandomNumber : 7개의 숫자 생성
@@ -64,6 +61,9 @@
     - getNumbersList : 각 로또가 갖고 있는 번호 반환
 - MessageManager
     - MessageManager : 생성자
+    - askHowMuch : 로또 구입을 얼마나 할지 물어보는 기능
+    - isNumber : 구입으로 적은 금액이 숫자인지 판단하는 기능
+    - checkInputRangeRight : 입력받은 금액이 한도 금액에 맞는지 판단하는 기능
     - askLastWinningLotto : 지난주 로또 당첨 번호를 묻는 기능
     - makeLastLotto : 지난주 당첨 로또 번호에 맞게 생성 기능
     - checkNumberRight : 지난주 받은 로또 번호들이 정당성이 맞는지 확인 하는 기능
