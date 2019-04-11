@@ -8,7 +8,13 @@ public class MoneyValidation implements Validation<Integer> {
 
 	@Override
 	public boolean check(String value) {
-		return false;
+		if (!checkInteger(value)) {
+			return false;
+		}
+
+		this.money = convert(value);
+
+		return checkRange() && checkUnit();
 	}
 
 	private boolean checkInteger(String value) {
