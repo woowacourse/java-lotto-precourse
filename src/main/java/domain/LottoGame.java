@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoGame {
@@ -9,12 +11,15 @@ public class LottoGame {
     private static final String QUANTITY_GUIDE = "개를 구매했습니다.";
     private static final int LOTTO_PRICE = 1000;
 
+    private int purchasingMoney;
+    private List<Lotto> lotteries = new ArrayList<>();
+
     public static void main(String[] args) {
         LottoGame game = new LottoGame();
-        int purchasingMoney = game.enterPurchasingMoney();
-        int purchasingQuantity = game.getPurchasingQuantity(purchasingMoney,
-            game.LOTTO_PRICE);
+        game.purchasingMoney = game.enterPurchasingMoney();
+        int purchasingQuantity = game.getPurchasingQuantity();
         System.out.println(purchasingQuantity + game.QUANTITY_GUIDE);
+        game.purchaseLottery();
     }
 
     private int enterPurchasingMoney() {
@@ -48,8 +53,21 @@ public class LottoGame {
         return true;
     }
 
-    private int getPurchasingQuantity(int purchasingMoney, int lottoPrice) {
-        int quantity = purchasingMoney / lottoPrice;
+    private int getPurchasingQuantity() {
+        int quantity = this.purchasingMoney / LOTTO_PRICE;
         return quantity;
+    }
+
+    private void purchaseLottery() {
+        List<Integer> lottoNumbers;
+        int purchasingQuantity = this.getPurchasingQuantity();
+        for (int i = 0; i < purchasingQuantity; i++) {
+            lottoNumbers = Lotto.generateLottoNumbers();
+            Lotto lottery = new Lotto(lottoNumbers);
+            this.lotteries.add(lottery);
+        }
+        for (int i = 0; i < lotteries.size(); i++) {
+            System.out.println(this.lotteries.get(i).getNumbers());
+        }
     }
 }
