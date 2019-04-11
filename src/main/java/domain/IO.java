@@ -92,12 +92,30 @@ public class IO {
         return true;
     }
 
+//    private boolean indexingCheckOverlap(ArrayList<Integer> arrayList, int number) {
+//        for (int i = 0; i < arrayList.size(); ++i) {
+//            return checkOverlap(arrayList.get(i), number);
+//        }
+//        return true;
+//    }
+//
+//    private boolean checkOverlap(int numberInArr, int number) {
+//        if (numberInArr == number) {
+//            return false;
+//        }
+//        return true;
+//    }
+
     private int scanNextIntLoop() {
         int number = scan.nextInt();
         if (checkBound(number) == false) {
             System.out.println("1 ~ 45 사이의 수를 입력해 주세요.");
             number = scanNextIntLoop();
         }
+//        if (indexingCheckOverlap(arrayList, number) == false) {
+//            System.out.println("중복된 수는 입력하실 수 없습니다.");
+//            number = scanNextIntLoop(arrayList);
+//        }
         return number;
     }
 

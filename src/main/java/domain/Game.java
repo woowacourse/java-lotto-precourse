@@ -20,7 +20,7 @@ public class Game {
         userInWinningNumbers();
         winningLotto.match(lottoList.get(0));
         matchingLottoLoop();
-//        lottoStatistics();
+        lottoStatistics();
     }
 
     private void purchaseLotto() {
@@ -75,5 +75,9 @@ public class Game {
         if (rank == Rank.FIFTH) {
             winningArray[4]++;
         }
+    }
+
+    private void lottoStatistics() {
+        io.printStatistics(winningArray, price);
     }
 }
