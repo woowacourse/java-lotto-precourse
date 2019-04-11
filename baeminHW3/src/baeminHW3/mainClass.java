@@ -60,7 +60,6 @@ public class mainClass {
 		int buyMoney = getMoney();
 		List<Lotto> lotto = buyLotto(buyMoney);
 		printLotto(lotto);
-
 	}
 	
 	public static int getMoney() {
@@ -93,5 +92,17 @@ public class mainClass {
 		for(int i=0; i<lotto.size(); i++) {
 			lotto.get(i).printNumber();
 		}
+	}
+	
+	public static List<Integer> getWinNumber(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+		List<Integer> number = new ArrayList<Integer>();
+		String temp = scan.nextLine();
+		String[] numberByString = temp.split(",");
+		for(int i=0; i<numberByString.length; i++) {
+			number.add(Integer.valueOf(numberByString[i]));
+		}
+		return number;
 	}
 }
