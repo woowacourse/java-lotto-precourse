@@ -29,7 +29,7 @@ public class LottoMachine {
 	private List<Integer> baseNumbers = new ArrayList<Integer>();
 	
 	public LottoMachine() {
-		for	(int i = LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER; i <= LottoConstant.MAXIMUM_RANGE_OF_LOTTO_NUMBER; i++) {
+		for	(int i = LottoConstant.MIN_RANGE_OF_LOTTO_NUMBER; i <= LottoConstant.MAX_RANGE_OF_LOTTO_NUMBER; i++) {
 			baseNumbers.add(i);
 		}
 	}
@@ -60,11 +60,11 @@ public class LottoMachine {
 	private List<Integer> generateLottoNumbers() {
 		List<Integer> numberList = new ArrayList<Integer>();
 		
-		for	(int i = LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER; i <= LottoConstant.NUMBER_OF_LOTTO_NUMBERS; i++) {
+		for	(int i = LottoConstant.MIN_RANGE_OF_LOTTO_NUMBER; i <= LottoConstant.NUMBER_OF_LOTTO_NUMBERS; i++) {
 			int randomIndex = random.nextInt(LottoConstant.SIZE_OF_RANGE - i) 
-								+ LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER;
+								+ LottoConstant.MIN_RANGE_OF_LOTTO_NUMBER;
 			numberList.add(baseNumbers.get(randomIndex));
-			Collections.swap(baseNumbers, randomIndex, LottoConstant.MAXIMUM_RANGE_OF_LOTTO_NUMBER - i);
+			Collections.swap(baseNumbers, randomIndex, LottoConstant.MAX_RANGE_OF_LOTTO_NUMBER - i);
 		}
 		return numberList;
 	}
