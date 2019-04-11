@@ -17,4 +17,16 @@ public class Game {
 			this.gameUser.addLotto(lotto);
 		}
 	}
+
+	public String getLottos() {
+		StringBuilder sb = new StringBuilder();
+		int countOfLotto = gameUser.countOfLottos();
+
+		sb.append(String.format("%d개를 구매했습니다.\n", countOfLotto));
+		for (int i = 0; i < countOfLotto; i++) {
+			sb.append(gameUser.getLotto(i).toString()).append("\n");
+		}
+
+		return sb.toString();
+	}
 }
