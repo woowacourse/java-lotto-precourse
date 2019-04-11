@@ -2,7 +2,6 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -31,4 +30,15 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    public boolean contains(Integer num) {
+        return numbers.contains(num);
+    }
+
+    public int countEqualNumbers(Lotto lotto) {
+        int countOfMatch = 0;
+        for (var num : numbers) {
+            countOfMatch += lotto.contains(num) ? 1 : 0;
+        }
+        return countOfMatch;
+    }
 }

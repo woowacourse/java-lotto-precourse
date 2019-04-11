@@ -35,7 +35,7 @@ public class LottoGame {
 
         var winningLotto = lottoReader.readWinningLotto();
         System.out.println(winningLotto.toString());
-        lottoAnalyzer.analyze(winningLotto, lottos);
+        lottoAnalyzer.analyze(winningLotto, lottos, numLottos * LOTTO_PRICE);
     }
 
     private void _printLottos(List<Lotto> lottos) {

@@ -18,7 +18,7 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int countOfMatch = lotto.countEqualNumbers(userLotto);
+        return Rank.valueOf(countOfMatch, lotto.contains(bonusNo));
     }
 }
