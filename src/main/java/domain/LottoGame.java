@@ -1,3 +1,14 @@
+/*
+* 클래스 이름 : LottoGame.java
+*
+* 버전 정보 : 1.0.0
+*
+* 날짜 : 2019.04.11
+* 작성자 : 483759
+*
+* 전반적인 게임의 Input과 Output을 담당하고, 게임을 진행하는 클래스스
+**/
+
 package domain;
 
 import java.util.ArrayList;
@@ -11,16 +22,15 @@ public class LottoGame {
   private final static int oneLottoAmount = 6;
   private final static int maxLottoNum = 45;
 
-  public int purchasePrice;
   public int purchaseAmount;
   public int[] matchCount;
   public int totalReward;
 
-  private boolean IsValidAmount(int purchasePrice){
-    if(purchasePrice < 0){
+  private boolean IsValidAmount(int purchaseAmount){
+    if(purchaseAmount < 0){
       return false;
     }
-    if(purchasePrice % oneLottoPrice != 0){
+    if(purchaseAmount % oneLottoPrice != 0){
       return false;
     }
     return true;
@@ -35,16 +45,16 @@ public class LottoGame {
     return false;
   }
 
-  private int InputPurchasePrice(){
+  private int InputPurchaseAmount(){
     Scanner sc = new Scanner(System.in);
     System.out.println("구입금액을 입력해 주세요.");
-    int purchasePrice = -1;
+    int purchaseAmount = -1;
     try {
-      purchasePrice= sc.nextInt();
+      purchaseAmount= sc.nextInt();
     }catch (InputMismatchException e){
       System.out.println("유효하지 않은 값입니다");
     }
-    return purchasePrice;
+    return purchaseAmount;
   }
 
   private boolean IsAlreadyNumber(int oneNumber, boolean[] duplicateCheck){
@@ -75,12 +85,12 @@ public class LottoGame {
   }
 
   private void InputUserPurchase(){
-    purchasePrice = InputPurchasePrice();
-    if(!IsValidAmount(purchasePrice)) {
+    purchaseAmount = InputPurchaseAmount();
+    if(!IsValidAmount(purchaseAmount)) {
       System.out.println("잘못된 금액입니다.");
       return;
     }
-    purchaseAmount = purchasePrice/oneLottoPrice;
+    purchaseAmount = purchaseAmount/oneLottoPrice;
     System.out.println("\n"+purchaseAmount+"개를 구매했습니다.");
   }
 
@@ -117,11 +127,6 @@ public class LottoGame {
     Scanner sc = new Scanner(System.in);
     String winningInput = sc.nextLine();
     List<Integer> winningList = StringToIntegerLotto(winningInput);
-        /*
-        for (int i = 0; i < Lotto.oneLottoAmount; i++) {
-            System.out.print(winningList.get(i)+" ");
-        }
-        */
     Lotto winningNumber = new Lotto(winningList);
     return winningNumber;
   }
@@ -169,7 +174,7 @@ public class LottoGame {
     System.out.println("5개 일치 (1500000원) - " + matchCount[2] + "개");
     System.out.println("5개 일치; 보너스 볼 일치(3000000원) - " + matchCount[1] + "개");
     System.out.println("6개 일치 (2000000000원) - " + matchCount[0] + "개");
-    System.out.println("총 수익률은 " + (float)totalReward/purchasePrice + "입니다.");
+    System.out.println("총 수익률은 " + (float)totalReward/(purchaseAmount*oneLottoPrice) + "입니다.");
   }
 
   public void StartLotto(){
