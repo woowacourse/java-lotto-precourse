@@ -8,6 +8,7 @@
 
 package woowacourse.lotto.util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,7 +37,7 @@ class Stats {
     }
 
     void calYield(int totalPrice) {
-        yield = calTotalWinningMoney() / (double)totalPrice;
+        yield = calTotalWinningMoney().doubleValue()/totalPrice;
         System.out.format(YIELD_FORMAT_STRING, yield);
     }
 
@@ -49,11 +50,13 @@ class Stats {
         }
     }
 
-    private long calTotalWinningMoney() {
-        long totalWinningMoney = 0;
+    private BigDecimal calTotalWinningMoney() {
+        BigDecimal totalWinningMoney = new BigDecimal("0");
         for (Rank type : Rank.values()) {
-            totalWinningMoney += countOfRank.get(type)
-                    * type.getWinningMoney();
+            BigDecimal count = BigDecimal.valueOf(countOfRank.get(type));
+            BigDecimal unit = BigDecimal.valueOf(type.getWinningMoney());
+            BigDecimal round = count.multiply(unit);
+            totalWinningMoney = totalWinningMoney.add(round);
         }
         return totalWinningMoney;
     }
