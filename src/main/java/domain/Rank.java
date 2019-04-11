@@ -1,14 +1,22 @@
+/*
+ * @(#)Rank.java	1.8.0_191 2019/04/11
+ * 
+ * Copyright (c) 2019 Youngbae Son
+ * ComputerScience, ProgrammingLanguage, Java, Busan, KOREA
+ * All rights reserved.
+ * */
 package domain;
 
 /**
  * 로또 등수를 의미하는 enum
  */
 public enum Rank {
-    FIRST(6, 2_000_000_000), // 1등
-    SECOND(5, 30_000_000), // 2등
-    THIRD(5, 1_500_000), // 3등
-    FOURTH(4, 50_000), // 4등
-    FIFTH(3, 5_000), // 5등
+	
+    FIRST(6, 2_000_000_000), // 1등 6개 맞추면
+    SECOND(5, 30_000_000), // 2등 5개중 나머지 1개 보너스 번호이면서 5개 맞추면 
+    THIRD(5, 1_500_000), // 3등 5개 맞추면
+    FOURTH(4, 50_000), // 4등 4개 맞추면
+    FIFTH(3, 5_000), // 5등 3개맞추면
     MISS(0, 0);
 
     private static final int WINNING_MIN_COUNT = 3;
@@ -21,15 +29,8 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
-        return winningMoney;
-    }
-
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+    	
         if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;
         }
@@ -39,7 +40,7 @@ public enum Rank {
         }
 
         for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
+            if (rank.matchCount(countOfMatch) && rank != SECOND) {
                 return rank;
             }
         }
@@ -49,6 +50,14 @@ public enum Rank {
 
     private boolean matchCount(int countOfMatch) {
         return this.countOfMatch == countOfMatch;
+    }
+    
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }
 
