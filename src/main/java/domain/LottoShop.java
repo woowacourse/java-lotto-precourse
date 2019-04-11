@@ -13,7 +13,11 @@ public class LottoShop {
 	
 	public void printLotto() {
 		for (Lotto lotto : lottos) {
-			lotto.getNumbers();
+			System.out.println(lotto.getNumbers().toString());
 		}
+	}
+	
+	public List<Lotto> getLottos() {
+		return this.lottos;
 	}
 }

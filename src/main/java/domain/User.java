@@ -14,7 +14,40 @@ public class User {
 		int bonus = bonusNumInput();
 		
 		WinningLotto winLotto = new WinningLotto(new Lotto(winningLottoNumber), bonus);
+		List<Lotto> userLottos = shop.getLottos();
 		
+		matchLotto(winLotto, userLottos);
+	}
+	
+	public void matchLotto(WinningLotto winLotto, List<Lotto> userLottos) {
+		
+		List<Rank> ranks = new ArrayList<Rank>();
+		Iterator iterator = userLottos.iterator();
+		while(iterator.hasNext()) {
+			Lotto userLotto = (Lotto)iterator.next();
+			Rank rank = winLotto.match(userLotto);
+			ranks.add(rank);
+		}
+		System.out.println("당첨 통계");
+		System.out.println("-----------");
+		
+		rankCount(ranks, Rank.FIFTH);
+		rankCount(ranks, Rank.FOURTH);
+		rankCount(ranks, Rank.THIRD);
+		rankCount(ranks, Rank.SECOND);
+		rankCount(ranks, Rank.FIRST);
+	}
+	
+	public void rankCount(List<Rank> ranks, Rank target) {
+		Iterator it = ranks.iterator();
+		int numOfMatchs = 0;
+		while(it.hasNext()) {
+			Rank rank = (Rank)it.next();
+			if (rank.equals(target)) {
+				numOfMatchs++;
+			}
+		}
+		System.out.printf("%d개 일치 (%d원) - %d개\n", target.getCountOfMatch(), target.getWinningMoney(), numOfMatchs);
 	}
 	
 	public int getPrice() {
