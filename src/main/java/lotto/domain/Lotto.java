@@ -44,4 +44,8 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호들 중복이 불가능합니다.");
     }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
