@@ -37,3 +37,7 @@ LottoGameStart 클래스
 -ThisWeekNumber ; 이번주 당첨 숫자 번호
 
 -ThisWeekBonusNumber : 이번주 보너스 숫자 번호
+
+WinningLotto 클래스
+
+-Match : 숫자 매칭 

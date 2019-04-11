@@ -13,7 +13,20 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        int MatchScore =0;
+        boolean BonusScore=false;
+        for(Integer ball : userLotto.GetLottoNumber())
+        {
+            if(lotto.GetLottoNumber().contains(ball))
+            {
+                MatchScore=MatchScore+1;
+            }
+        }
+
+        if(userLotto.GetLottoNumber().contains(bonusNo))
+        {
+            BonusScore=true;
+        }
+        return Rank.valueOf(MatchScore,BonusScore);
     }
 }
