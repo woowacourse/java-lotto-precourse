@@ -64,11 +64,20 @@ public class LottoGame {
         return scan.nextInt();
     }
 
+    private static void calculateWinning(WinningLotto winningLotto, List<Lotto> userLotto_list, int gameCount) {
+        ArrayList<Rank> rank_list = new ArrayList<>();
+
+        for (int i = 0; i < gameCount; i++) {
+            rank_list.add(winningLotto.match(userLotto_list.get(i)));
+        }
+    }
+
     public static void main(String[] args) {
         int gameCount = printInitialLines();
         ArrayList<Lotto> userLotto_list = generateLottoList(gameCount);
         Lotto lastWinningLotto = getLastWinningNum();
         int bonusNum = getBonusNum();
         WinningLotto winningLotto = new WinningLotto(lastWinningLotto, bonusNum);
+        calculateWinning(winningLotto, userLotto_list, gameCount);
     }
 }
