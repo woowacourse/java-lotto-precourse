@@ -29,7 +29,7 @@ public class WinningLotto {
     	List<Integer> userNumber = userLotto.getNumbers();
        	List<Integer> Winning = this.lotto.getNumbers();
     	for(int i=0; i<userNumber.size(); i++) {
-    		boolean bonusCheck = isEqualNumber(Winning.get(i), Integer.valueOf(bonusNo));		
+    		boolean bonusCheck = isEqualNumber(userNumber.get(i), Integer.valueOf(bonusNo));		
     		boolean check = isEqualNumber(Winning.get(i), userNumber.get(i));
     		if(bonusCheck && !check) {
     			return true;
@@ -39,13 +39,13 @@ public class WinningLotto {
     }
     
     public boolean isEqualNumber(Integer a, Integer b) {
-    	return a.intValue() == b.intValue() ? true : false ;
+    	return (a.intValue() == b.intValue());
     }
     
     public Rank match(Lotto userLotto) {
     	int countOfMatch = getMatchCount(userLotto);
     	boolean matchBonus = isHaveBonus(userLotto);
-    	Rank r = Rank.valueOf(countOfMatch, matchBonus);
+    	Rank r = Rank.valueOf(countOfMatch , matchBonus);
         return r;
     }
 }

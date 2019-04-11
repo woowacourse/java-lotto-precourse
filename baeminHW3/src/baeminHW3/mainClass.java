@@ -58,10 +58,19 @@ public class mainClass {
 	
 	public static void main(String[] args) {
 		int buyMoney = getMoney();
+		int getMoney =0;
+		int[] rankCount = {0,0,0,0,0}; 
 		List<Lotto> lotto = buyLotto(buyMoney);
 		printLotto(lotto);
 		WinningLotto win = new WinningLotto(getWinningLotto(), getBonusNumber());
-		
+		for(int i=0; i<lotto.size(); i++) {
+			rankCount[win.match(lotto.get(i)).ordinal()]++;
+		}
+		Rank[] r = Rank.values();
+		for(int i=4; i>=0; i--) {
+     		getMoney += printRank(rankCount[i], r[i]);
+		}
+	    System.out.println("총 수익률은 "+ (float)buyMoney/getMoney +"입니다.");
 	}
 	
 	public static int getMoney() {
@@ -114,5 +123,12 @@ public class mainClass {
 		System.out.println("\n보너스 볼을 입력해 주세요.");
 		int bonus = scan.nextInt();
 		return bonus;
+	}
+	
+	public static int printRank(int count, Rank r) {
+		int money=0;
+		money = count * r.getWinningMoney();
+		System.out.println(r.countOfMatch + "개 일치 (" + r.winningMoney + "원)- " + count +"개");
+		return money;
 	}
 }
