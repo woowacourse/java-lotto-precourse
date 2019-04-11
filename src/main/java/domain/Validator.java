@@ -81,4 +81,17 @@ public class Validator {
 				CommandLineInterface.printIndivisiblePurchasePriceError();
 				return false;
 		}
+		
+		public static boolean isValidWinningNumber(String userWinningNums) {
+				try {
+						userWinningNums = SCANNER.nextLine();
+						String[] tmpWinningNums = userWinningNums.split(",");
+						winningNums = isComposedNum(tmpWinningNums);
+						return isValidWinningNumException(winningNums);
+						
+				} catch (NumberFormatException e) {
+						CommandLineInterface.printWinningNumberError();
+						return false;
+				}
+		}
 }
