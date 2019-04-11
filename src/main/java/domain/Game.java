@@ -7,6 +7,8 @@ public class Game {
     private int inputPrice;
     private int purchaseCount;
     private Lotto[] lottos;
+    private List<Integer> winningLottoNumber;
+    private List<Integer> bonusLottoNumber;
 
     public void run() {
         do {
@@ -60,6 +62,7 @@ public class Game {
 
         return randomNum;
     }
+
     private void addNumbers(List<Integer> numbers, int randomNumber) {
         if (numbers.indexOf(randomNumber) == -1) {
             numbers.add(randomNumber);
@@ -172,15 +175,28 @@ public class Game {
         return lottoNumbers;
     }
 
-    private List<Integer> inputLastWeekWinningLotto() {
+    private void inputLastWeekWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> winningLottoNumber = inputLottoSelectSize(6);
+        winningLottoNumber = inputLottoSelectSize(6);
+    }
 
-        return winningLottoNumber;
+    private void inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        bonusLottoNumber = inputLottoSelectSize(1);
+    }
+
+    private boolean checkBonusBall() {
+        if (winningLottoNumber.contains(bonusLottoNumber.get(0))) {
+            System.out.println("보너스 번호는 지난 주 당첨 번호와 달라야 합니다.");
+            return true;
+        }
+
+        return false;
     }
 
     private void inputBonusBallLotto() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        inputLottoSelectSize(1);
+        do {
+            inputBonusBall();
+        } while (checkBonusBall());
     }
 }
