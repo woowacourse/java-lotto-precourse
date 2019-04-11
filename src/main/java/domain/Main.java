@@ -21,7 +21,7 @@ public class Main {
         return staticSc;
     }
 
-    private int getTrials() {
+    private static int getTrials() {
         int value, trials;
         Scanner sc = getScanner();
         System.out.println("구입금액을 입력해주세요.");
@@ -32,14 +32,14 @@ public class Main {
         return trials;
     }
 
-    private void initNumSeq() {
+    private static void initNumSeq() {
         numSeq = new ArrayList<>();
         for (int i = 0; i < 45; i++) {
             numSeq.add(i + 1);
         }
     }
 
-    private void shuffleNumSeq() {
+    private static void shuffleNumSeq() {
         if (numSeq == null) {
             initNumSeq();
         }
@@ -52,12 +52,12 @@ public class Main {
         }
     }
 
-    private Lotto buyLotto() {
+    private static Lotto buyLotto() {
         shuffleNumSeq();
         return new Lotto(numSeq.subList(0, 5));
     }
 
-    private void buyMultipleLotto(int trials) {
+    private static void buyMultipleLotto(int trials) {
         lottoList = new ArrayList<>();
         System.out.println(String.format("%d 개를 구매했습니다.", trials));
         for (int i = 0; i < trials; i++) {
@@ -67,11 +67,11 @@ public class Main {
         }
     }
 
-    private List<Integer> separateToList(String str) {
+    private static List<Integer> separateToList(String str) {
         return Arrays.stream(str.split(",")).map(Integer::parseInt).collect(Collectors.toList());
     }
 
-    private void getWinningLotto() {
+    private static void getWinningLotto() {
         Scanner sc = getScanner();
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
@@ -83,14 +83,14 @@ public class Main {
         winningLotto = new WinningLotto(new Lotto(numList), bonus);
     }
 
-    private void initRankMap() {
+    private static void initRankMap() {
         rankMap = new HashMap<>();
         for (Rank r : Rank.values()) {
             rankMap.put(r, 0);
         }
     }
 
-    private void matchLottos() {
+    private static void matchLottos() {
         initRankMap();
         for (int i = 0; i < lottoList.size(); i++) {
             Rank r = winningLotto.match(lottoList.get(i));
@@ -99,7 +99,7 @@ public class Main {
         rankMap.remove(Rank.MISS);
     }
 
-    private int calculateBenefit() {
+    private static int calculateBenefit() {
         int result = 0;
         for (Rank r : rankMap.keySet()) {
             result += r.getWinningMoney() * rankMap.get(r);
@@ -108,7 +108,7 @@ public class Main {
         return result;
     }
 
-    private String formatRank(Rank r) {
+    private static String formatRank(Rank r) {
         if (r == Rank.SECOND) {
             return String.format("%d개 일치, 보너스 볼 일치(%d원)", r.getCountOfMatch(), r.getWinningMoney());
         }
@@ -118,7 +118,7 @@ public class Main {
         return String.format("%d개 일치 (%d원)", r.getCountOfMatch(), r.getWinningMoney());
     }
 
-    private void printResult() {
+    private static void printResult() {
         System.out.println("당첨 통계\n--------");
         for (Rank r : displayRankOrder) {
             System.out.println(formatRank(r) + String.format("- %d개", rankMap.get(r)));
@@ -126,6 +126,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
+        int trials = getTrials();
     }
 }
