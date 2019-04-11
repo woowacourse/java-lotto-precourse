@@ -13,6 +13,10 @@ public class User {
         lottoList = new ArrayList<>();
     }
 
+    public int getPay(){
+        return Integer.parseInt(pay);
+    }
+
     public String inputBonus(){
         String input;
         input = scanner.nextLine();
