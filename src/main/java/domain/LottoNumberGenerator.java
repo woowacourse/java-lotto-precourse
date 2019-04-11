@@ -36,4 +36,10 @@ public class LottoNumberGenerator {
 				
 				return lottoNumbers;
 		}
+		
+		private static void isDuplication(ArrayList<Integer> lottoNumbers, int randomNumber) {
+				if (!lottoNumbers.contains(randomNumber)) {
+						lottoNumbers.add(randomNumber);
+				}
+		}
 }
