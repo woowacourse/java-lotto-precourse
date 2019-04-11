@@ -42,7 +42,7 @@ public class ExceptionHandler {
         try {
             bonusNumber = userInput.TryToRecieveBonusNumber();
         } catch (Exception e) {
-            System.out.println("올바른 보너스 번호를 입력해주세요.");
+            System.out.println("올바른 보너스 볼을 입력해주세요.");
             System.exit(0);
         }
 
