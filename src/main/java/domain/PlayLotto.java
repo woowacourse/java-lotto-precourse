@@ -69,7 +69,7 @@ public class PlayLotto {
         int numberOfLotto = money / lottoPrice; // 구입할 Lotto 개수
         System.out.printf("\n%d개를 구매했습니다.\n", numberOfLotto);
         for (int i = 0; i < numberOfLotto; i++) {
-            lottoNumber = generatingLottoNumber(); // Lotto 번호 생성
+            lottoNumber = Utils.generatingLottoNumber(); // Lotto 번호 생성
             System.out.println(lottoNumber);
             myLotto.add(new Lotto(lottoNumber));
         }
@@ -168,23 +168,6 @@ public class PlayLotto {
             System.out.printf("%d개 일치 (%d원)- %d개\n",
                     countOfMatch, winningMoney, number);
         }
-    }
-
-    /**
-     * Lotto 번호 생성
-     *
-     * @return 1 ~ 45 사이, 크기가 6인 List
-     */
-    public List<Integer> generatingLottoNumber() {
-        int lottoCount = 6; // Lotto 숫자 갯수
-        int lottoNumberBegin = 1; // Lotto 숫자 범위, 시작
-        int lottoNumberEnd = 45; // Lotto 숫자 범위, 끝
-        List<Integer> lottoNumber = new ArrayList<>();
-        for (int number = lottoNumberBegin; number <= lottoNumberEnd; number++) {
-            lottoNumber.add(number);
-        }
-        Collections.shuffle(lottoNumber);
-        return lottoNumber.subList(0, lottoCount);
     }
 }
 

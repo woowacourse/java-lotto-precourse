@@ -6,6 +6,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,5 +26,22 @@ public class Utils {
             intList.add(Integer.parseInt(str));
         }
         return intList;
+    }
+
+    /**
+     * Lotto 번호 생성
+     *
+     * @return 1 ~ 45 사이, 크기가 6인 List
+     */
+    public static List<Integer> generatingLottoNumber() {
+        int lottoCount = 6; // Lotto 숫자 갯수
+        int lottoNumberBegin = 1; // Lotto 숫자 범위, 시작
+        int lottoNumberEnd = 45; // Lotto 숫자 범위, 끝
+        List<Integer> lottoNumber = new ArrayList<>();
+        for (int number = lottoNumberBegin; number <= lottoNumberEnd; number++) {
+            lottoNumber.add(number);
+        }
+        Collections.shuffle(lottoNumber);
+        return lottoNumber.subList(0, lottoCount);
     }
 }
