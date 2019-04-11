@@ -58,6 +58,6 @@ public class LottoMachine {
 
 	private int makeRandomLottoNumber() {
 		Random random = new Random();
-		return random.nextInt((LottoConstant.SIZE_OF_RANGE) + LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER);
+		return random.nextInt((LottoConstant.SIZE_OF_RANGE)) + LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER;
 	}
 }
