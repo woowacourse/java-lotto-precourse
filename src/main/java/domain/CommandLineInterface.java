@@ -29,6 +29,7 @@ public class CommandLineInterface {
 		private static final String PREDICATE_OF_LOTTO_PURCHASE = "개를 구매했습니다.";
 		private static final String SPACING_ONE_LINE = "\n";
 		private static final String INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+		private static final String WINNING_NUMBER_ERROR = "올바른 당첨 번호를 입력해 주세요.";
 		
 		public static void printInputPurchasePrice() {
 				System.out.println(INPUT_PURCHASE_PRICE);			
@@ -61,6 +62,9 @@ public class CommandLineInterface {
 		public static void printInputWinningNumber() {
 				System.out.println(INPUT_WINNING_NUMBER);
 		}
-		
+
+		public static void printWinningNumberError() {
+				System.out.println(WINNING_NUMBER_ERROR);
+		}
 
 }

@@ -94,4 +94,22 @@ public class Validator {
 						return false;
 				}
 		}
+
+		private static List<Integer> isComposedNum(String[] tmpWinningNums) {
+				winningNums = new ArrayList<Integer>();
+				
+				for (int i = 0; i < tmpWinningNums.length; i++) {
+						String elementString = tmpWinningNums[i].trim();
+						int element = Integer.parseInt(elementString);
+						winningNums.add(element);
+						Collections.sort(winningNums);
+				}
+				return winningNums;
+		}
+
+		private static boolean isValidWinningNumException(List<Integer> winningNums) {
+				return isValidWinningNumCount(winningNums) 
+						&& isValidWinningNumRange(winningNums)
+						&& isThereWinningNumDuplication(winningNums);
+		}
 }
