@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.atomic.LongAdder;
+import java.util.stream.Collectors;
 
 public class Game {
 	GameUser gameUser;
@@ -47,7 +49,7 @@ public class Game {
 		sb.append("당첨 통계").append("\n")
 				.append("---------").append("\n")
 				.append(getMatchResult(rankCount))
-				.append(String.format("총 수익률은 %.3f 입니다.", getYeild(rankCount)))
+				.append(String.format("총 수익률은 %.3f 입니다.", getYield(rankCount)))
 				.append("\n");
 
 		return sb.toString();
@@ -87,7 +89,16 @@ public class Game {
 		return sb.toString();
 	}
 
-	private double getYeild(Map<Rank, Integer> rankCount) {
-		return 0.0;
+	private double getYield(Map<Rank, Integer> rankCount) {
+		LongAdder longAdder = new LongAdder();
+
+		rankCount.entrySet().stream()
+				.map(entry -> (entry.getKey().getWinningMoney() * entry.getValue()))
+				.collect(Collectors.toList())
+				.forEach(longAdder::add);
+
+		double yield = longAdder.longValue() / (1.0 * gameUser.getMoney());
+
+		return yield;
 	}
 }
