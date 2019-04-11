@@ -20,6 +20,15 @@ public class Manager {
         user.makeLottoList();
         user.printLottoList();
         while(!secondQuery());
+        while(!thirdQuery());
+    }
+
+    public boolean thirdQuery(){
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String ret = user.inputBonus();
+        if(!CheckFormatError(ret)){
+            return false;
+        }
     }
 
     public boolean secondQuery(){
@@ -33,10 +42,15 @@ public class Manager {
         return true;
     }
 
-    public boolean checkWinningNumbers(List<String> list){
+    public void initCheckNumbers(){
         for(int i=1; i<46; i++){
             checkNumbers[i] = false;
         }
+    }
+
+    public boolean checkWinningNumbers(List<String> list){
+        initCheckNumbers();
+
         int cnt = 0;
 
         for(int i=0; i<list.size(); i++){
