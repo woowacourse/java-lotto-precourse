@@ -9,6 +9,8 @@ public class LottoGame {
     private static final String QUANTITY_GUIDE = "개를 구매했습니다.";
     private static final String WINNING_NUMBER_GUIDE = "지난 주 당첨 번호를 입력해주세요.";
     private static final String BONUSBALL_GUIDE = "보너스 볼을 입력해주세요.";
+    private static final String RESULT_HEADER = "당첨 통계";
+    private static final String DIVIDER = "---------";
     private static final String BONUSBALL_CASE = "SECOND";
     private static final String MATCH_GUIDE = "개 일치";
     private static final String SECOND_RANK_GUIDE = ", 보너스볼 일치";
@@ -145,6 +147,7 @@ public class LottoGame {
     }
 
     private void showWinningStatistics(TreeMap<Rank, Integer> lotteryResult) {
+        this.showContentsHeader();
         for (Rank rank : lotteryResult.keySet()) {
             String matchGuide  = this.formatCountOfMatch(rank);
             String bonusBallGuide = this.formatBonusBall(rank);
@@ -155,6 +158,11 @@ public class LottoGame {
                 + winningMoneyGuide + DELIMITER + winningCountGuide);
         }
         this.showProfitRate(lotteryResult);
+    }
+
+    private void showContentsHeader() {
+        System.out.println(RESULT_HEADER);
+        System.out.println(DIVIDER);
     }
 
     private String formatCountOfMatch(Rank rank) {
