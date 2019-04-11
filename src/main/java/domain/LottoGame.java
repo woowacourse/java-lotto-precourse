@@ -2,11 +2,18 @@ package domain;
 
 import domain.util.UserInput;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGame {
     private static final int PRICE_OF_LOTTO = 1000;
 
+    private List<Lotto> lottos;
+    private WinningLotto winningLotto;
+    private LottoManager lottoManager = new LottoManager();
+
     public void start() {
-        System.out.println(getNumOfLottos());
+        setLottoList(getNumOfLottos());
     }
 
     private int getNumOfLottos() {
@@ -26,5 +33,21 @@ public class LottoGame {
             return getPurchaseAmount();
         }
         return purchaseAmount;
+    }
+
+    private void setLottoList(int numOfLottos) {
+        lottos = new ArrayList<>();
+        LottoManager lottoManager = new LottoManager();
+        for (int i = 0; i < numOfLottos; i++) {
+            lottos.add(lottoManager.generateLotto());
+        }
+        System.out.println(String.format("\n%d개를 구매했습니다.", numOfLottos));
+        printLottos();
+    }
+
+    private void printLottos() {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.toString());
+        }
     }
 }
