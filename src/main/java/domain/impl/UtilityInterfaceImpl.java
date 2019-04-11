@@ -8,7 +8,7 @@
  * Copyright (c) 2019. Jihun oh
  * All rights reserved.
  */
-package domain;
+package domain.impl;
 
 import domain.interfaces.UtilityInterface;
 

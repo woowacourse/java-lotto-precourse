@@ -8,7 +8,7 @@
  * Copyright (c) 2019. JIhun oh
  * All rights reserved.
  */
-package domain;
+package domain.objects;
 
 /**
  * 로또 등수를 의미하는 enum

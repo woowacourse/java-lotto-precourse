@@ -8,8 +8,10 @@
  * Copyright (c) 2019. JIhun oh
  * All rights reserved.
  */
-package domain;
+package domain.impl;
 
+import domain.objects.Lotto;
+import domain.objects.WinningLotto;
 import domain.interfaces.ValidInterface;
 
 import java.util.Arrays;

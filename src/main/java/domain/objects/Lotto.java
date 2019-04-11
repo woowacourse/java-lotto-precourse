@@ -8,7 +8,7 @@
  * Copyright (c) 2019. JIhun oh
  * All rights reserved.
  */
-package domain;
+package domain.objects;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +21,7 @@ public class Lotto {
     public static final int UNIT_PRICE = 1000;
     public static final int MIN_LOTTO_NUM = 1;
     public static final int MAX_LOTTO_NUM = 45;
+    public static final int NUMS_COUNT = 6;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;

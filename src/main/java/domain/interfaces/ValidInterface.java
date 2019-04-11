@@ -10,8 +10,7 @@
  */
 package domain.interfaces;
 
-import domain.Lotto;
-import domain.WinningLotto;
+import domain.objects.Lotto;
 
 public interface ValidInterface {
     int MAX_PURCHASE_MONEY = 100_000;

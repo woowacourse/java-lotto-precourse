@@ -8,7 +8,7 @@
  * Copyright (c) 2019. JIhun oh
  * All rights reserved.
  */
-package domain;
+package domain.objects;
 
 /**
  * 당첨 번호를 담당하는 객체

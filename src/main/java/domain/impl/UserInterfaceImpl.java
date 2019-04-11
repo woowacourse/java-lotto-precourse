@@ -8,8 +8,9 @@
  * Copyright (c) 2019. JIhun oh
  * All rights reserved.
  */
-package domain;
+package domain.impl;
 
+import domain.objects.Lotto;
 import domain.interfaces.UserInterface;
 import domain.interfaces.UtilityInterface;
 import domain.interfaces.ValidInterface;

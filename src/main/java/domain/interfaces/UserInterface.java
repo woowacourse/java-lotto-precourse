@@ -10,8 +10,7 @@
  */
 package domain.interfaces;
 
-import domain.Lotto;
-import domain.WinningLotto;
+import domain.objects.Lotto;
 
 import java.util.List;
 
