@@ -108,4 +108,13 @@ public class Game {
     private String removeBlank(String inputLottoNumber) {
         return inputLottoNumber.replaceAll(" ", "");
     }
+
+    private List<String> inputLottoNumber() {
+        Scanner sc = new Scanner(System.in);
+
+        String inputLottoNumber = removeBlank(sc.nextLine());
+        List<String> lottoNumbers = splitWithComma(inputLottoNumber);
+
+        return lottoNumbers;
+    }
 }
