@@ -50,6 +50,18 @@ public class Result {
             checkRank(rank);
         }
     }
+    private void checkRank(Rank rank) {
+        System.out.print(rank.getCountOfMatch() + "개 일치");
+        if (rank == Rank.SECOND) {
+            System.out.print(", 보너스 볼 일치 ");
+        }
+        System.out.print("(" + rank.getWinningMoney() + "원)- ");
+        System.out.println(lottoMap.get(rank) + "개");
+    }
+
+    private double setRate() {
+        return (float) sumMoney / (float)myMoney;
+    }
 
 }
 
