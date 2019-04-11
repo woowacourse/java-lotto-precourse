@@ -35,6 +35,7 @@ public class UserInterfaceImpl implements UserInterface {
     public List<Integer> inputWinningLottoNumbers() {
         String winLotNums;
         System.out.println("지난주 당첨 번호를 입력해주세요.");
+        System.out.println("ex)1,2,3,4,5,6");
         winLotNums = sc.nextLine();
         if (!isInputWinLotNumsValid(winLotNums)) {
             return inputWinningLottoNumbers();
