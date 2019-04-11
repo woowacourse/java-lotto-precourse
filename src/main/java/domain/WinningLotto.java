@@ -16,7 +16,6 @@ public class WinningLotto {
         // TODO 로직 구현
         int numberOfMatches = userLotto.match(lotto);
         boolean isBonusIn = userLotto.contains(bonusNo);
-        System.out.println("isBonusIn" + isBonusIn);
 
         return Rank.valueOf(numberOfMatches, isBonusIn);
     }

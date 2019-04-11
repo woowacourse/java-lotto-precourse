@@ -18,10 +18,10 @@ public class MainAppTest extends TestCase {
     static final int INVALID_MONEY_TO_BUY_LOTTO_ZERO = 0;
     static final int INVALID_MONEY_TO_BUY_LOTTO_NEGATIVE_NUMBER = -1000;
 
-    static final Integer[] VALID_LOTTO_NUMBERS = new Integer[] {1, 15, 22, 33, 35, 42};
-    static final Integer[] INVALID_LOTTO_NUMBERS_NOT_SIX = new Integer[] {1, 15, 22, 33, 35, 42, 44};
-    static final Integer[] INVALID_LOTTO_NUMBERS_OUT_OF_BOUNDS = new Integer[] {-32, 15, 22, 33, 35, 4255};
-    static final Integer[] INVALID_LOTTO_NUMBERS_DUPLICATION = new Integer[] {15, 15, 22, 33, 35, 42};
+    static final Integer[] VALID_LOTTO_NUMBERS = new Integer[]{1, 15, 22, 33, 35, 42};
+    static final Integer[] INVALID_LOTTO_NUMBERS_NOT_SIX = new Integer[]{1, 15, 22, 33, 35, 42, 44};
+    static final Integer[] INVALID_LOTTO_NUMBERS_OUT_OF_BOUNDS = new Integer[]{-32, 15, 22, 33, 35, 4255};
+    static final Integer[] INVALID_LOTTO_NUMBERS_DUPLICATION = new Integer[]{15, 15, 22, 33, 35, 42};
 
     @Test
     public void testIsValidMoneyToBuyLotto() throws Exception {
@@ -54,7 +54,7 @@ public class MainAppTest extends TestCase {
         strTestInteger = Integer.toString(testInteger);
         InputStream in = new ByteArrayInputStream(strTestInteger.getBytes());
         System.setIn(in);
-        enteredInteger = MainApp.getIntegerFromUser();
+        enteredInteger = MainApp.getIntegerFromUser(MainApp.MESSAGE_WRONG_MONEY_TO_BUY_LOTTO);
         assertEquals(testInteger, enteredInteger);
     }
 
@@ -74,13 +74,13 @@ public class MainAppTest extends TestCase {
     @Test
     public void testCreateLottosWorth() throws Exception {
         int testMoney = VALID_MONEY_TO_BUY_LOTTO;
-        List<Lotto> lottos = MainApp.createLottosWorth(VALID_MONEY_TO_BUY_LOTTO);
+        List<Lotto> lottos = MainApp.makeLottosWorth(VALID_MONEY_TO_BUY_LOTTO);
         assertEquals(1, lottos.size());
     }
 
     @Test
     public void testPrintLotto() throws Exception {
-        Lotto testLotto = new Lotto(Arrays.asList(new Integer[] {1, 15, 22, 33, 35, 42}));
+        Lotto testLotto = new Lotto(Arrays.asList(new Integer[]{1, 15, 22, 33, 35, 42}));
         assertEquals("[1, 15, 22, 33, 35, 42]", testLotto.toString());
     }
 
@@ -147,7 +147,7 @@ public class MainAppTest extends TestCase {
 
     @Test
     public void testCalculateRevenue() throws Exception {
-        List<Integer> statisticsOfRanks = new ArrayList<Integer>(Arrays.asList(new Integer[] {1, 0, 0, 0, 0, 0}));
+        List<Integer> statisticsOfRanks = new ArrayList<Integer>(Arrays.asList(new Integer[]{1, 0, 0, 0, 0, 0}));
         int revenue = MainApp.calculateRevenue(statisticsOfRanks);
         assertEquals(Rank.FIRST.getWinningMoney(), revenue);
     }

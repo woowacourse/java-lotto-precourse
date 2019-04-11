@@ -37,7 +37,7 @@ public class Lotto {
         int numberOfMatches = 0;
         Iterator<Integer> it = numbers.iterator();
 
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             numberOfMatches += (anotherLotto.contains(it.next())) ? 1 : 0;
         }
 
