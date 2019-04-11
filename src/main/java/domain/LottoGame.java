@@ -20,6 +20,7 @@ import java.util.Scanner;
 public class LottoGame {
   private final static int oneLottoPrice = 1000;
   private final static int oneLottoAmount = 6;
+  private final static int maxPurchaseAmount = 25;
   private final static int maxLottoNum = 45;
 
   public int purchaseAmount;
@@ -88,9 +89,13 @@ public class LottoGame {
     purchaseAmount = InputPurchaseAmount();
     if(!IsValidAmount(purchaseAmount)) {
       System.out.println("잘못된 금액입니다.");
-      return;
+      System.exit(0);
     }
     purchaseAmount = purchaseAmount/oneLottoPrice;
+    if(purchaseAmount>maxPurchaseAmount){
+      System.out.println("최대 구매 개수를 초과하였습니다.");
+      System.exit(0);
+    }
     System.out.println("\n"+purchaseAmount+"개를 구매했습니다.");
   }
 
@@ -138,9 +143,9 @@ public class LottoGame {
   }
 
   public WinningLotto InputWinningLotto(){
-    System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     Lotto winningNumber = InputWinningNumber();
-    System.out.println("보너스 볼을 입력해 주세요.");
+    System.out.println("\n보너스 볼을 입력해 주세요.");
     int bonusNum = InputBonusNumber();
     WinningLotto winLotto = new WinningLotto(winningNumber, bonusNum);
     return winLotto;
@@ -167,7 +172,7 @@ public class LottoGame {
   }
 
   public void PrintResult(){
-    System.out.println("당첨통계");
+    System.out.println("\n당첨통계");
     System.out.println("-----------------");
     System.out.println("3개 일치 (5000원) - " + matchCount[4] + "개");
     System.out.println("4개 일치 (50000원) - " + matchCount[3] + "개");
