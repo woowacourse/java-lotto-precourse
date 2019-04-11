@@ -17,6 +17,16 @@ public class BonusNoValidation implements Validation<Integer> {
 		return false;
 	}
 
+	private boolean checkInteger(String value) {
+		try {
+			Integer.parseInt(value);
+			return true;
+		} catch (NumberFormatException e) {
+			System.out.println("정수가 아닙니다.");
+			return false;
+		}
+	}
+
 	@Override
 	public Integer convert(String value) {
 		return null;
