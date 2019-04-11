@@ -1,4 +1,4 @@
-package domain;
+package woowacourse.lotto.util;
 
 /**
  * 로또 등수를 의미하는 enum
@@ -51,4 +51,6 @@ public enum Rank {
         return this.countOfMatch == countOfMatch;
     }
 }
+
+
 
