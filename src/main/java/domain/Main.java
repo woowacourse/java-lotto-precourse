@@ -53,7 +53,7 @@ public class Main {
 
     private static Lotto buyLotto() {
         shuffleNumSeq();
-        return new Lotto(numSeq.subList(0, 5));
+        return new Lotto(numSeq.subList(0, 6));
     }
 
     private static void buyMultipleLotto(int trials) {
@@ -67,7 +67,7 @@ public class Main {
     }
 
     private static List<Integer> separateToList(String str) {
-        return Arrays.stream(str.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.stream(str.split("\\s*,\\s*")).map(Integer::parseInt).collect(Collectors.toList());
     }
 
     private static void getWinningLotto() {
@@ -123,7 +123,7 @@ public class Main {
             System.out.println(formatRank(r) + String.format("- %d개", rankMap.get(r)));
         }
 
-        System.out.println(String.format("총 수익률은 %3f입니다.", (float)lottoMoney / money));
+        System.out.println(String.format("총 수익률은 %.3f입니다.", (float)lottoMoney / money));
 
     }
 
