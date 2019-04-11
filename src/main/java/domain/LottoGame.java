@@ -16,16 +16,20 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class LottoGame {
 		private static final String BLANK = "";	
 		private static int theNumberOfLottoTicket;
+		private WinningLotto winningLotto;
 		
 		private List<Lotto> lottoTicket = new ArrayList<Lotto>();
+		private static Scanner SCANNER = new Scanner(System.in);
 		
 		public void runGame() {
 				getLottoPurchasePrice();
 				notifyUserTheNumberOfLottoTicketAndNumbers();
+				prepareWinningNumbers();
 		}
 		
 		private void getLottoPurchasePrice() {
@@ -46,5 +50,31 @@ public class LottoGame {
 				}
 				CommandLineInterface.printTheNumberOfLottoPurchase(theNumberOfLottoTicket);
 				CommandLineInterface.printLottoTicket(lottoTicket);
+		}
+
+		private void prepareWinningNumbers() {
+				List<Integer> winningNumbers = getWinningNumbers();
+				int bonusBall = getBonusBall();
+				Lotto luckyLotto = new Lotto(winningNumbers);
+				winningLotto = new WinningLotto(luckyLotto, bonusBall);
+		}
+
+		private List<Integer> getWinningNumbers() {
+				String userWinningNums = BLANK;
+				
+				CommandLineInterface.printInputWinningNumber();
+				while(!Validator.isValidWinningNumber(userWinningNums));
+				
+				return Validator.winningNums;
+		}
+		
+		private int getBonusBall() {
+				String userBonusBall = BLANK;
+				
+				CommandLineInterface.printInputBonusBall();
+				while(!Validator.isValidBonusBall(userBonusBall));
+				SCANNER.close();
+				
+				return Validator.bonusBall;
 		}
 }
