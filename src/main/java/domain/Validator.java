@@ -36,7 +36,7 @@ public class Validator {
 		
 		public static List<Integer> winningNums = new ArrayList<Integer>();
 		private static Scanner SCANNER = new Scanner(System.in);		
-		
+			
 		public static boolean isValidPrice(String userPrice) {
 				try {
 						userPrice = SCANNER.nextLine().trim();
@@ -47,7 +47,7 @@ public class Validator {
 				} catch (NumberFormatException e) {
 						CommandLineInterface.printPurchasePrcieNumberError();
 						return false;
-				}
+				}	
 		}
 		
 		/**
@@ -106,13 +106,13 @@ public class Validator {
 				}
 				return winningNums;
 		}
-
+		
 		private static boolean isValidWinningNumException(List<Integer> winningNums) {
 				return isValidWinningNumCount(winningNums) 
 						&& isValidWinningNumRange(winningNums)
 						&& isThereWinningNumDuplication(winningNums);
 		}
-
+		
 		private static boolean isValidWinningNumCount(List<Integer> winningNums) {
 				if (winningNums.size() == LottoNumberGenerator.THE_NUM_OF_LOTTO_NUMS) {
 						return true;
@@ -129,7 +129,7 @@ public class Validator {
 				CommandLineInterface.printWinningNumberRangeError();
 				return false;
 		}
-
+		
 		private static boolean isThereWinningNumDuplication(List<Integer> winningNums) {
 				TreeSet<Integer> checkSet = new TreeSet<Integer>();
 				for (int i = 0; i < winningNums.size(); i++) {
@@ -160,6 +160,14 @@ public class Validator {
 						return true;
 				}
 				CommandLineInterface.printBonusBallNumberRangeError();
+				return false;
+		}
+
+		private static boolean isThereBonusBallDuplication(int bonusBall) {
+				if(!winningNums.contains(bonusBall)) {
+						return true;
+				}
+				CommandLineInterface.printBonusBallDuplicationError();
 				return false;
 		}
 }

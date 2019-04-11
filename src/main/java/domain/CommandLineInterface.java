@@ -99,4 +99,8 @@ public class CommandLineInterface {
 		public static void printBonusBallNumberRangeError() {
 				System.out.println(NUMBER_RANGE_ERROR);
 		}
+
+		public static void printBonusBallDuplicationError() {
+				System.out.println(NUMBER_DUPLICATION_ERROR);
+		}
 }
