@@ -20,7 +20,7 @@ public class Console {
 
     public int[] readWinningNumbers() throws IOException {
         System.out.println(WINNING_NUMBERS_MESSAGE);
-        return Arrays.stream(bufferedReader.readLine().split(","))
+        return Arrays.stream(bufferedReader.readLine().split(REGEX))
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }
