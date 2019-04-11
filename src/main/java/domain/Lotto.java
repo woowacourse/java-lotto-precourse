@@ -56,7 +56,7 @@ public class Lotto {
     }
 
     private boolean haveDuplicates(List<Integer> numbers) {
-        Set uniqueNumbers = new HashSet<Integer>(numbers);
+        Set uniqueNumbers = new HashSet<>(numbers);
         return uniqueNumbers.size() < numbers.size();
     }
 

@@ -99,7 +99,6 @@ public class LottoGame {
         boolean isValid;
         do {
             winningNumbers = this.enterWinningNumbers();
-            System.out.println(winningNumbers);
             Lotto winningLottery = new Lotto(winningNumbers);
             isValid = winningLottery.validateWinningNumbers();
         } while (!isValid);
