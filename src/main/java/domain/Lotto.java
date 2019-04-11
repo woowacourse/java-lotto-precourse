@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         assertLottoNumbersCount(numbers);
+        assertDuplicateLotto(numbers);
         this.numbers = numbers;
     }
 
@@ -20,5 +22,14 @@ public class Lotto {
             throw new IllegalArgumentException("번호가 부족합니다. 다시 입력해주세요");
         else if(numbers.size() > LOTTO_NUMBERS_COUNT)
             throw new IllegalArgumentException("번호를 많이 선택하셨습니다. 다시 입력해주세요");
+    }
+
+    private void assertDuplicateLotto(List<Integer> numbers) {
+        List<Integer> checknumbers = new ArrayList<>();
+        for(int i = 0; i < numbers.size(); i++) {
+            if(checknumbers.contains(numbers.get(i)))
+                throw new IllegalArgumentException("번호가 중복되었습니다.");
+            checknumbers.add(numbers.get(i));
+        }
     }
 }
