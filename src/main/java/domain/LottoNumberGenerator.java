@@ -33,6 +33,7 @@ public class LottoNumberGenerator {
 						int randomNumber = RANDOM.nextInt(MAX_RANDOM_NUMBER) + MIN_RANDOM_NUMBER;
 						isDuplication(lottoNumbers, randomNumber);
 				}
+				Collections.sort(lottoNumbers);
 				
 				return lottoNumbers;
 		}
