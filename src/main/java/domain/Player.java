@@ -102,6 +102,7 @@ public class Player {
         StatisticsCalculator calculator = new StatisticsCalculator();
         calculator.calculateStatistics(lottos,winningLotto,validAmount);
         int fifthToFirst = 3;
+        System.out.println("당첨 통계\n---------");
         for (Rank r : calculator.rankArray) {
             ui.printStatistics(r, calculator.countWins[fifthToFirst++]);
         }
