@@ -58,4 +58,20 @@ public class LottoMachine {
         }
         return list;
     }
+
+    /*
+     * 당첨번호의 중복, 입력 개수, 입력 범위 처리
+     */
+    public boolean inspectLottoCondition(List<Integer> list) {
+        boolean satisfy, sign;
+        satisfy = (new HashSet(list).size() == NUMBER_PER_LOTTO) ? true : false;
+        for (int value : list) {
+            sign = (value >= MIN_BOUNDARY && value <= LOTTO_NUMBER_BOUNDARY) ? true : false;
+            satisfy = satisfy && sign;
+        }
+        if (satisfy == false) {
+            System.out.println("로또 규칙에 맞게 당첨 번호를 다시 입력해주세요.");
+        }
+        return satisfy;
+    }
 }
