@@ -8,6 +8,7 @@ public class Manager {
     private User user;
     private ArrayList<Integer> winningNumbesrs;
     private boolean[] checkNumbers;
+    private WinningLotto winningLotto;
 
     Manager(){
         user = new User();
@@ -23,6 +24,17 @@ public class Manager {
         while(!thirdQuery());
     }
 
+    public List<Integer> makeWinningList(){
+        List<Integer> winningList = new ArrayList<>();
+
+        for(int i = 1; i<46; i++) {
+            if(checkNumbers[i]) winningList.add(i);
+        }
+
+        return winningList;
+    }
+    
+
     public boolean thirdQuery(){
         System.out.println("보너스 볼을 입력해 주세요.");
         String ret = user.inputBonus();
@@ -32,6 +44,7 @@ public class Manager {
             return false;
         }
 
+        makeWinningLotto(Integer.parseInt(ret));
         return true;
     }
 
