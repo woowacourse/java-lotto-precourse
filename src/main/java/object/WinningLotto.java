@@ -15,7 +15,7 @@ public class WinningLotto implements LottoNumber {
         }
 
         public Rank match(Lotto userLotto) {
-                return Rank.valueOf(matchOfNumber(userLotto),matchOfBonusBall(userLotto));
+                return Rank.valueOf(matchOfNumber(userLotto), matchOfBonusBall(userLotto));
         }
 
         private int matchOfNumber(Lotto userLotto) {

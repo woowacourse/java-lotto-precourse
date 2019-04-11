@@ -30,7 +30,7 @@ public class InputUtil {
                 int bonusball;
                 try {
                         bonusball = scan.nextInt();
-                }catch(InputMismatchException e){
+                } catch (InputMismatchException e) {
                         System.err.println("입력 형식 오류");
                         return inputBonusBallFormatError;
                 }

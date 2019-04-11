@@ -35,14 +35,18 @@ public class PrintUtil {
         }
 
         public static void printWinningStats(Map<Rank, Integer> stats) {
-                for (Rank rank : Rank.values()) {
-                        System.out.println(rank.getCountOfMatch() + "개 일치 ("
-                                + rank.getWinningMoney() + "원)- " + stats.get(rank));
-                }
+//                for (Rank rank : Rank.values()) {
+//                        System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- " + stats.get(rank) + "개");
+//                }
+                System.out.println(Rank.FIFTH.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() + "원)- " + stats.get(Rank.FIFTH) + "개");
+                System.out.println(Rank.FOURTH.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() + "원)- " + stats.get(Rank.FIFTH) + "개");
+                System.out.println(Rank.THIRD.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() + "원)- " + stats.get(Rank.FIFTH) + "개");
+                System.out.println(Rank.SECOND.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() + "원)- " + stats.get(Rank.FIFTH) + "개");
+                System.out.println(Rank.FIRST.getCountOfMatch() + "개 일치 (" + Rank.FIFTH.getWinningMoney() + "원)- " + stats.get(Rank.FIFTH) + "개");
         }
 
-        public static void printYiend(double yield){
-               System.out.printf("총 수익률은 %.3f입니다.",yield);
+        public static void printYiend(double yield) {
+                System.out.printf("총 수익률은 %.3f입니다.", yield);
         }
 
         private static void printPurchasedLotto(Lotto lotto) {

@@ -9,11 +9,11 @@ import java.util.List;
 public class LastWeekWinningNumberCreator implements Creator {
         @Override
         public Lotto create() {
-                List<Integer> numbers=null;
-                do{
+                List<Integer> numbers = null;
+                do {
                         PrintUtil.printLastWeekWinningNumberInputMessage();
                         numbers = InputUtil.inputLastWeekWinningNumber();
-                }while(numbers==null);
+                } while (numbers == null);
                 Lotto lotto = new Lotto(numbers);
                 return lotto;
         }

@@ -14,13 +14,13 @@ public class BonusBallCreator implements Creator {
                 do {
                         PrintUtil.printBonusBallInputMessage();
                         bonusNo = InputUtil.inputBonusBall();
-                }while(bonusNo == inputFormatError || !checkBonusBall1to45(bonusNo));
+                } while (bonusNo == inputFormatError || !checkBonusBall1to45(bonusNo));
                 BonusBall bonusBall = new BonusBall(bonusNo);
                 return bonusBall;
         }
 
-        private boolean checkBonusBall1to45(int bonusNo){
-                if(bonusNo <1 || bonusNo > 45){
+        private boolean checkBonusBall1to45(int bonusNo) {
+                if (bonusNo < 1 || bonusNo > 45) {
                         System.err.println("1~45범위 밖 숫자 입력 오류");
                         return false;
                 }
