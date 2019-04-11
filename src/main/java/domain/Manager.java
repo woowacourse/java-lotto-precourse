@@ -36,6 +36,7 @@ public class Manager {
     public int makeWinningMap(){
         initWinningMap();
         int totalMoney = 0;
+
         for(int i=0; i<user.getLottoList().size(); i++){
             Rank rank = winningLotto.match(user.getLottoList().get(i));
             if(rank == Rank.MISS) continue;
@@ -43,6 +44,7 @@ public class Manager {
             int count = winningMap.get(rank);
             winningMap.put(rank, count+1);
         }
+
         return totalMoney;
     }
 
@@ -71,6 +73,7 @@ public class Manager {
     public void printResult(){
         System.out.println("당첨 통계");
         System.out.println("---------");
+
         int earningAmount = makeWinningMap();
         searchWinningMap();
         printEarningRate(earningAmount, user.getPay());
