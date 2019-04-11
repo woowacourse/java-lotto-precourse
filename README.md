@@ -37,6 +37,7 @@
 <pre>
     LottoGame : 게임을 하는 플레이 하는 main 공간을 의미하는 객체
     Controller : 게임의 흐름을 컨트럴하는 마스터 객체
+    MessageManager : 출력과 관련된 기능 갖고 있는 객체
     Lotto : 로또 한장을 의미하는 객체
     Rank : 로또 등수를 의미하는 enum
     WinningLotto : 당첨 번호를 담당하는 객체
@@ -57,5 +58,11 @@
     - showLottosNumber : 산 로또의 모든 숫자 출력하는 기능
 - Lotto
     - getNumbersList : 각 로또가 갖고 있는 번호 반환
+- MessageManager
+    - MessageManager : 생성자
+    - askLastWinningLotto : 지난주 로또 당첨 번호를 묻는 기능
+    - makeLastLotto : 지난주 당첨 로또 번호에 맞게 생성 기능
+    - checkNumberRight : 지난주 받은 로또 번호들이 정당성이 맞는지 확인 하는 기능
+    - getLastLottoList : 보너스 번호와 당첨번호 모두 합친 List 리턴 기
 - Rank
 - WinningLotto
