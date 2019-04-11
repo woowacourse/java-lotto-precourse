@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoMoney;
 import lotto.view.InputConsoleView;
 
 public class LottoGame {
@@ -10,7 +11,7 @@ public class LottoGame {
     }
 
     public void run(){
-        long purchaseAmount = inputConsoleView.inputPurchaseAmount();
-
+        LottoMoney purchaseAmount = new LottoMoney(inputConsoleView.inputPurchaseAmount());
+        
     }
 }
