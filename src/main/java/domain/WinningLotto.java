@@ -1,7 +1,19 @@
+/*
+ * WinningLotto
+ *
+ * version 1.1
+ *
+ * 2019/04/10
+ */
+
 package domain;
 
 /**
  * 당첨 번호를 담당하는 객체
+ *
+ * @author 우아한 테크코스, 김성훈
+ * @version 1.0 2019/04/10
+ *          1.1 2019/04/11
  */
 public class WinningLotto {
     private final Lotto lotto;
@@ -13,7 +25,6 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        // TODO 로직 구현
-        return null;
+        return Rank.valueOf(userLotto.calcCountOfMatch(lotto), userLotto.contains(bonusNo));
     }
 }
