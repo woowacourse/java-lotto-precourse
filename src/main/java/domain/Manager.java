@@ -19,8 +19,16 @@ public class Manager {
         String ret = user.inputMoney();
 
         CheckFormatError(ret);
+        CheckMinusError(Integer.parseInt(ret));
 
+        return true;
+    }
 
+    public boolean CheckMinusError(int input){
+        if(input <= 0) {
+            System.out.println(InputError.MINUS_ERROR);
+            return false;
+        }
         return true;
     }
 
