@@ -13,6 +13,7 @@ public enum Rank {
 
     private static final int WINNING_MIN_COUNT = 3;
 
+    private int index;
     private int countOfMatch;
     private int winningMoney;
 
@@ -39,7 +40,7 @@ public enum Rank {
         }
 
         for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
+            if (rank.matchCount(countOfMatch) && rank != SECOND) {
                 return rank;
             }
         }
