@@ -42,9 +42,45 @@ public class Game {
 		return res;
 	}
 
-	private int inputBonusNo(Lotto rightLotto) {
-		// TODO Auto-generated method stub
-		return 0;
+	private int inputBonusNo(Lotto lotto) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("보너스 볼을 입력해 주세요.");
+		String bonus = sc.nextLine();
+		if (!checkEffectiveBonus(bonus,lotto)) {
+			return inputBonusNo(lotto);
+		}
+		return Integer.parseInt(bonus);
+	}
+
+	private boolean checkEffectiveBonus(String bonus, Lotto lotto) {
+		int bonusInt;
+		
+		if(!checkNumType(bonus)) {
+			return false;
+		}
+		bonusInt = Integer.parseInt(bonus);
+		if (!isDistinctValue(lotto,bonusInt) ||	!isRightLottoRange(bonusInt)) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean isRightLottoRange(int number) {
+		boolean res = number >= LOTTO_MIN && number <= LOTTO_MAX;
+		
+		if (!res) {
+			System.out.println("유효하지 않는 입력값입니다.");
+		}
+		return res;
+	}
+
+	private boolean isDistinctValue(Lotto lotto, int bonusInt) {
+		boolean result = !lotto.contains(bonusInt);
+		if (!result) {
+			System.out.println("로또 당첨번호와 같은 값은 입력할 수 없습니다.");
+		}
+		return result;
 	}
 
 	private Lotto inputRightLotto() {

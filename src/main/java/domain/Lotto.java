@@ -16,4 +16,9 @@ public class Lotto {
 		System.out.println(numbers.toString());
 	}
 
+	public boolean contains(int value) {
+		boolean res = numbers.contains(value);
+		return res;
+	}
+
 }
