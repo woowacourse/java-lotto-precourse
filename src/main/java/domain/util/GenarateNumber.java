@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Collections;
 
 public class GenarateNumber {
-
     public static List<Integer> genarateUserNumber(int amountOfNumbers) {
         List<Integer> numbersList = new ArrayList<>();
         while (numbersList.size() < amountOfNumbers) {

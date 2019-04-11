@@ -7,7 +7,6 @@ import domain.util.Constant;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Game {
     public List<Lotto> userLottoList = new ArrayList();
     public WinningLotto winningLotto;

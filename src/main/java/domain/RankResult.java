@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.List;
 
 public class RankResult {
+    List<Lotto> userLottoList;
+    WinningLotto winningLotto;
     private static Map<Rank, Integer> rankHash = new HashMap<>();
     private static Rank[] rankStrings = Rank.values();
     private static int winningMoney = 0;
-    List<Lotto> userLottoList;
-    WinningLotto winningLotto;
 
     public RankResult(List<Lotto> userLottoList, WinningLotto winningLotto) {
         this.userLottoList = userLottoList;
@@ -42,22 +42,22 @@ public class RankResult {
 
     public static void printResultInformation(Map<Rank, Integer> resultMap) {
         PrintScan.printResult();
-        Rank[] rankArray = {Rank.FIFTH,Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
+        Rank[] rankArray = {Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST};
         for (Rank rank : rankArray) {
             PrintScan.printWinning(rank, resultMap.get(rank));
         }
     }
 
     public void setWinningMoney() {
-        for ( Rank hashKey : rankHash.keySet() ) {
+        for (Rank hashKey : rankHash.keySet()) {
             int winningPrice = hashKey.getWinningMoney();
             winningMoney += winningPrice * rankHash.get(hashKey);
         }
     }
 
-    public void setEarnRate(int numberOfLotto){
-        int spendMoney = numberOfLotto * 1000;
-        float earnRate = winningMoney/spendMoney;
+    public void setEarnRate(int numberOfLotto) {
+        float spendMoney = numberOfLotto * 1000;
+        float earnRate = winningMoney / spendMoney;
         PrintScan.printEarnRate(earnRate);
     }
 }

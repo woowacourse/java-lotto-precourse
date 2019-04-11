@@ -1,20 +1,11 @@
 package domain.util;
 
-import domain.util.Constant;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-
-import domain.Game;
-import org.omg.CORBA.INTERNAL;
-
 import java.util.InputMismatchException;
-import java.util.stream.Collectors;
 
 public class Input {
-
-
     public static int insertMoney() {
         int insertedMoney = 0;
         try {

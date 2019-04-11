@@ -23,10 +23,10 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static String lottoListToString(Lotto lotto){
+    public static String lottoListToString(Lotto lotto) {
         String lottoNumString = lotto.numbers.stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(" "));
+                .collect(Collectors.joining(", "));
         return lottoNumString;
     }
 
@@ -35,17 +35,18 @@ public class Lotto {
         return bonusNum;
     }
 
-    public int countMatchNumber(Lotto otherLotto){
-        int count = 0 ;
-        for (int number : otherLotto.numbers){
+    public int countMatchNumber(Lotto otherLotto) {
+        int count = 0;
+        for (int number : otherLotto.numbers) {
             count += this.numbers.contains(number) ? 1 : 0;
         }
         return count;
     }
-    public boolean hasBonusNumber(int bonusNum){
-            if(this.numbers.contains(bonusNum)){
-                return true;
-            }
-            return false;
+
+    public boolean hasBonusNumber(int bonusNum) {
+        if (this.numbers.contains(bonusNum)) {
+            return true;
+        }
+        return false;
     }
 }
