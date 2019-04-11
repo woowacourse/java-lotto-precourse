@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     final static int LOTTO_PRICE = 1000;
+    final static Rank[] displayRankOrder = { Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST };
     static private WinningLotto winningLotto;
     static private Scanner staticSc;
     static private List<Lotto> lottoList;
@@ -108,7 +109,10 @@ public class Main {
     }
 
     private void printResult() {
-
+        System.out.println("당첨 통계\n--------");
+        for (Rank r : displayRankOrder) {
+            System.out.println(formatRank(r) + String.format("- %d개", rankMap.get(r)));
+        }
     }
 
     public static void main(String[] args) {
