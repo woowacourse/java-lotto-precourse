@@ -39,4 +39,10 @@ public class Buyer {
        printReInputMoney(money);
         return money;
     }
+
+    public void printReInputMoney(int money) {
+        if (money < MIN_PAY_MONEY) {
+            System.out.println("로또 규칙에 맞게 구입 금액을 다시 입력해주세요.");
+        }
+    }
 }
