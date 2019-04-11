@@ -39,8 +39,9 @@ public class BonusNoValidation implements Validation<Integer> {
 	}
 
 	private boolean checkRange() {
+
 		if ((bonusNo < MIN_NUMBER) || (bonusNo > MAX_NUMBER)) {
-			System.out.println("보너스 볼의 범위는 최소 1, 최대 45 입니다.\n");
+			System.out.println(String.format("보너스 볼의 범위는 최소 %d, 최대 %d 입니다.\n", MIN_NUMBER, MAX_NUMBER));
 			return false;
 		}
 
