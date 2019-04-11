@@ -2,7 +2,7 @@ package domain;
 
 import java.util.*;
 
-public class Game {
+class Game {
 
     private int inputPrice;
     private int purchaseCount;
@@ -10,24 +10,37 @@ public class Game {
     private List<Integer> winningLottoNumber;
     private int bonusLottoNumber;
 
-    public void run() {
+    void run() {
+        userInputPrice();
+        createLotto();
+        repeatOutputLottoNumbers();
+        inputWinningLotto();
+        outputResult();
+    }
+
+    private void userInputPrice() {
+        System.out.println("구입금액을 입력해주세요.");
         do {
             buyLotto();
+            System.out.println();
         } while (printPurchaseCount());
+    }
 
-        Map<Rank, Integer> has;
-
+    private void createLotto() {
         createLottoObjectArray();
         createLottoInstance();
-        repeatOutputLottoNumbers();
+    }
 
+    private void inputWinningLotto() {
         inputLastWeekWinningLotto();
         inputBonusBallLotto();
+    }
 
-        has = matchLottoNumber();
-
-        outputWinStats(has);
-        outputRevenueCalculation(revenueCalculation(has));
+    private void outputResult() {
+        Map<Rank, Integer> rankLinkedHashMap = matchLottoNumber();
+        outputWinMessage();
+        outputWinStats(rankLinkedHashMap);
+        outputRevenueCalculation(revenueCalculation(rankLinkedHashMap, inputPrice));
     }
 
     private void buyLotto() {
@@ -58,17 +71,11 @@ public class Game {
     }
 
     private boolean checkSizeNumbers(List<Integer> numbers) {
-        if (numbers.size() == 6) {
-            return false;
-        }
-
-        return true;
+        return !(numbers.size() == 6);
     }
 
     private int createRandomNumber() {
-        int randomNum = (int)(Math.random() * 45) + 1;
-
-        return randomNum;
+        return (int) (Math.random() * 45) + 1;
     }
 
     private void addNumbers(List<Integer> numbers, int randomNumber) {
@@ -106,13 +113,15 @@ public class Game {
     }
 
     private void repeatOutputLottoNumbers() {
-        for (int i = 0; i < lottos.length; i++) {
-            outputLottoNumbers(lottos[i]);
+        for (Lotto lotto : lottos) {
+            outputLottoNumbers(lotto);
         }
+        System.out.println();
     }
 
     private List<Integer> splitWithComma(String inputLottoNumber) {
-        List<String> inputLotto = Arrays.asList(inputLottoNumber.split(","));
+        String[] inputArray = inputLottoNumber.split(",");
+        List<String> inputLotto = Arrays.asList(inputArray);
         List<Integer> lottoNumbers = new ArrayList<>();
 
         try {
@@ -134,9 +143,8 @@ public class Game {
         Scanner sc = new Scanner(System.in);
 
         String inputLottoNumber = removeBlank(sc.nextLine());
-        List<Integer> lottoNumbers = splitWithComma(inputLottoNumber);
 
-        return lottoNumbers;
+        return splitWithComma(inputLottoNumber);
     }
 
     private boolean checkNumberRangeAndFormat(int lottoNumber) {
@@ -210,9 +218,8 @@ public class Game {
 
     private WinningLotto createWinningLotto() {
         Lotto lotto = new Lotto(winningLottoNumber);
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusLottoNumber);
 
-        return winningLotto;
+        return new WinningLotto(lotto, bonusLottoNumber);
     }
 
     private Map<Rank, Integer> initMap() {
@@ -237,6 +244,12 @@ public class Game {
         return rankLinkedHashMap;
     }
 
+    private void outputWinMessage() {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("--------");
+    }
+
     private void outputRankMessage(Rank rank, int count) {
         if (rank == Rank.MISS) {
             return;
@@ -255,7 +268,7 @@ public class Game {
         }
     }
 
-    private double revenueCalculation(Map<Rank, Integer> rankLinkedHashMap) {
+    private double revenueCalculation(Map<Rank, Integer> rankLinkedHashMap, int inputPrice) {
         double totalPrice = 0;
 
         for (Map.Entry<Rank, Integer> rankEntry : rankLinkedHashMap.entrySet()) {
