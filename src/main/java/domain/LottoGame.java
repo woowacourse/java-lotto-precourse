@@ -15,6 +15,7 @@ public class LottoGame {
 
     private int purchasingMoney;
     private List<Lotto> lotteries = new ArrayList<>();
+    private WinningLotto winningLottery;
 
     public static void main(String[] args) {
         LottoGame game = new LottoGame();
@@ -22,8 +23,7 @@ public class LottoGame {
         int purchasingQuantity = game.getPurchasingQuantity();
         System.out.println(purchasingQuantity + QUANTITY_GUIDE);
         game.purchaseLottery();
-        List<Integer> winningNumbers = game.getWinningNumbers();
-        game.getBonusBallNumber(winningNumbers);
+        game.winningLottery = game.getWinningLottery();
     }
 
     private int enterPurchasingMoney() {
@@ -114,5 +114,13 @@ public class LottoGame {
                 bonusBallNumber);
         } while (!isValid);
         return bonusBallNumber;
+    }
+
+    private WinningLotto getWinningLottery() {
+        List<Integer> winningNumbers = this.getWinningNumbers();
+        Lotto lottery = new Lotto(winningNumbers);
+        int bonusBallNumber = this.getBonusBallNumber(winningNumbers);
+        winningLottery = new WinningLotto(lottery, bonusBallNumber);
+        return winningLottery;
     }
 }
