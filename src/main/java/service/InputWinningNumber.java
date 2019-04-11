@@ -49,13 +49,19 @@ public class InputWinningNumber {
 	}
 
 	private boolean isValidString(String[] winningInputString) {
-		for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-			int convertedInt = isValidInteger(winningInputString[i].trim());
-			if (convertedInt < 0) {
-				return false;
-			}
-			winningNumber.add(convertedInt);
+		int i = 0;
+		while ((winningNumber.size() < LOTTO_NUMBER_COUNT) && addWinningNumber(winningInputString[i].trim())) {
+			i++;
 		}
+		return (winningNumber.size() < LOTTO_NUMBER_COUNT ? false : true);
+	}
+
+	private boolean addWinningNumber(String lottoChar) {
+		int convertedInt = isValidInteger(lottoChar);
+		if (convertedInt < 0) {
+			return false;
+		}
+		winningNumber.add(convertedInt);
 		return true;
 	}
 
@@ -67,6 +73,13 @@ public class InputWinningNumber {
 			return -1;
 		}
 		return (isValidScope(result) ? result : -1);
+	}
+
+	private boolean isValidScope(int number) {
+		if (number > 0 && number <= LOTTO_NUMBER_LIMIT && !winningNumber.contains(number)) {
+			return true;
+		}
+		return false;
 	}
 
 	public void makeBonusBall() {
@@ -86,12 +99,5 @@ public class InputWinningNumber {
 			return false;
 		}
 		return isValidScope(bonusNumber);
-	}
-
-	private boolean isValidScope(int number) {
-		if (number > 0 && number <= LOTTO_NUMBER_LIMIT && !winningNumber.contains(number)) {
-			return true;
-		}
-		return false;
 	}
 }

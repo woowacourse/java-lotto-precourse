@@ -12,10 +12,10 @@ public class LottoGenerator {
 	private static final String PURCHASED_COUNT = "%d개를 구매했습니다.";
 	private List<Lotto> soldLottos;
 	private Random random;
-
+	
 	public LottoGenerator(int count) {
-		soldLottos = new ArrayList<>();
-		random = new Random();
+		this.soldLottos = new ArrayList<>();
+		this.random = new Random();
 		makeLottos(count);
 	}
 
@@ -23,7 +23,7 @@ public class LottoGenerator {
 		System.out.println(String.format(PURCHASED_COUNT, count));
 		while (count > 0) {
 			Lotto generatedLotto = new Lotto(generatingLotto());
-			soldLottos.add(generatedLotto);
+			this.soldLottos.add(generatedLotto);
 			printLottos(generatedLotto);
 			count--;
 		}
@@ -38,12 +38,16 @@ public class LottoGenerator {
 	private List<Integer> generatingNumber() {
 		List<Integer> lottoNumbers = new ArrayList<>();
 		while (lottoNumbers.size() < InputWinningNumber.LOTTO_NUMBER_COUNT) {
-			int number = 1 + random.nextInt(InputWinningNumber.LOTTO_NUMBER_LIMIT);
-			if (!lottoNumbers.contains(number)) {
-				lottoNumbers.add(number);
-			}
+			setNumber(lottoNumbers);
 		}
 		return lottoNumbers;
+	}
+	
+	private void setNumber(List<Integer> lottoNumbers) {
+		int number = 1 + random.nextInt(InputWinningNumber.LOTTO_NUMBER_LIMIT);
+		if (!lottoNumbers.contains(number)) {
+			lottoNumbers.add(number);
+		}
 	}
 
 	private void printLottos(Lotto generatedLotto) {
