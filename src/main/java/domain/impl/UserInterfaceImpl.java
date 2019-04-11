@@ -1,7 +1,7 @@
 /*
  * UserInterfaceImpl Class
  *
- * @version 1.6
+ * @version 2
  *
  * @date 2019-04-09
  *
@@ -22,6 +22,9 @@ import java.util.Scanner;
 
 import static domain.objects.Rank.*;
 
+/**
+ * 사용자와 interaction 하는 interface 의 구현체
+ */
 public class UserInterfaceImpl implements UserInterface {
     ValidInterface valid;
     Scanner sc;
@@ -32,21 +35,22 @@ public class UserInterfaceImpl implements UserInterface {
     }
 
     @Override
-    public List<Integer> inputWinningLottoNumbers() {
+    public List<Integer> inputWinningLottoNums() {
         String winLotNums;
+
         System.out.println("지난주 당첨 번호를 입력해주세요.");
         System.out.println("ex)1,2,3,4,5,6");
         winLotNums = sc.nextLine();
-        if (!isInputWinLotNumsValid(winLotNums)) {
-            return inputWinningLottoNumbers();
+        if (!isInputWinLottoNumsValid(winLotNums)) {
+            return inputWinningLottoNums();
         }
         return Utils.convertStrArrToIntList(winLotNums.split(","));
     }
 
     @Override
-    public boolean isInputWinLotNumsValid(String winNum) {
+    public boolean isInputWinLottoNumsValid(String winNum) {
         try {
-            valid.validWinningLottoSequence(winNum);
+            valid.validWinningLottoNumsSequence(winNum);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -57,6 +61,7 @@ public class UserInterfaceImpl implements UserInterface {
     @Override
     public int inputPurchasePrice() {
         String purchasePrice;
+
         System.out.println("구입금액을 입력해 주세요.");
         purchasePrice = sc.nextLine();
         if (!isInputPurchasePriceValid(purchasePrice)) {
@@ -77,20 +82,21 @@ public class UserInterfaceImpl implements UserInterface {
     }
 
     @Override
-    public int inputBonusNum(Lotto preWinLotto) {
+    public int inputBonusNum(Lotto preWinningLot) {
         String bonusNum;
+
         System.out.println("보너스 볼을 입력해 주세요.");
         bonusNum = sc.nextLine();
-        if (!isInputBonusNumValid(preWinLotto, bonusNum)) {
-            return inputBonusNum(preWinLotto);
+        if (!isInputBonusNumValid(preWinningLot, bonusNum)) {
+            return inputBonusNum(preWinningLot);
         }
         return Integer.parseInt(bonusNum);
     }
 
     @Override
-    public boolean isInputBonusNumValid(Lotto preWinLotto, String bonusNum) {
+    public boolean isInputBonusNumValid(Lotto preWinningLot, String bonusNum) {
         try {
-            valid.validBonusNumSequence(preWinLotto, bonusNum);
+            valid.validBonusNumSequence(preWinningLot, bonusNum);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -99,10 +105,10 @@ public class UserInterfaceImpl implements UserInterface {
     }
 
     @Override
-    public void printBoughtLottos(List<Lotto> lottoList) {
-        System.out.println(lottoList.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottoList) {
-            printLottoNums(lotto);
+    public void printBoughtLottoList(List<Lotto> lotList) {
+        System.out.println(lotList.size() + "개를 구매했습니다.");
+        for (Lotto lot : lotList) {
+            printLottoNums(lot);
         }
     }
 
@@ -112,18 +118,19 @@ public class UserInterfaceImpl implements UserInterface {
     }
 
     @Override
-    public void printLottoStatistic(LottoResult lottoResult) {
+    public void printLottoStatistic(LottoResult lotResult) {
         Rank[] ranks = {FIFTH, FOURTH, THIRD, SECOND, FIRST};
+
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Rank rank : ranks) {
-            printEachRankResult(rank, lottoResult.getRankCount(rank));
+            printRankResult(rank, lotResult.getRankCount(rank));
         }
-        System.out.println(String.format("총 수익률은 %.3f%% 입니다.", lottoResult.getYieldRate()));
+        System.out.println(String.format("총 수익률은 %.3f%% 입니다.", lotResult.getYieldRate()));
     }
 
     @Override
-    public void printEachRankResult(Rank rank, int count) {
+    public void printRankResult(Rank rank, int count) {
         String string = String.format("%d개 일치%s(%d원) - %d개",
                 rank.getCountOfMatch(),
                 rank.equals(Rank.SECOND) ? ", 보너스 볼 일치" : "",

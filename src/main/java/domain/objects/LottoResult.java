@@ -1,7 +1,7 @@
 /*
  * Lotto Class
  *
- * @version 1.1
+ * @version 2
  *
  * @date 2019-04-11
  *
@@ -16,6 +16,10 @@ import java.util.Map;
 import static domain.objects.Rank.FIRST;
 import static domain.objects.Rank.SECOND;
 
+/**
+ * 로또 결과를 의미하는 객체
+ * 번호 비교 결과인 Rank 를 Rank 마다 카운트한다.
+ */
 public class LottoResult {
     private Map<Rank, Integer> content;
 
@@ -34,26 +38,28 @@ public class LottoResult {
         return content.get(rank);
     }
 
-    public long getTotalYield() {
+    private long getTotalMoney() {
         long totalMoney = 0;
+
         for (Rank rank : Rank.values()) {
             totalMoney += (long) rank.getWinningMoney() * content.get(rank);
         }
         return totalMoney;
     }
 
-    public int getLottoCount(){
-        int count =0;
-        for(Rank rank :Rank.values()){
+    private int getTotalLottoCount() {
+        int count = 0;
+
+        for (Rank rank : Rank.values()) {
             count += content.get(rank);
         }
         return count;
     }
 
     public double getYieldRate() {
-        long totalMoney = getTotalYield();
-        int lottoCount = getLottoCount();
+        long totalMoney = getTotalMoney();
+        int totalLotCount = getTotalLottoCount();
 
-        return (double) totalMoney / (lottoCount*Lotto.UNIT_PRICE);
+        return (double) totalMoney / (totalLotCount * Lotto.UNIT_PRICE);
     }
 }

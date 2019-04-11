@@ -1,7 +1,7 @@
 /*
  * UserInterface Interface
  *
- * @version 1.5
+ * @version 2
  *
  * @date 2019-04-09
  *
@@ -16,25 +16,28 @@ import domain.objects.Rank;
 
 import java.util.List;
 
+/**
+ * 사용자와 interaction 하는 인터페이스
+ */
 public interface UserInterface {
 
     int inputPurchasePrice();
 
     boolean isInputPurchasePriceValid(String purchasePrice);
 
-    List<Integer> inputWinningLottoNumbers();
+    List<Integer> inputWinningLottoNums();
 
-    boolean isInputWinLotNumsValid(String winNums);
+    boolean isInputWinLottoNumsValid(String winNums);
 
-    int inputBonusNum(Lotto preWinLotto);
+    int inputBonusNum(Lotto preWinningLot);
 
     boolean isInputBonusNumValid(Lotto winLotto, String bonusNum);
 
-    void printBoughtLottos(List<Lotto> lottoList);
+    void printBoughtLottoList(List<Lotto> lotList);
 
-    void printLottoNums(Lotto lotto);
+    void printLottoNums(Lotto lot);
 
-    void printLottoStatistic(LottoResult lottoResult);
+    void printLottoStatistic(LottoResult lotResult);
 
-    void printEachRankResult(Rank rank, int count);
+    void printRankResult(Rank rank, int count);
 }

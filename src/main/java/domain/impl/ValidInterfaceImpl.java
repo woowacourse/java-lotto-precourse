@@ -1,7 +1,7 @@
 /*
  * ValidInterfaceImpl Class
  *
- * @version 1.2
+ * @version 2
  *
  * @date 2019-04-09
  *
@@ -18,17 +18,37 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+
+/**
+ * 사용자 입력을 검증하는 interface 의 구현체
+ */
 public class ValidInterfaceImpl implements ValidInterface {
 
+    //입력된 구매가격 검증 시퀸스, 관련 모든 검사를 수행.
     @Override
     public void validPurchaseSequence(String purchasePrice) {
-        try {
-            validConvertToIntType(purchasePrice);
-            validPurchasePriceDivisibleByUnitPrice(Integer.parseInt(purchasePrice));
-            validPurchasePrice(Integer.parseInt(purchasePrice));
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        validConvertToIntType(purchasePrice);
+        validPurchasePriceDivisibleByUnitPrice(Integer.parseInt(purchasePrice));
+        validPurchasePrice(Integer.parseInt(purchasePrice));
+    }
+
+    //입력된 당첨번호 검증 시퀸스, 관련 모든 검사를 수행.
+    @Override
+    public void validWinningLottoNumsSequence(String winLotNums) {
+        String[] eachWinLotNums = winLotNums.split(",");
+
+        validWinLottoNumsInt(eachWinLotNums);
+        validWinLottoNumsCount(eachWinLotNums);
+        validWinLottoNumsRange(eachWinLotNums);
+        validWinLottoDuplicate(eachWinLotNums);
+    }
+
+    //입력된 보너스번호 검증 시퀸스, 관련 모든 검사를 수행.
+    @Override
+    public void validBonusNumSequence(Lotto preWinLotto, String bonusNum) {
+        validConvertToIntType(bonusNum);
+        validWinLottoNumRange(bonusNum);
+        validBonusNumDuplicateWithWinLotto(preWinLotto, Integer.parseInt(bonusNum));
     }
 
     @Override
@@ -51,21 +71,6 @@ public class ValidInterfaceImpl implements ValidInterface {
     public void validPurchasePrice(int purchasePrice) {
         if (MIN_PURCHASE_MONEY > purchasePrice || purchasePrice > MAX_PURCHASE_MONEY) {
             throw new IllegalArgumentException(" 1,000원 ~ 100,000원 사이로 입력해주세요.");
-        }
-    }
-
-    //승리자번호 검증 시퀸스
-    //모든 검사를 수행.
-    @Override
-    public void validWinningLottoSequence(String winLottoNums) {
-        String[] eachWinLottoNum = winLottoNums.split(",");
-        try {
-            validWinLottoNumsInt(eachWinLottoNum);
-            validWinLottoNumsCount(eachWinLottoNum);
-            validWinLottoNumsRange(eachWinLottoNum);
-            validWinLottoDuplicate(eachWinLottoNum);
-        } catch (IllegalArgumentException e) {
-            throw e;
         }
     }
 
@@ -107,15 +112,8 @@ public class ValidInterfaceImpl implements ValidInterface {
     }
 
     @Override
-    public void validBonusNumSequence(Lotto preWinLotto, String bonusNum) {
-        validConvertToIntType(bonusNum);
-        validWinLottoNumRange(bonusNum);
-        validBonusNumDuplicateWithWinLotto(preWinLotto, Integer.parseInt(bonusNum));
-    }
-
-    @Override
     public void validBonusNumDuplicateWithWinLotto(Lotto preWinLotto, int bonusNum) {
-        if(preWinLotto.contains(bonusNum)){
+        if (preWinLotto.contains(bonusNum)) {
             throw new IllegalArgumentException("당첨번호와 중복 되었습니다.");
         }
     }

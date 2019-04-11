@@ -1,7 +1,7 @@
 /*
  * Game Class
  *
- * @version 1.2
+ * @version 2
  *
  * @date 2019-04-11
  *
@@ -19,10 +19,13 @@ import domain.objects.WinningLotto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 전체 Lotto 게임을 관리하는 객체
+ */
 public class Game {
     private UserInterface ui;
-    private List<Lotto> lottos;
-    private WinningLotto winLotto;
+    private List<Lotto> lottoList;
+    private WinningLotto winningLotto;
     private LottoResult lottoResult;
 
     public Game(UserInterface ui) {
@@ -30,37 +33,48 @@ public class Game {
     }
 
     public void run() {
-        int purchasePrice = ui.inputPurchasePrice();
-        lottos = createLottos(purchasePrice / Lotto.UNIT_PRICE);
-        ui.printBoughtLottos(lottos);
-        winLotto = createWinLotto();
-        lottoResult = createLottoResult(winLotto, lottos);
-        ui.printLottoStatistic(lottoResult);
+        int purchasePrice = purchasePrice();
+        lottoList = createLottoList(purchasePrice / Lotto.UNIT_PRICE);
+        printBoughtLottoList(lottoList);
+        winningLotto = createWinLotto();
+        lottoResult = createLottoResult(winningLotto, lottoList);
+        printLottoStatistic(lottoResult);
+    }
+
+    private int purchasePrice(){
+        return ui.inputPurchasePrice();
+    }
+
+    private List<Lotto> createLottoList(int quantity) {
+        List<Lotto> lotList = new ArrayList<>();
+        LottoFactory lotFactory = new LottoFactory();
+
+        for (int th = 0; th < quantity; th++) {
+            lotList.add(lotFactory.create());
+        }
+        return lotList;
+    }
+
+    private void printBoughtLottoList(List<Lotto> lotList){
+        ui.printBoughtLottoList(lotList);
     }
 
     private WinningLotto createWinLotto() {
-        Lotto preWinLotto = new Lotto(ui.inputWinningLottoNumbers());
-        int bonusNum = ui.inputBonusNum(preWinLotto);
+        Lotto preWinLot = new Lotto(ui.inputWinningLottoNums());
+        int bonusNum = ui.inputBonusNum(preWinLot);
 
-        return new WinningLotto(preWinLotto, bonusNum);
+        return new WinningLotto(preWinLot, bonusNum);
     }
 
-    private LottoResult createLottoResult(WinningLotto winLotto, List<Lotto> lottos) {
-        LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottos) {
-            lottoResult.put(winLotto.match(lotto));
+    private LottoResult createLottoResult(WinningLotto winningLot, List<Lotto> lotList) {
+        LottoResult lotResult = new LottoResult();
+        for (Lotto lot : lotList) {
+            lotResult.put(winningLot.match(lot));
         }
-        return lottoResult;
+        return lotResult;
     }
 
-    private List<Lotto> createLottos(int quantity) {
-        List<Lotto> lottos = new ArrayList<>();
-        LottoFactory lottoFactory = new LottoFactory();
-
-        for (int th = 0; th < quantity; th++) {
-            lottos.add(lottoFactory.createLotto());
-        }
-        return lottos;
+    private void printLottoStatistic(LottoResult lotResult){
+        ui.printLottoStatistic(lotResult);
     }
-
 }

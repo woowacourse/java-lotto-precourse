@@ -1,7 +1,7 @@
 /*
  * Main Class
  *
- * @version 1
+ * @version 2
  *
  * @date 2019-04-09
  *
@@ -13,11 +13,16 @@ package domain;
 import domain.impl.UserInterfaceImpl;
 import domain.impl.ValidInterfaceImpl;
 import domain.interfaces.UserInterface;
+import domain.interfaces.ValidInterface;
 
+/**
+ * 로또 게임을 시작하는 메인
+ */
 public class Main {
     public static void main(String[] args) {
-        UserInterface userInterface = new UserInterfaceImpl(new ValidInterfaceImpl());
-        Game game = new Game(userInterface);
+        ValidInterface vi = new ValidInterfaceImpl();
+        UserInterface ui = new UserInterfaceImpl(vi);
+        Game game = new Game(ui);
 
         game.run();
     }

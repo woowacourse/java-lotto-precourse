@@ -1,7 +1,7 @@
 /*
  * LottoFactory Class
  *
- * @version 1
+ * @version 2
  *
  * @date 2019-04-11
  *
@@ -12,6 +12,10 @@ package domain.objects;
 
 import java.util.*;
 
+/**
+ * 로또를 생산하는 객체
+ * 1-45 사이의 중복하지 않는 6자리 번호를 부여한다.
+ */
 public class LottoFactory {
     private Random random;
 
@@ -19,7 +23,7 @@ public class LottoFactory {
         random = new Random();
     }
 
-    public Lotto createLotto() {
+    public Lotto create() {
         return new Lotto(createLottoNums());
     }
 

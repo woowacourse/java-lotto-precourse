@@ -1,7 +1,7 @@
 /*
  * WinningLotto Class
  *
- * @version 1.3
+ * @version 2
  *
  * @date 2019-04-09
  *
@@ -14,18 +14,18 @@ package domain.objects;
  * 당첨 번호를 담당하는 객체
  */
 public class WinningLotto {
-    private final Lotto lotto;
+    private final Lotto lot;
     private final int bonusNo;
     public static final int WIN_NUMS_COUNT = 6;
 
-    public WinningLotto(Lotto lotto, int bonusNo) {
-        this.lotto = lotto;
+    public WinningLotto(Lotto lot, int bonusNo) {
+        this.lot = lot;
         this.bonusNo = bonusNo;
     }
 
-    public Rank match(Lotto userLotto) {
-        int countOfMatch = userLotto.countMatch(lotto);
-        boolean matchBonus = userLotto.contains(bonusNo);
+    public Rank match(Lotto userLot) {
+        int countOfMatch = userLot.countMatch(lot);
+        boolean matchBonus = userLot.contains(bonusNo);
 
         return Rank.valueOf(countOfMatch, matchBonus);
     }
