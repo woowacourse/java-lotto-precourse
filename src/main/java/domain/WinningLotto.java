@@ -13,8 +13,8 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        userLotto.getLotto().retainAll(lotto.getLotto());
         boolean bonus = userLotto.getLotto().contains(bonusNo);
+        userLotto.getLotto().retainAll(lotto.getLotto());
         return Rank.valueOf(userLotto.getLotto().size(), bonus);
     }
 }

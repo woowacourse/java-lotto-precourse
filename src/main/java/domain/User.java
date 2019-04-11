@@ -16,7 +16,7 @@ public class User {
     public List<Lotto> getLottoList(){
         return lottoList;
     }
-    
+
     public int getPay(){
         return Integer.parseInt(pay);
     }
@@ -74,7 +74,6 @@ public class User {
         ArrayList<Integer> numbers = new ArrayList<>();
         Lotto lotto;
 
-        // indent 1로 나중에 수정하자
         for(int i=0; i<6; i++){
             int number = getRandomNumber();
             if(!checkNumber[number]) {
