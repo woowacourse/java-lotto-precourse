@@ -36,9 +36,16 @@ public class LottoShop {
     }
 
     public int purchase() {
+        int purchaseMoney;
         Scanner scan = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
-        return scan.nextInt();
+        purchaseMoney = scan.nextInt();
+        while (purchaseMoney < PRICE) {
+            System.out.println("구입 금액은 " + PRICE + "원 이상입니다.");
+            System.out.println("구입금액을 입력해 주세요.");
+            purchaseMoney = scan.nextInt();
+        }
+        return purchaseMoney;
     }
 
     public void printLottoList() {
