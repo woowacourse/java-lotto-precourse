@@ -1,8 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class LottoGame {
     private static final String PURCHASE_GUIDE = "구입금액을 입력해주세요.";
@@ -11,6 +9,12 @@ public class LottoGame {
     private static final String QUANTITY_GUIDE = "개를 구매했습니다.";
     private static final String WINNING_NUMBER_GUIDE = "지난 주 당첨 번호를 입력해주세요.";
     private static final String BONUSBALL_GUIDE = "보너스 볼을 입력해주세요.";
+    private static final String BONUSBALL_CASE = "SECOND";
+    private static final String MATCH_GUIDE = "개 일치";
+    private static final String SECOND_RANK_GUIDE = ", 보너스볼 일치";
+    private static final String DELIMITER = "- ";
+    private static final String MONEY_UNIT = "원";
+    private static final String COUNT_UNIT = "개";
     private static final int LOTTO_PRICE = 1000;
 
     private int purchasingMoney;
@@ -24,6 +28,8 @@ public class LottoGame {
         System.out.println(purchasingQuantity + QUANTITY_GUIDE);
         game.purchaseLottery();
         game.winningLottery = game.getWinningLottery();
+        TreeMap<Rank, Integer> lotteryResult = game.getLotteryResult();
+        game.showWinningStatistics(lotteryResult);
     }
 
     private int enterPurchasingMoney() {
@@ -122,5 +128,31 @@ public class LottoGame {
         int bonusBallNumber = this.getBonusBallNumber(winningNumbers);
         winningLottery = new WinningLotto(lottery, bonusBallNumber);
         return winningLottery;
+    }
+
+    private TreeMap<Rank, Integer> getLotteryResult() {
+        TreeMap<Rank, Integer> lotteryResult = new TreeMap<>(Collections.reverseOrder());
+        for (Rank rank : Rank.values()) {
+            lotteryResult.put(rank, 0);
+        }
+        for (Lotto lotto : this.lotteries) {
+            Rank rank = this.winningLottery.match(lotto);
+            lotteryResult.put(rank, lotteryResult.get(rank) + 1);
+        }
+        lotteryResult.remove(Rank.MISS);
+        return lotteryResult;
+    }
+
+    private void showWinningStatistics(TreeMap<Rank, Integer> lotteryResult) {
+        for (Rank rank : lotteryResult.keySet()) {
+            int countOfMatch = rank.getCountOfMatch();
+            String bonusBallGuide = (rank.name() == BONUSBALL_CASE) ?
+                SECOND_RANK_GUIDE : " ";
+            String winningMoneyGuide =
+                "(" + rank.getWinningMoney() + MONEY_UNIT + ")";
+            String winningCount = lotteryResult.get(rank) + COUNT_UNIT;
+            System.out.println(countOfMatch + MATCH_GUIDE + bonusBallGuide
+                + winningMoneyGuide + DELIMITER + winningCount);
+        }
     }
 }
