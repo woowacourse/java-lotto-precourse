@@ -21,6 +21,4 @@ public class Lotto {
     public List<Integer> catchLotto(){
         return this.numbers;
     }
-
-    // 추가 기능 구현
 }
