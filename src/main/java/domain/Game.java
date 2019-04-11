@@ -2,8 +2,10 @@ package domain;
 
 import validation.MoneyValidation;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Game {
 	GameUser gameUser;
@@ -52,7 +54,13 @@ public class Game {
 	}
 
 	private Map<Rank, Integer> initRankCount() {
-		return null;
+		Map<Rank, Integer> rankMap = new TreeMap<>(Collections.reverseOrder());
+
+		for (Rank rank : Rank.values()) {
+			rankMap.put(rank, 0);
+		}
+
+		return rankMap;
 	}
 
 	private Map<Rank, Integer> calRankCount(Map<Rank, Integer> rankCount) {
