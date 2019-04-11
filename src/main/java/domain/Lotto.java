@@ -39,7 +39,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public boolean isCorretNumberCount() {
+    public boolean isCorrectNumberCount() {
         return (this.numbers.size() == LOTTO_NUMBER_COUNT) ? true : false;
     }
 
@@ -60,7 +60,7 @@ public class Lotto {
     }
 
     public boolean validateWinningNumbers() {
-        if (!this.isCorretNumberCount()) {
+        if (!this.isCorrectNumberCount()) {
             System.out.println(NUMBER_COUNT_GUIDE);
             return false;
         }
