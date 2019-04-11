@@ -3,8 +3,8 @@ package domain;
 public class Main {
 
     public static void main(String[] args){
-        GameController gameController = new GameController();
-        gameController.startGame();
+        LottoController lottoController = new LottoController();
+        lottoController.startLotto();
     }
 
 }

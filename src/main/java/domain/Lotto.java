@@ -39,8 +39,7 @@ public class Lotto {
         System.out.println(String.join(",", String.valueOf(numbers)));
     }
 
-    public void assignWinningLotto(String inputWinningLotto){
-        String[] winningLottoArray = inputWinningLotto.split(",");
+    public void assignWinningLotto(String[] winningLottoArray){
         for(String number : winningLottoArray){
             numbers.add(Integer.parseInt(number));
         }
