@@ -88,7 +88,9 @@ public class LottoGame {
 		
 		private void notifyUserWinningStatics() {
 				checkWinningInformation();
+				CommandLineInterface.printWinningStaticsResult();
 				calculateRatesOfProfit();
+				CommandLineInterface.printRatesOfProfit();
 		}
 		
 		/**

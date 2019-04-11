@@ -39,6 +39,14 @@ public class CommandLineInterface {
 		private static final String NUMBER_DUPLICATION_ERROR 
 													= "중복되지 않은 번호를 입력해 주세요.";
 		private static final String INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
+		private static final String TITLE_WIN_STATICS = "당첨 통계\n---------";
+		private static final String STATIC_STRING_1_1= "개 일치, 보너스볼 일치(";
+		private static final String STATIC_STRING_1_2= "개 일치 (";
+		private static final String STATIC_STRING_2= "원) - ";
+		private static final String STATIC_STRING_3= "개";
+		private static final String STATIC_STRING_4= "총 수익률은 ";
+		private static final String STATIC_STRING_5= "입니다.";
+		private static final String STRING_FORMATTING = "%,.3f";
 		
 		public static void printInputPurchasePrice() {
 				System.out.println(INPUT_PURCHASE_PRICE);			
@@ -51,11 +59,11 @@ public class CommandLineInterface {
 		public static void printPurchasePriceRangeError() {
 				System.out.println(PRICE_RANGE_ERROR);
 		}
-
+		
 		public static void printIndivisiblePurchasePriceError() {
 				System.out.println(INDIVISIBLE_PRICE_ERROR);
 		}
-
+		
 		public static void printTheNumberOfLottoPurchase(int theNumberOfLottoTicket) {
 				System.out.println(SPACING_ONE_LINE + theNumberOfLottoTicket 
 									+ PREDICATE_OF_LOTTO_PURCHASE);
@@ -67,15 +75,15 @@ public class CommandLineInterface {
 				}
 				System.out.println(SPACING_ONE_LINE);
 		}
-
+		
 		public static void printInputWinningNumber() {
 				System.out.println(INPUT_WINNING_NUMBER);
 		}
-
+		
 		public static void printWinningNumberError() {
 				System.out.println(WINNING_NUMBER_ERROR);
 		}
-
+		
 		public static void printWinningNumberCountError() {
 				System.out.println(WINNING_NUMBER_COUNT_ERROR);
 		}
@@ -83,15 +91,15 @@ public class CommandLineInterface {
 		public static void printWinningNumberRangeError() {
 				System.out.println(NUMBER_RANGE_ERROR);
 		}
-
+		
 		public static void printWinningNumberDuplicationError() {
 				System.out.println(NUMBER_DUPLICATION_ERROR);
 		}
-
+		
 		public static void printInputBonusBall() {
 				System.out.println(INPUT_BONUS_BALL);
 		}
-
+		
 		public static void printBonusBallNumberError() {
 				System.out.println(NUMBER_ERROR);
 		}
@@ -99,8 +107,39 @@ public class CommandLineInterface {
 		public static void printBonusBallNumberRangeError() {
 				System.out.println(NUMBER_RANGE_ERROR);
 		}
-
+		
 		public static void printBonusBallDuplicationError() {
 				System.out.println(NUMBER_DUPLICATION_ERROR);
+		}
+		
+		public static void printWinningStaticsResult() {
+				printTitleWinStatics();
+				for (int i = 4; i >= 0; i--) {
+						Rank rank = Rank.values()[i];
+						printWinningStaticMatchingInformation(rank);
+				}
+		}
+		
+		private static void printTitleWinStatics() {
+				System.out.println(SPACING_ONE_LINE + TITLE_WIN_STATICS);
+		}
+		
+		private static void printWinningStaticMatchingInformation(Rank rank) {
+				if (rank == Rank.SECOND) {
+						System.out.println(rank.getCountOfMatch() + STATIC_STRING_1_1 
+											+ rank.getWinningMoney() + STATIC_STRING_2 
+											+ LottoGame.winningInformation.get(rank) + STATIC_STRING_3);
+						return;
+				} 
+				System.out.println(rank.getCountOfMatch() + STATIC_STRING_1_2 
+									+ rank.getWinningMoney() + STATIC_STRING_2 
+									+ LottoGame.winningInformation.get(rank) + STATIC_STRING_3);
+				return;
+		}
+		
+		public static void printRatesOfProfit() {
+				System.out.println(STATIC_STRING_4 
+									+ String.format(STRING_FORMATTING, LottoGame.ratesOfProfit) 
+									+ STATIC_STRING_5);
 		}
 }
