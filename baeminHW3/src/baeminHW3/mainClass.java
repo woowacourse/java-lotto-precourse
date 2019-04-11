@@ -1,5 +1,8 @@
 package baeminHW3;
 
+import java.util.Scanner;
+import java.util.List;
+
 public class mainClass {
 	
 	public enum Rank {
@@ -52,6 +55,14 @@ public class mainClass {
 	}
 	
 	public static void main(String[] args) {
+		int buyMoney = getMoney();
 
+	}
+	
+	public static int getMoney() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("구입금액을 입력해 주세요.");
+		int money = scan.nextInt();
+		return money;
 	}
 }
