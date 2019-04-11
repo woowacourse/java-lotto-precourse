@@ -41,6 +41,20 @@ public class LottoGame {
         this.winningLotto = new WinningLotto(new Lotto(list), bonusNum);
     }
 
+    /* 로또 게임 결과(Rank와 횟수)를 반환하는 함수 */
+    public HashMap<Rank, Integer> getResultRankAndCount() {
+        HashMap<Rank, Integer> resultRankAndCount = new HashMap<Rank, Integer>();
+        for (Rank rank : Rank.values()) { //initilaize hashmap(resultRankAndCount)
+            resultRankAndCount.put(rank, 0);
+        }
+
+        for (Lotto userLotto : this.userLottos) {
+            Rank rank = this.winningLotto.match(userLotto);
+            resultRankAndCount.put(rank, resultRankAndCount.get(rank) + 1);
+        }
+        return resultRankAndCount;
+    }
+
     public void showLottos(){
         this.showMessage("\n총 "+this.userLottos.size()+"개를 구매했습니다.");
         Iterator<Lotto> it = this.userLottos.iterator();
@@ -50,7 +64,7 @@ public class LottoGame {
             this.showMessage(String.valueOf(lotto.getLottoNumbers()));
         }
     }
-
+    
     public void showMessage(String msg) {
         System.out.println(msg);
     }
