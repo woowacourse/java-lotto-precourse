@@ -15,17 +15,28 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-    	int countOfMatch = getCountOfMatch();
-    	boolean matchBonus = Main.bonusWinningNumber == bonusNo;
+    	int countOfMatch = getCountOfMatch(userLotto);
+    	boolean matchBonus = isBonusNoMatched(userLotto);
         return Rank.valueOf(countOfMatch, matchBonus);
     }
     
-    private int getCountOfMatch() {
-    	List<Integer> currLottoNumbers = lotto.getNumbers();
+    private boolean isBonusNoMatched(Lotto userLotto) {
+    	List<Integer> currLottoNumbers = userLotto.getNumbers();
+    	for(int i = 0; i < currLottoNumbers.size(); i++) {
+    		int currentNumber = currLottoNumbers.get(i);
+    		if(currentNumber == bonusNo) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    private int getCountOfMatch(Lotto userLotto) {
+    	List<Integer> currLottoNumbers = userLotto.getNumbers();
     	int countOfMatch = 0;
     	for(int i = 0; i < currLottoNumbers.size(); i++) {
     		int currentNumber = currLottoNumbers.get(i);
-    		if(Main.winningNumbers[currentNumber] > 0) {
+    		if(lotto.getNumbers().contains(currentNumber)) {
     			++countOfMatch;
     		}
     	}
