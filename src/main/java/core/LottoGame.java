@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 class LottoGame {
+    private final String END_CODE = "Y";
 
     private Person player;
     private Store lottoStore;
@@ -30,11 +31,22 @@ class LottoGame {
         scanner = new Scanner(System.in);
     }
 
-    void init() {
-        enterBudget();
-        sellLotto();
+    boolean init() {
+        if (!enterBudget() || !sellLotto()) {
+            reset();
+            return false;
+        }
         enterWinningInfo();
         checkRank();
+
+        return true;
+    }
+
+    private void reset() {
+        System.out.println("게임을 다시 시작하려면 Y를 입력해주세요.");
+        String inputStr = scanner.nextLine();
+        if (inputStr.equals(END_CODE))
+            init();
     }
 
     /**
