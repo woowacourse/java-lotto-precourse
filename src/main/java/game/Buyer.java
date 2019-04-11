@@ -73,4 +73,11 @@ public class Buyer {
         }
         return lottos;
     }
+
+    public static void showPurchasedLottos(List<Lotto> lottos, int count) {
+        System.out.println("\n" + count + "개를 구매했습니다.");
+        for (int i = 0; i < count; i++) {
+            System.out.println(lottos.get(i).getNumbers());
+        }
+    }
 }
