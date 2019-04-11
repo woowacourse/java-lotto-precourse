@@ -53,7 +53,7 @@ public class Main {
 
     private static Lotto buyLotto() {
         shuffleNumSeq();
-        return new Lotto(numSeq.subList(0, 6));
+        return new Lotto(new ArrayList<Integer>(numSeq.subList(0, 6)));
     }
 
     private static void buyMultipleLotto(int trials) {
@@ -67,7 +67,7 @@ public class Main {
     }
 
     private static List<Integer> separateToList(String str) {
-        return Arrays.stream(str.split("\\s*,\\s*")).map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.stream(str.split(",")).map(Integer::parseInt).collect(Collectors.toList());
     }
 
     private static void getWinningLotto() {
