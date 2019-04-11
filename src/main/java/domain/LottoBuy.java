@@ -25,7 +25,7 @@ public class LottoBuy {
         lottos = new Lotto[lotto_money / Info.DIVISION];
         for (int i = Info.ZERO; i < lotto_money / Info.DIVISION; i++) {
             lottos[i] = new Lotto(RandomNumberCreate.set_Change_List());
-            RandomNumberCreate.random_Set_Number_Reset();
+            RandomNumberCreate.set_Number_Delete(RandomNumberCreate.random_Number_Create_Set);
         }
     }
 
