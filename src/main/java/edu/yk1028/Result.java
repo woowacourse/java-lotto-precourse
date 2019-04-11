@@ -23,8 +23,8 @@ public class Result {
 	private final String WINNING_RESULT = "\n당첨 통계\n---------";
 	private final String TOTAL_YIELD = "총 수익률은 %.1f입니다.";
 
-	public long totalCount;
-	public Map<Rank, Long> count = new TreeMap<Rank, Long>(Comparator.reverseOrder());
+	private long totalCount;
+	private Map<Rank, Long> count = new TreeMap<Rank, Long>(Comparator.reverseOrder());
 
 	public Result() {
 		totalCount = 0L;

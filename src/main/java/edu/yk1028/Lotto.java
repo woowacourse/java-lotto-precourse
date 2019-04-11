@@ -36,7 +36,7 @@ public class Lotto {
 		return count;
 	}
 	
-	public int checkMatch(int number) {
+	private int checkMatch(int number) {
 		if(numbers.contains(number)) {
 			return 1;
 		}
