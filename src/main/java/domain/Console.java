@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import static constants.ConsoleConstants.*;
-import static constants.LottoConstants.LOTTO_PRICE;
 
 public class Console {
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -43,7 +42,7 @@ public class Console {
 
         stats.forEach((rank, count) -> System.out.println(resultForm(rank, count)));
 
-        System.out.println(stats.values().stream().mapToInt(Long::intValue).sum() * LOTTO_PRICE);
+        System.out.println(RESULT_RATE_MESSAGE + new State().returnOfRate(stats) + RESULT_RATE_END_MESSAGE);
     }
 
     private String resultForm(Rank rank, long count) {
