@@ -22,8 +22,8 @@ public class LottoGame {
         int purchasingQuantity = game.getPurchasingQuantity();
         System.out.println(purchasingQuantity + QUANTITY_GUIDE);
         game.purchaseLottery();
-        game.getWinningNumbers();
-        game.enterBonusBallNumber();
+        List<Integer> winningNumbers = game.getWinningNumbers();
+        game.getBonusBallNumber(winningNumbers);
     }
 
     private int enterPurchasingMoney() {
@@ -103,5 +103,16 @@ public class LottoGame {
         System.out.println(BONUSBALL_GUIDE);
         Scanner prompt = new Scanner(System.in);
         return prompt.nextInt();
+    }
+
+    private int getBonusBallNumber(List<Integer> winningNumbers) {
+        int bonusBallNumber;
+        boolean isValid;
+        do {
+            bonusBallNumber = this.enterBonusBallNumber();
+            isValid = Lotto.validateBonusBallNumber(winningNumbers,
+                bonusBallNumber);
+        } while (!isValid);
+        return bonusBallNumber;
     }
 }
