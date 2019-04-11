@@ -6,45 +6,20 @@ import java.util.*;
  * 게임의 흐름을 컨트럴하는 마스터 객체
  */
 public class Controller {
-    private static final int MINIMUM_MONEY = 1000;      //로또 구입할수 있는 최소 가격
-    private static final int MAXIMUM_MONEY = 100000;    //로또 구입할수 있는 최대 가격
+    public static final int MINIMUM_MONEY = 1000;      //로또 구입할수 있는 최소 가격
+    public static final int MAXIMUM_MONEY = 100000;    //로또 구입할수 있는 최대 가격
     public static final int LOTTOS_NUMBER = 7;         //로또의 번호 갯수
-    private static final int LOTTOS_LIMIT_NUMBER = 45;  //로또번호 한도 숫자
-    private static final int START_RANKING = 4;         // 출력이 반대로이기 때문에 RANK FIFITH 부터
+    public static final int LOTTOS_LIMIT_NUMBER = 45;  //로또번호 한도 숫자
+    public static int money;
 
-    private int money;
+    private final int RANK_SECOND_WINNING_MONEY = 30000000;
+    private final int START_RANKING = 4;         // 출력이 반대로이기 때문에 RANK FIFITH 부터
     private List<Lotto> lottos;
-    private Scanner scanner;
     private List<Rank> ranks;
 
     public Controller() {
-        scanner = new Scanner(System.in);
         lottos = new ArrayList<>();
         ranks = new ArrayList<>();
-    }
-
-    public void askHowMany() {
-        String inputValue;
-
-        do {
-            System.out.println("1000원 이상, 10만원 이하 구입금액을 입력해 주세요.");
-            inputValue = scanner.nextLine();
-        } while (!isNumber(inputValue));
-    }
-
-    /* Overflow가 일어나는지, 숫자인지 체크하는 메소드 */
-    public boolean isNumber(String inputValue) {
-        try {
-            money = Integer.parseInt(inputValue);
-
-            return checkInputRangeRight();
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public boolean checkInputRangeRight() {
-        return ((money >= MINIMUM_MONEY) && (money <= MAXIMUM_MONEY));
     }
 
     public void buyLotto() {
@@ -139,7 +114,7 @@ public class Controller {
     }
 
     public String printResult(Rank rank, HashMap<Rank, Integer> resultRank) {
-        if (rank.getWinningMoney() == 30000000) {
+        if (rank.getWinningMoney() == RANK_SECOND_WINNING_MONEY) {
             return String.format(rank.getCountOfMatch() + "개 일치, 보너스 볼 일치 ("
                     + rank.getWinningMoney() + "원)-" + resultRank.get(rank) + "개");
         }

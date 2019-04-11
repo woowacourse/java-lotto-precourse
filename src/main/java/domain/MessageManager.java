@@ -7,15 +7,37 @@ import java.util.stream.Collectors;
  * 출력 메시지와 관련된 기능 객체
  */
 public class MessageManager {
-
-    private static final int LOTTO_NUMBER_AMOUNT = 7;  // 로또 번호 갯수
-
     private Scanner scanner;
     private List<Integer> lastLotto;
 
     public MessageManager() {
         scanner = new Scanner(System.in);
         lastLotto = new ArrayList<>();
+    }
+
+    public void askHowMany() {
+        String inputValue;
+
+        do {
+            System.out.println("1000원 이상, 10만원 이하 구입금액을 입력해 주세요.");
+            inputValue = scanner.nextLine();
+        } while (!isNumber(inputValue));
+    }
+
+    /* Overflow가 일어나는지, 숫자인지 체크하는 메소드 */
+    public boolean isNumber(String inputValue) {
+        try {
+            Controller.money = Integer.parseInt(inputValue);
+
+            return checkInputRangeRight();
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public boolean checkInputRangeRight() {
+        return ((Controller.money >= Controller.MINIMUM_MONEY)
+                && (Controller.money <= Controller.MAXIMUM_MONEY));
     }
 
     public void askLastWinningLotto() {
@@ -46,12 +68,12 @@ public class MessageManager {
     }
 
     public boolean checkNumberRight() {
-        if (lastLotto.size() != LOTTO_NUMBER_AMOUNT) {                          //숫자가 7개가 맞는지 확인
+        if (lastLotto.size() != Controller.LOTTOS_NUMBER) {                          //숫자가 7개가 맞는지 확인
             return false;
         }
 
-        if (lastLotto.stream().filter(num -> (num <= 45 && num >= 1))           // 1-45 사이 값인지 확인
-                .count() != LOTTO_NUMBER_AMOUNT) {
+        if (lastLotto.stream().filter(num -> (num <= Controller.LOTTOS_LIMIT_NUMBER && num >= 1))
+                .count() != Controller.LOTTOS_NUMBER) {                               // 1-45 사이 값인지 확인
             return false;
         }
 

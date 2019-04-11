@@ -9,7 +9,7 @@ public class LottoGame {
         Controller controller = new Controller();
         MessageManager manger = new MessageManager();
 
-        controller.askHowMany();
+        manger.askHowMany();
         controller.buyLotto();
         controller.showLottosNumber();
 
