@@ -5,6 +5,9 @@ import java.util.List;
 
 import static domain.Constant.*;
 
+/**
+ * 수익률, 로또당 일치개수등을 계산하는 역할을 하는 클래스
+ */
 public class Calculator {
 
     public static int CalculateMatchCountPerRank(Rank rank, List<Rank> userRanks) {

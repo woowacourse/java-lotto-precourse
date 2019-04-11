@@ -59,6 +59,6 @@ public class UserOutput {
     private void PrintEarningRate(List<Rank> userRanks, int purchaseAmount) {
         double earningRate = Calculator.CalculateEarningRate(userRanks, purchaseAmount);
 
-        System.out.printf("수익률은 " + earningRate + "입니다.");
+        System.out.println("수익률은 " + earningRate + "입니다.");
     }
 }

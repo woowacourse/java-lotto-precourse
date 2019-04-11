@@ -3,7 +3,9 @@ package domain;
 import java.util.List;
 
 import static domain.Constant.*;
-
+/**
+ * 해당 데이터들이 로또게임에 맞는 타당한 값인지 확인하는 역할을 하는 클래스
+ */
 public class Validator {
 
     public static boolean isValidPurchaseAmount(int purchaseAmount) {

@@ -16,7 +16,7 @@ public class Lotto {
         return numbers;
     }
 
-    public String JoinLottoNumbers(){
+    public String JoinLottoNumbers() {
         String JoinedLottoNumber = String.join(",", this.numbers.toString());
 
         return JoinedLottoNumber;
