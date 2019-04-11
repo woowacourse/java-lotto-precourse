@@ -53,4 +53,18 @@ public class WinningLotto {
         }
         return count;
     }
+
+    /*
+     * 당첨 로또 번호 중 보너스 숫자와의 일치 여부
+     */
+    public boolean matchBonusNum(Lotto userLotto) {
+        int judge, answer = 0;
+        List<Integer> userLottoNumber = userLotto.getNumbers();
+
+        for (int i = 0; i < userLottoNumber.size(); i++) {
+            judge = (userLottoNumber.get(i) == bonusNo) ? EXIST : 0;
+            answer += judge;
+        }
+        return (answer == EXIST) ? true : false;
+    }
 }
