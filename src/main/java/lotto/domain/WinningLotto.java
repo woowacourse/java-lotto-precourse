@@ -15,7 +15,10 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        return null;
+        int countOfMatch = userLotto.calculateCountOfMatch(lotto);
+        boolean matchBonus = userLotto.isBonusNoDuplicate(bonusNo);
+
+        return Rank.valueOf(countOfMatch, matchBonus);
     }
 
     private void validateRange(int bonusNo) {

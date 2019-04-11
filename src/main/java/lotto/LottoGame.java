@@ -1,9 +1,7 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoMoney;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
+import lotto.utils.LottoRankChecker;
 import lotto.utils.RandomNumberGenerate;
 import lotto.view.InputConsoleView;
 import lotto.view.OutputConsoleView;
@@ -15,6 +13,7 @@ import java.util.stream.Collectors;
 public class LottoGame {
     private InputConsoleView inputConsoleView;
     private LottoMachine lottoMachine;
+    private WinPrice winPrice;
 
     public LottoGame() {
         inputConsoleView = new InputConsoleView();
@@ -27,6 +26,9 @@ public class LottoGame {
         OutputConsoleView.printLottos(purchasedLottos);
 
         WinningLotto winningLotto = getWinningLotto();
+
+        List<Rank> purchasedLottosRanks = LottoRankChecker.getRanks(purchasedLottos, winningLotto);
+        winPrice.addWinCount(purchasedLottosRanks);
 
     }
 

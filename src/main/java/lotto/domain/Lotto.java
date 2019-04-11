@@ -29,6 +29,18 @@ public class Lotto {
         return false;
     }
 
+    public int calculateCountOfMatch(Lotto anotherLotto) {
+        int countOfMatch = 0;
+        for (int number : numbers)
+            countOfMatch += anotherLotto.isDuplicate(number) ? 1 : 0;
+
+        return countOfMatch;
+    }
+
+    public boolean isDuplicate(int number) {
+        return numbers.contains(number);
+    }
+
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE)
             throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_SIZE + "개만 가능합니다.");
@@ -54,4 +66,5 @@ public class Lotto {
     public String toString() {
         return numbers.toString();
     }
+
 }
