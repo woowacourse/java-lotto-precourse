@@ -65,6 +65,14 @@ public class Manager {
         return true;
     }
 
+    public boolean checkNumberCount(int cnt){
+        if(cnt != 6){
+            System.out.println(InputError.NUMBER_CNT_ERROR);
+            return false;
+        }
+        return true;
+    }
+
     public boolean checkWinningNumbers(List<String> list){
         initCheckNumbers();
 
@@ -80,11 +88,7 @@ public class Manager {
             cnt++;
         }
 
-        if(cnt != 6){
-            System.out.println(InputError.NUMBER_CNT_ERROR);
-            return false;
-        }
-        return true;
+        return checkNumberCount(cnt);
     }
 
     public boolean firstQuery(){
