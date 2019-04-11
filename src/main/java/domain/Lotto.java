@@ -12,5 +12,4 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
 }
