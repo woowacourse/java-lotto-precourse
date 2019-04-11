@@ -13,7 +13,7 @@ public class Main {
     static private List<Integer> numSeq;
     static private Map<Rank, Integer> rankMap;
 
-    private Scanner getScanner() {
+    private static Scanner getScanner() {
         if (staticSc == null) {
             staticSc = new Scanner(System.in);
         }
@@ -126,6 +126,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int trials = getTrials();
+        buyMultipleLotto(getTrials());
+
     }
 }
