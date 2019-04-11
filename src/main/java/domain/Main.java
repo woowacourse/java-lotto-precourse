@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -12,6 +9,7 @@ public class Main {
     static private Scanner staticSc;
     static private List<Lotto> lottoList;
     static private List<Integer> numSeq;
+    static private Map<Rank, Integer> rankMap;
 
     private Scanner getScanner() {
         if (staticSc == null) {
