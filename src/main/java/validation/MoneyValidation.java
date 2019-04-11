@@ -30,6 +30,15 @@ public class MoneyValidation implements Validation<Integer> {
 		return true;
 	}
 
+	private boolean checkUnit() {
+		if (money % MONEY_UNIT != 0) {
+			System.out.println(String.format("금액의 단위는 %,d원 입니다.\n", MONEY_UNIT);
+			return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public Integer convert(String value) {
 		return null;
