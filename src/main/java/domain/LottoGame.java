@@ -78,6 +78,19 @@ public class LottoGame {
         }
     }
 
+    public void showResult() {
+        Rank[] ranks = Rank.values();
+        HashMap<Rank, Integer> resultRankAndCount = this.getResultRankAndCount();
+
+        for (int i = ranks.length - 1; i >= 0; i--) {
+            Rank rank = ranks[i];
+            if (rank == Rank.MISS) { continue; }
+            this.showMessage(rank.getCountOfMatch() + "개 일치("
+                    + rank.getWinningMoney() + "원)- "
+                    + resultRankAndCount.get(rank) + "개");
+        }
+    }
+
     public void showMessage(String msg) {
         System.out.println(msg);
     }
