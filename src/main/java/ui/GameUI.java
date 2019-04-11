@@ -17,6 +17,7 @@ public class GameUI {
 		try(Scanner sc = new Scanner(System.in)) {
 			int money = askMoney(sc);
 			game.setMoney(money);
+			System.out.println(game.getLotto());
 		}
 	}
 
