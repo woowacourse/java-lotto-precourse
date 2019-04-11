@@ -44,7 +44,6 @@ public class Lotto {
     }
     public boolean hasBonusNumber(int bonusNum){
             if(this.numbers.contains(bonusNum)){
-                System.out.println("bonus");
                 return true;
             }
             return false;
