@@ -54,4 +54,9 @@ public class RankResult {
             winningMoney += winningPrice * rankHash.get(hashKey);
         }
     }
+
+    public void setEarnRate(int numberOfLotto){
+        int spendMoney = numberOfLotto * 1000;
+        float earnRate = winningMoney/spendMoney;
+    }
 }
