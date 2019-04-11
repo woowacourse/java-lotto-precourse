@@ -101,7 +101,7 @@ public class LottoMaker {
         }
     }
 
-    private static void checkNumberRange(int number) {
+    public static void checkNumberRange(int number) {
         if ((number < LOTTO_MIN_NUMBER) || (number > LOTTO_MAX_NUMBER)) {
             throw new IllegalArgumentException("로또 번호의 범위가 유효하지 않습니다.");
         }
@@ -114,9 +114,10 @@ public class LottoMaker {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    private static void checkUniqueNumber(List<Integer> lottoNumberList, int bonusNumber) {
+    public static void checkUniqueNumber(List<Integer> lottoNumberList, int bonusNumber) {
         Set<Integer> lottoNumberSet = new HashSet<>(lottoNumberList);
-        if (lottoNumberSet.contains(bonusNumber))
+        if (lottoNumberSet.contains(bonusNumber)) {
             throw new IllegalArgumentException(lottoNumberList + "에 중복된 숫자가 존재합니다.");
+        }
     }
 }

@@ -22,8 +22,8 @@ import java.util.Scanner;
 public class LottoGame {
     private Scanner scanner;
     private List<Lotto> userLottos; //유저가 구매한 로또 리스트
-    private Lotto lastWinningLotto; //지난 주 당첨 번호
-    private int bonusNumber;    //보너스 번호
+    private Lotto lastWinninNumber; //지난 주 당첨 번호
+    private Integer bonusNumber;    //보너스 번호
     private WinningLotto winningLotto;  //당첨 로또
     private List<Rank> rankList;    //유저가 구매한 로또의 당첨 정보
 
@@ -33,21 +33,20 @@ public class LottoGame {
 
     public void run() {
         userLottos = getOrder();
-        System.out.println();
         printUserLottos(userLottos);
-        System.out.println();
-        lastWinningLotto = createLastWinningLotto();
+        lastWinninNumber = createLastWinningLotto();
+        bonusNumber = createBonusNumber();
+        winningLotto = LottoService.getWinningLotto(lastWinninNumber, bonusNumber);
     }
 
     private List<Lotto> getOrder() {
         List<Lotto> lottoList;
-        String stringBasedMoney;
 
         do {
             System.out.println("구입금액을 입력해 주세요.");
-            stringBasedMoney = scanner.nextLine();
-            lottoList = LottoService.getOrder(stringBasedMoney);
+            lottoList = LottoService.getOrder(scanner.nextLine());
         } while (lottoList == null);
+        System.out.println();
         return lottoList;
     }
 
@@ -56,19 +55,31 @@ public class LottoGame {
         for (Lotto lotto : userLottos) {
             System.out.println(lotto.getNumbers());
         }
+        System.out.println();
     }
 
     private Lotto createLastWinningLotto() {
-        String lastWeekWinningNumber;
         Lotto lotto;
 
         do {
             System.out.println("지난 주 당첨 번호를 입력해주세요.");
-            lastWeekWinningNumber = scanner.nextLine();
-            lotto = LottoService.getLotto(lastWeekWinningNumber);
+            lotto = LottoService.getLotto(scanner.nextLine());
         } while (lotto == null);
         return lotto;
     }
+
+    private Integer createBonusNumber() {
+        Integer number;
+
+        do {
+            System.out.println("보너스 볼을 입력해주세요.");
+            number = LottoService.getBonusNumber(scanner.nextLine(), lastWinninNumber);
+        } while (number == null);
+        System.out.println();
+        return number;
+    }
+
+
 
     public void closeGame() {
         scanner.close();

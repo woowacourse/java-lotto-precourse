@@ -35,14 +35,12 @@ public class LottoService {
     }
 
     private static int convertStringToInteger(String stringNumber) {
-        int number;
-
         try {
-            number = Integer.parseInt(stringNumber);
+            int number = Integer.parseInt(stringNumber);
+            return number;
         } catch (NumberFormatException exception) {
             throw new NumberFormatException("잘못된 숫자를 입력하였습니다.");
         }
-        return number;
     }
 
     private static void checkMinMoney(int money) {
@@ -60,9 +58,8 @@ public class LottoService {
         }
     }
 
-    public static WinningLotto getWinningLotto(Lotto lotto, String stringNumber) {
+    public static WinningLotto getWinningLotto(Lotto lotto, int bonusNumber) {
         try {
-            int bonusNumber = convertStringToInteger(stringNumber);
             return LottoMaker.getWinningLotto(lotto, bonusNumber);
         } catch (RuntimeException exception) {
             System.out.println(exception.getMessage());
@@ -77,6 +74,18 @@ public class LottoService {
                     .map(lotto -> winningLotto.match(lotto))
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
+
+    public static Integer getBonusNumber(String stringNumber, Lotto winningLotto) {
+        try {
+            int bonusNumber = convertStringToInteger(stringNumber);
+            LottoMaker.checkNumberRange(bonusNumber);
+            LottoMaker.checkUniqueNumber(winningLotto.getNumbers(), bonusNumber);
+            return bonusNumber;
+        } catch (RuntimeException exception) {
             System.out.println(exception.getMessage());
             return null;
         }
