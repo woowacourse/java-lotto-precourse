@@ -147,17 +147,34 @@ public class LottoGame {
 
     private void showWinningStatistics(TreeMap<Rank, Integer> lotteryResult) {
         for (Rank rank : lotteryResult.keySet()) {
-            int countOfMatch = rank.getCountOfMatch();
-            String bonusBallGuide = (rank.name() == BONUSBALL_CASE) ?
-                SECOND_RANK_GUIDE : " ";
-            String winningMoneyGuide =
-                "(" + rank.getWinningMoney() + MONEY_UNIT + ")";
-            String winningCount = lotteryResult.get(rank) + COUNT_UNIT;
-            System.out.println(countOfMatch + MATCH_GUIDE + bonusBallGuide
-                + winningMoneyGuide + DELIMITER + winningCount);
+            String matchGuide  = this.formatCountOfMatch(rank);
+            String bonusBallGuide = this.formatBonusBall(rank);
+            String winningMoneyGuide = this.formatWinningMoney(rank);
+            String winningCountGuide = this.formatWinningCount(lotteryResult,
+                rank);
+            System.out.println(matchGuide + bonusBallGuide
+                + winningMoneyGuide + DELIMITER + winningCountGuide);
         }
-        double profitRate = this.getProfitRate(lotteryResult);
-        System.out.println("총 수익률은 " + profitRate + "입니다.");
+        this.showProfitRate(lotteryResult);
+    }
+
+    private String formatCountOfMatch(Rank rank) {
+        int countOfMatch = rank.getCountOfMatch();
+        return countOfMatch + MATCH_GUIDE;
+    }
+
+    private String formatBonusBall(Rank rank) {
+        return (rank.name() == BONUSBALL_CASE) ? SECOND_RANK_GUIDE : " ";
+    }
+
+    private String formatWinningMoney(Rank rank) {
+        return "(" + rank.getWinningMoney() + MONEY_UNIT + ")";
+    }
+
+    private String formatWinningCount(TreeMap<Rank, Integer> lotteryResult,
+                                      Rank rank) {
+        int winningCount = lotteryResult.get(rank);
+        return winningCount + COUNT_UNIT;
     }
 
     private double getProfitRate(TreeMap<Rank, Integer> lotteryResult) {
@@ -177,5 +194,10 @@ public class LottoGame {
             totalWinningMoney += winningCount * winningMoney;
         }
         return totalWinningMoney;
+    }
+
+    private void showProfitRate(TreeMap<Rank, Integer> lotteryResult) {
+        double profitRate = this.getProfitRate(lotteryResult);
+        System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
 }
