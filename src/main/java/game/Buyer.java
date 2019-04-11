@@ -60,4 +60,17 @@ public class Buyer {
         }
         return new ArrayList(set);
     }
+
+    /*
+     * 번호를 담은 로또들의 리스트를 만들고 반환
+     */
+    public List<Lotto> purchaseLottos(int count) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            List<Integer> lottoNumber = makeLottoNumber();
+            Collections.sort(lottoNumber);
+            lottos.add(new Lotto(lottoNumber));
+        }
+        return lottos;
+    }
 }
