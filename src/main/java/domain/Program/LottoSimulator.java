@@ -19,7 +19,6 @@ public class LottoSimulator {
         Winningstatistics winningstatistics = Winningstatistics.createWinningStatistics(lottoBundle, winningLotto);
         double earningRate = Calculator.setEarningRate(winningstatistics, pay);
         Print.getWinningstatisticsResult(winningstatistics, earningRate);
-
     }
 
     private Lotto[] buyLottoBundle(long pay, int type) {
