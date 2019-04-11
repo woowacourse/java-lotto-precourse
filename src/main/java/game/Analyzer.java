@@ -67,4 +67,13 @@ public class Analyzer {
                 + rank.getWinningMoney() +"원)- "
                 + map.get(rank) + "개";
     }
+
+    public double putBenefitRate(List<Lotto> lottos) {
+        int sum = 0;
+        for (Rank rank : map.keySet()) {
+            int benefit = rank.getWinningMoney() * map.get(rank);
+            sum += benefit;
+        }
+        return (double) sum / (lottos.size() * LOTTO_PRICE);
+    }
 }
