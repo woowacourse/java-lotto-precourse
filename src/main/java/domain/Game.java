@@ -16,7 +16,6 @@ public class Game {
         createLottoObjectArray();
         createLottoInstance();
         repeatOutputLottoNumbers();
-
     }
 
     private void buyLotto() {
@@ -160,5 +159,10 @@ public class Game {
             lottoNumbers = inputLottoNumber();
         } while (checkNumberCount(lottoNumbers, listSize)
                 || checkLottoNumberRangeAndFormat(lottoNumbers));
+    }
+
+    private void inputLastWeekWinningLotto() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        inputLottoSelectSize(6);
     }
 }
