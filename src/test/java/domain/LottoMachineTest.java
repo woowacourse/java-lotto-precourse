@@ -9,6 +9,6 @@ public class LottoMachineTest {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         LottoMachine lottoMachine = new LottoMachine(lottoNumberGenerator);
 
-        lottoMachine.purchaseLottos(5001);
+        lottoMachine.createLottos(5001);
     }
 }

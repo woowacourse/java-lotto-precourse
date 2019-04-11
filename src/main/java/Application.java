@@ -9,7 +9,7 @@ public class Application {
 
     public static void main(String[] args) {
         int purchasePrice = userInterface.getPurchasePrice();
-        List<Lotto> lottos = lottoMachine.purchaseLottos(purchasePrice);
+        List<Lotto> lottos  = lottoMachine.createLottos(purchasePrice);
         userInterface.printLottos(lottos);
 
         WinningLotto winningLotto = userInterface.getWinningLotto();

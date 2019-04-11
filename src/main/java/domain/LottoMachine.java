@@ -13,13 +13,13 @@ public class LottoMachine {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public List<Lotto> purchaseLottos(int purchasePrice) {
+    public List<Lotto> createLottos(int purchasePrice) {
         validatePurchasePrice(purchasePrice);
 
         int lottoCount = purchasePrice / PRICE;
 
         return IntStream.rangeClosed(1, lottoCount)
-                .mapToObj(x -> makeLotto())
+                .mapToObj(x -> createLotto())
                 .collect(Collectors.toList());
     }
 
@@ -29,7 +29,7 @@ public class LottoMachine {
         }
     }
 
-    private Lotto makeLotto() {
+    private Lotto createLotto() {
         List<Integer> numbers = lottoNumberGenerator.makeLottoNumbers();
         return new Lotto(numbers);
     }
