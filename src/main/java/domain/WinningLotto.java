@@ -16,7 +16,9 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         int countOfMatch = this.getCountOfMatch(userLotto);
-        return null;
+        boolean bonusBallMatch = this.getBonusBallMatch(userLotto,
+            this.bonusNo);
+        return Rank.valueOf(countOfMatch, bonusBallMatch);
     }
 
     private int getCountOfMatch(Lotto userLotto) {
@@ -31,5 +33,9 @@ public class WinningLotto {
 
     private int isMatch(int lotteryNumber, List<Integer> winningNumbers) {
         return (winningNumbers.contains(lotteryNumber)) ? 1 : 0;
+    }
+
+    private boolean getBonusBallMatch(Lotto userLotto, int bonusNo) {
+        return userLotto.getNumbers().contains(bonusNo);
     }
 }
