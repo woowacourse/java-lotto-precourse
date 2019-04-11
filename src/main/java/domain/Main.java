@@ -123,7 +123,7 @@ public class Main {
             System.out.println(formatRank(r) + String.format("- %d개", rankMap.get(r)));
         }
 
-        System.out.println(String.format("총 수익률은 %3f입니다.", money / (float)lottoMoney));
+        System.out.println(String.format("총 수익률은 %3f입니다.", (float)lottoMoney / money);
 
     }
 
@@ -132,7 +132,8 @@ public class Main {
         buyMultipleLotto((int)(money / LOTTO_PRICE));
         getWinningLotto();
         matchLottos();
+
         int lottoMoney = calculateBenefit();
-        printResult();
+        printResult(money, lottoMoney);
     }
 }
