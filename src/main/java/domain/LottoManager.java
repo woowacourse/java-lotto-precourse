@@ -52,10 +52,12 @@ public class LottoManager {
         lottoList = userLotto.getLotto();
         winningLotto = new WinningLotto(lottoMatch.getWinLottoNum(), lottoMatch.getBonusNum());
         int tmp;
+        int totalPrice = 0;
 
         for (Lotto lotto : lottoList) {
             tmp = map.get(winningLotto.match(lotto).getWinningMoney());
             map.put(winningLotto.match(lotto).getWinningMoney(), ++tmp);
+            totalPrice += winningLotto.match(lotto).getWinningMoney();
         }
 
         int[] rank = new int[6];
@@ -63,21 +65,23 @@ public class LottoManager {
         for (int key: map.keySet()) {
             rank[i++] = map.get(key);
         }
-        printResult(rank);
+        printResult(rank,totalPrice,lottoList.size());
     }
 
 
-    private void printResult(int[] rankArray) {
+    private void printResult(int[] rankArray, int totalPrice, int userLottoAmount) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (int i = 1; i < rankArray.length; i++) {
             System.out.println(resultStrArray[i]+"- "+rankArray[i]+"개");
         }
+        printWinRating(totalPrice,userLottoAmount);
     }
 
-    private void printWinRating(){
-
+    private void printWinRating(double totalPrice, double userLottoAmount){
+        double winRate = Double.parseDouble(String.format("%.3f", totalPrice/(userLottoAmount*1000)));
+        System.out.println("총 수익률은 "+winRate+"입니다.");
     }
 
 }
