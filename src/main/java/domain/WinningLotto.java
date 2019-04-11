@@ -17,11 +17,11 @@ public class WinningLotto {
 
     public Rank match(Lotto userLotto) {
         List<Integer> matchNumbers;
-        boolean matchBonus = userLotto.getNumbers().contains(bonusNo);
+        boolean matchBonus = userLotto.contains(bonusNo);
 
         matchNumbers = userLotto.getNumbers()
                 .stream()
-                .filter(number -> this.lotto.getNumbers().contains(number))
+                .filter(this.lotto::contains)
                 .collect(Collectors.toList());
 
         return Rank.valueOf(matchNumbers.size(), matchBonus);
