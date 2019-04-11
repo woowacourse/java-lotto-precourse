@@ -11,10 +11,9 @@
 package edu.yk1028;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import edu.yk1028.Exception.MoneyLackException;
 
@@ -26,7 +25,14 @@ import edu.yk1028.Exception.MoneyLackException;
  */
 public class LottoMachine {
 	private Random random = new Random();
+	private List<Integer> baseNumbers = new ArrayList<Integer>();
 	
+	public LottoMachine() {
+		for	(int i = LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER; i <= LottoConstant.MAXIMUM_RANGE_OF_LOTTO_NUMBER; i++) {
+			baseNumbers.add(i);
+		}
+	}
+
 	public List<Lotto> cellLottos(long money) throws Exception {
 		if (money < LottoConstant.MIN_MONEY) {
 			throw new MoneyLackException();
@@ -49,16 +55,13 @@ public class LottoMachine {
 
 	private List<Integer> generateLottoNumbers() {
 		List<Integer> numberList = new ArrayList<Integer>();
-		Set<Integer> numberSet = new HashSet<Integer>();
-
-		while (numberSet.size() != LottoConstant.NUMBER_OF_LOTTO_NUMBERS) {
-			numberSet.add(makeRandomLottoNumber());
+		
+		for	(int i = LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER; i <= LottoConstant.NUMBER_OF_LOTTO_NUMBERS; i++) {
+			int randomIndex = random.nextInt(LottoConstant.SIZE_OF_RANGE - i) 
+								+ LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER;
+			numberList.add(baseNumbers.get(randomIndex));
+			Collections.swap(baseNumbers, randomIndex, LottoConstant.MAXIMUM_RANGE_OF_LOTTO_NUMBER - i);
 		}
-		numberList.addAll(numberSet);
 		return numberList;
-	}
-
-	private int makeRandomLottoNumber() {
-		return random.nextInt((LottoConstant.SIZE_OF_RANGE)) + LottoConstant.MINIMUM_RANGE_OF_LOTTO_NUMBER;
 	}
 }
