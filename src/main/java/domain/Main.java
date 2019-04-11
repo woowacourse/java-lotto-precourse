@@ -2,7 +2,7 @@ package domain;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         LottoController lottoController = new LottoController();
         lottoController.startLotto();
     }

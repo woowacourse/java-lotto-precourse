@@ -16,15 +16,15 @@ public class WinningLotto {
         // TODO 로직 구현
         int count = 0;
 
-        for(int userNumber : userLotto.getNumbers()){
-           count = countOfMatchNumber(userNumber, count);
+        for (int userNumber : userLotto.getNumbers()) {
+            count = countOfMatchNumber(userNumber, count);
         }
 
         return Rank.valueOf(count, userLotto.getNumbers().contains(bonusNo));
     }
 
-    private int countOfMatchNumber(int number, int count){
-        if(lotto.getNumbers().contains(number)){
+    private int countOfMatchNumber(int number, int count) {
+        if (lotto.getNumbers().contains(number)) {
             return ++count;
         }
         return count;

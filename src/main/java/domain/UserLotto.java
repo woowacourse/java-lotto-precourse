@@ -9,8 +9,15 @@ class UserLotto {
     private static final int LOTTO_PRICE = 1000;
 
     public int inputPrice(Scanner scanner) {
-        System.out.println("구입 금액을 입력해 주세요.");
-        return scanner.nextInt();
+        while(true){
+            System.out.println("구입 금액을 입력해 주세요.");
+            String input = scanner.nextLine();
+            if(InputPriceException.getInstance().hasBlankException(input) || InputPriceException.getInstance().isNumberFormatException(input)
+                || InputPriceException.getInstance().isMinusNumberException(input) || InputPriceException.getInstance().hasNumberOfChiperException(input)){
+                continue;
+            }
+            return Integer.parseInt(input);
+        }
     }
 
     public void assignPurchaseLottoList(int purchasePrice, List<Lotto> purchaseLottoList) {
@@ -19,11 +26,9 @@ class UserLotto {
 
         for (int i = 0; i < numberOfLotto; i++) {
             Lotto assignLotto = new Lotto(new ArrayList<>());
-            assignLotto.getLottoNumber();
+            assignLotto.assignPurchaserLottoNumber();
             purchaseLottoList.add(assignLotto);
         }
-
-        System.out.println();
     }
 
 }

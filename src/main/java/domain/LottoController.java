@@ -2,7 +2,7 @@ package domain;
 
 import java.util.*;
 
-class LottoController {
+public class LottoController {
 
     public void startLotto() {
         List<Lotto> purchaseLottoList = new ArrayList<>();
@@ -14,6 +14,7 @@ class LottoController {
 
         userLotto.assignPurchaseLottoList(purchasePrice, purchaseLottoList);
         assignWinning.statsWinningLotto(purchaseLottoList, scanner, purchasePrice);
+        scanner.close();
     }
 
 }
