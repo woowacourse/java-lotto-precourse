@@ -27,6 +27,8 @@ public class Game {
 
         // 지난 주 당첨 번호
         winningLotto = generateWinningLotto();
+        for (int i = 0; i < gameNum; i++)
+            winningLotto.match(lottos.get(i));
 
     }
 
@@ -34,15 +36,21 @@ public class Game {
         for (int i = 0; i < gameNum; i++) {
             lottos.get(i).print();
         }
+        System.out.println();
     }
 
     private WinningLotto generateWinningLotto() {
+        System.out.println(SENTENCE[2]);
+
         // 임시로 당첨 번호 받기
         List<Integer> list = new LinkedList<>();
         String input[] = sc.nextLine().split(",");
-        for (int i = 0; i < input.length; i++)
-            list.add(Integer.parseInt(input[i]));
+        for (String str : input) {
+            list.add(Integer.parseInt(str));
+        }
 
+
+        System.out.println(SENTENCE[3]);
         int bonus = sc.nextInt();
 
         Lotto lotto = new Lotto(list);

@@ -12,11 +12,21 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public int getCountOfMatch(Lotto winningLotto) {
+        int count = 0;
+        for (int number : numbers)
+            count += winningLotto.contains(number) ? 1 : 0;
+
+        return count;
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
     public void print() {
         StringBuilder sb = new StringBuilder("[");
-
-        for (int i = 0; i < 6; i++)
+        for (int i: numbers)
             sb.append(numbers.get(i) +", ");
         sb.delete(sb.length() - 2, sb.length());
         sb.append("]");
