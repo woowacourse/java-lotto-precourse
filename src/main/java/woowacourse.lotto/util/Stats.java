@@ -11,7 +11,7 @@ package woowacourse.lotto.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Stats {
+class Stats {
     private static final String RANK_FORMAT_STRING =
             "당첨 통계\n"
                     + "---------\n"
@@ -23,6 +23,7 @@ public class Stats {
     private static final String YIELD_FORMAT_STRING =
             "총 수익률은 %.3f입니다.\n";
     private HashMap<Rank, Integer> countOfRank = new HashMap<>();
+    double yield;
 
     void printRankCount(ArrayList<Rank> matchedRanks) {
         updateRankCount(matchedRanks);
@@ -35,7 +36,7 @@ public class Stats {
     }
 
     void calYield(int totalPrice) {
-        double yield = calTotalWinningMoney() / (double)totalPrice;
+        yield = calTotalWinningMoney() / (double)totalPrice;
         System.out.format(YIELD_FORMAT_STRING, yield);
     }
 
