@@ -16,6 +16,7 @@ public class LottoGame {
     private static final String MONEY_UNIT = "원";
     private static final String COUNT_UNIT = "개";
     private static final int LOTTO_PRICE = 1000;
+    private static float ROUNDING_NUMBER = 1000;
 
     private int purchasingMoney;
     private List<Lotto> lotteries = new ArrayList<>();
@@ -154,5 +155,26 @@ public class LottoGame {
             System.out.println(countOfMatch + MATCH_GUIDE + bonusBallGuide
                 + winningMoneyGuide + DELIMITER + winningCount);
         }
+        double profitRate = this.getProfitRate(lotteryResult);
+        System.out.println("총 수익률은 " + profitRate + "입니다.");
+    }
+
+    private double getProfitRate(TreeMap<Rank, Integer> lotteryResult) {
+        int totalWinningMoney = this.getTotalWinningMoney(lotteryResult);
+        if (totalWinningMoney == 0) {
+            return 0;
+        }
+        double profitRate = totalWinningMoney / this.purchasingMoney;
+        return Math.round(profitRate * ROUNDING_NUMBER) / ROUNDING_NUMBER;
+    }
+
+    private int getTotalWinningMoney(TreeMap<Rank, Integer> lotteryResult) {
+        int totalWinningMoney = 0;
+        for (Rank rank : lotteryResult.keySet()) {
+            int winningCount = lotteryResult.get(rank);
+            int winningMoney = rank.getWinningMoney();
+            totalWinningMoney += winningCount * winningMoney;
+        }
+        return totalWinningMoney;
     }
 }
