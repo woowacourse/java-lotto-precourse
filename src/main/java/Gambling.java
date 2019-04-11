@@ -1,4 +1,5 @@
 import domain.Console;
+import domain.State;
 import lotto.BuyLotto;
 import lotto.Lotto;
 import lotto.Rank;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class Gambling {
     private Console console;
 
-    Gambling(){
+    Gambling() {
         console = new Console();
     }
 
@@ -21,6 +22,7 @@ public class Gambling {
         List<Lotto> lottos = makeLottos();
         WinningLotto winningLotto = makeWinningLotto();
         List<Rank> resultRanks = makeMatchResult(lottos, winningLotto);
+        console.writeResult(new State().statsLottoResult(resultRanks));
     }
 
     private List<Lotto> makeLottos() throws IOException {
