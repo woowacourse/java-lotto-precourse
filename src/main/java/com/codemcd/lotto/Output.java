@@ -1,6 +1,6 @@
 package com.codemcd.lotto;
 
-import java.util.List;
+        import java.util.List;
 
 public class Output {
 

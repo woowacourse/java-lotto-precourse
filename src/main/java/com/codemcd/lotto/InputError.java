@@ -66,11 +66,11 @@ public class InputError {
         int countOfRightNumber = 0;
         for (int i = 0; i < number.length; ++i) {
             countOfRightNumber +=
-                    (isNumeric(number[i])
-                    && isNaturalNumber(number[i])
-                    && isRightNumberOfRange(number[i]))
-                    ? 1
-                    : 0;
+                            (isNumeric(number[i])
+                            && isNaturalNumber(number[i])
+                            && isRightNumberOfRange(number[i]))
+                            ? 1
+                            : 0;
         }
         return (countOfRightNumber == COUNT_OF_NUMBER);
     }
@@ -85,7 +85,7 @@ public class InputError {
         int countOfNotOverlapNumber = 0;
         for (int i = 0; i < number.length; ++i) {
             countOfNotOverlapNumber +=
-                    (checkOverlapNumberOne(number, number[i]))
+                            (checkOverlapNumberOne(number, number[i]))
                             ? 1
                             : 0;
         }

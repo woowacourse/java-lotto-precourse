@@ -41,8 +41,9 @@ public class Game {
     }
 
     private void initializeCountOfRankList() {
-        for (int i = 0; i < MAX_RANK_NUMBER + 1; ++i)
+        for (int i = 0; i < MAX_RANK_NUMBER + 1; ++i) {
             countOfRank.add(0);
+        }
     }
 
     private double calculateEarningsRate(int money) {
