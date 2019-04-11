@@ -29,9 +29,18 @@ public class Game {
 		
 	}
 
-	private HashMap<Rank, Integer> collectLottoResult(List<Lotto> lottoList2, WinningLotto winningNumbers2) {
-		// TODO Auto-generated method stub
-		return null;
+	private HashMap<Rank, Integer> collectLottoResult(List<Lotto> myLotto, 
+			WinningLotto winninglotto) {
+		HashMap<Rank,Integer> result = new HashMap<Rank, Integer>();
+		for (Rank rank : Rank.values()) {
+			result.put(rank, 0);
+		}
+		
+		for (Lotto lotto : myLotto) {
+			Rank rank = winninglotto.match(lotto);
+			result.put(rank, result.get(rank)+1);
+		}
+		return result;
 	}
 
 	private WinningLotto checkLastLotto() {

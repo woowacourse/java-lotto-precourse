@@ -21,4 +21,25 @@ public class Lotto {
 		return res;
 	}
 
+	public int getCountOfMatch(Lotto lotto) {
+		final int LOTTO_MIN = 1;
+		final int LOTTO_MAX = 45;
+		
+		int res =0;
+		
+		for (int i = LOTTO_MIN; i <= LOTTO_MAX; i++) {
+			res += coHas(lotto,i);
+		}
+		return res;
+	}
+
+	private int coHas(Lotto lotto, int i) {
+		int res = 0;
+		
+		if (lotto.contains(i) && contains(i)) {
+			res = 1;
+		}
+		return res;
+	}
+
 }

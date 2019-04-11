@@ -13,7 +13,10 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        //구현
-        return null;
+        Rank res;
+        int countOfMatch = userLotto.getCountOfMatch(lotto);
+        boolean matchBonus = userLotto.contains(bonusNo);
+        res = Rank.valueOf(countOfMatch, matchBonus);
+        return res;
     }
 }
