@@ -28,9 +28,7 @@ public class User {
 
 	public boolean buyLottos(LottoMachine lottoMachine) {
 		try {
-			long money = insertMoney();
-			
-			this.lottos = lottoMachine.cellLottos(money);
+			this.lottos = lottoMachine.cellLottos(insertMoney());
 			System.out.println(lottos.size() + PURCHASE_LOTTO_TAIL_MESSAGE);
 		} catch (Exception e) {
 			System.out.println(PURCHASE_FAILED);

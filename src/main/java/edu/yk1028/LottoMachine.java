@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 import edu.yk1028.Exception.MoneyLackException;
+import edu.yk1028.Exception.TooMuchMoneyException;
 
 /**
  * 사용자에게 로또를 발급하는 객체
@@ -36,6 +37,9 @@ public class LottoMachine {
 	public List<Lotto> cellLottos(long money) throws Exception {
 		if (money < LottoConstant.MIN_MONEY) {
 			throw new MoneyLackException();
+		}
+		if (money > LottoConstant.MAX_MONEY) {
+			throw new TooMuchMoneyException();
 		}
 		return generateLottos(maximumNumberOfLotto(money));
 	}

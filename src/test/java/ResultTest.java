@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
+import edu.yk1028.LottoConstant;
 import edu.yk1028.Rank;
 import edu.yk1028.Result;
 
@@ -12,7 +13,8 @@ public class ResultTest {
 		Result result = new Result();
 		
 		// when
-		long maximumNumberOfLottos = 9223372036854775L;
+		long maximumNumberOfLottos = LottoConstant.MAX_MONEY
+									/ LottoConstant.LOTTO_PRICE;
 		for	(long i = 0; i < maximumNumberOfLottos; i++) {
 			result.add(Rank.FIRST);
 		}
