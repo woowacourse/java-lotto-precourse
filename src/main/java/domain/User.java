@@ -49,7 +49,24 @@ public class User {
         overlap.put(no, 0);
         return false;
     }
+    private void BuyLotto(int price) {
+        createdLotto = new ArrayList<Lotto>();
+        int myMoney = price;
+        while(myMoney >= MinPrice) {
+            createLotto();
+            myMoney -= MinPrice;
+        }
+    }
 
+    private void createLotto() {
+        overlap = new HashMap<Integer, Integer>();
+        List<Integer> lotto = new ArrayList<Integer>();
+        for(int i =0; i<MaxNumberLength; i++) {
+            int number = randomNumber();
+            lotto.add(number);
+        }
+        createdLotto.add(new Lotto(lotto));
+    }
     public List<Lotto> getLotto(int price) {
         BuyLotto(price);
         System.out.println(createdLotto.size()+"개를 구매했습니다.");
