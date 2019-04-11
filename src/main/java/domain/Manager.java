@@ -10,7 +10,7 @@ public class Manager {
     }
 
     public void startGame(){
-        firstQuery();
+        while(!firstQuery());
 
     }
 
@@ -20,7 +20,16 @@ public class Manager {
 
         CheckFormatError(ret);
         CheckMinusError(Integer.parseInt(ret));
+        CheckRestError(Integer.parseInt(ret));
+        
+        return true;
+    }
 
+    public boolean CheckRestError(int input){
+        if(input % 1000 != 0){
+            System.out.println(InputError.REST_ERROR);
+            return false;
+        }
         return true;
     }
 
