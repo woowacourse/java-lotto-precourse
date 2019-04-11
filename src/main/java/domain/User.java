@@ -3,12 +3,13 @@ import java.util.*;
 
 public class User {
 	public String resultNum = "";
+	private int gameCoin = 0;
 	public void playgame() {
 		
 		LottoShop shop = new LottoShop();
 		
-		int gameCoin = getPrice();
-		shop.createLotto(gameCoin);
+		this.gameCoin = getPrice();
+		shop.createLotto(this.gameCoin);
 		shop.printLotto();
 		List<Integer> winningLottoNumber = winNumInput();
 		int bonus = bonusNumInput();
@@ -31,14 +32,28 @@ public class User {
 		System.out.println("당첨 통계");
 		System.out.println("-----------");
 		
+		
 		rankCount(ranks, Rank.FIFTH);
 		rankCount(ranks, Rank.FOURTH);
 		rankCount(ranks, Rank.THIRD);
 		rankCount(ranks, Rank.SECOND);
 		rankCount(ranks, Rank.FIRST);
+		
+		calcTotalPrize(ranks);
 	}
 	
-	public void rankCount(List<Rank> ranks, Rank target) {
+	public void calcTotalPrize(List<Rank> ranks) {
+		Iterator it = ranks.iterator();
+		int totalPrize = 0;
+		while(it.hasNext()) {
+			Rank rank = (Rank)it.next();
+			totalPrize += rank.getWinningMoney();
+		}
+		
+		System.out.printf("총 수익률은 %.3f 입니다.\n", (float)totalPrize / (this.gameCoin *1000));
+	}
+	
+	public int rankCount(List<Rank> ranks, Rank target) {
 		Iterator it = ranks.iterator();
 		int numOfMatchs = 0;
 		while(it.hasNext()) {
@@ -48,6 +63,7 @@ public class User {
 			}
 		}
 		System.out.printf("%d개 일치 (%d원) - %d개\n", target.getCountOfMatch(), target.getWinningMoney(), numOfMatchs);
+		return numOfMatchs;
 	}
 	
 	public int getPrice() {
