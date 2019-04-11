@@ -1,4 +1,4 @@
-package domain;
+package com.nekisse.domain;
 
 import java.util.List;
 
