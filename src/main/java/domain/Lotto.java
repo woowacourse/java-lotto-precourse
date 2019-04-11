@@ -8,12 +8,15 @@ import java.util.List;
  */
 public class Lotto {
     private static final int LOTTO_NUMBERS_COUNT= 6;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
 
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         assertLottoNumbersCount(numbers);
         assertDuplicateLotto(numbers);
+        assertLottoNumber(numbers);
         this.numbers = numbers;
     }
 
@@ -32,4 +35,14 @@ public class Lotto {
             checknumbers.add(numbers.get(i));
         }
     }
+
+    private void assertLottoNumber(List<Integer> numbers) {
+        for(int i = 0; i < numbers.size(); i++) {
+            if(numbers.get(i) > LOTTO_MAX_NUMBER)
+                throw new IllegalArgumentException("45보다 큰 수를 입력하셨습니다.");
+            else if(numbers.get(i) < LOTTO_MIN_NUMBER)
+                throw new IllegalArgumentException("1보다 작은 수를 입력하셨습니다.");
+        }
+    }
+
 }
