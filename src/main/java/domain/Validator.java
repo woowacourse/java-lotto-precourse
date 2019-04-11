@@ -30,20 +30,38 @@ public class Validator {
 		public static final int LIST_LAST_ELEMENT = 5;
 		public static int purchasePrice;
 		public static int bonusBall;
+		private static final int DIVISIBLE = 0;
+		private static final int FIRST_CHAR = 0;
+		private static final int UNIT_WON = 1; 
 		
 		public static List<Integer> winningNums = new ArrayList<Integer>();
 		private static Scanner SCANNER = new Scanner(System.in);		
 		
-		
 		public static boolean isValidPrice(String userPrice) {
 				try {
 						userPrice = SCANNER.nextLine().trim();
+						userPrice = isValidPurchasePriceAddedUnit(userPrice).trim();
 						purchasePrice = Integer.parseInt(userPrice);
 						return isValidPurchasePriceException(purchasePrice);
 						
 				} catch (NumberFormatException e) {
 						CommandLineInterface.printPurchasePrcieNumberError();
 						return false;
-				}	
+				}
+		}
+		
+		/**
+		 * 사용자로부터 입력받은 값에 '원'이라는 단위가 있는지 확인합니다.
+		 */
+		private static String isValidPurchasePriceAddedUnit(String userPrice) {
+				if (userPrice.substring(userPrice.length()-UNIT_WON).equals("원")) {
+						return (String) userPrice.substring(FIRST_CHAR, userPrice.length()-UNIT_WON);
+				}
+				return userPrice;
+		}
+		
+		private static boolean isValidPurchasePriceException(int purchasePrice) {
+			return (isValidPurchasePriceRange(purchasePrice)
+					&& isDivisiblePurchasePriceByUnit(purchasePrice));
 		}
 }
