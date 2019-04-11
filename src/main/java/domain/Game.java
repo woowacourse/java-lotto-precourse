@@ -45,7 +45,7 @@ public class Game {
 		
 		for (int i = 0; i < size; i++) {
 			res.add(genLottoNumber());
-			//res.get(i).printNumbers();
+			res.get(i).printNumbers();
 		}
 		
 		return res;

@@ -11,5 +11,9 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
+    
+    public void printNumbers() {
+		System.out.println(numbers.toString());
+	}
 
 }
