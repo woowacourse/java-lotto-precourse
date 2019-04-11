@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     final static int LOTTO_PRICE = 1000;
-    final static Rank[] displayRankOrder = { Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST };
+    final static Rank[] displayRankOrder = { Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH };
 
     static private WinningLotto winningLotto;
     static private Scanner staticSc;
