@@ -26,7 +26,7 @@ public class Main {
             lottoNumbers.add(winnerNumber);
         }
 
-        int bonusBall = ui.inputBonusBall(winnerNumbers);
+        int bonusBall = ui.inputBonusBall(lottoNumbers);
         winnerLotto = new WinningLotto(new Lotto(lottoNumbers), bonusBall);
 
         ResultInformation resultInformation = new ResultInformation(buyer.getLottos(), winnerLotto);

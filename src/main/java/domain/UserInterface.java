@@ -76,7 +76,7 @@ public class UserInterface extends CheckValidity {
                 && checkLottoNumberScope(Integer.parseInt(winnerNumberStr)));
     }
 
-    public int inputBonusBall(int[] winnerNumbers) {
+    public int inputBonusBall(List<Integer> winnerNumbers) {
         String bonusBallStr = "";
         boolean flag = false;
 
@@ -89,7 +89,7 @@ public class UserInterface extends CheckValidity {
         return Integer.parseInt(bonusBallStr);
     }
 
-    private boolean validateBonusBall(int[] winnerNumbers, String bonusBallStr) {
+    private boolean validateBonusBall(List<Integer> winnerNumbers, String bonusBallStr) {
         return (checkIntegerFormat(bonusBallStr)
                 && !checkDoubleBonus(winnerNumbers, Integer.parseInt(bonusBallStr))
                 && checkLottoNumberScope(Integer.parseInt(bonusBallStr)));
