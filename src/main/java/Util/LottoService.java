@@ -23,15 +23,34 @@ import java.util.stream.Collectors;
 public class LottoService {
     private static final int LOTTO_PRICE = 1_000;
 
-    public static List<Lotto> getOrder(int money) {
-        if (LOTTO_PRICE > money) {
-            System.out.println("주문 금액은 최소 1,000원 이상이어야 합니다.");
+    public static List<Lotto> getOrder(String stringBasedMoney) {
+        int money;
+
+        try {
+            money = convertStringToInteger(stringBasedMoney);
+            checkMinMoney(money);
+        } catch (RuntimeException exception) {
+            System.out.println(exception.getMessage());
             return null;
         }
+        return LottoMaker.getLottos(money / LOTTO_PRICE);
+    }
 
-        int numberOfLotto = money / LOTTO_PRICE;
-        List<Lotto> lottos = LottoMaker.getLottos(numberOfLotto);
-        return lottos;
+    private static int convertStringToInteger(String stringNumber) {
+        int number;
+
+        try {
+            number = Integer.parseInt(stringNumber);
+        } catch (NumberFormatException exception) {
+            throw new NumberFormatException("잘못된 숫자를 입력하였습니다.");
+        }
+        return number;
+    }
+
+    private static void checkMinMoney(int money) {
+        if (LOTTO_PRICE > money) {
+            throw new IllegalArgumentException("주문 금액은 최소 1,000원 입니다.");
+        }
     }
 
     public static Lotto getLotto(String stringNumber) {
