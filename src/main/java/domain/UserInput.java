@@ -20,7 +20,7 @@ public class UserInput {
 		
 		do {
 			System.out.println("구입금액을 입력해 주세요.");
-			purchaseAmount = sc.next();
+			purchaseAmount = sc.nextLine();
 		} while (!validator.isValidPurchaseAmount(purchaseAmount));
 		
 		return Integer.parseInt(purchaseAmount);
@@ -28,6 +28,7 @@ public class UserInput {
 	
 	public Lotto inputWinningLotto() {
 		do {
+			System.out.println("지난 주 당첨 번호를 입력해주세요.");
 			splitNumberBall();
 		} while (validator.isValidNuberBalls(numbers));
 		
@@ -40,6 +41,7 @@ public class UserInput {
 	public int inputBonusNo() {
 		String bonusNo;
 		do {
+			System.out.println("보너스 볼을 입력해주세요.");
 			bonusNo = sc.nextLine();
 		} while (validator.isValidBonusNO(bonusNo, numbers));
 		

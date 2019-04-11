@@ -14,7 +14,8 @@ public class InputValidator {
 	private static final int COUNT_OF_BALL = 6;
 	private static final int COUNT_OF_BONUS_BALL = 1;
 	private static final String PATTERN_OF_MONEY = "^[0-9]*$";
-	private static final String PATTERN_OF_LOTTO_BALL = "^[1-45]*$";
+	private static final int MIN_BALL = 1;
+	private static final int MAX_BALL = 45;
 	
 	public boolean isValidPurchaseAmount (String purchaseAmount) {
 		if (isNumber(purchaseAmount) 
@@ -64,7 +65,9 @@ public class InputValidator {
 
 	private boolean isCollectNumber (List<String> numbers) {
 		for (String number : numbers) {
-			if (!Pattern.matches(PATTERN_OF_LOTTO_BALL, number)) {
+			if (!Pattern.matches(PATTERN_OF_MONEY, number)
+					|| !(MIN_BALL<=Integer.parseInt(number)
+						&&MAX_BALL>=Integer.parseInt(number))) {
 				return false;
 			}
 		}
