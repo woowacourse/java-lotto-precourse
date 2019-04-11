@@ -23,13 +23,6 @@ public class LottoPaper {
         setSelfLottoNumber();
     }
 
-    private static void fillLottoBox() {
-        lottoNumberBox.clear();
-        for (int i = Constant.LOTTO_MIN; i <= Constant.LOTTO_MAX; i++) {
-            lottoNumberBox.add(i);
-        }
-    }
-
     public List<Integer> getLottoNumber() {
         return lottoNumber;
     }
@@ -50,6 +43,13 @@ public class LottoPaper {
             lottoNumber.add(lottoNumberBox.remove(Random.createNumber(Constant.LOTTO_MAX - 1 - i)));
         }
         return lottoNumber;
+    }
+
+    private static void fillLottoBox() {
+        lottoNumberBox.clear();
+        for (int i = Constant.LOTTO_MIN; i <= Constant.LOTTO_MAX; i++) {
+            lottoNumberBox.add(i);
+        }
     }
 
     private void setSelfLottoNumber() {
