@@ -1,8 +1,20 @@
+/*
+ * @(#)Game.java
+ * v2.0
+ * 2019/04/11
+ */
+
 package com.codemcd.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 로또 게임의 전체 진행과 데이터 생성 및 계산
+ *
+ * @author 박성범
+ * @version v2.0
+ */
 public class Game {
 
     private static final int MIN_LOTTO_PRICE = 1000;

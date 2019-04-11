@@ -1,9 +1,21 @@
+/*
+ * @(#)Input.java
+ * v2.0
+ * 2019/04/11
+ */
+
 package com.codemcd.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * 구입 금액과 지난 주 당첨 번호 및 보너스 번호 입력 처리
+ *
+ * @author 박성범
+ * @version v2.0
+ */
 public class Input {
 
     public static int returnMoney() {

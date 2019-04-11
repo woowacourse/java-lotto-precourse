@@ -1,9 +1,21 @@
+/*
+ * @(#)RandomNumber.java
+ * v2.0
+ * 2019/04/11
+ */
+
 package com.codemcd.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 로또 번호 생성
+ *
+ * @author 박성범
+ * @version v2.0
+ */
 public class RandomNumber {
 
     private static final int MAX_LOTTO_NUMBER = 45;

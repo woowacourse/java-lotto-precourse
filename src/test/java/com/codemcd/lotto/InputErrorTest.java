@@ -1,8 +1,21 @@
+/*
+ * @(#)InputErrorTest.java
+ * v2.0
+ * 2019/04/11
+ */
+
 package com.codemcd.lotto;
 
 import org.junit.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 로또 게임 입력 테스트
+ *
+ * @author 박성범
+ * @version v2.0
+ */
 public class InputErrorTest {
 
     @Test

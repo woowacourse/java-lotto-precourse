@@ -1,7 +1,19 @@
+/*
+ * @(#)Output.java
+ * v2.0
+ * 2019/04/11
+ */
+
 package com.codemcd.lotto;
 
-        import java.util.List;
+import java.util.List;
 
+/**
+ * 구입한 로또 번호와 당첨 결과를 출력하는 클래스
+ *
+ * @author 박성범
+ * @version v2.0
+ */
 public class Output {
 
     public static void printLottoNumbers(List<Lotto> lottoList) {

@@ -1,3 +1,9 @@
+/*
+ * @(#)RandomNumberTest.java
+ * v2.0
+ * 2019/04/11
+ */
+
 package com.codemcd.lotto;
 
 import org.junit.Test;
@@ -7,6 +13,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 정상적인 로또 번호를 생성하는지 테스트
+ *
+ * @author 박성범
+ * @version v2.0
+ */
 public class RandomNumberTest {
 
     @Test

@@ -1,3 +1,9 @@
+/*
+ * @(#)WinningNumber.java
+ * v2.0
+ * 2019/04/11
+ */
+
 package com.codemcd.lotto;
 
 /**

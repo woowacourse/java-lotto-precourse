@@ -1,5 +1,17 @@
+/*
+ * @(#)InputError.java
+ * v2.0
+ * 2019/04/11
+ */
+
 package com.codemcd.lotto;
 
+/**
+ * 입력의 오류를 검사하고 어떤 오류인지 알려주는 클래스
+ *
+ * @author 박성범
+ * @version v2.0
+ */
 public class InputError {
 
     private static final int MIN_LOTTO_PRICE = 1000;
