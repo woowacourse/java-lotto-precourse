@@ -129,4 +129,16 @@ public class Validator {
 				CommandLineInterface.printWinningNumberRangeError();
 				return false;
 		}
+
+		private static boolean isThereWinningNumDuplication(List<Integer> winningNums) {
+				TreeSet<Integer> checkSet = new TreeSet<Integer>();
+				for (int i = 0; i < winningNums.size(); i++) {
+						checkSet.add(winningNums.get(i));
+				}
+				if (checkSet.size() == winningNums.size()) {
+						return true;
+				}
+				CommandLineInterface.printWinningNumberDuplicationError();
+				return false;
+		}
 }

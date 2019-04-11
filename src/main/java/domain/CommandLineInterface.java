@@ -36,6 +36,8 @@ public class CommandLineInterface {
 												+ " 이상 "
 												+ LottoNumberGenerator.MAX_RANDOM_NUMBER
 												+ " 이하의 번호를 입력해 주세요.";
+		private static final String NUMBER_DUPLICATION_ERROR 
+													= "중복되지 않은 번호를 입력해 주세요.";
 		
 		public static void printInputPurchasePrice() {
 				System.out.println(INPUT_PURCHASE_PRICE);			
@@ -79,6 +81,10 @@ public class CommandLineInterface {
 		
 		public static void printWinningNumberRangeError() {
 				System.out.println(NUMBER_RANGE_ERROR);
+		}
+
+		public static void printWinningNumberDuplicationError() {
+				System.out.println(NUMBER_DUPLICATION_ERROR);
 		}
 
 }
