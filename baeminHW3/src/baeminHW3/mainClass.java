@@ -98,7 +98,7 @@ public class mainClass {
 	
 	public static Lotto getWinningLotto(){
 		Scanner scan = new Scanner(System.in);
-		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+		System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
 		List<Integer> number = new ArrayList<Integer>();
 		String temp = scan.nextLine();
 		String[] numberByString = temp.split(",");
@@ -111,7 +111,7 @@ public class mainClass {
 	
 	public static int getBonusNumber() {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("보너스 볼을 입력해 주세요.");
+		System.out.println("\n보너스 볼을 입력해 주세요.");
 		int bonus = scan.nextInt();
 		return bonus;
 	}
