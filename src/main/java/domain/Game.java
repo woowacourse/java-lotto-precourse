@@ -18,6 +18,7 @@ public class Game {
         createLottoObjectArray();
         createLottoInstance();
         repeatOutputLottoNumbers();
+
         inputLastWeekWinningLotto();
         inputBonusBallLotto();
     }
@@ -198,5 +199,12 @@ public class Game {
         do {
             inputBonusBall();
         } while (checkBonusBall());
+    }
+
+    private WinningLotto createWinningLotto() {
+        Lotto lotto = new Lotto(winningLottoNumber);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusLottoNumber);
+
+        return winningLotto;
     }
 }
