@@ -1,3 +1,9 @@
+/*
+ *@(#)WinningStats.java           1.0 2019/04/11
+ *Copyright (c) 2019 Hyogeon Kim.
+ *Lotto Game, Java, Mungyeong, KOREA
+ */
+
 package object.mainobject;
 
 import domain.Rank;
@@ -6,6 +12,13 @@ import util.PrintUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * 로또 게임에서 당첨 통계에 대한 정보를 가지고 있고
+ * 그에 대한 기능을 하는 클래스
+ * @author 김효건
+ * @version 1.0 2019년 04월 011일
+ */
 
 public class WinningStats {
         private final PurchaseInfo purchaseInfo;

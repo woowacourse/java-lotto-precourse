@@ -1,10 +1,19 @@
+/*
+ *@(#)InputUtil.java           1.0 2019/04/11
+ *Copyright (c) 2019 Hyogeon Kim.
+ *Lotto Game, Java, Mungyeong, KOREA
+ */
+
 package object;
 
 import domain.Rank;
 
 /**
- * 당첨 번호를 담당하는 객체
+ * 로또 게임에서 지난 주 당첨 번호, 보너스 번호에 대한 정보를 갖고 있는 클래스
+ * @author 김효건
+ * @version 1.0 2019년 04월 011일
  */
+
 public class WinningLotto implements LottoNumber {
         private final Lotto lotto;
         private final int bonusNo;

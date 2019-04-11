@@ -1,8 +1,18 @@
+/*
+ *@(#)Rank.java           1.0 2019/04/11
+ *Copyright (c) 2019 Hyogeon Kim.
+ *Lotto Game, Java, Mungyeong, KOREA
+ */
+
 package domain;
 
 /**
- * 로또 등수를 의미하는 enum
+ * 로또 게임에서 랭크에 대한 정보를 가지고
+ * 그에 대한 기능을 하는 클래스
+ * @author 김효건
+ * @version 1.0 2019년 04월 011일
  */
+
 public enum Rank {
         FIRST(6, 2_000_000_000), // 1등
         SECOND(5, 30_000_000), // 2등
