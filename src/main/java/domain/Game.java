@@ -20,10 +20,10 @@ class RankComparator implements Comparator<Rank> {
 }
 
 public class Game {
-	static final int LOTTO_MIN = 1;
-	static final int LOTTO_MAX = 45;
-	static final int LOTTO_SIZE = 6;
-	static final int LOTTO_PRICE = 1000;
+	private static final int LOTTO_MIN = 1;
+	private static final int LOTTO_MAX = 45;
+	private static final int LOTTO_SIZE = 6;
+	private static final int LOTTO_PRICE = 1000;
 	
 	private List<Lotto> lottoList;
 	private WinningLotto winningNumbers;
