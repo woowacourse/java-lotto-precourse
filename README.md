@@ -13,24 +13,16 @@
 
 
 1. 구입금액 입력
-
 2. 구입금액에 대한 예외 처리 (1000원 미만, 음수, 0, 문자)
-
 3. 구매할 수 있는 수만큼 랜덤을 이용하여 로또 번호 생성
-
 4. 구매한 로또 번호 출력
-
 5. 당첨 번호 입력
-
 6. 당첨 번호에 대한 예외 처리 (번호 갯수, 음수, 0, 문자)
-
 7. 보너스볼 입력
-
 8. 보너스볼에 대한 예외 처리 (당첨 번호와 일치, 음수, 0, 문자)
-
 9. 당첨 통계 출력
-
 10. 수익률 계산
+11. 다시 시작
 
 
 
@@ -96,3 +88,67 @@
 
 
 ### 게임 화면
+
+
+
+##### 정상적인 게임
+
+
+
+![](./screenshot/NormalCase1.jpg)
+
+
+
+##### 다시 시작 기능
+
+
+
+![](./screenshot/NormalCase2.jpg)
+
+
+
+##### 음수 입력 예외처리
+
+
+
+![](./screenshot/MinusInputCase.jpg)
+
+
+
+##### 문자 입력 예외처리
+
+
+
+![](./screenshot/LetterInputCase.jpg)
+
+
+
+##### 돈이 부족할 때 예외처리
+
+
+
+![](./screenshot/NoMoneyCase.jpg)
+
+
+
+##### 잘못된 범위의 당첨번호 예외처리
+
+
+
+![](./screenshot/WrongRangeCase.jpg)
+
+
+
+##### 잘못된 갯수의 당첨번호 예외처리
+
+
+
+![](./screenshot/WrongCountCase.jpg)
+
+
+
+##### 당첨 번호에 보너스 번호가 포함될 경우 예외처리
+
+
+
+![](./screenshot/WinningContainBonusCase.jpg)
