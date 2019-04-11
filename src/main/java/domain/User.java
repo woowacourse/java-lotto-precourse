@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+
 public class User {
 	static private Scanner scanner = new Scanner(System.in);
 	private static ArrayList<Lotto> userLottoList = new ArrayList<Lotto>();
@@ -52,6 +53,36 @@ public class User {
 	}
 
 	public static void makeNumberListOfLastWeek() {
+	}
+
+	public static List<Integer> inputNumberOfLastweek() {
+		Set<Integer> set = new HashSet<Integer>();
+		String[] userInputWithoutComma = {};
+		do {
+			userInputWithoutComma = splitWithComma();
+			set = makeWeekNumberSet(userInputWithoutComma);
+		} while (Util.isDuplicatedNumber(set) || !Util.isValidRange(userInputWithoutComma));
+		List<Integer> lastweekNumberList = new LinkedList<Integer>(set);
+		return lastweekNumberList;
+	}
+
+	public static String[] splitWithComma() {
+		String userInput = "";
+		String[] userInputWithoutComma = {};
+		do {
+			System.out.println("지난주 당첨번호를 입력해 주세요.");
+			userInput = scanner.nextLine();
+			userInputWithoutComma = userInput.split(",");
+		} while (!Util.isvalidWeekNumber(userInputWithoutComma) || !Util.isValidNumberCount(userInputWithoutComma));
+		return userInputWithoutComma;
+	}
+
+	public static Set<Integer> makeWeekNumberSet(String[] userInputWithoutComma) {
+		Set<Integer> set = new HashSet<Integer>();
+		for (int i = 0; i < userInputWithoutComma.length; i++) {
+			set.add(Util.StringToInteger(userInputWithoutComma[i].replaceAll("\\p{Z}", "")));
+		}
+		return set;
 	}
 
 	public static int compareWithWinningLotto() {
