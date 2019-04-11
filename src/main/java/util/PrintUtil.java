@@ -11,7 +11,7 @@ public class PrintUtil {
                 System.out.println("구입금액을 입력해 주세요.");
         }
 
-        public static void printPurchaseConfirmMessage(int numberOfLotto) {
+        public static void printPurchaseConfirmMessage(long numberOfLotto) {
                 System.out.println("\n" + numberOfLotto + "개를 구매했습니다.");
         }
 
@@ -42,7 +42,7 @@ public class PrintUtil {
         }
 
         public static void printYiend(double yield){
-               System.out.printf("총 수익률은 %.3lf입니다.",yield);
+               System.out.printf("총 수익률은 %.3f입니다.",yield);
         }
 
         private static void printPurchasedLotto(Lotto lotto) {

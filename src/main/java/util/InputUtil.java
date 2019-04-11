@@ -1,15 +1,21 @@
 package util;
 
-import domain.*;
-
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputUtil {
-        public static int inputPurchaseAmount() {
+        public static long inputPurchaseAmount() {
                 Scanner scan = new Scanner(System.in);
-                return scan.nextInt();
+                long input;
+                try {
+                        input = scan.nextLong();
+                }catch(InputMismatchException e){
+                        System.err.println("입력 형식 오류");
+                        return -999_999_999_999l;
+                }
+                return input;
         }
 
         public static List<Integer> inputLastWeekWinningNumber() {
@@ -32,6 +38,4 @@ public class InputUtil {
                 }
                 return winningNumber;
         }
-
-
 }

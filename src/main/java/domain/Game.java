@@ -15,6 +15,7 @@ public class Game {
                 WinningLottoCreator creator = new WinningLottoCreator();
                 WinningLotto winningLotto = creator.create();
                 WinningStats winningStats = new WinningStats(purchaseInfo, winningLotto);
+
                 winningStats.printStats();
         }
 }
