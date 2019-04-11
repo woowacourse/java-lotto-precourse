@@ -24,6 +24,15 @@ public class LottoValidation implements Validation<List<Integer>> {
 		return true;
 	}
 
+	private boolean checkCountNumbers() {
+		if (numbers.size() != NUMBER_CNT) {
+			System.out.println("6개 숫자를 입력해야 합니다.");
+			return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public List<Integer> convert(String value) {
 		return null;
