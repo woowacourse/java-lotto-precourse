@@ -38,6 +38,7 @@ public class CommandLineInterface {
 												+ " 이하의 번호를 입력해 주세요.";
 		private static final String NUMBER_DUPLICATION_ERROR 
 													= "중복되지 않은 번호를 입력해 주세요.";
+		private static final String INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
 		
 		public static void printInputPurchasePrice() {
 				System.out.println(INPUT_PURCHASE_PRICE);			
@@ -87,4 +88,7 @@ public class CommandLineInterface {
 				System.out.println(NUMBER_DUPLICATION_ERROR);
 		}
 
+		public static void printInputBonusBall() {
+				System.out.println(INPUT_BONUS_BALL);
+		}
 }
