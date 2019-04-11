@@ -13,4 +13,14 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    public void print() {
+        StringBuilder sb = new StringBuilder("[");
+
+        for (int i = 0; i < 6; i++)
+            sb.append(numbers.get(i) +", ");
+        sb.delete(sb.length() - 2, sb.length());
+        sb.append("]");
+
+        System.out.println(sb.toString());
+    }
 }
