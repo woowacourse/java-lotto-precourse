@@ -14,6 +14,53 @@ public class Vaild {
 		return true;
 	}
 	
+	public boolean winNumVaild(String input) {
+		String temp[] = input.split(",");
+		for(int i = 0; i < temp.length; i++) {
+			if (!isInteger(temp[i])) {
+				return false;
+			}
+		}
+		if ( isSixNum(temp)|| isLottoNum(temp) || isOverLap(temp)) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean isSixNum(String[] input) {
+		boolean result = false;
+		if (input.length != 6) {
+			System.out.println("6개의 숫자를 입력해주세요.");
+			result = true;
+		}
+		return result;
+	}
+	
+	public boolean isLottoNum(String[] input) {
+		boolean result = false;
+		for (int i = 0; i < input.length; i++) {
+			int number = Integer.parseInt(input[i]);
+			if (number < 1 || number > 45) {
+				System.out.println("입력 숫자가 로또 숫자가 아닙니다.");
+				result = true;
+			}
+		}
+		return result;
+	}
+	
+	public boolean isOverLap(String[] input) {
+		boolean result = false;
+		for (int i = 0; i < input.length; i++) {
+			for (int j = 1; j < input.length; j++) {
+				if (input[i] == input[j]) {
+					System.out.println("중복되는 값은 입력하실 수 없습니다.");
+					result = true;
+				}
+			}
+		}
+		return result;
+	}
+	
 	public boolean isInteger(String input) {		
 		boolean result = false; 
 	
