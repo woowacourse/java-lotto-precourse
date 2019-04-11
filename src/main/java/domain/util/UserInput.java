@@ -13,4 +13,8 @@ public class UserInput {
             return getInteger();
         }
     }
+
+    public static String getString() {
+        return scanner.nextLine();
+    }
 }

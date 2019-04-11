@@ -3,6 +3,8 @@ package domain;
 import domain.util.UserInput;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class LottoGame {
@@ -14,6 +16,7 @@ public class LottoGame {
 
     public void start() {
         setLottoList(getNumOfLottos());
+        setWinningLotto();
     }
 
     private int getNumOfLottos() {
@@ -48,6 +51,53 @@ public class LottoGame {
     private void printLottos() {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.toString());
+        }
+    }
+
+    private void setWinningLotto() {
+        List<Integer> winningNums = new ArrayList<>();
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        winningNums.addAll(getWinningNums());
+    }
+
+    private List<Integer> getWinningNums() {
+        List<Integer> winningNums = new ArrayList<>();
+        try {
+            winningNums.addAll(stringListToIntegerList(getSequence(UserInput.getString())));
+            lottoManager.validateWinningLotto(new ArrayList<>(winningNums));
+            return winningNums;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getWinningNums();
+        }
+    }
+
+    private List<String> getSequence(String userInput) throws Exception {
+        String delimeter = ",";
+        validateSequenceSyntax(userInput, delimeter);
+        return Arrays.asList(userInput.split(delimeter));
+    }
+
+    private void validateSequenceSyntax(String string, String delimeter) throws Exception {
+        int delimeterCount = string.length() - string.replace(delimeter, "").length();
+        if ((delimeterCount + 1) != Arrays.asList(string.split(delimeter)).size()) {
+            throw new Exception(",로 구분하는 수열을 입력하세요");
+        }
+    }
+
+    private Collection<? extends Integer> stringListToIntegerList(List<String> stringList) throws Exception{
+        List<Integer> integerList = new ArrayList<>();
+        for(String string : stringList) {
+            integerList.add(stringToInteger(string));
+        }
+        return integerList;
+    }
+
+    private Integer stringToInteger(String string) throws Exception{
+        try{
+            return Integer.valueOf(string);
+        } catch (Exception e) {
+            throw new Exception("정수값이 아닙니다");
         }
     }
 }
