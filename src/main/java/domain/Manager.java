@@ -29,6 +29,7 @@ public class Manager {
         if(!CheckFormatError(ret)){
             return false;
         }
+        return true;
     }
 
     public boolean secondQuery(){
@@ -56,6 +57,14 @@ public class Manager {
         return true;
     }
 
+    public boolean checkRangeNumber(int number){
+        if(number<1 || number>45){
+            System.out.println(InputError.NUMBER_RANGE_ERROR);
+            return false;
+        }
+        return true;
+    }
+
     public boolean checkWinningNumbers(List<String> list){
         initCheckNumbers();
 
@@ -63,15 +72,9 @@ public class Manager {
 
         for(int i=0; i<list.size(); i++){
             int number = Integer.parseInt(list.get(i));
-            if(!CheckFormatError(list.get(i))) return false;
 
-            if(!checkDuplicateNumber(number)) return false;
-
-
-            if(number<1 || number>45){
-                System.out.println(InputError.NUMBER_RANGE_ERROR);
-                return false;
-            }
+            if(!CheckFormatError(list.get(i)) || !checkDuplicateNumber(number)
+                    || !checkRangeNumber(number)) return false;
 
             checkNumbers[number] = true;
             cnt++;
