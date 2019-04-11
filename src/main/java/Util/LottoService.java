@@ -25,7 +25,8 @@ public class LottoService {
 
     public static List<Lotto> getOrder(int money) {
         if (LOTTO_PRICE > money) {
-            throw new IllegalArgumentException("주문 금액은 최소 1,000원 이상이어야 합니다.");
+            System.out.println("주문 금액은 최소 1,000원 이상이어야 합니다.");
+            return null;
         }
 
         int numberOfLotto = money / LOTTO_PRICE;
