@@ -74,4 +74,19 @@ public class LottoMachine {
         }
         return satisfy;
     }
+
+    /*
+     * 보너스 숫자 입력하고 조건을 만족할 시 발급
+     */
+    public int makeBonusNum(Lotto winnerLotto) {
+        boolean satisfy;
+        System.out.println("보너스 볼을 입력해 주세요.");
+        do {
+            satisfy = inspectInputBonusNum();
+            satisfy = satisfy && inspectBoundaryBonusNum(bonusNumInput);
+            satisfy = satisfy && inspectDuplicateBonusNum(winnerLotto, bonusNumInput);
+        } while (!satisfy);
+        System.out.println();
+        return bonusNumInput;
+    }
 }
