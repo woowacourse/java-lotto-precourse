@@ -1,7 +1,7 @@
 /*
  * UserInterface Interface
  *
- * @version 1.3
+ * @version 1.4
  *
  * @date 2019-04-09
  *
@@ -20,7 +20,7 @@ public interface UserInterface {
 
     boolean isInputPurchasePriceValid(String purchasePrice);
 
-    int[] inputWinningLottoNumbers();
+    List<Integer> inputWinningLottoNumbers();
 
     boolean isInputWinLotNumsValid(String winNums);
 

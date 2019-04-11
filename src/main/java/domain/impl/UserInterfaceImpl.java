@@ -1,7 +1,7 @@
 /*
  * UserInterfaceImpl Class
  *
- * @version 1.3
+ * @version 1.4
  *
  * @date 2019-04-09
  *
@@ -12,32 +12,30 @@ package domain.impl;
 
 import domain.objects.Lotto;
 import domain.interfaces.UserInterface;
-import domain.interfaces.UtilityInterface;
 import domain.interfaces.ValidInterface;
+import domain.utility.Utils;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class UserInterfaceImpl implements UserInterface {
     ValidInterface valid;
-    UtilityInterface utility;
     Scanner sc;
 
-    public UserInterfaceImpl(ValidInterface valid, UtilityInterface utility) {
+    public UserInterfaceImpl(ValidInterface valid) {
         this.sc = new Scanner(System.in);
         this.valid = valid;
-        this.utility = utility;
     }
 
     @Override
-    public int[] inputWinningLottoNumbers() {
+    public List<Integer> inputWinningLottoNumbers() {
         String winLotNums;
         System.out.println("지난주 당첨 번호를 입력해주세요.");
         winLotNums = sc.nextLine();
         if (!isInputWinLotNumsValid(winLotNums)) {
             return inputWinningLottoNumbers();
         }
-        return utility.convertStrArrToIntArr(winLotNums.split(","));
+        return Utils.convertStrArrToIntList(winLotNums.split(","));
     }
 
     @Override
@@ -78,7 +76,7 @@ public class UserInterfaceImpl implements UserInterface {
         String bonusNum;
         System.out.println("보너스 볼을 입력해 주세요.");
         bonusNum = sc.nextLine();
-        if(!isInputBonusNumValid(preWinLotto,bonusNum)){
+        if (!isInputBonusNumValid(preWinLotto, bonusNum)) {
             return inputBonusNum(preWinLotto);
         }
         return Integer.parseInt(bonusNum);
@@ -86,9 +84,9 @@ public class UserInterfaceImpl implements UserInterface {
 
     @Override
     public boolean isInputBonusNumValid(Lotto preWinLotto, String bonusNum) {
-        try{
+        try {
             valid.validBonusNumSequence(preWinLotto, bonusNum);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -97,8 +95,8 @@ public class UserInterfaceImpl implements UserInterface {
 
     @Override
     public void printBoughtLottos(List<Lotto> lottoList) {
-        System.out.println( lottoList.size() + "개를 구매했습니다.");
-        for( Lotto lotto : lottoList){
+        System.out.println(lottoList.size() + "개를 구매했습니다.");
+        for (Lotto lotto : lottoList) {
             printLottoNums(lotto);
         }
     }
