@@ -33,6 +33,19 @@ public class LottoValidation implements Validation<List<Integer>> {
 		return true;
 	}
 
+	private boolean checkReduplicationNumbers() {
+		long numbersCount = numbers.stream()
+				.distinct()
+				.count();
+
+		if (numbersCount != numbers.size()) {
+			System.out.println("중복된 숫자가 존재합니다.");
+			return false;
+		}
+
+		return true;
+	}
+
 	@Override
 	public List<Integer> convert(String value) {
 		return null;
