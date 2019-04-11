@@ -64,20 +64,40 @@ public class LottoGame {
         return scan.nextInt();
     }
 
-    private static void calculateWinning(WinningLotto winningLotto, List<Lotto> userLotto_list, int gameCount) {
+    private static int[] calculateWinning(WinningLotto winningLotto, List<Lotto> userLotto_list, int gameCount) {
+        int[] winStates = {0, 0, 0, 0, 0, 0};
         ArrayList<Rank> rank_list = new ArrayList<>();
 
         for (int i = 0; i < gameCount; i++) {
             rank_list.add(winningLotto.match(userLotto_list.get(i)));
+            winStates[rank_list.get(i).ordinal()] += 1;
         }
+        return winStates;
+    }
+
+    private static void printResult(int[] winStates, int gameCount) {
+        System.out.println("당첨 통계");
+        System.out.println("-----------");
+        double moneyEarned = 0;
+        for (int k = 4; k >= 0; k--) {
+            System.out.println((Rank.values()[k].getCountOfMatch()) + "개 일치(" + (Rank.values()[k].getWinningMoney()) + "원)- " + (winStates[k]) + "개");
+            moneyEarned += winStates[k] * Rank.values()[k].getWinningMoney();
+        }
+        System.out.println("총 수익률은 " + (moneyEarned / (gameCount * 1000)) + "입니다.");
     }
 
     public static void main(String[] args) {
-        int gameCount = printInitialLines();
-        ArrayList<Lotto> userLotto_list = generateLottoList(gameCount);
-        Lotto lastWinningLotto = getLastWinningNum();
-        int bonusNum = getBonusNum();
+        int gameCount, bonusNum;
+        ArrayList<Lotto> userLotto_list = new ArrayList<>();
+        Lotto lastWinningLotto;
+        int[] winStates;
+        
+        gameCount = printInitialLines();
+        userLotto_list = generateLottoList(gameCount);
+        lastWinningLotto = getLastWinningNum();
+        bonusNum = getBonusNum();
         WinningLotto winningLotto = new WinningLotto(lastWinningLotto, bonusNum);
-        calculateWinning(winningLotto, userLotto_list, gameCount);
+        winStates = calculateWinning(winningLotto, userLotto_list, gameCount);
+        printResult(winStates, gameCount);
     }
 }
