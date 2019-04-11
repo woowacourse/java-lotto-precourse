@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     final static int LOTTO_PRICE = 1000;
-    final static WinningLotto winningLotto;
+    static private WinningLotto winningLotto;
     static private Scanner staticSc;
     static private List<Lotto> lottoList;
     static private List<Integer> numSeq;
@@ -69,6 +69,18 @@ public class Main {
 
     private List<Integer> separateToList(String str) {
         return Arrays.stream(str.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+    }
+
+    private void getWinningLotto() {
+        Scanner sc = getScanner();
+
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> numList = separateToList(sc.next());
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonus = sc.nextInt();
+
+        winningLotto = new WinningLotto(new Lotto(numList), bonus);
     }
 
 
