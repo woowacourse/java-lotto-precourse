@@ -19,6 +19,7 @@ public class LottoGame {
         scan.nextLine();
         return count;
     }
+
     private static List<Integer> CreateNum(int randomCount) {
         Random random = new Random();
         ArrayList<Integer> ListNum = new ArrayList<>();
@@ -43,8 +44,31 @@ public class LottoGame {
         return lottoList;
     }
 
+    private static Lotto getLastWinningNum() {
+        Scanner scan = new Scanner(System.in);
+
+        List<Integer> winningNum = new ArrayList<>();
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        String[] LottoNum = scan.nextLine().split(",");
+        for (String s : LottoNum) {
+            int tmp = Integer.valueOf((s));
+            winningNum.add(tmp);
+        }
+        Lotto winningLotto = new Lotto(winningNum);
+        return winningLotto;
+    }
+
+    private static int getBonusNum() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해주세요.");
+        return scan.nextInt();
+    }
+
     public static void main(String[] args) {
         int gameCount = printInitialLines();
         ArrayList<Lotto> userLotto_list = generateLottoList(gameCount);
+        Lotto lastWinningLotto = getLastWinningNum();
+        int bonusNum = getBonusNum();
+        WinningLotto winningLotto = new WinningLotto(lastWinningLotto, bonusNum);
     }
 }
