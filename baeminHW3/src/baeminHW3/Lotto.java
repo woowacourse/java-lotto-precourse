@@ -17,7 +17,7 @@ public class Lotto {
     	return cnt;
     }
     
-    public int isEqualNumber(int a, int b) {
-    	return a == b ? 1 : 0 ;
+    public int isEqualNumber(Integer a, Integer b) {
+    	return a.intValue() == b.intValue() ? 1 : 0 ;
     }
 }
