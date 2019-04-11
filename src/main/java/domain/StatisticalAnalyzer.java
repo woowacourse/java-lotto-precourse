@@ -9,7 +9,7 @@ import java.util.*;
  * @author jongyoon Kim
  */
 public class StatisticalAnalyzer {
-    
+
     /**
      * 당첨 통계 계산
      *
