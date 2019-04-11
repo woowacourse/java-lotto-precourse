@@ -91,6 +91,10 @@ public class LottoGame {
         }
     }
 
+    public void showROI() {
+        this.showMessage("총 수익률은 "+String.valueOf(this.getTotalWinningMoney() / this.cashToBuyLotto)+"입니다.");
+    }
+
     public void showMessage(String msg) {
         System.out.println(msg);
     }
