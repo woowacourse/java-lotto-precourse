@@ -10,4 +10,5 @@ import java.util.*;
 public class Buyer {
     static final int  NUMBER_PER_LOTTO = 6;
     static final int LOTTO_NUMBER_BOUNDARY = 45;
+    private static final int MIN_PAY_MONEY = 0;
 }
