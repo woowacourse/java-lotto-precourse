@@ -17,6 +17,10 @@ public class Lotto {
     }
 
     // 추가 기능 구현
+    public List<Integer> getNumbers(){
+        return numbers;
+    }
+
     public void getLottoNumber() {
         Set<Integer> set = new TreeSet<>();
         while (set.size() != 6) {
@@ -24,15 +28,15 @@ public class Lotto {
         }
 
         numbers.addAll(set);
-        System.out.println(printLottoNumber(numbers));
+        printLottoNumber(numbers);
     }
 
     private int createLottoNumber() {
         return ((int) (Math.random() * LOTTO_MAX_NUM) + LOTTO_MIN_NUM);
     }
 
-    private String printLottoNumber(List<Integer> numbers) {
-        return String.join(",", String.valueOf(numbers));
+    private void printLottoNumber(List<Integer> numbers) {
+        System.out.println(String.join(",", String.valueOf(numbers)));
     }
 
     public void assignWinningLotto(String inputWinningLotto){
@@ -40,8 +44,6 @@ public class Lotto {
         for(String number : winningLottoArray){
             numbers.add(Integer.parseInt(number));
         }
-
-        System.out.println(printLottoNumber(numbers));
     }
 
 }
