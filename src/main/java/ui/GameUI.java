@@ -1,6 +1,7 @@
 package ui;
 
 import domain.Game;
+import validation.BonusNoValidation;
 import validation.LottoValidation;
 import validation.MoneyValidation;
 import validation.Validation;
@@ -37,6 +38,15 @@ public class GameUI {
 		Validation<List<Integer>> validation = new LottoValidation();
 
 		Input<List<Integer>> input = new Input<>(sc, message, validation);
+
+		return input.ask();
+	}
+
+	private int askBonusNo(Scanner sc, List<Integer> numbers) {
+		String message = "보너스 볼을 입력해 주세요";
+		Validation<Integer> validation = new BonusNoValidation(numbers);
+
+		Input<Integer> input = new Input<>(sc, message, validation);
 
 		return input.ask();
 	}
