@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -30,15 +31,16 @@ public class LottoGenerator {
         lottoList.add(new Lotto(GenerateRandomNumbers()));
     }
 
-    public List<Integer> GenerateRandomNumbers() {
+    private List<Integer> GenerateRandomNumbers() {
         HashSet<Integer> lottoNumberSet = new HashSet<>();
-        List<Integer> lottoNumbers = new ArrayList<>();
-        int lottoNumber;
 
         while (lottoNumberSet.size() < LOTTO_SIZE) {
-            lottoNumber = (int) ((Math.random() * MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
+            int lottoNumber = (int) ((Math.random() * MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
             lottoNumberSet.add(lottoNumber);
         }
+
+        List<Integer> lottoNumbers = new ArrayList<>(lottoNumberSet);
+        Collections.sort(lottoNumbers);
 
         return lottoNumbers;
     }

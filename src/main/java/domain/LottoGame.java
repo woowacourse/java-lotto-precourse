@@ -4,42 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    private UserInput userInput;
+    private ExceptionHandler exceptionHandler;
     private LottoGenerator lottoGenerator;
     private UserOutput userOutput;
 
     LottoGame() {
-        userInput = new UserInput();
+        exceptionHandler = new ExceptionHandler();
         lottoGenerator = new LottoGenerator();
         userOutput = new UserOutput();
     }
 
     public void Start() {
-        int purchaseAmount = userInput.RecievePurchaseAmount();
+        int purchaseAmount = exceptionHandler.RecievePurchaseAmount();
         lottoGenerator.GenerateLottoes(purchaseAmount);
 
         userOutput.PrintPurchaseResults();
 
-        List<Integer> winningNumbers = userInput.RecieveWinningNumber();
-        int bonusNumber = userInput.RecieveBonusNumber();
+        List<Integer> winningNumbers = exceptionHandler.RecieveWinningNumber();
+        int bonusNumber = exceptionHandler.RecieveBonusNumber();
         lottoGenerator.GenerateWinningLotto(winningNumbers, bonusNumber);
-        List<Rank> ranks =  MatchLottoNumbers();
+        List<Rank> ranks = Calculator.MatchLottoNumbers();
 
-        userOutput.PrintWinStatistics(ranks,purchaseAmount);
+        userOutput.PrintWinStatistics(ranks, purchaseAmount);
     }
 
-    private List<Rank> MatchLottoNumbers() {
-        WinningLotto winningLotto = LottoGenerator.getWinningLotto();
-        List<Lotto> lottoes = LottoGenerator.getLottoList();
-        List<Rank> ranks = new ArrayList<>();
-
-        for (int i = 0; i < lottoes.size(); i++) {
-            Rank rank = winningLotto.match(lottoes.get(i));
-            ranks.add(rank);
-        }
-
-        return ranks;
-    }
 
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame();

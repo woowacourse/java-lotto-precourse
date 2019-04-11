@@ -22,6 +22,7 @@ public class WinningLotto {
         boolean matchBonus = userLottoNumbers.contains(this.bonusNo);
 
         Rank userRank = Rank.valueOf(matchCount, matchBonus);
+
         return userRank;
     }
 }

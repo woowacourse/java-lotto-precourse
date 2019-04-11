@@ -25,12 +25,9 @@ public class UserOutput {
     }
 
     private void PrintLottoNumbers(int lottoOrder) {
-        String purchaseResult; // 하나의 구매된 로또의 번호들
+        String JoinedLottoNumber = this.lottoList.get(lottoOrder).JoinLottoNumbers();
 
-        List<Integer> lottoNumbers = this.lottoList.get(lottoOrder).getNumbers();
-        purchaseResult = String.join(",", lottoNumbers.toString());
-
-        System.out.println(purchaseResult);
+        System.out.println(JoinedLottoNumber);
 
     }
 
