@@ -12,5 +12,25 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    // 추가 기능 구현
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public int isMatch(int number) {
+        if (numbers.contains(number)) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    public int howManyMatch(Lotto lotto) {
+        int countOfMatch = 0;
+
+        for (int number : numbers) {
+            countOfMatch += lotto.isMatch(number);
+        }
+
+        return countOfMatch;
+    }
 }
